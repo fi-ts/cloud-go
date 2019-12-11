@@ -1,4 +1,4 @@
-package cloud
+package main
 
 import (
 	"errors"
@@ -30,7 +30,7 @@ func NewClient(rawurl, token, hmac string) (*client.Cloud, error) {
 
 	var hmacAuth *security.HMACAuth
 	if hmac != "" {
-		auth := security.NewHMACAuth("Metal-View", []byte(hmac))
+		auth := security.NewHMACAuth("Metal-View-All", []byte(hmac))
 		hmacAuth = &auth
 	}
 
