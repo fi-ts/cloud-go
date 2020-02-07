@@ -17,6 +17,10 @@ import (
 // swagger:model v1.Worker
 type V1Worker struct {
 
+	// machine image
+	// Required: true
+	MachineImage *V1MachineImage `json:"MachineImage"`
+
 	// machine type
 	// Required: true
 	MachineType *string `json:"MachineType"`
@@ -46,6 +50,10 @@ type V1Worker struct {
 func (m *V1Worker) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateMachineImage(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMachineType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -73,6 +81,24 @@ func (m *V1Worker) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1Worker) validateMachineImage(formats strfmt.Registry) error {
+
+	if err := validate.Required("MachineImage", "body", m.MachineImage); err != nil {
+		return err
+	}
+
+	if m.MachineImage != nil {
+		if err := m.MachineImage.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("MachineImage")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

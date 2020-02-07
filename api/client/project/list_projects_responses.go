@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/metal-pod/cloud-go/api/models"
+	models "github.com/metal-stack/cloud-go/api/models"
 )
 
 // ListProjectsReader is a Reader for the ListProjects structure.

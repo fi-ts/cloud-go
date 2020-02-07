@@ -27,7 +27,7 @@ type V1OwnerReference struct {
 	// If true, this reference points to the managing controller.
 	Controller bool `json:"controller,omitempty"`
 
-	// Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+	// Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 	// Required: true
 	Kind *string `json:"kind"`
 

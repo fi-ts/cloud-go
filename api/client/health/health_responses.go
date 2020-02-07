@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/metal-pod/cloud-go/api/models"
+	models "github.com/metal-stack/cloud-go/api/models"
 )
 
 // HealthReader is a Reader for the Health structure.
@@ -58,7 +58,7 @@ type HealthOK struct {
 }
 
 func (o *HealthOK) Error() string {
-	return fmt.Sprintf("[GET /healthv1/health][%d] healthOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/health][%d] healthOK  %+v", 200, o.Payload)
 }
 
 func (o *HealthOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -87,7 +87,7 @@ type HealthInternalServerError struct {
 }
 
 func (o *HealthInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /healthv1/health][%d] healthInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /v1/health][%d] healthInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *HealthInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

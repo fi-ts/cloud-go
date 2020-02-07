@@ -11,12 +11,12 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/metal-pod/cloud-go/api/client/accounting"
-	"github.com/metal-pod/cloud-go/api/client/cluster"
-	"github.com/metal-pod/cloud-go/api/client/health"
-	"github.com/metal-pod/cloud-go/api/client/ip"
-	"github.com/metal-pod/cloud-go/api/client/project"
-	"github.com/metal-pod/cloud-go/api/client/version"
+	"github.com/metal-stack/cloud-go/api/client/accounting"
+	"github.com/metal-stack/cloud-go/api/client/cluster"
+	"github.com/metal-stack/cloud-go/api/client/health"
+	"github.com/metal-stack/cloud-go/api/client/ip"
+	"github.com/metal-stack/cloud-go/api/client/project"
+	"github.com/metal-stack/cloud-go/api/client/version"
 )
 
 // Default cloud HTTP client.

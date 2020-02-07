@@ -8,8 +8,8 @@ import (
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/metal-pod/cloud-go/api/client"
 	"github.com/metal-pod/security"
+	"github.com/metal-stack/cloud-go/api/client"
 
 	httptransport "github.com/go-openapi/runtime/client"
 )

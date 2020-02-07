@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"strconv"
+
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -17,21 +19,25 @@ import (
 // swagger:model v1.ClusterResponse
 type V1ClusterResponse struct {
 
-	// the garedner shoot control plane raw extension
+	// the gardener shoot control plane raw extension
 	// Required: true
 	Controlplane *V1alpha1ControlPlaneConfig `json:"controlplane"`
 
-	// the garedner shoot infrastructure raw extension
+	// the gardener shoot infrastructure raw extension
 	// Required: true
 	Infrastructure *V1alpha1InfrastructureConfig `json:"infrastructure"`
 
-	// the garedner shoot network raw extension
+	// the machines which belong to this cluster
+	// Required: true
+	Machines []*ModelsV1MachineResponse `json:"machines"`
+
+	// the gardener shoot network raw extension
 	// Required: true
 	Network *V1alpha1NetworkConfig `json:"network"`
 
 	// the gardener shoot resource but with the raw extensions separated out
 	// Required: true
-	Shoot *V1alpha1Shoot `json:"shoot"`
+	Shoot *V1beta1Shoot `json:"shoot"`
 }
 
 // Validate validates this v1 cluster response
@@ -43,6 +49,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInfrastructure(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMachines(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -91,6 +101,31 @@ func (m *V1ClusterResponse) validateInfrastructure(formats strfmt.Registry) erro
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateMachines(formats strfmt.Registry) error {
+
+	if err := validate.Required("machines", "body", m.Machines); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Machines); i++ {
+		if swag.IsZero(m.Machines[i]) { // not required
+			continue
+		}
+
+		if m.Machines[i] != nil {
+			if err := m.Machines[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("machines" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

@@ -18,8 +18,11 @@ type V1ManagedFieldsEntry struct {
 	// APIVersion defines the version of this resource that this field set applies to. The format is "group/version" just like the top-level APIVersion field. It is necessary to track the version of a field set because it cannot be automatically converted.
 	APIVersion string `json:"apiVersion,omitempty"`
 
-	// Fields identifies a set of fields.
-	Fields string `json:"fields,omitempty"`
+	// FieldsType is the discriminator for the different fields format and version. There is currently only one possible value: "FieldsV1"
+	FieldsType string `json:"fieldsType,omitempty"`
+
+	// FieldsV1 holds the first JSON version format as described in the "FieldsV1" type.
+	FieldsV1 string `json:"fieldsV1,omitempty"`
 
 	// Manager is an identifier of the workflow managing these fields.
 	Manager string `json:"manager,omitempty"`

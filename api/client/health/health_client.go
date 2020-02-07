@@ -25,7 +25,7 @@ type Client struct {
 }
 
 /*
-Health performs a healtcheck
+Health performs a healthcheck
 */
 func (a *Client) Health(params *HealthParams, authInfo runtime.ClientAuthInfoWriter) (*HealthOK, error) {
 	// TODO: Validate the params before sending
@@ -36,7 +36,7 @@ func (a *Client) Health(params *HealthParams, authInfo runtime.ClientAuthInfoWri
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "health",
 		Method:             "GET",
-		PathPattern:        "/healthv1/health",
+		PathPattern:        "/v1/health",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
