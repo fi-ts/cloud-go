@@ -8,7 +8,6 @@ require (
 	github.com/go-openapi/strfmt v0.19.3
 	github.com/go-openapi/swag v0.19.5
 	github.com/go-openapi/validate v0.19.5
-	github.com/metal-pod/cloud-go v0.0.0-20191211160716-e58fa1ae107b
-	github.com/metal-pod/metal-go v0.2.0
-	github.com/metal-pod/security v0.0.0-20190605103437-319d1b2eca89
+	github.com/google/go-cmp v0.3.1 // indirect
+	github.com/metal-stack/security v0.0.0-20200213101721-0aed751953ac
 )
