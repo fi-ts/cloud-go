@@ -18,7 +18,7 @@ import (
 type V1beta1LastError struct {
 
 	// codes
-	Codes []V1beta1ErrorCode `json:"codes"`
+	Codes []string `json:"codes"`
 
 	// description
 	// Required: true

@@ -21,6 +21,10 @@ type ModelsV1MachineResponse struct {
 	// Required: true
 	Allocation *ModelsV1MachineAllocation `json:"allocation"`
 
+	// bios
+	// Required: true
+	Bios *ModelsV1MachineBIOS `json:"bios"`
+
 	// changed
 	// Required: true
 	Changed *string `json:"changed"`
@@ -81,6 +85,10 @@ func (m *ModelsV1MachineResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAllocation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBios(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -148,6 +156,24 @@ func (m *ModelsV1MachineResponse) validateAllocation(formats strfmt.Registry) er
 		if err := m.Allocation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allocation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) validateBios(formats strfmt.Registry) error {
+
+	if err := validate.Required("bios", "body", m.Bios); err != nil {
+		return err
+	}
+
+	if m.Bios != nil {
+		if err := m.Bios.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("bios")
 			}
 			return err
 		}

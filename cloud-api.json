@@ -516,7 +516,7 @@
         }
       }
     },
-    "/v1/cluster/{id}/credentials": {
+    "/v1/cluster/{id}/kubeconfigtpl": {
       "get": {
         "consumes": [
           "application/json"
@@ -527,8 +527,8 @@
         "tags": [
           "cluster"
         ],
-        "summary": "get all the kubeconfig for the cluster",
-        "operationId": "getClusterCredentials",
+        "summary": "gets the kubeconfig-template just with cluster-infos for the cluster",
+        "operationId": "getClusterKubeconfigTpl",
         "parameters": [
           {
             "type": "string",
@@ -542,7 +542,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.ClusterCredentialsResponse"
+              "$ref": "#/definitions/v1.ClusterKubeconfigResponse"
             }
           },
           "default": {
@@ -1177,6 +1177,24 @@
         }
       }
     },
+    "models.V1MachineBIOS": {
+      "required": [
+        "date",
+        "vendor",
+        "version"
+      ],
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
     "models.V1MachineBlockDevice": {
       "required": [
         "name",
@@ -1329,6 +1347,7 @@
     "models.V1MachineResponse": {
       "required": [
         "allocation",
+        "bios",
         "changed",
         "created",
         "events",
@@ -1345,6 +1364,9 @@
       "properties": {
         "allocation": {
           "$ref": "#/definitions/models.V1MachineAllocation"
+        },
+        "bios": {
+          "$ref": "#/definitions/models.V1MachineBIOS"
         },
         "changed": {
           "type": "string"
@@ -1657,6 +1679,16 @@
           "type": "string"
         },
         "Tenant": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.ClusterKubeconfigResponse": {
+      "required": [
+        "Kubeconfig"
+      ],
+      "properties": {
+        "Kubeconfig": {
           "type": "string"
         }
       }
@@ -2479,7 +2511,6 @@
         }
       }
     },
-    "v1.ServiceExternalTrafficPolicyType": {},
     "v1.ShootConstraints": {
       "required": [
         "kubernetes_versions",
@@ -2749,7 +2780,6 @@
         }
       }
     },
-    "v1alpha1.CIDR": {},
     "v1alpha1.CloudControllerManagerConfig": {
       "properties": {
         "featureGates": {
@@ -2881,7 +2911,7 @@
       ],
       "properties": {
         "cidr": {
-          "$ref": "#/definitions/v1alpha1.CIDR"
+          "type": "string"
         },
         "type": {
           "type": "string"
@@ -2889,24 +2919,18 @@
       }
     },
     "v1alpha1.IPv4": {
-      "required": [
-        "pool",
-        "mode"
-      ],
       "properties": {
         "autoDetectionMethod": {
           "type": "string"
         },
         "mode": {
-          "$ref": "#/definitions/v1alpha1.IPv4PoolMode"
+          "type": "string"
         },
         "pool": {
-          "$ref": "#/definitions/v1alpha1.IPv4Pool"
+          "type": "string"
         }
       }
     },
-    "v1alpha1.IPv4Pool": {},
-    "v1alpha1.IPv4PoolMode": {},
     "v1alpha1.InfrastructureConfig": {
       "description": "TypeMeta describes an individual object in an API response or request with strings representing the type of the object and its API schema version. Structures that are versioned or persisted should inline TypeMeta.",
       "required": [
@@ -2977,8 +3001,14 @@
         "backend": {
           "type": "string"
         },
+        "ipAutodetectionMethod": {
+          "type": "string"
+        },
         "ipam": {
           "$ref": "#/definitions/v1alpha1.IPAM"
+        },
+        "ipip": {
+          "type": "string"
         },
         "ipv4": {
           "$ref": "#/definitions/v1alpha1.IPv4"
@@ -2989,6 +3019,9 @@
         },
         "typha": {
           "$ref": "#/definitions/v1alpha1.Typha"
+        },
+        "vethMTU": {
+          "type": "string"
         }
       }
     },
@@ -3147,7 +3180,6 @@
         }
       }
     },
-    "v1beta1.ErrorCode": {},
     "v1beta1.Extension": {
       "required": [
         "type"
@@ -3297,7 +3329,7 @@
           }
         },
         "mode": {
-          "$ref": "#/definitions/v1beta1.ProxyMode"
+          "type": "string"
         }
       }
     },
@@ -3463,7 +3495,7 @@
         "codes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1beta1.ErrorCode"
+            "type": "string"
           }
         },
         "description": {
@@ -3599,7 +3631,7 @@
           "type": "boolean"
         },
         "externalTrafficPolicy": {
-          "$ref": "#/definitions/v1.ServiceExternalTrafficPolicyType"
+          "type": "string"
         },
         "loadBalancerSourceRanges": {
           "type": "array",
@@ -3685,7 +3717,6 @@
         }
       }
     },
-    "v1beta1.ProxyMode": {},
     "v1beta1.ServiceAccountConfig": {
       "properties": {
         "issuer": {
@@ -3776,6 +3807,9 @@
         },
         "provider": {
           "$ref": "#/definitions/v1beta1.Provider"
+        },
+        "purpose": {
+          "type": "string"
         },
         "region": {
           "type": "string"

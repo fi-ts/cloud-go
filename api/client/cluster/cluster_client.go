@@ -141,23 +141,23 @@ func (a *Client) FindClusters(params *FindClustersParams, authInfo runtime.Clien
 }
 
 /*
-GetClusterCredentials gets all the kubeconfig for the cluster
+GetClusterKubeconfigTpl gets the kubeconfig template just with cluster infos for the cluster
 */
-func (a *Client) GetClusterCredentials(params *GetClusterCredentialsParams, authInfo runtime.ClientAuthInfoWriter) (*GetClusterCredentialsOK, error) {
+func (a *Client) GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, authInfo runtime.ClientAuthInfoWriter) (*GetClusterKubeconfigTplOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetClusterCredentialsParams()
+		params = NewGetClusterKubeconfigTplParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "getClusterCredentials",
+		ID:                 "getClusterKubeconfigTpl",
 		Method:             "GET",
-		PathPattern:        "/v1/cluster/{id}/credentials",
+		PathPattern:        "/v1/cluster/{id}/kubeconfigtpl",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetClusterCredentialsReader{formats: a.formats},
+		Reader:             &GetClusterKubeconfigTplReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -165,7 +165,7 @@ func (a *Client) GetClusterCredentials(params *GetClusterCredentialsParams, auth
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetClusterCredentialsOK), nil
+	return result.(*GetClusterKubeconfigTplOK), nil
 
 }
 

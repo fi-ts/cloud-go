@@ -19,7 +19,7 @@ type V1beta1KubeProxyConfig struct {
 	FeatureGates map[string]bool `json:"featureGates,omitempty"`
 
 	// mode
-	Mode V1beta1ProxyMode `json:"mode,omitempty"`
+	Mode string `json:"mode,omitempty"`
 }
 
 // Validate validates this v1beta1 kube proxy config

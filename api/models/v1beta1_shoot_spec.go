@@ -53,6 +53,9 @@ type V1beta1ShootSpec struct {
 	// Required: true
 	Provider *V1beta1Provider `json:"provider"`
 
+	// purpose
+	Purpose string `json:"purpose,omitempty"`
+
 	// region
 	// Required: true
 	Region *string `json:"region"`
