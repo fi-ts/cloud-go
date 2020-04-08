@@ -17,6 +17,12 @@ import (
 // swagger:model v1beta1.Volume
 type V1beta1Volume struct {
 
+	// encrypted
+	Encrypted bool `json:"encrypted,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
 	// size
 	// Required: true
 	Size *string `json:"size"`

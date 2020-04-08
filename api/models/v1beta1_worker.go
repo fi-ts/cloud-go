@@ -25,6 +25,12 @@ type V1beta1Worker struct {
 	// ca bundle
 	CaBundle string `json:"caBundle,omitempty"`
 
+	// data volumes
+	DataVolumes []*V1beta1Volume `json:"dataVolumes"`
+
+	// kubelet data volume name
+	KubeletDataVolumeName string `json:"kubeletDataVolumeName,omitempty"`
+
 	// kubernetes
 	Kubernetes *V1beta1WorkerKubernetes `json:"kubernetes,omitempty"`
 
@@ -70,6 +76,10 @@ type V1beta1Worker struct {
 func (m *V1beta1Worker) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDataVolumes(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateKubernetes(formats); err != nil {
 		res = append(res, err)
 	}
@@ -101,6 +111,31 @@ func (m *V1beta1Worker) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1beta1Worker) validateDataVolumes(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DataVolumes) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.DataVolumes); i++ {
+		if swag.IsZero(m.DataVolumes[i]) { // not required
+			continue
+		}
+
+		if m.DataVolumes[i] != nil {
+			if err := m.DataVolumes[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("dataVolumes" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

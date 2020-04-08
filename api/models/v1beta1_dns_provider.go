@@ -19,6 +19,9 @@ type V1beta1DNSProvider struct {
 	// domains
 	Domains *V1beta1DNSIncludeExclude `json:"domains,omitempty"`
 
+	// primary
+	Primary bool `json:"primary,omitempty"`
+
 	// secret name
 	SecretName string `json:"secretName,omitempty"`
 
