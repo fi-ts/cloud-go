@@ -24,8 +24,14 @@ type V1alpha1NetworkConfig struct {
 	// Required: true
 	Backend *string `json:"backend"`
 
+	// ip autodetection method
+	IPAutodetectionMethod string `json:"ipAutodetectionMethod,omitempty"`
+
 	// ipam
 	IPAM *V1alpha1IPAM `json:"ipam,omitempty"`
+
+	// ipip
+	IPIP string `json:"ipip,omitempty"`
 
 	// ipv4
 	IPV4 *V1alpha1IPV4 `json:"ipv4,omitempty"`
@@ -35,6 +41,9 @@ type V1alpha1NetworkConfig struct {
 
 	// typha
 	Typha *V1alpha1Typha `json:"typha,omitempty"`
+
+	// veth m t u
+	VethMTU string `json:"vethMTU,omitempty"`
 }
 
 // Validate validates this v1alpha1 network config

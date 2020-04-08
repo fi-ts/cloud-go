@@ -13,23 +13,20 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1alpha1IPAM v1alpha1 IP a m
-// swagger:model v1alpha1.IPAM
-type V1alpha1IPAM struct {
+// V1S3ListRequest v1 s3 list request
+// swagger:model v1.S3ListRequest
+type V1S3ListRequest struct {
 
-	// cidr
-	Cidr string `json:"cidr,omitempty"`
-
-	// type
+	// partition
 	// Required: true
-	Type *string `json:"type"`
+	Partition *string `json:"partition"`
 }
 
-// Validate validates this v1alpha1 IP a m
-func (m *V1alpha1IPAM) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 s3 list request
+func (m *V1S3ListRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateType(formats); err != nil {
+	if err := m.validatePartition(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -39,9 +36,9 @@ func (m *V1alpha1IPAM) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1alpha1IPAM) validateType(formats strfmt.Registry) error {
+func (m *V1S3ListRequest) validatePartition(formats strfmt.Registry) error {
 
-	if err := validate.Required("type", "body", m.Type); err != nil {
+	if err := validate.Required("partition", "body", m.Partition); err != nil {
 		return err
 	}
 
@@ -49,7 +46,7 @@ func (m *V1alpha1IPAM) validateType(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *V1alpha1IPAM) MarshalBinary() ([]byte, error) {
+func (m *V1S3ListRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -57,8 +54,8 @@ func (m *V1alpha1IPAM) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1alpha1IPAM) UnmarshalBinary(b []byte) error {
-	var res V1alpha1IPAM
+func (m *V1S3ListRequest) UnmarshalBinary(b []byte) error {
+	var res V1S3ListRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

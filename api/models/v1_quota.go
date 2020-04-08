@@ -17,6 +17,9 @@ type V1Quota struct {
 
 	// quota
 	Quota int32 `json:"quota,omitempty"`
+
+	// used
+	Used int32 `json:"used,omitempty"`
 }
 
 // Validate validates this v1 quota

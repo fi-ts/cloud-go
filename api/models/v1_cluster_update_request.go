@@ -19,6 +19,14 @@ import (
 // swagger:model v1.ClusterUpdateRequest
 type V1ClusterUpdateRequest struct {
 
+	// firewall image
+	// Required: true
+	FirewallImage *string `json:"FirewallImage"`
+
+	// firewall size
+	// Required: true
+	FirewallSize *string `json:"FirewallSize"`
+
 	// ID
 	// Required: true
 	ID *string `json:"ID"`
@@ -31,6 +39,10 @@ type V1ClusterUpdateRequest struct {
 	// Required: true
 	Maintenance *V1Maintenance `json:"Maintenance"`
 
+	// purpose
+	// Required: true
+	Purpose *string `json:"Purpose"`
+
 	// workers
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
@@ -39,6 +51,14 @@ type V1ClusterUpdateRequest struct {
 // Validate validates this v1 cluster update request
 func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateFirewallImage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFirewallSize(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
@@ -52,6 +72,10 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePurpose(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateWorkers(formats); err != nil {
 		res = append(res, err)
 	}
@@ -59,6 +83,24 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateFirewallImage(formats strfmt.Registry) error {
+
+	if err := validate.Required("FirewallImage", "body", m.FirewallImage); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateFirewallSize(formats strfmt.Registry) error {
+
+	if err := validate.Required("FirewallSize", "body", m.FirewallSize); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -102,6 +144,15 @@ func (m *V1ClusterUpdateRequest) validateMaintenance(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validatePurpose(formats strfmt.Registry) error {
+
+	if err := validate.Required("Purpose", "body", m.Purpose); err != nil {
+		return err
 	}
 
 	return nil
