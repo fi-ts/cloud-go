@@ -17,6 +17,9 @@ import (
 // swagger:model v1.Meta
 type V1Meta struct {
 
+	// annotations
+	Annotations map[string]string `json:"annotations,omitempty"`
+
 	// apiversion
 	Apiversion string `json:"apiversion,omitempty"`
 
@@ -29,6 +32,9 @@ type V1Meta struct {
 
 	// kind
 	Kind string `json:"kind,omitempty"`
+
+	// labels
+	Labels []string `json:"labels"`
 
 	// updated time
 	// Format: date-time

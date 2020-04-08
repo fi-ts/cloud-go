@@ -25,7 +25,7 @@ type V1beta1NginxIngress struct {
 	Enabled *bool `json:"enabled"`
 
 	// external traffic policy
-	ExternalTrafficPolicy V1ServiceExternalTrafficPolicyType `json:"externalTrafficPolicy,omitempty"`
+	ExternalTrafficPolicy string `json:"externalTrafficPolicy,omitempty"`
 
 	// load balancer source ranges
 	LoadBalancerSourceRanges []string `json:"loadBalancerSourceRanges"`

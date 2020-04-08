@@ -8,9 +8,7 @@ package models
 import (
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1alpha1IPV4 v1alpha1 ipv4
@@ -21,47 +19,14 @@ type V1alpha1IPV4 struct {
 	AutoDetectionMethod string `json:"autoDetectionMethod,omitempty"`
 
 	// mode
-	// Required: true
-	Mode V1alpha1IPV4PoolMode `json:"mode"`
+	Mode string `json:"mode,omitempty"`
 
 	// pool
-	// Required: true
-	Pool V1alpha1IPV4Pool `json:"pool"`
+	Pool string `json:"pool,omitempty"`
 }
 
 // Validate validates this v1alpha1 ipv4
 func (m *V1alpha1IPV4) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateMode(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePool(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1alpha1IPV4) validateMode(formats strfmt.Registry) error {
-
-	if err := validate.Required("mode", "body", m.Mode); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1alpha1IPV4) validatePool(formats strfmt.Registry) error {
-
-	if err := validate.Required("pool", "body", m.Pool); err != nil {
-		return err
-	}
-
 	return nil
 }
 

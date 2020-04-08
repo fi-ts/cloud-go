@@ -47,10 +47,6 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	Maintenance *V1Maintenance `json:"Maintenance"`
 
-	// max pods
-	// Required: true
-	MaxPods *int32 `json:"MaxPods"`
-
 	// name
 	// Required: true
 	Name *string `json:"Name"`
@@ -62,6 +58,10 @@ type V1ClusterCreateRequest struct {
 	// project ID
 	// Required: true
 	ProjectID *string `json:"ProjectID"`
+
+	// purpose
+	// Required: true
+	Purpose *string `json:"Purpose"`
 
 	// tenant
 	// Required: true
@@ -104,10 +104,6 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateMaxPods(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -117,6 +113,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProjectID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePurpose(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -224,15 +224,6 @@ func (m *V1ClusterCreateRequest) validateMaintenance(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *V1ClusterCreateRequest) validateMaxPods(formats strfmt.Registry) error {
-
-	if err := validate.Required("MaxPods", "body", m.MaxPods); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1ClusterCreateRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("Name", "body", m.Name); err != nil {
@@ -254,6 +245,15 @@ func (m *V1ClusterCreateRequest) validatePartitionID(formats strfmt.Registry) er
 func (m *V1ClusterCreateRequest) validateProjectID(formats strfmt.Registry) error {
 
 	if err := validate.Required("ProjectID", "body", m.ProjectID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) validatePurpose(formats strfmt.Registry) error {
+
+	if err := validate.Required("Purpose", "body", m.Purpose); err != nil {
 		return err
 	}
 

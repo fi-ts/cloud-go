@@ -15,7 +15,10 @@ import (
 	"github.com/metal-stack/cloud-go/api/client/cluster"
 	"github.com/metal-stack/cloud-go/api/client/health"
 	"github.com/metal-stack/cloud-go/api/client/ip"
+	"github.com/metal-stack/cloud-go/api/client/masterdata"
 	"github.com/metal-stack/cloud-go/api/client/project"
+	"github.com/metal-stack/cloud-go/api/client/s3"
+	"github.com/metal-stack/cloud-go/api/client/tenant"
 	"github.com/metal-stack/cloud-go/api/client/version"
 )
 
@@ -70,7 +73,13 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Cloud {
 
 	cli.IP = ip.New(transport, formats)
 
+	cli.Masterdata = masterdata.New(transport, formats)
+
 	cli.Project = project.New(transport, formats)
+
+	cli.S3 = s3.New(transport, formats)
+
+	cli.Tenant = tenant.New(transport, formats)
 
 	cli.Version = version.New(transport, formats)
 
@@ -126,7 +135,13 @@ type Cloud struct {
 
 	IP *ip.Client
 
+	Masterdata *masterdata.Client
+
 	Project *project.Client
+
+	S3 *s3.Client
+
+	Tenant *tenant.Client
 
 	Version *version.Client
 
@@ -145,7 +160,13 @@ func (c *Cloud) SetTransport(transport runtime.ClientTransport) {
 
 	c.IP.SetTransport(transport)
 
+	c.Masterdata.SetTransport(transport)
+
 	c.Project.SetTransport(transport)
+
+	c.S3.SetTransport(transport)
+
+	c.Tenant.SetTransport(transport)
 
 	c.Version.SetTransport(transport)
 
