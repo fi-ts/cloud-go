@@ -10,7 +10,6 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1Meta v1 meta
@@ -24,8 +23,7 @@ type V1Meta struct {
 	Apiversion string `json:"apiversion,omitempty"`
 
 	// created time
-	// Format: date-time
-	CreatedTime strfmt.DateTime `json:"created_time,omitempty"`
+	CreatedTime *TimestampTimestamp `json:"created_time,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -37,8 +35,7 @@ type V1Meta struct {
 	Labels []string `json:"labels"`
 
 	// updated time
-	// Format: date-time
-	UpdatedTime strfmt.DateTime `json:"updated_time,omitempty"`
+	UpdatedTime *TimestampTimestamp `json:"updated_time,omitempty"`
 
 	// version
 	Version int64 `json:"version,omitempty"`
@@ -68,8 +65,13 @@ func (m *V1Meta) validateCreatedTime(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created_time", "body", "date-time", m.CreatedTime.String(), formats); err != nil {
-		return err
+	if m.CreatedTime != nil {
+		if err := m.CreatedTime.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("created_time")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -81,8 +83,13 @@ func (m *V1Meta) validateUpdatedTime(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("updated_time", "body", "date-time", m.UpdatedTime.String(), formats); err != nil {
-		return err
+	if m.UpdatedTime != nil {
+		if err := m.UpdatedTime.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("updated_time")
+			}
+			return err
+		}
 	}
 
 	return nil

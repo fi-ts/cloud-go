@@ -61,7 +61,7 @@ func NewGetMasterdataOK() *GetMasterdataOK {
 Ok
 */
 type GetMasterdataOK struct {
-	Payload *models.V1ProjectResponse
+	Payload *models.V1MasterdataLookupResponse
 }
 
 func (o *GetMasterdataOK) Error() string {
@@ -70,7 +70,7 @@ func (o *GetMasterdataOK) Error() string {
 
 func (o *GetMasterdataOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V1ProjectResponse)
+	o.Payload = new(models.V1MasterdataLookupResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -873,7 +873,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/v1.ProjectResponse"
+              "$ref": "#/definitions/v1.MasterdataLookupResponse"
             }
           },
           "404": {
@@ -2032,6 +2032,18 @@
         }
       }
     },
+    "timestamp.Timestamp": {
+      "properties": {
+        "nanos": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "v1.Addons": {
       "required": [
         "NginxIngress",
@@ -2378,6 +2390,55 @@
         }
       }
     },
+    "v1.ConnectorConfig": {
+      "properties": {
+        "idm_access_code": {
+          "type": "string"
+        },
+        "idm_api_password": {
+          "type": "string"
+        },
+        "idm_api_url": {
+          "type": "string"
+        },
+        "idm_api_user": {
+          "type": "string"
+        },
+        "idm_customer_id": {
+          "type": "string"
+        },
+        "idm_domain_name": {
+          "type": "string"
+        },
+        "idm_group_ou": {
+          "type": "string"
+        },
+        "idm_groupname_template": {
+          "$ref": "#/definitions/wrappers.StringValue"
+        },
+        "idm_job_info": {
+          "type": "string"
+        },
+        "idm_req_email": {
+          "type": "string"
+        },
+        "idm_req_system": {
+          "type": "string"
+        },
+        "idm_req_user": {
+          "type": "string"
+        },
+        "idm_submitter": {
+          "type": "string"
+        },
+        "idm_system_id": {
+          "type": "string"
+        },
+        "idm_tenant_prefix": {
+          "type": "string"
+        }
+      }
+    },
     "v1.ContainerUsage": {
       "required": [
         "tenant",
@@ -2559,15 +2620,38 @@
         }
       }
     },
+    "v1.IAMConfig": {
+      "properties": {
+        "group_config": {
+          "$ref": "#/definitions/v1.NamespaceGroupConfig"
+        },
+        "idm_config": {
+          "$ref": "#/definitions/v1.IDMConfig"
+        },
+        "issuer_config": {
+          "$ref": "#/definitions/v1.IssuerConfig"
+        }
+      }
+    },
+    "v1.IDMConfig": {
+      "properties": {
+        "connector_config": {
+          "$ref": "#/definitions/v1.ConnectorConfig"
+        },
+        "idm_type": {
+          "type": "string"
+        }
+      }
+    },
     "v1.IPFindRequest": {
       "required": [
-        "Tags",
-        "IPAddress",
         "ProjectID",
         "ParentPrefixCidr",
         "NetworkID",
         "MachineID",
-        "Type"
+        "Type",
+        "Tags",
+        "IPAddress"
       ],
       "properties": {
         "IPAddress": {
@@ -2617,6 +2701,16 @@
           }
         },
         "type": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.IssuerConfig": {
+      "properties": {
+        "client_id": {
+          "type": "string"
+        },
+        "url": {
           "type": "string"
         }
       }
@@ -2743,6 +2837,20 @@
         }
       }
     },
+    "v1.MasterdataLookupResponse": {
+      "required": [
+        "Tenant",
+        "Project"
+      ],
+      "properties": {
+        "Project": {
+          "$ref": "#/definitions/v1.Project"
+        },
+        "Tenant": {
+          "$ref": "#/definitions/v1.Tenant"
+        }
+      }
+    },
     "v1.Meta": {
       "properties": {
         "annotations": {
@@ -2755,8 +2863,7 @@
           "type": "string"
         },
         "created_time": {
-          "type": "string",
-          "format": "date-time"
+          "$ref": "#/definitions/timestamp.Timestamp"
         },
         "id": {
           "type": "string"
@@ -2771,12 +2878,31 @@
           }
         },
         "updated_time": {
-          "type": "string",
-          "format": "date-time"
+          "$ref": "#/definitions/timestamp.Timestamp"
         },
         "version": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "v1.NamespaceGroupConfig": {
+      "properties": {
+        "cluster_groupname_template": {
+          "type": "string"
+        },
+        "excluded_namespaces": {
+          "type": "string"
+        },
+        "expected_groups_list": {
+          "type": "string"
+        },
+        "namespace_max_length": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rolebinding_name_template": {
+          "type": "string"
         }
       }
     },
@@ -3001,12 +3127,7 @@
     "v1.Quota": {
       "properties": {
         "quota": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "used": {
-          "type": "integer",
-          "format": "int32"
+          "$ref": "#/definitions/wrappers.Int32Value"
         }
       }
     },
@@ -3019,6 +3140,9 @@
           "$ref": "#/definitions/v1.Quota"
         },
         "machine": {
+          "$ref": "#/definitions/v1.Quota"
+        },
+        "project": {
           "$ref": "#/definitions/v1.Quota"
         }
       }
@@ -3245,6 +3369,9 @@
         },
         "description": {
           "type": "string"
+        },
+        "iam_config": {
+          "$ref": "#/definitions/v1.IAMConfig"
         },
         "meta": {
           "$ref": "#/definitions/v1.Meta"
@@ -3857,6 +3984,9 @@
       "properties": {
         "domains": {
           "$ref": "#/definitions/v1beta1.DNSIncludeExclude"
+        },
+        "primary": {
+          "type": "boolean"
         },
         "secretName": {
           "type": "string"
@@ -4569,6 +4699,12 @@
         "size"
       ],
       "properties": {
+        "encrypted": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
         "size": {
           "type": "string"
         },
@@ -4592,6 +4728,15 @@
           }
         },
         "caBundle": {
+          "type": "string"
+        },
+        "dataVolumes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1.Volume"
+          }
+        },
+        "kubeletDataVolumeName": {
           "type": "string"
         },
         "kubernetes": {
@@ -4647,6 +4792,21 @@
       "properties": {
         "kubelet": {
           "$ref": "#/definitions/v1beta1.KubeletConfig"
+        }
+      }
+    },
+    "wrappers.Int32Value": {
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "wrappers.StringValue": {
+      "properties": {
+        "value": {
+          "type": "string"
         }
       }
     }
