@@ -58,7 +58,7 @@ type Gets3OK struct {
 }
 
 func (o *Gets3OK) Error() string {
-	return fmt.Sprintf("[GET /v1/s3/{id}][%d] gets3OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/s3][%d] gets3OK  %+v", 200, o.Payload)
 }
 
 func (o *Gets3OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *Gets3Default) Code() int {
 }
 
 func (o *Gets3Default) Error() string {
-	return fmt.Sprintf("[GET /v1/s3/{id}][%d] gets3 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /v1/s3][%d] gets3 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *Gets3Default) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

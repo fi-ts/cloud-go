@@ -17,6 +17,14 @@ import (
 // swagger:model v1.S3CreateRequest
 type V1S3CreateRequest struct {
 
+	// id
+	// Required: true
+	ID *string `json:"id"`
+
+	// max buckets
+	// Required: true
+	MaxBuckets *int64 `json:"max_buckets"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
@@ -24,6 +32,10 @@ type V1S3CreateRequest struct {
 	// partition
 	// Required: true
 	Partition *string `json:"partition"`
+
+	// project
+	// Required: true
+	Project *string `json:"project"`
 
 	// tenant
 	// Required: true
@@ -34,11 +46,23 @@ type V1S3CreateRequest struct {
 func (m *V1S3CreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMaxBuckets(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePartition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProject(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -49,6 +73,24 @@ func (m *V1S3CreateRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1S3CreateRequest) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3CreateRequest) validateMaxBuckets(formats strfmt.Registry) error {
+
+	if err := validate.Required("max_buckets", "body", m.MaxBuckets); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -64,6 +106,15 @@ func (m *V1S3CreateRequest) validateName(formats strfmt.Registry) error {
 func (m *V1S3CreateRequest) validatePartition(formats strfmt.Registry) error {
 
 	if err := validate.Required("partition", "body", m.Partition); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3CreateRequest) validateProject(formats strfmt.Registry) error {
+
+	if err := validate.Required("project", "body", m.Project); err != nil {
 		return err
 	}
 

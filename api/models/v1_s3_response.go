@@ -21,13 +21,17 @@ type V1S3Response struct {
 	// Required: true
 	Endpoint *string `json:"endpoint"`
 
-	// name
+	// id
 	// Required: true
-	Name *string `json:"name"`
+	ID *string `json:"id"`
 
 	// partition
 	// Required: true
 	Partition *string `json:"partition"`
+
+	// project
+	// Required: true
+	Project *string `json:"project"`
 
 	// tenant
 	// Required: true
@@ -42,11 +46,15 @@ func (m *V1S3Response) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateName(formats); err != nil {
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePartition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProject(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -69,9 +77,9 @@ func (m *V1S3Response) validateEndpoint(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1S3Response) validateName(formats strfmt.Registry) error {
+func (m *V1S3Response) validateID(formats strfmt.Registry) error {
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 
@@ -81,6 +89,15 @@ func (m *V1S3Response) validateName(formats strfmt.Registry) error {
 func (m *V1S3Response) validatePartition(formats strfmt.Registry) error {
 
 	if err := validate.Required("partition", "body", m.Partition); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3Response) validateProject(formats strfmt.Registry) error {
+
+	if err := validate.Required("project", "body", m.Project); err != nil {
 		return err
 	}
 

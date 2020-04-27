@@ -17,13 +17,21 @@ import (
 // swagger:model v1.S3DeleteRequest
 type V1S3DeleteRequest struct {
 
-	// name
+	// force
 	// Required: true
-	Name *string `json:"name"`
+	Force *bool `json:"force"`
+
+	// id
+	// Required: true
+	ID *string `json:"id"`
 
 	// partition
 	// Required: true
 	Partition *string `json:"partition"`
+
+	// project
+	// Required: true
+	Project *string `json:"project"`
 
 	// tenant
 	// Required: true
@@ -34,11 +42,19 @@ type V1S3DeleteRequest struct {
 func (m *V1S3DeleteRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateName(formats); err != nil {
+	if err := m.validateForce(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePartition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProject(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -52,9 +68,18 @@ func (m *V1S3DeleteRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1S3DeleteRequest) validateName(formats strfmt.Registry) error {
+func (m *V1S3DeleteRequest) validateForce(formats strfmt.Registry) error {
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
+	if err := validate.Required("force", "body", m.Force); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3DeleteRequest) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 
@@ -64,6 +89,15 @@ func (m *V1S3DeleteRequest) validateName(formats strfmt.Registry) error {
 func (m *V1S3DeleteRequest) validatePartition(formats strfmt.Registry) error {
 
 	if err := validate.Required("partition", "body", m.Partition); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3DeleteRequest) validateProject(formats strfmt.Registry) error {
+
+	if err := validate.Required("project", "body", m.Project); err != nil {
 		return err
 	}
 

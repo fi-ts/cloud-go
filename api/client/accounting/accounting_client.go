@@ -141,6 +141,64 @@ func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo run
 }
 
 /*
+S3Usage gets s3 bucket usage for given accounting query
+*/
+func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter) (*S3UsageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewS3UsageParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "s3Usage",
+		Method:             "GET",
+		PathPattern:        "/v1/accounting/s3-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &S3UsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*S3UsageOK), nil
+
+}
+
+/*
+S3UsageCSV gets s3 bucket usage for given accounting query
+*/
+func (a *Client) S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*S3UsageCSVOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewS3UsageCSVParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "s3UsageCSV",
+		Method:             "GET",
+		PathPattern:        "/v1/accounting/s3-usage-csv",
+		ProducesMediaTypes: []string{"application/json", "text/plain"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &S3UsageCSVReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*S3UsageCSVOK), nil
+
+}
+
+/*
 VolumeUsage gets volume usage for given accounting query
 */
 func (a *Client) VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientAuthInfoWriter) (*VolumeUsageOK, error) {

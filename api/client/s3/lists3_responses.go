@@ -58,7 +58,7 @@ type Lists3OK struct {
 }
 
 func (o *Lists3OK) Error() string {
-	return fmt.Sprintf("[GET /v1/s3][%d] lists3OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3OK  %+v", 200, o.Payload)
 }
 
 func (o *Lists3OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -94,7 +94,7 @@ func (o *Lists3Default) Code() int {
 }
 
 func (o *Lists3Default) Error() string {
-	return fmt.Sprintf("[GET /v1/s3][%d] lists3 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *Lists3Default) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

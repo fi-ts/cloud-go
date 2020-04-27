@@ -21,9 +21,13 @@ type V1S3PartitionResponse struct {
 	// Required: true
 	Endpoint *string `json:"endpoint"`
 
-	// name
+	// id
 	// Required: true
-	Name *string `json:"name"`
+	ID *string `json:"id"`
+
+	// ready
+	// Required: true
+	Ready *bool `json:"ready"`
 }
 
 // Validate validates this v1 s3 partition response
@@ -34,7 +38,11 @@ func (m *V1S3PartitionResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateName(formats); err != nil {
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReady(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -53,9 +61,18 @@ func (m *V1S3PartitionResponse) validateEndpoint(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *V1S3PartitionResponse) validateName(formats strfmt.Registry) error {
+func (m *V1S3PartitionResponse) validateID(formats strfmt.Registry) error {
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3PartitionResponse) validateReady(formats strfmt.Registry) error {
+
+	if err := validate.Required("ready", "body", m.Ready); err != nil {
 		return err
 	}
 

@@ -13,12 +13,9 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1VolumeUsageRequest v1 volume usage request
-// swagger:model v1.VolumeUsageRequest
-type V1VolumeUsageRequest struct {
-
-	// the cluster id to account for
-	Clusterid string `json:"clusterid,omitempty"`
+// V1S3UsageRequest v1 s3 usage request
+// swagger:model v1.S3UsageRequest
+type V1S3UsageRequest struct {
 
 	// estimates costs if time window ends in the future (defaults to false)
 	Forecast bool `json:"forecast,omitempty"`
@@ -27,9 +24,6 @@ type V1VolumeUsageRequest struct {
 	// Required: true
 	// Format: date-time
 	From *strfmt.DateTime `json:"from"`
-
-	// the namespace name to account for
-	Namespace string `json:"namespace,omitempty"`
 
 	// the project id to account for
 	Projectid string `json:"projectid,omitempty"`
@@ -42,8 +36,8 @@ type V1VolumeUsageRequest struct {
 	To strfmt.DateTime `json:"to,omitempty"`
 }
 
-// Validate validates this v1 volume usage request
-func (m *V1VolumeUsageRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 s3 usage request
+func (m *V1S3UsageRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateFrom(formats); err != nil {
@@ -60,7 +54,7 @@ func (m *V1VolumeUsageRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1VolumeUsageRequest) validateFrom(formats strfmt.Registry) error {
+func (m *V1S3UsageRequest) validateFrom(formats strfmt.Registry) error {
 
 	if err := validate.Required("from", "body", m.From); err != nil {
 		return err
@@ -73,7 +67,7 @@ func (m *V1VolumeUsageRequest) validateFrom(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1VolumeUsageRequest) validateTo(formats strfmt.Registry) error {
+func (m *V1S3UsageRequest) validateTo(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.To) { // not required
 		return nil
@@ -87,7 +81,7 @@ func (m *V1VolumeUsageRequest) validateTo(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *V1VolumeUsageRequest) MarshalBinary() ([]byte, error) {
+func (m *V1S3UsageRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -95,8 +89,8 @@ func (m *V1VolumeUsageRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1VolumeUsageRequest) UnmarshalBinary(b []byte) error {
-	var res V1VolumeUsageRequest
+func (m *V1S3UsageRequest) UnmarshalBinary(b []byte) error {
+	var res V1S3UsageRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
