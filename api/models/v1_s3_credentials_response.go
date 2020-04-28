@@ -25,6 +25,14 @@ type V1S3CredentialsResponse struct {
 	// Required: true
 	Endpoint *string `json:"endpoint"`
 
+	// id
+	// Required: true
+	ID *string `json:"id"`
+
+	// max buckets
+	// Required: true
+	MaxBuckets *int64 `json:"max_buckets"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
@@ -32,6 +40,10 @@ type V1S3CredentialsResponse struct {
 	// partition
 	// Required: true
 	Partition *string `json:"partition"`
+
+	// project
+	// Required: true
+	Project *string `json:"project"`
 
 	// secret key
 	// Required: true
@@ -54,11 +66,23 @@ func (m *V1S3CredentialsResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMaxBuckets(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePartition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProject(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -94,6 +118,24 @@ func (m *V1S3CredentialsResponse) validateEndpoint(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *V1S3CredentialsResponse) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3CredentialsResponse) validateMaxBuckets(formats strfmt.Registry) error {
+
+	if err := validate.Required("max_buckets", "body", m.MaxBuckets); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1S3CredentialsResponse) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -106,6 +148,15 @@ func (m *V1S3CredentialsResponse) validateName(formats strfmt.Registry) error {
 func (m *V1S3CredentialsResponse) validatePartition(formats strfmt.Registry) error {
 
 	if err := validate.Required("partition", "body", m.Partition); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3CredentialsResponse) validateProject(formats strfmt.Registry) error {
+
+	if err := validate.Required("project", "body", m.Project); err != nil {
 		return err
 	}
 

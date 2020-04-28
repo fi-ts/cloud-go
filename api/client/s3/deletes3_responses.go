@@ -58,7 +58,7 @@ type Deletes3OK struct {
 }
 
 func (o *Deletes3OK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/s3/{id}][%d] deletes3OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3OK  %+v", 200, o.Payload)
 }
 
 func (o *Deletes3OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *Deletes3Default) Code() int {
 }
 
 func (o *Deletes3Default) Error() string {
-	return fmt.Sprintf("[DELETE /v1/s3/{id}][%d] deletes3 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *Deletes3Default) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

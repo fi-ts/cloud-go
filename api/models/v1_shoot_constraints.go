@@ -19,6 +19,14 @@ import (
 // swagger:model v1.ShootConstraints
 type V1ShootConstraints struct {
 
+	// the list of available firewall images
+	// Required: true
+	FirewallImages []string `json:"firewall_images"`
+
+	// the list of available firewall types
+	// Required: true
+	FirewallTypes []string `json:"firewall_types"`
+
 	// the list of available kubernetes versions
 	// Required: true
 	KubernetesVersions []string `json:"kubernetes_versions"`
@@ -44,6 +52,14 @@ type V1ShootConstraints struct {
 func (m *V1ShootConstraints) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFirewallImages(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFirewallTypes(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateKubernetesVersions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -67,6 +83,24 @@ func (m *V1ShootConstraints) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ShootConstraints) validateFirewallImages(formats strfmt.Registry) error {
+
+	if err := validate.Required("firewall_images", "body", m.FirewallImages); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ShootConstraints) validateFirewallTypes(formats strfmt.Registry) error {
+
+	if err := validate.Required("firewall_types", "body", m.FirewallTypes); err != nil {
+		return err
+	}
+
 	return nil
 }
 

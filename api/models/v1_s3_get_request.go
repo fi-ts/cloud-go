@@ -17,13 +17,17 @@ import (
 // swagger:model v1.S3GetRequest
 type V1S3GetRequest struct {
 
-	// name
+	// id
 	// Required: true
-	Name *string `json:"name"`
+	ID *string `json:"id"`
 
 	// partition
 	// Required: true
 	Partition *string `json:"partition"`
+
+	// project
+	// Required: true
+	Project *string `json:"project"`
 
 	// tenant
 	// Required: true
@@ -34,11 +38,15 @@ type V1S3GetRequest struct {
 func (m *V1S3GetRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateName(formats); err != nil {
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePartition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProject(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -52,9 +60,9 @@ func (m *V1S3GetRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1S3GetRequest) validateName(formats strfmt.Registry) error {
+func (m *V1S3GetRequest) validateID(formats strfmt.Registry) error {
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 
@@ -64,6 +72,15 @@ func (m *V1S3GetRequest) validateName(formats strfmt.Registry) error {
 func (m *V1S3GetRequest) validatePartition(formats strfmt.Registry) error {
 
 	if err := validate.Required("partition", "body", m.Partition); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3GetRequest) validateProject(formats strfmt.Registry) error {
+
+	if err := validate.Required("project", "body", m.Project); err != nil {
 		return err
 	}
 

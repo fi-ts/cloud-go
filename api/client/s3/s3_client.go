@@ -65,7 +65,7 @@ func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInf
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "deletes3",
 		Method:             "DELETE",
-		PathPattern:        "/v1/s3/{id}",
+		PathPattern:        "/v1/s3",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -94,7 +94,7 @@ func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWrite
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "gets3",
 		Method:             "GET",
-		PathPattern:        "/v1/s3/{id}",
+		PathPattern:        "/v1/s3",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -123,7 +123,7 @@ func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWri
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "lists3",
 		Method:             "GET",
-		PathPattern:        "/v1/s3",
+		PathPattern:        "/v1/s3/list",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
