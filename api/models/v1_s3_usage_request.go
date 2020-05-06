@@ -17,9 +17,6 @@ import (
 // swagger:model v1.S3UsageRequest
 type V1S3UsageRequest struct {
 
-	// estimates costs if time window ends in the future (defaults to false)
-	Forecast bool `json:"forecast,omitempty"`
-
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time

@@ -2403,10 +2403,6 @@
           "description": "the cluster id to account for",
           "type": "string"
         },
-        "forecast": {
-          "description": "estimates costs if time window ends in the future (defaults to false)",
-          "type": "boolean"
-        },
         "from": {
           "description": "the start time in the accounting window to look at",
           "type": "string",
@@ -2465,6 +2461,7 @@
         "partition",
         "clusterid",
         "clustername",
+        "containerimage",
         "namespace",
         "poduuid",
         "podname",
@@ -2483,6 +2480,10 @@
         },
         "clustername": {
           "description": "the cluster name of this container",
+          "type": "string"
+        },
+        "containerimage": {
+          "description": "the container image of this container",
           "type": "string"
         },
         "containername": {
@@ -2580,10 +2581,6 @@
           "description": "the cluster id to account for",
           "type": "string"
         },
-        "forecast": {
-          "description": "estimates costs if time window ends in the future (defaults to false)",
-          "type": "boolean"
-        },
         "from": {
           "description": "the start time in the accounting window to look at",
           "type": "string",
@@ -2640,13 +2637,13 @@
     },
     "v1.IPFindRequest": {
       "required": [
+        "IPAddress",
+        "ProjectID",
+        "ParentPrefixCidr",
         "NetworkID",
         "MachineID",
         "Type",
-        "Tags",
-        "IPAddress",
-        "ProjectID",
-        "ParentPrefixCidr"
+        "Tags"
       ],
       "properties": {
         "IPAddress": {
@@ -2811,7 +2808,8 @@
     "v1.MasterdataLookupRequest": {
       "required": [
         "ClusterNameProject",
-        "ClusterID"
+        "ClusterID",
+        "ProjectIDTime"
       ],
       "properties": {
         "ClusterID": {
@@ -2819,6 +2817,9 @@
         },
         "ClusterNameProject": {
           "$ref": "#/definitions/v1.ClusterNameProject"
+        },
+        "ProjectIDTime": {
+          "$ref": "#/definitions/v1.ProjectIDTime"
         }
       }
     },
@@ -3067,6 +3068,21 @@
         }
       }
     },
+    "v1.ProjectIDTime": {
+      "required": [
+        "ProjectID",
+        "Time"
+      ],
+      "properties": {
+        "ProjectID": {
+          "type": "string"
+        },
+        "Time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "v1.ProjectListResponse": {
       "properties": {
         "projects": {
@@ -3300,6 +3316,7 @@
         "partition",
         "user",
         "bucketname",
+        "bucketid",
         "currentnumberofobjects",
         "start",
         "end",
@@ -3308,6 +3325,10 @@
         "warnings"
       ],
       "properties": {
+        "bucketid": {
+          "description": "the bucket id of this s3 bucket",
+          "type": "string"
+        },
         "bucketname": {
           "description": "the bucket name of this s3 bucket",
           "type": "string"
@@ -3391,10 +3412,6 @@
         "from"
       ],
       "properties": {
-        "forecast": {
-          "description": "estimates costs if time window ends in the future (defaults to false)",
-          "type": "boolean"
-        },
         "from": {
           "description": "the start time in the accounting window to look at",
           "type": "string",
@@ -3686,10 +3703,6 @@
         "clusterid": {
           "description": "the cluster id to account for",
           "type": "string"
-        },
-        "forecast": {
-          "description": "estimates costs if time window ends in the future (defaults to false)",
-          "type": "boolean"
         },
         "from": {
           "description": "the start time in the accounting window to look at",

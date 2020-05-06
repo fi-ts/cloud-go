@@ -17,6 +17,10 @@ import (
 // swagger:model v1.S3Usage
 type V1S3Usage struct {
 
+	// the bucket id of this s3 bucket
+	// Required: true
+	Bucketid *string `json:"bucketid"`
+
 	// the bucket name of this s3 bucket
 	// Required: true
 	Bucketname *string `json:"bucketname"`
@@ -72,6 +76,10 @@ type V1S3Usage struct {
 func (m *V1S3Usage) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateBucketid(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateBucketname(formats); err != nil {
 		res = append(res, err)
 	}
@@ -123,6 +131,15 @@ func (m *V1S3Usage) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1S3Usage) validateBucketid(formats strfmt.Registry) error {
+
+	if err := validate.Required("bucketid", "body", m.Bucketid); err != nil {
+		return err
+	}
+
 	return nil
 }
 

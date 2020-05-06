@@ -25,6 +25,10 @@ type V1ContainerUsage struct {
 	// Required: true
 	Clustername *string `json:"clustername"`
 
+	// the container image of this container
+	// Required: true
+	Containerimage *string `json:"containerimage"`
+
 	// the name of this container
 	// Required: true
 	Containername *string `json:"containername"`
@@ -93,6 +97,10 @@ func (m *V1ContainerUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateClustername(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateContainerimage(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -170,6 +178,15 @@ func (m *V1ContainerUsage) validateClusterid(formats strfmt.Registry) error {
 func (m *V1ContainerUsage) validateClustername(formats strfmt.Registry) error {
 
 	if err := validate.Required("clustername", "body", m.Clustername); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ContainerUsage) validateContainerimage(formats strfmt.Registry) error {
+
+	if err := validate.Required("containerimage", "body", m.Containerimage); err != nil {
 		return err
 	}
 
