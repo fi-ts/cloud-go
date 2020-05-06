@@ -24,6 +24,10 @@ type V1MasterdataLookupRequest struct {
 	// cluster name project
 	// Required: true
 	ClusterNameProject *V1ClusterNameProject `json:"ClusterNameProject"`
+
+	// project ID time
+	// Required: true
+	ProjectIDTime *V1ProjectIDTime `json:"ProjectIDTime"`
 }
 
 // Validate validates this v1 masterdata lookup request
@@ -35,6 +39,10 @@ func (m *V1MasterdataLookupRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateClusterNameProject(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProjectIDTime(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -63,6 +71,24 @@ func (m *V1MasterdataLookupRequest) validateClusterNameProject(formats strfmt.Re
 		if err := m.ClusterNameProject.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ClusterNameProject")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1MasterdataLookupRequest) validateProjectIDTime(formats strfmt.Registry) error {
+
+	if err := validate.Required("ProjectIDTime", "body", m.ProjectIDTime); err != nil {
+		return err
+	}
+
+	if m.ProjectIDTime != nil {
+		if err := m.ProjectIDTime.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ProjectIDTime")
 			}
 			return err
 		}
