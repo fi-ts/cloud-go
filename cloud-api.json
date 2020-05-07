@@ -1566,6 +1566,7 @@
       "required": [
         "changed",
         "created",
+        "expirationDate",
         "features",
         "id"
       ],
@@ -1573,10 +1574,16 @@
         "changed": {
           "type": "string"
         },
+        "classification": {
+          "type": "string"
+        },
         "created": {
           "type": "string"
         },
         "description": {
+          "type": "string"
+        },
+        "expirationDate": {
           "type": "string"
         },
         "features": {
@@ -2236,15 +2243,13 @@
       }
     },
     "v1.ClusterNameProject": {
-      "required": [
-        "ClusterName",
-        "Project"
-      ],
       "properties": {
-        "ClusterName": {
+        "cluster_name": {
+          "description": "cluster name",
           "type": "string"
         },
-        "Project": {
+        "project": {
+          "description": "generated middle-part of gardener shoot namespace, e.g. 'ps5d42'",
           "type": "string"
         }
       }
@@ -2806,33 +2811,29 @@
       }
     },
     "v1.MasterdataLookupRequest": {
-      "required": [
-        "ClusterNameProject",
-        "ClusterID",
-        "ProjectIDTime"
-      ],
       "properties": {
-        "ClusterID": {
+        "cluster_id": {
+          "description": "lookup by clusterID as returned by cloud-api (e.g. 345abc12-3321-4dbc-8d17-55c6ea4fcb38)",
           "type": "string"
         },
-        "ClusterNameProject": {
+        "cluster_name_project": {
+          "description": "lookup by clustername and shoot-project",
           "$ref": "#/definitions/v1.ClusterNameProject"
         },
-        "ProjectIDTime": {
+        "project_id_time": {
+          "description": "lookup at some point in time by projectID as returned by cloud-api (e.g. 10241dd7-a8de-4856-8ac0-b55830b22036)",
           "$ref": "#/definitions/v1.ProjectIDTime"
         }
       }
     },
     "v1.MasterdataLookupResponse": {
-      "required": [
-        "Tenant",
-        "Project"
-      ],
       "properties": {
-        "Project": {
+        "project": {
+          "description": "project",
           "$ref": "#/definitions/v1.Project"
         },
-        "Tenant": {
+        "tenant": {
+          "description": "tenant to which the project belongs",
           "$ref": "#/definitions/v1.Tenant"
         }
       }
@@ -3069,15 +3070,13 @@
       }
     },
     "v1.ProjectIDTime": {
-      "required": [
-        "ProjectID",
-        "Time"
-      ],
       "properties": {
-        "ProjectID": {
+        "project_id": {
+          "description": "projectID as returned by cloud-api (e.g. 10241dd7-a8de-4856-8ac0-b55830b22036)",
           "type": "string"
         },
-        "Time": {
+        "time": {
+          "description": "point in time",
           "type": "string",
           "format": "date-time"
         }
