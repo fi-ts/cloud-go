@@ -8,9 +8,7 @@ package models
 import (
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1ClusterNameProject v1 cluster name project
@@ -18,47 +16,14 @@ import (
 type V1ClusterNameProject struct {
 
 	// cluster name
-	// Required: true
-	ClusterName *string `json:"ClusterName"`
+	ClusterName string `json:"cluster_name,omitempty"`
 
-	// project
-	// Required: true
-	Project *string `json:"Project"`
+	// generated middle-part of gardener shoot namespace, e.g. 'ps5d42'
+	Project string `json:"project,omitempty"`
 }
 
 // Validate validates this v1 cluster name project
 func (m *V1ClusterNameProject) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateClusterName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateProject(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1ClusterNameProject) validateClusterName(formats strfmt.Registry) error {
-
-	if err := validate.Required("ClusterName", "body", m.ClusterName); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1ClusterNameProject) validateProject(formats strfmt.Registry) error {
-
-	if err := validate.Required("Project", "body", m.Project); err != nil {
-		return err
-	}
-
 	return nil
 }
 

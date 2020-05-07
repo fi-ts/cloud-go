@@ -10,33 +10,25 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1MasterdataLookupRequest v1 masterdata lookup request
 // swagger:model v1.MasterdataLookupRequest
 type V1MasterdataLookupRequest struct {
 
-	// cluster ID
-	// Required: true
-	ClusterID *string `json:"ClusterID"`
+	// lookup by clusterID as returned by cloud-api (e.g. 345abc12-3321-4dbc-8d17-55c6ea4fcb38)
+	ClusterID string `json:"cluster_id,omitempty"`
 
-	// cluster name project
-	// Required: true
-	ClusterNameProject *V1ClusterNameProject `json:"ClusterNameProject"`
+	// lookup by clustername and shoot-project
+	ClusterNameProject *V1ClusterNameProject `json:"cluster_name_project,omitempty"`
 
-	// project ID time
-	// Required: true
-	ProjectIDTime *V1ProjectIDTime `json:"ProjectIDTime"`
+	// lookup at some point in time by projectID as returned by cloud-api (e.g. 10241dd7-a8de-4856-8ac0-b55830b22036)
+	ProjectIDTime *V1ProjectIDTime `json:"project_id_time,omitempty"`
 }
 
 // Validate validates this v1 masterdata lookup request
 func (m *V1MasterdataLookupRequest) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateClusterID(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateClusterNameProject(formats); err != nil {
 		res = append(res, err)
@@ -52,25 +44,16 @@ func (m *V1MasterdataLookupRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1MasterdataLookupRequest) validateClusterID(formats strfmt.Registry) error {
-
-	if err := validate.Required("ClusterID", "body", m.ClusterID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1MasterdataLookupRequest) validateClusterNameProject(formats strfmt.Registry) error {
 
-	if err := validate.Required("ClusterNameProject", "body", m.ClusterNameProject); err != nil {
-		return err
+	if swag.IsZero(m.ClusterNameProject) { // not required
+		return nil
 	}
 
 	if m.ClusterNameProject != nil {
 		if err := m.ClusterNameProject.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("ClusterNameProject")
+				return ve.ValidateName("cluster_name_project")
 			}
 			return err
 		}
@@ -81,14 +64,14 @@ func (m *V1MasterdataLookupRequest) validateClusterNameProject(formats strfmt.Re
 
 func (m *V1MasterdataLookupRequest) validateProjectIDTime(formats strfmt.Registry) error {
 
-	if err := validate.Required("ProjectIDTime", "body", m.ProjectIDTime); err != nil {
-		return err
+	if swag.IsZero(m.ProjectIDTime) { // not required
+		return nil
 	}
 
 	if m.ProjectIDTime != nil {
 		if err := m.ProjectIDTime.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("ProjectIDTime")
+				return ve.ValidateName("project_id_time")
 			}
 			return err
 		}

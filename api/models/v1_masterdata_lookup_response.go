@@ -10,7 +10,6 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1MasterdataLookupResponse v1 masterdata lookup response
@@ -18,12 +17,10 @@ import (
 type V1MasterdataLookupResponse struct {
 
 	// project
-	// Required: true
-	Project *V1Project `json:"Project"`
+	Project *V1Project `json:"project,omitempty"`
 
-	// tenant
-	// Required: true
-	Tenant *V1Tenant `json:"Tenant"`
+	// tenant to which the project belongs
+	Tenant *V1Tenant `json:"tenant,omitempty"`
 }
 
 // Validate validates this v1 masterdata lookup response
@@ -46,14 +43,14 @@ func (m *V1MasterdataLookupResponse) Validate(formats strfmt.Registry) error {
 
 func (m *V1MasterdataLookupResponse) validateProject(formats strfmt.Registry) error {
 
-	if err := validate.Required("Project", "body", m.Project); err != nil {
-		return err
+	if swag.IsZero(m.Project) { // not required
+		return nil
 	}
 
 	if m.Project != nil {
 		if err := m.Project.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Project")
+				return ve.ValidateName("project")
 			}
 			return err
 		}
@@ -64,14 +61,14 @@ func (m *V1MasterdataLookupResponse) validateProject(formats strfmt.Registry) er
 
 func (m *V1MasterdataLookupResponse) validateTenant(formats strfmt.Registry) error {
 
-	if err := validate.Required("Tenant", "body", m.Tenant); err != nil {
-		return err
+	if swag.IsZero(m.Tenant) { // not required
+		return nil
 	}
 
 	if m.Tenant != nil {
 		if err := m.Tenant.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Tenant")
+				return ve.ValidateName("tenant")
 			}
 			return err
 		}

@@ -21,12 +21,19 @@ type ModelsV1ImageResponse struct {
 	// Required: true
 	Changed *string `json:"changed"`
 
+	// classification
+	Classification string `json:"classification,omitempty"`
+
 	// created
 	// Required: true
 	Created *string `json:"created"`
 
 	// description
 	Description string `json:"description,omitempty"`
+
+	// expiration date
+	// Required: true
+	ExpirationDate *string `json:"expirationDate"`
 
 	// features
 	// Required: true
@@ -52,6 +59,10 @@ func (m *ModelsV1ImageResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreated(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExpirationDate(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -81,6 +92,15 @@ func (m *ModelsV1ImageResponse) validateChanged(formats strfmt.Registry) error {
 func (m *ModelsV1ImageResponse) validateCreated(formats strfmt.Registry) error {
 
 	if err := validate.Required("created", "body", m.Created); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1ImageResponse) validateExpirationDate(formats strfmt.Registry) error {
+
+	if err := validate.Required("expirationDate", "body", m.ExpirationDate); err != nil {
 		return err
 	}
 
