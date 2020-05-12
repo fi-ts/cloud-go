@@ -141,6 +141,122 @@ func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo run
 }
 
 /*
+IPUsage gets ip usage for given accounting query
+*/
+func (a *Client) IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoWriter) (*IPUsageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewIPUsageParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ipUsage",
+		Method:             "GET",
+		PathPattern:        "/v1/accounting/ip-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &IPUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*IPUsageOK), nil
+
+}
+
+/*
+IPUsageCSV gets ip usage for given accounting query
+*/
+func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*IPUsageCSVOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewIPUsageCSVParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ipUsageCSV",
+		Method:             "GET",
+		PathPattern:        "/v1/accounting/ip-usage-csv",
+		ProducesMediaTypes: []string{"application/json", "text/plain"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &IPUsageCSVReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*IPUsageCSVOK), nil
+
+}
+
+/*
+NetworkUsage gets network usage for given accounting query
+*/
+func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkUsageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewNetworkUsageParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "networkUsage",
+		Method:             "GET",
+		PathPattern:        "/v1/accounting/network-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &NetworkUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*NetworkUsageOK), nil
+
+}
+
+/*
+NetworkUsageCSV gets network usage for given accounting query
+*/
+func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkUsageCSVOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewNetworkUsageCSVParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "networkUsageCSV",
+		Method:             "GET",
+		PathPattern:        "/v1/accounting/network-usage-csv",
+		ProducesMediaTypes: []string{"application/json", "text/plain"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &NetworkUsageCSVReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*NetworkUsageCSVOK), nil
+
+}
+
+/*
 S3Usage gets s3 bucket usage for given accounting query
 */
 func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter) (*S3UsageOK, error) {
