@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"strconv"
+
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -17,10 +19,6 @@ import (
 // swagger:model v1.S3CredentialsResponse
 type V1S3CredentialsResponse struct {
 
-	// access key
-	// Required: true
-	AccessKey *string `json:"access_key"`
-
 	// endpoint
 	// Required: true
 	Endpoint *string `json:"endpoint"`
@@ -28,6 +26,10 @@ type V1S3CredentialsResponse struct {
 	// id
 	// Required: true
 	ID *string `json:"id"`
+
+	// keys
+	// Required: true
+	Keys []*V1S3Key `json:"keys"`
 
 	// max buckets
 	// Required: true
@@ -45,10 +47,6 @@ type V1S3CredentialsResponse struct {
 	// Required: true
 	Project *string `json:"project"`
 
-	// secret key
-	// Required: true
-	SecretKey *string `json:"secret_key"`
-
 	// tenant
 	// Required: true
 	Tenant *string `json:"tenant"`
@@ -58,15 +56,15 @@ type V1S3CredentialsResponse struct {
 func (m *V1S3CredentialsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAccessKey(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateEndpoint(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKeys(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -86,10 +84,6 @@ func (m *V1S3CredentialsResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateSecretKey(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateTenant(formats); err != nil {
 		res = append(res, err)
 	}
@@ -97,15 +91,6 @@ func (m *V1S3CredentialsResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1S3CredentialsResponse) validateAccessKey(formats strfmt.Registry) error {
-
-	if err := validate.Required("access_key", "body", m.AccessKey); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -122,6 +107,31 @@ func (m *V1S3CredentialsResponse) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3CredentialsResponse) validateKeys(formats strfmt.Registry) error {
+
+	if err := validate.Required("keys", "body", m.Keys); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Keys); i++ {
+		if swag.IsZero(m.Keys[i]) { // not required
+			continue
+		}
+
+		if m.Keys[i] != nil {
+			if err := m.Keys[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("keys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -157,15 +167,6 @@ func (m *V1S3CredentialsResponse) validatePartition(formats strfmt.Registry) err
 func (m *V1S3CredentialsResponse) validateProject(formats strfmt.Registry) error {
 
 	if err := validate.Required("project", "body", m.Project); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1S3CredentialsResponse) validateSecretKey(formats strfmt.Registry) error {
-
-	if err := validate.Required("secret_key", "body", m.SecretKey); err != nil {
 		return err
 	}
 

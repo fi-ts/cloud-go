@@ -169,6 +169,35 @@ func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runti
 
 }
 
+/*
+Updates3 updates an s3 user
+*/
+func (a *Client) Updates3(params *Updates3Params, authInfo runtime.ClientAuthInfoWriter) (*Updates3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdates3Params()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updates3",
+		Method:             "POST",
+		PathPattern:        "/v1/s3",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &Updates3Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*Updates3OK), nil
+
+}
+
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ClientTransport) {
 	a.transport = transport

@@ -25,6 +25,9 @@ type V1beta1Worker struct {
 	// ca bundle
 	CaBundle string `json:"caBundle,omitempty"`
 
+	// cri
+	Cri *V1beta1CRI `json:"cri,omitempty"`
+
 	// data volumes
 	DataVolumes []*V1beta1Volume `json:"dataVolumes"`
 
@@ -76,6 +79,10 @@ type V1beta1Worker struct {
 func (m *V1beta1Worker) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCri(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDataVolumes(formats); err != nil {
 		res = append(res, err)
 	}
@@ -111,6 +118,24 @@ func (m *V1beta1Worker) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1beta1Worker) validateCri(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Cri) { // not required
+		return nil
+	}
+
+	if m.Cri != nil {
+		if err := m.Cri.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cri")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

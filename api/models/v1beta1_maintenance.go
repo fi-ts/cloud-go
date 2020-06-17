@@ -19,6 +19,9 @@ type V1beta1Maintenance struct {
 	// auto update
 	AutoUpdate *V1beta1MaintenanceAutoUpdate `json:"autoUpdate,omitempty"`
 
+	// confine spec update rollout
+	ConfineSpecUpdateRollout bool `json:"confineSpecUpdateRollout,omitempty"`
+
 	// time window
 	TimeWindow *V1beta1MaintenanceTimeWindow `json:"timeWindow,omitempty"`
 }

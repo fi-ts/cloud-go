@@ -28,6 +28,10 @@ type V1NetworkUsageAccumuluated struct {
 	// the accumulated outgoing traffic (byte)
 	// Required: true
 	Out *string `json:"out"`
+
+	// the accumulated total traffic (byte)
+	// Required: true
+	Total *string `json:"total"`
 }
 
 // Validate validates this v1 network usage accumuluated
@@ -43,6 +47,10 @@ func (m *V1NetworkUsageAccumuluated) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOut(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTotal(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,6 +81,15 @@ func (m *V1NetworkUsageAccumuluated) validateLifetime(formats strfmt.Registry) e
 func (m *V1NetworkUsageAccumuluated) validateOut(formats strfmt.Registry) error {
 
 	if err := validate.Required("out", "body", m.Out); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1NetworkUsageAccumuluated) validateTotal(formats strfmt.Registry) error {
+
+	if err := validate.Required("total", "body", m.Total); err != nil {
 		return err
 	}
 

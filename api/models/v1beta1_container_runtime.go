@@ -13,26 +13,23 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1beta1ShootMachineImage v1beta1 shoot machine image
-// swagger:model v1beta1.ShootMachineImage
-type V1beta1ShootMachineImage struct {
-
-	// name
-	// Required: true
-	Name *string `json:"name"`
+// V1beta1ContainerRuntime v1beta1 container runtime
+// swagger:model v1beta1.ContainerRuntime
+type V1beta1ContainerRuntime struct {
 
 	// provider config
 	ProviderConfig string `json:"providerConfig,omitempty"`
 
-	// version
-	Version string `json:"version,omitempty"`
+	// type
+	// Required: true
+	Type *string `json:"type"`
 }
 
-// Validate validates this v1beta1 shoot machine image
-func (m *V1beta1ShootMachineImage) Validate(formats strfmt.Registry) error {
+// Validate validates this v1beta1 container runtime
+func (m *V1beta1ContainerRuntime) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateName(formats); err != nil {
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -42,9 +39,9 @@ func (m *V1beta1ShootMachineImage) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1beta1ShootMachineImage) validateName(formats strfmt.Registry) error {
+func (m *V1beta1ContainerRuntime) validateType(formats strfmt.Registry) error {
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
 	}
 
@@ -52,7 +49,7 @@ func (m *V1beta1ShootMachineImage) validateName(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *V1beta1ShootMachineImage) MarshalBinary() ([]byte, error) {
+func (m *V1beta1ContainerRuntime) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -60,8 +57,8 @@ func (m *V1beta1ShootMachineImage) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1beta1ShootMachineImage) UnmarshalBinary(b []byte) error {
-	var res V1beta1ShootMachineImage
+func (m *V1beta1ContainerRuntime) UnmarshalBinary(b []byte) error {
+	var res V1beta1ContainerRuntime
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

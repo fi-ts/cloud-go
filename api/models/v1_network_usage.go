@@ -67,6 +67,10 @@ type V1NetworkUsage struct {
 	// Required: true
 	Tenant *string `json:"tenant"`
 
+	// the total traffic of this network device (byte)
+	// Required: true
+	Total *string `json:"total"`
+
 	// warnings that occurred when calculating the usage of this device's network traffic
 	// Required: true
 	Warnings []string `json:"warnings"`
@@ -121,6 +125,10 @@ func (m *V1NetworkUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTenant(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTotal(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -244,6 +252,15 @@ func (m *V1NetworkUsage) validateStart(formats strfmt.Registry) error {
 func (m *V1NetworkUsage) validateTenant(formats strfmt.Registry) error {
 
 	if err := validate.Required("tenant", "body", m.Tenant); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1NetworkUsage) validateTotal(formats strfmt.Registry) error {
+
+	if err := validate.Required("total", "body", m.Total); err != nil {
 		return err
 	}
 

@@ -17,6 +17,9 @@ import (
 // swagger:model v1beta1.Condition
 type V1beta1Condition struct {
 
+	// codes
+	Codes []string `json:"codes"`
+
 	// last transition time
 	// Required: true
 	LastTransitionTime *string `json:"lastTransitionTime"`
