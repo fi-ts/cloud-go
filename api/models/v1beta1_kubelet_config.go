@@ -43,6 +43,9 @@ type V1beta1KubeletConfig struct {
 	// feature gates
 	FeatureGates map[string]bool `json:"featureGates,omitempty"`
 
+	// image pull progress deadline
+	ImagePullProgressDeadline string `json:"imagePullProgressDeadline,omitempty"`
+
 	// max pods
 	MaxPods int32 `json:"maxPods,omitempty"`
 

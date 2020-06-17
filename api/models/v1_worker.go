@@ -17,6 +17,10 @@ import (
 // swagger:model v1.Worker
 type V1Worker struct {
 
+	// c r i
+	// Required: true
+	CRI *V1beta1CRI `json:"CRI"`
+
 	// machine image
 	// Required: true
 	MachineImage *V1MachineImage `json:"MachineImage"`
@@ -50,6 +54,10 @@ type V1Worker struct {
 func (m *V1Worker) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCRI(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMachineImage(formats); err != nil {
 		res = append(res, err)
 	}
@@ -81,6 +89,24 @@ func (m *V1Worker) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1Worker) validateCRI(formats strfmt.Registry) error {
+
+	if err := validate.Required("CRI", "body", m.CRI); err != nil {
+		return err
+	}
+
+	if m.CRI != nil {
+		if err := m.CRI.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("CRI")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

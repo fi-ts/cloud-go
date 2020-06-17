@@ -21,6 +21,10 @@ type V1S3CreateRequest struct {
 	// Required: true
 	ID *string `json:"id"`
 
+	// key
+	// Required: true
+	Key *V1S3Key `json:"key"`
+
 	// max buckets
 	// Required: true
 	MaxBuckets *int64 `json:"max_buckets"`
@@ -47,6 +51,10 @@ func (m *V1S3CreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKey(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -80,6 +88,24 @@ func (m *V1S3CreateRequest) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3CreateRequest) validateKey(formats strfmt.Registry) error {
+
+	if err := validate.Required("key", "body", m.Key); err != nil {
+		return err
+	}
+
+	if m.Key != nil {
+		if err := m.Key.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("key")
+			}
+			return err
+		}
 	}
 
 	return nil
