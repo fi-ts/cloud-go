@@ -20,6 +20,9 @@ type V1NetworkUsageRequest struct {
 	// the cluster id to account for
 	Clusterid string `json:"clusterid,omitempty"`
 
+	// the device to account for
+	Device string `json:"device,omitempty"`
+
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
