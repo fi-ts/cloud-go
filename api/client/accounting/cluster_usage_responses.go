@@ -58,7 +58,7 @@ type ClusterUsageOK struct {
 }
 
 func (o *ClusterUsageOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/cluster-usage][%d] clusterUsageOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK  %+v", 200, o.Payload)
 }
 
 func (o *ClusterUsageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *ClusterUsageDefault) Code() int {
 }
 
 func (o *ClusterUsageDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/cluster-usage][%d] clusterUsage default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsage default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ClusterUsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -58,7 +58,7 @@ type S3UsageOK struct {
 }
 
 func (o *S3UsageOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/s3-usage][%d] s3UsageOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3UsageOK  %+v", 200, o.Payload)
 }
 
 func (o *S3UsageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *S3UsageDefault) Code() int {
 }
 
 func (o *S3UsageDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/s3-usage][%d] s3Usage default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *S3UsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

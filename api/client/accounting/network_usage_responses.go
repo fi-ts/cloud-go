@@ -58,7 +58,7 @@ type NetworkUsageOK struct {
 }
 
 func (o *NetworkUsageOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/network-usage][%d] networkUsageOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/network-usage][%d] networkUsageOK  %+v", 200, o.Payload)
 }
 
 func (o *NetworkUsageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *NetworkUsageDefault) Code() int {
 }
 
 func (o *NetworkUsageDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/network-usage][%d] networkUsage default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/network-usage][%d] networkUsage default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *NetworkUsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

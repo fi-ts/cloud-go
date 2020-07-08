@@ -58,7 +58,7 @@ type IPUsageOK struct {
 }
 
 func (o *IPUsageOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/ip-usage][%d] ipUsageOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsageOK  %+v", 200, o.Payload)
 }
 
 func (o *IPUsageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *IPUsageDefault) Code() int {
 }
 
 func (o *IPUsageDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/ip-usage][%d] ipUsage default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsage default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *IPUsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

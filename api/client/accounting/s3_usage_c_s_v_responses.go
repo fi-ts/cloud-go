@@ -58,7 +58,7 @@ type S3UsageCSVOK struct {
 }
 
 func (o *S3UsageCSVOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK  %+v", 200, o.Payload)
 }
 
 func (o *S3UsageCSVOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -94,7 +94,7 @@ func (o *S3UsageCSVDefault) Code() int {
 }
 
 func (o *S3UsageCSVDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/s3-usage-csv][%d] s3UsageCSV default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSV default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *S3UsageCSVDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

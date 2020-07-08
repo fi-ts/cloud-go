@@ -58,7 +58,7 @@ type NetworkUsageCSVOK struct {
 }
 
 func (o *NetworkUsageCSVOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/network-usage-csv][%d] networkUsageCSVOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/network-usage-csv][%d] networkUsageCSVOK  %+v", 200, o.Payload)
 }
 
 func (o *NetworkUsageCSVOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -94,7 +94,7 @@ func (o *NetworkUsageCSVDefault) Code() int {
 }
 
 func (o *NetworkUsageCSVDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/network-usage-csv][%d] networkUsageCSV default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/network-usage-csv][%d] networkUsageCSV default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *NetworkUsageCSVDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

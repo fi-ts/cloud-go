@@ -58,7 +58,7 @@ type IPUsageCSVOK struct {
 }
 
 func (o *IPUsageCSVOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/ip-usage-csv][%d] ipUsageCSVOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/ip-usage-csv][%d] ipUsageCSVOK  %+v", 200, o.Payload)
 }
 
 func (o *IPUsageCSVOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -94,7 +94,7 @@ func (o *IPUsageCSVDefault) Code() int {
 }
 
 func (o *IPUsageCSVDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/ip-usage-csv][%d] ipUsageCSV default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/ip-usage-csv][%d] ipUsageCSV default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *IPUsageCSVDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

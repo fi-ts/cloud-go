@@ -58,7 +58,7 @@ type ContainerUsageOK struct {
 }
 
 func (o *ContainerUsageOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
 }
 
 func (o *ContainerUsageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *ContainerUsageDefault) Code() int {
 }
 
 func (o *ContainerUsageDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/container-usage][%d] containerUsage default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ContainerUsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
