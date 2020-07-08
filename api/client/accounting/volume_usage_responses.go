@@ -58,7 +58,7 @@ type VolumeUsageOK struct {
 }
 
 func (o *VolumeUsageOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/volume-usage][%d] volumeUsageOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsageOK  %+v", 200, o.Payload)
 }
 
 func (o *VolumeUsageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *VolumeUsageDefault) Code() int {
 }
 
 func (o *VolumeUsageDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/volume-usage][%d] volumeUsage default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsage default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *VolumeUsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

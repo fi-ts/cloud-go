@@ -58,7 +58,7 @@ type ContainerUsageCSVOK struct {
 }
 
 func (o *ContainerUsageCSVOK) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/container-usage-csv][%d] containerUsageCSVOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/container-usage-csv][%d] containerUsageCSVOK  %+v", 200, o.Payload)
 }
 
 func (o *ContainerUsageCSVOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -94,7 +94,7 @@ func (o *ContainerUsageCSVDefault) Code() int {
 }
 
 func (o *ContainerUsageCSVDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/accounting/container-usage-csv][%d] containerUsageCSV default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/container-usage-csv][%d] containerUsageCSV default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ContainerUsageCSVDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

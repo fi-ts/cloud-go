@@ -35,7 +35,7 @@ func (a *Client) ClusterUsage(params *ClusterUsageParams, authInfo runtime.Clien
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "clusterUsage",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/cluster-usage",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -64,7 +64,7 @@ func (a *Client) ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "clusterUsageCSV",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/cluster-usage-csv",
 		ProducesMediaTypes: []string{"application/json", "text/plain"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -93,7 +93,7 @@ func (a *Client) ContainerUsage(params *ContainerUsageParams, authInfo runtime.C
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "containerUsage",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/container-usage",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -122,7 +122,7 @@ func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo run
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "containerUsageCSV",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/container-usage-csv",
 		ProducesMediaTypes: []string{"application/json", "text/plain"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -151,7 +151,7 @@ func (a *Client) IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoW
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ipUsage",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/ip-usage",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -180,7 +180,7 @@ func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAut
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "ipUsageCSV",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/ip-usage-csv",
 		ProducesMediaTypes: []string{"application/json", "text/plain"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -209,7 +209,7 @@ func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.Clien
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "networkUsage",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/network-usage",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -238,7 +238,7 @@ func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "networkUsageCSV",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/network-usage-csv",
 		ProducesMediaTypes: []string{"application/json", "text/plain"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -267,7 +267,7 @@ func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoW
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "s3Usage",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/s3-usage",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -296,7 +296,7 @@ func (a *Client) S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAut
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "s3UsageCSV",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/s3-usage-csv",
 		ProducesMediaTypes: []string{"application/json", "text/plain"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -325,7 +325,7 @@ func (a *Client) VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientA
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "volumeUsage",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/volume-usage",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -354,7 +354,7 @@ func (a *Client) VolumeUsageCSV(params *VolumeUsageCSVParams, authInfo runtime.C
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "volumeUsageCSV",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/v1/accounting/volume-usage-csv",
 		ProducesMediaTypes: []string{"application/json", "text/plain"},
 		ConsumesMediaTypes: []string{"application/json"},
