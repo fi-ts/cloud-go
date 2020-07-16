@@ -58,7 +58,7 @@ type FreeIPOK struct {
 }
 
 func (o *FreeIPOK) Error() string {
-	return fmt.Sprintf("[POST /v1/ip/free/{ip}][%d] freeIpOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/ip/{ip}][%d] freeIpOK  %+v", 200, o.Payload)
 }
 
 func (o *FreeIPOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ func (o *FreeIPDefault) Code() int {
 }
 
 func (o *FreeIPDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/ip/free/{ip}][%d] freeIP default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/ip/{ip}][%d] freeIP default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *FreeIPDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

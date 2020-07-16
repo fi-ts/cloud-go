@@ -43,6 +43,10 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	Kubernetes *V1Kubernetes `json:"Kubernetes"`
 
+	// labels
+	// Required: true
+	Labels map[string]string `json:"Labels"`
+
 	// maintenance
 	// Required: true
 	Maintenance *V1Maintenance `json:"Maintenance"`
@@ -97,6 +101,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateKubernetes(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLabels(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -202,6 +210,11 @@ func (m *V1ClusterCreateRequest) validateKubernetes(formats strfmt.Registry) err
 			return err
 		}
 	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) validateLabels(formats strfmt.Registry) error {
 
 	return nil
 }

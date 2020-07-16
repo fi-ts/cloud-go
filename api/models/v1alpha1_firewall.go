@@ -25,6 +25,10 @@ type V1alpha1Firewall struct {
 	// Required: true
 	Networks []string `json:"networks"`
 
+	// rate limits
+	// Required: true
+	RateLimits map[string]int64 `json:"rateLimits"`
+
 	// size
 	// Required: true
 	Size *string `json:"size"`
@@ -39,6 +43,10 @@ func (m *V1alpha1Firewall) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNetworks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRateLimits(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -66,6 +74,11 @@ func (m *V1alpha1Firewall) validateNetworks(formats strfmt.Registry) error {
 	if err := validate.Required("networks", "body", m.Networks); err != nil {
 		return err
 	}
+
+	return nil
+}
+
+func (m *V1alpha1Firewall) validateRateLimits(formats strfmt.Registry) error {
 
 	return nil
 }

@@ -702,6 +702,12 @@
         "Kubernetes": {
           "$ref": "#/definitions/v1.Kubernetes"
         },
+        "Labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "Maintenance": {
           "$ref": "#/definitions/v1.Maintenance"
         },
@@ -734,6 +740,7 @@
         "FirewallImage",
         "FirewallSize",
         "Kubernetes",
+        "Labels",
         "Maintenance",
         "Name",
         "PartitionID",
@@ -849,6 +856,12 @@
         "Kubernetes": {
           "$ref": "#/definitions/v1.Kubernetes"
         },
+        "Labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "Maintenance": {
           "$ref": "#/definitions/v1.Maintenance"
         },
@@ -867,6 +880,7 @@
         "FirewallSize",
         "ID",
         "Kubernetes",
+        "Labels",
         "Maintenance",
         "Purpose",
         "Workers"
@@ -2780,6 +2794,12 @@
           },
           "type": "array"
         },
+        "rateLimits": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        },
         "size": {
           "type": "string"
         }
@@ -2787,6 +2807,7 @@
       "required": [
         "image",
         "networks",
+        "rateLimits",
         "size"
       ]
     },
@@ -3942,8 +3963,7 @@
       "name": "MIT",
       "url": "http://mit.org"
     },
-    "title": "cloud-api",
-    "version": "v0.7.12"
+    "title": "cloud-api"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
@@ -3979,7 +3999,7 @@
             }
           }
         },
-        "summary": "get cluster usage for given accounting query",
+        "summary": "find cluster usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4019,7 +4039,7 @@
             }
           }
         },
-        "summary": "get cluster usage for given accounting query",
+        "summary": "find cluster usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4058,7 +4078,7 @@
             }
           }
         },
-        "summary": "get container usage for given accounting query",
+        "summary": "find container usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4098,7 +4118,7 @@
             }
           }
         },
-        "summary": "get container usage for given accounting query",
+        "summary": "find container usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4137,7 +4157,7 @@
             }
           }
         },
-        "summary": "get ip usage for given accounting query",
+        "summary": "find ip usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4177,7 +4197,7 @@
             }
           }
         },
-        "summary": "get ip usage for given accounting query",
+        "summary": "find ip usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4216,7 +4236,7 @@
             }
           }
         },
-        "summary": "get network usage for given accounting query",
+        "summary": "find network usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4256,7 +4276,7 @@
             }
           }
         },
-        "summary": "get network usage for given accounting query",
+        "summary": "find network usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4295,7 +4315,7 @@
             }
           }
         },
-        "summary": "get s3 bucket usage for given accounting query",
+        "summary": "find s3 bucket usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4335,7 +4355,7 @@
             }
           }
         },
-        "summary": "get s3 bucket usage for given accounting query",
+        "summary": "find s3 bucket usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4374,7 +4394,7 @@
             }
           }
         },
-        "summary": "get volume usage for given accounting query",
+        "summary": "find volume usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4414,7 +4434,7 @@
             }
           }
         },
-        "summary": "get volume usage for given accounting query",
+        "summary": "find volume usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -4937,8 +4957,8 @@
         ]
       }
     },
-    "/v1/ip/free/{ip}": {
-      "post": {
+    "/v1/ip/{ip}": {
+      "delete": {
         "consumes": [
           "application/json"
         ],
@@ -4973,9 +4993,7 @@
         "tags": [
           "ip"
         ]
-      }
-    },
-    "/v1/ip/{ip}": {
+      },
       "get": {
         "consumes": [
           "application/json"
