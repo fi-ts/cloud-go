@@ -64,8 +64,8 @@ func (a *Client) FreeIP(params *FreeIPParams, authInfo runtime.ClientAuthInfoWri
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "freeIP",
-		Method:             "POST",
-		PathPattern:        "/v1/ip/free/{ip}",
+		Method:             "DELETE",
+		PathPattern:        "/v1/ip/{ip}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
