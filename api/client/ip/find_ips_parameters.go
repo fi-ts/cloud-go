@@ -16,7 +16,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/metal-stack/cloud-go/api/models"
+	models "github.com/fi-ts/cloud-go/api/models"
 )
 
 // NewFindIpsParams creates a new FindIpsParams object
