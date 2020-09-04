@@ -19,6 +19,9 @@ import (
 // swagger:model v1beta1.ShootStatus
 type V1beta1ShootStatus struct {
 
+	// cluster identity
+	ClusterIdentity string `json:"clusterIdentity,omitempty"`
+
 	// conditions
 	Conditions []*V1beta1Condition `json:"conditions"`
 
