@@ -19,48 +19,161 @@ import (
 // swagger:model v1.ClusterResponse
 type V1ClusterResponse struct {
 
-	// the gardener shoot control plane raw extension
+	// additional networks
 	// Required: true
-	Controlplane *V1alpha1ControlPlaneConfig `json:"controlplane"`
+	AdditionalNetworks []string `json:"AdditionalNetworks"`
 
-	// the gardener shoot infrastructure raw extension
+	// creation timestamp
 	// Required: true
-	Infrastructure *V1alpha1InfrastructureConfig `json:"infrastructure"`
+	// Format: date-time
+	CreationTimestamp *strfmt.DateTime `json:"CreationTimestamp"`
+
+	// DNS endpoint
+	// Required: true
+	DNSEndpoint *string `json:"DNSEndpoint"`
+
+	// description
+	// Required: true
+	Description *string `json:"Description"`
+
+	// firewall image
+	// Required: true
+	FirewallImage *string `json:"FirewallImage"`
+
+	// firewall size
+	// Required: true
+	FirewallSize *string `json:"FirewallSize"`
+
+	// ID
+	// Required: true
+	ID *string `json:"ID"`
+
+	// kubernetes
+	// Required: true
+	Kubernetes *V1Kubernetes `json:"Kubernetes"`
+
+	// labels
+	// Required: true
+	Labels map[string]string `json:"Labels"`
+
+	// maintenance
+	// Required: true
+	Maintenance *V1Maintenance `json:"Maintenance"`
+
+	// name
+	// Required: true
+	Name *string `json:"Name"`
+
+	// networking
+	// Required: true
+	Networking *V1Networking `json:"Networking"`
+
+	// partition ID
+	// Required: true
+	PartitionID *string `json:"PartitionID"`
+
+	// project ID
+	// Required: true
+	ProjectID *string `json:"ProjectID"`
+
+	// purpose
+	// Required: true
+	Purpose *string `json:"Purpose"`
+
+	// status
+	// Required: true
+	Status *V1beta1ShootStatus `json:"Status"`
+
+	// tenant
+	// Required: true
+	Tenant *string `json:"Tenant"`
+
+	// workers
+	// Required: true
+	Workers []*V1Worker `json:"Workers"`
 
 	// the machines which belong to this cluster
 	// Required: true
 	Machines []*ModelsV1MachineResponse `json:"machines"`
-
-	// the gardener shoot network raw extension
-	// Required: true
-	Network *V1alpha1NetworkConfig `json:"network"`
-
-	// the gardener shoot resource but with the raw extensions separated out
-	// Required: true
-	Shoot *V1beta1Shoot `json:"shoot"`
 }
 
 // Validate validates this v1 cluster response
 func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateControlplane(formats); err != nil {
+	if err := m.validateAdditionalNetworks(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateInfrastructure(formats); err != nil {
+	if err := m.validateCreationTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDNSEndpoint(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFirewallImage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFirewallSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKubernetes(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLabels(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMaintenance(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNetworking(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePartitionID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProjectID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePurpose(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTenant(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkers(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateMachines(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateNetwork(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateShoot(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -70,16 +183,83 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1ClusterResponse) validateControlplane(formats strfmt.Registry) error {
+func (m *V1ClusterResponse) validateAdditionalNetworks(formats strfmt.Registry) error {
 
-	if err := validate.Required("controlplane", "body", m.Controlplane); err != nil {
+	if err := validate.Required("AdditionalNetworks", "body", m.AdditionalNetworks); err != nil {
 		return err
 	}
 
-	if m.Controlplane != nil {
-		if err := m.Controlplane.Validate(formats); err != nil {
+	return nil
+}
+
+func (m *V1ClusterResponse) validateCreationTimestamp(formats strfmt.Registry) error {
+
+	if err := validate.Required("CreationTimestamp", "body", m.CreationTimestamp); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("CreationTimestamp", "body", "date-time", m.CreationTimestamp.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateDNSEndpoint(formats strfmt.Registry) error {
+
+	if err := validate.Required("DNSEndpoint", "body", m.DNSEndpoint); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateDescription(formats strfmt.Registry) error {
+
+	if err := validate.Required("Description", "body", m.Description); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateFirewallImage(formats strfmt.Registry) error {
+
+	if err := validate.Required("FirewallImage", "body", m.FirewallImage); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateFirewallSize(formats strfmt.Registry) error {
+
+	if err := validate.Required("FirewallSize", "body", m.FirewallSize); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("ID", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateKubernetes(formats strfmt.Registry) error {
+
+	if err := validate.Required("Kubernetes", "body", m.Kubernetes); err != nil {
+		return err
+	}
+
+	if m.Kubernetes != nil {
+		if err := m.Kubernetes.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("controlplane")
+				return ve.ValidateName("Kubernetes")
 			}
 			return err
 		}
@@ -88,19 +268,130 @@ func (m *V1ClusterResponse) validateControlplane(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *V1ClusterResponse) validateInfrastructure(formats strfmt.Registry) error {
+func (m *V1ClusterResponse) validateLabels(formats strfmt.Registry) error {
 
-	if err := validate.Required("infrastructure", "body", m.Infrastructure); err != nil {
+	return nil
+}
+
+func (m *V1ClusterResponse) validateMaintenance(formats strfmt.Registry) error {
+
+	if err := validate.Required("Maintenance", "body", m.Maintenance); err != nil {
 		return err
 	}
 
-	if m.Infrastructure != nil {
-		if err := m.Infrastructure.Validate(formats); err != nil {
+	if m.Maintenance != nil {
+		if err := m.Maintenance.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("infrastructure")
+				return ve.ValidateName("Maintenance")
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("Name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateNetworking(formats strfmt.Registry) error {
+
+	if err := validate.Required("Networking", "body", m.Networking); err != nil {
+		return err
+	}
+
+	if m.Networking != nil {
+		if err := m.Networking.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Networking")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validatePartitionID(formats strfmt.Registry) error {
+
+	if err := validate.Required("PartitionID", "body", m.PartitionID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateProjectID(formats strfmt.Registry) error {
+
+	if err := validate.Required("ProjectID", "body", m.ProjectID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validatePurpose(formats strfmt.Registry) error {
+
+	if err := validate.Required("Purpose", "body", m.Purpose); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateStatus(formats strfmt.Registry) error {
+
+	if err := validate.Required("Status", "body", m.Status); err != nil {
+		return err
+	}
+
+	if m.Status != nil {
+		if err := m.Status.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Status")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateTenant(formats strfmt.Registry) error {
+
+	if err := validate.Required("Tenant", "body", m.Tenant); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateWorkers(formats strfmt.Registry) error {
+
+	if err := validate.Required("Workers", "body", m.Workers); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Workers); i++ {
+		if swag.IsZero(m.Workers[i]) { // not required
+			continue
+		}
+
+		if m.Workers[i] != nil {
+			if err := m.Workers[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("Workers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -126,42 +417,6 @@ func (m *V1ClusterResponse) validateMachines(formats strfmt.Registry) error {
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *V1ClusterResponse) validateNetwork(formats strfmt.Registry) error {
-
-	if err := validate.Required("network", "body", m.Network); err != nil {
-		return err
-	}
-
-	if m.Network != nil {
-		if err := m.Network.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("network")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1ClusterResponse) validateShoot(formats strfmt.Registry) error {
-
-	if err := validate.Required("shoot", "body", m.Shoot); err != nil {
-		return err
-	}
-
-	if m.Shoot != nil {
-		if err := m.Shoot.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("shoot")
-			}
-			return err
-		}
 	}
 
 	return nil

@@ -48,6 +48,10 @@ type ModelsV1ImageResponse struct {
 
 	// url
 	URL string `json:"url,omitempty"`
+
+	// usedby
+	// Required: true
+	Usedby []string `json:"usedby"`
 }
 
 // Validate validates this models v1 image response
@@ -71,6 +75,10 @@ func (m *ModelsV1ImageResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUsedby(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -119,6 +127,15 @@ func (m *ModelsV1ImageResponse) validateFeatures(formats strfmt.Registry) error 
 func (m *ModelsV1ImageResponse) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1ImageResponse) validateUsedby(formats strfmt.Registry) error {
+
+	if err := validate.Required("usedby", "body", m.Usedby); err != nil {
 		return err
 	}
 

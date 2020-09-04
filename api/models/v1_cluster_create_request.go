@@ -23,10 +23,6 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	AdditionalNetworks []string `json:"AdditionalNetworks"`
 
-	// addons
-	// Required: true
-	Addons *V1Addons `json:"Addons"`
-
 	// description
 	// Required: true
 	Description *string `json:"Description"`
@@ -81,10 +77,6 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdditionalNetworks(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateAddons(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -146,24 +138,6 @@ func (m *V1ClusterCreateRequest) validateAdditionalNetworks(formats strfmt.Regis
 
 	if err := validate.Required("AdditionalNetworks", "body", m.AdditionalNetworks); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *V1ClusterCreateRequest) validateAddons(formats strfmt.Registry) error {
-
-	if err := validate.Required("Addons", "body", m.Addons); err != nil {
-		return err
-	}
-
-	if m.Addons != nil {
-		if err := m.Addons.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Addons")
-			}
-			return err
-		}
 	}
 
 	return nil

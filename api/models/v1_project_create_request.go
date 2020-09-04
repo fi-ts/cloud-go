@@ -16,15 +16,31 @@ import (
 // swagger:model v1.ProjectCreateRequest
 type V1ProjectCreateRequest struct {
 
-	// project
-	Project *V1Project `json:"project,omitempty"`
+	// description
+	Description string `json:"description,omitempty"`
+
+	// meta
+	Meta *V1Meta `json:"meta,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// quotas
+	Quotas *V1QuotaSet `json:"quotas,omitempty"`
+
+	// tenant id
+	TenantID string `json:"tenant_id,omitempty"`
 }
 
 // Validate validates this v1 project create request
 func (m *V1ProjectCreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateProject(formats); err != nil {
+	if err := m.validateMeta(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQuotas(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -34,16 +50,34 @@ func (m *V1ProjectCreateRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1ProjectCreateRequest) validateProject(formats strfmt.Registry) error {
+func (m *V1ProjectCreateRequest) validateMeta(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Project) { // not required
+	if swag.IsZero(m.Meta) { // not required
 		return nil
 	}
 
-	if m.Project != nil {
-		if err := m.Project.Validate(formats); err != nil {
+	if m.Meta != nil {
+		if err := m.Meta.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("project")
+				return ve.ValidateName("meta")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ProjectCreateRequest) validateQuotas(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Quotas) { // not required
+		return nil
+	}
+
+	if m.Quotas != nil {
+		if err := m.Quotas.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("quotas")
 			}
 			return err
 		}

@@ -19,7 +19,7 @@ type V1Worker struct {
 
 	// c r i
 	// Required: true
-	CRI *V1beta1CRI `json:"CRI"`
+	CRI *string `json:"CRI"`
 
 	// machine image
 	// Required: true
@@ -96,15 +96,6 @@ func (m *V1Worker) validateCRI(formats strfmt.Registry) error {
 
 	if err := validate.Required("CRI", "body", m.CRI); err != nil {
 		return err
-	}
-
-	if m.CRI != nil {
-		if err := m.CRI.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("CRI")
-			}
-			return err
-		}
 	}
 
 	return nil
