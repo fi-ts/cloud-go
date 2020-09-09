@@ -25,6 +25,35 @@ type Client struct {
 }
 
 /*
+AllocateIP allocates an ip in a given network
+*/
+func (a *Client) AllocateIP(params *AllocateIPParams, authInfo runtime.ClientAuthInfoWriter) (*AllocateIPCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAllocateIPParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "allocateIP",
+		Method:             "POST",
+		PathPattern:        "/v1/ip/allocate",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &AllocateIPReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*AllocateIPCreated), nil
+
+}
+
+/*
 FindIps finds ips by multiple criteria
 */
 func (a *Client) FindIps(params *FindIpsParams, authInfo runtime.ClientAuthInfoWriter) (*FindIpsOK, error) {
