@@ -797,6 +797,17 @@
         }
       }
     },
+    "v1.ClusterReconcileRequest": {
+      "properties": {
+        "operation": {
+          "description": "the gardener shoot operation annotation to annotate the shoot with",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation"
+      ]
+    },
     "v1.ClusterResponse": {
       "properties": {
         "AdditionalNetworks": {
@@ -1250,6 +1261,43 @@
         "accumulatedusage",
         "from",
         "usage"
+      ]
+    },
+    "v1.IPAllocateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "machineid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkid": {
+          "type": "string"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ipaddress",
+        "machineid",
+        "networkid",
+        "projectid"
       ]
     },
     "v1.IPFindRequest": {
@@ -3559,6 +3607,14 @@
             "name": "id",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterReconcileRequest"
+            }
           }
         ],
         "produces": [
@@ -3715,6 +3771,45 @@
           }
         },
         "summary": "updates an ip.",
+        "tags": [
+          "ip"
+        ]
+      }
+    },
+    "/v1/ip/allocate": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "allocateIP",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.IPAllocateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/models.V1IPResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "allocate an ip in a given network",
         "tags": [
           "ip"
         ]

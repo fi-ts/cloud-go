@@ -15,6 +15,8 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	models "github.com/fi-ts/cloud-go/api/models"
 )
 
 // NewReconcileClusterParams creates a new ReconcileClusterParams object
@@ -61,6 +63,8 @@ for the reconcile cluster operation typically these are written to a http.Reques
 */
 type ReconcileClusterParams struct {
 
+	/*Body*/
+	Body *models.V1ClusterReconcileRequest
 	/*ID
 	  identifier of the cluster
 
@@ -105,6 +109,17 @@ func (o *ReconcileClusterParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the reconcile cluster params
+func (o *ReconcileClusterParams) WithBody(body *models.V1ClusterReconcileRequest) *ReconcileClusterParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the reconcile cluster params
+func (o *ReconcileClusterParams) SetBody(body *models.V1ClusterReconcileRequest) {
+	o.Body = body
+}
+
 // WithID adds the id to the reconcile cluster params
 func (o *ReconcileClusterParams) WithID(id string) *ReconcileClusterParams {
 	o.SetID(id)
@@ -123,6 +138,12 @@ func (o *ReconcileClusterParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
+
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {
