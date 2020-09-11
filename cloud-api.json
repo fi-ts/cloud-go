@@ -755,6 +755,9 @@
     },
     "v1.ClusterFindRequest": {
       "properties": {
+        "ID": {
+          "type": "string"
+        },
         "Name": {
           "type": "string"
         },
@@ -769,6 +772,7 @@
         }
       },
       "required": [
+        "ID",
         "Name",
         "PartitionID",
         "ProjectID",
