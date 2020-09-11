@@ -17,6 +17,10 @@ import (
 // swagger:model v1.ClusterFindRequest
 type V1ClusterFindRequest struct {
 
+	// ID
+	// Required: true
+	ID *string `json:"ID"`
+
 	// name
 	// Required: true
 	Name *string `json:"Name"`
@@ -38,6 +42,10 @@ type V1ClusterFindRequest struct {
 func (m *V1ClusterFindRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -57,6 +65,15 @@ func (m *V1ClusterFindRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterFindRequest) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("ID", "body", m.ID); err != nil {
+		return err
+	}
+
 	return nil
 }
 
