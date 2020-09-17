@@ -39,9 +39,9 @@ type V1ShootConstraints struct {
 	// Required: true
 	MachineTypes []string `json:"machine_types"`
 
-	// a list of partition specific shoot contraints
+	// the list of available networks for cluster creation
 	// Required: true
-	PartitionConstraints map[string]V1PartitionContraints `json:"partition_constraints"`
+	Networks []string `json:"networks"`
 
 	// the list of available partitions
 	// Required: true
@@ -72,7 +72,7 @@ func (m *V1ShootConstraints) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validatePartitionConstraints(formats); err != nil {
+	if err := m.validateNetworks(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -147,19 +147,10 @@ func (m *V1ShootConstraints) validateMachineTypes(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *V1ShootConstraints) validatePartitionConstraints(formats strfmt.Registry) error {
+func (m *V1ShootConstraints) validateNetworks(formats strfmt.Registry) error {
 
-	for k := range m.PartitionConstraints {
-
-		if err := validate.Required("partition_constraints"+"."+k, "body", m.PartitionConstraints[k]); err != nil {
-			return err
-		}
-		if val, ok := m.PartitionConstraints[k]; ok {
-			if err := val.Validate(formats); err != nil {
-				return err
-			}
-		}
-
+	if err := validate.Required("networks", "body", m.Networks); err != nil {
+		return err
 	}
 
 	return nil
