@@ -18,20 +18,17 @@ import (
 type ModelsV1MachineResponse struct {
 
 	// allocation
-	// Required: true
-	Allocation *ModelsV1MachineAllocation `json:"allocation"`
+	Allocation *ModelsV1MachineAllocation `json:"allocation,omitempty"`
 
 	// bios
 	// Required: true
 	Bios *ModelsV1MachineBIOS `json:"bios"`
 
 	// changed
-	// Required: true
-	Changed *string `json:"changed"`
+	Changed string `json:"changed,omitempty"`
 
 	// created
-	// Required: true
-	Created *string `json:"created"`
+	Created string `json:"created,omitempty"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -60,16 +57,13 @@ type ModelsV1MachineResponse struct {
 	Name string `json:"name,omitempty"`
 
 	// partition
-	// Required: true
-	Partition *ModelsV1PartitionResponse `json:"partition"`
+	Partition *ModelsV1PartitionResponse `json:"partition,omitempty"`
 
 	// rackid
-	// Required: true
-	Rackid *string `json:"rackid"`
+	Rackid string `json:"rackid,omitempty"`
 
 	// size
-	// Required: true
-	Size *ModelsV1SizeResponse `json:"size"`
+	Size *ModelsV1SizeResponse `json:"size,omitempty"`
 
 	// state
 	// Required: true
@@ -89,14 +83,6 @@ func (m *ModelsV1MachineResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateBios(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateChanged(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateCreated(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -124,10 +110,6 @@ func (m *ModelsV1MachineResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateRackid(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateSize(formats); err != nil {
 		res = append(res, err)
 	}
@@ -148,8 +130,8 @@ func (m *ModelsV1MachineResponse) Validate(formats strfmt.Registry) error {
 
 func (m *ModelsV1MachineResponse) validateAllocation(formats strfmt.Registry) error {
 
-	if err := validate.Required("allocation", "body", m.Allocation); err != nil {
-		return err
+	if swag.IsZero(m.Allocation) { // not required
+		return nil
 	}
 
 	if m.Allocation != nil {
@@ -177,24 +159,6 @@ func (m *ModelsV1MachineResponse) validateBios(formats strfmt.Registry) error {
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *ModelsV1MachineResponse) validateChanged(formats strfmt.Registry) error {
-
-	if err := validate.Required("changed", "body", m.Changed); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *ModelsV1MachineResponse) validateCreated(formats strfmt.Registry) error {
-
-	if err := validate.Required("created", "body", m.Created); err != nil {
-		return err
 	}
 
 	return nil
@@ -274,8 +238,8 @@ func (m *ModelsV1MachineResponse) validateLiveliness(formats strfmt.Registry) er
 
 func (m *ModelsV1MachineResponse) validatePartition(formats strfmt.Registry) error {
 
-	if err := validate.Required("partition", "body", m.Partition); err != nil {
-		return err
+	if swag.IsZero(m.Partition) { // not required
+		return nil
 	}
 
 	if m.Partition != nil {
@@ -290,19 +254,10 @@ func (m *ModelsV1MachineResponse) validatePartition(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *ModelsV1MachineResponse) validateRackid(formats strfmt.Registry) error {
-
-	if err := validate.Required("rackid", "body", m.Rackid); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *ModelsV1MachineResponse) validateSize(formats strfmt.Registry) error {
 
-	if err := validate.Required("size", "body", m.Size); err != nil {
-		return err
+	if swag.IsZero(m.Size) { // not required
+		return nil
 	}
 
 	if m.Size != nil {

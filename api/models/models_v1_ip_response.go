@@ -18,12 +18,10 @@ import (
 type ModelsV1IPResponse struct {
 
 	// changed
-	// Required: true
-	Changed *string `json:"changed"`
+	Changed string `json:"changed,omitempty"`
 
 	// created
-	// Required: true
-	Created *string `json:"created"`
+	Created string `json:"created,omitempty"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -56,14 +54,6 @@ type ModelsV1IPResponse struct {
 func (m *ModelsV1IPResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateChanged(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateCreated(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateIpaddress(formats); err != nil {
 		res = append(res, err)
 	}
@@ -87,24 +77,6 @@ func (m *ModelsV1IPResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *ModelsV1IPResponse) validateChanged(formats strfmt.Registry) error {
-
-	if err := validate.Required("changed", "body", m.Changed); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *ModelsV1IPResponse) validateCreated(formats strfmt.Registry) error {
-
-	if err := validate.Required("created", "body", m.Created); err != nil {
-		return err
-	}
-
 	return nil
 }
 
