@@ -20,16 +20,14 @@ import (
 type ModelsV1SizeResponse struct {
 
 	// changed
-	// Required: true
-	Changed *string `json:"changed"`
+	Changed string `json:"changed,omitempty"`
 
 	// constraints
 	// Required: true
 	Constraints []*ModelsV1SizeConstraint `json:"constraints"`
 
 	// created
-	// Required: true
-	Created *string `json:"created"`
+	Created string `json:"created,omitempty"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -46,15 +44,7 @@ type ModelsV1SizeResponse struct {
 func (m *ModelsV1SizeResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateChanged(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateConstraints(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateCreated(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -65,15 +55,6 @@ func (m *ModelsV1SizeResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *ModelsV1SizeResponse) validateChanged(formats strfmt.Registry) error {
-
-	if err := validate.Required("changed", "body", m.Changed); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -97,15 +78,6 @@ func (m *ModelsV1SizeResponse) validateConstraints(formats strfmt.Registry) erro
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *ModelsV1SizeResponse) validateCreated(formats strfmt.Registry) error {
-
-	if err := validate.Required("created", "body", m.Created); err != nil {
-		return err
 	}
 
 	return nil

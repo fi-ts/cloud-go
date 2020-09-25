@@ -100,8 +100,6 @@
         }
       },
       "required": [
-        "changed",
-        "created",
         "ipaddress",
         "networkid",
         "projectid",
@@ -149,8 +147,6 @@
         }
       },
       "required": [
-        "changed",
-        "created",
         "expirationDate",
         "features",
         "id",
@@ -503,18 +499,12 @@
         }
       },
       "required": [
-        "allocation",
         "bios",
-        "changed",
-        "created",
         "events",
         "hardware",
         "id",
         "ledstate",
         "liveliness",
-        "partition",
-        "rackid",
-        "size",
         "state",
         "tags"
       ]
@@ -576,8 +566,6 @@
       },
       "required": [
         "bootconfig",
-        "changed",
-        "created",
         "id"
       ]
     },
@@ -626,9 +614,7 @@
         }
       },
       "required": [
-        "changed",
         "constraints",
-        "created",
         "id"
       ]
     },
@@ -1814,20 +1800,6 @@
         "Type"
       ]
     },
-    "v1.PartitionContraints": {
-      "properties": {
-        "networks": {
-          "description": "the list of available networks in this partition",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "networks"
-      ]
-    },
     "v1.Project": {
       "properties": {
         "description": {
@@ -2389,12 +2361,12 @@
           },
           "type": "array"
         },
-        "partition_constraints": {
-          "additionalProperties": {
-            "$ref": "#/definitions/v1.PartitionContraints"
+        "networks": {
+          "description": "the list of available networks for cluster creation",
+          "items": {
+            "type": "string"
           },
-          "description": "a list of partition specific shoot contraints",
-          "type": "object"
+          "type": "array"
         },
         "partitions": {
           "description": "the list of available partitions",
@@ -2410,7 +2382,7 @@
         "kubernetes_versions",
         "machine_images",
         "machine_types",
-        "partition_constraints",
+        "networks",
         "partitions"
       ]
     },
