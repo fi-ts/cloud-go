@@ -17,15 +17,19 @@ import (
 // swagger:model v1.S3UsageAccumuluated
 type V1S3UsageAccumuluated struct {
 
-	// the accumulated reported number of objects of the s3 bucketd in this response
+	// the accumulated reported number of objects of the s3 buckets in this response
 	// Required: true
 	Currentnumberofobjects *string `json:"currentnumberofobjects"`
+
+	// the accumulated reported size of the s3 buckets in this response
+	// Required: true
+	Currentsize *string `json:"currentsize"`
 
 	// the duration that this s3 bucket is running
 	// Required: true
 	Lifetime *int64 `json:"lifetime"`
 
-	// the accumulated storage seconds of the s3 bucketd in this response (byte*s)
+	// the accumulated storage seconds of the s3 buckets in this response (byte*s)
 	// Required: true
 	Storageseconds *string `json:"storageseconds"`
 }
@@ -35,6 +39,10 @@ func (m *V1S3UsageAccumuluated) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCurrentnumberofobjects(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCurrentsize(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -55,6 +63,15 @@ func (m *V1S3UsageAccumuluated) Validate(formats strfmt.Registry) error {
 func (m *V1S3UsageAccumuluated) validateCurrentnumberofobjects(formats strfmt.Registry) error {
 
 	if err := validate.Required("currentnumberofobjects", "body", m.Currentnumberofobjects); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3UsageAccumuluated) validateCurrentsize(formats strfmt.Registry) error {
+
+	if err := validate.Required("currentsize", "body", m.Currentsize); err != nil {
 		return err
 	}
 
