@@ -364,6 +364,9 @@
         "networkid": {
           "type": "string"
         },
+        "networktype": {
+          "type": "string"
+        },
         "prefixes": {
           "items": {
             "type": "string"
@@ -387,6 +390,7 @@
         "ips",
         "nat",
         "networkid",
+        "networktype",
         "prefixes",
         "private",
         "underlay",
@@ -2170,6 +2174,10 @@
           "description": "the last reported number of objects of this s3 bucket",
           "type": "string"
         },
+        "currentsize": {
+          "description": "the last reported size of this s3 bucket",
+          "type": "string"
+        },
         "end": {
           "description": "the end time of this s3 bucket",
           "format": "date-time",
@@ -2221,6 +2229,7 @@
         "bucketid",
         "bucketname",
         "currentnumberofobjects",
+        "currentsize",
         "end",
         "lifetime",
         "partition",
@@ -2236,7 +2245,11 @@
     "v1.S3UsageAccumuluated": {
       "properties": {
         "currentnumberofobjects": {
-          "description": "the accumulated reported number of objects of the s3 bucketd in this response",
+          "description": "the accumulated reported number of objects of the s3 buckets in this response",
+          "type": "string"
+        },
+        "currentsize": {
+          "description": "the accumulated reported size of the s3 buckets in this response",
           "type": "string"
         },
         "lifetime": {
@@ -2245,12 +2258,13 @@
           "type": "integer"
         },
         "storageseconds": {
-          "description": "the accumulated storage seconds of the s3 bucketd in this response (byte*s)",
+          "description": "the accumulated storage seconds of the s3 buckets in this response (byte*s)",
           "type": "string"
         }
       },
       "required": [
         "currentnumberofobjects",
+        "currentsize",
         "lifetime",
         "storageseconds"
       ]

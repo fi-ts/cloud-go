@@ -29,6 +29,10 @@ type V1S3Usage struct {
 	// Required: true
 	Currentnumberofobjects *string `json:"currentnumberofobjects"`
 
+	// the last reported size of this s3 bucket
+	// Required: true
+	Currentsize *string `json:"currentsize"`
+
 	// the end time of this s3 bucket
 	// Required: true
 	// Format: date-time
@@ -85,6 +89,10 @@ func (m *V1S3Usage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCurrentnumberofobjects(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCurrentsize(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -155,6 +163,15 @@ func (m *V1S3Usage) validateBucketname(formats strfmt.Registry) error {
 func (m *V1S3Usage) validateCurrentnumberofobjects(formats strfmt.Registry) error {
 
 	if err := validate.Required("currentnumberofobjects", "body", m.Currentnumberofobjects); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3Usage) validateCurrentsize(formats strfmt.Registry) error {
+
+	if err := validate.Required("currentsize", "body", m.Currentsize); err != nil {
 		return err
 	}
 

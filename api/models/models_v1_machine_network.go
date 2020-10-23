@@ -37,6 +37,10 @@ type ModelsV1MachineNetwork struct {
 	// Required: true
 	Networkid *string `json:"networkid"`
 
+	// networktype
+	// Required: true
+	Networktype *string `json:"networktype"`
+
 	// prefixes
 	// Required: true
 	Prefixes []string `json:"prefixes"`
@@ -75,6 +79,10 @@ func (m *ModelsV1MachineNetwork) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNetworkid(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNetworktype(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -139,6 +147,15 @@ func (m *ModelsV1MachineNetwork) validateNat(formats strfmt.Registry) error {
 func (m *ModelsV1MachineNetwork) validateNetworkid(formats strfmt.Registry) error {
 
 	if err := validate.Required("networkid", "body", m.Networkid); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineNetwork) validateNetworktype(formats strfmt.Registry) error {
+
+	if err := validate.Required("networktype", "body", m.Networktype); err != nil {
 		return err
 	}
 
