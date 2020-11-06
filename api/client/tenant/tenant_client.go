@@ -54,6 +54,35 @@ func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthI
 }
 
 /*
+ListTenants gets a tenant list
+*/
+func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTenantsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListTenantsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listTenants",
+		Method:             "GET",
+		PathPattern:        "/v1/tenant",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListTenantsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListTenantsOK), nil
+
+}
+
+/*
 UpdateTenant updates a tenant optimistic lock error can occur
 */
 func (a *Client) UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateTenantOK, error) {
