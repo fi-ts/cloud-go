@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // VolumeUsageCSVReader is a Reader for the VolumeUsageCSV structure.
@@ -86,7 +86,7 @@ Error
 type VolumeUsageCSVDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the volume usage c s v default response
@@ -98,13 +98,13 @@ func (o *VolumeUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSV default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *VolumeUsageCSVDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *VolumeUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *VolumeUsageCSVDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

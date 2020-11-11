@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // S3UsageReader is a Reader for the S3Usage structure.
@@ -88,7 +89,7 @@ Error
 type S3UsageDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the s3 usage default response
@@ -100,13 +101,13 @@ func (o *S3UsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *S3UsageDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *S3UsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *S3UsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
