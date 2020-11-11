@@ -13,17 +13,20 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // NewFindClustersParams creates a new FindClustersParams object
 // with the default values initialized.
 func NewFindClustersParams() *FindClustersParams {
-	var ()
+	var (
+		returnMachinesDefault = bool(false)
+	)
 	return &FindClustersParams{
+		ReturnMachines: &returnMachinesDefault,
 
 		timeout: cr.DefaultTimeout,
 	}
@@ -32,8 +35,11 @@ func NewFindClustersParams() *FindClustersParams {
 // NewFindClustersParamsWithTimeout creates a new FindClustersParams object
 // with the default values initialized, and the ability to set a timeout on a request
 func NewFindClustersParamsWithTimeout(timeout time.Duration) *FindClustersParams {
-	var ()
+	var (
+		returnMachinesDefault = bool(false)
+	)
 	return &FindClustersParams{
+		ReturnMachines: &returnMachinesDefault,
 
 		timeout: timeout,
 	}
@@ -42,8 +48,11 @@ func NewFindClustersParamsWithTimeout(timeout time.Duration) *FindClustersParams
 // NewFindClustersParamsWithContext creates a new FindClustersParams object
 // with the default values initialized, and the ability to set a context for a request
 func NewFindClustersParamsWithContext(ctx context.Context) *FindClustersParams {
-	var ()
+	var (
+		returnMachinesDefault = bool(false)
+	)
 	return &FindClustersParams{
+		ReturnMachines: &returnMachinesDefault,
 
 		Context: ctx,
 	}
@@ -52,9 +61,12 @@ func NewFindClustersParamsWithContext(ctx context.Context) *FindClustersParams {
 // NewFindClustersParamsWithHTTPClient creates a new FindClustersParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewFindClustersParamsWithHTTPClient(client *http.Client) *FindClustersParams {
-	var ()
+	var (
+		returnMachinesDefault = bool(false)
+	)
 	return &FindClustersParams{
-		HTTPClient: client,
+		ReturnMachines: &returnMachinesDefault,
+		HTTPClient:     client,
 	}
 }
 
@@ -65,6 +77,11 @@ type FindClustersParams struct {
 
 	/*Body*/
 	Body *models.V1ClusterFindRequest
+	/*ReturnMachines
+	  returns machines in the response, which is disabled by default for list responses because it makes the request slower
+
+	*/
+	ReturnMachines *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -115,6 +132,17 @@ func (o *FindClustersParams) SetBody(body *models.V1ClusterFindRequest) {
 	o.Body = body
 }
 
+// WithReturnMachines adds the returnMachines to the find clusters params
+func (o *FindClustersParams) WithReturnMachines(returnMachines *bool) *FindClustersParams {
+	o.SetReturnMachines(returnMachines)
+	return o
+}
+
+// SetReturnMachines adds the returnMachines to the find clusters params
+func (o *FindClustersParams) SetReturnMachines(returnMachines *bool) {
+	o.ReturnMachines = returnMachines
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *FindClustersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -127,6 +155,22 @@ func (o *FindClustersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
 		}
+	}
+
+	if o.ReturnMachines != nil {
+
+		// query param return-machines
+		var qrReturnMachines bool
+		if o.ReturnMachines != nil {
+			qrReturnMachines = *o.ReturnMachines
+		}
+		qReturnMachines := swag.FormatBool(qrReturnMachines)
+		if qReturnMachines != "" {
+			if err := r.SetQueryParam("return-machines", qReturnMachines); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	if len(res) > 0 {

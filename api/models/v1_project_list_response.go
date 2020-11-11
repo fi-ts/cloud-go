@@ -8,13 +8,13 @@ package models
 import (
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // V1ProjectListResponse v1 project list response
+//
 // swagger:model v1.ProjectListResponse
 type V1ProjectListResponse struct {
 

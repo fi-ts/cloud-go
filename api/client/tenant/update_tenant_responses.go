@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // UpdateTenantReader is a Reader for the UpdateTenant structure.
@@ -24,21 +23,18 @@ type UpdateTenantReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *UpdateTenantReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewUpdateTenantOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 412:
 		result := NewUpdateTenantPreconditionFailed()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		result := NewUpdateTenantDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -68,6 +64,10 @@ func (o *UpdateTenantOK) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenantOK  %+v", 200, o.Payload)
 }
 
+func (o *UpdateTenantOK) GetPayload() *models.V1TenantResponse {
+	return o.Payload
+}
+
 func (o *UpdateTenantOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1TenantResponse)
@@ -95,6 +95,10 @@ type UpdateTenantPreconditionFailed struct {
 
 func (o *UpdateTenantPreconditionFailed) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenantPreconditionFailed  %+v", 412, o.Payload)
+}
+
+func (o *UpdateTenantPreconditionFailed) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *UpdateTenantPreconditionFailed) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,6 +137,10 @@ func (o *UpdateTenantDefault) Code() int {
 
 func (o *UpdateTenantDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenant default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *UpdateTenantDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *UpdateTenantDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

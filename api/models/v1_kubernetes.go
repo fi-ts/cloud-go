@@ -6,20 +6,25 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // V1Kubernetes v1 kubernetes
+//
 // swagger:model v1.Kubernetes
 type V1Kubernetes struct {
 
 	// allow privileged containers
 	// Required: true
 	AllowPrivilegedContainers *bool `json:"AllowPrivilegedContainers"`
+
+	// expiration date
+	// Required: true
+	// Format: date-time
+	ExpirationDate *strfmt.DateTime `json:"ExpirationDate"`
 
 	// version
 	// Required: true
@@ -31,6 +36,10 @@ func (m *V1Kubernetes) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAllowPrivilegedContainers(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExpirationDate(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -47,6 +56,19 @@ func (m *V1Kubernetes) Validate(formats strfmt.Registry) error {
 func (m *V1Kubernetes) validateAllowPrivilegedContainers(formats strfmt.Registry) error {
 
 	if err := validate.Required("AllowPrivilegedContainers", "body", m.AllowPrivilegedContainers); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1Kubernetes) validateExpirationDate(formats strfmt.Registry) error {
+
+	if err := validate.Required("ExpirationDate", "body", m.ExpirationDate); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("ExpirationDate", "body", "date-time", m.ExpirationDate.String(), formats); err != nil {
 		return err
 	}
 

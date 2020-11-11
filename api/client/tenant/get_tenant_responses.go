@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // GetTenantReader is a Reader for the GetTenant structure.
@@ -24,14 +23,12 @@ type GetTenantReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *GetTenantReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewGetTenantOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewGetTenantDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type GetTenantOK struct {
 
 func (o *GetTenantOK) Error() string {
 	return fmt.Sprintf("[GET /v1/tenant/{id}][%d] getTenantOK  %+v", 200, o.Payload)
+}
+
+func (o *GetTenantOK) GetPayload() *models.V1TenantResponse {
+	return o.Payload
 }
 
 func (o *GetTenantOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -97,6 +98,10 @@ func (o *GetTenantDefault) Code() int {
 
 func (o *GetTenantDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/tenant/{id}][%d] getTenant default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetTenantDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *GetTenantDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

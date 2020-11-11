@@ -7,12 +7,11 @@ package tenant
 
 import (
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new tenant API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -24,8 +23,19 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter) (*GetTenantOK, error)
+
+	ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTenantsOK, error)
+
+	UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateTenantOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
-GetTenant gets tenant by id
+  GetTenant gets tenant by id
 */
 func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter) (*GetTenantOK, error) {
 	// TODO: Validate the params before sending
@@ -49,12 +59,17 @@ func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetTenantOK), nil
-
+	success, ok := result.(*GetTenantOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetTenantDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListTenants gets a tenant list
+  ListTenants gets a tenant list
 */
 func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTenantsOK, error) {
 	// TODO: Validate the params before sending
@@ -78,12 +93,17 @@ func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListTenantsOK), nil
-
+	success, ok := result.(*ListTenantsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListTenantsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateTenant updates a tenant optimistic lock error can occur
+  UpdateTenant updates a tenant optimistic lock error can occur
 */
 func (a *Client) UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateTenantOK, error) {
 	// TODO: Validate the params before sending
@@ -107,8 +127,13 @@ func (a *Client) UpdateTenant(params *UpdateTenantParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateTenantOK), nil
-
+	success, ok := result.(*UpdateTenantOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateTenantDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

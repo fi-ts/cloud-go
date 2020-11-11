@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // Gets3Reader is a Reader for the Gets3 structure.
@@ -24,14 +23,12 @@ type Gets3Reader struct {
 // ReadResponse reads a server response into the received o.
 func (o *Gets3Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewGets3OK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewGets3Default(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type Gets3OK struct {
 
 func (o *Gets3OK) Error() string {
 	return fmt.Sprintf("[GET /v1/s3][%d] gets3OK  %+v", 200, o.Payload)
+}
+
+func (o *Gets3OK) GetPayload() *models.V1S3CredentialsResponse {
+	return o.Payload
 }
 
 func (o *Gets3OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -97,6 +98,10 @@ func (o *Gets3Default) Code() int {
 
 func (o *Gets3Default) Error() string {
 	return fmt.Sprintf("[GET /v1/s3][%d] gets3 default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *Gets3Default) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *Gets3Default) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

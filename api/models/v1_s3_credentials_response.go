@@ -8,14 +8,14 @@ package models
 import (
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // V1S3CredentialsResponse v1 s3 credentials response
+//
 // swagger:model v1.S3CredentialsResponse
 type V1S3CredentialsResponse struct {
 

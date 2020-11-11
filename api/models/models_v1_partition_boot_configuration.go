@@ -6,12 +6,12 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // ModelsV1PartitionBootConfiguration models v1 partition boot configuration
+//
 // swagger:model models.V1PartitionBootConfiguration
 type ModelsV1PartitionBootConfiguration struct {
 

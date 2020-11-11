@@ -7,12 +7,11 @@ package masterdata
 
 import (
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new masterdata API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -24,8 +23,15 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetMasterdata(params *GetMasterdataParams, authInfo runtime.ClientAuthInfoWriter) (*GetMasterdataOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
-GetMasterdata gets masterdata for given lookup criteria
+  GetMasterdata gets masterdata for given lookup criteria
 */
 func (a *Client) GetMasterdata(params *GetMasterdataParams, authInfo runtime.ClientAuthInfoWriter) (*GetMasterdataOK, error) {
 	// TODO: Validate the params before sending
@@ -49,8 +55,13 @@ func (a *Client) GetMasterdata(params *GetMasterdataParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetMasterdataOK), nil
-
+	success, ok := result.(*GetMasterdataOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetMasterdataDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

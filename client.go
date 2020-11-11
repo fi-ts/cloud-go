@@ -15,7 +15,7 @@ import (
 )
 
 // NewClient creates a new client for accessing the cloud-api
-func NewClient(rawurl, token, hmac string) (*client.Cloud, error) {
+func NewClient(rawurl, token, hmac string) (*client.CloudAPI, error) {
 	if (token == "") == (hmac == "") {
 		return nil, errors.New("either token or hmac is required")
 	}

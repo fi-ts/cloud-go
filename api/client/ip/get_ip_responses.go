@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // GetIPReader is a Reader for the GetIP structure.
@@ -24,14 +23,12 @@ type GetIPReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *GetIPReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewGetIPOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewGetIPDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type GetIPOK struct {
 
 func (o *GetIPOK) Error() string {
 	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIpOK  %+v", 200, o.Payload)
+}
+
+func (o *GetIPOK) GetPayload() *models.ModelsV1IPResponse {
+	return o.Payload
 }
 
 func (o *GetIPOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -97,6 +98,10 @@ func (o *GetIPDefault) Code() int {
 
 func (o *GetIPDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIP default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetIPDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *GetIPDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
