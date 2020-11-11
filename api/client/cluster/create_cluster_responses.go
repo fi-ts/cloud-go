@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // CreateClusterReader is a Reader for the CreateCluster structure.
@@ -90,20 +91,20 @@ func NewCreateClusterConflict() *CreateClusterConflict {
 Conflict
 */
 type CreateClusterConflict struct {
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 func (o *CreateClusterConflict) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict  %+v", 409, o.Payload)
 }
 
-func (o *CreateClusterConflict) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *CreateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateClusterConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -127,7 +128,7 @@ Error
 type CreateClusterDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the create cluster default response
@@ -139,13 +140,13 @@ func (o *CreateClusterDefault) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *CreateClusterDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *CreateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateClusterDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // Updates3Reader is a Reader for the Updates3 structure.
@@ -88,7 +89,7 @@ Error
 type Updates3Default struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the updates3 default response
@@ -100,13 +101,13 @@ func (o *Updates3Default) Error() string {
 	return fmt.Sprintf("[POST /v1/s3][%d] updates3 default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *Updates3Default) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *Updates3Default) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *Updates3Default) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

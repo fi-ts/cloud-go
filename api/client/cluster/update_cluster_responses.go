@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // UpdateClusterReader is a Reader for the UpdateCluster structure.
@@ -90,20 +91,20 @@ func NewUpdateClusterConflict() *UpdateClusterConflict {
 Conflict
 */
 type UpdateClusterConflict struct {
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 func (o *UpdateClusterConflict) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterConflict  %+v", 409, o.Payload)
 }
 
-func (o *UpdateClusterConflict) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *UpdateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateClusterConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -127,7 +128,7 @@ Error
 type UpdateClusterDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the update cluster default response
@@ -139,13 +140,13 @@ func (o *UpdateClusterDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster][%d] updateCluster default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *UpdateClusterDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *UpdateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateClusterDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

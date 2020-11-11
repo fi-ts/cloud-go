@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // GetClusterKubeconfigTplReader is a Reader for the GetClusterKubeconfigTpl structure.
@@ -88,7 +89,7 @@ Error
 type GetClusterKubeconfigTplDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the get cluster kubeconfig tpl default response
@@ -100,13 +101,13 @@ func (o *GetClusterKubeconfigTplDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTpl default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *GetClusterKubeconfigTplDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *GetClusterKubeconfigTplDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *GetClusterKubeconfigTplDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

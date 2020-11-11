@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // GetMasterdataReader is a Reader for the GetMasterdata structure.
@@ -90,20 +91,20 @@ func NewGetMasterdataNotFound() *GetMasterdataNotFound {
 NotFound
 */
 type GetMasterdataNotFound struct {
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 func (o *GetMasterdataNotFound) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound  %+v", 404, o.Payload)
 }
 
-func (o *GetMasterdataNotFound) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *GetMasterdataNotFound) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *GetMasterdataNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -127,7 +128,7 @@ Error
 type GetMasterdataDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the get masterdata default response
@@ -139,13 +140,13 @@ func (o *GetMasterdataDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *GetMasterdataDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *GetMasterdataDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *GetMasterdataDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // ListClustersReader is a Reader for the ListClusters structure.
@@ -86,7 +87,7 @@ Error
 type ListClustersDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the list clusters default response
@@ -98,13 +99,13 @@ func (o *ListClustersDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster][%d] listClusters default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *ListClustersDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+func (o *ListClustersDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
 
 func (o *ListClustersDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
