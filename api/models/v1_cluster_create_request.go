@@ -8,14 +8,14 @@ package models
 import (
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // V1ClusterCreateRequest v1 cluster create request
+//
 // swagger:model v1.ClusterCreateRequest
 type V1ClusterCreateRequest struct {
 

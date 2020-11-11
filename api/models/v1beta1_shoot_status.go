@@ -8,14 +8,14 @@ package models
 import (
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // V1beta1ShootStatus v1beta1 shoot status
+//
 // swagger:model v1beta1.ShootStatus
 type V1beta1ShootStatus struct {
 

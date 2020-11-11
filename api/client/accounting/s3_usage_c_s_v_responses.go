@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // S3UsageCSVReader is a Reader for the S3UsageCSV structure.
@@ -24,14 +23,12 @@ type S3UsageCSVReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *S3UsageCSVReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewS3UsageCSVOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewS3UsageCSVDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type S3UsageCSVOK struct {
 
 func (o *S3UsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK  %+v", 200, o.Payload)
+}
+
+func (o *S3UsageCSVOK) GetPayload() string {
+	return o.Payload
 }
 
 func (o *S3UsageCSVOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -95,6 +96,10 @@ func (o *S3UsageCSVDefault) Code() int {
 
 func (o *S3UsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSV default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *S3UsageCSVDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *S3UsageCSVDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // FindClustersReader is a Reader for the FindClusters structure.
@@ -24,14 +23,12 @@ type FindClustersReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *FindClustersReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewFindClustersOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewFindClustersDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type FindClustersOK struct {
 
 func (o *FindClustersOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClustersOK  %+v", 200, o.Payload)
+}
+
+func (o *FindClustersOK) GetPayload() []*models.V1ClusterResponse {
+	return o.Payload
 }
 
 func (o *FindClustersOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -95,6 +96,10 @@ func (o *FindClustersDefault) Code() int {
 
 func (o *FindClustersDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClusters default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *FindClustersDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *FindClustersDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

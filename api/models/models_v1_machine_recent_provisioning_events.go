@@ -8,14 +8,14 @@ package models
 import (
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // ModelsV1MachineRecentProvisioningEvents models v1 machine recent provisioning events
+//
 // swagger:model models.V1MachineRecentProvisioningEvents
 type ModelsV1MachineRecentProvisioningEvents struct {
 

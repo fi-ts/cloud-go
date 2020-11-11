@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // DeleteClusterReader is a Reader for the DeleteCluster structure.
@@ -24,14 +23,12 @@ type DeleteClusterReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *DeleteClusterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewDeleteClusterOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewDeleteClusterDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type DeleteClusterOK struct {
 
 func (o *DeleteClusterOK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/cluster/{id}][%d] deleteClusterOK  %+v", 200, o.Payload)
+}
+
+func (o *DeleteClusterOK) GetPayload() *models.V1ClusterResponse {
+	return o.Payload
 }
 
 func (o *DeleteClusterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -97,6 +98,10 @@ func (o *DeleteClusterDefault) Code() int {
 
 func (o *DeleteClusterDefault) Error() string {
 	return fmt.Sprintf("[DELETE /v1/cluster/{id}][%d] deleteCluster default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *DeleteClusterDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *DeleteClusterDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

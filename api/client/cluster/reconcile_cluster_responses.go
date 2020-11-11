@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // ReconcileClusterReader is a Reader for the ReconcileCluster structure.
@@ -24,14 +23,12 @@ type ReconcileClusterReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *ReconcileClusterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewReconcileClusterOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewReconcileClusterDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type ReconcileClusterOK struct {
 
 func (o *ReconcileClusterOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileClusterOK  %+v", 200, o.Payload)
+}
+
+func (o *ReconcileClusterOK) GetPayload() *models.V1ClusterResponse {
+	return o.Payload
 }
 
 func (o *ReconcileClusterOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -97,6 +98,10 @@ func (o *ReconcileClusterDefault) Code() int {
 
 func (o *ReconcileClusterDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileCluster default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ReconcileClusterDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *ReconcileClusterDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

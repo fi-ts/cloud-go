@@ -13,15 +13,18 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListClustersParams creates a new ListClustersParams object
 // with the default values initialized.
 func NewListClustersParams() *ListClustersParams {
-
+	var (
+		returnMachinesDefault = bool(false)
+	)
 	return &ListClustersParams{
+		ReturnMachines: &returnMachinesDefault,
 
 		timeout: cr.DefaultTimeout,
 	}
@@ -30,8 +33,11 @@ func NewListClustersParams() *ListClustersParams {
 // NewListClustersParamsWithTimeout creates a new ListClustersParams object
 // with the default values initialized, and the ability to set a timeout on a request
 func NewListClustersParamsWithTimeout(timeout time.Duration) *ListClustersParams {
-
+	var (
+		returnMachinesDefault = bool(false)
+	)
 	return &ListClustersParams{
+		ReturnMachines: &returnMachinesDefault,
 
 		timeout: timeout,
 	}
@@ -40,8 +46,11 @@ func NewListClustersParamsWithTimeout(timeout time.Duration) *ListClustersParams
 // NewListClustersParamsWithContext creates a new ListClustersParams object
 // with the default values initialized, and the ability to set a context for a request
 func NewListClustersParamsWithContext(ctx context.Context) *ListClustersParams {
-
+	var (
+		returnMachinesDefault = bool(false)
+	)
 	return &ListClustersParams{
+		ReturnMachines: &returnMachinesDefault,
 
 		Context: ctx,
 	}
@@ -50,9 +59,12 @@ func NewListClustersParamsWithContext(ctx context.Context) *ListClustersParams {
 // NewListClustersParamsWithHTTPClient creates a new ListClustersParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewListClustersParamsWithHTTPClient(client *http.Client) *ListClustersParams {
-
+	var (
+		returnMachinesDefault = bool(false)
+	)
 	return &ListClustersParams{
-		HTTPClient: client,
+		ReturnMachines: &returnMachinesDefault,
+		HTTPClient:     client,
 	}
 }
 
@@ -60,6 +72,13 @@ func NewListClustersParamsWithHTTPClient(client *http.Client) *ListClustersParam
 for the list clusters operation typically these are written to a http.Request
 */
 type ListClustersParams struct {
+
+	/*ReturnMachines
+	  returns machines in the response, which is disabled by default for list responses because it makes the request slower
+
+	*/
+	ReturnMachines *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -98,6 +117,17 @@ func (o *ListClustersParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithReturnMachines adds the returnMachines to the list clusters params
+func (o *ListClustersParams) WithReturnMachines(returnMachines *bool) *ListClustersParams {
+	o.SetReturnMachines(returnMachines)
+	return o
+}
+
+// SetReturnMachines adds the returnMachines to the list clusters params
+func (o *ListClustersParams) SetReturnMachines(returnMachines *bool) {
+	o.ReturnMachines = returnMachines
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListClustersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -105,6 +135,22 @@ func (o *ListClustersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
+	if o.ReturnMachines != nil {
+
+		// query param return-machines
+		var qrReturnMachines bool
+		if o.ReturnMachines != nil {
+			qrReturnMachines = *o.ReturnMachines
+		}
+		qReturnMachines := swag.FormatBool(qrReturnMachines)
+		if qReturnMachines != "" {
+			if err := r.SetQueryParam("return-machines", qReturnMachines); err != nil {
+				return err
+			}
+		}
+
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

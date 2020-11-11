@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // ListConstraintsReader is a Reader for the ListConstraints structure.
@@ -24,14 +23,12 @@ type ListConstraintsReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *ListConstraintsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewListConstraintsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewListConstraintsDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type ListConstraintsOK struct {
 
 func (o *ListConstraintsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/constraints][%d] listConstraintsOK  %+v", 200, o.Payload)
+}
+
+func (o *ListConstraintsOK) GetPayload() *models.V1ShootConstraints {
+	return o.Payload
 }
 
 func (o *ListConstraintsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -97,6 +98,10 @@ func (o *ListConstraintsDefault) Code() int {
 
 func (o *ListConstraintsDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/constraints][%d] listConstraints default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ListConstraintsDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *ListConstraintsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

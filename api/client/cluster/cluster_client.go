@@ -7,12 +7,11 @@ package cluster
 
 import (
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new cluster API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -24,8 +23,33 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientService is the interface for Client methods
+type ClientService interface {
+	CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter) (*CreateClusterCreated, error)
+
+	DeleteCluster(params *DeleteClusterParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteClusterOK, error)
+
+	FindCluster(params *FindClusterParams, authInfo runtime.ClientAuthInfoWriter) (*FindClusterOK, error)
+
+	FindClusters(params *FindClustersParams, authInfo runtime.ClientAuthInfoWriter) (*FindClustersOK, error)
+
+	GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, authInfo runtime.ClientAuthInfoWriter) (*GetClusterKubeconfigTplOK, error)
+
+	GetSSHKeyPair(params *GetSSHKeyPairParams, authInfo runtime.ClientAuthInfoWriter) (*GetSSHKeyPairOK, error)
+
+	ListClusters(params *ListClustersParams, authInfo runtime.ClientAuthInfoWriter) (*ListClustersOK, error)
+
+	ListConstraints(params *ListConstraintsParams, authInfo runtime.ClientAuthInfoWriter) (*ListConstraintsOK, error)
+
+	ReconcileCluster(params *ReconcileClusterParams, authInfo runtime.ClientAuthInfoWriter) (*ReconcileClusterOK, error)
+
+	UpdateCluster(params *UpdateClusterParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateClusterOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
-CreateCluster creates a cluster if the given ID already exists a conflict is returned
+  CreateCluster creates a cluster if the given ID already exists a conflict is returned
 */
 func (a *Client) CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter) (*CreateClusterCreated, error) {
 	// TODO: Validate the params before sending
@@ -49,12 +73,17 @@ func (a *Client) CreateCluster(params *CreateClusterParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateClusterCreated), nil
-
+	success, ok := result.(*CreateClusterCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteCluster deletes an cluster and returns the deleted entity
+  DeleteCluster deletes an cluster and returns the deleted entity
 */
 func (a *Client) DeleteCluster(params *DeleteClusterParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -78,12 +107,17 @@ func (a *Client) DeleteCluster(params *DeleteClusterParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteClusterOK), nil
-
+	success, ok := result.(*DeleteClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-FindCluster gets cluster by id
+  FindCluster gets cluster by id
 */
 func (a *Client) FindCluster(params *FindClusterParams, authInfo runtime.ClientAuthInfoWriter) (*FindClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -107,12 +141,17 @@ func (a *Client) FindCluster(params *FindClusterParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	return result.(*FindClusterOK), nil
-
+	success, ok := result.(*FindClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*FindClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-FindClusters finds clusters by multiple criteria
+  FindClusters finds clusters by multiple criteria
 */
 func (a *Client) FindClusters(params *FindClustersParams, authInfo runtime.ClientAuthInfoWriter) (*FindClustersOK, error) {
 	// TODO: Validate the params before sending
@@ -136,12 +175,17 @@ func (a *Client) FindClusters(params *FindClustersParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*FindClustersOK), nil
-
+	success, ok := result.(*FindClustersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*FindClustersDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetClusterKubeconfigTpl gets the kubeconfig template just with cluster infos for the cluster
+  GetClusterKubeconfigTpl gets the kubeconfig template just with cluster infos for the cluster
 */
 func (a *Client) GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, authInfo runtime.ClientAuthInfoWriter) (*GetClusterKubeconfigTplOK, error) {
 	// TODO: Validate the params before sending
@@ -165,12 +209,17 @@ func (a *Client) GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, 
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetClusterKubeconfigTplOK), nil
-
+	success, ok := result.(*GetClusterKubeconfigTplOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetClusterKubeconfigTplDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetSSHKeyPair gets all the ssh keypairs of the cluster
+  GetSSHKeyPair gets all the ssh keypairs of the cluster
 */
 func (a *Client) GetSSHKeyPair(params *GetSSHKeyPairParams, authInfo runtime.ClientAuthInfoWriter) (*GetSSHKeyPairOK, error) {
 	// TODO: Validate the params before sending
@@ -194,12 +243,17 @@ func (a *Client) GetSSHKeyPair(params *GetSSHKeyPairParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetSSHKeyPairOK), nil
-
+	success, ok := result.(*GetSSHKeyPairOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetSSHKeyPairDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListClusters gets all clusters
+  ListClusters gets all clusters
 */
 func (a *Client) ListClusters(params *ListClustersParams, authInfo runtime.ClientAuthInfoWriter) (*ListClustersOK, error) {
 	// TODO: Validate the params before sending
@@ -223,12 +277,17 @@ func (a *Client) ListClusters(params *ListClustersParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListClustersOK), nil
-
+	success, ok := result.(*ListClustersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListClustersDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListConstraints gets constraints for cluster create
+  ListConstraints gets constraints for cluster create
 */
 func (a *Client) ListConstraints(params *ListConstraintsParams, authInfo runtime.ClientAuthInfoWriter) (*ListConstraintsOK, error) {
 	// TODO: Validate the params before sending
@@ -252,12 +311,17 @@ func (a *Client) ListConstraints(params *ListConstraintsParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListConstraintsOK), nil
-
+	success, ok := result.(*ListConstraintsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListConstraintsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ReconcileCluster triggers cluster reconcilation
+  ReconcileCluster triggers cluster reconcilation
 */
 func (a *Client) ReconcileCluster(params *ReconcileClusterParams, authInfo runtime.ClientAuthInfoWriter) (*ReconcileClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -281,12 +345,17 @@ func (a *Client) ReconcileCluster(params *ReconcileClusterParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ReconcileClusterOK), nil
-
+	success, ok := result.(*ReconcileClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ReconcileClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateCluster updates a cluster if the cluster was changed since this one was read a conflict is returned
+  UpdateCluster updates a cluster if the cluster was changed since this one was read a conflict is returned
 */
 func (a *Client) UpdateCluster(params *UpdateClusterParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -310,8 +379,13 @@ func (a *Client) UpdateCluster(params *UpdateClusterParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateClusterOK), nil
-
+	success, ok := result.(*UpdateClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

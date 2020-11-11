@@ -6,12 +6,12 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // V1ClusterNameProject v1 cluster name project
+//
 // swagger:model v1.ClusterNameProject
 type V1ClusterNameProject struct {
 

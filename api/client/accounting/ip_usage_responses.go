@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // IPUsageReader is a Reader for the IPUsage structure.
@@ -24,14 +23,12 @@ type IPUsageReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *IPUsageReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewIPUsageOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewIPUsageDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type IPUsageOK struct {
 
 func (o *IPUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsageOK  %+v", 200, o.Payload)
+}
+
+func (o *IPUsageOK) GetPayload() *models.V1IPUsageResponse {
+	return o.Payload
 }
 
 func (o *IPUsageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -97,6 +98,10 @@ func (o *IPUsageDefault) Code() int {
 
 func (o *IPUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsage default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *IPUsageDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *IPUsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

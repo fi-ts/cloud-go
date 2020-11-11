@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // ClusterUsageCSVReader is a Reader for the ClusterUsageCSV structure.
@@ -24,14 +23,12 @@ type ClusterUsageCSVReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *ClusterUsageCSVReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewClusterUsageCSVOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewClusterUsageCSVDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -59,6 +56,10 @@ type ClusterUsageCSVOK struct {
 
 func (o *ClusterUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK  %+v", 200, o.Payload)
+}
+
+func (o *ClusterUsageCSVOK) GetPayload() string {
+	return o.Payload
 }
 
 func (o *ClusterUsageCSVOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -95,6 +96,10 @@ func (o *ClusterUsageCSVDefault) Code() int {
 
 func (o *ClusterUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSV default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ClusterUsageCSVDefault) GetPayload() *models.HttperrorsHTTPErrorResponse {
+	return o.Payload
 }
 
 func (o *ClusterUsageCSVDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

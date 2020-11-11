@@ -7,12 +7,11 @@ package ip
 
 import (
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new ip API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -24,8 +23,25 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientService is the interface for Client methods
+type ClientService interface {
+	AllocateIP(params *AllocateIPParams, authInfo runtime.ClientAuthInfoWriter) (*AllocateIPCreated, error)
+
+	FindIPs(params *FindIPsParams, authInfo runtime.ClientAuthInfoWriter) (*FindIPsOK, error)
+
+	FreeIP(params *FreeIPParams, authInfo runtime.ClientAuthInfoWriter) (*FreeIPOK, error)
+
+	GetIP(params *GetIPParams, authInfo runtime.ClientAuthInfoWriter) (*GetIPOK, error)
+
+	ListIPs(params *ListIPsParams, authInfo runtime.ClientAuthInfoWriter) (*ListIPsOK, error)
+
+	UpdateIP(params *UpdateIPParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateIPOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
-AllocateIP allocates an ip in a given network
+  AllocateIP allocates an ip in a given network
 */
 func (a *Client) AllocateIP(params *AllocateIPParams, authInfo runtime.ClientAuthInfoWriter) (*AllocateIPCreated, error) {
 	// TODO: Validate the params before sending
@@ -49,17 +65,22 @@ func (a *Client) AllocateIP(params *AllocateIPParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AllocateIPCreated), nil
-
+	success, ok := result.(*AllocateIPCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*AllocateIPDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-FindIps finds ips by multiple criteria
+  FindIPs finds ips by multiple criteria
 */
-func (a *Client) FindIps(params *FindIpsParams, authInfo runtime.ClientAuthInfoWriter) (*FindIpsOK, error) {
+func (a *Client) FindIPs(params *FindIPsParams, authInfo runtime.ClientAuthInfoWriter) (*FindIPsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewFindIpsParams()
+		params = NewFindIPsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
@@ -70,7 +91,7 @@ func (a *Client) FindIps(params *FindIpsParams, authInfo runtime.ClientAuthInfoW
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &FindIpsReader{formats: a.formats},
+		Reader:             &FindIPsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -78,12 +99,17 @@ func (a *Client) FindIps(params *FindIpsParams, authInfo runtime.ClientAuthInfoW
 	if err != nil {
 		return nil, err
 	}
-	return result.(*FindIpsOK), nil
-
+	success, ok := result.(*FindIPsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*FindIPsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-FreeIP frees an ip and returns the freed entity
+  FreeIP frees an ip and returns the freed entity
 */
 func (a *Client) FreeIP(params *FreeIPParams, authInfo runtime.ClientAuthInfoWriter) (*FreeIPOK, error) {
 	// TODO: Validate the params before sending
@@ -107,12 +133,17 @@ func (a *Client) FreeIP(params *FreeIPParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	return result.(*FreeIPOK), nil
-
+	success, ok := result.(*FreeIPOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*FreeIPDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetIP gets ip by address
+  GetIP gets ip by address
 */
 func (a *Client) GetIP(params *GetIPParams, authInfo runtime.ClientAuthInfoWriter) (*GetIPOK, error) {
 	// TODO: Validate the params before sending
@@ -136,17 +167,22 @@ func (a *Client) GetIP(params *GetIPParams, authInfo runtime.ClientAuthInfoWrite
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetIPOK), nil
-
+	success, ok := result.(*GetIPOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetIPDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListIps gets all ips
+  ListIPs gets all ips
 */
-func (a *Client) ListIps(params *ListIpsParams, authInfo runtime.ClientAuthInfoWriter) (*ListIpsOK, error) {
+func (a *Client) ListIPs(params *ListIPsParams, authInfo runtime.ClientAuthInfoWriter) (*ListIPsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListIpsParams()
+		params = NewListIPsParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
@@ -157,7 +193,7 @@ func (a *Client) ListIps(params *ListIpsParams, authInfo runtime.ClientAuthInfoW
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListIpsReader{formats: a.formats},
+		Reader:             &ListIPsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -165,12 +201,17 @@ func (a *Client) ListIps(params *ListIpsParams, authInfo runtime.ClientAuthInfoW
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListIpsOK), nil
-
+	success, ok := result.(*ListIPsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListIPsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateIP updates an ip
+  UpdateIP updates an ip
 */
 func (a *Client) UpdateIP(params *UpdateIPParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateIPOK, error) {
 	// TODO: Validate the params before sending
@@ -194,8 +235,13 @@ func (a *Client) UpdateIP(params *UpdateIPParams, authInfo runtime.ClientAuthInf
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateIPOK), nil
-
+	success, ok := result.(*UpdateIPOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateIPDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client
