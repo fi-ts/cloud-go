@@ -8,20 +8,24 @@ package models
 import (
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // V1ClusterResponse v1 cluster response
+//
 // swagger:model v1.ClusterResponse
 type V1ClusterResponse struct {
 
 	// additional networks
 	// Required: true
 	AdditionalNetworks []string `json:"AdditionalNetworks"`
+
+	// control plane feature gates
+	// Required: true
+	ControlPlaneFeatureGates []string `json:"ControlPlaneFeatureGates"`
 
 	// creation timestamp
 	// Required: true
@@ -96,8 +100,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
 
+	// the firewalls which belong to this cluster
+	Firewalls []*ModelsV1MachineResponse `json:"firewalls"`
+
 	// the machines which belong to this cluster
-	// Required: true
 	Machines []*ModelsV1MachineResponse `json:"machines"`
 }
 
@@ -106,6 +112,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdditionalNetworks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateControlPlaneFeatureGates(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -181,6 +191,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateFirewalls(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMachines(formats); err != nil {
 		res = append(res, err)
 	}
@@ -194,6 +208,15 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 func (m *V1ClusterResponse) validateAdditionalNetworks(formats strfmt.Registry) error {
 
 	if err := validate.Required("AdditionalNetworks", "body", m.AdditionalNetworks); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateControlPlaneFeatureGates(formats strfmt.Registry) error {
+
+	if err := validate.Required("ControlPlaneFeatureGates", "body", m.ControlPlaneFeatureGates); err != nil {
 		return err
 	}
 
@@ -430,10 +453,35 @@ func (m *V1ClusterResponse) validateWorkers(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1ClusterResponse) validateFirewalls(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Firewalls) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Firewalls); i++ {
+		if swag.IsZero(m.Firewalls[i]) { // not required
+			continue
+		}
+
+		if m.Firewalls[i] != nil {
+			if err := m.Firewalls[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("firewalls" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *V1ClusterResponse) validateMachines(formats strfmt.Registry) error {
 
-	if err := validate.Required("machines", "body", m.Machines); err != nil {
-		return err
+	if swag.IsZero(m.Machines) { // not required
+		return nil
 	}
 
 	for i := 0; i < len(m.Machines); i++ {

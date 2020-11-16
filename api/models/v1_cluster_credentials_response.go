@@ -6,14 +6,14 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // V1ClusterCredentialsResponse v1 cluster credentials response
+//
 // swagger:model v1.ClusterCredentialsResponse
 type V1ClusterCredentialsResponse struct {
 

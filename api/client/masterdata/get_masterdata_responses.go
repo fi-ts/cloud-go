@@ -10,10 +10,10 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // GetMasterdataReader is a Reader for the GetMasterdata structure.
@@ -24,21 +24,18 @@ type GetMasterdataReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *GetMasterdataReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewGetMasterdataOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 404:
 		result := NewGetMasterdataNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		result := NewGetMasterdataDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -68,6 +65,10 @@ func (o *GetMasterdataOK) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK  %+v", 200, o.Payload)
 }
 
+func (o *GetMasterdataOK) GetPayload() *models.V1MasterdataLookupResponse {
+	return o.Payload
+}
+
 func (o *GetMasterdataOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1MasterdataLookupResponse)
@@ -90,16 +91,20 @@ func NewGetMasterdataNotFound() *GetMasterdataNotFound {
 NotFound
 */
 type GetMasterdataNotFound struct {
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 func (o *GetMasterdataNotFound) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound  %+v", 404, o.Payload)
 }
 
+func (o *GetMasterdataNotFound) GetPayload() *httperrors.HTTPErrorResponse {
+	return o.Payload
+}
+
 func (o *GetMasterdataNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -123,7 +128,7 @@ Error
 type GetMasterdataDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the get masterdata default response
@@ -135,9 +140,13 @@ func (o *GetMasterdataDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default  %+v", o._statusCode, o.Payload)
 }
 
+func (o *GetMasterdataDefault) GetPayload() *httperrors.HTTPErrorResponse {
+	return o.Payload
+}
+
 func (o *GetMasterdataDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

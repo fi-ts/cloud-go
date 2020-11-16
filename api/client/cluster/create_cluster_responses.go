@@ -10,10 +10,10 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // CreateClusterReader is a Reader for the CreateCluster structure.
@@ -24,21 +24,18 @@ type CreateClusterReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *CreateClusterReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 201:
 		result := NewCreateClusterCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	case 409:
 		result := NewCreateClusterConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		result := NewCreateClusterDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -68,6 +65,10 @@ func (o *CreateClusterCreated) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterCreated  %+v", 201, o.Payload)
 }
 
+func (o *CreateClusterCreated) GetPayload() *models.V1ClusterResponse {
+	return o.Payload
+}
+
 func (o *CreateClusterCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1ClusterResponse)
@@ -90,16 +91,20 @@ func NewCreateClusterConflict() *CreateClusterConflict {
 Conflict
 */
 type CreateClusterConflict struct {
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 func (o *CreateClusterConflict) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict  %+v", 409, o.Payload)
 }
 
+func (o *CreateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
+	return o.Payload
+}
+
 func (o *CreateClusterConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -123,7 +128,7 @@ Error
 type CreateClusterDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the create cluster default response
@@ -135,9 +140,13 @@ func (o *CreateClusterDefault) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default  %+v", o._statusCode, o.Payload)
 }
 
+func (o *CreateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
+	return o.Payload
+}
+
 func (o *CreateClusterDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

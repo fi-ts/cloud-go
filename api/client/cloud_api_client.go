@@ -8,8 +8,7 @@ package client
 import (
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/client/accounting"
 	"github.com/fi-ts/cloud-go/api/client/cluster"
@@ -22,7 +21,7 @@ import (
 	"github.com/fi-ts/cloud-go/api/client/version"
 )
 
-// Default cloud HTTP client.
+// Default cloud API HTTP client.
 var Default = NewHTTPClient(nil)
 
 const (
@@ -37,14 +36,14 @@ const (
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
 var DefaultSchemes = []string{"http"}
 
-// NewHTTPClient creates a new cloud HTTP client.
-func NewHTTPClient(formats strfmt.Registry) *Cloud {
+// NewHTTPClient creates a new cloud API HTTP client.
+func NewHTTPClient(formats strfmt.Registry) *CloudAPI {
 	return NewHTTPClientWithConfig(formats, nil)
 }
 
-// NewHTTPClientWithConfig creates a new cloud HTTP client,
+// NewHTTPClientWithConfig creates a new cloud API HTTP client,
 // using a customizable transport config.
-func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Cloud {
+func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *CloudAPI {
 	// ensure nullable parameters have default
 	if cfg == nil {
 		cfg = DefaultTransportConfig()
@@ -55,34 +54,24 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Clo
 	return New(transport, formats)
 }
 
-// New creates a new cloud client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Cloud {
+// New creates a new cloud API client
+func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudAPI {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
 	}
 
-	cli := new(Cloud)
+	cli := new(CloudAPI)
 	cli.Transport = transport
-
 	cli.Accounting = accounting.New(transport, formats)
-
 	cli.Cluster = cluster.New(transport, formats)
-
 	cli.Health = health.New(transport, formats)
-
 	cli.IP = ip.New(transport, formats)
-
 	cli.Masterdata = masterdata.New(transport, formats)
-
 	cli.Project = project.New(transport, formats)
-
 	cli.S3 = s3.New(transport, formats)
-
 	cli.Tenant = tenant.New(transport, formats)
-
 	cli.Version = version.New(transport, formats)
-
 	return cli
 }
 
@@ -125,49 +114,39 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// Cloud is a client for cloud
-type Cloud struct {
-	Accounting *accounting.Client
+// CloudAPI is a client for cloud API
+type CloudAPI struct {
+	Accounting accounting.ClientService
 
-	Cluster *cluster.Client
+	Cluster cluster.ClientService
 
-	Health *health.Client
+	Health health.ClientService
 
-	IP *ip.Client
+	IP ip.ClientService
 
-	Masterdata *masterdata.Client
+	Masterdata masterdata.ClientService
 
-	Project *project.Client
+	Project project.ClientService
 
-	S3 *s3.Client
+	S3 s3.ClientService
 
-	Tenant *tenant.Client
+	Tenant tenant.ClientService
 
-	Version *version.Client
+	Version version.ClientService
 
 	Transport runtime.ClientTransport
 }
 
 // SetTransport changes the transport on the client and all its subresources
-func (c *Cloud) SetTransport(transport runtime.ClientTransport) {
+func (c *CloudAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
-
 	c.Accounting.SetTransport(transport)
-
 	c.Cluster.SetTransport(transport)
-
 	c.Health.SetTransport(transport)
-
 	c.IP.SetTransport(transport)
-
 	c.Masterdata.SetTransport(transport)
-
 	c.Project.SetTransport(transport)
-
 	c.S3.SetTransport(transport)
-
 	c.Tenant.SetTransport(transport)
-
 	c.Version.SetTransport(transport)
-
 }

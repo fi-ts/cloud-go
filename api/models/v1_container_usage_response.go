@@ -8,14 +8,14 @@ package models
 import (
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // V1ContainerUsageResponse v1 container usage response
+//
 // swagger:model v1.ContainerUsageResponse
 type V1ContainerUsageResponse struct {
 

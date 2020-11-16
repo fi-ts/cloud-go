@@ -13,10 +13,9 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // NewUpdates3Params creates a new Updates3Params object

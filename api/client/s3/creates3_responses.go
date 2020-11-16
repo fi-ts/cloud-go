@@ -10,10 +10,10 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // Creates3Reader is a Reader for the Creates3 structure.
@@ -24,14 +24,12 @@ type Creates3Reader struct {
 // ReadResponse reads a server response into the received o.
 func (o *Creates3Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewCreates3OK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewCreates3Default(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -61,6 +59,10 @@ func (o *Creates3OK) Error() string {
 	return fmt.Sprintf("[PUT /v1/s3][%d] creates3OK  %+v", 200, o.Payload)
 }
 
+func (o *Creates3OK) GetPayload() *models.V1S3CredentialsResponse {
+	return o.Payload
+}
+
 func (o *Creates3OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1S3CredentialsResponse)
@@ -87,7 +89,7 @@ Error
 type Creates3Default struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the creates3 default response
@@ -99,9 +101,13 @@ func (o *Creates3Default) Error() string {
 	return fmt.Sprintf("[PUT /v1/s3][%d] creates3 default  %+v", o._statusCode, o.Payload)
 }
 
+func (o *Creates3Default) GetPayload() *httperrors.HTTPErrorResponse {
+	return o.Payload
+}
+
 func (o *Creates3Default) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

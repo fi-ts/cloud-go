@@ -16,7 +16,13 @@
       "required": [
         "message",
         "statuscode"
-      ]
+      ],
+      "x-go-type": {
+        "import": {
+          "package": "github.com/metal-stack/metal-lib/httperrors"
+        },
+        "type": "HTTPErrorResponse"
+      }
     },
     "models.V1BootInfo": {
       "properties": {
@@ -817,6 +823,12 @@
           },
           "type": "array"
         },
+        "ControlPlaneFeatureGates": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "CreationTimestamp": {
           "format": "date-time",
           "type": "string"
@@ -881,6 +893,13 @@
           },
           "type": "array"
         },
+        "firewalls": {
+          "description": "the firewalls which belong to this cluster",
+          "items": {
+            "$ref": "#/definitions/models.V1MachineResponse"
+          },
+          "type": "array"
+        },
         "machines": {
           "description": "the machines which belong to this cluster",
           "items": {
@@ -891,6 +910,7 @@
       },
       "required": [
         "AdditionalNetworks",
+        "ControlPlaneFeatureGates",
         "CreationTimestamp",
         "DNSEndpoint",
         "Description",
@@ -908,8 +928,7 @@
         "Purpose",
         "Status",
         "Tenant",
-        "Workers",
-        "machines"
+        "Workers"
       ]
     },
     "v1.ClusterUpdateRequest": {
@@ -1518,12 +1537,17 @@
         "AllowPrivilegedContainers": {
           "type": "boolean"
         },
+        "ExpirationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "Version": {
           "type": "string"
         }
       },
       "required": [
         "AllowPrivilegedContainers",
+        "ExpirationDate",
         "Version"
       ]
     },
@@ -3327,6 +3351,15 @@
           "application/json"
         ],
         "operationId": "listClusters",
+        "parameters": [
+          {
+            "default": false,
+            "description": "returns machines in the response, which is disabled by default for list responses because it makes the request slower",
+            "in": "query",
+            "name": "return-machines",
+            "type": "bool"
+          }
+        ],
         "produces": [
           "application/json"
         ],
@@ -3475,6 +3508,13 @@
         ],
         "operationId": "findClusters",
         "parameters": [
+          {
+            "default": false,
+            "description": "returns machines in the response, which is disabled by default for list responses because it makes the request slower",
+            "in": "query",
+            "name": "return-machines",
+            "type": "bool"
+          },
           {
             "in": "body",
             "name": "body",
@@ -4418,6 +4458,36 @@
       }
     },
     "/v1/tenant": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "listTenants",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.TenantResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get a tenant list",
+        "tags": [
+          "tenant"
+        ]
+      },
       "post": {
         "consumes": [
           "application/json"

@@ -7,12 +7,11 @@ package project
 
 import (
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new project API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -24,8 +23,23 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientService is the interface for Client methods
+type ClientService interface {
+	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter) (*CreateProjectCreated, error)
+
+	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteProjectOK, error)
+
+	FindProject(params *FindProjectParams, authInfo runtime.ClientAuthInfoWriter) (*FindProjectOK, error)
+
+	ListProjects(params *ListProjectsParams, authInfo runtime.ClientAuthInfoWriter) (*ListProjectsOK, error)
+
+	UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateProjectOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
-CreateProject creates a project if the given ID already exists a conflict is returned
+  CreateProject creates a project if the given ID already exists a conflict is returned
 */
 func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter) (*CreateProjectCreated, error) {
 	// TODO: Validate the params before sending
@@ -49,12 +63,17 @@ func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateProjectCreated), nil
-
+	success, ok := result.(*CreateProjectCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateProjectDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DeleteProject deletes a project and returns the deleted entity
+  DeleteProject deletes a project and returns the deleted entity
 */
 func (a *Client) DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteProjectOK, error) {
 	// TODO: Validate the params before sending
@@ -78,12 +97,17 @@ func (a *Client) DeleteProject(params *DeleteProjectParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteProjectOK), nil
-
+	success, ok := result.(*DeleteProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteProjectDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-FindProject gets project by id
+  FindProject gets project by id
 */
 func (a *Client) FindProject(params *FindProjectParams, authInfo runtime.ClientAuthInfoWriter) (*FindProjectOK, error) {
 	// TODO: Validate the params before sending
@@ -107,12 +131,17 @@ func (a *Client) FindProject(params *FindProjectParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	return result.(*FindProjectOK), nil
-
+	success, ok := result.(*FindProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*FindProjectDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListProjects gets all projects
+  ListProjects gets all projects
 */
 func (a *Client) ListProjects(params *ListProjectsParams, authInfo runtime.ClientAuthInfoWriter) (*ListProjectsOK, error) {
 	// TODO: Validate the params before sending
@@ -136,12 +165,17 @@ func (a *Client) ListProjects(params *ListProjectsParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListProjectsOK), nil
-
+	success, ok := result.(*ListProjectsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListProjectsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateProject updates a project optimistic lock error can occur
+  UpdateProject updates a project optimistic lock error can occur
 */
 func (a *Client) UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateProjectOK, error) {
 	// TODO: Validate the params before sending
@@ -165,8 +199,13 @@ func (a *Client) UpdateProject(params *UpdateProjectParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateProjectOK), nil
-
+	success, ok := result.(*UpdateProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdateProjectDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

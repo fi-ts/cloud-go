@@ -7,12 +7,11 @@ package s3
 
 import (
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new s3 API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -24,8 +23,25 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientService is the interface for Client methods
+type ClientService interface {
+	Creates3(params *Creates3Params, authInfo runtime.ClientAuthInfoWriter) (*Creates3OK, error)
+
+	Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInfoWriter) (*Deletes3OK, error)
+
+	Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWriter) (*Gets3OK, error)
+
+	Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWriter) (*Lists3OK, error)
+
+	Lists3partitions(params *Lists3partitionsParams, authInfo runtime.ClientAuthInfoWriter) (*Lists3partitionsOK, error)
+
+	Updates3(params *Updates3Params, authInfo runtime.ClientAuthInfoWriter) (*Updates3OK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
-Creates3 creates an s3 user if the given name for this tenant already exists a conflict is returned
+  Creates3 creates an s3 user if the given name for this tenant already exists a conflict is returned
 */
 func (a *Client) Creates3(params *Creates3Params, authInfo runtime.ClientAuthInfoWriter) (*Creates3OK, error) {
 	// TODO: Validate the params before sending
@@ -49,12 +65,17 @@ func (a *Client) Creates3(params *Creates3Params, authInfo runtime.ClientAuthInf
 	if err != nil {
 		return nil, err
 	}
-	return result.(*Creates3OK), nil
-
+	success, ok := result.(*Creates3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*Creates3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Deletes3 deletes an s3 user
+  Deletes3 deletes an s3 user
 */
 func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInfoWriter) (*Deletes3OK, error) {
 	// TODO: Validate the params before sending
@@ -78,12 +99,17 @@ func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInf
 	if err != nil {
 		return nil, err
 	}
-	return result.(*Deletes3OK), nil
-
+	success, ok := result.(*Deletes3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*Deletes3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Gets3 gets s3 user
+  Gets3 gets s3 user
 */
 func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWriter) (*Gets3OK, error) {
 	// TODO: Validate the params before sending
@@ -107,12 +133,17 @@ func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWrite
 	if err != nil {
 		return nil, err
 	}
-	return result.(*Gets3OK), nil
-
+	success, ok := result.(*Gets3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*Gets3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Lists3 lists s3 users
+  Lists3 lists s3 users
 */
 func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWriter) (*Lists3OK, error) {
 	// TODO: Validate the params before sending
@@ -136,12 +167,17 @@ func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	return result.(*Lists3OK), nil
-
+	success, ok := result.(*Lists3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*Lists3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Lists3partitions lists s3 partitions
+  Lists3partitions lists s3 partitions
 */
 func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runtime.ClientAuthInfoWriter) (*Lists3partitionsOK, error) {
 	// TODO: Validate the params before sending
@@ -165,12 +201,17 @@ func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	return result.(*Lists3partitionsOK), nil
-
+	success, ok := result.(*Lists3partitionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*Lists3partitionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Updates3 updates an s3 user
+  Updates3 updates an s3 user
 */
 func (a *Client) Updates3(params *Updates3Params, authInfo runtime.ClientAuthInfoWriter) (*Updates3OK, error) {
 	// TODO: Validate the params before sending
@@ -194,8 +235,13 @@ func (a *Client) Updates3(params *Updates3Params, authInfo runtime.ClientAuthInf
 	if err != nil {
 		return nil, err
 	}
-	return result.(*Updates3OK), nil
-
+	success, ok := result.(*Updates3OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*Updates3Default)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 // SetTransport changes the transport on the client

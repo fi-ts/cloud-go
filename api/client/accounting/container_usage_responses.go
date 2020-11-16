@@ -10,10 +10,10 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/fi-ts/cloud-go/api/models"
+	"github.com/fi-ts/cloud-go/api/models"
+	"github.com/metal-stack/metal-lib/httperrors"
 )
 
 // ContainerUsageReader is a Reader for the ContainerUsage structure.
@@ -24,14 +24,12 @@ type ContainerUsageReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *ContainerUsageReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewContainerUsageOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		result := NewContainerUsageDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -61,6 +59,10 @@ func (o *ContainerUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
 }
 
+func (o *ContainerUsageOK) GetPayload() *models.V1ContainerUsageResponse {
+	return o.Payload
+}
+
 func (o *ContainerUsageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1ContainerUsageResponse)
@@ -87,7 +89,7 @@ Error
 type ContainerUsageDefault struct {
 	_statusCode int
 
-	Payload *models.HttperrorsHTTPErrorResponse
+	Payload *httperrors.HTTPErrorResponse
 }
 
 // Code gets the status code for the container usage default response
@@ -99,9 +101,13 @@ func (o *ContainerUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default  %+v", o._statusCode, o.Payload)
 }
 
+func (o *ContainerUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
+	return o.Payload
+}
+
 func (o *ContainerUsageDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HttperrorsHTTPErrorResponse)
+	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
