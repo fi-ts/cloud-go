@@ -19,6 +19,10 @@ import (
 // swagger:model v1.ClusterUpdateRequest
 type V1ClusterUpdateRequest struct {
 
+	// egress rules
+	// Required: true
+	EgressRules []*V1EgressRule `json:"EgressRules"`
+
 	// firewall image
 	// Required: true
 	FirewallImage *string `json:"FirewallImage"`
@@ -56,6 +60,10 @@ type V1ClusterUpdateRequest struct {
 func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateEgressRules(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFirewallImage(formats); err != nil {
 		res = append(res, err)
 	}
@@ -91,6 +99,31 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateEgressRules(formats strfmt.Registry) error {
+
+	if err := validate.Required("EgressRules", "body", m.EgressRules); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.EgressRules); i++ {
+		if swag.IsZero(m.EgressRules[i]) { // not required
+			continue
+		}
+
+		if m.EgressRules[i] != nil {
+			if err := m.EgressRules[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("EgressRules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

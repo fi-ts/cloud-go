@@ -27,6 +27,10 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	Description *string `json:"Description"`
 
+	// egress rules
+	// Required: true
+	EgressRules []*V1EgressRule `json:"EgressRules"`
+
 	// firewall image
 	// Required: true
 	FirewallImage *string `json:"FirewallImage"`
@@ -81,6 +85,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEgressRules(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -147,6 +155,31 @@ func (m *V1ClusterCreateRequest) validateDescription(formats strfmt.Registry) er
 
 	if err := validate.Required("Description", "body", m.Description); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) validateEgressRules(formats strfmt.Registry) error {
+
+	if err := validate.Required("EgressRules", "body", m.EgressRules); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.EgressRules); i++ {
+		if swag.IsZero(m.EgressRules[i]) { // not required
+			continue
+		}
+
+		if m.EgressRules[i] != nil {
+			if err := m.EgressRules[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("EgressRules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

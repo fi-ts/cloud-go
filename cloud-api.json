@@ -679,6 +679,12 @@
         "Description": {
           "type": "string"
         },
+        "EgressRules": {
+          "items": {
+            "$ref": "#/definitions/v1.EgressRule"
+          },
+          "type": "array"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -722,6 +728,7 @@
       "required": [
         "AdditionalNetworks",
         "Description",
+        "EgressRules",
         "FirewallImage",
         "FirewallSize",
         "Kubernetes",
@@ -832,6 +839,12 @@
         "Description": {
           "type": "string"
         },
+        "EgressRules": {
+          "items": {
+            "$ref": "#/definitions/v1.EgressRule"
+          },
+          "type": "array"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -901,6 +914,7 @@
         "CreationTimestamp",
         "DNSEndpoint",
         "Description",
+        "EgressRules",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -919,6 +933,12 @@
     },
     "v1.ClusterUpdateRequest": {
       "properties": {
+        "EgressRules": {
+          "items": {
+            "$ref": "#/definitions/v1.EgressRule"
+          },
+          "type": "array"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -951,6 +971,7 @@
         }
       },
       "required": [
+        "EgressRules",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -1274,6 +1295,23 @@
         "accumulatedusage",
         "from",
         "usage"
+      ]
+    },
+    "v1.EgressRule": {
+      "properties": {
+        "IPs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "NetworkID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "IPs",
+        "NetworkID"
       ]
     },
     "v1.IPAllocateRequest": {
