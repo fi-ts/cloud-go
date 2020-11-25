@@ -685,6 +685,9 @@
           },
           "type": "array"
         },
+        "FirewallControllerVersion": {
+          "type": "string"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -729,6 +732,7 @@
         "AdditionalNetworks",
         "Description",
         "EgressRules",
+        "FirewallControllerVersion",
         "FirewallImage",
         "FirewallSize",
         "Kubernetes",
@@ -845,6 +849,9 @@
           },
           "type": "array"
         },
+        "FirewallControllerVersion": {
+          "type": "string"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -915,6 +922,7 @@
         "DNSEndpoint",
         "Description",
         "EgressRules",
+        "FirewallControllerVersion",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -938,6 +946,9 @@
             "$ref": "#/definitions/v1.EgressRule"
           },
           "type": "array"
+        },
+        "FirewallControllerVersion": {
+          "type": "string"
         },
         "FirewallImage": {
           "type": "string"
@@ -972,6 +983,7 @@
       },
       "required": [
         "EgressRules",
+        "FirewallControllerVersion",
         "FirewallImage",
         "FirewallSize",
         "ID",

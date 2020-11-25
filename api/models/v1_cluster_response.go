@@ -44,6 +44,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	EgressRules []*V1EgressRule `json:"EgressRules"`
 
+	// firewall controller version
+	// Required: true
+	FirewallControllerVersion *string `json:"FirewallControllerVersion"`
+
 	// firewall image
 	// Required: true
 	FirewallImage *string `json:"FirewallImage"`
@@ -132,6 +136,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateEgressRules(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFirewallControllerVersion(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -274,6 +282,15 @@ func (m *V1ClusterResponse) validateEgressRules(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateFirewallControllerVersion(formats strfmt.Registry) error {
+
+	if err := validate.Required("FirewallControllerVersion", "body", m.FirewallControllerVersion); err != nil {
+		return err
 	}
 
 	return nil

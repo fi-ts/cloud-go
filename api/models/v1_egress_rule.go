@@ -6,20 +6,20 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // V1EgressRule v1 egress rule
+//
 // swagger:model v1.EgressRule
 type V1EgressRule struct {
 
-	// ips
+	// i ps
 	// Required: true
-	Ips []string `json:"IPs"`
+	IPs []string `json:"IPs"`
 
 	// network ID
 	// Required: true
@@ -30,7 +30,7 @@ type V1EgressRule struct {
 func (m *V1EgressRule) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateIps(formats); err != nil {
+	if err := m.validateIPs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -44,9 +44,9 @@ func (m *V1EgressRule) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1EgressRule) validateIps(formats strfmt.Registry) error {
+func (m *V1EgressRule) validateIPs(formats strfmt.Registry) error {
 
-	if err := validate.Required("IPs", "body", m.Ips); err != nil {
+	if err := validate.Required("IPs", "body", m.IPs); err != nil {
 		return err
 	}
 
