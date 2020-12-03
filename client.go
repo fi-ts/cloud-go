@@ -1,7 +1,6 @@
 package cloudgo
 
 import (
-	"errors"
 	"fmt"
 	"net/url"
 	"time"
@@ -40,10 +39,6 @@ func AuthType(authType string) option {
 
 // NewClient creates a new client for accessing the cloud-api
 func NewClient(rawurl, token, hmac string, options ...option) (*client.CloudAPI, error) {
-	if (token == "") == (hmac == "") {
-		return nil, errors.New("either token or hmac is required")
-	}
-
 	parsedurl, err := url.Parse(rawurl)
 	if err != nil {
 		return nil, err
