@@ -14,8 +14,32 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 )
 
+const (
+	defaultHMACAuthType = "Metal-View-All"
+)
+
+type clientSpec struct {
+	host     string
+	basePath string
+	schemes  []string
+
+	token string
+	hmac  string
+
+	hmacAuthType string
+}
+
+type option func(c *clientSpec)
+
+// AuthType sets the authType for HMAC-Auth
+func AuthType(authType string) option {
+	return func(c *clientSpec) {
+		c.hmacAuthType = authType
+	}
+}
+
 // NewClient creates a new client for accessing the cloud-api
-func NewClient(rawurl, token, hmac string) (*client.CloudAPI, error) {
+func NewClient(rawurl, token, hmac string, options ...option) (*client.CloudAPI, error) {
 	if (token == "") == (hmac == "") {
 		return nil, errors.New("either token or hmac is required")
 	}
@@ -28,25 +52,44 @@ func NewClient(rawurl, token, hmac string) (*client.CloudAPI, error) {
 		return nil, fmt.Errorf("invalid url:%s, must be in the form scheme://host[:port]/basepath", rawurl)
 	}
 
+	spec := &clientSpec{
+		host:         parsedurl.Host,
+		basePath:     parsedurl.Path,
+		schemes:      []string{parsedurl.Scheme},
+		token:        token,
+		hmac:         hmac,
+		hmacAuthType: defaultHMACAuthType,
+	}
+
+	for _, opt := range options {
+		opt(spec)
+	}
+
+	transport := newClientTransport(spec)
+
+	c := client.New(transport, nil)
+
+	return c, nil
+}
+
+func newClientTransport(c *clientSpec) *httptransport.Runtime {
 	var hmacAuth *security.HMACAuth
-	if hmac != "" {
-		auth := security.NewHMACAuth("Metal-View-All", []byte(hmac))
+	if c.hmac != "" {
+		auth := security.NewHMACAuth(c.hmacAuthType, []byte(c.hmac))
 		hmacAuth = &auth
 	}
 
 	auther := runtime.ClientAuthInfoWriterFunc(func(rq runtime.ClientRequest, rg strfmt.Registry) error {
 		if hmacAuth != nil {
 			hmacAuth.AddAuthToClientRequest(rq, time.Now())
-		} else if token != "" {
-			security.AddUserTokenToClientRequest(rq, token)
+		} else if c.token != "" {
+			security.AddUserTokenToClientRequest(rq, c.token)
 		}
 		return nil
 	})
 
-	transport := httptransport.New(parsedurl.Host, parsedurl.Path, []string{parsedurl.Scheme})
+	transport := httptransport.New(c.host, c.basePath, c.schemes)
 	transport.DefaultAuthentication = auther
 
-	c := client.New(transport, nil)
-
-	return c, nil
+	return transport
 }
