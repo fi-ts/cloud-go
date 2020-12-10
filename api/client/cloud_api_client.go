@@ -19,6 +19,7 @@ import (
 	"github.com/fi-ts/cloud-go/api/client/s3"
 	"github.com/fi-ts/cloud-go/api/client/tenant"
 	"github.com/fi-ts/cloud-go/api/client/version"
+	"github.com/fi-ts/cloud-go/api/client/volume"
 )
 
 // Default cloud API HTTP client.
@@ -72,6 +73,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudAPI {
 	cli.S3 = s3.New(transport, formats)
 	cli.Tenant = tenant.New(transport, formats)
 	cli.Version = version.New(transport, formats)
+	cli.Volume = volume.New(transport, formats)
 	return cli
 }
 
@@ -134,6 +136,8 @@ type CloudAPI struct {
 
 	Version version.ClientService
 
+	Volume volume.ClientService
+
 	Transport runtime.ClientTransport
 }
 
@@ -149,4 +153,5 @@ func (c *CloudAPI) SetTransport(transport runtime.ClientTransport) {
 	c.S3.SetTransport(transport)
 	c.Tenant.SetTransport(transport)
 	c.Version.SetTransport(transport)
+	c.Volume.SetTransport(transport)
 }
