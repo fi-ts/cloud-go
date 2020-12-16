@@ -37,6 +37,10 @@ type V1VolumeResponse struct {
 	// Required: true
 	Size *int64 `json:"Size"`
 
+	// volume handle
+	// Required: true
+	VolumeHandle *string `json:"VolumeHandle"`
+
 	// volume ID
 	// Required: true
 	VolumeID *string `json:"VolumeID"`
@@ -63,6 +67,10 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVolumeHandle(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -115,6 +123,15 @@ func (m *V1VolumeResponse) validateReplicaCount(formats strfmt.Registry) error {
 func (m *V1VolumeResponse) validateSize(formats strfmt.Registry) error {
 
 	if err := validate.Required("Size", "body", m.Size); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateVolumeHandle(formats strfmt.Registry) error {
+
+	if err := validate.Required("VolumeHandle", "body", m.VolumeHandle); err != nil {
 		return err
 	}
 

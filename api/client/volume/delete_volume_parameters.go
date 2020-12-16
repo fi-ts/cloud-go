@@ -60,11 +60,11 @@ for the delete volume operation typically these are written to a http.Request
 */
 type DeleteVolumeParams struct {
 
-	/*Volume
-	  name of the volume
+	/*ID
+	  id of the volume
 
 	*/
-	Volume string
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -104,15 +104,15 @@ func (o *DeleteVolumeParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithVolume adds the volume to the delete volume params
-func (o *DeleteVolumeParams) WithVolume(volume string) *DeleteVolumeParams {
-	o.SetVolume(volume)
+// WithID adds the id to the delete volume params
+func (o *DeleteVolumeParams) WithID(id string) *DeleteVolumeParams {
+	o.SetID(id)
 	return o
 }
 
-// SetVolume adds the volume to the delete volume params
-func (o *DeleteVolumeParams) SetVolume(volume string) {
-	o.Volume = volume
+// SetID adds the id to the delete volume params
+func (o *DeleteVolumeParams) SetID(id string) {
+	o.ID = id
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -123,8 +123,8 @@ func (o *DeleteVolumeParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	}
 	var res []error
 
-	// path param volume
-	if err := r.SetPathParam("volume", o.Volume); err != nil {
+	// path param id
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 
