@@ -2547,6 +2547,9 @@
           "format": "integer",
           "type": "integer"
         },
+        "Statistics": {
+          "$ref": "#/definitions/v1.VolumeStatistics"
+        },
         "StorageClass": {
           "type": "string"
         },
@@ -2563,9 +2566,31 @@
         "ProjectID",
         "ReplicaCount",
         "Size",
+        "Statistics",
         "StorageClass",
         "VolumeHandle",
         "VolumeID"
+      ]
+    },
+    "v1.VolumeStatistics": {
+      "properties": {
+        "CompressionRatio": {
+          "format": "double",
+          "type": "number"
+        },
+        "LogicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "CompressionRatio",
+        "LogicalUsedStorage",
+        "PhysicalUsedStorage"
       ]
     },
     "v1.VolumeUsage": {

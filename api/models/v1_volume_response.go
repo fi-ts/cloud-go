@@ -37,6 +37,10 @@ type V1VolumeResponse struct {
 	// Required: true
 	Size *int64 `json:"Size"`
 
+	// statistics
+	// Required: true
+	Statistics *V1VolumeStatistics `json:"Statistics"`
+
 	// storage class
 	// Required: true
 	StorageClass *string `json:"StorageClass"`
@@ -71,6 +75,10 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatistics(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -132,6 +140,24 @@ func (m *V1VolumeResponse) validateSize(formats strfmt.Registry) error {
 
 	if err := validate.Required("Size", "body", m.Size); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateStatistics(formats strfmt.Registry) error {
+
+	if err := validate.Required("Statistics", "body", m.Statistics); err != nil {
+		return err
+	}
+
+	if m.Statistics != nil {
+		if err := m.Statistics.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Statistics")
+			}
+			return err
+		}
 	}
 
 	return nil
