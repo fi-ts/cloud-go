@@ -2547,6 +2547,9 @@
           "format": "integer",
           "type": "integer"
         },
+        "StorageClass": {
+          "type": "string"
+        },
         "VolumeHandle": {
           "type": "string"
         },
@@ -2560,6 +2563,7 @@
         "ProjectID",
         "ReplicaCount",
         "Size",
+        "StorageClass",
         "VolumeHandle",
         "VolumeID"
       ]
