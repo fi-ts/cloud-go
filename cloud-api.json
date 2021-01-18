@@ -2553,6 +2553,9 @@
         "StorageClass": {
           "type": "string"
         },
+        "TenantID": {
+          "type": "string"
+        },
         "VolumeHandle": {
           "type": "string"
         },
@@ -2568,6 +2571,7 @@
         "Size",
         "Statistics",
         "StorageClass",
+        "TenantID",
         "VolumeHandle",
         "VolumeID"
       ]
