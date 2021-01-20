@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -48,6 +50,11 @@ func (m *ModelsV1MachineProvisioningEvent) validateEvent(formats strfmt.Registry
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this models v1 machine provisioning event based on context it is used
+func (m *ModelsV1MachineProvisioningEvent) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

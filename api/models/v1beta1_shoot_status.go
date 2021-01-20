@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -103,7 +104,6 @@ func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 }
 
 func (m *V1beta1ShootStatus) validateConditions(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Conditions) { // not required
 		return nil
 	}
@@ -128,7 +128,6 @@ func (m *V1beta1ShootStatus) validateConditions(formats strfmt.Registry) error {
 }
 
 func (m *V1beta1ShootStatus) validateConstraints(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Constraints) { // not required
 		return nil
 	}
@@ -180,7 +179,6 @@ func (m *V1beta1ShootStatus) validateHibernated(formats strfmt.Registry) error {
 }
 
 func (m *V1beta1ShootStatus) validateLastErrors(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.LastErrors) { // not required
 		return nil
 	}
@@ -205,7 +203,6 @@ func (m *V1beta1ShootStatus) validateLastErrors(formats strfmt.Registry) error {
 }
 
 func (m *V1beta1ShootStatus) validateLastOperation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.LastOperation) { // not required
 		return nil
 	}
@@ -235,6 +232,118 @@ func (m *V1beta1ShootStatus) validateUID(formats strfmt.Registry) error {
 
 	if err := validate.Required("uid", "body", m.UID); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1beta1 shoot status based on the context it is used
+func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateConditions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateConstraints(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGardener(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLastErrors(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLastOperation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateConditions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Conditions); i++ {
+
+		if m.Conditions[i] != nil {
+			if err := m.Conditions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateConstraints(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Constraints); i++ {
+
+		if m.Constraints[i] != nil {
+			if err := m.Constraints[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("constraints" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateGardener(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Gardener != nil {
+		if err := m.Gardener.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gardener")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateLastErrors(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.LastErrors); i++ {
+
+		if m.LastErrors[i] != nil {
+			if err := m.LastErrors[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("lastErrors" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateLastOperation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LastOperation != nil {
+		if err := m.LastOperation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("lastOperation")
+			}
+			return err
+		}
 	}
 
 	return nil

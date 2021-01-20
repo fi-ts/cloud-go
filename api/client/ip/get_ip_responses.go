@@ -47,7 +47,7 @@ func NewGetIPOK() *GetIPOK {
 	return &GetIPOK{}
 }
 
-/*GetIPOK handles this case with default header values.
+/* GetIPOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type GetIPOK struct {
 func (o *GetIPOK) Error() string {
 	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIpOK  %+v", 200, o.Payload)
 }
-
 func (o *GetIPOK) GetPayload() *models.ModelsV1IPResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewGetIPDefault(code int) *GetIPDefault {
 	}
 }
 
-/*GetIPDefault handles this case with default header values.
+/* GetIPDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -100,7 +99,6 @@ func (o *GetIPDefault) Code() int {
 func (o *GetIPDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIP default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *GetIPDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

@@ -18,56 +18,70 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewS3UsageParams creates a new S3UsageParams object
-// with the default values initialized.
+// NewS3UsageParams creates a new S3UsageParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewS3UsageParams() *S3UsageParams {
-	var ()
 	return &S3UsageParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewS3UsageParamsWithTimeout creates a new S3UsageParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewS3UsageParamsWithTimeout(timeout time.Duration) *S3UsageParams {
-	var ()
 	return &S3UsageParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewS3UsageParamsWithContext creates a new S3UsageParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewS3UsageParamsWithContext(ctx context.Context) *S3UsageParams {
-	var ()
 	return &S3UsageParams{
-
 		Context: ctx,
 	}
 }
 
 // NewS3UsageParamsWithHTTPClient creates a new S3UsageParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewS3UsageParamsWithHTTPClient(client *http.Client) *S3UsageParams {
-	var ()
 	return &S3UsageParams{
 		HTTPClient: client,
 	}
 }
 
-/*S3UsageParams contains all the parameters to send to the API endpoint
-for the s3 usage operation typically these are written to a http.Request
+/* S3UsageParams contains all the parameters to send to the API endpoint
+   for the s3 usage operation.
+
+   Typically these are written to a http.Request.
 */
 type S3UsageParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1S3UsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the s3 usage params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *S3UsageParams) WithDefaults() *S3UsageParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the s3 usage params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *S3UsageParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the s3 usage params
@@ -121,7 +135,6 @@ func (o *S3UsageParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regis
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

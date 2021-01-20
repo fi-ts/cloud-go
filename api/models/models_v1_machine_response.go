@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -129,7 +131,6 @@ func (m *ModelsV1MachineResponse) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ModelsV1MachineResponse) validateAllocation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Allocation) { // not required
 		return nil
 	}
@@ -237,7 +238,6 @@ func (m *ModelsV1MachineResponse) validateLiveliness(formats strfmt.Registry) er
 }
 
 func (m *ModelsV1MachineResponse) validatePartition(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Partition) { // not required
 		return nil
 	}
@@ -255,7 +255,6 @@ func (m *ModelsV1MachineResponse) validatePartition(formats strfmt.Registry) err
 }
 
 func (m *ModelsV1MachineResponse) validateSize(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Size) { // not required
 		return nil
 	}
@@ -294,6 +293,160 @@ func (m *ModelsV1MachineResponse) validateTags(formats strfmt.Registry) error {
 
 	if err := validate.Required("tags", "body", m.Tags); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this models v1 machine response based on the context it is used
+func (m *ModelsV1MachineResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAllocation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateBios(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateEvents(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHardware(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLedstate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePartition(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSize(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidateAllocation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Allocation != nil {
+		if err := m.Allocation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("allocation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidateBios(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Bios != nil {
+		if err := m.Bios.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("bios")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidateEvents(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Events != nil {
+		if err := m.Events.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("events")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidateHardware(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Hardware != nil {
+		if err := m.Hardware.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hardware")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidateLedstate(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Ledstate != nil {
+		if err := m.Ledstate.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ledstate")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidatePartition(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Partition != nil {
+		if err := m.Partition.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("partition")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidateSize(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Size != nil {
+		if err := m.Size.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("size")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.State != nil {
+		if err := m.State.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("state")
+			}
+			return err
+		}
 	}
 
 	return nil

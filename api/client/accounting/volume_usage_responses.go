@@ -47,7 +47,7 @@ func NewVolumeUsageOK() *VolumeUsageOK {
 	return &VolumeUsageOK{}
 }
 
-/*VolumeUsageOK handles this case with default header values.
+/* VolumeUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type VolumeUsageOK struct {
 func (o *VolumeUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsageOK  %+v", 200, o.Payload)
 }
-
 func (o *VolumeUsageOK) GetPayload() *models.V1VolumeUsageResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewVolumeUsageDefault(code int) *VolumeUsageDefault {
 	}
 }
 
-/*VolumeUsageDefault handles this case with default header values.
+/* VolumeUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -100,7 +99,6 @@ func (o *VolumeUsageDefault) Code() int {
 func (o *VolumeUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsage default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *VolumeUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

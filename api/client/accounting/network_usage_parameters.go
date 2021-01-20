@@ -18,56 +18,70 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewNetworkUsageParams creates a new NetworkUsageParams object
-// with the default values initialized.
+// NewNetworkUsageParams creates a new NetworkUsageParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewNetworkUsageParams() *NetworkUsageParams {
-	var ()
 	return &NetworkUsageParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewNetworkUsageParamsWithTimeout creates a new NetworkUsageParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewNetworkUsageParamsWithTimeout(timeout time.Duration) *NetworkUsageParams {
-	var ()
 	return &NetworkUsageParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewNetworkUsageParamsWithContext creates a new NetworkUsageParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewNetworkUsageParamsWithContext(ctx context.Context) *NetworkUsageParams {
-	var ()
 	return &NetworkUsageParams{
-
 		Context: ctx,
 	}
 }
 
 // NewNetworkUsageParamsWithHTTPClient creates a new NetworkUsageParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewNetworkUsageParamsWithHTTPClient(client *http.Client) *NetworkUsageParams {
-	var ()
 	return &NetworkUsageParams{
 		HTTPClient: client,
 	}
 }
 
-/*NetworkUsageParams contains all the parameters to send to the API endpoint
-for the network usage operation typically these are written to a http.Request
+/* NetworkUsageParams contains all the parameters to send to the API endpoint
+   for the network usage operation.
+
+   Typically these are written to a http.Request.
 */
 type NetworkUsageParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1NetworkUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the network usage params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *NetworkUsageParams) WithDefaults() *NetworkUsageParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the network usage params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *NetworkUsageParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the network usage params
@@ -121,7 +135,6 @@ func (o *NetworkUsageParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

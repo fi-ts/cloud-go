@@ -18,56 +18,70 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewVolumeUsageCSVParams creates a new VolumeUsageCSVParams object
-// with the default values initialized.
+// NewVolumeUsageCSVParams creates a new VolumeUsageCSVParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewVolumeUsageCSVParams() *VolumeUsageCSVParams {
-	var ()
 	return &VolumeUsageCSVParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewVolumeUsageCSVParamsWithTimeout creates a new VolumeUsageCSVParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewVolumeUsageCSVParamsWithTimeout(timeout time.Duration) *VolumeUsageCSVParams {
-	var ()
 	return &VolumeUsageCSVParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewVolumeUsageCSVParamsWithContext creates a new VolumeUsageCSVParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewVolumeUsageCSVParamsWithContext(ctx context.Context) *VolumeUsageCSVParams {
-	var ()
 	return &VolumeUsageCSVParams{
-
 		Context: ctx,
 	}
 }
 
 // NewVolumeUsageCSVParamsWithHTTPClient creates a new VolumeUsageCSVParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewVolumeUsageCSVParamsWithHTTPClient(client *http.Client) *VolumeUsageCSVParams {
-	var ()
 	return &VolumeUsageCSVParams{
 		HTTPClient: client,
 	}
 }
 
-/*VolumeUsageCSVParams contains all the parameters to send to the API endpoint
-for the volume usage c s v operation typically these are written to a http.Request
+/* VolumeUsageCSVParams contains all the parameters to send to the API endpoint
+   for the volume usage c s v operation.
+
+   Typically these are written to a http.Request.
 */
 type VolumeUsageCSVParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1VolumeUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the volume usage c s v params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *VolumeUsageCSVParams) WithDefaults() *VolumeUsageCSVParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the volume usage c s v params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *VolumeUsageCSVParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the volume usage c s v params
@@ -121,7 +135,6 @@ func (o *VolumeUsageCSVParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

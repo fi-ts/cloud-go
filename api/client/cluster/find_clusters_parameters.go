@@ -19,73 +19,87 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewFindClustersParams creates a new FindClustersParams object
-// with the default values initialized.
+// NewFindClustersParams creates a new FindClustersParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewFindClustersParams() *FindClustersParams {
-	var (
-		returnMachinesDefault = bool(false)
-	)
 	return &FindClustersParams{
-		ReturnMachines: &returnMachinesDefault,
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewFindClustersParamsWithTimeout creates a new FindClustersParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewFindClustersParamsWithTimeout(timeout time.Duration) *FindClustersParams {
-	var (
-		returnMachinesDefault = bool(false)
-	)
 	return &FindClustersParams{
-		ReturnMachines: &returnMachinesDefault,
-
 		timeout: timeout,
 	}
 }
 
 // NewFindClustersParamsWithContext creates a new FindClustersParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewFindClustersParamsWithContext(ctx context.Context) *FindClustersParams {
-	var (
-		returnMachinesDefault = bool(false)
-	)
 	return &FindClustersParams{
-		ReturnMachines: &returnMachinesDefault,
-
 		Context: ctx,
 	}
 }
 
 // NewFindClustersParamsWithHTTPClient creates a new FindClustersParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewFindClustersParamsWithHTTPClient(client *http.Client) *FindClustersParams {
-	var (
-		returnMachinesDefault = bool(false)
-	)
 	return &FindClustersParams{
-		ReturnMachines: &returnMachinesDefault,
-		HTTPClient:     client,
+		HTTPClient: client,
 	}
 }
 
-/*FindClustersParams contains all the parameters to send to the API endpoint
-for the find clusters operation typically these are written to a http.Request
+/* FindClustersParams contains all the parameters to send to the API endpoint
+   for the find clusters operation.
+
+   Typically these are written to a http.Request.
 */
 type FindClustersParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1ClusterFindRequest
-	/*ReturnMachines
-	  returns machines in the response, which is disabled by default for list responses because it makes the request slower
 
+	/* ReturnMachines.
+
+	   returns machines in the response, which is disabled by default for list responses because it makes the request slower
 	*/
 	ReturnMachines *bool
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the find clusters params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *FindClustersParams) WithDefaults() *FindClustersParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the find clusters params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *FindClustersParams) SetDefaults() {
+	var (
+		returnMachinesDefault = bool(false)
+	)
+
+	val := FindClustersParams{
+		ReturnMachines: &returnMachinesDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the find clusters params
@@ -150,7 +164,6 @@ func (o *FindClustersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
@@ -161,16 +174,17 @@ func (o *FindClustersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 		// query param return-machines
 		var qrReturnMachines bool
+
 		if o.ReturnMachines != nil {
 			qrReturnMachines = *o.ReturnMachines
 		}
 		qReturnMachines := swag.FormatBool(qrReturnMachines)
 		if qReturnMachines != "" {
+
 			if err := r.SetQueryParam("return-machines", qReturnMachines); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

@@ -18,56 +18,70 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewIPUsageParams creates a new IPUsageParams object
-// with the default values initialized.
+// NewIPUsageParams creates a new IPUsageParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewIPUsageParams() *IPUsageParams {
-	var ()
 	return &IPUsageParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewIPUsageParamsWithTimeout creates a new IPUsageParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewIPUsageParamsWithTimeout(timeout time.Duration) *IPUsageParams {
-	var ()
 	return &IPUsageParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewIPUsageParamsWithContext creates a new IPUsageParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewIPUsageParamsWithContext(ctx context.Context) *IPUsageParams {
-	var ()
 	return &IPUsageParams{
-
 		Context: ctx,
 	}
 }
 
 // NewIPUsageParamsWithHTTPClient creates a new IPUsageParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewIPUsageParamsWithHTTPClient(client *http.Client) *IPUsageParams {
-	var ()
 	return &IPUsageParams{
 		HTTPClient: client,
 	}
 }
 
-/*IPUsageParams contains all the parameters to send to the API endpoint
-for the ip usage operation typically these are written to a http.Request
+/* IPUsageParams contains all the parameters to send to the API endpoint
+   for the ip usage operation.
+
+   Typically these are written to a http.Request.
 */
 type IPUsageParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1IPUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the ip usage params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *IPUsageParams) WithDefaults() *IPUsageParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the ip usage params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *IPUsageParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the ip usage params
@@ -121,7 +135,6 @@ func (o *IPUsageParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regis
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

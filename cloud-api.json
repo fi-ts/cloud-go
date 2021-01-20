@@ -2507,6 +2507,96 @@
         }
       }
     },
+    "v1.VolumeFindRequest": {
+      "properties": {
+        "PartitionID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "VolumeID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "PartitionID",
+        "ProjectID",
+        "VolumeID"
+      ]
+    },
+    "v1.VolumeResponse": {
+      "properties": {
+        "ConnectedHosts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "PartitionID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "ReplicaCount": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Size": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Statistics": {
+          "$ref": "#/definitions/v1.VolumeStatistics"
+        },
+        "StorageClass": {
+          "type": "string"
+        },
+        "TenantID": {
+          "type": "string"
+        },
+        "VolumeHandle": {
+          "type": "string"
+        },
+        "VolumeID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ConnectedHosts",
+        "PartitionID",
+        "ProjectID",
+        "ReplicaCount",
+        "Size",
+        "Statistics",
+        "StorageClass",
+        "TenantID",
+        "VolumeHandle",
+        "VolumeID"
+      ]
+    },
+    "v1.VolumeStatistics": {
+      "properties": {
+        "CompressionRatio": {
+          "format": "double",
+          "type": "number"
+        },
+        "LogicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "CompressionRatio",
+        "LogicalUsedStorage",
+        "PhysicalUsedStorage"
+      ]
+    },
     "v1.VolumeUsage": {
       "properties": {
         "capacityseconds": {
@@ -2673,6 +2763,14 @@
       "properties": {
         "CRI": {
           "type": "string"
+        },
+        "DrainTimeout": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "HealthTimeout": {
+          "format": "integer",
+          "type": "integer"
         },
         "MachineImage": {
           "$ref": "#/definitions/v1.MachineImage"
@@ -4602,6 +4700,118 @@
         "summary": "returns the current version information of this module",
         "tags": [
           "version"
+        ]
+      }
+    },
+    "/v1/volume": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "listVolumes",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.VolumeResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get all volumes",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/find": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "findVolumes",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.VolumeFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.VolumeResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find volumes by multiple criteria",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "deleteVolume",
+        "parameters": [
+          {
+            "description": "id of the volume",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.VolumeResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "deletes a volume including all data",
+        "tags": [
+          "volume"
         ]
       }
     }

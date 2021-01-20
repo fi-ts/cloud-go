@@ -47,7 +47,7 @@ func NewCreates3OK() *Creates3OK {
 	return &Creates3OK{}
 }
 
-/*Creates3OK handles this case with default header values.
+/* Creates3OK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type Creates3OK struct {
 func (o *Creates3OK) Error() string {
 	return fmt.Sprintf("[PUT /v1/s3][%d] creates3OK  %+v", 200, o.Payload)
 }
-
 func (o *Creates3OK) GetPayload() *models.V1S3CredentialsResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewCreates3Default(code int) *Creates3Default {
 	}
 }
 
-/*Creates3Default handles this case with default header values.
+/* Creates3Default describes a response with status code -1, with default header values.
 
 Error
 */
@@ -100,7 +99,6 @@ func (o *Creates3Default) Code() int {
 func (o *Creates3Default) Error() string {
 	return fmt.Sprintf("[PUT /v1/s3][%d] creates3 default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *Creates3Default) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

@@ -47,7 +47,7 @@ func NewLists3OK() *Lists3OK {
 	return &Lists3OK{}
 }
 
-/*Lists3OK handles this case with default header values.
+/* Lists3OK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type Lists3OK struct {
 func (o *Lists3OK) Error() string {
 	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3OK  %+v", 200, o.Payload)
 }
-
 func (o *Lists3OK) GetPayload() []*models.V1S3Response {
 	return o.Payload
 }
@@ -80,7 +79,7 @@ func NewLists3Default(code int) *Lists3Default {
 	}
 }
 
-/*Lists3Default handles this case with default header values.
+/* Lists3Default describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,7 +97,6 @@ func (o *Lists3Default) Code() int {
 func (o *Lists3Default) Error() string {
 	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3 default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *Lists3Default) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

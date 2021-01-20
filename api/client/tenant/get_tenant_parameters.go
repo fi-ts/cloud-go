@@ -16,59 +16,73 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetTenantParams creates a new GetTenantParams object
-// with the default values initialized.
+// NewGetTenantParams creates a new GetTenantParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetTenantParams() *GetTenantParams {
-	var ()
 	return &GetTenantParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetTenantParamsWithTimeout creates a new GetTenantParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewGetTenantParamsWithTimeout(timeout time.Duration) *GetTenantParams {
-	var ()
 	return &GetTenantParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewGetTenantParamsWithContext creates a new GetTenantParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewGetTenantParamsWithContext(ctx context.Context) *GetTenantParams {
-	var ()
 	return &GetTenantParams{
-
 		Context: ctx,
 	}
 }
 
 // NewGetTenantParamsWithHTTPClient creates a new GetTenantParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewGetTenantParamsWithHTTPClient(client *http.Client) *GetTenantParams {
-	var ()
 	return &GetTenantParams{
 		HTTPClient: client,
 	}
 }
 
-/*GetTenantParams contains all the parameters to send to the API endpoint
-for the get tenant operation typically these are written to a http.Request
+/* GetTenantParams contains all the parameters to send to the API endpoint
+   for the get tenant operation.
+
+   Typically these are written to a http.Request.
 */
 type GetTenantParams struct {
 
-	/*ID
-	  identifier of the tenant
+	/* ID.
 
+	   identifier of the tenant
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the get tenant params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetTenantParams) WithDefaults() *GetTenantParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the get tenant params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetTenantParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get tenant params

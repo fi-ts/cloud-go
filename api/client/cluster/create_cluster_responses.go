@@ -53,7 +53,7 @@ func NewCreateClusterCreated() *CreateClusterCreated {
 	return &CreateClusterCreated{}
 }
 
-/*CreateClusterCreated handles this case with default header values.
+/* CreateClusterCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -64,7 +64,6 @@ type CreateClusterCreated struct {
 func (o *CreateClusterCreated) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterCreated  %+v", 201, o.Payload)
 }
-
 func (o *CreateClusterCreated) GetPayload() *models.V1ClusterResponse {
 	return o.Payload
 }
@@ -86,7 +85,7 @@ func NewCreateClusterConflict() *CreateClusterConflict {
 	return &CreateClusterConflict{}
 }
 
-/*CreateClusterConflict handles this case with default header values.
+/* CreateClusterConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -97,7 +96,6 @@ type CreateClusterConflict struct {
 func (o *CreateClusterConflict) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict  %+v", 409, o.Payload)
 }
-
 func (o *CreateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -121,7 +119,7 @@ func NewCreateClusterDefault(code int) *CreateClusterDefault {
 	}
 }
 
-/*CreateClusterDefault handles this case with default header values.
+/* CreateClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -139,7 +137,6 @@ func (o *CreateClusterDefault) Code() int {
 func (o *CreateClusterDefault) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *CreateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

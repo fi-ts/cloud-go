@@ -47,7 +47,7 @@ func NewReconcileClusterOK() *ReconcileClusterOK {
 	return &ReconcileClusterOK{}
 }
 
-/*ReconcileClusterOK handles this case with default header values.
+/* ReconcileClusterOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type ReconcileClusterOK struct {
 func (o *ReconcileClusterOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileClusterOK  %+v", 200, o.Payload)
 }
-
 func (o *ReconcileClusterOK) GetPayload() *models.V1ClusterResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewReconcileClusterDefault(code int) *ReconcileClusterDefault {
 	}
 }
 
-/*ReconcileClusterDefault handles this case with default header values.
+/* ReconcileClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -100,7 +99,6 @@ func (o *ReconcileClusterDefault) Code() int {
 func (o *ReconcileClusterDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileCluster default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ReconcileClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

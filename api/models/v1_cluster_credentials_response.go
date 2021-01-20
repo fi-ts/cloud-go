@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -61,6 +63,34 @@ func (m *V1ClusterCredentialsResponse) validateSSHKeyPair(formats strfmt.Registr
 
 	if m.SSHKeyPair != nil {
 		if err := m.SSHKeyPair.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SSHKeyPair")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 cluster credentials response based on the context it is used
+func (m *V1ClusterCredentialsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSSHKeyPair(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1ClusterCredentialsResponse) contextValidateSSHKeyPair(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SSHKeyPair != nil {
+		if err := m.SSHKeyPair.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("SSHKeyPair")
 			}
