@@ -47,7 +47,7 @@ func NewFindVolumesOK() *FindVolumesOK {
 	return &FindVolumesOK{}
 }
 
-/*FindVolumesOK handles this case with default header values.
+/* FindVolumesOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type FindVolumesOK struct {
 func (o *FindVolumesOK) Error() string {
 	return fmt.Sprintf("[POST /v1/volume/find][%d] findVolumesOK  %+v", 200, o.Payload)
 }
-
 func (o *FindVolumesOK) GetPayload() []*models.V1VolumeResponse {
 	return o.Payload
 }
@@ -80,7 +79,7 @@ func NewFindVolumesDefault(code int) *FindVolumesDefault {
 	}
 }
 
-/*FindVolumesDefault handles this case with default header values.
+/* FindVolumesDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,7 +97,6 @@ func (o *FindVolumesDefault) Code() int {
 func (o *FindVolumesDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/volume/find][%d] findVolumes default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *FindVolumesDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

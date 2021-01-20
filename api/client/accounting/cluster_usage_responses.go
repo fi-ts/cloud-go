@@ -47,7 +47,7 @@ func NewClusterUsageOK() *ClusterUsageOK {
 	return &ClusterUsageOK{}
 }
 
-/*ClusterUsageOK handles this case with default header values.
+/* ClusterUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type ClusterUsageOK struct {
 func (o *ClusterUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK  %+v", 200, o.Payload)
 }
-
 func (o *ClusterUsageOK) GetPayload() *models.V1ClusterUsageResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewClusterUsageDefault(code int) *ClusterUsageDefault {
 	}
 }
 
-/*ClusterUsageDefault handles this case with default header values.
+/* ClusterUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -100,7 +99,6 @@ func (o *ClusterUsageDefault) Code() int {
 func (o *ClusterUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsage default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ClusterUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

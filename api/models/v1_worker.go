@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -20,6 +22,12 @@ type V1Worker struct {
 	// c r i
 	// Required: true
 	CRI *string `json:"CRI"`
+
+	// drain timeout
+	DrainTimeout int64 `json:"DrainTimeout,omitempty"`
+
+	// health timeout
+	HealthTimeout int64 `json:"HealthTimeout,omitempty"`
 
 	// machine image
 	// Required: true
@@ -168,6 +176,34 @@ func (m *V1Worker) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("Name", "body", m.Name); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 worker based on the context it is used
+func (m *V1Worker) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMachineImage(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1Worker) contextValidateMachineImage(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MachineImage != nil {
+		if err := m.MachineImage.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("MachineImage")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -16,52 +16,66 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewListTenantsParams creates a new ListTenantsParams object
-// with the default values initialized.
+// NewListTenantsParams creates a new ListTenantsParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListTenantsParams() *ListTenantsParams {
-
 	return &ListTenantsParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListTenantsParamsWithTimeout creates a new ListTenantsParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewListTenantsParamsWithTimeout(timeout time.Duration) *ListTenantsParams {
-
 	return &ListTenantsParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewListTenantsParamsWithContext creates a new ListTenantsParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewListTenantsParamsWithContext(ctx context.Context) *ListTenantsParams {
-
 	return &ListTenantsParams{
-
 		Context: ctx,
 	}
 }
 
 // NewListTenantsParamsWithHTTPClient creates a new ListTenantsParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewListTenantsParamsWithHTTPClient(client *http.Client) *ListTenantsParams {
-
 	return &ListTenantsParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListTenantsParams contains all the parameters to send to the API endpoint
-for the list tenants operation typically these are written to a http.Request
+/* ListTenantsParams contains all the parameters to send to the API endpoint
+   for the list tenants operation.
+
+   Typically these are written to a http.Request.
 */
 type ListTenantsParams struct {
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the list tenants params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListTenantsParams) WithDefaults() *ListTenantsParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the list tenants params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListTenantsParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list tenants params

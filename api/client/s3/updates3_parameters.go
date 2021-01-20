@@ -18,56 +18,70 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewUpdates3Params creates a new Updates3Params object
-// with the default values initialized.
+// NewUpdates3Params creates a new Updates3Params object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdates3Params() *Updates3Params {
-	var ()
 	return &Updates3Params{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdates3ParamsWithTimeout creates a new Updates3Params object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdates3ParamsWithTimeout(timeout time.Duration) *Updates3Params {
-	var ()
 	return &Updates3Params{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdates3ParamsWithContext creates a new Updates3Params object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdates3ParamsWithContext(ctx context.Context) *Updates3Params {
-	var ()
 	return &Updates3Params{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdates3ParamsWithHTTPClient creates a new Updates3Params object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdates3ParamsWithHTTPClient(client *http.Client) *Updates3Params {
-	var ()
 	return &Updates3Params{
 		HTTPClient: client,
 	}
 }
 
-/*Updates3Params contains all the parameters to send to the API endpoint
-for the updates3 operation typically these are written to a http.Request
+/* Updates3Params contains all the parameters to send to the API endpoint
+   for the updates3 operation.
+
+   Typically these are written to a http.Request.
 */
 type Updates3Params struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1S3UpdateRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the updates3 params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *Updates3Params) WithDefaults() *Updates3Params {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the updates3 params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *Updates3Params) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the updates3 params
@@ -121,7 +135,6 @@ func (o *Updates3Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

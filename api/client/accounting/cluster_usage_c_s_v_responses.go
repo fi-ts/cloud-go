@@ -46,7 +46,7 @@ func NewClusterUsageCSVOK() *ClusterUsageCSVOK {
 	return &ClusterUsageCSVOK{}
 }
 
-/*ClusterUsageCSVOK handles this case with default header values.
+/* ClusterUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -57,7 +57,6 @@ type ClusterUsageCSVOK struct {
 func (o *ClusterUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK  %+v", 200, o.Payload)
 }
-
 func (o *ClusterUsageCSVOK) GetPayload() string {
 	return o.Payload
 }
@@ -79,7 +78,7 @@ func NewClusterUsageCSVDefault(code int) *ClusterUsageCSVDefault {
 	}
 }
 
-/*ClusterUsageCSVDefault handles this case with default header values.
+/* ClusterUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -97,7 +96,6 @@ func (o *ClusterUsageCSVDefault) Code() int {
 func (o *ClusterUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSV default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ClusterUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

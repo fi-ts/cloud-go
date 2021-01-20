@@ -47,7 +47,7 @@ func NewListClustersOK() *ListClustersOK {
 	return &ListClustersOK{}
 }
 
-/*ListClustersOK handles this case with default header values.
+/* ListClustersOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type ListClustersOK struct {
 func (o *ListClustersOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster][%d] listClustersOK  %+v", 200, o.Payload)
 }
-
 func (o *ListClustersOK) GetPayload() []*models.V1ClusterResponse {
 	return o.Payload
 }
@@ -80,7 +79,7 @@ func NewListClustersDefault(code int) *ListClustersDefault {
 	}
 }
 
-/*ListClustersDefault handles this case with default header values.
+/* ListClustersDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,7 +97,6 @@ func (o *ListClustersDefault) Code() int {
 func (o *ListClustersDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster][%d] listClusters default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ListClustersDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

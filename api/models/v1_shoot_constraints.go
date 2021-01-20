@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -160,6 +161,38 @@ func (m *V1ShootConstraints) validatePartitions(formats strfmt.Registry) error {
 
 	if err := validate.Required("partitions", "body", m.Partitions); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 shoot constraints based on the context it is used
+func (m *V1ShootConstraints) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMachineImages(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1ShootConstraints) contextValidateMachineImages(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.MachineImages); i++ {
+
+		if m.MachineImages[i] != nil {
+			if err := m.MachineImages[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("machine_images" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

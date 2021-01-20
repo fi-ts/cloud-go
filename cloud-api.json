@@ -2764,6 +2764,14 @@
         "CRI": {
           "type": "string"
         },
+        "DrainTimeout": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "HealthTimeout": {
+          "format": "integer",
+          "type": "integer"
+        },
         "MachineImage": {
           "$ref": "#/definitions/v1.MachineImage"
         },

@@ -47,7 +47,7 @@ func NewDeleteVolumeOK() *DeleteVolumeOK {
 	return &DeleteVolumeOK{}
 }
 
-/*DeleteVolumeOK handles this case with default header values.
+/* DeleteVolumeOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type DeleteVolumeOK struct {
 func (o *DeleteVolumeOK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/volume/{id}][%d] deleteVolumeOK  %+v", 200, o.Payload)
 }
-
 func (o *DeleteVolumeOK) GetPayload() *models.V1VolumeResponse {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewDeleteVolumeDefault(code int) *DeleteVolumeDefault {
 	}
 }
 
-/*DeleteVolumeDefault handles this case with default header values.
+/* DeleteVolumeDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -100,7 +99,6 @@ func (o *DeleteVolumeDefault) Code() int {
 func (o *DeleteVolumeDefault) Error() string {
 	return fmt.Sprintf("[DELETE /v1/volume/{id}][%d] deleteVolume default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *DeleteVolumeDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

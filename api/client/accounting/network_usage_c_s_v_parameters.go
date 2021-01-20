@@ -18,56 +18,70 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewNetworkUsageCSVParams creates a new NetworkUsageCSVParams object
-// with the default values initialized.
+// NewNetworkUsageCSVParams creates a new NetworkUsageCSVParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewNetworkUsageCSVParams() *NetworkUsageCSVParams {
-	var ()
 	return &NetworkUsageCSVParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewNetworkUsageCSVParamsWithTimeout creates a new NetworkUsageCSVParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewNetworkUsageCSVParamsWithTimeout(timeout time.Duration) *NetworkUsageCSVParams {
-	var ()
 	return &NetworkUsageCSVParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewNetworkUsageCSVParamsWithContext creates a new NetworkUsageCSVParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewNetworkUsageCSVParamsWithContext(ctx context.Context) *NetworkUsageCSVParams {
-	var ()
 	return &NetworkUsageCSVParams{
-
 		Context: ctx,
 	}
 }
 
 // NewNetworkUsageCSVParamsWithHTTPClient creates a new NetworkUsageCSVParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewNetworkUsageCSVParamsWithHTTPClient(client *http.Client) *NetworkUsageCSVParams {
-	var ()
 	return &NetworkUsageCSVParams{
 		HTTPClient: client,
 	}
 }
 
-/*NetworkUsageCSVParams contains all the parameters to send to the API endpoint
-for the network usage c s v operation typically these are written to a http.Request
+/* NetworkUsageCSVParams contains all the parameters to send to the API endpoint
+   for the network usage c s v operation.
+
+   Typically these are written to a http.Request.
 */
 type NetworkUsageCSVParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1NetworkUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the network usage c s v params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *NetworkUsageCSVParams) WithDefaults() *NetworkUsageCSVParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the network usage c s v params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *NetworkUsageCSVParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the network usage c s v params
@@ -121,7 +135,6 @@ func (o *NetworkUsageCSVParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

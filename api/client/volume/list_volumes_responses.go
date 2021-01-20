@@ -47,7 +47,7 @@ func NewListVolumesOK() *ListVolumesOK {
 	return &ListVolumesOK{}
 }
 
-/*ListVolumesOK handles this case with default header values.
+/* ListVolumesOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type ListVolumesOK struct {
 func (o *ListVolumesOK) Error() string {
 	return fmt.Sprintf("[GET /v1/volume][%d] listVolumesOK  %+v", 200, o.Payload)
 }
-
 func (o *ListVolumesOK) GetPayload() []*models.V1VolumeResponse {
 	return o.Payload
 }
@@ -80,7 +79,7 @@ func NewListVolumesDefault(code int) *ListVolumesDefault {
 	}
 }
 
-/*ListVolumesDefault handles this case with default header values.
+/* ListVolumesDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,7 +97,6 @@ func (o *ListVolumesDefault) Code() int {
 func (o *ListVolumesDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/volume][%d] listVolumes default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ListVolumesDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

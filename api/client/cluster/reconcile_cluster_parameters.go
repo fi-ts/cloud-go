@@ -18,61 +18,76 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewReconcileClusterParams creates a new ReconcileClusterParams object
-// with the default values initialized.
+// NewReconcileClusterParams creates a new ReconcileClusterParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewReconcileClusterParams() *ReconcileClusterParams {
-	var ()
 	return &ReconcileClusterParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewReconcileClusterParamsWithTimeout creates a new ReconcileClusterParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewReconcileClusterParamsWithTimeout(timeout time.Duration) *ReconcileClusterParams {
-	var ()
 	return &ReconcileClusterParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewReconcileClusterParamsWithContext creates a new ReconcileClusterParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewReconcileClusterParamsWithContext(ctx context.Context) *ReconcileClusterParams {
-	var ()
 	return &ReconcileClusterParams{
-
 		Context: ctx,
 	}
 }
 
 // NewReconcileClusterParamsWithHTTPClient creates a new ReconcileClusterParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewReconcileClusterParamsWithHTTPClient(client *http.Client) *ReconcileClusterParams {
-	var ()
 	return &ReconcileClusterParams{
 		HTTPClient: client,
 	}
 }
 
-/*ReconcileClusterParams contains all the parameters to send to the API endpoint
-for the reconcile cluster operation typically these are written to a http.Request
+/* ReconcileClusterParams contains all the parameters to send to the API endpoint
+   for the reconcile cluster operation.
+
+   Typically these are written to a http.Request.
 */
 type ReconcileClusterParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1ClusterReconcileRequest
-	/*ID
-	  identifier of the cluster
 
+	/* ID.
+
+	   identifier of the cluster
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the reconcile cluster params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ReconcileClusterParams) WithDefaults() *ReconcileClusterParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the reconcile cluster params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ReconcileClusterParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the reconcile cluster params
@@ -137,7 +152,6 @@ func (o *ReconcileClusterParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

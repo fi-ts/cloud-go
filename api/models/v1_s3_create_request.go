@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -151,6 +153,34 @@ func (m *V1S3CreateRequest) validateTenant(formats strfmt.Registry) error {
 
 	if err := validate.Required("tenant", "body", m.Tenant); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 s3 create request based on the context it is used
+func (m *V1S3CreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateKey(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1S3CreateRequest) contextValidateKey(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Key != nil {
+		if err := m.Key.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("key")
+			}
+			return err
+		}
 	}
 
 	return nil

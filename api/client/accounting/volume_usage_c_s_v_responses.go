@@ -46,7 +46,7 @@ func NewVolumeUsageCSVOK() *VolumeUsageCSVOK {
 	return &VolumeUsageCSVOK{}
 }
 
-/*VolumeUsageCSVOK handles this case with default header values.
+/* VolumeUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -57,7 +57,6 @@ type VolumeUsageCSVOK struct {
 func (o *VolumeUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSVOK  %+v", 200, o.Payload)
 }
-
 func (o *VolumeUsageCSVOK) GetPayload() string {
 	return o.Payload
 }
@@ -79,7 +78,7 @@ func NewVolumeUsageCSVDefault(code int) *VolumeUsageCSVDefault {
 	}
 }
 
-/*VolumeUsageCSVDefault handles this case with default header values.
+/* VolumeUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -97,7 +96,6 @@ func (o *VolumeUsageCSVDefault) Code() int {
 func (o *VolumeUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSV default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *VolumeUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

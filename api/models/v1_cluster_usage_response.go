@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -95,7 +96,6 @@ func (m *V1ClusterUsageResponse) validateFrom(formats strfmt.Registry) error {
 }
 
 func (m *V1ClusterUsageResponse) validateTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.To) { // not required
 		return nil
 	}
@@ -120,6 +120,56 @@ func (m *V1ClusterUsageResponse) validateUsage(formats strfmt.Registry) error {
 
 		if m.Usage[i] != nil {
 			if err := m.Usage[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("usage" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 cluster usage response based on the context it is used
+func (m *V1ClusterUsageResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAccumulatedusage(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUsage(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1ClusterUsageResponse) contextValidateAccumulatedusage(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Accumulatedusage != nil {
+		if err := m.Accumulatedusage.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("accumulatedusage")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUsageResponse) contextValidateUsage(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Usage); i++ {
+
+		if m.Usage[i] != nil {
+			if err := m.Usage[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("usage" + "." + strconv.Itoa(i))
 				}

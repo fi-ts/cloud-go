@@ -47,7 +47,7 @@ func NewListConstraintsOK() *ListConstraintsOK {
 	return &ListConstraintsOK{}
 }
 
-/*ListConstraintsOK handles this case with default header values.
+/* ListConstraintsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -58,7 +58,6 @@ type ListConstraintsOK struct {
 func (o *ListConstraintsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/constraints][%d] listConstraintsOK  %+v", 200, o.Payload)
 }
-
 func (o *ListConstraintsOK) GetPayload() *models.V1ShootConstraints {
 	return o.Payload
 }
@@ -82,7 +81,7 @@ func NewListConstraintsDefault(code int) *ListConstraintsDefault {
 	}
 }
 
-/*ListConstraintsDefault handles this case with default header values.
+/* ListConstraintsDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -100,7 +99,6 @@ func (o *ListConstraintsDefault) Code() int {
 func (o *ListConstraintsDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/constraints][%d] listConstraints default  %+v", o._statusCode, o.Payload)
 }
-
 func (o *ListConstraintsDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

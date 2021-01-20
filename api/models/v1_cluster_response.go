@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -343,6 +344,10 @@ func (m *V1ClusterResponse) validateKubernetes(formats strfmt.Registry) error {
 
 func (m *V1ClusterResponse) validateLabels(formats strfmt.Registry) error {
 
+	if err := validate.Required("Labels", "body", m.Labels); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -471,7 +476,6 @@ func (m *V1ClusterResponse) validateWorkers(formats strfmt.Registry) error {
 }
 
 func (m *V1ClusterResponse) validateFirewalls(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Firewalls) { // not required
 		return nil
 	}
@@ -496,7 +500,6 @@ func (m *V1ClusterResponse) validateFirewalls(formats strfmt.Registry) error {
 }
 
 func (m *V1ClusterResponse) validateMachines(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Machines) { // not required
 		return nil
 	}
@@ -508,6 +511,176 @@ func (m *V1ClusterResponse) validateMachines(formats strfmt.Registry) error {
 
 		if m.Machines[i] != nil {
 			if err := m.Machines[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("machines" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 cluster response based on the context it is used
+func (m *V1ClusterResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateEgressRules(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateKubernetes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMaintenance(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNetworking(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateWorkers(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFirewalls(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMachines(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateEgressRules(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.EgressRules); i++ {
+
+		if m.EgressRules[i] != nil {
+			if err := m.EgressRules[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("EgressRules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateKubernetes(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Kubernetes != nil {
+		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Kubernetes")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateMaintenance(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Maintenance != nil {
+		if err := m.Maintenance.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Maintenance")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateNetworking(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Networking != nil {
+		if err := m.Networking.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Networking")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Status != nil {
+		if err := m.Status.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Status")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateWorkers(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Workers); i++ {
+
+		if m.Workers[i] != nil {
+			if err := m.Workers[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("Workers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateFirewalls(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Firewalls); i++ {
+
+		if m.Firewalls[i] != nil {
+			if err := m.Firewalls[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("firewalls" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateMachines(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Machines); i++ {
+
+		if m.Machines[i] != nil {
+			if err := m.Machines[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("machines" + "." + strconv.Itoa(i))
 				}

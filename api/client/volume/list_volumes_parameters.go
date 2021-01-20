@@ -16,52 +16,66 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewListVolumesParams creates a new ListVolumesParams object
-// with the default values initialized.
+// NewListVolumesParams creates a new ListVolumesParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListVolumesParams() *ListVolumesParams {
-
 	return &ListVolumesParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListVolumesParamsWithTimeout creates a new ListVolumesParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewListVolumesParamsWithTimeout(timeout time.Duration) *ListVolumesParams {
-
 	return &ListVolumesParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewListVolumesParamsWithContext creates a new ListVolumesParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewListVolumesParamsWithContext(ctx context.Context) *ListVolumesParams {
-
 	return &ListVolumesParams{
-
 		Context: ctx,
 	}
 }
 
 // NewListVolumesParamsWithHTTPClient creates a new ListVolumesParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewListVolumesParamsWithHTTPClient(client *http.Client) *ListVolumesParams {
-
 	return &ListVolumesParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListVolumesParams contains all the parameters to send to the API endpoint
-for the list volumes operation typically these are written to a http.Request
+/* ListVolumesParams contains all the parameters to send to the API endpoint
+   for the list volumes operation.
+
+   Typically these are written to a http.Request.
 */
 type ListVolumesParams struct {
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the list volumes params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListVolumesParams) WithDefaults() *ListVolumesParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the list volumes params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListVolumesParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list volumes params

@@ -18,56 +18,70 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewS3UsageCSVParams creates a new S3UsageCSVParams object
-// with the default values initialized.
+// NewS3UsageCSVParams creates a new S3UsageCSVParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewS3UsageCSVParams() *S3UsageCSVParams {
-	var ()
 	return &S3UsageCSVParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewS3UsageCSVParamsWithTimeout creates a new S3UsageCSVParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewS3UsageCSVParamsWithTimeout(timeout time.Duration) *S3UsageCSVParams {
-	var ()
 	return &S3UsageCSVParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewS3UsageCSVParamsWithContext creates a new S3UsageCSVParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewS3UsageCSVParamsWithContext(ctx context.Context) *S3UsageCSVParams {
-	var ()
 	return &S3UsageCSVParams{
-
 		Context: ctx,
 	}
 }
 
 // NewS3UsageCSVParamsWithHTTPClient creates a new S3UsageCSVParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewS3UsageCSVParamsWithHTTPClient(client *http.Client) *S3UsageCSVParams {
-	var ()
 	return &S3UsageCSVParams{
 		HTTPClient: client,
 	}
 }
 
-/*S3UsageCSVParams contains all the parameters to send to the API endpoint
-for the s3 usage c s v operation typically these are written to a http.Request
+/* S3UsageCSVParams contains all the parameters to send to the API endpoint
+   for the s3 usage c s v operation.
+
+   Typically these are written to a http.Request.
 */
 type S3UsageCSVParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1S3UsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the s3 usage c s v params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *S3UsageCSVParams) WithDefaults() *S3UsageCSVParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the s3 usage c s v params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *S3UsageCSVParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the s3 usage c s v params
@@ -121,7 +135,6 @@ func (o *S3UsageCSVParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

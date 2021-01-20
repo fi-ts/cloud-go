@@ -18,56 +18,70 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewContainerUsageCSVParams creates a new ContainerUsageCSVParams object
-// with the default values initialized.
+// NewContainerUsageCSVParams creates a new ContainerUsageCSVParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewContainerUsageCSVParams() *ContainerUsageCSVParams {
-	var ()
 	return &ContainerUsageCSVParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewContainerUsageCSVParamsWithTimeout creates a new ContainerUsageCSVParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewContainerUsageCSVParamsWithTimeout(timeout time.Duration) *ContainerUsageCSVParams {
-	var ()
 	return &ContainerUsageCSVParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewContainerUsageCSVParamsWithContext creates a new ContainerUsageCSVParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewContainerUsageCSVParamsWithContext(ctx context.Context) *ContainerUsageCSVParams {
-	var ()
 	return &ContainerUsageCSVParams{
-
 		Context: ctx,
 	}
 }
 
 // NewContainerUsageCSVParamsWithHTTPClient creates a new ContainerUsageCSVParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewContainerUsageCSVParamsWithHTTPClient(client *http.Client) *ContainerUsageCSVParams {
-	var ()
 	return &ContainerUsageCSVParams{
 		HTTPClient: client,
 	}
 }
 
-/*ContainerUsageCSVParams contains all the parameters to send to the API endpoint
-for the container usage c s v operation typically these are written to a http.Request
+/* ContainerUsageCSVParams contains all the parameters to send to the API endpoint
+   for the container usage c s v operation.
+
+   Typically these are written to a http.Request.
 */
 type ContainerUsageCSVParams struct {
 
-	/*Body*/
+	// Body.
 	Body *models.V1ContainerUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the container usage c s v params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ContainerUsageCSVParams) WithDefaults() *ContainerUsageCSVParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the container usage c s v params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ContainerUsageCSVParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the container usage c s v params
@@ -121,7 +135,6 @@ func (o *ContainerUsageCSVParams) WriteToRequest(r runtime.ClientRequest, reg st
 		return err
 	}
 	var res []error
-
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
