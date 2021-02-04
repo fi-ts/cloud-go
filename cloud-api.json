@@ -941,6 +941,12 @@
     },
     "v1.ClusterUpdateRequest": {
       "properties": {
+        "AdditionalNetworks": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "EgressRules": {
           "items": {
             "$ref": "#/definitions/v1.EgressRule"
@@ -982,6 +988,7 @@
         }
       },
       "required": [
+        "AdditionalNetworks",
         "EgressRules",
         "FirewallControllerVersion",
         "FirewallImage",

@@ -20,6 +20,10 @@ import (
 // swagger:model v1.ClusterUpdateRequest
 type V1ClusterUpdateRequest struct {
 
+	// additional networks
+	// Required: true
+	AdditionalNetworks []string `json:"AdditionalNetworks"`
+
 	// egress rules
 	// Required: true
 	EgressRules []*V1EgressRule `json:"EgressRules"`
@@ -65,6 +69,10 @@ type V1ClusterUpdateRequest struct {
 func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAdditionalNetworks(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEgressRules(formats); err != nil {
 		res = append(res, err)
 	}
@@ -108,6 +116,15 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateAdditionalNetworks(formats strfmt.Registry) error {
+
+	if err := validate.Required("AdditionalNetworks", "body", m.AdditionalNetworks); err != nil {
+		return err
+	}
+
 	return nil
 }
 
