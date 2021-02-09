@@ -74,6 +74,9 @@
     },
     "models.V1IPResponse": {
       "properties": {
+        "allocationuuid": {
+          "type": "string"
+        },
         "changed": {
           "type": "string"
         },
@@ -106,6 +109,7 @@
         }
       },
       "required": [
+        "allocationuuid",
         "ipaddress",
         "networkid",
         "projectid",
@@ -450,7 +454,6 @@
       },
       "required": [
         "incomplete_provisioning_cycles",
-        "last_event_time",
         "log"
       ]
     },
@@ -667,6 +670,30 @@
         "revision",
         "version"
       ]
+    },
+    "v1.AccessList": {
+      "properties": {
+        "sourceRanges": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "v1.Backup": {
+      "properties": {
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "s3BucketURL": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        }
+      }
     },
     "v1.ClusterCreateRequest": {
       "properties": {
@@ -1626,6 +1653,17 @@
         "End"
       ]
     },
+    "v1.MaintenanceWindow": {
+      "properties": {
+        "timeWindow": {
+          "$ref": "#/definitions/v1.TimeWindow"
+        },
+        "weekday": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
     "v1.MasterdataLookupRequest": {
       "properties": {
         "cluster_id": {
@@ -1883,6 +1921,130 @@
         "Pods",
         "Services",
         "Type"
+      ]
+    },
+    "v1.PostgresCreateRequest": {
+      "properties": {
+        "accessList": {
+          "$ref": "#/definitions/v1.AccessList"
+        },
+        "description": {
+          "type": "string"
+        },
+        "maintenance": {
+          "$ref": "#/definitions/v1.MaintenanceWindow"
+        },
+        "numberOfInstances": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "size": {
+          "$ref": "#/definitions/v1.Size"
+        },
+        "tenant": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresFindRequest": {
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "PartitionID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "Tenant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ID",
+        "Name",
+        "PartitionID",
+        "ProjectID",
+        "Tenant"
+      ]
+    },
+    "v1.PostgresResponse": {
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "PartitionID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "Tenant": {
+          "type": "string"
+        },
+        "accessList": {
+          "$ref": "#/definitions/v1.AccessList"
+        },
+        "backup": {
+          "$ref": "#/definitions/v1.Backup"
+        },
+        "maintenance": {
+          "$ref": "#/definitions/v1.MaintenanceWindow"
+        },
+        "numberOfInstances": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "$ref": "#/definitions/v1.Size"
+        },
+        "status": {
+          "$ref": "#/definitions/v1.PostgresStatus"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ID",
+        "Name",
+        "PartitionID",
+        "ProjectID",
+        "Tenant",
+        "status"
+      ]
+    },
+    "v1.PostgresStatus": {
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresUpdateRequest": {
+      "properties": {
+        "ID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ID"
       ]
     },
     "v1.Project": {
@@ -2481,6 +2643,19 @@
         "partitions"
       ]
     },
+    "v1.Size": {
+      "properties": {
+        "cpu": {
+          "type": "string"
+        },
+        "sharedBuffer": {
+          "type": "string"
+        },
+        "storageSize": {
+          "type": "string"
+        }
+      }
+    },
     "v1.Tenant": {
       "properties": {
         "default_quotas": {
@@ -2511,6 +2686,16 @@
       "properties": {
         "tenant": {
           "$ref": "#/definitions/v1.Tenant"
+        }
+      }
+    },
+    "v1.TimeWindow": {
+      "properties": {
+        "end": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
         }
       }
     },
@@ -3860,6 +4045,240 @@
         "summary": "get all the ssh-keypairs of the cluster",
         "tags": [
           "cluster"
+        ]
+      }
+    },
+    "/v1/database/postgres": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "listPostgres",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.PostgresResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get all postgres databases",
+        "tags": [
+          "database"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "updatePostgres",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresUpdateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "updates a postgres. if the postgres was changed since this one was read, a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createPostgres",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresCreateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "create a postgres. if the given ID already exists a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/find": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "findPostgres",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.PostgresResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find postgres databases by multiple criteria",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "deletePostgres",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "deletes an postgres and returns the deleted entity",
+        "tags": [
+          "database"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgres",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres by id",
+        "tags": [
+          "database"
         ]
       }
     },
