@@ -1934,6 +1934,9 @@
         "maintenance": {
           "$ref": "#/definitions/v1.MaintenanceWindow"
         },
+        "name": {
+          "type": "string"
+        },
         "numberOfInstances": {
           "format": "int32",
           "type": "integer"
