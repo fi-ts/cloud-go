@@ -27,9 +27,6 @@ type V1PostgresCreateRequest struct {
 	// maintenance
 	Maintenance *V1MaintenanceWindow `json:"maintenance,omitempty"`
 
-	// name
-	Name string `json:"name,omitempty"`
-
 	// number of instances
 	NumberOfInstances int32 `json:"numberOfInstances,omitempty"`
 
