@@ -1957,10 +1957,10 @@
     },
     "v1.PostgresFindRequest": {
       "properties": {
-        "ID": {
+        "Description": {
           "type": "string"
         },
-        "Name": {
+        "ID": {
           "type": "string"
         },
         "PartitionID": {
@@ -1974,8 +1974,8 @@
         }
       },
       "required": [
+        "Description",
         "ID",
-        "Name",
         "PartitionID",
         "ProjectID",
         "Tenant"
@@ -1983,10 +1983,10 @@
     },
     "v1.PostgresResponse": {
       "properties": {
-        "ID": {
+        "Description": {
           "type": "string"
         },
-        "Name": {
+        "ID": {
           "type": "string"
         },
         "PartitionID": {
@@ -2022,8 +2022,8 @@
         }
       },
       "required": [
+        "Description",
         "ID",
-        "Name",
         "PartitionID",
         "ProjectID",
         "Tenant",
