@@ -30,12 +30,6 @@ func (o *UpdatePostgresReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return result, nil
-	case 409:
-		result := NewUpdatePostgresConflict()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return nil, result
 	default:
 		result := NewUpdatePostgresDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -71,38 +65,6 @@ func (o *UpdatePostgresOK) GetPayload() *models.V1PostgresResponse {
 func (o *UpdatePostgresOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1PostgresResponse)
-
-	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewUpdatePostgresConflict creates a UpdatePostgresConflict with default headers values
-func NewUpdatePostgresConflict() *UpdatePostgresConflict {
-	return &UpdatePostgresConflict{}
-}
-
-/* UpdatePostgresConflict describes a response with status code 409, with default header values.
-
-Conflict
-*/
-type UpdatePostgresConflict struct {
-	Payload *httperrors.HTTPErrorResponse
-}
-
-func (o *UpdatePostgresConflict) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgresConflict  %+v", 409, o.Payload)
-}
-func (o *UpdatePostgresConflict) GetPayload() *httperrors.HTTPErrorResponse {
-	return o.Payload
-}
-
-func (o *UpdatePostgresConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

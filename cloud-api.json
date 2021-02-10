@@ -683,6 +683,9 @@
     },
     "v1.Backup": {
       "properties": {
+        "accesskey": {
+          "type": "string"
+        },
         "retention": {
           "format": "int32",
           "type": "integer"
@@ -691,6 +694,9 @@
           "type": "string"
         },
         "schedule": {
+          "type": "string"
+        },
+        "secretkey": {
           "type": "string"
         }
       }
@@ -2692,9 +2698,11 @@
     "v1.TimeWindow": {
       "properties": {
         "end": {
+          "format": "date-time",
           "type": "string"
         },
         "start": {
+          "format": "date-time",
           "type": "string"
         }
       }
@@ -4104,12 +4112,6 @@
               "$ref": "#/definitions/v1.PostgresResponse"
             }
           },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -4145,12 +4147,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/v1.PostgresResponse"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
             }
           },
           "default": {

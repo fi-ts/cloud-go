@@ -17,6 +17,9 @@ import (
 // swagger:model v1.Backup
 type V1Backup struct {
 
+	// accesskey
+	Accesskey string `json:"accesskey,omitempty"`
+
 	// retention
 	Retention int32 `json:"retention,omitempty"`
 
@@ -25,6 +28,9 @@ type V1Backup struct {
 
 	// schedule
 	Schedule string `json:"schedule,omitempty"`
+
+	// secretkey
+	Secretkey string `json:"secretkey,omitempty"`
 }
 
 // Validate validates this v1 backup
