@@ -62,7 +62,7 @@ func NewUpdatePostgresParamsWithHTTPClient(client *http.Client) *UpdatePostgresP
 type UpdatePostgresParams struct {
 
 	// Body.
-	Body *models.V1PostgresUpdateRequest
+	Body *models.V1PostgresCreateRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -118,13 +118,13 @@ func (o *UpdatePostgresParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the update postgres params
-func (o *UpdatePostgresParams) WithBody(body *models.V1PostgresUpdateRequest) *UpdatePostgresParams {
+func (o *UpdatePostgresParams) WithBody(body *models.V1PostgresCreateRequest) *UpdatePostgresParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update postgres params
-func (o *UpdatePostgresParams) SetBody(body *models.V1PostgresUpdateRequest) {
+func (o *UpdatePostgresParams) SetBody(body *models.V1PostgresCreateRequest) {
 	o.Body = body
 }
 

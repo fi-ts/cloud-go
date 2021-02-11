@@ -2052,16 +2052,6 @@
         }
       }
     },
-    "v1.PostgresUpdateRequest": {
-      "properties": {
-        "ID": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ID"
-      ]
-    },
     "v1.Project": {
       "properties": {
         "description": {
@@ -4107,7 +4097,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.PostgresUpdateRequest"
+              "$ref": "#/definitions/v1.PostgresCreateRequest"
             }
           }
         ],
