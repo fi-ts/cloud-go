@@ -1931,6 +1931,9 @@
     },
     "v1.PostgresCreateRequest": {
       "properties": {
+        "ID": {
+          "type": "string"
+        },
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
@@ -1962,7 +1965,10 @@
         "version": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "ID"
+      ]
     },
     "v1.PostgresFindRequest": {
       "properties": {
