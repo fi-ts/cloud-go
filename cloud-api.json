@@ -1934,6 +1934,9 @@
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
+        "backup": {
+          "$ref": "#/definitions/v1.Backup"
+        },
         "description": {
           "type": "string"
         },
