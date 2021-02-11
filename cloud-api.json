@@ -1136,6 +1136,13 @@
     },
     "v1.ContainerUsage": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this container",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id of this container",
           "type": "string"
@@ -1212,6 +1219,7 @@
         }
       },
       "required": [
+        "annotations",
         "clusterid",
         "clustername",
         "containerimage",
@@ -1255,6 +1263,13 @@
     },
     "v1.ContainerUsageRequest": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this container",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id to account for",
           "type": "string"
@@ -1283,6 +1298,7 @@
         }
       },
       "required": [
+        "annotations",
         "from"
       ]
     },
@@ -2606,6 +2622,13 @@
     },
     "v1.VolumeUsage": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this volume",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "capacityseconds": {
           "description": "the capacity seconds of this volume (byte*s)",
           "type": "string"
@@ -2670,6 +2693,7 @@
         }
       },
       "required": [
+        "annotations",
         "capacityseconds",
         "class",
         "clusterid",
@@ -2705,6 +2729,13 @@
     },
     "v1.VolumeUsageRequest": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this container",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id to account for",
           "type": "string"
@@ -2733,6 +2764,7 @@
         }
       },
       "required": [
+        "annotations",
         "from"
       ]
     },

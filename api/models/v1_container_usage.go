@@ -19,6 +19,10 @@ import (
 // swagger:model v1.ContainerUsage
 type V1ContainerUsage struct {
 
+	// accounting annotations present on the last accounting report of this container
+	// Required: true
+	Annotations []string `json:"annotations"`
+
 	// the cluster id of this container
 	// Required: true
 	Clusterid *string `json:"clusterid"`
@@ -94,6 +98,10 @@ type V1ContainerUsage struct {
 func (m *V1ContainerUsage) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateClusterid(formats); err != nil {
 		res = append(res, err)
 	}
@@ -165,6 +173,15 @@ func (m *V1ContainerUsage) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ContainerUsage) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
 	return nil
 }
 
