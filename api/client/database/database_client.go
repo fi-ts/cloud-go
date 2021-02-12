@@ -33,6 +33,8 @@ type ClientService interface {
 
 	GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresOK, error)
 
+	GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresSecretsOK, error)
+
 	ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresOK, error)
 
 	UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresOK, error)
@@ -173,6 +175,40 @@ func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientA
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetPostgresDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  GetPostgresSecrets gets postgres secrets by id
+*/
+func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresSecretsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPostgresSecretsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getPostgresSecrets",
+		Method:             "GET",
+		PathPattern:        "/v1/database/postgres/{id}/secrets",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPostgresSecretsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPostgresSecretsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetPostgresSecretsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

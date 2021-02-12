@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,9 +17,6 @@ import (
 //
 // swagger:model v1.Backup
 type V1Backup struct {
-
-	// accesskey
-	Accesskey string `json:"accesskey,omitempty"`
 
 	// retention
 	Retention int32 `json:"retention,omitempty"`
@@ -29,17 +27,66 @@ type V1Backup struct {
 	// schedule
 	Schedule string `json:"schedule,omitempty"`
 
-	// secretkey
-	Secretkey string `json:"secretkey,omitempty"`
+	// secret
+	Secret *V1BackupSecret `json:"secret,omitempty"`
 }
 
 // Validate validates this v1 backup
 func (m *V1Backup) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSecret(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this v1 backup based on context it is used
+func (m *V1Backup) validateSecret(formats strfmt.Registry) error {
+	if swag.IsZero(m.Secret) { // not required
+		return nil
+	}
+
+	if m.Secret != nil {
+		if err := m.Secret.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secret")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 backup based on the context it is used
 func (m *V1Backup) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSecret(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1Backup) contextValidateSecret(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Secret != nil {
+		if err := m.Secret.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secret")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

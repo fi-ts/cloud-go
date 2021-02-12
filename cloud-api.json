@@ -683,9 +683,6 @@
     },
     "v1.Backup": {
       "properties": {
-        "accesskey": {
-          "type": "string"
-        },
         "retention": {
           "format": "int32",
           "type": "integer"
@@ -694,6 +691,16 @@
           "type": "string"
         },
         "schedule": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "#/definitions/v1.BackupSecret"
+        }
+      }
+    },
+    "v1.BackupSecret": {
+      "properties": {
+        "accesskey": {
           "type": "string"
         },
         "secretkey": {
@@ -1998,6 +2005,10 @@
     },
     "v1.PostgresResponse": {
       "properties": {
+        "CreationTimestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
         "Description": {
           "type": "string"
         },
@@ -2037,12 +2048,30 @@
         }
       },
       "required": [
+        "CreationTimestamp",
         "Description",
         "ID",
         "PartitionID",
         "ProjectID",
         "Tenant",
         "status"
+      ]
+    },
+    "v1.PostgresSecretsRespone": {
+      "properties": {
+        "Backup": {
+          "$ref": "#/definitions/v1.BackupSecret"
+        },
+        "User": {
+          "items": {
+            "$ref": "#/definitions/v1.UserSecret"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "Backup",
+        "User"
       ]
     },
     "v1.PostgresStatus": {
@@ -2705,6 +2734,20 @@
           "type": "string"
         }
       }
+    },
+    "v1.UserSecret": {
+      "properties": {
+        "Password": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Password",
+        "Username"
+      ]
     },
     "v1.VolumeFindRequest": {
       "properties": {
@@ -4272,6 +4315,44 @@
           }
         },
         "summary": "get postgres by id",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/{id}/secrets": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresSecrets",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresSecretsRespone"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres secrets by id",
         "tags": [
           "database"
         ]
