@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -19,15 +20,67 @@ type V1PostgresStatus struct {
 
 	// description
 	Description string `json:"description,omitempty"`
+
+	// socket
+	Socket *V1Socket `json:"socket,omitempty"`
 }
 
 // Validate validates this v1 postgres status
 func (m *V1PostgresStatus) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSocket(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this v1 postgres status based on context it is used
+func (m *V1PostgresStatus) validateSocket(formats strfmt.Registry) error {
+	if swag.IsZero(m.Socket) { // not required
+		return nil
+	}
+
+	if m.Socket != nil {
+		if err := m.Socket.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("socket")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 postgres status based on the context it is used
 func (m *V1PostgresStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSocket(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1PostgresStatus) contextValidateSocket(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Socket != nil {
+		if err := m.Socket.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("socket")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

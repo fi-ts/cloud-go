@@ -2078,6 +2078,9 @@
       "properties": {
         "description": {
           "type": "string"
+        },
+        "socket": {
+          "$ref": "#/definitions/v1.Socket"
         }
       }
     },
@@ -2687,6 +2690,17 @@
         },
         "storageSize": {
           "type": "string"
+        }
+      }
+    },
+    "v1.Socket": {
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
