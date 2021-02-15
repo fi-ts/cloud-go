@@ -19,6 +19,10 @@ import (
 // swagger:model v1.VolumeUsage
 type V1VolumeUsage struct {
 
+	// accounting annotations present on the last accounting report of this volume
+	// Required: true
+	Annotations []string `json:"annotations"`
+
 	// the capacity seconds of this volume (byte*s)
 	// Required: true
 	Capacityseconds *string `json:"capacityseconds"`
@@ -82,6 +86,10 @@ type V1VolumeUsage struct {
 func (m *V1VolumeUsage) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCapacityseconds(formats); err != nil {
 		res = append(res, err)
 	}
@@ -141,6 +149,15 @@ func (m *V1VolumeUsage) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1VolumeUsage) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
 	return nil
 }
 

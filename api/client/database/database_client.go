@@ -33,7 +33,11 @@ type ClientService interface {
 
 	GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresOK, error)
 
+	GetPostgresPartitions(params *GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresPartitionsOK, error)
+
 	GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresSecretsOK, error)
+
+	GetPostgresVersions(params *GetPostgresVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresVersionsOK, error)
 
 	ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresOK, error)
 
@@ -179,6 +183,40 @@ func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientA
 }
 
 /*
+  GetPostgresPartitions gets postgres partitions supported
+*/
+func (a *Client) GetPostgresPartitions(params *GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresPartitionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPostgresPartitionsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getPostgresPartitions",
+		Method:             "GET",
+		PathPattern:        "/v1/database/postgres/partitions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPostgresPartitionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPostgresPartitionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetPostgresPartitionsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   GetPostgresSecrets gets postgres secrets by id
 */
 func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresSecretsOK, error) {
@@ -209,6 +247,40 @@ func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo r
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetPostgresSecretsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  GetPostgresVersions gets postgres versions supported
+*/
+func (a *Client) GetPostgresVersions(params *GetPostgresVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresVersionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPostgresVersionsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getPostgresVersions",
+		Method:             "GET",
+		PathPattern:        "/v1/database/postgres/versions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPostgresVersionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPostgresVersionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetPostgresVersionsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -1176,6 +1176,13 @@
     },
     "v1.ContainerUsage": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this container",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id of this container",
           "type": "string"
@@ -1252,6 +1259,7 @@
         }
       },
       "required": [
+        "annotations",
         "clusterid",
         "clustername",
         "containerimage",
@@ -1295,6 +1303,13 @@
     },
     "v1.ContainerUsageRequest": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this container",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id to account for",
           "type": "string"
@@ -1323,6 +1338,7 @@
         }
       },
       "required": [
+        "annotations",
         "from"
       ]
     },
@@ -2003,6 +2019,25 @@
         "Tenant"
       ]
     },
+    "v1.PostgresPartition": {
+      "properties": {
+        "AllowedTenants": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "AllowedTenants"
+      ]
+    },
+    "v1.PostgresPartitionsResponse": {
+      "additionalProperties": {
+        "$ref": "#/definitions/v1.PostgresPartition"
+      },
+      "type": "object"
+    },
     "v1.PostgresResponse": {
       "properties": {
         "CreationTimestamp": {
@@ -2083,6 +2118,21 @@
           "$ref": "#/definitions/v1.Socket"
         }
       }
+    },
+    "v1.PostgresVersion": {
+      "properties": {
+        "ExpirationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ExpirationDate",
+        "Version"
+      ]
     },
     "v1.Project": {
       "properties": {
@@ -2855,6 +2905,13 @@
     },
     "v1.VolumeUsage": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this volume",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "capacityseconds": {
           "description": "the capacity seconds of this volume (byte*s)",
           "type": "string"
@@ -2919,6 +2976,7 @@
         }
       },
       "required": [
+        "annotations",
         "capacityseconds",
         "class",
         "clusterid",
@@ -2954,6 +3012,13 @@
     },
     "v1.VolumeUsageRequest": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this container",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id to account for",
           "type": "string"
@@ -2982,6 +3047,7 @@
         }
       },
       "required": [
+        "annotations",
         "from"
       ]
     },
@@ -4255,6 +4321,67 @@
           }
         },
         "summary": "find postgres databases by multiple criteria",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/partitions": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresPartitions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresPartitionsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres partitions supported",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/versions": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresVersions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.PostgresVersion"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres versions supported",
         "tags": [
           "database"
         ]
