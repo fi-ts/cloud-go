@@ -20,13 +20,11 @@ import (
 type V1PostgresVersion struct {
 
 	// expiration date
-	// Required: true
 	// Format: date-time
-	ExpirationDate *strfmt.DateTime `json:"ExpirationDate"`
+	ExpirationDate strfmt.DateTime `json:"expirationDate,omitempty"`
 
 	// version
-	// Required: true
-	Version *string `json:"Version"`
+	Version string `json:"version,omitempty"`
 }
 
 // Validate validates this v1 postgres version
@@ -37,10 +35,6 @@ func (m *V1PostgresVersion) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateVersion(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -48,21 +42,11 @@ func (m *V1PostgresVersion) Validate(formats strfmt.Registry) error {
 }
 
 func (m *V1PostgresVersion) validateExpirationDate(formats strfmt.Registry) error {
-
-	if err := validate.Required("ExpirationDate", "body", m.ExpirationDate); err != nil {
-		return err
+	if swag.IsZero(m.ExpirationDate) { // not required
+		return nil
 	}
 
-	if err := validate.FormatOf("ExpirationDate", "body", "date-time", m.ExpirationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1PostgresVersion) validateVersion(formats strfmt.Registry) error {
-
-	if err := validate.Required("Version", "body", m.Version); err != nil {
+	if err := validate.FormatOf("expirationDate", "body", "date-time", m.ExpirationDate.String(), formats); err != nil {
 		return err
 	}
 

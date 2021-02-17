@@ -8,10 +8,8 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1UserSecret v1 user secret
@@ -20,47 +18,14 @@ import (
 type V1UserSecret struct {
 
 	// password
-	// Required: true
-	Password *string `json:"Password"`
+	Password string `json:"password,omitempty"`
 
 	// username
-	// Required: true
-	Username *string `json:"Username"`
+	Username string `json:"username,omitempty"`
 }
 
 // Validate validates this v1 user secret
 func (m *V1UserSecret) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validatePassword(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUsername(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1UserSecret) validatePassword(formats strfmt.Registry) error {
-
-	if err := validate.Required("Password", "body", m.Password); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1UserSecret) validateUsername(formats strfmt.Registry) error {
-
-	if err := validate.Required("Username", "body", m.Username); err != nil {
-		return err
-	}
-
 	return nil
 }
 

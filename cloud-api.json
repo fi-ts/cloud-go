@@ -2094,20 +2094,16 @@
     },
     "v1.PostgresSecretsRespone": {
       "properties": {
-        "Backup": {
+        "backupSecret": {
           "$ref": "#/definitions/v1.BackupSecret"
         },
-        "User": {
+        "userSecret": {
           "items": {
             "$ref": "#/definitions/v1.UserSecret"
           },
           "type": "array"
         }
-      },
-      "required": [
-        "Backup",
-        "User"
-      ]
+      }
     },
     "v1.PostgresStatus": {
       "properties": {
@@ -2121,18 +2117,14 @@
     },
     "v1.PostgresVersion": {
       "properties": {
-        "ExpirationDate": {
+        "expirationDate": {
           "format": "date-time",
           "type": "string"
         },
-        "Version": {
+        "version": {
           "type": "string"
         }
-      },
-      "required": [
-        "ExpirationDate",
-        "Version"
-      ]
+      }
     },
     "v1.Project": {
       "properties": {
@@ -2801,17 +2793,13 @@
     },
     "v1.UserSecret": {
       "properties": {
-        "Password": {
+        "password": {
           "type": "string"
         },
-        "Username": {
+        "username": {
           "type": "string"
         }
-      },
-      "required": [
-        "Password",
-        "Username"
-      ]
+      }
     },
     "v1.VolumeFindRequest": {
       "properties": {

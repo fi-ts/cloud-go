@@ -12,7 +12,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1PostgresSecretsRespone v1 postgres secrets respone
@@ -20,24 +19,22 @@ import (
 // swagger:model v1.PostgresSecretsRespone
 type V1PostgresSecretsRespone struct {
 
-	// backup
-	// Required: true
-	Backup *V1BackupSecret `json:"Backup"`
+	// backup secret
+	BackupSecret *V1BackupSecret `json:"backupSecret,omitempty"`
 
-	// user
-	// Required: true
-	User []*V1UserSecret `json:"User"`
+	// user secret
+	UserSecret []*V1UserSecret `json:"userSecret"`
 }
 
 // Validate validates this v1 postgres secrets respone
 func (m *V1PostgresSecretsRespone) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateBackup(formats); err != nil {
+	if err := m.validateBackupSecret(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateUser(formats); err != nil {
+	if err := m.validateUserSecret(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -47,16 +44,15 @@ func (m *V1PostgresSecretsRespone) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1PostgresSecretsRespone) validateBackup(formats strfmt.Registry) error {
-
-	if err := validate.Required("Backup", "body", m.Backup); err != nil {
-		return err
+func (m *V1PostgresSecretsRespone) validateBackupSecret(formats strfmt.Registry) error {
+	if swag.IsZero(m.BackupSecret) { // not required
+		return nil
 	}
 
-	if m.Backup != nil {
-		if err := m.Backup.Validate(formats); err != nil {
+	if m.BackupSecret != nil {
+		if err := m.BackupSecret.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Backup")
+				return ve.ValidateName("backupSecret")
 			}
 			return err
 		}
@@ -65,21 +61,20 @@ func (m *V1PostgresSecretsRespone) validateBackup(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *V1PostgresSecretsRespone) validateUser(formats strfmt.Registry) error {
-
-	if err := validate.Required("User", "body", m.User); err != nil {
-		return err
+func (m *V1PostgresSecretsRespone) validateUserSecret(formats strfmt.Registry) error {
+	if swag.IsZero(m.UserSecret) { // not required
+		return nil
 	}
 
-	for i := 0; i < len(m.User); i++ {
-		if swag.IsZero(m.User[i]) { // not required
+	for i := 0; i < len(m.UserSecret); i++ {
+		if swag.IsZero(m.UserSecret[i]) { // not required
 			continue
 		}
 
-		if m.User[i] != nil {
-			if err := m.User[i].Validate(formats); err != nil {
+		if m.UserSecret[i] != nil {
+			if err := m.UserSecret[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("User" + "." + strconv.Itoa(i))
+					return ve.ValidateName("userSecret" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -94,11 +89,11 @@ func (m *V1PostgresSecretsRespone) validateUser(formats strfmt.Registry) error {
 func (m *V1PostgresSecretsRespone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateBackup(ctx, formats); err != nil {
+	if err := m.contextValidateBackupSecret(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateUser(ctx, formats); err != nil {
+	if err := m.contextValidateUserSecret(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -108,12 +103,12 @@ func (m *V1PostgresSecretsRespone) ContextValidate(ctx context.Context, formats 
 	return nil
 }
 
-func (m *V1PostgresSecretsRespone) contextValidateBackup(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1PostgresSecretsRespone) contextValidateBackupSecret(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Backup != nil {
-		if err := m.Backup.ContextValidate(ctx, formats); err != nil {
+	if m.BackupSecret != nil {
+		if err := m.BackupSecret.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Backup")
+				return ve.ValidateName("backupSecret")
 			}
 			return err
 		}
@@ -122,14 +117,14 @@ func (m *V1PostgresSecretsRespone) contextValidateBackup(ctx context.Context, fo
 	return nil
 }
 
-func (m *V1PostgresSecretsRespone) contextValidateUser(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1PostgresSecretsRespone) contextValidateUserSecret(ctx context.Context, formats strfmt.Registry) error {
 
-	for i := 0; i < len(m.User); i++ {
+	for i := 0; i < len(m.UserSecret); i++ {
 
-		if m.User[i] != nil {
-			if err := m.User[i].ContextValidate(ctx, formats); err != nil {
+		if m.UserSecret[i] != nil {
+			if err := m.UserSecret[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("User" + "." + strconv.Itoa(i))
+					return ve.ValidateName("userSecret" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
