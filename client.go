@@ -2,7 +2,6 @@ package cloudgo
 
 import (
 	"fmt"
-	"net"
 	"net/http"
 	"net/url"
 	"time"
@@ -95,7 +94,7 @@ func newClientTransport(c *clientSpec) *httptransport.Runtime {
 	})
 
 	client := &http.Client{
-		Timeout: c.timeout,
+		Timeout:   c.timeout,
 		Transport: http.DefaultTransport,
 	}
 
