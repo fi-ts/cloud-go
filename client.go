@@ -96,15 +96,8 @@ func newClientTransport(c *clientSpec) *httptransport.Runtime {
 
 	client := &http.Client{
 		Timeout: c.timeout,
-		Transport: &http.Transport{
-			Proxy: http.ProxyFromEnvironment,
-			Dial: (&net.Dialer{
-				Timeout:   30 * time.Second,
-				KeepAlive: 30 * time.Second,
-			}).Dial,
-			TLSHandshakeTimeout:   10 * time.Second,
-			ResponseHeaderTimeout: 10 * time.Second,
-		},
+		Transport: http.DefaultTransport,
+	}
 	}
 
 	transport := httptransport.NewWithClient(c.host, c.basePath, c.schemes, client)
