@@ -98,7 +98,6 @@ func newClientTransport(c *clientSpec) *httptransport.Runtime {
 		Timeout: c.timeout,
 		Transport: http.DefaultTransport,
 	}
-	}
 
 	transport := httptransport.NewWithClient(c.host, c.basePath, c.schemes, client)
 	transport.DefaultAuthentication = auther
