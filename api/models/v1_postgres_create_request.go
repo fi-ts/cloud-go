@@ -32,6 +32,9 @@ type V1PostgresCreateRequest struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// labels
+	Labels map[string]string `json:"labels,omitempty"`
+
 	// maintenance
 	Maintenance *V1MaintenanceWindow `json:"maintenance,omitempty"`
 

@@ -50,6 +50,9 @@ type V1PostgresResponse struct {
 	// backup
 	Backup *V1Backup `json:"backup,omitempty"`
 
+	// labels
+	Labels map[string]string `json:"labels,omitempty"`
+
 	// maintenance
 	Maintenance *V1MaintenanceWindow `json:"maintenance,omitempty"`
 

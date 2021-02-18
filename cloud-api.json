@@ -1966,6 +1966,12 @@
         "description": {
           "type": "string"
         },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "maintenance": {
           "$ref": "#/definitions/v1.MaintenanceWindow"
         },
@@ -2009,6 +2015,12 @@
         },
         "Tenant": {
           "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         }
       },
       "required": [
@@ -2064,6 +2076,12 @@
         },
         "backup": {
           "$ref": "#/definitions/v1.Backup"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         },
         "maintenance": {
           "$ref": "#/definitions/v1.MaintenanceWindow"

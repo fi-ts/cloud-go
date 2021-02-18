@@ -38,6 +38,9 @@ type V1PostgresFindRequest struct {
 	// tenant
 	// Required: true
 	Tenant *string `json:"Tenant"`
+
+	// labels
+	Labels map[string]string `json:"labels,omitempty"`
 }
 
 // Validate validates this v1 postgres find request
