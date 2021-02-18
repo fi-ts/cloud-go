@@ -2052,10 +2052,6 @@
     },
     "v1.PostgresResponse": {
       "properties": {
-        "CreationTimestamp": {
-          "format": "date-time",
-          "type": "string"
-        },
         "Description": {
           "type": "string"
         },
@@ -2076,6 +2072,13 @@
         },
         "backup": {
           "$ref": "#/definitions/v1.Backup"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "creationTimestamp": {
+          "format": "date-time",
+          "type": "string"
         },
         "labels": {
           "additionalProperties": {
@@ -2101,7 +2104,6 @@
         }
       },
       "required": [
-        "CreationTimestamp",
         "Description",
         "ID",
         "PartitionID",

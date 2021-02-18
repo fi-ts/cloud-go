@@ -19,11 +19,6 @@ import (
 // swagger:model v1.PostgresResponse
 type V1PostgresResponse struct {
 
-	// creation timestamp
-	// Required: true
-	// Format: date-time
-	CreationTimestamp *strfmt.DateTime `json:"CreationTimestamp"`
-
 	// description
 	// Required: true
 	Description *string `json:"Description"`
@@ -50,6 +45,13 @@ type V1PostgresResponse struct {
 	// backup
 	Backup *V1Backup `json:"backup,omitempty"`
 
+	// created by
+	CreatedBy string `json:"createdBy,omitempty"`
+
+	// creation timestamp
+	// Format: date-time
+	CreationTimestamp strfmt.DateTime `json:"creationTimestamp,omitempty"`
+
 	// labels
 	Labels map[string]string `json:"labels,omitempty"`
 
@@ -73,10 +75,6 @@ type V1PostgresResponse struct {
 // Validate validates this v1 postgres response
 func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateCreationTimestamp(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateDescription(formats); err != nil {
 		res = append(res, err)
@@ -106,6 +104,10 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCreationTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMaintenance(formats); err != nil {
 		res = append(res, err)
 	}
@@ -121,19 +123,6 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1PostgresResponse) validateCreationTimestamp(formats strfmt.Registry) error {
-
-	if err := validate.Required("CreationTimestamp", "body", m.CreationTimestamp); err != nil {
-		return err
-	}
-
-	if err := validate.FormatOf("CreationTimestamp", "body", "date-time", m.CreationTimestamp.String(), formats); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -211,6 +200,18 @@ func (m *V1PostgresResponse) validateBackup(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) validateCreationTimestamp(formats strfmt.Registry) error {
+	if swag.IsZero(m.CreationTimestamp) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("creationTimestamp", "body", "date-time", m.CreationTimestamp.String(), formats); err != nil {
+		return err
 	}
 
 	return nil
