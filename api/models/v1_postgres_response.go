@@ -42,9 +42,6 @@ type V1PostgresResponse struct {
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
 
-	// backup
-	Backup *V1Backup `json:"backup,omitempty"`
-
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
 
@@ -97,10 +94,6 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAccessList(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateBackup(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -188,23 +181,6 @@ func (m *V1PostgresResponse) validateAccessList(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1PostgresResponse) validateBackup(formats strfmt.Registry) error {
-	if swag.IsZero(m.Backup) { // not required
-		return nil
-	}
-
-	if m.Backup != nil {
-		if err := m.Backup.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("backup")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *V1PostgresResponse) validateCreationTimestamp(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreationTimestamp) { // not required
 		return nil
@@ -277,10 +253,6 @@ func (m *V1PostgresResponse) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateBackup(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateMaintenance(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -305,20 +277,6 @@ func (m *V1PostgresResponse) contextValidateAccessList(ctx context.Context, form
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1PostgresResponse) contextValidateBackup(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Backup != nil {
-		if err := m.Backup.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("backup")
 			}
 			return err
 		}

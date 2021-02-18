@@ -27,11 +27,17 @@ type Client struct {
 type ClientService interface {
 	CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePostgresCreated, error)
 
+	CreatePostgresBackup(params *CreatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePostgresBackupCreated, error)
+
 	DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresOK, error)
+
+	DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresBackupCreated, error)
 
 	FindPostgres(params *FindPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*FindPostgresOK, error)
 
 	GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresOK, error)
+
+	GetPostgresBackups(params *GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresBackupsOK, error)
 
 	GetPostgresPartitions(params *GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresPartitionsOK, error)
 
@@ -81,6 +87,40 @@ func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.C
 }
 
 /*
+  CreatePostgresBackup creates a postgres backup for the given projectid
+*/
+func (a *Client) CreatePostgresBackup(params *CreatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePostgresBackupCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePostgresBackupParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "createPostgresBackup",
+		Method:             "PUT",
+		PathPattern:        "/v1/database/postgres/backup",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePostgresBackupReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePostgresBackupCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreatePostgresBackupDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
   DeletePostgres deletes an postgres and returns the deleted entity
 */
 func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresOK, error) {
@@ -111,6 +151,40 @@ func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeletePostgresDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  DeletePostgresBackup deletes a postgres backup for the given projectid
+*/
+func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresBackupCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeletePostgresBackupParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deletePostgresBackup",
+		Method:             "DELETE",
+		PathPattern:        "/v1/database/postgres/backup/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeletePostgresBackupReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeletePostgresBackupCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeletePostgresBackupDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -179,6 +253,40 @@ func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientA
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetPostgresDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  GetPostgresBackups gets postgres backups
+*/
+func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresBackupsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPostgresBackupsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getPostgresBackups",
+		Method:             "GET",
+		PathPattern:        "/v1/database/postgres/backup/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPostgresBackupsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPostgresBackupsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetPostgresBackupsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

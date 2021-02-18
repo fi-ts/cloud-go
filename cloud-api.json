@@ -683,6 +683,9 @@
     },
     "v1.Backup": {
       "properties": {
+        "projectID": {
+          "type": "string"
+        },
         "retention": {
           "format": "int32",
           "type": "integer"
@@ -695,6 +698,9 @@
         },
         "secret": {
           "$ref": "#/definitions/v1.BackupSecret"
+        },
+        "tenant": {
+          "type": "string"
         }
       }
     },
@@ -1960,9 +1966,6 @@
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
-        "backup": {
-          "$ref": "#/definitions/v1.Backup"
-        },
         "description": {
           "type": "string"
         },
@@ -2070,9 +2073,6 @@
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
-        "backup": {
-          "$ref": "#/definitions/v1.Backup"
-        },
         "createdBy": {
           "type": "string"
         },
@@ -2114,9 +2114,6 @@
     },
     "v1.PostgresSecretsRespone": {
       "properties": {
-        "backupSecret": {
-          "$ref": "#/definitions/v1.BackupSecret"
-        },
         "userSecret": {
           "items": {
             "$ref": "#/definitions/v1.UserSecret"
@@ -4287,6 +4284,149 @@
           }
         },
         "summary": "create a postgres. if the given ID already exists a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/backup": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresBackups",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.Backup"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres backups",
+        "tags": [
+          "database"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createPostgresBackup",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.Backup"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.Backup"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "create a postgres backup for the given projectid",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/backup/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "deletePostgresBackup",
+        "parameters": [
+          {
+            "description": "identifier of the projectid",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.Backup"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "delete a postgres backup for the given projectid",
+        "tags": [
+          "database"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresBackups",
+        "parameters": [
+          {
+            "description": "identifier of the backup",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.Backup"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres backups",
         "tags": [
           "database"
         ]

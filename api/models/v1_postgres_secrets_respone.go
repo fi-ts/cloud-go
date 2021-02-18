@@ -19,9 +19,6 @@ import (
 // swagger:model v1.PostgresSecretsRespone
 type V1PostgresSecretsRespone struct {
 
-	// backup secret
-	BackupSecret *V1BackupSecret `json:"backupSecret,omitempty"`
-
 	// user secret
 	UserSecret []*V1UserSecret `json:"userSecret"`
 }
@@ -30,10 +27,6 @@ type V1PostgresSecretsRespone struct {
 func (m *V1PostgresSecretsRespone) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateBackupSecret(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateUserSecret(formats); err != nil {
 		res = append(res, err)
 	}
@@ -41,23 +34,6 @@ func (m *V1PostgresSecretsRespone) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1PostgresSecretsRespone) validateBackupSecret(formats strfmt.Registry) error {
-	if swag.IsZero(m.BackupSecret) { // not required
-		return nil
-	}
-
-	if m.BackupSecret != nil {
-		if err := m.BackupSecret.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("backupSecret")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -89,10 +65,6 @@ func (m *V1PostgresSecretsRespone) validateUserSecret(formats strfmt.Registry) e
 func (m *V1PostgresSecretsRespone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateBackupSecret(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateUserSecret(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -100,20 +72,6 @@ func (m *V1PostgresSecretsRespone) ContextValidate(ctx context.Context, formats 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1PostgresSecretsRespone) contextValidateBackupSecret(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.BackupSecret != nil {
-		if err := m.BackupSecret.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("backupSecret")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

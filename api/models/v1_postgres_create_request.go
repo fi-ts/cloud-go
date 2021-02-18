@@ -26,9 +26,6 @@ type V1PostgresCreateRequest struct {
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
 
-	// backup
-	Backup *V1Backup `json:"backup,omitempty"`
-
 	// description
 	Description string `json:"description,omitempty"`
 
@@ -69,10 +66,6 @@ func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateBackup(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateMaintenance(formats); err != nil {
 		res = append(res, err)
 	}
@@ -105,23 +98,6 @@ func (m *V1PostgresCreateRequest) validateAccessList(formats strfmt.Registry) er
 		if err := m.AccessList.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1PostgresCreateRequest) validateBackup(formats strfmt.Registry) error {
-	if swag.IsZero(m.Backup) { // not required
-		return nil
-	}
-
-	if m.Backup != nil {
-		if err := m.Backup.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("backup")
 			}
 			return err
 		}
@@ -172,10 +148,6 @@ func (m *V1PostgresCreateRequest) ContextValidate(ctx context.Context, formats s
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateBackup(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateMaintenance(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -196,20 +168,6 @@ func (m *V1PostgresCreateRequest) contextValidateAccessList(ctx context.Context,
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1PostgresCreateRequest) contextValidateBackup(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Backup != nil {
-		if err := m.Backup.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("backup")
 			}
 			return err
 		}
