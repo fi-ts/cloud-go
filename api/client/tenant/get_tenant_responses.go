@@ -47,7 +47,7 @@ func NewGetTenantOK() *GetTenantOK {
 	return &GetTenantOK{}
 }
 
-/* GetTenantOK describes a response with status code 200, with default header values.
+/*GetTenantOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type GetTenantOK struct {
 func (o *GetTenantOK) Error() string {
 	return fmt.Sprintf("[GET /v1/tenant/{id}][%d] getTenantOK  %+v", 200, o.Payload)
 }
+
 func (o *GetTenantOK) GetPayload() *models.V1TenantResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetTenantDefault(code int) *GetTenantDefault {
 	}
 }
 
-/* GetTenantDefault describes a response with status code -1, with default header values.
+/*GetTenantDefault handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *GetTenantDefault) Code() int {
 func (o *GetTenantDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/tenant/{id}][%d] getTenant default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetTenantDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

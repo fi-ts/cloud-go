@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -184,10 +182,6 @@ func (m *ModelsV1MachineDiskPartition) validateNumber(formats strfmt.Registry) e
 
 func (m *ModelsV1MachineDiskPartition) validateProperties(formats strfmt.Registry) error {
 
-	if err := validate.Required("properties", "body", m.Properties); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -197,11 +191,6 @@ func (m *ModelsV1MachineDiskPartition) validateSize(formats strfmt.Registry) err
 		return err
 	}
 
-	return nil
-}
-
-// ContextValidate validates this models v1 machine disk partition based on context it is used
-func (m *ModelsV1MachineDiskPartition) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

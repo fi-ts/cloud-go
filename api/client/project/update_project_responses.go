@@ -53,7 +53,7 @@ func NewUpdateProjectOK() *UpdateProjectOK {
 	return &UpdateProjectOK{}
 }
 
-/* UpdateProjectOK describes a response with status code 200, with default header values.
+/*UpdateProjectOK handles this case with default header values.
 
 Updated
 */
@@ -64,6 +64,7 @@ type UpdateProjectOK struct {
 func (o *UpdateProjectOK) Error() string {
 	return fmt.Sprintf("[POST /v1/project][%d] updateProjectOK  %+v", 200, o.Payload)
 }
+
 func (o *UpdateProjectOK) GetPayload() *models.V1ProjectResponse {
 	return o.Payload
 }
@@ -85,7 +86,7 @@ func NewUpdateProjectPreconditionFailed() *UpdateProjectPreconditionFailed {
 	return &UpdateProjectPreconditionFailed{}
 }
 
-/* UpdateProjectPreconditionFailed describes a response with status code 412, with default header values.
+/*UpdateProjectPreconditionFailed handles this case with default header values.
 
 OptimisticLock
 */
@@ -96,6 +97,7 @@ type UpdateProjectPreconditionFailed struct {
 func (o *UpdateProjectPreconditionFailed) Error() string {
 	return fmt.Sprintf("[POST /v1/project][%d] updateProjectPreconditionFailed  %+v", 412, o.Payload)
 }
+
 func (o *UpdateProjectPreconditionFailed) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -119,7 +121,7 @@ func NewUpdateProjectDefault(code int) *UpdateProjectDefault {
 	}
 }
 
-/* UpdateProjectDefault describes a response with status code -1, with default header values.
+/*UpdateProjectDefault handles this case with default header values.
 
 Error
 */
@@ -137,6 +139,7 @@ func (o *UpdateProjectDefault) Code() int {
 func (o *UpdateProjectDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/project][%d] updateProject default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *UpdateProjectDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

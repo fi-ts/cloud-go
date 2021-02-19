@@ -47,7 +47,7 @@ func NewContainerUsageOK() *ContainerUsageOK {
 	return &ContainerUsageOK{}
 }
 
-/* ContainerUsageOK describes a response with status code 200, with default header values.
+/*ContainerUsageOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type ContainerUsageOK struct {
 func (o *ContainerUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
 }
+
 func (o *ContainerUsageOK) GetPayload() *models.V1ContainerUsageResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewContainerUsageDefault(code int) *ContainerUsageDefault {
 	}
 }
 
-/* ContainerUsageDefault describes a response with status code -1, with default header values.
+/*ContainerUsageDefault handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *ContainerUsageDefault) Code() int {
 func (o *ContainerUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *ContainerUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -47,6 +45,7 @@ func (m *V1MasterdataLookupRequest) Validate(formats strfmt.Registry) error {
 }
 
 func (m *V1MasterdataLookupRequest) validateClusterNameProject(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.ClusterNameProject) { // not required
 		return nil
 	}
@@ -64,58 +63,13 @@ func (m *V1MasterdataLookupRequest) validateClusterNameProject(formats strfmt.Re
 }
 
 func (m *V1MasterdataLookupRequest) validateProjectIDTime(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.ProjectIDTime) { // not required
 		return nil
 	}
 
 	if m.ProjectIDTime != nil {
 		if err := m.ProjectIDTime.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("project_id_time")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this v1 masterdata lookup request based on the context it is used
-func (m *V1MasterdataLookupRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateClusterNameProject(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateProjectIDTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1MasterdataLookupRequest) contextValidateClusterNameProject(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ClusterNameProject != nil {
-		if err := m.ClusterNameProject.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("cluster_name_project")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1MasterdataLookupRequest) contextValidateProjectIDTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ProjectIDTime != nil {
-		if err := m.ProjectIDTime.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("project_id_time")
 			}

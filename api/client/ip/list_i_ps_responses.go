@@ -47,7 +47,7 @@ func NewListIPsOK() *ListIPsOK {
 	return &ListIPsOK{}
 }
 
-/* ListIPsOK describes a response with status code 200, with default header values.
+/*ListIPsOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type ListIPsOK struct {
 func (o *ListIPsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/ip][%d] listIPsOK  %+v", 200, o.Payload)
 }
+
 func (o *ListIPsOK) GetPayload() []*models.ModelsV1IPResponse {
 	return o.Payload
 }
@@ -79,7 +80,7 @@ func NewListIPsDefault(code int) *ListIPsDefault {
 	}
 }
 
-/* ListIPsDefault describes a response with status code -1, with default header values.
+/*ListIPsDefault handles this case with default header values.
 
 Error
 */
@@ -97,6 +98,7 @@ func (o *ListIPsDefault) Code() int {
 func (o *ListIPsDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/ip][%d] listIPs default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *ListIPsDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

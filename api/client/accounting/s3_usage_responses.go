@@ -47,7 +47,7 @@ func NewS3UsageOK() *S3UsageOK {
 	return &S3UsageOK{}
 }
 
-/* S3UsageOK describes a response with status code 200, with default header values.
+/*S3UsageOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type S3UsageOK struct {
 func (o *S3UsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3UsageOK  %+v", 200, o.Payload)
 }
+
 func (o *S3UsageOK) GetPayload() *models.V1S3UsageResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewS3UsageDefault(code int) *S3UsageDefault {
 	}
 }
 
-/* S3UsageDefault describes a response with status code -1, with default header values.
+/*S3UsageDefault handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *S3UsageDefault) Code() int {
 func (o *S3UsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *S3UsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

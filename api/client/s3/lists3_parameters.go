@@ -18,70 +18,56 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewLists3Params creates a new Lists3Params object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewLists3Params creates a new Lists3Params object
+// with the default values initialized.
 func NewLists3Params() *Lists3Params {
+	var ()
 	return &Lists3Params{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewLists3ParamsWithTimeout creates a new Lists3Params object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewLists3ParamsWithTimeout(timeout time.Duration) *Lists3Params {
+	var ()
 	return &Lists3Params{
+
 		timeout: timeout,
 	}
 }
 
 // NewLists3ParamsWithContext creates a new Lists3Params object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewLists3ParamsWithContext(ctx context.Context) *Lists3Params {
+	var ()
 	return &Lists3Params{
+
 		Context: ctx,
 	}
 }
 
 // NewLists3ParamsWithHTTPClient creates a new Lists3Params object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewLists3ParamsWithHTTPClient(client *http.Client) *Lists3Params {
+	var ()
 	return &Lists3Params{
 		HTTPClient: client,
 	}
 }
 
-/* Lists3Params contains all the parameters to send to the API endpoint
-   for the lists3 operation.
-
-   Typically these are written to a http.Request.
+/*Lists3Params contains all the parameters to send to the API endpoint
+for the lists3 operation typically these are written to a http.Request
 */
 type Lists3Params struct {
 
-	// Body.
+	/*Body*/
 	Body *models.V1S3ListRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the lists3 params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *Lists3Params) WithDefaults() *Lists3Params {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the lists3 params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *Lists3Params) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the lists3 params
@@ -135,6 +121,7 @@ func (o *Lists3Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

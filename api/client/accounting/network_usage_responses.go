@@ -47,7 +47,7 @@ func NewNetworkUsageOK() *NetworkUsageOK {
 	return &NetworkUsageOK{}
 }
 
-/* NetworkUsageOK describes a response with status code 200, with default header values.
+/*NetworkUsageOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type NetworkUsageOK struct {
 func (o *NetworkUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/network-usage][%d] networkUsageOK  %+v", 200, o.Payload)
 }
+
 func (o *NetworkUsageOK) GetPayload() *models.V1NetworkUsageResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewNetworkUsageDefault(code int) *NetworkUsageDefault {
 	}
 }
 
-/* NetworkUsageDefault describes a response with status code -1, with default header values.
+/*NetworkUsageDefault handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *NetworkUsageDefault) Code() int {
 func (o *NetworkUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/network-usage][%d] networkUsage default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *NetworkUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

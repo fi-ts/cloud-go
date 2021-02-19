@@ -43,6 +43,8 @@ type ClientService interface {
 
 	ReconcileCluster(params *ReconcileClusterParams, authInfo runtime.ClientAuthInfoWriter) (*ReconcileClusterOK, error)
 
+	ResetMachine(params *ResetMachineParams, authInfo runtime.ClientAuthInfoWriter) (*ResetMachineOK, error)
+
 	UpdateCluster(params *UpdateClusterParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateClusterOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -351,6 +353,40 @@ func (a *Client) ReconcileCluster(params *ReconcileClusterParams, authInfo runti
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ReconcileClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ResetMachine triggers hard power reset of a machine
+*/
+func (a *Client) ResetMachine(params *ResetMachineParams, authInfo runtime.ClientAuthInfoWriter) (*ResetMachineOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResetMachineParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "resetMachine",
+		Method:             "POST",
+		PathPattern:        "/v1/cluster/{id}/resetmachine",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResetMachineReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResetMachineOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ResetMachineDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

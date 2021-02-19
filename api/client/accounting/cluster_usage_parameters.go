@@ -18,70 +18,56 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewClusterUsageParams creates a new ClusterUsageParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewClusterUsageParams creates a new ClusterUsageParams object
+// with the default values initialized.
 func NewClusterUsageParams() *ClusterUsageParams {
+	var ()
 	return &ClusterUsageParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewClusterUsageParamsWithTimeout creates a new ClusterUsageParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewClusterUsageParamsWithTimeout(timeout time.Duration) *ClusterUsageParams {
+	var ()
 	return &ClusterUsageParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewClusterUsageParamsWithContext creates a new ClusterUsageParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewClusterUsageParamsWithContext(ctx context.Context) *ClusterUsageParams {
+	var ()
 	return &ClusterUsageParams{
+
 		Context: ctx,
 	}
 }
 
 // NewClusterUsageParamsWithHTTPClient creates a new ClusterUsageParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewClusterUsageParamsWithHTTPClient(client *http.Client) *ClusterUsageParams {
+	var ()
 	return &ClusterUsageParams{
 		HTTPClient: client,
 	}
 }
 
-/* ClusterUsageParams contains all the parameters to send to the API endpoint
-   for the cluster usage operation.
-
-   Typically these are written to a http.Request.
+/*ClusterUsageParams contains all the parameters to send to the API endpoint
+for the cluster usage operation typically these are written to a http.Request
 */
 type ClusterUsageParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.V1ClusterUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the cluster usage params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ClusterUsageParams) WithDefaults() *ClusterUsageParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the cluster usage params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ClusterUsageParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the cluster usage params
@@ -135,6 +121,7 @@ func (o *ClusterUsageParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

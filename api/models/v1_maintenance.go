@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -72,52 +70,6 @@ func (m *V1Maintenance) validateTimeWindow(formats strfmt.Registry) error {
 
 	if m.TimeWindow != nil {
 		if err := m.TimeWindow.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("TimeWindow")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this v1 maintenance based on the context it is used
-func (m *V1Maintenance) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateAutoUpdate(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTimeWindow(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1Maintenance) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.AutoUpdate != nil {
-		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("AutoUpdate")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1Maintenance) contextValidateTimeWindow(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TimeWindow != nil {
-		if err := m.TimeWindow.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("TimeWindow")
 			}

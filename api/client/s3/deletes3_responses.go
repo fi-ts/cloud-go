@@ -47,7 +47,7 @@ func NewDeletes3OK() *Deletes3OK {
 	return &Deletes3OK{}
 }
 
-/* Deletes3OK describes a response with status code 200, with default header values.
+/*Deletes3OK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type Deletes3OK struct {
 func (o *Deletes3OK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3OK  %+v", 200, o.Payload)
 }
+
 func (o *Deletes3OK) GetPayload() *models.V1S3Response {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewDeletes3Default(code int) *Deletes3Default {
 	}
 }
 
-/* Deletes3Default describes a response with status code -1, with default header values.
+/*Deletes3Default handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *Deletes3Default) Code() int {
 func (o *Deletes3Default) Error() string {
 	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3 default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *Deletes3Default) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

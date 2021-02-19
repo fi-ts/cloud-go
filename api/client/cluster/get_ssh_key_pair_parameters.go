@@ -16,73 +16,59 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetSSHKeyPairParams creates a new GetSSHKeyPairParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewGetSSHKeyPairParams creates a new GetSSHKeyPairParams object
+// with the default values initialized.
 func NewGetSSHKeyPairParams() *GetSSHKeyPairParams {
+	var ()
 	return &GetSSHKeyPairParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetSSHKeyPairParamsWithTimeout creates a new GetSSHKeyPairParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewGetSSHKeyPairParamsWithTimeout(timeout time.Duration) *GetSSHKeyPairParams {
+	var ()
 	return &GetSSHKeyPairParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewGetSSHKeyPairParamsWithContext creates a new GetSSHKeyPairParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewGetSSHKeyPairParamsWithContext(ctx context.Context) *GetSSHKeyPairParams {
+	var ()
 	return &GetSSHKeyPairParams{
+
 		Context: ctx,
 	}
 }
 
 // NewGetSSHKeyPairParamsWithHTTPClient creates a new GetSSHKeyPairParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewGetSSHKeyPairParamsWithHTTPClient(client *http.Client) *GetSSHKeyPairParams {
+	var ()
 	return &GetSSHKeyPairParams{
 		HTTPClient: client,
 	}
 }
 
-/* GetSSHKeyPairParams contains all the parameters to send to the API endpoint
-   for the get SSH key pair operation.
-
-   Typically these are written to a http.Request.
+/*GetSSHKeyPairParams contains all the parameters to send to the API endpoint
+for the get SSH key pair operation typically these are written to a http.Request
 */
 type GetSSHKeyPairParams struct {
 
-	/* ID.
+	/*ID
+	  identifier of the cluster
 
-	   identifier of the cluster
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the get SSH key pair params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetSSHKeyPairParams) WithDefaults() *GetSSHKeyPairParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the get SSH key pair params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetSSHKeyPairParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get SSH key pair params

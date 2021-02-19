@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -119,60 +118,6 @@ func (m *ModelsV1MachineHardware) validateNics(formats strfmt.Registry) error {
 
 		if m.Nics[i] != nil {
 			if err := m.Nics[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("nics" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this models v1 machine hardware based on the context it is used
-func (m *ModelsV1MachineHardware) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateDisks(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateNics(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ModelsV1MachineHardware) contextValidateDisks(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Disks); i++ {
-
-		if m.Disks[i] != nil {
-			if err := m.Disks[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("disks" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (m *ModelsV1MachineHardware) contextValidateNics(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Nics); i++ {
-
-		if m.Nics[i] != nil {
-			if err := m.Nics[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("nics" + "." + strconv.Itoa(i))
 				}

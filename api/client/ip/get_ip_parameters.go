@@ -16,73 +16,59 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetIPParams creates a new GetIPParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewGetIPParams creates a new GetIPParams object
+// with the default values initialized.
 func NewGetIPParams() *GetIPParams {
+	var ()
 	return &GetIPParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetIPParamsWithTimeout creates a new GetIPParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewGetIPParamsWithTimeout(timeout time.Duration) *GetIPParams {
+	var ()
 	return &GetIPParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewGetIPParamsWithContext creates a new GetIPParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewGetIPParamsWithContext(ctx context.Context) *GetIPParams {
+	var ()
 	return &GetIPParams{
+
 		Context: ctx,
 	}
 }
 
 // NewGetIPParamsWithHTTPClient creates a new GetIPParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewGetIPParamsWithHTTPClient(client *http.Client) *GetIPParams {
+	var ()
 	return &GetIPParams{
 		HTTPClient: client,
 	}
 }
 
-/* GetIPParams contains all the parameters to send to the API endpoint
-   for the get IP operation.
-
-   Typically these are written to a http.Request.
+/*GetIPParams contains all the parameters to send to the API endpoint
+for the get IP operation typically these are written to a http.Request
 */
 type GetIPParams struct {
 
-	/* IP.
+	/*IP
+	  address of the ip
 
-	   address of the ip
 	*/
 	IP string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the get IP params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetIPParams) WithDefaults() *GetIPParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the get IP params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetIPParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get IP params

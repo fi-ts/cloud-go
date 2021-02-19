@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -57,6 +55,7 @@ func (m *V1Tenant) Validate(formats strfmt.Registry) error {
 }
 
 func (m *V1Tenant) validateDefaultQuotas(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.DefaultQuotas) { // not required
 		return nil
 	}
@@ -74,6 +73,7 @@ func (m *V1Tenant) validateDefaultQuotas(formats strfmt.Registry) error {
 }
 
 func (m *V1Tenant) validateMeta(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Meta) { // not required
 		return nil
 	}
@@ -91,76 +91,13 @@ func (m *V1Tenant) validateMeta(formats strfmt.Registry) error {
 }
 
 func (m *V1Tenant) validateQuotas(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Quotas) { // not required
 		return nil
 	}
 
 	if m.Quotas != nil {
 		if err := m.Quotas.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("quotas")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this v1 tenant based on the context it is used
-func (m *V1Tenant) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateDefaultQuotas(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateMeta(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateQuotas(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1Tenant) contextValidateDefaultQuotas(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.DefaultQuotas != nil {
-		if err := m.DefaultQuotas.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("default_quotas")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1Tenant) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Meta != nil {
-		if err := m.Meta.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("meta")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1Tenant) contextValidateQuotas(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Quotas != nil {
-		if err := m.Quotas.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("quotas")
 			}

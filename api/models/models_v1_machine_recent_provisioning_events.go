@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -86,38 +85,6 @@ func (m *ModelsV1MachineRecentProvisioningEvents) validateLog(formats strfmt.Reg
 
 		if m.Log[i] != nil {
 			if err := m.Log[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("log" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this models v1 machine recent provisioning events based on the context it is used
-func (m *ModelsV1MachineRecentProvisioningEvents) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateLog(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ModelsV1MachineRecentProvisioningEvents) contextValidateLog(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Log); i++ {
-
-		if m.Log[i] != nil {
-			if err := m.Log[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("log" + "." + strconv.Itoa(i))
 				}

@@ -16,73 +16,59 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteVolumeParams creates a new DeleteVolumeParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewDeleteVolumeParams creates a new DeleteVolumeParams object
+// with the default values initialized.
 func NewDeleteVolumeParams() *DeleteVolumeParams {
+	var ()
 	return &DeleteVolumeParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteVolumeParamsWithTimeout creates a new DeleteVolumeParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewDeleteVolumeParamsWithTimeout(timeout time.Duration) *DeleteVolumeParams {
+	var ()
 	return &DeleteVolumeParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewDeleteVolumeParamsWithContext creates a new DeleteVolumeParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewDeleteVolumeParamsWithContext(ctx context.Context) *DeleteVolumeParams {
+	var ()
 	return &DeleteVolumeParams{
+
 		Context: ctx,
 	}
 }
 
 // NewDeleteVolumeParamsWithHTTPClient creates a new DeleteVolumeParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewDeleteVolumeParamsWithHTTPClient(client *http.Client) *DeleteVolumeParams {
+	var ()
 	return &DeleteVolumeParams{
 		HTTPClient: client,
 	}
 }
 
-/* DeleteVolumeParams contains all the parameters to send to the API endpoint
-   for the delete volume operation.
-
-   Typically these are written to a http.Request.
+/*DeleteVolumeParams contains all the parameters to send to the API endpoint
+for the delete volume operation typically these are written to a http.Request
 */
 type DeleteVolumeParams struct {
 
-	/* ID.
+	/*ID
+	  id of the volume
 
-	   id of the volume
 	*/
 	ID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the delete volume params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *DeleteVolumeParams) WithDefaults() *DeleteVolumeParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the delete volume params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *DeleteVolumeParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete volume params

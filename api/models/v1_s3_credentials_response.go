@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -178,38 +177,6 @@ func (m *V1S3CredentialsResponse) validateTenant(formats strfmt.Registry) error 
 
 	if err := validate.Required("tenant", "body", m.Tenant); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this v1 s3 credentials response based on the context it is used
-func (m *V1S3CredentialsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateKeys(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1S3CredentialsResponse) contextValidateKeys(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Keys); i++ {
-
-		if m.Keys[i] != nil {
-			if err := m.Keys[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("keys" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil

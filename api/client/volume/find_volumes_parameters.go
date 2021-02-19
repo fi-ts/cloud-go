@@ -18,70 +18,56 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewFindVolumesParams creates a new FindVolumesParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewFindVolumesParams creates a new FindVolumesParams object
+// with the default values initialized.
 func NewFindVolumesParams() *FindVolumesParams {
+	var ()
 	return &FindVolumesParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewFindVolumesParamsWithTimeout creates a new FindVolumesParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewFindVolumesParamsWithTimeout(timeout time.Duration) *FindVolumesParams {
+	var ()
 	return &FindVolumesParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewFindVolumesParamsWithContext creates a new FindVolumesParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewFindVolumesParamsWithContext(ctx context.Context) *FindVolumesParams {
+	var ()
 	return &FindVolumesParams{
+
 		Context: ctx,
 	}
 }
 
 // NewFindVolumesParamsWithHTTPClient creates a new FindVolumesParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewFindVolumesParamsWithHTTPClient(client *http.Client) *FindVolumesParams {
+	var ()
 	return &FindVolumesParams{
 		HTTPClient: client,
 	}
 }
 
-/* FindVolumesParams contains all the parameters to send to the API endpoint
-   for the find volumes operation.
-
-   Typically these are written to a http.Request.
+/*FindVolumesParams contains all the parameters to send to the API endpoint
+for the find volumes operation typically these are written to a http.Request
 */
 type FindVolumesParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.V1VolumeFindRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the find volumes params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *FindVolumesParams) WithDefaults() *FindVolumesParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the find volumes params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *FindVolumesParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the find volumes params
@@ -135,6 +121,7 @@ func (o *FindVolumesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

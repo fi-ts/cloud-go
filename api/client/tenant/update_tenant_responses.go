@@ -53,7 +53,7 @@ func NewUpdateTenantOK() *UpdateTenantOK {
 	return &UpdateTenantOK{}
 }
 
-/* UpdateTenantOK describes a response with status code 200, with default header values.
+/*UpdateTenantOK handles this case with default header values.
 
 Updated
 */
@@ -64,6 +64,7 @@ type UpdateTenantOK struct {
 func (o *UpdateTenantOK) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenantOK  %+v", 200, o.Payload)
 }
+
 func (o *UpdateTenantOK) GetPayload() *models.V1TenantResponse {
 	return o.Payload
 }
@@ -85,7 +86,7 @@ func NewUpdateTenantPreconditionFailed() *UpdateTenantPreconditionFailed {
 	return &UpdateTenantPreconditionFailed{}
 }
 
-/* UpdateTenantPreconditionFailed describes a response with status code 412, with default header values.
+/*UpdateTenantPreconditionFailed handles this case with default header values.
 
 OptimisticLock
 */
@@ -96,6 +97,7 @@ type UpdateTenantPreconditionFailed struct {
 func (o *UpdateTenantPreconditionFailed) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenantPreconditionFailed  %+v", 412, o.Payload)
 }
+
 func (o *UpdateTenantPreconditionFailed) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -119,7 +121,7 @@ func NewUpdateTenantDefault(code int) *UpdateTenantDefault {
 	}
 }
 
-/* UpdateTenantDefault describes a response with status code -1, with default header values.
+/*UpdateTenantDefault handles this case with default header values.
 
 Error
 */
@@ -137,6 +139,7 @@ func (o *UpdateTenantDefault) Code() int {
 func (o *UpdateTenantDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenant default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *UpdateTenantDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

@@ -46,7 +46,7 @@ func NewIPUsageCSVOK() *IPUsageCSVOK {
 	return &IPUsageCSVOK{}
 }
 
-/* IPUsageCSVOK describes a response with status code 200, with default header values.
+/*IPUsageCSVOK handles this case with default header values.
 
 OK
 */
@@ -57,6 +57,7 @@ type IPUsageCSVOK struct {
 func (o *IPUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/ip-usage-csv][%d] ipUsageCSVOK  %+v", 200, o.Payload)
 }
+
 func (o *IPUsageCSVOK) GetPayload() string {
 	return o.Payload
 }
@@ -78,7 +79,7 @@ func NewIPUsageCSVDefault(code int) *IPUsageCSVDefault {
 	}
 }
 
-/* IPUsageCSVDefault describes a response with status code -1, with default header values.
+/*IPUsageCSVDefault handles this case with default header values.
 
 Error
 */
@@ -96,6 +97,7 @@ func (o *IPUsageCSVDefault) Code() int {
 func (o *IPUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/ip-usage-csv][%d] ipUsageCSV default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *IPUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

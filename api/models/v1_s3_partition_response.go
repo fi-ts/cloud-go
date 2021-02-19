@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -78,11 +76,6 @@ func (m *V1S3PartitionResponse) validateReady(formats strfmt.Registry) error {
 		return err
 	}
 
-	return nil
-}
-
-// ContextValidate validates this v1 s3 partition response based on context it is used
-func (m *V1S3PartitionResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

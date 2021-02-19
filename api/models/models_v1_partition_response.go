@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -86,34 +84,6 @@ func (m *ModelsV1PartitionResponse) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this models v1 partition response based on the context it is used
-func (m *ModelsV1PartitionResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateBootconfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ModelsV1PartitionResponse) contextValidateBootconfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Bootconfig != nil {
-		if err := m.Bootconfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("bootconfig")
-			}
-			return err
-		}
 	}
 
 	return nil

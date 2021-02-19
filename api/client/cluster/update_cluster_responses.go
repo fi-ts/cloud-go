@@ -53,7 +53,7 @@ func NewUpdateClusterOK() *UpdateClusterOK {
 	return &UpdateClusterOK{}
 }
 
-/* UpdateClusterOK describes a response with status code 200, with default header values.
+/*UpdateClusterOK handles this case with default header values.
 
 OK
 */
@@ -64,6 +64,7 @@ type UpdateClusterOK struct {
 func (o *UpdateClusterOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterOK  %+v", 200, o.Payload)
 }
+
 func (o *UpdateClusterOK) GetPayload() *models.V1ClusterResponse {
 	return o.Payload
 }
@@ -85,7 +86,7 @@ func NewUpdateClusterConflict() *UpdateClusterConflict {
 	return &UpdateClusterConflict{}
 }
 
-/* UpdateClusterConflict describes a response with status code 409, with default header values.
+/*UpdateClusterConflict handles this case with default header values.
 
 Conflict
 */
@@ -96,6 +97,7 @@ type UpdateClusterConflict struct {
 func (o *UpdateClusterConflict) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterConflict  %+v", 409, o.Payload)
 }
+
 func (o *UpdateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -119,7 +121,7 @@ func NewUpdateClusterDefault(code int) *UpdateClusterDefault {
 	}
 }
 
-/* UpdateClusterDefault describes a response with status code -1, with default header values.
+/*UpdateClusterDefault handles this case with default header values.
 
 Error
 */
@@ -137,6 +139,7 @@ func (o *UpdateClusterDefault) Code() int {
 func (o *UpdateClusterDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster][%d] updateCluster default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *UpdateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

@@ -53,7 +53,7 @@ func NewGetMasterdataOK() *GetMasterdataOK {
 	return &GetMasterdataOK{}
 }
 
-/* GetMasterdataOK describes a response with status code 200, with default header values.
+/*GetMasterdataOK handles this case with default header values.
 
 Ok
 */
@@ -64,6 +64,7 @@ type GetMasterdataOK struct {
 func (o *GetMasterdataOK) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK  %+v", 200, o.Payload)
 }
+
 func (o *GetMasterdataOK) GetPayload() *models.V1MasterdataLookupResponse {
 	return o.Payload
 }
@@ -85,7 +86,7 @@ func NewGetMasterdataNotFound() *GetMasterdataNotFound {
 	return &GetMasterdataNotFound{}
 }
 
-/* GetMasterdataNotFound describes a response with status code 404, with default header values.
+/*GetMasterdataNotFound handles this case with default header values.
 
 NotFound
 */
@@ -96,6 +97,7 @@ type GetMasterdataNotFound struct {
 func (o *GetMasterdataNotFound) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound  %+v", 404, o.Payload)
 }
+
 func (o *GetMasterdataNotFound) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -119,7 +121,7 @@ func NewGetMasterdataDefault(code int) *GetMasterdataDefault {
 	}
 }
 
-/* GetMasterdataDefault describes a response with status code -1, with default header values.
+/*GetMasterdataDefault handles this case with default header values.
 
 Error
 */
@@ -137,6 +139,7 @@ func (o *GetMasterdataDefault) Code() int {
 func (o *GetMasterdataDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetMasterdataDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

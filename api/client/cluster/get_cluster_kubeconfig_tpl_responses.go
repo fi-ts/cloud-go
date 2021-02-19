@@ -47,7 +47,7 @@ func NewGetClusterKubeconfigTplOK() *GetClusterKubeconfigTplOK {
 	return &GetClusterKubeconfigTplOK{}
 }
 
-/* GetClusterKubeconfigTplOK describes a response with status code 200, with default header values.
+/*GetClusterKubeconfigTplOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type GetClusterKubeconfigTplOK struct {
 func (o *GetClusterKubeconfigTplOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTplOK  %+v", 200, o.Payload)
 }
+
 func (o *GetClusterKubeconfigTplOK) GetPayload() *models.V1ClusterKubeconfigResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetClusterKubeconfigTplDefault(code int) *GetClusterKubeconfigTplDefault
 	}
 }
 
-/* GetClusterKubeconfigTplDefault describes a response with status code -1, with default header values.
+/*GetClusterKubeconfigTplDefault handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *GetClusterKubeconfigTplDefault) Code() int {
 func (o *GetClusterKubeconfigTplDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTpl default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetClusterKubeconfigTplDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

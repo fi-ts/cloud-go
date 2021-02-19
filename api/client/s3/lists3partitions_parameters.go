@@ -16,66 +16,52 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewLists3partitionsParams creates a new Lists3partitionsParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewLists3partitionsParams creates a new Lists3partitionsParams object
+// with the default values initialized.
 func NewLists3partitionsParams() *Lists3partitionsParams {
+
 	return &Lists3partitionsParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewLists3partitionsParamsWithTimeout creates a new Lists3partitionsParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewLists3partitionsParamsWithTimeout(timeout time.Duration) *Lists3partitionsParams {
+
 	return &Lists3partitionsParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewLists3partitionsParamsWithContext creates a new Lists3partitionsParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewLists3partitionsParamsWithContext(ctx context.Context) *Lists3partitionsParams {
+
 	return &Lists3partitionsParams{
+
 		Context: ctx,
 	}
 }
 
 // NewLists3partitionsParamsWithHTTPClient creates a new Lists3partitionsParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewLists3partitionsParamsWithHTTPClient(client *http.Client) *Lists3partitionsParams {
+
 	return &Lists3partitionsParams{
 		HTTPClient: client,
 	}
 }
 
-/* Lists3partitionsParams contains all the parameters to send to the API endpoint
-   for the lists3partitions operation.
-
-   Typically these are written to a http.Request.
+/*Lists3partitionsParams contains all the parameters to send to the API endpoint
+for the lists3partitions operation typically these are written to a http.Request
 */
 type Lists3partitionsParams struct {
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the lists3partitions params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *Lists3partitionsParams) WithDefaults() *Lists3partitionsParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the lists3partitions params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *Lists3partitionsParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the lists3partitions params

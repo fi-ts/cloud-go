@@ -46,7 +46,7 @@ func NewNetworkUsageCSVOK() *NetworkUsageCSVOK {
 	return &NetworkUsageCSVOK{}
 }
 
-/* NetworkUsageCSVOK describes a response with status code 200, with default header values.
+/*NetworkUsageCSVOK handles this case with default header values.
 
 OK
 */
@@ -57,6 +57,7 @@ type NetworkUsageCSVOK struct {
 func (o *NetworkUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/network-usage-csv][%d] networkUsageCSVOK  %+v", 200, o.Payload)
 }
+
 func (o *NetworkUsageCSVOK) GetPayload() string {
 	return o.Payload
 }
@@ -78,7 +79,7 @@ func NewNetworkUsageCSVDefault(code int) *NetworkUsageCSVDefault {
 	}
 }
 
-/* NetworkUsageCSVDefault describes a response with status code -1, with default header values.
+/*NetworkUsageCSVDefault handles this case with default header values.
 
 Error
 */
@@ -96,6 +97,7 @@ func (o *NetworkUsageCSVDefault) Code() int {
 func (o *NetworkUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/network-usage-csv][%d] networkUsageCSV default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *NetworkUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

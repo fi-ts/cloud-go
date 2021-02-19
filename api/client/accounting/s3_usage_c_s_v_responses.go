@@ -46,7 +46,7 @@ func NewS3UsageCSVOK() *S3UsageCSVOK {
 	return &S3UsageCSVOK{}
 }
 
-/* S3UsageCSVOK describes a response with status code 200, with default header values.
+/*S3UsageCSVOK handles this case with default header values.
 
 OK
 */
@@ -57,6 +57,7 @@ type S3UsageCSVOK struct {
 func (o *S3UsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK  %+v", 200, o.Payload)
 }
+
 func (o *S3UsageCSVOK) GetPayload() string {
 	return o.Payload
 }
@@ -78,7 +79,7 @@ func NewS3UsageCSVDefault(code int) *S3UsageCSVDefault {
 	}
 }
 
-/* S3UsageCSVDefault describes a response with status code -1, with default header values.
+/*S3UsageCSVDefault handles this case with default header values.
 
 Error
 */
@@ -96,6 +97,7 @@ func (o *S3UsageCSVDefault) Code() int {
 func (o *S3UsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSV default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *S3UsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

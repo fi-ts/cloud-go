@@ -47,7 +47,7 @@ func NewDeleteClusterOK() *DeleteClusterOK {
 	return &DeleteClusterOK{}
 }
 
-/* DeleteClusterOK describes a response with status code 200, with default header values.
+/*DeleteClusterOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type DeleteClusterOK struct {
 func (o *DeleteClusterOK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/cluster/{id}][%d] deleteClusterOK  %+v", 200, o.Payload)
 }
+
 func (o *DeleteClusterOK) GetPayload() *models.V1ClusterResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewDeleteClusterDefault(code int) *DeleteClusterDefault {
 	}
 }
 
-/* DeleteClusterDefault describes a response with status code -1, with default header values.
+/*DeleteClusterDefault handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *DeleteClusterDefault) Code() int {
 func (o *DeleteClusterDefault) Error() string {
 	return fmt.Sprintf("[DELETE /v1/cluster/{id}][%d] deleteCluster default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *DeleteClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

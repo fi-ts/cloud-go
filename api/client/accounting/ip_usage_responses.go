@@ -47,7 +47,7 @@ func NewIPUsageOK() *IPUsageOK {
 	return &IPUsageOK{}
 }
 
-/* IPUsageOK describes a response with status code 200, with default header values.
+/*IPUsageOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type IPUsageOK struct {
 func (o *IPUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsageOK  %+v", 200, o.Payload)
 }
+
 func (o *IPUsageOK) GetPayload() *models.V1IPUsageResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewIPUsageDefault(code int) *IPUsageDefault {
 	}
 }
 
-/* IPUsageDefault describes a response with status code -1, with default header values.
+/*IPUsageDefault handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *IPUsageDefault) Code() int {
 func (o *IPUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsage default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *IPUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

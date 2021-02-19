@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -241,10 +240,6 @@ func (m *V1ClusterCreateRequest) validateKubernetes(formats strfmt.Registry) err
 
 func (m *V1ClusterCreateRequest) validateLabels(formats strfmt.Registry) error {
 
-	if err := validate.Required("Labels", "body", m.Labels); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -324,96 +319,6 @@ func (m *V1ClusterCreateRequest) validateWorkers(formats strfmt.Registry) error 
 
 		if m.Workers[i] != nil {
 			if err := m.Workers[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("Workers" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this v1 cluster create request based on the context it is used
-func (m *V1ClusterCreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateEgressRules(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateKubernetes(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateMaintenance(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateWorkers(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1ClusterCreateRequest) contextValidateEgressRules(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.EgressRules); i++ {
-
-		if m.EgressRules[i] != nil {
-			if err := m.EgressRules[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("EgressRules" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (m *V1ClusterCreateRequest) contextValidateKubernetes(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Kubernetes != nil {
-		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Kubernetes")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1ClusterCreateRequest) contextValidateMaintenance(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Maintenance != nil {
-		if err := m.Maintenance.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Maintenance")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1ClusterCreateRequest) contextValidateWorkers(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Workers); i++ {
-
-		if m.Workers[i] != nil {
-			if err := m.Workers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Workers" + "." + strconv.Itoa(i))
 				}

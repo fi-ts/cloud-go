@@ -47,7 +47,7 @@ func NewUpdates3OK() *Updates3OK {
 	return &Updates3OK{}
 }
 
-/* Updates3OK describes a response with status code 200, with default header values.
+/*Updates3OK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type Updates3OK struct {
 func (o *Updates3OK) Error() string {
 	return fmt.Sprintf("[POST /v1/s3][%d] updates3OK  %+v", 200, o.Payload)
 }
+
 func (o *Updates3OK) GetPayload() *models.V1S3CredentialsResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewUpdates3Default(code int) *Updates3Default {
 	}
 }
 
-/* Updates3Default describes a response with status code -1, with default header values.
+/*Updates3Default handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *Updates3Default) Code() int {
 func (o *Updates3Default) Error() string {
 	return fmt.Sprintf("[POST /v1/s3][%d] updates3 default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *Updates3Default) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

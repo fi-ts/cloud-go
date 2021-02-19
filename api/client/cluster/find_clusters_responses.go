@@ -47,7 +47,7 @@ func NewFindClustersOK() *FindClustersOK {
 	return &FindClustersOK{}
 }
 
-/* FindClustersOK describes a response with status code 200, with default header values.
+/*FindClustersOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type FindClustersOK struct {
 func (o *FindClustersOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClustersOK  %+v", 200, o.Payload)
 }
+
 func (o *FindClustersOK) GetPayload() []*models.V1ClusterResponse {
 	return o.Payload
 }
@@ -79,7 +80,7 @@ func NewFindClustersDefault(code int) *FindClustersDefault {
 	}
 }
 
-/* FindClustersDefault describes a response with status code -1, with default header values.
+/*FindClustersDefault handles this case with default header values.
 
 Error
 */
@@ -97,6 +98,7 @@ func (o *FindClustersDefault) Code() int {
 func (o *FindClustersDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClusters default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *FindClustersDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

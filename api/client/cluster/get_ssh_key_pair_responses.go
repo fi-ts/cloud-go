@@ -47,7 +47,7 @@ func NewGetSSHKeyPairOK() *GetSSHKeyPairOK {
 	return &GetSSHKeyPairOK{}
 }
 
-/* GetSSHKeyPairOK describes a response with status code 200, with default header values.
+/*GetSSHKeyPairOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type GetSSHKeyPairOK struct {
 func (o *GetSSHKeyPairOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSshKeyPairOK  %+v", 200, o.Payload)
 }
+
 func (o *GetSSHKeyPairOK) GetPayload() *models.V1ClusterCredentialsResponse {
 	return o.Payload
 }
@@ -81,7 +82,7 @@ func NewGetSSHKeyPairDefault(code int) *GetSSHKeyPairDefault {
 	}
 }
 
-/* GetSSHKeyPairDefault describes a response with status code -1, with default header values.
+/*GetSSHKeyPairDefault handles this case with default header values.
 
 Error
 */
@@ -99,6 +100,7 @@ func (o *GetSSHKeyPairDefault) Code() int {
 func (o *GetSSHKeyPairDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSSHKeyPair default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *GetSSHKeyPairDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

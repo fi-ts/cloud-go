@@ -18,70 +18,56 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewClusterUsageCSVParams creates a new ClusterUsageCSVParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewClusterUsageCSVParams creates a new ClusterUsageCSVParams object
+// with the default values initialized.
 func NewClusterUsageCSVParams() *ClusterUsageCSVParams {
+	var ()
 	return &ClusterUsageCSVParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewClusterUsageCSVParamsWithTimeout creates a new ClusterUsageCSVParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewClusterUsageCSVParamsWithTimeout(timeout time.Duration) *ClusterUsageCSVParams {
+	var ()
 	return &ClusterUsageCSVParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewClusterUsageCSVParamsWithContext creates a new ClusterUsageCSVParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewClusterUsageCSVParamsWithContext(ctx context.Context) *ClusterUsageCSVParams {
+	var ()
 	return &ClusterUsageCSVParams{
+
 		Context: ctx,
 	}
 }
 
 // NewClusterUsageCSVParamsWithHTTPClient creates a new ClusterUsageCSVParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewClusterUsageCSVParamsWithHTTPClient(client *http.Client) *ClusterUsageCSVParams {
+	var ()
 	return &ClusterUsageCSVParams{
 		HTTPClient: client,
 	}
 }
 
-/* ClusterUsageCSVParams contains all the parameters to send to the API endpoint
-   for the cluster usage c s v operation.
-
-   Typically these are written to a http.Request.
+/*ClusterUsageCSVParams contains all the parameters to send to the API endpoint
+for the cluster usage c s v operation typically these are written to a http.Request
 */
 type ClusterUsageCSVParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.V1ClusterUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the cluster usage c s v params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ClusterUsageCSVParams) WithDefaults() *ClusterUsageCSVParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the cluster usage c s v params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ClusterUsageCSVParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the cluster usage c s v params
@@ -135,6 +121,7 @@ func (o *ClusterUsageCSVParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

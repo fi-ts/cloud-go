@@ -47,7 +47,7 @@ func NewLists3partitionsOK() *Lists3partitionsOK {
 	return &Lists3partitionsOK{}
 }
 
-/* Lists3partitionsOK describes a response with status code 200, with default header values.
+/*Lists3partitionsOK handles this case with default header values.
 
 OK
 */
@@ -58,6 +58,7 @@ type Lists3partitionsOK struct {
 func (o *Lists3partitionsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/s3/partitions][%d] lists3partitionsOK  %+v", 200, o.Payload)
 }
+
 func (o *Lists3partitionsOK) GetPayload() []*models.V1S3PartitionResponse {
 	return o.Payload
 }
@@ -79,7 +80,7 @@ func NewLists3partitionsDefault(code int) *Lists3partitionsDefault {
 	}
 }
 
-/* Lists3partitionsDefault describes a response with status code -1, with default header values.
+/*Lists3partitionsDefault handles this case with default header values.
 
 Error
 */
@@ -97,6 +98,7 @@ func (o *Lists3partitionsDefault) Code() int {
 func (o *Lists3partitionsDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/s3/partitions][%d] lists3partitions default  %+v", o._statusCode, o.Payload)
 }
+
 func (o *Lists3partitionsDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

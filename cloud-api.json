@@ -796,6 +796,17 @@
         "Kubeconfig"
       ]
     },
+    "v1.ClusterMachineResetRequest": {
+      "properties": {
+        "machineid": {
+          "description": "uuid of the machine to power reset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "machineid"
+      ]
+    },
     "v1.ClusterNameProject": {
       "properties": {
         "cluster_name": {
@@ -3852,6 +3863,52 @@
           }
         },
         "summary": "trigger cluster reconcilation ",
+        "tags": [
+          "cluster"
+        ]
+      }
+    },
+    "/v1/cluster/{id}/resetmachine": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "resetMachine",
+        "parameters": [
+          {
+            "description": "identifier of the cluster",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterMachineResetRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "trigger hard power reset of a machine ",
         "tags": [
           "cluster"
         ]

@@ -18,70 +18,56 @@ import (
 	"github.com/fi-ts/cloud-go/api/models"
 )
 
-// NewContainerUsageParams creates a new ContainerUsageParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewContainerUsageParams creates a new ContainerUsageParams object
+// with the default values initialized.
 func NewContainerUsageParams() *ContainerUsageParams {
+	var ()
 	return &ContainerUsageParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewContainerUsageParamsWithTimeout creates a new ContainerUsageParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewContainerUsageParamsWithTimeout(timeout time.Duration) *ContainerUsageParams {
+	var ()
 	return &ContainerUsageParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewContainerUsageParamsWithContext creates a new ContainerUsageParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewContainerUsageParamsWithContext(ctx context.Context) *ContainerUsageParams {
+	var ()
 	return &ContainerUsageParams{
+
 		Context: ctx,
 	}
 }
 
 // NewContainerUsageParamsWithHTTPClient creates a new ContainerUsageParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewContainerUsageParamsWithHTTPClient(client *http.Client) *ContainerUsageParams {
+	var ()
 	return &ContainerUsageParams{
 		HTTPClient: client,
 	}
 }
 
-/* ContainerUsageParams contains all the parameters to send to the API endpoint
-   for the container usage operation.
-
-   Typically these are written to a http.Request.
+/*ContainerUsageParams contains all the parameters to send to the API endpoint
+for the container usage operation typically these are written to a http.Request
 */
 type ContainerUsageParams struct {
 
-	// Body.
+	/*Body*/
 	Body *models.V1ContainerUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the container usage params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ContainerUsageParams) WithDefaults() *ContainerUsageParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the container usage params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *ContainerUsageParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the container usage params
@@ -135,6 +121,7 @@ func (o *ContainerUsageParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
+
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
