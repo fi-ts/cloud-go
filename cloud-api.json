@@ -690,7 +690,10 @@
           "format": "int32",
           "type": "integer"
         },
-        "s3BucketURL": {
+        "s3BucketName": {
+          "type": "string"
+        },
+        "s3Endpoint": {
           "type": "string"
         },
         "schedule": {

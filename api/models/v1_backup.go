@@ -24,8 +24,11 @@ type V1Backup struct {
 	// retention
 	Retention int32 `json:"retention,omitempty"`
 
-	// s3 bucket URL
-	S3BucketURL string `json:"s3BucketURL,omitempty"`
+	// s3 bucket name
+	S3BucketName string `json:"s3BucketName,omitempty"`
+
+	// s3 endpoint
+	S3Endpoint string `json:"s3Endpoint,omitempty"`
 
 	// schedule
 	Schedule string `json:"schedule,omitempty"`
