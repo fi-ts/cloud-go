@@ -4294,7 +4294,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "getPostgresBackups",
+        "operationId": "listPostgresBackups",
         "produces": [
           "application/json"
         ],
@@ -4315,7 +4315,7 @@
             }
           }
         },
-        "summary": "get postgres backups",
+        "summary": "get all postgres backups",
         "tags": [
           "database"
         ]

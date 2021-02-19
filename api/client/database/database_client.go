@@ -47,6 +47,8 @@ type ClientService interface {
 
 	ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresOK, error)
 
+	ListPostgresBackups(params *ListPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresBackupsOK, error)
+
 	UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -423,6 +425,40 @@ func (a *Client) ListPostgres(params *ListPostgresParams, authInfo runtime.Clien
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListPostgresDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ListPostgresBackups gets all postgres backups
+*/
+func (a *Client) ListPostgresBackups(params *ListPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresBackupsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListPostgresBackupsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listPostgresBackups",
+		Method:             "GET",
+		PathPattern:        "/v1/database/postgres/backup",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListPostgresBackupsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListPostgresBackupsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListPostgresBackupsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
