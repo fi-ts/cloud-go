@@ -4323,6 +4323,43 @@
           "database"
         ]
       },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "updatePostgresBackup",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.Backup"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.Backup"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "update a postgres backup for the given projectid",
+        "tags": [
+          "database"
+        ]
+      },
       "put": {
         "consumes": [
           "application/json"

@@ -51,6 +51,8 @@ type ClientService interface {
 
 	UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresOK, error)
 
+	UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresBackupCreated, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -493,6 +495,40 @@ func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UpdatePostgresDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  UpdatePostgresBackup updates a postgres backup for the given projectid
+*/
+func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresBackupCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdatePostgresBackupParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updatePostgresBackup",
+		Method:             "POST",
+		PathPattern:        "/v1/database/postgres/backup",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdatePostgresBackupReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdatePostgresBackupCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*UpdatePostgresBackupDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
