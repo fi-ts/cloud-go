@@ -31,7 +31,7 @@ type ClientService interface {
 
 	DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresOK, error)
 
-	DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresBackupCreated, error)
+	DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresBackupOK, error)
 
 	FindPostgres(params *FindPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*FindPostgresOK, error)
 
@@ -157,7 +157,7 @@ func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.C
 /*
   DeletePostgresBackup deletes a postgres backup for the given projectid
 */
-func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresBackupCreated, error) {
+func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresBackupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeletePostgresBackupParams()
@@ -179,7 +179,7 @@ func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeletePostgresBackupCreated)
+	success, ok := result.(*DeletePostgresBackupOK)
 	if ok {
 		return success, nil
 	}
