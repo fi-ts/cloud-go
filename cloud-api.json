@@ -4545,7 +4545,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/v1.BackupUpdateRequest"
+              "$ref": "#/definitions/v1.BackupResponse"
             }
           },
           "default": {
@@ -4582,7 +4582,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/v1.BackupCreateRequest"
+              "$ref": "#/definitions/v1.BackupResponse"
             }
           },
           "default": {
