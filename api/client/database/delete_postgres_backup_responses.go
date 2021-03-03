@@ -52,19 +52,19 @@ func NewDeletePostgresBackupOK() *DeletePostgresBackupOK {
 Created
 */
 type DeletePostgresBackupOK struct {
-	Payload *models.V1Backup
+	Payload *models.V1BackupResponse
 }
 
 func (o *DeletePostgresBackupOK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/database/postgres/backup/{id}][%d] deletePostgresBackupOK  %+v", 200, o.Payload)
 }
-func (o *DeletePostgresBackupOK) GetPayload() *models.V1Backup {
+func (o *DeletePostgresBackupOK) GetPayload() *models.V1BackupResponse {
 	return o.Payload
 }
 
 func (o *DeletePostgresBackupOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V1Backup)
+	o.Payload = new(models.V1BackupResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

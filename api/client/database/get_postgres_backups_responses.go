@@ -52,19 +52,19 @@ func NewGetPostgresBackupsOK() *GetPostgresBackupsOK {
 OK
 */
 type GetPostgresBackupsOK struct {
-	Payload *models.V1Backup
+	Payload *models.V1BackupResponse
 }
 
 func (o *GetPostgresBackupsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/backup/{id}][%d] getPostgresBackupsOK  %+v", 200, o.Payload)
 }
-func (o *GetPostgresBackupsOK) GetPayload() *models.V1Backup {
+func (o *GetPostgresBackupsOK) GetPayload() *models.V1BackupResponse {
 	return o.Payload
 }
 
 func (o *GetPostgresBackupsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V1Backup)
+	o.Payload = new(models.V1BackupResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

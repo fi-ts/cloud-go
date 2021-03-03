@@ -24,6 +24,105 @@
         "type": "HTTPErrorResponse"
       }
     },
+    "metalgo.IPAllocateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "machineid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkid": {
+          "type": "string"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ipaddress",
+        "machineid",
+        "networkid",
+        "projectid"
+      ]
+    },
+    "metalgo.IPFindRequest": {
+      "properties": {
+        "IPAddress": {
+          "type": "string"
+        },
+        "MachineID": {
+          "type": "string"
+        },
+        "NetworkID": {
+          "type": "string"
+        },
+        "ParentPrefixCidr": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "Tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "IPAddress",
+        "MachineID",
+        "NetworkID",
+        "ParentPrefixCidr",
+        "ProjectID",
+        "Tags",
+        "Type"
+      ]
+    },
+    "metalgo.IPUpdateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ipaddress"
+      ]
+    },
     "models.V1BootInfo": {
       "properties": {
         "bootloaderid": {
@@ -681,8 +780,17 @@
         }
       }
     },
-    "v1.Backup": {
+    "v1.BackupCreateRequest": {
       "properties": {
+        "autocreate": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "partition": {
+          "type": "string"
+        },
         "projectID": {
           "type": "string"
         },
@@ -707,6 +815,41 @@
         }
       }
     },
+    "v1.BackupResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "s3BucketName": {
+          "type": "string"
+        },
+        "s3Endpoint": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "#/definitions/v1.BackupSecret"
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "v1.BackupSecret": {
       "properties": {
         "accesskey": {
@@ -714,6 +857,29 @@
         },
         "secretkey": {
           "type": "string"
+        }
+      }
+    },
+    "v1.BackupUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "s3BucketName": {
+          "type": "string"
+        },
+        "s3Endpoint": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "#/definitions/v1.BackupSecret"
         }
       }
     },
@@ -1969,6 +2135,9 @@
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
+        "backup": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -2058,29 +2227,23 @@
     },
     "v1.PostgresResponse": {
       "properties": {
-        "Description": {
-          "type": "string"
-        },
-        "ID": {
-          "type": "string"
-        },
-        "PartitionID": {
-          "type": "string"
-        },
-        "ProjectID": {
-          "type": "string"
-        },
-        "Tenant": {
-          "type": "string"
-        },
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
+        },
+        "backup": {
+          "type": "string"
         },
         "createdBy": {
           "type": "string"
         },
         "creationTimestamp": {
           "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
           "type": "string"
         },
         "labels": {
@@ -2096,22 +2259,27 @@
           "format": "int32",
           "type": "integer"
         },
+        "partition": {
+          "type": "string"
+        },
+        "project": {
+          "type": "string"
+        },
         "size": {
           "$ref": "#/definitions/v1.Size"
         },
         "status": {
           "$ref": "#/definitions/v1.PostgresStatus"
         },
+        "tenant": {
+          "type": "string"
+        },
         "version": {
           "type": "string"
         }
       },
       "required": [
-        "Description",
-        "ID",
-        "PartitionID",
-        "ProjectID",
-        "Tenant",
+        "id",
         "status"
       ]
     },
@@ -2127,6 +2295,9 @@
     },
     "v1.PostgresStatus": {
       "properties": {
+        "childReference": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -2810,6 +2981,35 @@
           "type": "string"
         }
       }
+    },
+    "v1.UsageRequest": {
+      "properties": {
+        "clusterid": {
+          "description": "the cluster id to account for",
+          "type": "string"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
     },
     "v1.UserSecret": {
       "properties": {
@@ -4306,7 +4506,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "$ref": "#/definitions/v1.Backup"
+                "$ref": "#/definitions/v1.BackupResponse"
               },
               "type": "array"
             }
@@ -4334,7 +4534,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Backup"
+              "$ref": "#/definitions/v1.BackupUpdateRequest"
             }
           }
         ],
@@ -4345,7 +4545,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/v1.Backup"
+              "$ref": "#/definitions/v1.BackupUpdateRequest"
             }
           },
           "default": {
@@ -4371,7 +4571,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.Backup"
+              "$ref": "#/definitions/v1.BackupCreateRequest"
             }
           }
         ],
@@ -4382,7 +4582,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/v1.Backup"
+              "$ref": "#/definitions/v1.BackupCreateRequest"
             }
           },
           "default": {
@@ -4420,7 +4620,7 @@
           "200": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/v1.Backup"
+              "$ref": "#/definitions/v1.BackupResponse"
             }
           },
           "default": {
@@ -4456,7 +4656,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.Backup"
+              "$ref": "#/definitions/v1.BackupResponse"
             }
           },
           "default": {

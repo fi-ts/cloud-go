@@ -19,28 +19,11 @@ import (
 // swagger:model v1.PostgresResponse
 type V1PostgresResponse struct {
 
-	// description
-	// Required: true
-	Description *string `json:"Description"`
-
-	// ID
-	// Required: true
-	ID *string `json:"ID"`
-
-	// partition ID
-	// Required: true
-	PartitionID *string `json:"PartitionID"`
-
-	// project ID
-	// Required: true
-	ProjectID *string `json:"ProjectID"`
-
-	// tenant
-	// Required: true
-	Tenant *string `json:"Tenant"`
-
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
+
+	// backup
+	Backup string `json:"backup,omitempty"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
@@ -48,6 +31,13 @@ type V1PostgresResponse struct {
 	// creation timestamp
 	// Format: date-time
 	CreationTimestamp strfmt.DateTime `json:"creationTimestamp,omitempty"`
+
+	// description
+	Description string `json:"description,omitempty"`
+
+	// id
+	// Required: true
+	ID *string `json:"id"`
 
 	// labels
 	Labels map[string]string `json:"labels,omitempty"`
@@ -58,12 +48,21 @@ type V1PostgresResponse struct {
 	// number of instances
 	NumberOfInstances int32 `json:"numberOfInstances,omitempty"`
 
+	// partition
+	Partition string `json:"partition,omitempty"`
+
+	// project
+	Project string `json:"project,omitempty"`
+
 	// size
 	Size *V1Size `json:"size,omitempty"`
 
 	// status
 	// Required: true
 	Status *V1PostgresStatus `json:"status"`
+
+	// tenant
+	Tenant string `json:"tenant,omitempty"`
 
 	// version
 	Version string `json:"version,omitempty"`
@@ -73,31 +72,15 @@ type V1PostgresResponse struct {
 func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateDescription(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePartitionID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateProjectID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTenant(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateAccessList(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateCreationTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -116,51 +99,6 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1PostgresResponse) validateDescription(formats strfmt.Registry) error {
-
-	if err := validate.Required("Description", "body", m.Description); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1PostgresResponse) validateID(formats strfmt.Registry) error {
-
-	if err := validate.Required("ID", "body", m.ID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1PostgresResponse) validatePartitionID(formats strfmt.Registry) error {
-
-	if err := validate.Required("PartitionID", "body", m.PartitionID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1PostgresResponse) validateProjectID(formats strfmt.Registry) error {
-
-	if err := validate.Required("ProjectID", "body", m.ProjectID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1PostgresResponse) validateTenant(formats strfmt.Registry) error {
-
-	if err := validate.Required("Tenant", "body", m.Tenant); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -187,6 +125,15 @@ func (m *V1PostgresResponse) validateCreationTimestamp(formats strfmt.Registry) 
 	}
 
 	if err := validate.FormatOf("creationTimestamp", "body", "date-time", m.CreationTimestamp.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 

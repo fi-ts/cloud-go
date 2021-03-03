@@ -62,7 +62,7 @@ func NewUpdatePostgresBackupParamsWithHTTPClient(client *http.Client) *UpdatePos
 type UpdatePostgresBackupParams struct {
 
 	// Body.
-	Body *models.V1Backup
+	Body *models.V1BackupUpdateRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -118,13 +118,13 @@ func (o *UpdatePostgresBackupParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the update postgres backup params
-func (o *UpdatePostgresBackupParams) WithBody(body *models.V1Backup) *UpdatePostgresBackupParams {
+func (o *UpdatePostgresBackupParams) WithBody(body *models.V1BackupUpdateRequest) *UpdatePostgresBackupParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update postgres backup params
-func (o *UpdatePostgresBackupParams) SetBody(body *models.V1Backup) {
+func (o *UpdatePostgresBackupParams) SetBody(body *models.V1BackupUpdateRequest) {
 	o.Body = body
 }
 

@@ -18,6 +18,9 @@ import (
 // swagger:model v1.PostgresStatus
 type V1PostgresStatus struct {
 
+	// child reference
+	ChildReference string `json:"childReference,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 

@@ -26,6 +26,9 @@ type V1PostgresCreateRequest struct {
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
 
+	// backup
+	Backup string `json:"backup,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
