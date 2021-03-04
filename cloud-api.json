@@ -815,6 +815,26 @@
         }
       }
     },
+    "v1.BackupEntry": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "size",
+        "timestamp"
+      ]
+    },
     "v1.BackupResponse": {
       "properties": {
         "id": {
@@ -2225,6 +2245,12 @@
         "backup": {
           "type": "string"
         },
+        "backups": {
+          "items": {
+            "$ref": "#/definitions/v1.BackupEntry"
+          },
+          "type": "array"
+        },
         "createdBy": {
           "type": "string"
         },
@@ -2274,6 +2300,7 @@
         }
       },
       "required": [
+        "backups",
         "id",
         "status"
       ]
