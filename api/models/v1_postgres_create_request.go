@@ -36,7 +36,7 @@ type V1PostgresCreateRequest struct {
 	Labels map[string]string `json:"labels,omitempty"`
 
 	// maintenance
-	Maintenance *V1MaintenanceWindow `json:"maintenance,omitempty"`
+	Maintenance []string `json:"maintenance"`
 
 	// number of instances
 	NumberOfInstances int32 `json:"numberOfInstances,omitempty"`
@@ -66,10 +66,6 @@ func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAccessList(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateMaintenance(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -109,23 +105,6 @@ func (m *V1PostgresCreateRequest) validateAccessList(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *V1PostgresCreateRequest) validateMaintenance(formats strfmt.Registry) error {
-	if swag.IsZero(m.Maintenance) { // not required
-		return nil
-	}
-
-	if m.Maintenance != nil {
-		if err := m.Maintenance.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("maintenance")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *V1PostgresCreateRequest) validateSize(formats strfmt.Registry) error {
 	if swag.IsZero(m.Size) { // not required
 		return nil
@@ -151,10 +130,6 @@ func (m *V1PostgresCreateRequest) ContextValidate(ctx context.Context, formats s
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateMaintenance(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSize(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -171,20 +146,6 @@ func (m *V1PostgresCreateRequest) contextValidateAccessList(ctx context.Context,
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1PostgresCreateRequest) contextValidateMaintenance(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Maintenance != nil {
-		if err := m.Maintenance.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("maintenance")
 			}
 			return err
 		}

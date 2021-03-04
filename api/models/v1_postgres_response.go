@@ -43,7 +43,7 @@ type V1PostgresResponse struct {
 	Labels map[string]string `json:"labels,omitempty"`
 
 	// maintenance
-	Maintenance *V1MaintenanceWindow `json:"maintenance,omitempty"`
+	Maintenance []string `json:"maintenance"`
 
 	// number of instances
 	NumberOfInstances int32 `json:"numberOfInstances,omitempty"`
@@ -81,10 +81,6 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateMaintenance(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -140,23 +136,6 @@ func (m *V1PostgresResponse) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1PostgresResponse) validateMaintenance(formats strfmt.Registry) error {
-	if swag.IsZero(m.Maintenance) { // not required
-		return nil
-	}
-
-	if m.Maintenance != nil {
-		if err := m.Maintenance.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("maintenance")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *V1PostgresResponse) validateSize(formats strfmt.Registry) error {
 	if swag.IsZero(m.Size) { // not required
 		return nil
@@ -200,10 +179,6 @@ func (m *V1PostgresResponse) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateMaintenance(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSize(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -224,20 +199,6 @@ func (m *V1PostgresResponse) contextValidateAccessList(ctx context.Context, form
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1PostgresResponse) contextValidateMaintenance(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Maintenance != nil {
-		if err := m.Maintenance.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("maintenance")
 			}
 			return err
 		}
