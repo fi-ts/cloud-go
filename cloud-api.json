@@ -2248,12 +2248,6 @@
         "backup": {
           "type": "string"
         },
-        "backups": {
-          "items": {
-            "$ref": "#/definitions/v1.BackupEntry"
-          },
-          "type": "array"
-        },
         "createdBy": {
           "type": "string"
         },
@@ -2303,7 +2297,6 @@
         }
       },
       "required": [
-        "backups",
         "id",
         "status"
       ]
@@ -4560,7 +4553,7 @@
           "application/json"
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Ok",
             "schema": {
               "$ref": "#/definitions/v1.BackupResponse"
@@ -4862,6 +4855,47 @@
           }
         },
         "summary": "get postgres by id",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/{id}/backups": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresBackups",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.BackupEntry"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres stored backups by id",
         "tags": [
           "database"
         ]

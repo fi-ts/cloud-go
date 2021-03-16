@@ -61,7 +61,7 @@ type GetPostgresBackupsParams struct {
 
 	/* ID.
 
-	   identifier of the backup
+	   identifier of the postgres
 	*/
 	ID string
 

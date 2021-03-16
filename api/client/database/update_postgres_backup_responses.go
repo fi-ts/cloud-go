@@ -24,8 +24,8 @@ type UpdatePostgresBackupReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *UpdatePostgresBackupReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 201:
-		result := NewUpdatePostgresBackupCreated()
+	case 200:
+		result := NewUpdatePostgresBackupOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -42,27 +42,27 @@ func (o *UpdatePostgresBackupReader) ReadResponse(response runtime.ClientRespons
 	}
 }
 
-// NewUpdatePostgresBackupCreated creates a UpdatePostgresBackupCreated with default headers values
-func NewUpdatePostgresBackupCreated() *UpdatePostgresBackupCreated {
-	return &UpdatePostgresBackupCreated{}
+// NewUpdatePostgresBackupOK creates a UpdatePostgresBackupOK with default headers values
+func NewUpdatePostgresBackupOK() *UpdatePostgresBackupOK {
+	return &UpdatePostgresBackupOK{}
 }
 
-/* UpdatePostgresBackupCreated describes a response with status code 201, with default header values.
+/* UpdatePostgresBackupOK describes a response with status code 200, with default header values.
 
 Ok
 */
-type UpdatePostgresBackupCreated struct {
+type UpdatePostgresBackupOK struct {
 	Payload *models.V1BackupResponse
 }
 
-func (o *UpdatePostgresBackupCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/backup][%d] updatePostgresBackupCreated  %+v", 201, o.Payload)
+func (o *UpdatePostgresBackupOK) Error() string {
+	return fmt.Sprintf("[POST /v1/database/postgres/backup][%d] updatePostgresBackupOK  %+v", 200, o.Payload)
 }
-func (o *UpdatePostgresBackupCreated) GetPayload() *models.V1BackupResponse {
+func (o *UpdatePostgresBackupOK) GetPayload() *models.V1BackupResponse {
 	return o.Payload
 }
 
-func (o *UpdatePostgresBackupCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *UpdatePostgresBackupOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1BackupResponse)
 

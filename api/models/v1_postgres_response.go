@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -25,10 +24,6 @@ type V1PostgresResponse struct {
 
 	// backup
 	Backup string `json:"backup,omitempty"`
-
-	// backups
-	// Required: true
-	Backups []*V1BackupEntry `json:"backups"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
@@ -81,10 +76,6 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateBackups(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateCreationTimestamp(formats); err != nil {
 		res = append(res, err)
 	}
@@ -119,31 +110,6 @@ func (m *V1PostgresResponse) validateAccessList(formats strfmt.Registry) error {
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *V1PostgresResponse) validateBackups(formats strfmt.Registry) error {
-
-	if err := validate.Required("backups", "body", m.Backups); err != nil {
-		return err
-	}
-
-	for i := 0; i < len(m.Backups); i++ {
-		if swag.IsZero(m.Backups[i]) { // not required
-			continue
-		}
-
-		if m.Backups[i] != nil {
-			if err := m.Backups[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("backups" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
@@ -213,10 +179,6 @@ func (m *V1PostgresResponse) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateBackups(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSize(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -240,24 +202,6 @@ func (m *V1PostgresResponse) contextValidateAccessList(ctx context.Context, form
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *V1PostgresResponse) contextValidateBackups(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Backups); i++ {
-
-		if m.Backups[i] != nil {
-			if err := m.Backups[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("backups" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil

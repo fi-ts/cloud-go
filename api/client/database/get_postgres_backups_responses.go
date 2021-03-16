@@ -52,22 +52,20 @@ func NewGetPostgresBackupsOK() *GetPostgresBackupsOK {
 OK
 */
 type GetPostgresBackupsOK struct {
-	Payload *models.V1BackupResponse
+	Payload []*models.V1BackupEntry
 }
 
 func (o *GetPostgresBackupsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/backup/{id}][%d] getPostgresBackupsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/{id}/backups][%d] getPostgresBackupsOK  %+v", 200, o.Payload)
 }
-func (o *GetPostgresBackupsOK) GetPayload() *models.V1BackupResponse {
+func (o *GetPostgresBackupsOK) GetPayload() []*models.V1BackupEntry {
 	return o.Payload
 }
 
 func (o *GetPostgresBackupsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V1BackupResponse)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -97,7 +95,7 @@ func (o *GetPostgresBackupsDefault) Code() int {
 }
 
 func (o *GetPostgresBackupsDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/backup/{id}][%d] getPostgresBackups default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/{id}/backups][%d] getPostgresBackups default  %+v", o._statusCode, o.Payload)
 }
 func (o *GetPostgresBackupsDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload

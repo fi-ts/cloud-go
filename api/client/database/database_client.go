@@ -54,7 +54,7 @@ type ClientService interface {
 
 	UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresOK, error)
 
-	UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupCreated, error)
+	UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -288,7 +288,7 @@ func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientA
 }
 
 /*
-  GetPostgresBackups gets postgres backups
+  GetPostgresBackups gets postgres stored backups by id
 */
 func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresBackupsOK, error) {
 	// TODO: Validate the params before sending
@@ -298,7 +298,7 @@ func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo r
 	op := &runtime.ClientOperation{
 		ID:                 "getPostgresBackups",
 		Method:             "GET",
-		PathPattern:        "/v1/database/postgres/backup/{id}",
+		PathPattern:        "/v1/database/postgres/{id}/backups",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -556,7 +556,7 @@ func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.C
 /*
   UpdatePostgresBackup updates a postgres backup for the given projectid
 */
-func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupCreated, error) {
+func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdatePostgresBackupParams()
@@ -582,7 +582,7 @@ func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdatePostgresBackupCreated)
+	success, ok := result.(*UpdatePostgresBackupOK)
 	if ok {
 		return success, nil
 	}
