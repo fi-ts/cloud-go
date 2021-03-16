@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -24,75 +23,17 @@ type V1BackupUpdateRequest struct {
 	// retention
 	Retention int32 `json:"retention,omitempty"`
 
-	// s3 bucket name
-	S3BucketName string `json:"s3BucketName,omitempty"`
-
-	// s3 endpoint
-	S3Endpoint string `json:"s3Endpoint,omitempty"`
-
 	// schedule
 	Schedule string `json:"schedule,omitempty"`
-
-	// secret
-	Secret *V1BackupSecret `json:"secret,omitempty"`
 }
 
 // Validate validates this v1 backup update request
 func (m *V1BackupUpdateRequest) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateSecret(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *V1BackupUpdateRequest) validateSecret(formats strfmt.Registry) error {
-	if swag.IsZero(m.Secret) { // not required
-		return nil
-	}
-
-	if m.Secret != nil {
-		if err := m.Secret.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("secret")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this v1 backup update request based on the context it is used
+// ContextValidate validates this v1 backup update request based on context it is used
 func (m *V1BackupUpdateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateSecret(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1BackupUpdateRequest) contextValidateSecret(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Secret != nil {
-		if err := m.Secret.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("secret")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

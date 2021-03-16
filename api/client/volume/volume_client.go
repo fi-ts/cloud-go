@@ -23,13 +23,16 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteVolume(params *DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteVolumeOK, error)
+	DeleteVolume(params *DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVolumeOK, error)
 
-	FindVolumes(params *FindVolumesParams, authInfo runtime.ClientAuthInfoWriter) (*FindVolumesOK, error)
+	FindVolumes(params *FindVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindVolumesOK, error)
 
-	ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter) (*ListVolumesOK, error)
+	ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVolumesOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -37,13 +40,12 @@ type ClientService interface {
 /*
   DeleteVolume deletes a volume including all data
 */
-func (a *Client) DeleteVolume(params *DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteVolumeOK, error) {
+func (a *Client) DeleteVolume(params *DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVolumeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteVolumeParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "deleteVolume",
 		Method:             "DELETE",
 		PathPattern:        "/v1/volume/{id}",
@@ -55,7 +57,12 @@ func (a *Client) DeleteVolume(params *DeleteVolumeParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -71,13 +78,12 @@ func (a *Client) DeleteVolume(params *DeleteVolumeParams, authInfo runtime.Clien
 /*
   FindVolumes finds volumes by multiple criteria
 */
-func (a *Client) FindVolumes(params *FindVolumesParams, authInfo runtime.ClientAuthInfoWriter) (*FindVolumesOK, error) {
+func (a *Client) FindVolumes(params *FindVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindVolumesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFindVolumesParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "findVolumes",
 		Method:             "POST",
 		PathPattern:        "/v1/volume/find",
@@ -89,7 +95,12 @@ func (a *Client) FindVolumes(params *FindVolumesParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -105,13 +116,12 @@ func (a *Client) FindVolumes(params *FindVolumesParams, authInfo runtime.ClientA
 /*
   ListVolumes gets all volumes
 */
-func (a *Client) ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter) (*ListVolumesOK, error) {
+func (a *Client) ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVolumesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListVolumesParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "listVolumes",
 		Method:             "GET",
 		PathPattern:        "/v1/volume",
@@ -123,7 +133,12 @@ func (a *Client) ListVolumes(params *ListVolumesParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

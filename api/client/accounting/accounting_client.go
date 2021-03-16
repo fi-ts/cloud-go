@@ -23,31 +23,34 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ClusterUsage(params *ClusterUsageParams, authInfo runtime.ClientAuthInfoWriter) (*ClusterUsageOK, error)
+	ClusterUsage(params *ClusterUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterUsageOK, error)
 
-	ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*ClusterUsageCSVOK, error)
+	ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterUsageCSVOK, error)
 
-	ContainerUsage(params *ContainerUsageParams, authInfo runtime.ClientAuthInfoWriter) (*ContainerUsageOK, error)
+	ContainerUsage(params *ContainerUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerUsageOK, error)
 
-	ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*ContainerUsageCSVOK, error)
+	ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerUsageCSVOK, error)
 
-	IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoWriter) (*IPUsageOK, error)
+	IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPUsageOK, error)
 
-	IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*IPUsageCSVOK, error)
+	IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPUsageCSVOK, error)
 
-	NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkUsageOK, error)
+	NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageOK, error)
 
-	NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkUsageCSVOK, error)
+	NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageCSVOK, error)
 
-	S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter) (*S3UsageOK, error)
+	S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageOK, error)
 
-	S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*S3UsageCSVOK, error)
+	S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageCSVOK, error)
 
-	VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientAuthInfoWriter) (*VolumeUsageOK, error)
+	VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VolumeUsageOK, error)
 
-	VolumeUsageCSV(params *VolumeUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*VolumeUsageCSVOK, error)
+	VolumeUsageCSV(params *VolumeUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VolumeUsageCSVOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -55,13 +58,12 @@ type ClientService interface {
 /*
   ClusterUsage finds cluster usage for given accounting query
 */
-func (a *Client) ClusterUsage(params *ClusterUsageParams, authInfo runtime.ClientAuthInfoWriter) (*ClusterUsageOK, error) {
+func (a *Client) ClusterUsage(params *ClusterUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterUsageOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewClusterUsageParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "clusterUsage",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/cluster-usage",
@@ -73,7 +75,12 @@ func (a *Client) ClusterUsage(params *ClusterUsageParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -89,13 +96,12 @@ func (a *Client) ClusterUsage(params *ClusterUsageParams, authInfo runtime.Clien
 /*
   ClusterUsageCSV finds cluster usage for given accounting query
 */
-func (a *Client) ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*ClusterUsageCSVOK, error) {
+func (a *Client) ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterUsageCSVOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewClusterUsageCSVParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "clusterUsageCSV",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/cluster-usage-csv",
@@ -107,7 +113,12 @@ func (a *Client) ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -123,13 +134,12 @@ func (a *Client) ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime
 /*
   ContainerUsage finds container usage for given accounting query
 */
-func (a *Client) ContainerUsage(params *ContainerUsageParams, authInfo runtime.ClientAuthInfoWriter) (*ContainerUsageOK, error) {
+func (a *Client) ContainerUsage(params *ContainerUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerUsageOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewContainerUsageParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "containerUsage",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/container-usage",
@@ -141,7 +151,12 @@ func (a *Client) ContainerUsage(params *ContainerUsageParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -157,13 +172,12 @@ func (a *Client) ContainerUsage(params *ContainerUsageParams, authInfo runtime.C
 /*
   ContainerUsageCSV finds container usage for given accounting query
 */
-func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*ContainerUsageCSVOK, error) {
+func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerUsageCSVOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewContainerUsageCSVParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "containerUsageCSV",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/container-usage-csv",
@@ -175,7 +189,12 @@ func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo run
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -191,13 +210,12 @@ func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo run
 /*
   IPUsage finds ip usage for given accounting query
 */
-func (a *Client) IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoWriter) (*IPUsageOK, error) {
+func (a *Client) IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPUsageOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIPUsageParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ipUsage",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/ip-usage",
@@ -209,7 +227,12 @@ func (a *Client) IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoW
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -225,13 +248,12 @@ func (a *Client) IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoW
 /*
   IPUsageCSV finds ip usage for given accounting query
 */
-func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*IPUsageCSVOK, error) {
+func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPUsageCSVOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIPUsageCSVParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "ipUsageCSV",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/ip-usage-csv",
@@ -243,7 +265,12 @@ func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAut
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -259,13 +286,12 @@ func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAut
 /*
   NetworkUsage finds network usage for given accounting query
 */
-func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkUsageOK, error) {
+func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNetworkUsageParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "networkUsage",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/network-usage",
@@ -277,7 +303,12 @@ func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -293,13 +324,12 @@ func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.Clien
 /*
   NetworkUsageCSV finds network usage for given accounting query
 */
-func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*NetworkUsageCSVOK, error) {
+func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageCSVOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNetworkUsageCSVParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "networkUsageCSV",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/network-usage-csv",
@@ -311,7 +341,12 @@ func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -327,13 +362,12 @@ func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime
 /*
   S3Usage finds s3 bucket usage for given accounting query
 */
-func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter) (*S3UsageOK, error) {
+func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewS3UsageParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "s3Usage",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/s3-usage",
@@ -345,7 +379,12 @@ func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoW
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -361,13 +400,12 @@ func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoW
 /*
   S3UsageCSV finds s3 bucket usage for given accounting query
 */
-func (a *Client) S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*S3UsageCSVOK, error) {
+func (a *Client) S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageCSVOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewS3UsageCSVParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "s3UsageCSV",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/s3-usage-csv",
@@ -379,7 +417,12 @@ func (a *Client) S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAut
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -395,13 +438,12 @@ func (a *Client) S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAut
 /*
   VolumeUsage finds volume usage for given accounting query
 */
-func (a *Client) VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientAuthInfoWriter) (*VolumeUsageOK, error) {
+func (a *Client) VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VolumeUsageOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewVolumeUsageParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "volumeUsage",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/volume-usage",
@@ -413,7 +455,12 @@ func (a *Client) VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -429,13 +476,12 @@ func (a *Client) VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientA
 /*
   VolumeUsageCSV finds volume usage for given accounting query
 */
-func (a *Client) VolumeUsageCSV(params *VolumeUsageCSVParams, authInfo runtime.ClientAuthInfoWriter) (*VolumeUsageCSVOK, error) {
+func (a *Client) VolumeUsageCSV(params *VolumeUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VolumeUsageCSVOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewVolumeUsageCSVParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "volumeUsageCSV",
 		Method:             "POST",
 		PathPattern:        "/v1/accounting/volume-usage-csv",
@@ -447,7 +493,12 @@ func (a *Client) VolumeUsageCSV(params *VolumeUsageCSVParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

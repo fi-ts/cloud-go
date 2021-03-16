@@ -785,6 +785,9 @@
         "autocreate": {
           "type": "boolean"
         },
+        "createdBy": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -804,6 +807,9 @@
         "s3Endpoint": {
           "type": "string"
         },
+        "s3Region": {
+          "type": "string"
+        },
         "schedule": {
           "type": "string"
         },
@@ -813,7 +819,10 @@
         "tenant": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "createdBy"
+      ]
     },
     "v1.BackupEntry": {
       "properties": {
@@ -837,6 +846,9 @@
     },
     "v1.BackupResponse": {
       "properties": {
+        "createdBy": {
+          "type": "string"
+        },
         "id": {
           "type": "string"
         },
@@ -856,6 +868,9 @@
         "s3Endpoint": {
           "type": "string"
         },
+        "s3Region": {
+          "type": "string"
+        },
         "schedule": {
           "type": "string"
         },
@@ -867,12 +882,16 @@
         }
       },
       "required": [
+        "createdBy",
         "id"
       ]
     },
     "v1.BackupSecret": {
       "properties": {
         "accesskey": {
+          "type": "string"
+        },
+        "s3encryptionkey": {
           "type": "string"
         },
         "secretkey": {
@@ -889,17 +908,8 @@
           "format": "int32",
           "type": "integer"
         },
-        "s3BucketName": {
-          "type": "string"
-        },
-        "s3Endpoint": {
-          "type": "string"
-        },
         "schedule": {
           "type": "string"
-        },
-        "secret": {
-          "$ref": "#/definitions/v1.BackupSecret"
         }
       }
     },
@@ -1716,6 +1726,10 @@
           "description": "the tenant of this ip",
           "type": "string"
         },
+        "uuid": {
+          "description": "the allocation uuid of this ip",
+          "type": "string"
+        },
         "warnings": {
           "description": "warnings that occurred when calculating the usage of this ip",
           "items": {
@@ -1732,6 +1746,7 @@
         "projectname",
         "start",
         "tenant",
+        "uuid",
         "warnings"
       ]
     },
@@ -1956,11 +1971,6 @@
           "description": "the device name of this network device",
           "type": "string"
         },
-        "end": {
-          "description": "the end time of this network device",
-          "format": "date-time",
-          "type": "string"
-        },
         "in": {
           "description": "the ingoing traffic of this network device (byte)",
           "type": "string"
@@ -1986,11 +1996,6 @@
           "description": "the project name of this network device",
           "type": "string"
         },
-        "start": {
-          "description": "the start time of this network device",
-          "format": "date-time",
-          "type": "string"
-        },
         "tenant": {
           "description": "the tenant of this network device",
           "type": "string"
@@ -2011,14 +2016,12 @@
         "clusterid",
         "clustername",
         "device",
-        "end",
         "in",
         "lifetime",
         "out",
         "partition",
         "projectid",
         "projectname",
-        "start",
         "tenant",
         "total",
         "warnings"
@@ -3185,6 +3188,10 @@
           "description": "the type of this volume",
           "type": "string"
         },
+        "uuid": {
+          "description": "the uuid of this volume",
+          "type": "string"
+        },
         "warnings": {
           "description": "warnings that occurred when calculating the usage of this volume",
           "items": {
@@ -3208,6 +3215,7 @@
         "start",
         "tenant",
         "type",
+        "uuid",
         "warnings"
       ]
     },
@@ -4553,7 +4561,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Ok",
             "schema": {
               "$ref": "#/definitions/v1.BackupResponse"
             }
@@ -4628,7 +4636,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Created",
+            "description": "Ok",
             "schema": {
               "$ref": "#/definitions/v1.BackupResponse"
             }

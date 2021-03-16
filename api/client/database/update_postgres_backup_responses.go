@@ -49,7 +49,7 @@ func NewUpdatePostgresBackupCreated() *UpdatePostgresBackupCreated {
 
 /* UpdatePostgresBackupCreated describes a response with status code 201, with default header values.
 
-Created
+Ok
 */
 type UpdatePostgresBackupCreated struct {
 	Payload *models.V1BackupResponse

@@ -23,35 +23,38 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePostgresCreated, error)
+	CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresCreated, error)
 
-	CreatePostgresBackup(params *CreatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePostgresBackupCreated, error)
+	CreatePostgresBackup(params *CreatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupCreated, error)
 
-	DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresOK, error)
+	DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresOK, error)
 
-	DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresBackupOK, error)
+	DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupOK, error)
 
-	FindPostgres(params *FindPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*FindPostgresOK, error)
+	FindPostgres(params *FindPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindPostgresOK, error)
 
-	GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresOK, error)
+	GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresOK, error)
 
-	GetPostgresBackups(params *GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresBackupsOK, error)
+	GetPostgresBackups(params *GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresBackupsOK, error)
 
-	GetPostgresPartitions(params *GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresPartitionsOK, error)
+	GetPostgresPartitions(params *GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresPartitionsOK, error)
 
-	GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresSecretsOK, error)
+	GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresSecretsOK, error)
 
-	GetPostgresVersions(params *GetPostgresVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresVersionsOK, error)
+	GetPostgresVersions(params *GetPostgresVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresVersionsOK, error)
 
-	ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresOK, error)
+	ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresOK, error)
 
-	ListPostgresBackups(params *ListPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresBackupsOK, error)
+	ListPostgresBackups(params *ListPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresBackupsOK, error)
 
-	UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresOK, error)
+	UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresOK, error)
 
-	UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresBackupCreated, error)
+	UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupCreated, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -59,13 +62,12 @@ type ClientService interface {
 /*
   CreatePostgres creates a postgres if the given ID already exists a conflict is returned
 */
-func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePostgresCreated, error) {
+func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreatePostgresParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "createPostgres",
 		Method:             "PUT",
 		PathPattern:        "/v1/database/postgres",
@@ -77,7 +79,12 @@ func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -93,13 +100,12 @@ func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.C
 /*
   CreatePostgresBackup creates a postgres backup for the given projectid
 */
-func (a *Client) CreatePostgresBackup(params *CreatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*CreatePostgresBackupCreated, error) {
+func (a *Client) CreatePostgresBackup(params *CreatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreatePostgresBackupParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "createPostgresBackup",
 		Method:             "PUT",
 		PathPattern:        "/v1/database/postgres/backup",
@@ -111,7 +117,12 @@ func (a *Client) CreatePostgresBackup(params *CreatePostgresBackupParams, authIn
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -127,13 +138,12 @@ func (a *Client) CreatePostgresBackup(params *CreatePostgresBackupParams, authIn
 /*
   DeletePostgres deletes an postgres and returns the deleted entity
 */
-func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresOK, error) {
+func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeletePostgresParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "deletePostgres",
 		Method:             "DELETE",
 		PathPattern:        "/v1/database/postgres/{id}",
@@ -145,7 +155,12 @@ func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -161,13 +176,12 @@ func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.C
 /*
   DeletePostgresBackup deletes a postgres backup for the given projectid
 */
-func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*DeletePostgresBackupOK, error) {
+func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeletePostgresBackupParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "deletePostgresBackup",
 		Method:             "DELETE",
 		PathPattern:        "/v1/database/postgres/backup/{id}",
@@ -179,7 +193,12 @@ func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authIn
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -195,13 +214,12 @@ func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authIn
 /*
   FindPostgres finds postgres databases by multiple criteria
 */
-func (a *Client) FindPostgres(params *FindPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*FindPostgresOK, error) {
+func (a *Client) FindPostgres(params *FindPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindPostgresOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFindPostgresParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "findPostgres",
 		Method:             "POST",
 		PathPattern:        "/v1/database/postgres/find",
@@ -213,7 +231,12 @@ func (a *Client) FindPostgres(params *FindPostgresParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -229,13 +252,12 @@ func (a *Client) FindPostgres(params *FindPostgresParams, authInfo runtime.Clien
 /*
   GetPostgres gets postgres by id
 */
-func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresOK, error) {
+func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetPostgresParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getPostgres",
 		Method:             "GET",
 		PathPattern:        "/v1/database/postgres/{id}",
@@ -247,7 +269,12 @@ func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -263,13 +290,12 @@ func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientA
 /*
   GetPostgresBackups gets postgres backups
 */
-func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresBackupsOK, error) {
+func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresBackupsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetPostgresBackupsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getPostgresBackups",
 		Method:             "GET",
 		PathPattern:        "/v1/database/postgres/backup/{id}",
@@ -281,7 +307,12 @@ func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo r
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -297,13 +328,12 @@ func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo r
 /*
   GetPostgresPartitions gets postgres partitions supported
 */
-func (a *Client) GetPostgresPartitions(params *GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresPartitionsOK, error) {
+func (a *Client) GetPostgresPartitions(params *GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresPartitionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetPostgresPartitionsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getPostgresPartitions",
 		Method:             "GET",
 		PathPattern:        "/v1/database/postgres/partitions",
@@ -315,7 +345,12 @@ func (a *Client) GetPostgresPartitions(params *GetPostgresPartitionsParams, auth
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -331,13 +366,12 @@ func (a *Client) GetPostgresPartitions(params *GetPostgresPartitionsParams, auth
 /*
   GetPostgresSecrets gets postgres secrets by id
 */
-func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresSecretsOK, error) {
+func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresSecretsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetPostgresSecretsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getPostgresSecrets",
 		Method:             "GET",
 		PathPattern:        "/v1/database/postgres/{id}/secrets",
@@ -349,7 +383,12 @@ func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo r
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -365,13 +404,12 @@ func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo r
 /*
   GetPostgresVersions gets postgres versions supported
 */
-func (a *Client) GetPostgresVersions(params *GetPostgresVersionsParams, authInfo runtime.ClientAuthInfoWriter) (*GetPostgresVersionsOK, error) {
+func (a *Client) GetPostgresVersions(params *GetPostgresVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetPostgresVersionsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getPostgresVersions",
 		Method:             "GET",
 		PathPattern:        "/v1/database/postgres/versions",
@@ -383,7 +421,12 @@ func (a *Client) GetPostgresVersions(params *GetPostgresVersionsParams, authInfo
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -399,13 +442,12 @@ func (a *Client) GetPostgresVersions(params *GetPostgresVersionsParams, authInfo
 /*
   ListPostgres gets all postgres databases
 */
-func (a *Client) ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresOK, error) {
+func (a *Client) ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListPostgresParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "listPostgres",
 		Method:             "GET",
 		PathPattern:        "/v1/database/postgres",
@@ -417,7 +459,12 @@ func (a *Client) ListPostgres(params *ListPostgresParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -433,13 +480,12 @@ func (a *Client) ListPostgres(params *ListPostgresParams, authInfo runtime.Clien
 /*
   ListPostgresBackups gets all postgres backups
 */
-func (a *Client) ListPostgresBackups(params *ListPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter) (*ListPostgresBackupsOK, error) {
+func (a *Client) ListPostgresBackups(params *ListPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresBackupsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListPostgresBackupsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "listPostgresBackups",
 		Method:             "GET",
 		PathPattern:        "/v1/database/postgres/backup",
@@ -451,7 +497,12 @@ func (a *Client) ListPostgresBackups(params *ListPostgresBackupsParams, authInfo
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -467,13 +518,12 @@ func (a *Client) ListPostgresBackups(params *ListPostgresBackupsParams, authInfo
 /*
   UpdatePostgres updates a postgres if the postgres was changed since this one was read a conflict is returned
 */
-func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresOK, error) {
+func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdatePostgresParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "updatePostgres",
 		Method:             "POST",
 		PathPattern:        "/v1/database/postgres",
@@ -485,7 +535,12 @@ func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -501,13 +556,12 @@ func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.C
 /*
   UpdatePostgresBackup updates a postgres backup for the given projectid
 */
-func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter) (*UpdatePostgresBackupCreated, error) {
+func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdatePostgresBackupParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "updatePostgresBackup",
 		Method:             "POST",
 		PathPattern:        "/v1/database/postgres/backup",
@@ -519,7 +573,12 @@ func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authIn
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

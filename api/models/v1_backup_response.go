@@ -19,6 +19,10 @@ import (
 // swagger:model v1.BackupResponse
 type V1BackupResponse struct {
 
+	// created by
+	// Required: true
+	CreatedBy *string `json:"createdBy"`
+
 	// id
 	// Required: true
 	ID *string `json:"id"`
@@ -38,6 +42,9 @@ type V1BackupResponse struct {
 	// s3 endpoint
 	S3Endpoint string `json:"s3Endpoint,omitempty"`
 
+	// s3 region
+	S3Region string `json:"s3Region,omitempty"`
+
 	// schedule
 	Schedule string `json:"schedule,omitempty"`
 
@@ -52,6 +59,10 @@ type V1BackupResponse struct {
 func (m *V1BackupResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -63,6 +74,15 @@ func (m *V1BackupResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1BackupResponse) validateCreatedBy(formats strfmt.Registry) error {
+
+	if err := validate.Required("createdBy", "body", m.CreatedBy); err != nil {
+		return err
+	}
+
 	return nil
 }
 

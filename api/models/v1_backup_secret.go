@@ -20,6 +20,9 @@ type V1BackupSecret struct {
 	// accesskey
 	Accesskey string `json:"accesskey,omitempty"`
 
+	// s3encryptionkey
+	S3encryptionkey string `json:"s3encryptionkey,omitempty"`
+
 	// secretkey
 	Secretkey string `json:"secretkey,omitempty"`
 }
