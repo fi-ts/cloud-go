@@ -77,6 +77,10 @@ type V1VolumeUsage struct {
 	// Required: true
 	Type *string `json:"type"`
 
+	// the uuid of this volume
+	// Required: true
+	UUID *string `json:"uuid"`
+
 	// warnings that occurred when calculating the usage of this volume
 	// Required: true
 	Warnings []string `json:"warnings"`
@@ -139,6 +143,10 @@ func (m *V1VolumeUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUUID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -280,6 +288,15 @@ func (m *V1VolumeUsage) validateTenant(formats strfmt.Registry) error {
 func (m *V1VolumeUsage) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeUsage) validateUUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("uuid", "body", m.UUID); err != nil {
 		return err
 	}
 

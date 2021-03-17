@@ -31,11 +31,6 @@ type V1NetworkUsage struct {
 	// Required: true
 	Device *string `json:"device"`
 
-	// the end time of this network device
-	// Required: true
-	// Format: date-time
-	End *strfmt.DateTime `json:"end"`
-
 	// the ingoing traffic of this network device (byte)
 	// Required: true
 	In *string `json:"in"`
@@ -59,11 +54,6 @@ type V1NetworkUsage struct {
 	// the project name of this network device
 	// Required: true
 	Projectname *string `json:"projectname"`
-
-	// the start time of this network device
-	// Required: true
-	// Format: date-time
-	Start *strfmt.DateTime `json:"start"`
 
 	// the tenant of this network device
 	// Required: true
@@ -94,10 +84,6 @@ func (m *V1NetworkUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEnd(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateIn(formats); err != nil {
 		res = append(res, err)
 	}
@@ -119,10 +105,6 @@ func (m *V1NetworkUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProjectname(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStart(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -165,19 +147,6 @@ func (m *V1NetworkUsage) validateClustername(formats strfmt.Registry) error {
 func (m *V1NetworkUsage) validateDevice(formats strfmt.Registry) error {
 
 	if err := validate.Required("device", "body", m.Device); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1NetworkUsage) validateEnd(formats strfmt.Registry) error {
-
-	if err := validate.Required("end", "body", m.End); err != nil {
-		return err
-	}
-
-	if err := validate.FormatOf("end", "body", "date-time", m.End.String(), formats); err != nil {
 		return err
 	}
 
@@ -232,19 +201,6 @@ func (m *V1NetworkUsage) validateProjectid(formats strfmt.Registry) error {
 func (m *V1NetworkUsage) validateProjectname(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectname", "body", m.Projectname); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1NetworkUsage) validateStart(formats strfmt.Registry) error {
-
-	if err := validate.Required("start", "body", m.Start); err != nil {
-		return err
-	}
-
-	if err := validate.FormatOf("start", "body", "date-time", m.Start.String(), formats); err != nil {
 		return err
 	}
 

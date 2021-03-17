@@ -74,6 +74,9 @@
     },
     "models.V1IPResponse": {
       "properties": {
+        "allocationuuid": {
+          "type": "string"
+        },
         "changed": {
           "type": "string"
         },
@@ -106,6 +109,7 @@
         }
       },
       "required": [
+        "allocationuuid",
         "ipaddress",
         "networkid",
         "projectid",
@@ -450,7 +454,6 @@
       },
       "required": [
         "incomplete_provisioning_cycles",
-        "last_event_time",
         "log"
       ]
     },
@@ -1481,6 +1484,10 @@
           "description": "the tenant of this ip",
           "type": "string"
         },
+        "uuid": {
+          "description": "the allocation uuid of this ip",
+          "type": "string"
+        },
         "warnings": {
           "description": "warnings that occurred when calculating the usage of this ip",
           "items": {
@@ -1497,6 +1504,7 @@
         "projectname",
         "start",
         "tenant",
+        "uuid",
         "warnings"
       ]
     },
@@ -1721,11 +1729,6 @@
           "description": "the device name of this network device",
           "type": "string"
         },
-        "end": {
-          "description": "the end time of this network device",
-          "format": "date-time",
-          "type": "string"
-        },
         "in": {
           "description": "the ingoing traffic of this network device (byte)",
           "type": "string"
@@ -1751,11 +1754,6 @@
           "description": "the project name of this network device",
           "type": "string"
         },
-        "start": {
-          "description": "the start time of this network device",
-          "format": "date-time",
-          "type": "string"
-        },
         "tenant": {
           "description": "the tenant of this network device",
           "type": "string"
@@ -1776,14 +1774,12 @@
         "clusterid",
         "clustername",
         "device",
-        "end",
         "in",
         "lifetime",
         "out",
         "partition",
         "projectid",
         "projectname",
-        "start",
         "tenant",
         "total",
         "warnings"
@@ -2684,6 +2680,10 @@
           "description": "the type of this volume",
           "type": "string"
         },
+        "uuid": {
+          "description": "the uuid of this volume",
+          "type": "string"
+        },
         "warnings": {
           "description": "warnings that occurred when calculating the usage of this volume",
           "items": {
@@ -2707,6 +2707,7 @@
         "start",
         "tenant",
         "type",
+        "uuid",
         "warnings"
       ]
     },

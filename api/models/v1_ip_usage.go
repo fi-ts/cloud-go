@@ -49,6 +49,10 @@ type V1IPUsage struct {
 	// Required: true
 	Tenant *string `json:"tenant"`
 
+	// the allocation uuid of this ip
+	// Required: true
+	UUID *string `json:"uuid"`
+
 	// warnings that occurred when calculating the usage of this ip
 	// Required: true
 	Warnings []string `json:"warnings"`
@@ -83,6 +87,10 @@ func (m *V1IPUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTenant(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUUID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -161,6 +169,15 @@ func (m *V1IPUsage) validateStart(formats strfmt.Registry) error {
 func (m *V1IPUsage) validateTenant(formats strfmt.Registry) error {
 
 	if err := validate.Required("tenant", "body", m.Tenant); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1IPUsage) validateUUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("uuid", "body", m.UUID); err != nil {
 		return err
 	}
 
