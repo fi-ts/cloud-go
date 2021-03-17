@@ -50,9 +50,6 @@ type V1PostgresCreateRequest struct {
 	// size
 	Size *V1Size `json:"size,omitempty"`
 
-	// tenant
-	Tenant string `json:"tenant,omitempty"`
-
 	// version
 	Version string `json:"version,omitempty"`
 }

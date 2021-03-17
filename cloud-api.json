@@ -815,9 +815,6 @@
         },
         "secret": {
           "$ref": "#/definitions/v1.BackupSecret"
-        },
-        "tenant": {
-          "type": "string"
         }
       },
       "required": [
@@ -2177,9 +2174,6 @@
         },
         "size": {
           "$ref": "#/definitions/v1.Size"
-        },
-        "tenant": {
-          "type": "string"
         },
         "version": {
           "type": "string"

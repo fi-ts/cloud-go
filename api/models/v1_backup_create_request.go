@@ -52,9 +52,6 @@ type V1BackupCreateRequest struct {
 
 	// secret
 	Secret *V1BackupSecret `json:"secret,omitempty"`
-
-	// tenant
-	Tenant string `json:"tenant,omitempty"`
 }
 
 // Validate validates this v1 backup create request
