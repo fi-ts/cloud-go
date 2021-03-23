@@ -322,8 +322,12 @@ github.com/markbates/oncer v0.0.0-20181203154359-bf2de49a0be2/go.mod h1:Ld9puTsI
 github.com/markbates/safe v1.0.1/go.mod h1:nAqgmRi7cY2nqMc92/bSEeQA+R4OheNU2T1kNSCBdG0=
 github.com/metal-stack/metal-lib v0.7.1 h1:ecfU6acj4NxrDQvti8d5SY0ytrPK7fcTo4rndaX+s2s=
 github.com/metal-stack/metal-lib v0.7.1/go.mod h1:ZINOFXqRRcjS2X/wQXxCmg9pvyEQLz33UFV/r/HxVP4=
+github.com/metal-stack/metal-lib v0.7.2 h1:vXuQnpoXJV4otCwLyB74MiiokaidAoAcNnivkG9/UTI=
+github.com/metal-stack/metal-lib v0.7.2/go.mod h1:eDBJ88yC8jUk+bAJXpF1Upw6j3lbbgv3UIF0D+llMec=
 github.com/metal-stack/security v0.5.2 h1:bOXV1sKCPSuSL+8J8Oz0uP1XvVnqGhrQxPqJ+4Ldb/s=
 github.com/metal-stack/security v0.5.2/go.mod h1:t7P93F6/iSDR729OS/3x5t69ewBCsHUYqRVaHb5nxjc=
+github.com/metal-stack/security v0.5.3 h1:FSqTetVVc3lfKpwFT7kT0BnVGk2bGdDkrtNYqnU4v0Q=
+github.com/metal-stack/security v0.5.3/go.mod h1:t7P93F6/iSDR729OS/3x5t69ewBCsHUYqRVaHb5nxjc=
 github.com/metal-stack/v v1.0.2/go.mod h1:YTahEu7/ishwpYKnp/VaW/7nf8+PInogkfGwLcGPdXg=
 github.com/mitchellh/mapstructure v1.1.2 h1:fmNYVwqnSfB9mZU6OS2O6GsXM+wcskZDuKQzvN1EDeE=
 github.com/mitchellh/mapstructure v1.1.2/go.mod h1:FVVH3fgwuzCH5S8UJGiWEs2h04kUh9fWfEaFds41c1Y=
