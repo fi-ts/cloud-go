@@ -17,6 +17,10 @@ import (
 // swagger:model models.V1IPResponse
 type ModelsV1IPResponse struct {
 
+	// allocationuuid
+	// Required: true
+	Allocationuuid *string `json:"allocationuuid"`
+
 	// changed
 	Changed string `json:"changed,omitempty"`
 
@@ -54,6 +58,10 @@ type ModelsV1IPResponse struct {
 func (m *ModelsV1IPResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAllocationuuid(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateIpaddress(formats); err != nil {
 		res = append(res, err)
 	}
@@ -77,6 +85,15 @@ func (m *ModelsV1IPResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ModelsV1IPResponse) validateAllocationuuid(formats strfmt.Registry) error {
+
+	if err := validate.Required("allocationuuid", "body", m.Allocationuuid); err != nil {
+		return err
+	}
+
 	return nil
 }
 

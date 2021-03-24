@@ -24,8 +24,7 @@ type ModelsV1MachineRecentProvisioningEvents struct {
 	IncompleteProvisioningCycles *string `json:"incomplete_provisioning_cycles"`
 
 	// last event time
-	// Required: true
-	LastEventTime *string `json:"last_event_time"`
+	LastEventTime string `json:"last_event_time,omitempty"`
 
 	// log
 	// Required: true
@@ -37,10 +36,6 @@ func (m *ModelsV1MachineRecentProvisioningEvents) Validate(formats strfmt.Regist
 	var res []error
 
 	if err := m.validateIncompleteProvisioningCycles(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateLastEventTime(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -57,15 +52,6 @@ func (m *ModelsV1MachineRecentProvisioningEvents) Validate(formats strfmt.Regist
 func (m *ModelsV1MachineRecentProvisioningEvents) validateIncompleteProvisioningCycles(formats strfmt.Registry) error {
 
 	if err := validate.Required("incomplete_provisioning_cycles", "body", m.IncompleteProvisioningCycles); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *ModelsV1MachineRecentProvisioningEvents) validateLastEventTime(formats strfmt.Registry) error {
-
-	if err := validate.Required("last_event_time", "body", m.LastEventTime); err != nil {
 		return err
 	}
 

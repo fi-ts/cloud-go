@@ -22,6 +22,9 @@ type V1Tenant struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// iam config
+	IamConfig *V1IAMConfig `json:"iam_config,omitempty"`
+
 	// meta
 	Meta *V1Meta `json:"meta,omitempty"`
 
@@ -37,6 +40,10 @@ func (m *V1Tenant) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDefaultQuotas(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIamConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,6 +71,24 @@ func (m *V1Tenant) validateDefaultQuotas(formats strfmt.Registry) error {
 		if err := m.DefaultQuotas.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("default_quotas")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1Tenant) validateIamConfig(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.IamConfig) { // not required
+		return nil
+	}
+
+	if m.IamConfig != nil {
+		if err := m.IamConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("iam_config")
 			}
 			return err
 		}
