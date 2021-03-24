@@ -23,13 +23,16 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter) (*GetTenantOK, error)
+	GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTenantOK, error)
 
-	ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTenantsOK, error)
+	ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTenantsOK, error)
 
-	UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateTenantOK, error)
+	UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTenantOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -37,13 +40,12 @@ type ClientService interface {
 /*
   GetTenant gets tenant by id
 */
-func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter) (*GetTenantOK, error) {
+func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTenantOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetTenantParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getTenant",
 		Method:             "GET",
 		PathPattern:        "/v1/tenant/{id}",
@@ -55,7 +57,12 @@ func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -71,13 +78,12 @@ func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthI
 /*
   ListTenants gets a tenant list
 */
-func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter) (*ListTenantsOK, error) {
+func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTenantsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListTenantsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "listTenants",
 		Method:             "GET",
 		PathPattern:        "/v1/tenant",
@@ -89,7 +95,12 @@ func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -105,13 +116,12 @@ func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientA
 /*
   UpdateTenant updates a tenant optimistic lock error can occur
 */
-func (a *Client) UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter) (*UpdateTenantOK, error) {
+func (a *Client) UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTenantOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateTenantParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "updateTenant",
 		Method:             "POST",
 		PathPattern:        "/v1/tenant",
@@ -123,7 +133,12 @@ func (a *Client) UpdateTenant(params *UpdateTenantParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

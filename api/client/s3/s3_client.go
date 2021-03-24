@@ -23,19 +23,22 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	Creates3(params *Creates3Params, authInfo runtime.ClientAuthInfoWriter) (*Creates3OK, error)
+	Creates3(params *Creates3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Creates3OK, error)
 
-	Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInfoWriter) (*Deletes3OK, error)
+	Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Deletes3OK, error)
 
-	Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWriter) (*Gets3OK, error)
+	Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Gets3OK, error)
 
-	Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWriter) (*Lists3OK, error)
+	Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Lists3OK, error)
 
-	Lists3partitions(params *Lists3partitionsParams, authInfo runtime.ClientAuthInfoWriter) (*Lists3partitionsOK, error)
+	Lists3partitions(params *Lists3partitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Lists3partitionsOK, error)
 
-	Updates3(params *Updates3Params, authInfo runtime.ClientAuthInfoWriter) (*Updates3OK, error)
+	Updates3(params *Updates3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Updates3OK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -43,13 +46,12 @@ type ClientService interface {
 /*
   Creates3 creates an s3 user if the given name for this tenant already exists a conflict is returned
 */
-func (a *Client) Creates3(params *Creates3Params, authInfo runtime.ClientAuthInfoWriter) (*Creates3OK, error) {
+func (a *Client) Creates3(params *Creates3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Creates3OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreates3Params()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "creates3",
 		Method:             "PUT",
 		PathPattern:        "/v1/s3",
@@ -61,7 +63,12 @@ func (a *Client) Creates3(params *Creates3Params, authInfo runtime.ClientAuthInf
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -77,13 +84,12 @@ func (a *Client) Creates3(params *Creates3Params, authInfo runtime.ClientAuthInf
 /*
   Deletes3 deletes an s3 user
 */
-func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInfoWriter) (*Deletes3OK, error) {
+func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Deletes3OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeletes3Params()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "deletes3",
 		Method:             "DELETE",
 		PathPattern:        "/v1/s3",
@@ -95,7 +101,12 @@ func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInf
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -111,13 +122,12 @@ func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInf
 /*
   Gets3 gets s3 user
 */
-func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWriter) (*Gets3OK, error) {
+func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Gets3OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGets3Params()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "gets3",
 		Method:             "GET",
 		PathPattern:        "/v1/s3",
@@ -129,7 +139,12 @@ func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWrite
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -145,13 +160,12 @@ func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWrite
 /*
   Lists3 lists s3 users
 */
-func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWriter) (*Lists3OK, error) {
+func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Lists3OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLists3Params()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "lists3",
 		Method:             "GET",
 		PathPattern:        "/v1/s3/list",
@@ -163,7 +177,12 @@ func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWri
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -179,13 +198,12 @@ func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWri
 /*
   Lists3partitions lists s3 partitions
 */
-func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runtime.ClientAuthInfoWriter) (*Lists3partitionsOK, error) {
+func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Lists3partitionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLists3partitionsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "lists3partitions",
 		Method:             "GET",
 		PathPattern:        "/v1/s3/partitions",
@@ -197,7 +215,12 @@ func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runti
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -213,13 +236,12 @@ func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runti
 /*
   Updates3 updates an s3 user
 */
-func (a *Client) Updates3(params *Updates3Params, authInfo runtime.ClientAuthInfoWriter) (*Updates3OK, error) {
+func (a *Client) Updates3(params *Updates3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Updates3OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdates3Params()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "updates3",
 		Method:             "POST",
 		PathPattern:        "/v1/s3",
@@ -231,7 +253,12 @@ func (a *Client) Updates3(params *Updates3Params, authInfo runtime.ClientAuthInf
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
