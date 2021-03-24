@@ -17,6 +17,7 @@ test:
 generate-client:
 	rm -rf api
 	mkdir -p api
+	docker pull metalstack/builder
 	docker run --user $$(id -u):$$(id -g) --rm -v ${PWD}:/work metalstack/builder swagger generate client -f cloud-api.json -t api --skip-validation
 
 .PHONY: golangcicheck
