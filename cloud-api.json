@@ -1591,6 +1591,23 @@
         "NetworkID"
       ]
     },
+    "v1.IAMConfig": {
+      "properties": {
+        "idm_config": {
+          "$ref": "#/definitions/v1.IDMConfig"
+        },
+        "issuer_config": {
+          "$ref": "#/definitions/v1.IssuerConfig"
+        }
+      }
+    },
+    "v1.IDMConfig": {
+      "properties": {
+        "idm_type": {
+          "type": "string"
+        }
+      }
+    },
     "v1.IPAllocateRequest": {
       "properties": {
         "description": {
@@ -1813,6 +1830,16 @@
         "from",
         "usage"
       ]
+    },
+    "v1.IssuerConfig": {
+      "properties": {
+        "client_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
     },
     "v1.Kubernetes": {
       "properties": {
@@ -2957,6 +2984,9 @@
         "description": {
           "type": "string"
         },
+        "iam_config": {
+          "$ref": "#/definitions/v1.IAMConfig"
+        },
         "meta": {
           "$ref": "#/definitions/v1.Meta"
         },
@@ -2970,8 +3000,23 @@
     },
     "v1.TenantResponse": {
       "properties": {
-        "tenant": {
-          "$ref": "#/definitions/v1.Tenant"
+        "default_quotas": {
+          "$ref": "#/definitions/v1.QuotaSet"
+        },
+        "description": {
+          "type": "string"
+        },
+        "iam_config": {
+          "$ref": "#/definitions/v1.IAMConfig"
+        },
+        "meta": {
+          "$ref": "#/definitions/v1.Meta"
+        },
+        "name": {
+          "type": "string"
+        },
+        "quotas": {
+          "$ref": "#/definitions/v1.QuotaSet"
         }
       }
     },
