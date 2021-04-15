@@ -1352,6 +1352,94 @@
         "NetworkID"
       ]
     },
+    "v1.GatewayCreateRequest": {
+      "properties": {
+        "ProjectUID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "peers": {
+          "items": {
+            "$ref": "#/definitions/v1.PeerSpec"
+          },
+          "type": "array"
+        },
+        "pipes": {
+          "items": {
+            "$ref": "#/definitions/v1.PipeSpec"
+          },
+          "type": "array"
+        },
+        "port": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "private_key": {
+          "type": "string"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ProjectUID",
+        "name",
+        "peers",
+        "pipes",
+        "private_key",
+        "public_key",
+        "type"
+      ]
+    },
+    "v1.GatewayResponse": {
+      "properties": {
+        "ProjectUID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "peers": {
+          "items": {
+            "$ref": "#/definitions/v1.PeerSpec"
+          },
+          "type": "array"
+        },
+        "pipes": {
+          "items": {
+            "$ref": "#/definitions/v1.PipeSpec"
+          },
+          "type": "array"
+        },
+        "port": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "private_key": {
+          "type": "string"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ProjectUID",
+        "name",
+        "peers",
+        "pipes",
+        "private_key",
+        "public_key",
+        "type"
+      ]
+    },
     "v1.IAMConfig": {
       "properties": {
         "idm_config": {
@@ -1922,6 +2010,45 @@
         "Pods",
         "Services",
         "Type"
+      ]
+    },
+    "v1.PeerSpec": {
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "public_key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "public_key"
+      ]
+    },
+    "v1.PipeSpec": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "peer": {
+          "type": "string"
+        },
+        "port": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "remote": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "port",
+        "remote"
       ]
     },
     "v1.Project": {
@@ -3938,6 +4065,47 @@
         "summary": "get all the ssh-keypairs of the cluster",
         "tags": [
           "cluster"
+        ]
+      }
+    },
+    "/v1/gateway": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createGateway",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "gateway created",
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayResponse"
+            }
+          },
+          "409": {
+            "description": "gateway already existing",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
         ]
       }
     },
