@@ -20,10 +20,6 @@ import (
 // swagger:model v1.GatewayResponse
 type V1GatewayResponse struct {
 
-	// project UID
-	// Required: true
-	ProjectUID *string `json:"ProjectUID"`
-
 	// name
 	// Required: true
 	Name *string `json:"name"`
@@ -43,6 +39,10 @@ type V1GatewayResponse struct {
 	// Required: true
 	PrivateKey *string `json:"private_key"`
 
+	// project UID
+	// Required: true
+	ProjectUID *string `json:"projectUID"`
+
 	// public key
 	// Required: true
 	PublicKey *string `json:"public_key"`
@@ -55,10 +55,6 @@ type V1GatewayResponse struct {
 // Validate validates this v1 gateway response
 func (m *V1GatewayResponse) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateProjectUID(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
@@ -76,6 +72,10 @@ func (m *V1GatewayResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateProjectUID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePublicKey(formats); err != nil {
 		res = append(res, err)
 	}
@@ -87,15 +87,6 @@ func (m *V1GatewayResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1GatewayResponse) validateProjectUID(formats strfmt.Registry) error {
-
-	if err := validate.Required("ProjectUID", "body", m.ProjectUID); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -161,6 +152,15 @@ func (m *V1GatewayResponse) validatePipes(formats strfmt.Registry) error {
 func (m *V1GatewayResponse) validatePrivateKey(formats strfmt.Registry) error {
 
 	if err := validate.Required("private_key", "body", m.PrivateKey); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1GatewayResponse) validateProjectUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("projectUID", "body", m.ProjectUID); err != nil {
 		return err
 	}
 

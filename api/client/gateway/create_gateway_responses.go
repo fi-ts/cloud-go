@@ -62,7 +62,7 @@ type CreateGatewayCreated struct {
 }
 
 func (o *CreateGatewayCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/gateway][%d] createGatewayCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[PUT /v1/gateway][%d] createGatewayCreated  %+v", 201, o.Payload)
 }
 func (o *CreateGatewayCreated) GetPayload() *models.V1GatewayResponse {
 	return o.Payload
@@ -94,7 +94,7 @@ type CreateGatewayConflict struct {
 }
 
 func (o *CreateGatewayConflict) Error() string {
-	return fmt.Sprintf("[POST /v1/gateway][%d] createGatewayConflict  %+v", 409, o.Payload)
+	return fmt.Sprintf("[PUT /v1/gateway][%d] createGatewayConflict  %+v", 409, o.Payload)
 }
 func (o *CreateGatewayConflict) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
@@ -135,7 +135,7 @@ func (o *CreateGatewayDefault) Code() int {
 }
 
 func (o *CreateGatewayDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/gateway][%d] createGateway default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[PUT /v1/gateway][%d] createGateway default  %+v", o._statusCode, o.Payload)
 }
 func (o *CreateGatewayDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload

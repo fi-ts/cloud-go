@@ -1354,9 +1354,6 @@
     },
     "v1.GatewayCreateRequest": {
       "properties": {
-        "ProjectUID": {
-          "type": "string"
-        },
         "name": {
           "type": "string"
         },
@@ -1379,6 +1376,9 @@
         "private_key": {
           "type": "string"
         },
+        "projectUID": {
+          "type": "string"
+        },
         "public_key": {
           "type": "string"
         },
@@ -1387,20 +1387,17 @@
         }
       },
       "required": [
-        "ProjectUID",
         "name",
         "peers",
         "pipes",
         "private_key",
+        "projectUID",
         "public_key",
         "type"
       ]
     },
     "v1.GatewayResponse": {
       "properties": {
-        "ProjectUID": {
-          "type": "string"
-        },
         "name": {
           "type": "string"
         },
@@ -1423,6 +1420,9 @@
         "private_key": {
           "type": "string"
         },
+        "projectUID": {
+          "type": "string"
+        },
         "public_key": {
           "type": "string"
         },
@@ -1431,11 +1431,11 @@
         }
       },
       "required": [
-        "ProjectUID",
         "name",
         "peers",
         "pipes",
         "private_key",
+        "projectUID",
         "public_key",
         "type"
       ]
@@ -4069,7 +4069,7 @@
       }
     },
     "/v1/gateway": {
-      "post": {
+      "put": {
         "consumes": [
           "application/json"
         ],
@@ -4083,6 +4083,9 @@
               "$ref": "#/definitions/v1.GatewayCreateRequest"
             }
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "201": {
@@ -5120,6 +5123,10 @@
     {
       "description": "Managing tenant entities",
       "name": "tenant"
+    },
+    {
+      "description": "Managing gateway entities",
+      "name": "gateway"
     }
   ]
 }

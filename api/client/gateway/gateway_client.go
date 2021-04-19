@@ -43,7 +43,7 @@ func (a *Client) CreateGateway(params *CreateGatewayParams, authInfo runtime.Cli
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "createGateway",
-		Method:             "POST",
+		Method:             "PUT",
 		PathPattern:        "/v1/gateway",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
