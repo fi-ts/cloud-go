@@ -30,13 +30,15 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresCreated, error)
 
-	CreatePostgresBackup(params *CreatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupCreated, error)
+	CreatePostgresBackupConfig(params *CreatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupConfigCreated, error)
 
 	DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresOK, error)
 
-	DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupOK, error)
+	DeletePostgresBackupConfig(params *DeletePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupConfigOK, error)
 
 	FindPostgres(params *FindPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindPostgresOK, error)
+
+	GetBackupConfig(params *GetBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBackupConfigOK, error)
 
 	GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresOK, error)
 
@@ -50,11 +52,11 @@ type ClientService interface {
 
 	ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresOK, error)
 
-	ListPostgresBackups(params *ListPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresBackupsOK, error)
+	ListPostgresBackupConfigs(params *ListPostgresBackupConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresBackupConfigsOK, error)
 
 	UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresOK, error)
 
-	UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupOK, error)
+	UpdatePostgresBackupConfig(params *UpdatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupConfigOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -98,22 +100,22 @@ func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.C
 }
 
 /*
-  CreatePostgresBackup creates a postgres backup for the given projectid
+  CreatePostgresBackupConfig creates a postgres backup for the given projectid
 */
-func (a *Client) CreatePostgresBackup(params *CreatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupCreated, error) {
+func (a *Client) CreatePostgresBackupConfig(params *CreatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupConfigCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreatePostgresBackupParams()
+		params = NewCreatePostgresBackupConfigParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createPostgresBackup",
+		ID:                 "createPostgresBackupConfig",
 		Method:             "PUT",
-		PathPattern:        "/v1/database/postgres/backup",
+		PathPattern:        "/v1/database/postgres/backup-config",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreatePostgresBackupReader{formats: a.formats},
+		Reader:             &CreatePostgresBackupConfigReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -126,12 +128,12 @@ func (a *Client) CreatePostgresBackup(params *CreatePostgresBackupParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreatePostgresBackupCreated)
+	success, ok := result.(*CreatePostgresBackupConfigCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreatePostgresBackupDefault)
+	unexpectedSuccess := result.(*CreatePostgresBackupConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -174,22 +176,22 @@ func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.C
 }
 
 /*
-  DeletePostgresBackup deletes a postgres backup for the given projectid
+  DeletePostgresBackupConfig deletes a postgres backup for the given projectid
 */
-func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupOK, error) {
+func (a *Client) DeletePostgresBackupConfig(params *DeletePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupConfigOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeletePostgresBackupParams()
+		params = NewDeletePostgresBackupConfigParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deletePostgresBackup",
+		ID:                 "deletePostgresBackupConfig",
 		Method:             "DELETE",
-		PathPattern:        "/v1/database/postgres/backup/{id}",
+		PathPattern:        "/v1/database/postgres/backup-config/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeletePostgresBackupReader{formats: a.formats},
+		Reader:             &DeletePostgresBackupConfigReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -202,12 +204,12 @@ func (a *Client) DeletePostgresBackup(params *DeletePostgresBackupParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeletePostgresBackupOK)
+	success, ok := result.(*DeletePostgresBackupConfigOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeletePostgresBackupDefault)
+	unexpectedSuccess := result.(*DeletePostgresBackupConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -246,6 +248,44 @@ func (a *Client) FindPostgres(params *FindPostgresParams, authInfo runtime.Clien
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*FindPostgresDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  GetBackupConfig gets postgres backups
+*/
+func (a *Client) GetBackupConfig(params *GetBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBackupConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetBackupConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getBackupConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/database/postgres/backup-config/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetBackupConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetBackupConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetBackupConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -478,22 +518,22 @@ func (a *Client) ListPostgres(params *ListPostgresParams, authInfo runtime.Clien
 }
 
 /*
-  ListPostgresBackups gets all postgres backups
+  ListPostgresBackupConfigs gets all postgres backups
 */
-func (a *Client) ListPostgresBackups(params *ListPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresBackupsOK, error) {
+func (a *Client) ListPostgresBackupConfigs(params *ListPostgresBackupConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresBackupConfigsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListPostgresBackupsParams()
+		params = NewListPostgresBackupConfigsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listPostgresBackups",
+		ID:                 "listPostgresBackupConfigs",
 		Method:             "GET",
-		PathPattern:        "/v1/database/postgres/backup",
+		PathPattern:        "/v1/database/postgres/backup-config",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListPostgresBackupsReader{formats: a.formats},
+		Reader:             &ListPostgresBackupConfigsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -506,12 +546,12 @@ func (a *Client) ListPostgresBackups(params *ListPostgresBackupsParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListPostgresBackupsOK)
+	success, ok := result.(*ListPostgresBackupConfigsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListPostgresBackupsDefault)
+	unexpectedSuccess := result.(*ListPostgresBackupConfigsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -554,22 +594,22 @@ func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.C
 }
 
 /*
-  UpdatePostgresBackup updates a postgres backup for the given projectid
+  UpdatePostgresBackupConfig updates a postgres backup for the given projectid
 */
-func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupOK, error) {
+func (a *Client) UpdatePostgresBackupConfig(params *UpdatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupConfigOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdatePostgresBackupParams()
+		params = NewUpdatePostgresBackupConfigParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updatePostgresBackup",
+		ID:                 "updatePostgresBackupConfig",
 		Method:             "POST",
-		PathPattern:        "/v1/database/postgres/backup",
+		PathPattern:        "/v1/database/postgres/backup-config",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdatePostgresBackupReader{formats: a.formats},
+		Reader:             &UpdatePostgresBackupConfigReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -582,12 +622,12 @@ func (a *Client) UpdatePostgresBackup(params *UpdatePostgresBackupParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdatePostgresBackupOK)
+	success, ok := result.(*UpdatePostgresBackupConfigOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UpdatePostgresBackupDefault)
+	unexpectedSuccess := result.(*UpdatePostgresBackupConfigDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

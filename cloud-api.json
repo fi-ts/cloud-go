@@ -4542,12 +4542,12 @@
         ]
       }
     },
-    "/v1/database/postgres/backup": {
+    "/v1/database/postgres/backup-config": {
       "get": {
         "consumes": [
           "application/json"
         ],
-        "operationId": "listPostgresBackups",
+        "operationId": "listPostgresBackupConfigs",
         "produces": [
           "application/json"
         ],
@@ -4577,7 +4577,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "updatePostgresBackup",
+        "operationId": "updatePostgresBackupConfig",
         "parameters": [
           {
             "in": "body",
@@ -4614,7 +4614,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "createPostgresBackup",
+        "operationId": "createPostgresBackupConfig",
         "parameters": [
           {
             "in": "body",
@@ -4648,12 +4648,12 @@
         ]
       }
     },
-    "/v1/database/postgres/backup/{id}": {
+    "/v1/database/postgres/backup-config/{id}": {
       "delete": {
         "consumes": [
           "application/json"
         ],
-        "operationId": "deletePostgresBackup",
+        "operationId": "deletePostgresBackupConfig",
         "parameters": [
           {
             "description": "identifier of the projectid",
@@ -4689,7 +4689,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "getPostgresBackups",
+        "operationId": "getBackupConfig",
         "parameters": [
           {
             "description": "identifier of the backup",
