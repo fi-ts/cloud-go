@@ -1373,13 +1373,7 @@
           "format": "integer",
           "type": "integer"
         },
-        "private_key": {
-          "type": "string"
-        },
         "projectUID": {
-          "type": "string"
-        },
-        "public_key": {
           "type": "string"
         },
         "type": {
@@ -1390,9 +1384,7 @@
         "name",
         "peers",
         "pipes",
-        "private_key",
         "projectUID",
-        "public_key",
         "type"
       ]
     },
@@ -1417,13 +1409,7 @@
           "format": "integer",
           "type": "integer"
         },
-        "private_key": {
-          "type": "string"
-        },
         "projectUID": {
-          "type": "string"
-        },
-        "public_key": {
           "type": "string"
         },
         "type": {
@@ -1434,9 +1420,7 @@
         "name",
         "peers",
         "pipes",
-        "private_key",
         "projectUID",
-        "public_key",
         "type"
       ]
     },
@@ -4073,7 +4057,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "createGateway",
+        "operationId": "handleCreateRequest",
         "parameters": [
           {
             "in": "body",

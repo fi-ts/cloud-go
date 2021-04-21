@@ -35,17 +35,9 @@ type V1GatewayResponse struct {
 	// port
 	Port int64 `json:"port,omitempty"`
 
-	// private key
-	// Required: true
-	PrivateKey *string `json:"private_key"`
-
 	// project UID
 	// Required: true
 	ProjectUID *string `json:"projectUID"`
-
-	// public key
-	// Required: true
-	PublicKey *string `json:"public_key"`
 
 	// type
 	// Required: true
@@ -68,15 +60,7 @@ func (m *V1GatewayResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validatePrivateKey(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateProjectUID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePublicKey(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -149,27 +133,9 @@ func (m *V1GatewayResponse) validatePipes(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1GatewayResponse) validatePrivateKey(formats strfmt.Registry) error {
-
-	if err := validate.Required("private_key", "body", m.PrivateKey); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1GatewayResponse) validateProjectUID(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectUID", "body", m.ProjectUID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1GatewayResponse) validatePublicKey(formats strfmt.Registry) error {
-
-	if err := validate.Required("public_key", "body", m.PublicKey); err != nil {
 		return err
 	}
 

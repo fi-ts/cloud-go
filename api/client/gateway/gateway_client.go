@@ -28,28 +28,28 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateGateway(params *CreateGatewayParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGatewayCreated, error)
+	HandleCreateRequest(params *HandleCreateRequestParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HandleCreateRequestCreated, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  CreateGateway create gateway API
+  HandleCreateRequest handle create request API
 */
-func (a *Client) CreateGateway(params *CreateGatewayParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGatewayCreated, error) {
+func (a *Client) HandleCreateRequest(params *HandleCreateRequestParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HandleCreateRequestCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateGatewayParams()
+		params = NewHandleCreateRequestParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createGateway",
+		ID:                 "handleCreateRequest",
 		Method:             "PUT",
 		PathPattern:        "/v1/gateway",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateGatewayReader{formats: a.formats},
+		Reader:             &HandleCreateRequestReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -62,12 +62,12 @@ func (a *Client) CreateGateway(params *CreateGatewayParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateGatewayCreated)
+	success, ok := result.(*HandleCreateRequestCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CreateGatewayDefault)
+	unexpectedSuccess := result.(*HandleCreateRequestDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
