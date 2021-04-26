@@ -30,12 +30,6 @@ func (o *HandleCreateRequestReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return result, nil
-	case 409:
-		result := NewHandleCreateRequestConflict()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return nil, result
 	default:
 		result := NewHandleCreateRequestDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -62,7 +56,7 @@ type HandleCreateRequestCreated struct {
 }
 
 func (o *HandleCreateRequestCreated) Error() string {
-	return fmt.Sprintf("[PUT /v1/gateway][%d] handleCreateRequestCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/gateway][%d] handleCreateRequestCreated  %+v", 201, o.Payload)
 }
 func (o *HandleCreateRequestCreated) GetPayload() *models.V1GatewayResponse {
 	return o.Payload
@@ -71,38 +65,6 @@ func (o *HandleCreateRequestCreated) GetPayload() *models.V1GatewayResponse {
 func (o *HandleCreateRequestCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1GatewayResponse)
-
-	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewHandleCreateRequestConflict creates a HandleCreateRequestConflict with default headers values
-func NewHandleCreateRequestConflict() *HandleCreateRequestConflict {
-	return &HandleCreateRequestConflict{}
-}
-
-/* HandleCreateRequestConflict describes a response with status code 409, with default header values.
-
-gateway already existing
-*/
-type HandleCreateRequestConflict struct {
-	Payload *httperrors.HTTPErrorResponse
-}
-
-func (o *HandleCreateRequestConflict) Error() string {
-	return fmt.Sprintf("[PUT /v1/gateway][%d] handleCreateRequestConflict  %+v", 409, o.Payload)
-}
-func (o *HandleCreateRequestConflict) GetPayload() *httperrors.HTTPErrorResponse {
-	return o.Payload
-}
-
-func (o *HandleCreateRequestConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(httperrors.HTTPErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -135,7 +97,7 @@ func (o *HandleCreateRequestDefault) Code() int {
 }
 
 func (o *HandleCreateRequestDefault) Error() string {
-	return fmt.Sprintf("[PUT /v1/gateway][%d] handleCreateRequest default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/gateway][%d] handleCreateRequest default  %+v", o._statusCode, o.Payload)
 }
 func (o *HandleCreateRequestDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload

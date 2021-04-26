@@ -4053,7 +4053,7 @@
       }
     },
     "/v1/gateway": {
-      "put": {
+      "post": {
         "consumes": [
           "application/json"
         ],
@@ -4076,12 +4076,6 @@
             "description": "gateway created",
             "schema": {
               "$ref": "#/definitions/v1.GatewayResponse"
-            }
-          },
-          "409": {
-            "description": "gateway already existing",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
             }
           },
           "default": {

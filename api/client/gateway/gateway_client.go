@@ -43,7 +43,7 @@ func (a *Client) HandleCreateRequest(params *HandleCreateRequestParams, authInfo
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "handleCreateRequest",
-		Method:             "PUT",
+		Method:             "POST",
 		PathPattern:        "/v1/gateway",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
