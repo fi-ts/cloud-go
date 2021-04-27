@@ -1388,7 +1388,57 @@
         "type"
       ]
     },
+    "v1.GatewayDeleteRequest": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "projectUID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "projectUID"
+      ]
+    },
     "v1.GatewayResponse": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "peers": {
+          "items": {
+            "$ref": "#/definitions/v1.PeerSpec"
+          },
+          "type": "array"
+        },
+        "pipes": {
+          "items": {
+            "$ref": "#/definitions/v1.PipeSpec"
+          },
+          "type": "array"
+        },
+        "port": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "projectUID": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "peers",
+        "pipes",
+        "projectUID",
+        "type"
+      ]
+    },
+    "v1.GatewayUpdateRequest": {
       "properties": {
         "name": {
           "type": "string"
@@ -4053,11 +4103,47 @@
       }
     },
     "/v1/gateway": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "delete",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayDeleteRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway deleted",
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      },
       "post": {
         "consumes": [
           "application/json"
         ],
-        "operationId": "handleCreateRequest",
+        "operationId": "create",
         "parameters": [
           {
             "in": "body",
@@ -4074,6 +4160,70 @@
         "responses": {
           "201": {
             "description": "gateway created",
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayUpdateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway updated",
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      }
+    },
+    "/v1/gateway/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "describe",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway info fetched",
             "schema": {
               "$ref": "#/definitions/v1.GatewayResponse"
             }
