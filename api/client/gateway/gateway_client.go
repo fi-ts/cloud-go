@@ -126,7 +126,7 @@ func (a *Client) Describe(params *DescribeParams, authInfo runtime.ClientAuthInf
 	op := &runtime.ClientOperation{
 		ID:                 "describe",
 		Method:             "GET",
-		PathPattern:        "/v1/gateway/{id}",
+		PathPattern:        "/v1/gateway",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

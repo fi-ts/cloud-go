@@ -56,7 +56,7 @@ type DescribeOK struct {
 }
 
 func (o *DescribeOK) Error() string {
-	return fmt.Sprintf("[GET /v1/gateway/{id}][%d] describeOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/gateway][%d] describeOK  %+v", 200, o.Payload)
 }
 func (o *DescribeOK) GetPayload() *models.V1GatewayResponse {
 	return o.Payload
@@ -97,7 +97,7 @@ func (o *DescribeDefault) Code() int {
 }
 
 func (o *DescribeDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/gateway/{id}][%d] describe default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /v1/gateway][%d] describe default  %+v", o._statusCode, o.Payload)
 }
 func (o *DescribeDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload

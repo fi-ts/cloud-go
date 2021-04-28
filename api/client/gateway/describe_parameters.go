@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // NewDescribeParams creates a new DescribeParams object,
@@ -58,6 +60,10 @@ func NewDescribeParamsWithHTTPClient(client *http.Client) *DescribeParams {
    Typically these are written to a http.Request.
 */
 type DescribeParams struct {
+
+	// Body.
+	Body *models.V1GatewayDescribeRequest
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -111,6 +117,17 @@ func (o *DescribeParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the describe params
+func (o *DescribeParams) WithBody(body *models.V1GatewayDescribeRequest) *DescribeParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the describe params
+func (o *DescribeParams) SetBody(body *models.V1GatewayDescribeRequest) {
+	o.Body = body
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *DescribeParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -118,6 +135,11 @@ func (o *DescribeParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

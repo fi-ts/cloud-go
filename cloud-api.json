@@ -1402,6 +1402,20 @@
         "projectUID"
       ]
     },
+    "v1.GatewayDescribeRequest": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "projectUID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "projectUID"
+      ]
+    },
     "v1.GatewayResponse": {
       "properties": {
         "name": {
@@ -4139,6 +4153,42 @@
           "gateway"
         ]
       },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "describe",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayDescribeRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway info fetched",
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      },
       "post": {
         "consumes": [
           "application/json"
@@ -4196,34 +4246,6 @@
         "responses": {
           "200": {
             "description": "gateway updated",
-            "schema": {
-              "$ref": "#/definitions/v1.GatewayResponse"
-            }
-          },
-          "default": {
-            "description": "error",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
-            }
-          }
-        },
-        "tags": [
-          "gateway"
-        ]
-      }
-    },
-    "/v1/gateway/{id}": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "describe",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "gateway info fetched",
             "schema": {
               "$ref": "#/definitions/v1.GatewayResponse"
             }
