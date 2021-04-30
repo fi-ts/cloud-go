@@ -48,11 +48,11 @@ type V1PostgresResponse struct {
 	// number of instances
 	NumberOfInstances int32 `json:"numberOfInstances,omitempty"`
 
-	// partition
-	Partition string `json:"partition,omitempty"`
+	// partition ID
+	PartitionID string `json:"partitionID,omitempty"`
 
-	// project
-	Project string `json:"project,omitempty"`
+	// project ID
+	ProjectID string `json:"projectID,omitempty"`
 
 	// size
 	Size *V1Size `json:"size,omitempty"`

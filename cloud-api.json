@@ -2298,10 +2298,10 @@
           "format": "int32",
           "type": "integer"
         },
-        "partition": {
+        "partitionID": {
           "type": "string"
         },
-        "project": {
+        "projectID": {
           "type": "string"
         },
         "size": {
@@ -2344,6 +2344,53 @@
           "$ref": "#/definitions/v1.Socket"
         }
       }
+    },
+    "v1.PostgresUpdateRequest": {
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "accessList": {
+          "$ref": "#/definitions/v1.AccessList"
+        },
+        "backup": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "maintenance": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "numberOfInstances": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "size": {
+          "$ref": "#/definitions/v1.Size"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ID"
+      ]
     },
     "v1.PostgresVersion": {
       "properties": {
@@ -4478,7 +4525,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.PostgresCreateRequest"
+              "$ref": "#/definitions/v1.PostgresUpdateRequest"
             }
           }
         ],
