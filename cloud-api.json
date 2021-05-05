@@ -780,136 +780,6 @@
         }
       }
     },
-    "v1.BackupCreateRequest": {
-      "properties": {
-        "autocreate": {
-          "type": "boolean"
-        },
-        "createdBy": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "partition": {
-          "type": "string"
-        },
-        "projectID": {
-          "type": "string"
-        },
-        "retention": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "s3BucketName": {
-          "type": "string"
-        },
-        "s3Endpoint": {
-          "type": "string"
-        },
-        "s3Region": {
-          "type": "string"
-        },
-        "schedule": {
-          "type": "string"
-        },
-        "secret": {
-          "$ref": "#/definitions/v1.BackupSecret"
-        }
-      },
-      "required": [
-        "createdBy"
-      ]
-    },
-    "v1.BackupEntry": {
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "size": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "timestamp": {
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "size",
-        "timestamp"
-      ]
-    },
-    "v1.BackupResponse": {
-      "properties": {
-        "createdBy": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "projectID": {
-          "type": "string"
-        },
-        "retention": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "s3BucketName": {
-          "type": "string"
-        },
-        "s3Endpoint": {
-          "type": "string"
-        },
-        "s3Region": {
-          "type": "string"
-        },
-        "schedule": {
-          "type": "string"
-        },
-        "secret": {
-          "$ref": "#/definitions/v1.BackupSecret"
-        },
-        "tenant": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "createdBy",
-        "id"
-      ]
-    },
-    "v1.BackupSecret": {
-      "properties": {
-        "accesskey": {
-          "type": "string"
-        },
-        "s3encryptionkey": {
-          "type": "string"
-        },
-        "secretkey": {
-          "type": "string"
-        }
-      }
-    },
-    "v1.BackupUpdateRequest": {
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "retention": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "schedule": {
-          "type": "string"
-        }
-      }
-    },
     "v1.ClusterCreateRequest": {
       "properties": {
         "AdditionalNetworks": {
@@ -2162,6 +2032,136 @@
         "Services",
         "Type"
       ]
+    },
+    "v1.PostgresBackupConfigCreateRequest": {
+      "properties": {
+        "autocreate": {
+          "type": "boolean"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "partition": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "s3BucketName": {
+          "type": "string"
+        },
+        "s3Endpoint": {
+          "type": "string"
+        },
+        "s3Region": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "#/definitions/v1.PostgresBackupSecret"
+        }
+      },
+      "required": [
+        "createdBy"
+      ]
+    },
+    "v1.PostgresBackupConfigResponse": {
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "s3BucketName": {
+          "type": "string"
+        },
+        "s3Endpoint": {
+          "type": "string"
+        },
+        "s3Region": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "#/definitions/v1.PostgresBackupSecret"
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "createdBy",
+        "id"
+      ]
+    },
+    "v1.PostgresBackupConfigUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "schedule": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresBackupEntry": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "size",
+        "timestamp"
+      ]
+    },
+    "v1.PostgresBackupSecret": {
+      "properties": {
+        "accesskey": {
+          "type": "string"
+        },
+        "s3encryptionkey": {
+          "type": "string"
+        },
+        "secretkey": {
+          "type": "string"
+        }
+      }
     },
     "v1.PostgresCreateRequest": {
       "properties": {
@@ -4603,7 +4603,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "$ref": "#/definitions/v1.BackupResponse"
+                "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
               },
               "type": "array"
             }
@@ -4631,7 +4631,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.BackupUpdateRequest"
+              "$ref": "#/definitions/v1.PostgresBackupConfigUpdateRequest"
             }
           }
         ],
@@ -4642,7 +4642,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/v1.BackupResponse"
+              "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
             }
           },
           "default": {
@@ -4668,7 +4668,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.BackupCreateRequest"
+              "$ref": "#/definitions/v1.PostgresBackupConfigCreateRequest"
             }
           }
         ],
@@ -4679,7 +4679,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/v1.BackupResponse"
+              "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
             }
           },
           "default": {
@@ -4717,7 +4717,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/v1.BackupResponse"
+              "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
             }
           },
           "default": {
@@ -4753,7 +4753,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.BackupResponse"
+              "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
             }
           },
           "default": {
@@ -4969,7 +4969,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "$ref": "#/definitions/v1.BackupEntry"
+                "$ref": "#/definitions/v1.PostgresBackupEntry"
               },
               "type": "array"
             }

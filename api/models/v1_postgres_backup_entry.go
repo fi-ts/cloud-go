@@ -14,10 +14,10 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1BackupEntry v1 backup entry
+// V1PostgresBackupEntry v1 postgres backup entry
 //
-// swagger:model v1.BackupEntry
-type V1BackupEntry struct {
+// swagger:model v1.PostgresBackupEntry
+type V1PostgresBackupEntry struct {
 
 	// name
 	// Required: true
@@ -33,8 +33,8 @@ type V1BackupEntry struct {
 	Timestamp *strfmt.DateTime `json:"timestamp"`
 }
 
-// Validate validates this v1 backup entry
-func (m *V1BackupEntry) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 postgres backup entry
+func (m *V1PostgresBackupEntry) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateName(formats); err != nil {
@@ -55,7 +55,7 @@ func (m *V1BackupEntry) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1BackupEntry) validateName(formats strfmt.Registry) error {
+func (m *V1PostgresBackupEntry) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
@@ -64,7 +64,7 @@ func (m *V1BackupEntry) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1BackupEntry) validateSize(formats strfmt.Registry) error {
+func (m *V1PostgresBackupEntry) validateSize(formats strfmt.Registry) error {
 
 	if err := validate.Required("size", "body", m.Size); err != nil {
 		return err
@@ -73,7 +73,7 @@ func (m *V1BackupEntry) validateSize(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1BackupEntry) validateTimestamp(formats strfmt.Registry) error {
+func (m *V1PostgresBackupEntry) validateTimestamp(formats strfmt.Registry) error {
 
 	if err := validate.Required("timestamp", "body", m.Timestamp); err != nil {
 		return err
@@ -86,13 +86,13 @@ func (m *V1BackupEntry) validateTimestamp(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1 backup entry based on context it is used
-func (m *V1BackupEntry) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1 postgres backup entry based on context it is used
+func (m *V1PostgresBackupEntry) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1BackupEntry) MarshalBinary() ([]byte, error) {
+func (m *V1PostgresBackupEntry) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -100,8 +100,8 @@ func (m *V1BackupEntry) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1BackupEntry) UnmarshalBinary(b []byte) error {
-	var res V1BackupEntry
+func (m *V1PostgresBackupEntry) UnmarshalBinary(b []byte) error {
+	var res V1PostgresBackupEntry
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

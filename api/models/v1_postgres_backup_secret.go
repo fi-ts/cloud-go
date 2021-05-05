@@ -12,10 +12,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// V1BackupSecret v1 backup secret
+// V1PostgresBackupSecret v1 postgres backup secret
 //
-// swagger:model v1.BackupSecret
-type V1BackupSecret struct {
+// swagger:model v1.PostgresBackupSecret
+type V1PostgresBackupSecret struct {
 
 	// accesskey
 	Accesskey string `json:"accesskey,omitempty"`
@@ -27,18 +27,18 @@ type V1BackupSecret struct {
 	Secretkey string `json:"secretkey,omitempty"`
 }
 
-// Validate validates this v1 backup secret
-func (m *V1BackupSecret) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 postgres backup secret
+func (m *V1PostgresBackupSecret) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1 backup secret based on context it is used
-func (m *V1BackupSecret) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1 postgres backup secret based on context it is used
+func (m *V1PostgresBackupSecret) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1BackupSecret) MarshalBinary() ([]byte, error) {
+func (m *V1PostgresBackupSecret) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -46,8 +46,8 @@ func (m *V1BackupSecret) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1BackupSecret) UnmarshalBinary(b []byte) error {
-	var res V1BackupSecret
+func (m *V1PostgresBackupSecret) UnmarshalBinary(b []byte) error {
+	var res V1PostgresBackupSecret
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -62,7 +62,7 @@ func NewCreatePostgresBackupConfigParamsWithHTTPClient(client *http.Client) *Cre
 type CreatePostgresBackupConfigParams struct {
 
 	// Body.
-	Body *models.V1BackupCreateRequest
+	Body *models.V1PostgresBackupConfigCreateRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -118,13 +118,13 @@ func (o *CreatePostgresBackupConfigParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create postgres backup config params
-func (o *CreatePostgresBackupConfigParams) WithBody(body *models.V1BackupCreateRequest) *CreatePostgresBackupConfigParams {
+func (o *CreatePostgresBackupConfigParams) WithBody(body *models.V1PostgresBackupConfigCreateRequest) *CreatePostgresBackupConfigParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create postgres backup config params
-func (o *CreatePostgresBackupConfigParams) SetBody(body *models.V1BackupCreateRequest) {
+func (o *CreatePostgresBackupConfigParams) SetBody(body *models.V1PostgresBackupConfigCreateRequest) {
 	o.Body = body
 }
 

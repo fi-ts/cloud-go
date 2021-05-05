@@ -14,23 +14,21 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1BackupCreateRequest v1 backup create request
+// V1PostgresBackupConfigResponse v1 postgres backup config response
 //
-// swagger:model v1.BackupCreateRequest
-type V1BackupCreateRequest struct {
-
-	// autocreate
-	Autocreate bool `json:"autocreate,omitempty"`
+// swagger:model v1.PostgresBackupConfigResponse
+type V1PostgresBackupConfigResponse struct {
 
 	// created by
 	// Required: true
 	CreatedBy *string `json:"createdBy"`
 
+	// id
+	// Required: true
+	ID *string `json:"id"`
+
 	// name
 	Name string `json:"name,omitempty"`
-
-	// partition
-	Partition string `json:"partition,omitempty"`
 
 	// project ID
 	ProjectID string `json:"projectID,omitempty"`
@@ -51,14 +49,21 @@ type V1BackupCreateRequest struct {
 	Schedule string `json:"schedule,omitempty"`
 
 	// secret
-	Secret *V1BackupSecret `json:"secret,omitempty"`
+	Secret *V1PostgresBackupSecret `json:"secret,omitempty"`
+
+	// tenant
+	Tenant string `json:"tenant,omitempty"`
 }
 
-// Validate validates this v1 backup create request
-func (m *V1BackupCreateRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 postgres backup config response
+func (m *V1PostgresBackupConfigResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -72,7 +77,7 @@ func (m *V1BackupCreateRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1BackupCreateRequest) validateCreatedBy(formats strfmt.Registry) error {
+func (m *V1PostgresBackupConfigResponse) validateCreatedBy(formats strfmt.Registry) error {
 
 	if err := validate.Required("createdBy", "body", m.CreatedBy); err != nil {
 		return err
@@ -81,7 +86,16 @@ func (m *V1BackupCreateRequest) validateCreatedBy(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *V1BackupCreateRequest) validateSecret(formats strfmt.Registry) error {
+func (m *V1PostgresBackupConfigResponse) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresBackupConfigResponse) validateSecret(formats strfmt.Registry) error {
 	if swag.IsZero(m.Secret) { // not required
 		return nil
 	}
@@ -98,8 +112,8 @@ func (m *V1BackupCreateRequest) validateSecret(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this v1 backup create request based on the context it is used
-func (m *V1BackupCreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this v1 postgres backup config response based on the context it is used
+func (m *V1PostgresBackupConfigResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateSecret(ctx, formats); err != nil {
@@ -112,7 +126,7 @@ func (m *V1BackupCreateRequest) ContextValidate(ctx context.Context, formats str
 	return nil
 }
 
-func (m *V1BackupCreateRequest) contextValidateSecret(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1PostgresBackupConfigResponse) contextValidateSecret(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Secret != nil {
 		if err := m.Secret.ContextValidate(ctx, formats); err != nil {
@@ -127,7 +141,7 @@ func (m *V1BackupCreateRequest) contextValidateSecret(ctx context.Context, forma
 }
 
 // MarshalBinary interface implementation
-func (m *V1BackupCreateRequest) MarshalBinary() ([]byte, error) {
+func (m *V1PostgresBackupConfigResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -135,8 +149,8 @@ func (m *V1BackupCreateRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1BackupCreateRequest) UnmarshalBinary(b []byte) error {
-	var res V1BackupCreateRequest
+func (m *V1PostgresBackupConfigResponse) UnmarshalBinary(b []byte) error {
+	var res V1PostgresBackupConfigResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

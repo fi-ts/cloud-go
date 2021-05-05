@@ -52,13 +52,13 @@ func NewListPostgresBackupConfigsOK() *ListPostgresBackupConfigsOK {
 OK
 */
 type ListPostgresBackupConfigsOK struct {
-	Payload []*models.V1BackupResponse
+	Payload []*models.V1PostgresBackupConfigResponse
 }
 
 func (o *ListPostgresBackupConfigsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/backup-config][%d] listPostgresBackupConfigsOK  %+v", 200, o.Payload)
 }
-func (o *ListPostgresBackupConfigsOK) GetPayload() []*models.V1BackupResponse {
+func (o *ListPostgresBackupConfigsOK) GetPayload() []*models.V1PostgresBackupConfigResponse {
 	return o.Payload
 }
 

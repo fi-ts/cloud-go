@@ -52,19 +52,19 @@ func NewCreatePostgresBackupConfigCreated() *CreatePostgresBackupConfigCreated {
 Created
 */
 type CreatePostgresBackupConfigCreated struct {
-	Payload *models.V1BackupResponse
+	Payload *models.V1PostgresBackupConfigResponse
 }
 
 func (o *CreatePostgresBackupConfigCreated) Error() string {
 	return fmt.Sprintf("[PUT /v1/database/postgres/backup-config][%d] createPostgresBackupConfigCreated  %+v", 201, o.Payload)
 }
-func (o *CreatePostgresBackupConfigCreated) GetPayload() *models.V1BackupResponse {
+func (o *CreatePostgresBackupConfigCreated) GetPayload() *models.V1PostgresBackupConfigResponse {
 	return o.Payload
 }
 
 func (o *CreatePostgresBackupConfigCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V1BackupResponse)
+	o.Payload = new(models.V1PostgresBackupConfigResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
