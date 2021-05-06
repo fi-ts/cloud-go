@@ -15,10 +15,10 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1GatewayUpdateRequest v1 gateway update request
+// V1GatewayAddPipesRequest v1 gateway add pipes request
 //
-// swagger:model v1.GatewayUpdateRequest
-type V1GatewayUpdateRequest struct {
+// swagger:model v1.GatewayAddPipesRequest
+type V1GatewayAddPipesRequest struct {
 
 	// name
 	// Required: true
@@ -44,8 +44,8 @@ type V1GatewayUpdateRequest struct {
 	Type *string `json:"type"`
 }
 
-// Validate validates this v1 gateway update request
-func (m *V1GatewayUpdateRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 gateway add pipes request
+func (m *V1GatewayAddPipesRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateName(formats); err != nil {
@@ -74,7 +74,7 @@ func (m *V1GatewayUpdateRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1GatewayUpdateRequest) validateName(formats strfmt.Registry) error {
+func (m *V1GatewayAddPipesRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
@@ -83,7 +83,7 @@ func (m *V1GatewayUpdateRequest) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1GatewayUpdateRequest) validatePeers(formats strfmt.Registry) error {
+func (m *V1GatewayAddPipesRequest) validatePeers(formats strfmt.Registry) error {
 
 	if err := validate.Required("peers", "body", m.Peers); err != nil {
 		return err
@@ -108,7 +108,7 @@ func (m *V1GatewayUpdateRequest) validatePeers(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1GatewayUpdateRequest) validatePipes(formats strfmt.Registry) error {
+func (m *V1GatewayAddPipesRequest) validatePipes(formats strfmt.Registry) error {
 
 	if err := validate.Required("pipes", "body", m.Pipes); err != nil {
 		return err
@@ -133,7 +133,7 @@ func (m *V1GatewayUpdateRequest) validatePipes(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1GatewayUpdateRequest) validateProjectUID(formats strfmt.Registry) error {
+func (m *V1GatewayAddPipesRequest) validateProjectUID(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectUID", "body", m.ProjectUID); err != nil {
 		return err
@@ -142,7 +142,7 @@ func (m *V1GatewayUpdateRequest) validateProjectUID(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *V1GatewayUpdateRequest) validateType(formats strfmt.Registry) error {
+func (m *V1GatewayAddPipesRequest) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
@@ -151,8 +151,8 @@ func (m *V1GatewayUpdateRequest) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this v1 gateway update request based on the context it is used
-func (m *V1GatewayUpdateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this v1 gateway add pipes request based on the context it is used
+func (m *V1GatewayAddPipesRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidatePeers(ctx, formats); err != nil {
@@ -169,7 +169,7 @@ func (m *V1GatewayUpdateRequest) ContextValidate(ctx context.Context, formats st
 	return nil
 }
 
-func (m *V1GatewayUpdateRequest) contextValidatePeers(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1GatewayAddPipesRequest) contextValidatePeers(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Peers); i++ {
 
@@ -187,7 +187,7 @@ func (m *V1GatewayUpdateRequest) contextValidatePeers(ctx context.Context, forma
 	return nil
 }
 
-func (m *V1GatewayUpdateRequest) contextValidatePipes(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1GatewayAddPipesRequest) contextValidatePipes(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Pipes); i++ {
 
@@ -206,7 +206,7 @@ func (m *V1GatewayUpdateRequest) contextValidatePipes(ctx context.Context, forma
 }
 
 // MarshalBinary interface implementation
-func (m *V1GatewayUpdateRequest) MarshalBinary() ([]byte, error) {
+func (m *V1GatewayAddPipesRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -214,8 +214,8 @@ func (m *V1GatewayUpdateRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1GatewayUpdateRequest) UnmarshalBinary(b []byte) error {
-	var res V1GatewayUpdateRequest
+func (m *V1GatewayAddPipesRequest) UnmarshalBinary(b []byte) error {
+	var res V1GatewayAddPipesRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

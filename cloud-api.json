@@ -1352,6 +1352,42 @@
         "NetworkID"
       ]
     },
+    "v1.GatewayAddPipesRequest": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "peers": {
+          "items": {
+            "$ref": "#/definitions/v1.PeerSpec"
+          },
+          "type": "array"
+        },
+        "pipes": {
+          "items": {
+            "$ref": "#/definitions/v1.PipeSpec"
+          },
+          "type": "array"
+        },
+        "port": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "projectUID": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "peers",
+        "pipes",
+        "projectUID",
+        "type"
+      ]
+    },
     "v1.GatewayCreateRequest": {
       "properties": {
         "name": {
@@ -1417,42 +1453,6 @@
       ]
     },
     "v1.GatewayResponse": {
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "peers": {
-          "items": {
-            "$ref": "#/definitions/v1.PeerSpec"
-          },
-          "type": "array"
-        },
-        "pipes": {
-          "items": {
-            "$ref": "#/definitions/v1.PipeSpec"
-          },
-          "type": "array"
-        },
-        "port": {
-          "format": "integer",
-          "type": "integer"
-        },
-        "projectUID": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "peers",
-        "pipes",
-        "projectUID",
-        "type"
-      ]
-    },
-    "v1.GatewayUpdateRequest": {
       "properties": {
         "name": {
           "type": "string"
@@ -4229,14 +4229,14 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "update",
+        "operationId": "addPipes",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.GatewayUpdateRequest"
+              "$ref": "#/definitions/v1.GatewayAddPipesRequest"
             }
           }
         ],
@@ -4245,7 +4245,7 @@
         ],
         "responses": {
           "200": {
-            "description": "gateway updated",
+            "description": "pipes added to the gateway",
             "schema": {
               "$ref": "#/definitions/v1.GatewayResponse"
             }
