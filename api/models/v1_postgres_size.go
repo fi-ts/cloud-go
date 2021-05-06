@@ -12,10 +12,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// V1Size v1 size
+// V1PostgresSize v1 postgres size
 //
-// swagger:model v1.Size
-type V1Size struct {
+// swagger:model v1.PostgresSize
+type V1PostgresSize struct {
 
 	// cpu
 	CPU string `json:"cpu,omitempty"`
@@ -27,18 +27,18 @@ type V1Size struct {
 	StorageSize string `json:"storageSize,omitempty"`
 }
 
-// Validate validates this v1 size
-func (m *V1Size) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 postgres size
+func (m *V1PostgresSize) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1 size based on context it is used
-func (m *V1Size) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1 postgres size based on context it is used
+func (m *V1PostgresSize) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1Size) MarshalBinary() ([]byte, error) {
+func (m *V1PostgresSize) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -46,8 +46,8 @@ func (m *V1Size) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1Size) UnmarshalBinary(b []byte) error {
-	var res V1Size
+func (m *V1PostgresSize) UnmarshalBinary(b []byte) error {
+	var res V1PostgresSize
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

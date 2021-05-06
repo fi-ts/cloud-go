@@ -2165,9 +2165,6 @@
     },
     "v1.PostgresCreateRequest": {
       "properties": {
-        "ID": {
-          "type": "string"
-        },
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
@@ -2200,31 +2197,19 @@
           "type": "string"
         },
         "size": {
-          "$ref": "#/definitions/v1.Size"
+          "$ref": "#/definitions/v1.PostgresSize"
         },
         "version": {
           "type": "string"
         }
-      },
-      "required": [
-        "ID"
-      ]
+      }
     },
     "v1.PostgresFindRequest": {
       "properties": {
-        "Description": {
+        "description": {
           "type": "string"
         },
-        "ID": {
-          "type": "string"
-        },
-        "PartitionID": {
-          "type": "string"
-        },
-        "ProjectID": {
-          "type": "string"
-        },
-        "Tenant": {
+        "id": {
           "type": "string"
         },
         "labels": {
@@ -2232,15 +2217,17 @@
             "type": "string"
           },
           "type": "object"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "tenant": {
+          "type": "string"
         }
-      },
-      "required": [
-        "Description",
-        "ID",
-        "PartitionID",
-        "ProjectID",
-        "Tenant"
-      ]
+      }
     },
     "v1.PostgresPartition": {
       "properties": {
@@ -2305,7 +2292,7 @@
           "type": "string"
         },
         "size": {
-          "$ref": "#/definitions/v1.Size"
+          "$ref": "#/definitions/v1.PostgresSize"
         },
         "status": {
           "$ref": "#/definitions/v1.PostgresStatus"
@@ -2332,6 +2319,30 @@
         }
       }
     },
+    "v1.PostgresSize": {
+      "properties": {
+        "cpu": {
+          "type": "string"
+        },
+        "sharedBuffer": {
+          "type": "string"
+        },
+        "storageSize": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresSocket": {
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
     "v1.PostgresStatus": {
       "properties": {
         "childReference": {
@@ -2341,15 +2352,12 @@
           "type": "string"
         },
         "socket": {
-          "$ref": "#/definitions/v1.Socket"
+          "$ref": "#/definitions/v1.PostgresSocket"
         }
       }
     },
     "v1.PostgresUpdateRequest": {
       "properties": {
-        "ID": {
-          "type": "string"
-        },
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
@@ -2357,6 +2365,9 @@
           "type": "string"
         },
         "description": {
+          "type": "string"
+        },
+        "id": {
           "type": "string"
         },
         "labels": {
@@ -2382,14 +2393,14 @@
           "type": "string"
         },
         "size": {
-          "$ref": "#/definitions/v1.Size"
+          "$ref": "#/definitions/v1.PostgresSize"
         },
         "version": {
           "type": "string"
         }
       },
       "required": [
-        "ID"
+        "id"
       ]
     },
     "v1.PostgresVersion": {
@@ -2998,30 +3009,6 @@
         "networks",
         "partitions"
       ]
-    },
-    "v1.Size": {
-      "properties": {
-        "cpu": {
-          "type": "string"
-        },
-        "sharedBuffer": {
-          "type": "string"
-        },
-        "storageSize": {
-          "type": "string"
-        }
-      }
-    },
-    "v1.Socket": {
-      "properties": {
-        "ip": {
-          "type": "string"
-        },
-        "port": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
     },
     "v1.Tenant": {
       "properties": {
@@ -4640,7 +4627,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
             }
@@ -4652,7 +4639,7 @@
             }
           }
         },
-        "summary": "update a postgres backup for the given projectid",
+        "summary": "update the postgres backup",
         "tags": [
           "database"
         ]
@@ -4689,7 +4676,7 @@
             }
           }
         },
-        "summary": "create a postgres backup for the given projectid",
+        "summary": "create a postgres backup",
         "tags": [
           "database"
         ]
@@ -4703,7 +4690,7 @@
         "operationId": "deletePostgresBackupConfig",
         "parameters": [
           {
-            "description": "identifier of the projectid",
+            "description": "identifier of the backup config",
             "in": "path",
             "name": "id",
             "required": true,
@@ -4715,7 +4702,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
             }
@@ -4727,7 +4714,7 @@
             }
           }
         },
-        "summary": "delete a postgres backup for the given projectid",
+        "summary": "delete a postgres backup",
         "tags": [
           "database"
         ]
@@ -4739,7 +4726,7 @@
         "operationId": "getBackupConfig",
         "parameters": [
           {
-            "description": "identifier of the backup",
+            "description": "identifier of the backup config",
             "in": "path",
             "name": "id",
             "required": true,

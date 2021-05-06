@@ -25,7 +25,7 @@ type V1PostgresStatus struct {
 	Description string `json:"description,omitempty"`
 
 	// socket
-	Socket *V1Socket `json:"socket,omitempty"`
+	Socket *V1PostgresSocket `json:"socket,omitempty"`
 }
 
 // Validate validates this v1 postgres status

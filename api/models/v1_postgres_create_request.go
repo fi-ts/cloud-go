@@ -11,17 +11,12 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1PostgresCreateRequest v1 postgres create request
 //
 // swagger:model v1.PostgresCreateRequest
 type V1PostgresCreateRequest struct {
-
-	// ID
-	// Required: true
-	ID *string `json:"ID"`
 
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
@@ -48,7 +43,7 @@ type V1PostgresCreateRequest struct {
 	ProjectID string `json:"projectID,omitempty"`
 
 	// size
-	Size *V1Size `json:"size,omitempty"`
+	Size *V1PostgresSize `json:"size,omitempty"`
 
 	// version
 	Version string `json:"version,omitempty"`
@@ -57,10 +52,6 @@ type V1PostgresCreateRequest struct {
 // Validate validates this v1 postgres create request
 func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateID(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateAccessList(formats); err != nil {
 		res = append(res, err)
@@ -73,15 +64,6 @@ func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1PostgresCreateRequest) validateID(formats strfmt.Registry) error {
-
-	if err := validate.Required("ID", "body", m.ID); err != nil {
-		return err
-	}
-
 	return nil
 }
 

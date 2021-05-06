@@ -61,7 +61,7 @@ type DeletePostgresBackupConfigParams struct {
 
 	/* ID.
 
-	   identifier of the projectid
+	   identifier of the backup config
 	*/
 	ID string
 

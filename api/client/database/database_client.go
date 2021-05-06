@@ -100,7 +100,7 @@ func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.C
 }
 
 /*
-  CreatePostgresBackupConfig creates a postgres backup for the given projectid
+  CreatePostgresBackupConfig creates a postgres backup
 */
 func (a *Client) CreatePostgresBackupConfig(params *CreatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupConfigCreated, error) {
 	// TODO: Validate the params before sending
@@ -176,7 +176,7 @@ func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.C
 }
 
 /*
-  DeletePostgresBackupConfig deletes a postgres backup for the given projectid
+  DeletePostgresBackupConfig deletes a postgres backup
 */
 func (a *Client) DeletePostgresBackupConfig(params *DeletePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -594,7 +594,7 @@ func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.C
 }
 
 /*
-  UpdatePostgresBackupConfig updates a postgres backup for the given projectid
+  UpdatePostgresBackupConfig updates the postgres backup
 */
 func (a *Client) UpdatePostgresBackupConfig(params *UpdatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupConfigOK, error) {
 	// TODO: Validate the params before sending

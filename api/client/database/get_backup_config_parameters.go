@@ -61,7 +61,7 @@ type GetBackupConfigParams struct {
 
 	/* ID.
 
-	   identifier of the backup
+	   identifier of the backup config
 	*/
 	ID string
 

@@ -49,7 +49,7 @@ func NewUpdatePostgresBackupConfigOK() *UpdatePostgresBackupConfigOK {
 
 /* UpdatePostgresBackupConfigOK describes a response with status code 200, with default header values.
 
-Ok
+OK
 */
 type UpdatePostgresBackupConfigOK struct {
 	Payload *models.V1PostgresBackupConfigResponse

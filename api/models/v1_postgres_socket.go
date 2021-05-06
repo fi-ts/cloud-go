@@ -12,10 +12,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// V1Socket v1 socket
+// V1PostgresSocket v1 postgres socket
 //
-// swagger:model v1.Socket
-type V1Socket struct {
+// swagger:model v1.PostgresSocket
+type V1PostgresSocket struct {
 
 	// ip
 	IP string `json:"ip,omitempty"`
@@ -24,18 +24,18 @@ type V1Socket struct {
 	Port int32 `json:"port,omitempty"`
 }
 
-// Validate validates this v1 socket
-func (m *V1Socket) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 postgres socket
+func (m *V1PostgresSocket) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1 socket based on context it is used
-func (m *V1Socket) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1 postgres socket based on context it is used
+func (m *V1PostgresSocket) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1Socket) MarshalBinary() ([]byte, error) {
+func (m *V1PostgresSocket) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -43,8 +43,8 @@ func (m *V1Socket) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1Socket) UnmarshalBinary(b []byte) error {
-	var res V1Socket
+func (m *V1PostgresSocket) UnmarshalBinary(b []byte) error {
+	var res V1PostgresSocket
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

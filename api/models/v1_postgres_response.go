@@ -55,7 +55,7 @@ type V1PostgresResponse struct {
 	ProjectID string `json:"projectID,omitempty"`
 
 	// size
-	Size *V1Size `json:"size,omitempty"`
+	Size *V1PostgresSize `json:"size,omitempty"`
 
 	// status
 	// Required: true

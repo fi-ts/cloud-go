@@ -49,7 +49,7 @@ func NewDeletePostgresBackupConfigOK() *DeletePostgresBackupConfigOK {
 
 /* DeletePostgresBackupConfigOK describes a response with status code 200, with default header values.
 
-Ok
+OK
 */
 type DeletePostgresBackupConfigOK struct {
 	Payload *models.V1PostgresBackupConfigResponse

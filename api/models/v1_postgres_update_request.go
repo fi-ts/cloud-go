@@ -19,10 +19,6 @@ import (
 // swagger:model v1.PostgresUpdateRequest
 type V1PostgresUpdateRequest struct {
 
-	// ID
-	// Required: true
-	ID *string `json:"ID"`
-
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
 
@@ -31,6 +27,10 @@ type V1PostgresUpdateRequest struct {
 
 	// description
 	Description string `json:"description,omitempty"`
+
+	// id
+	// Required: true
+	ID *string `json:"id"`
 
 	// labels
 	Labels map[string]string `json:"labels,omitempty"`
@@ -48,7 +48,7 @@ type V1PostgresUpdateRequest struct {
 	ProjectID string `json:"projectID,omitempty"`
 
 	// size
-	Size *V1Size `json:"size,omitempty"`
+	Size *V1PostgresSize `json:"size,omitempty"`
 
 	// version
 	Version string `json:"version,omitempty"`
@@ -58,11 +58,11 @@ type V1PostgresUpdateRequest struct {
 func (m *V1PostgresUpdateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateID(formats); err != nil {
+	if err := m.validateAccessList(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateAccessList(formats); err != nil {
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,15 +73,6 @@ func (m *V1PostgresUpdateRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1PostgresUpdateRequest) validateID(formats strfmt.Registry) error {
-
-	if err := validate.Required("ID", "body", m.ID); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -97,6 +88,15 @@ func (m *V1PostgresUpdateRequest) validateAccessList(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUpdateRequest) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	return nil
