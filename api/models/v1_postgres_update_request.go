@@ -33,7 +33,7 @@ type V1PostgresUpdateRequest struct {
 	ID *string `json:"id"`
 
 	// labels
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels V1PostgresUpdateRequestLabels `json:"labels,omitempty"`
 
 	// maintenance
 	Maintenance []string `json:"maintenance"`
@@ -63,6 +63,10 @@ func (m *V1PostgresUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLabels(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -102,6 +106,23 @@ func (m *V1PostgresUpdateRequest) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1PostgresUpdateRequest) validateLabels(formats strfmt.Registry) error {
+	if swag.IsZero(m.Labels) { // not required
+		return nil
+	}
+
+	if m.Labels != nil {
+		if err := m.Labels.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("labels")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1PostgresUpdateRequest) validateSize(formats strfmt.Registry) error {
 	if swag.IsZero(m.Size) { // not required
 		return nil
@@ -127,6 +148,10 @@ func (m *V1PostgresUpdateRequest) ContextValidate(ctx context.Context, formats s
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLabels(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSize(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -146,6 +171,18 @@ func (m *V1PostgresUpdateRequest) contextValidateAccessList(ctx context.Context,
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUpdateRequest) contextValidateLabels(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.Labels.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("labels")
+		}
+		return err
 	}
 
 	return nil

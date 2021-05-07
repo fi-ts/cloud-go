@@ -2371,10 +2371,7 @@
           "type": "string"
         },
         "labels": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "type": "object"
+          "$ref": "#/definitions/v1.PostgresUpdateRequest.labels"
         },
         "maintenance": {
           "items": {
@@ -2402,6 +2399,12 @@
       "required": [
         "id"
       ]
+    },
+    "v1.PostgresUpdateRequest.labels": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
     },
     "v1.PostgresVersion": {
       "properties": {
