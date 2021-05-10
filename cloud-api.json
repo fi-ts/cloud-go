@@ -1352,22 +1352,10 @@
         "NetworkID"
       ]
     },
-    "v1.GatewayAddPipesRequest": {
+    "v1.GatewayCreateInstanceRequest": {
       "properties": {
         "name": {
           "type": "string"
-        },
-        "peers": {
-          "items": {
-            "$ref": "#/definitions/v1.PeerSpec"
-          },
-          "type": "array"
-        },
-        "pipes": {
-          "items": {
-            "$ref": "#/definitions/v1.PipeSpec"
-          },
-          "type": "array"
         },
         "port": {
           "format": "integer",
@@ -1382,49 +1370,32 @@
       },
       "required": [
         "name",
-        "peers",
-        "pipes",
         "projectUID",
         "type"
       ]
     },
-    "v1.GatewayCreateRequest": {
+    "v1.GatewayCreatePipesRequest": {
       "properties": {
-        "name": {
-          "type": "string"
+        "Client": {
+          "$ref": "#/definitions/v1.GatewayInstanceIdentity"
         },
-        "peers": {
-          "items": {
-            "$ref": "#/definitions/v1.PeerSpec"
-          },
-          "type": "array"
+        "Server": {
+          "$ref": "#/definitions/v1.GatewayInstanceIdentity"
         },
         "pipes": {
           "items": {
             "$ref": "#/definitions/v1.PipeSpec"
           },
           "type": "array"
-        },
-        "port": {
-          "format": "integer",
-          "type": "integer"
-        },
-        "projectUID": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
         }
       },
       "required": [
-        "name",
-        "peers",
-        "pipes",
-        "projectUID",
-        "type"
+        "Client",
+        "Server",
+        "pipes"
       ]
     },
-    "v1.GatewayDeleteRequest": {
+    "v1.GatewayInstanceIdentity": {
       "properties": {
         "name": {
           "type": "string"
@@ -1438,21 +1409,7 @@
         "projectUID"
       ]
     },
-    "v1.GatewayDescribeRequest": {
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "projectUID": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "projectUID"
-      ]
-    },
-    "v1.GatewayResponse": {
+    "v1.GatewayInstanceResponse": {
       "properties": {
         "name": {
           "type": "string"
@@ -4116,19 +4073,19 @@
         ]
       }
     },
-    "/v1/gateway": {
+    "/v1/gateway/client": {
       "delete": {
         "consumes": [
           "application/json"
         ],
-        "operationId": "delete",
+        "operationId": "deleteClient",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.GatewayDeleteRequest"
+              "$ref": "#/definitions/v1.GatewayInstanceIdentity"
             }
           }
         ],
@@ -4137,9 +4094,9 @@
         ],
         "responses": {
           "200": {
-            "description": "gateway deleted",
+            "description": "gateway client deleted",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayResponse"
+              "$ref": "#/definitions/v1.GatewayInstanceResponse"
             }
           },
           "default": {
@@ -4157,14 +4114,14 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "describe",
+        "operationId": "describeInstance",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.GatewayDescribeRequest"
+              "$ref": "#/definitions/v1.GatewayInstanceIdentity"
             }
           }
         ],
@@ -4173,9 +4130,9 @@
         ],
         "responses": {
           "200": {
-            "description": "gateway info fetched",
+            "description": "gateway client fetched",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayResponse"
+              "$ref": "#/definitions/v1.GatewayInstanceResponse"
             }
           },
           "default": {
@@ -4193,14 +4150,14 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "create",
+        "operationId": "createClient",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.GatewayCreateRequest"
+              "$ref": "#/definitions/v1.GatewayInstanceIdentity"
             }
           }
         ],
@@ -4209,9 +4166,85 @@
         ],
         "responses": {
           "201": {
-            "description": "gateway created",
+            "description": "gateway client created",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayResponse"
+              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      }
+    },
+    "/v1/gateway/pipes": {
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createPipes",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayCreatePipesRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway pipes created",
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      }
+    },
+    "/v1/gateway/server": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "deleteServer",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayInstanceIdentity"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway server deleted",
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayInstanceResponse"
             }
           },
           "default": {
@@ -4225,18 +4258,18 @@
           "gateway"
         ]
       },
-      "put": {
+      "get": {
         "consumes": [
           "application/json"
         ],
-        "operationId": "addPipes",
+        "operationId": "describeInstance",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.GatewayAddPipesRequest"
+              "$ref": "#/definitions/v1.GatewayInstanceIdentity"
             }
           }
         ],
@@ -4245,9 +4278,45 @@
         ],
         "responses": {
           "200": {
-            "description": "pipes added to the gateway",
+            "description": "gateway server fetched",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayResponse"
+              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createServer",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayCreateInstanceRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "gateway server created",
+            "schema": {
+              "$ref": "#/definitions/v1.GatewayInstanceResponse"
             }
           },
           "default": {
