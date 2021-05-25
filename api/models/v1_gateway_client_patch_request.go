@@ -14,22 +14,29 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1GatewayInstanceIdentity v1 gateway instance identity
+// V1GatewayClientPatchRequest v1 gateway client patch request
 //
-// swagger:model v1.GatewayInstanceIdentity
-type V1GatewayInstanceIdentity struct {
+// swagger:model v1.GatewayClientPatchRequest
+type V1GatewayClientPatchRequest struct {
 
 	// name
 	// Required: true
 	Name *string `json:"name"`
 
+	// pipe names
+	PipeNames []string `json:"pipeNames"`
+
 	// project UID
 	// Required: true
 	ProjectUID *string `json:"projectUID"`
+
+	// uid
+	// Required: true
+	UID *string `json:"uid"`
 }
 
-// Validate validates this v1 gateway instance identity
-func (m *V1GatewayInstanceIdentity) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 gateway client patch request
+func (m *V1GatewayClientPatchRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateName(formats); err != nil {
@@ -40,13 +47,17 @@ func (m *V1GatewayInstanceIdentity) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateUID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
-func (m *V1GatewayInstanceIdentity) validateName(formats strfmt.Registry) error {
+func (m *V1GatewayClientPatchRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
@@ -55,7 +66,7 @@ func (m *V1GatewayInstanceIdentity) validateName(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *V1GatewayInstanceIdentity) validateProjectUID(formats strfmt.Registry) error {
+func (m *V1GatewayClientPatchRequest) validateProjectUID(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectUID", "body", m.ProjectUID); err != nil {
 		return err
@@ -64,13 +75,22 @@ func (m *V1GatewayInstanceIdentity) validateProjectUID(formats strfmt.Registry) 
 	return nil
 }
 
-// ContextValidate validates this v1 gateway instance identity based on context it is used
-func (m *V1GatewayInstanceIdentity) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1GatewayClientPatchRequest) validateUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("uid", "body", m.UID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this v1 gateway client patch request based on context it is used
+func (m *V1GatewayClientPatchRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1GatewayInstanceIdentity) MarshalBinary() ([]byte, error) {
+func (m *V1GatewayClientPatchRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -78,8 +98,8 @@ func (m *V1GatewayInstanceIdentity) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1GatewayInstanceIdentity) UnmarshalBinary(b []byte) error {
-	var res V1GatewayInstanceIdentity
+func (m *V1GatewayClientPatchRequest) UnmarshalBinary(b []byte) error {
+	var res V1GatewayClientPatchRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

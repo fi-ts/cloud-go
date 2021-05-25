@@ -14,14 +14,17 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1GatewayCreateInstanceRequest v1 gateway create instance request
+// V1GatewayClientPostRequest v1 gateway client post request
 //
-// swagger:model v1.GatewayCreateInstanceRequest
-type V1GatewayCreateInstanceRequest struct {
+// swagger:model v1.GatewayClientPostRequest
+type V1GatewayClientPostRequest struct {
 
 	// name
 	// Required: true
 	Name *string `json:"name"`
+
+	// pipe names
+	PipeNames []string `json:"pipeNames"`
 
 	// port
 	Port int64 `json:"port,omitempty"`
@@ -30,13 +33,19 @@ type V1GatewayCreateInstanceRequest struct {
 	// Required: true
 	ProjectUID *string `json:"projectUID"`
 
-	// type
+	// server name
+	ServerName string `json:"serverName,omitempty"`
+
+	// server project UID
+	ServerProjectUID string `json:"serverProjectUID,omitempty"`
+
+	// uid
 	// Required: true
-	Type *string `json:"type"`
+	UID *string `json:"uid"`
 }
 
-// Validate validates this v1 gateway create instance request
-func (m *V1GatewayCreateInstanceRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 gateway client post request
+func (m *V1GatewayClientPostRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateName(formats); err != nil {
@@ -47,7 +56,7 @@ func (m *V1GatewayCreateInstanceRequest) Validate(formats strfmt.Registry) error
 		res = append(res, err)
 	}
 
-	if err := m.validateType(formats); err != nil {
+	if err := m.validateUID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -57,7 +66,7 @@ func (m *V1GatewayCreateInstanceRequest) Validate(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *V1GatewayCreateInstanceRequest) validateName(formats strfmt.Registry) error {
+func (m *V1GatewayClientPostRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
@@ -66,7 +75,7 @@ func (m *V1GatewayCreateInstanceRequest) validateName(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *V1GatewayCreateInstanceRequest) validateProjectUID(formats strfmt.Registry) error {
+func (m *V1GatewayClientPostRequest) validateProjectUID(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectUID", "body", m.ProjectUID); err != nil {
 		return err
@@ -75,22 +84,22 @@ func (m *V1GatewayCreateInstanceRequest) validateProjectUID(formats strfmt.Regis
 	return nil
 }
 
-func (m *V1GatewayCreateInstanceRequest) validateType(formats strfmt.Registry) error {
+func (m *V1GatewayClientPostRequest) validateUID(formats strfmt.Registry) error {
 
-	if err := validate.Required("type", "body", m.Type); err != nil {
+	if err := validate.Required("uid", "body", m.UID); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-// ContextValidate validates this v1 gateway create instance request based on context it is used
-func (m *V1GatewayCreateInstanceRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1 gateway client post request based on context it is used
+func (m *V1GatewayClientPostRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1GatewayCreateInstanceRequest) MarshalBinary() ([]byte, error) {
+func (m *V1GatewayClientPostRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -98,8 +107,8 @@ func (m *V1GatewayCreateInstanceRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1GatewayCreateInstanceRequest) UnmarshalBinary(b []byte) error {
-	var res V1GatewayCreateInstanceRequest
+func (m *V1GatewayClientPostRequest) UnmarshalBinary(b []byte) error {
+	var res V1GatewayClientPostRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

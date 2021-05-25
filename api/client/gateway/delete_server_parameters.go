@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // NewDeleteServerParams creates a new DeleteServerParams object,
@@ -61,8 +59,17 @@ func NewDeleteServerParamsWithHTTPClient(client *http.Client) *DeleteServerParam
 */
 type DeleteServerParams struct {
 
-	// Body.
-	Body *models.V1GatewayInstanceIdentity
+	/* Name.
+
+	   name of the gateway server
+	*/
+	Name string
+
+	/* Projectuid.
+
+	   project UUID
+	*/
+	Projectuid string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -117,15 +124,26 @@ func (o *DeleteServerParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the delete server params
-func (o *DeleteServerParams) WithBody(body *models.V1GatewayInstanceIdentity) *DeleteServerParams {
-	o.SetBody(body)
+// WithName adds the name to the delete server params
+func (o *DeleteServerParams) WithName(name string) *DeleteServerParams {
+	o.SetName(name)
 	return o
 }
 
-// SetBody adds the body to the delete server params
-func (o *DeleteServerParams) SetBody(body *models.V1GatewayInstanceIdentity) {
-	o.Body = body
+// SetName adds the name to the delete server params
+func (o *DeleteServerParams) SetName(name string) {
+	o.Name = name
+}
+
+// WithProjectuid adds the projectuid to the delete server params
+func (o *DeleteServerParams) WithProjectuid(projectuid string) *DeleteServerParams {
+	o.SetProjectuid(projectuid)
+	return o
+}
+
+// SetProjectuid adds the projectuid to the delete server params
+func (o *DeleteServerParams) SetProjectuid(projectuid string) {
+	o.Projectuid = projectuid
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -135,10 +153,15 @@ func (o *DeleteServerParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+
+	// path param name
+	if err := r.SetPathParam("name", o.Name); err != nil {
+		return err
+	}
+
+	// path param projectuid
+	if err := r.SetPathParam("projectuid", o.Projectuid); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

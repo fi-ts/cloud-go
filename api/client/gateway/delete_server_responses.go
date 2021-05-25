@@ -56,7 +56,7 @@ type DeleteServerOK struct {
 }
 
 func (o *DeleteServerOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/gateway/server][%d] deleteServerOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /gateway/v1/projects/{projectuid}/servers/{name}][%d] deleteServerOK  %+v", 200, o.Payload)
 }
 func (o *DeleteServerOK) GetPayload() *models.V1GatewayInstanceResponse {
 	return o.Payload
@@ -97,7 +97,7 @@ func (o *DeleteServerDefault) Code() int {
 }
 
 func (o *DeleteServerDefault) Error() string {
-	return fmt.Sprintf("[DELETE /v1/gateway/server][%d] deleteServer default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /gateway/v1/projects/{projectuid}/servers/{name}][%d] deleteServer default  %+v", o._statusCode, o.Payload)
 }
 func (o *DeleteServerDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
