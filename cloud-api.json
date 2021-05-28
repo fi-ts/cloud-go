@@ -1,6 +1,7 @@
 {
   "basePath": "/",
   "definitions": {
+    "*v2.ClusterInfo": {},
     "httperrors.HTTPErrorResponse": {
       "properties": {
         "message": {
@@ -5889,6 +5890,38 @@
           }
         },
         "summary": "get all volumes",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/clusterinfo": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "clusterInfo",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/*v2.ClusterInfo"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "return info and status to connected storage clusters",
         "tags": [
           "volume"
         ]
