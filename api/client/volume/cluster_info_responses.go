@@ -52,13 +52,13 @@ func NewClusterInfoOK() *ClusterInfoOK {
 OK
 */
 type ClusterInfoOK struct {
-	Payload []models.V2ClusterInfo
+	Payload []*models.V1StorageClusterInfo
 }
 
 func (o *ClusterInfoOK) Error() string {
 	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfoOK  %+v", 200, o.Payload)
 }
-func (o *ClusterInfoOK) GetPayload() []models.V2ClusterInfo {
+func (o *ClusterInfoOK) GetPayload() []*models.V1StorageClusterInfo {
 	return o.Payload
 }
 
