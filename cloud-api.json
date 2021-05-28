@@ -898,6 +898,36 @@
         "Tenant"
       ]
     },
+    "v1.ClusterHealth": {
+      "properties": {
+        "NumDegradedVolumes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "NumInactiveNodes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "NumNotAvailableVolumes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "NumReadOnlyVolumes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "State": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NumDegradedVolumes",
+        "NumInactiveNodes",
+        "NumNotAvailableVolumes",
+        "NumReadOnlyVolumes",
+        "State"
+      ]
+    },
     "v1.ClusterKubeconfigResponse": {
       "properties": {
         "Kubeconfig": {
@@ -1049,6 +1079,67 @@
         "Status",
         "Tenant",
         "Workers"
+      ]
+    },
+    "v1.ClusterStatisticsApi": {
+      "properties": {
+        "CompressionRatio": {
+          "format": "double",
+          "type": "number"
+        },
+        "EffectivePhysicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "EstimatedFreeLogicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "EstimatedLogicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "FreePhysicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "InstalledPhysicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "LogicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "LogicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "ManagedPhysicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalUsedStorageIncludingParity": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "CompressionRatio",
+        "EffectivePhysicalStorage",
+        "EstimatedFreeLogicalStorage",
+        "EstimatedLogicalStorage",
+        "FreePhysicalStorage",
+        "InstalledPhysicalStorage",
+        "LogicalStorage",
+        "LogicalUsedStorage",
+        "ManagedPhysicalStorage",
+        "PhysicalUsedStorage",
+        "PhysicalUsedStorageIncludingParity"
       ]
     },
     "v1.ClusterUpdateRequest": {
@@ -3011,6 +3102,68 @@
         "machine_types",
         "networks",
         "partitions"
+      ]
+    },
+    "v1.StorageClusterInfo": {
+      "properties": {
+        "ApiEndpoints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "CurrentMaxReplicas": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "DiscoveryEndpoints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Health": {
+          "$ref": "#/definitions/v1.ClusterHealth"
+        },
+        "MaxAllowedVersion": {
+          "type": "string"
+        },
+        "MinAllowedVersion": {
+          "type": "string"
+        },
+        "MinVersionInCluster": {
+          "type": "string"
+        },
+        "Partition": {
+          "type": "string"
+        },
+        "Statistics": {
+          "$ref": "#/definitions/v1.ClusterStatisticsApi"
+        },
+        "SubsystemNQN": {
+          "type": "string"
+        },
+        "SupportedMaxReplicas": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "UUID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ApiEndpoints",
+        "CurrentMaxReplicas",
+        "DiscoveryEndpoints",
+        "Health",
+        "MaxAllowedVersion",
+        "MinAllowedVersion",
+        "MinVersionInCluster",
+        "Partition",
+        "Statistics",
+        "SubsystemNQN",
+        "SupportedMaxReplicas",
+        "UUID"
       ]
     },
     "v1.Tenant": {
@@ -5889,6 +6042,38 @@
           }
         },
         "summary": "get all volumes",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/clusterinfo": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "clusterInfo",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.StorageClusterInfo"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "return info and status to connected storage clusters",
         "tags": [
           "volume"
         ]
