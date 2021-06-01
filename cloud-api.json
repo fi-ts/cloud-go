@@ -3282,7 +3282,7 @@
           },
           "type": "array"
         },
-        "NodeList": {
+        "NodeIPList": {
           "items": {
             "type": "string"
           },
@@ -3320,7 +3320,7 @@
       },
       "required": [
         "ConnectedHosts",
-        "NodeList",
+        "NodeIPList",
         "PartitionID",
         "ProjectID",
         "ReplicaCount",

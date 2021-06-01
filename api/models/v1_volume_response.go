@@ -23,9 +23,9 @@ type V1VolumeResponse struct {
 	// Required: true
 	ConnectedHosts []string `json:"ConnectedHosts"`
 
-	// node list
+	// node IP list
 	// Required: true
-	NodeList []string `json:"NodeList"`
+	NodeIPList []string `json:"NodeIPList"`
 
 	// partition ID
 	// Required: true
@@ -72,7 +72,7 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateNodeList(formats); err != nil {
+	if err := m.validateNodeIPList(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -127,9 +127,9 @@ func (m *V1VolumeResponse) validateConnectedHosts(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *V1VolumeResponse) validateNodeList(formats strfmt.Registry) error {
+func (m *V1VolumeResponse) validateNodeIPList(formats strfmt.Registry) error {
 
-	if err := validate.Required("NodeList", "body", m.NodeList); err != nil {
+	if err := validate.Required("NodeIPList", "body", m.NodeIPList); err != nil {
 		return err
 	}
 
