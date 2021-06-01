@@ -3282,6 +3282,12 @@
           },
           "type": "array"
         },
+        "NodeList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "PartitionID": {
           "type": "string"
         },
@@ -3314,6 +3320,7 @@
       },
       "required": [
         "ConnectedHosts",
+        "NodeList",
         "PartitionID",
         "ProjectID",
         "ReplicaCount",
