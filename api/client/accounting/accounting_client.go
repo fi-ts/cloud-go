@@ -44,6 +44,10 @@ type ClientService interface {
 
 	NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageCSVOK, error)
 
+	PostgresUsage(params *PostgresUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageOK, error)
+
+	PostgresUsageCSV(params *PostgresUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageCSVOK, error)
+
 	S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageOK, error)
 
 	S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageCSVOK, error)
@@ -356,6 +360,82 @@ func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*NetworkUsageCSVDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  PostgresUsage finds postgres usage for given accounting query
+*/
+func (a *Client) PostgresUsage(params *PostgresUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostgresUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "postgresUsage",
+		Method:             "POST",
+		PathPattern:        "/v1/accounting/postgres-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostgresUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostgresUsageOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PostgresUsageDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  PostgresUsageCSV finds postgres usage for given accounting query
+*/
+func (a *Client) PostgresUsageCSV(params *PostgresUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageCSVOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostgresUsageCSVParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "postgresUsageCSV",
+		Method:             "POST",
+		PathPattern:        "/v1/accounting/postgres-usage-csv",
+		ProducesMediaTypes: []string{"application/json", "text/plain"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostgresUsageCSVReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostgresUsageCSVOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PostgresUsageCSVDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

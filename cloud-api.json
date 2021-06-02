@@ -2497,6 +2497,164 @@
       },
       "type": "object"
     },
+    "v1.PostgresUsage": {
+      "properties": {
+        "cpuseconds": {
+          "description": "the cpu seconds of this postgres (s*s)",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "the duration that this postgres is running",
+          "format": "integer",
+          "type": "integer"
+        },
+        "memoryseconds": {
+          "description": "the memory seconds of this postgres (byte*s)",
+          "type": "string"
+        },
+        "partition": {
+          "description": "the partition of this postgres",
+          "type": "string"
+        },
+        "postgresdescription": {
+          "description": "the cluster name of this postgres",
+          "type": "string"
+        },
+        "postgresend": {
+          "description": "the end time of this postgres",
+          "format": "date-time",
+          "type": "string"
+        },
+        "postgresid": {
+          "description": "the id of this postgres",
+          "type": "string"
+        },
+        "postgresstart": {
+          "description": "the start time of this postgres",
+          "format": "date-time",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id of this postgres",
+          "type": "string"
+        },
+        "storageseconds": {
+          "description": "the accumulated storage seconds of the postgres in this response (byte*s)",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this postgres",
+          "type": "string"
+        },
+        "warnings": {
+          "description": "warnings that occurred when calculating the usage of this postgres",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "cpuseconds",
+        "lifetime",
+        "memoryseconds",
+        "partition",
+        "postgresdescription",
+        "postgresend",
+        "postgresid",
+        "postgresstart",
+        "projectid",
+        "storageseconds",
+        "tenant",
+        "warnings"
+      ]
+    },
+    "v1.PostgresUsageAccumuluated": {
+      "properties": {
+        "cpuseconds": {
+          "description": "the accumuluated cpu seconds of the postgres in this response (s*s)",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "the duration that this postgres is running",
+          "format": "integer",
+          "type": "integer"
+        },
+        "memoryseconds": {
+          "description": "the accumulated memory seconds of the postgres in this response (byte*s)",
+          "type": "string"
+        },
+        "storageseconds": {
+          "description": "the accumulated storage seconds of the postgres in this response (byte*s)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cpuseconds",
+        "lifetime",
+        "memoryseconds",
+        "storageseconds"
+      ]
+    },
+    "v1.PostgresUsageRequest": {
+      "properties": {
+        "clusterid": {
+          "description": "the cluster id to account for",
+          "type": "string"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "v1.PostgresUsageResponse": {
+      "properties": {
+        "accumulatedusage": {
+          "$ref": "#/definitions/v1.PostgresUsageAccumuluated",
+          "description": "just the usage data of the individual postgres summed up"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        },
+        "usage": {
+          "description": "the usage data of the individual postgres",
+          "items": {
+            "$ref": "#/definitions/v1.PostgresUsage"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "accumulatedusage",
+        "from",
+        "usage"
+      ]
+    },
     "v1.PostgresVersion": {
       "properties": {
         "expirationDate": {
@@ -4073,6 +4231,85 @@
           }
         },
         "summary": "find network usage for given accounting query",
+        "tags": [
+          "accounting"
+        ]
+      }
+    },
+    "/v1/accounting/postgres-usage": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "postgresUsage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresUsageRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresUsageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find postgres usage for given accounting query",
+        "tags": [
+          "accounting"
+        ]
+      }
+    },
+    "/v1/accounting/postgres-usage-csv": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "postgresUsageCSV",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresUsageRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find postgres usage for given accounting query",
         "tags": [
           "accounting"
         ]
