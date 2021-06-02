@@ -62,6 +62,10 @@ type V1VolumeResponse struct {
 	// volume ID
 	// Required: true
 	VolumeID *string `json:"VolumeID"`
+
+	// volume name
+	// Required: true
+	VolumeName *string `json:"VolumeName"`
 }
 
 // Validate validates this v1 volume response
@@ -109,6 +113,10 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateVolumeID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVolumeName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -220,6 +228,15 @@ func (m *V1VolumeResponse) validateVolumeHandle(formats strfmt.Registry) error {
 func (m *V1VolumeResponse) validateVolumeID(formats strfmt.Registry) error {
 
 	if err := validate.Required("VolumeID", "body", m.VolumeID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateVolumeName(formats strfmt.Registry) error {
+
+	if err := validate.Required("VolumeName", "body", m.VolumeName); err != nil {
 		return err
 	}
 
