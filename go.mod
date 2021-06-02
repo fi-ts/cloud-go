@@ -1,6 +1,6 @@
 module github.com/fi-ts/cloud-go
 
-go 1.15
+go 1.16
 
 require (
 	github.com/go-openapi/errors v0.20.0
@@ -10,5 +10,6 @@ require (
 	github.com/go-openapi/validate v0.20.2
 	github.com/metal-stack/metal-lib v0.7.2
 	github.com/metal-stack/security v0.5.3
+	github.com/stretchr/testify v1.7.0
 	github.com/tidwall/pretty v1.1.0 // indirect
 )
