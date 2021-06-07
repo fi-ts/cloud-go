@@ -28,44 +28,50 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteClient(params *DeleteClientParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClientOK, error)
+	ClientDelete(params *ClientDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientDeleteOK, error)
 
-	DeleteServer(params *DeleteServerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServerOK, error)
+	ClientGet(params *ClientGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientGetOK, error)
 
-	GetClient(params *GetClientParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClientOK, error)
+	ClientList(params *ClientListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientListOK, error)
 
-	GetServer(params *GetServerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServerOK, error)
+	ClientListAll(params *ClientListAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientListAllOK, error)
 
-	ListServers(params *ListServersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServersOK, error)
+	ClientPatch(params *ClientPatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientPatchOK, error)
 
-	PatchClient(params *PatchClientParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchClientOK, error)
+	ClientPost(params *ClientPostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientPostCreated, error)
 
-	PatchServer(params *PatchServerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchServerOK, error)
+	ServerDelete(params *ServerDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerDeleteOK, error)
 
-	PostClient(params *PostClientParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostClientCreated, error)
+	ServerGet(params *ServerGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerGetOK, error)
 
-	PostServer(params *PostServerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostServerCreated, error)
+	ServerList(params *ServerListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerListOK, error)
+
+	ServerListAll(params *ServerListAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerListAllOK, error)
+
+	ServerPatch(params *ServerPatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerPatchOK, error)
+
+	ServerPost(params *ServerPostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerPostCreated, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  DeleteClient delete client API
+  ClientDelete client delete API
 */
-func (a *Client) DeleteClient(params *DeleteClientParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClientOK, error) {
+func (a *Client) ClientDelete(params *ClientDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteClientParams()
+		params = NewClientDeleteParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteClient",
+		ID:                 "clientDelete",
 		Method:             "DELETE",
 		PathPattern:        "/gateway/v1/projects/{projectuid}/clients/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteClientReader{formats: a.formats},
+		Reader:             &ClientDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -78,70 +84,32 @@ func (a *Client) DeleteClient(params *DeleteClientParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteClientOK)
+	success, ok := result.(*ClientDeleteOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteClientDefault)
+	unexpectedSuccess := result.(*ClientDeleteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  DeleteServer delete server API
+  ClientGet client get API
 */
-func (a *Client) DeleteServer(params *DeleteServerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServerOK, error) {
+func (a *Client) ClientGet(params *ClientGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteServerParams()
+		params = NewClientGetParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteServer",
-		Method:             "DELETE",
-		PathPattern:        "/gateway/v1/projects/{projectuid}/servers/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteServerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteServerOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*DeleteServerDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  GetClient get client API
-*/
-func (a *Client) GetClient(params *GetClientParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClientOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetClientParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getClient",
+		ID:                 "clientGet",
 		Method:             "GET",
 		PathPattern:        "/gateway/v1/projects/{projectuid}/clients/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetClientReader{formats: a.formats},
+		Reader:             &ClientGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -154,32 +122,32 @@ func (a *Client) GetClient(params *GetClientParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetClientOK)
+	success, ok := result.(*ClientGetOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetClientDefault)
+	unexpectedSuccess := result.(*ClientGetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  GetServer get server API
+  ClientList client list API
 */
-func (a *Client) GetServer(params *GetServerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServerOK, error) {
+func (a *Client) ClientList(params *ClientListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetServerParams()
+		params = NewClientListParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getServer",
+		ID:                 "clientList",
 		Method:             "GET",
-		PathPattern:        "/gateway/v1/projects/{projectuid}/servers/{name}",
+		PathPattern:        "/gateway/v1/projects/{projectuid}/clients",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetServerReader{formats: a.formats},
+		Reader:             &ClientListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -192,32 +160,32 @@ func (a *Client) GetServer(params *GetServerParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetServerOK)
+	success, ok := result.(*ClientListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetServerDefault)
+	unexpectedSuccess := result.(*ClientListDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  ListServers list servers API
+  ClientListAll client list all API
 */
-func (a *Client) ListServers(params *ListServersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServersOK, error) {
+func (a *Client) ClientListAll(params *ClientListAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientListAllOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListServersParams()
+		params = NewClientListAllParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listServers",
+		ID:                 "clientListAll",
 		Method:             "GET",
-		PathPattern:        "/gateway/v1/projects/{projectuid}",
+		PathPattern:        "/gateway/v1/clients",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListServersReader{formats: a.formats},
+		Reader:             &ClientListAllReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -230,32 +198,32 @@ func (a *Client) ListServers(params *ListServersParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListServersOK)
+	success, ok := result.(*ClientListAllOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListServersDefault)
+	unexpectedSuccess := result.(*ClientListAllDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  PatchClient patch client API
+  ClientPatch client patch API
 */
-func (a *Client) PatchClient(params *PatchClientParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchClientOK, error) {
+func (a *Client) ClientPatch(params *ClientPatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientPatchOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPatchClientParams()
+		params = NewClientPatchParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "patchClient",
+		ID:                 "clientPatch",
 		Method:             "PATCH",
 		PathPattern:        "/gateway/v1/projects/{projectuid}/clients/{name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &PatchClientReader{formats: a.formats},
+		Reader:             &ClientPatchReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -268,70 +236,32 @@ func (a *Client) PatchClient(params *PatchClientParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PatchClientOK)
+	success, ok := result.(*ClientPatchOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*PatchClientDefault)
+	unexpectedSuccess := result.(*ClientPatchDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  PatchServer patch server API
+  ClientPost client post API
 */
-func (a *Client) PatchServer(params *PatchServerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchServerOK, error) {
+func (a *Client) ClientPost(params *ClientPostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClientPostCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPatchServerParams()
+		params = NewClientPostParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "patchServer",
-		Method:             "PATCH",
-		PathPattern:        "/gateway/v1/projects/{projectuid}/servers/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PatchServerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PatchServerOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*PatchServerDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  PostClient post client API
-*/
-func (a *Client) PostClient(params *PostClientParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostClientCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostClientParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postClient",
+		ID:                 "clientPost",
 		Method:             "POST",
 		PathPattern:        "/gateway/v1/projects/{projectuid}/clients",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &PostClientReader{formats: a.formats},
+		Reader:             &ClientPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -344,32 +274,222 @@ func (a *Client) PostClient(params *PostClientParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PostClientCreated)
+	success, ok := result.(*ClientPostCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*PostClientDefault)
+	unexpectedSuccess := result.(*ClientPostDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-  PostServer post server API
+  ServerDelete server delete API
 */
-func (a *Client) PostServer(params *PostServerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostServerCreated, error) {
+func (a *Client) ServerDelete(params *ServerDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostServerParams()
+		params = NewServerDeleteParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "postServer",
+		ID:                 "serverDelete",
+		Method:             "DELETE",
+		PathPattern:        "/gateway/v1/projects/{projectuid}/servers/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ServerDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServerDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ServerDeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ServerGet server get API
+*/
+func (a *Client) ServerGet(params *ServerGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServerGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "serverGet",
+		Method:             "GET",
+		PathPattern:        "/gateway/v1/projects/{projectuid}/servers/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ServerGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServerGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ServerGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ServerList server list API
+*/
+func (a *Client) ServerList(params *ServerListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerListOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServerListParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "serverList",
+		Method:             "GET",
+		PathPattern:        "/gateway/v1/projects/{projectuid}/servers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ServerListReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServerListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ServerListDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ServerListAll server list all API
+*/
+func (a *Client) ServerListAll(params *ServerListAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerListAllOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServerListAllParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "serverListAll",
+		Method:             "GET",
+		PathPattern:        "/gateway/v1/servers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ServerListAllReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServerListAllOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ServerListAllDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ServerPatch server patch API
+*/
+func (a *Client) ServerPatch(params *ServerPatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerPatchOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServerPatchParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "serverPatch",
+		Method:             "PATCH",
+		PathPattern:        "/gateway/v1/projects/{projectuid}/servers/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ServerPatchReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServerPatchOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ServerPatchDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ServerPost server post API
+*/
+func (a *Client) ServerPost(params *ServerPostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerPostCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServerPostParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "serverPost",
 		Method:             "POST",
 		PathPattern:        "/gateway/v1/projects/{projectuid}/servers",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &PostServerReader{formats: a.formats},
+		Reader:             &ServerPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -382,12 +502,12 @@ func (a *Client) PostServer(params *PostServerParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PostServerCreated)
+	success, ok := result.(*ServerPostCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*PostServerDefault)
+	unexpectedSuccess := result.(*ServerPostDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

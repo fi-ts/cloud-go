@@ -20,6 +20,9 @@ import (
 // swagger:model v1.GatewayServerPostRequest
 type V1GatewayServerPostRequest struct {
 
+	// load balancer IP
+	LoadBalancerIP string `json:"loadBalancerIP,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`

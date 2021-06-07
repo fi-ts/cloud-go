@@ -15,10 +15,10 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1GatewayInstanceResponse v1 gateway instance response
+// V1GatewayClientResponse v1 gateway client response
 //
-// swagger:model v1.GatewayInstanceResponse
-type V1GatewayInstanceResponse struct {
+// swagger:model v1.GatewayClientResponse
+type V1GatewayClientResponse struct {
 
 	// name
 	// Required: true
@@ -28,10 +28,7 @@ type V1GatewayInstanceResponse struct {
 	Peers []*V1PeerSpec `json:"peers"`
 
 	// pipes
-	Pipes []*V1PipeSpec `json:"pipes"`
-
-	// port
-	Port int64 `json:"port,omitempty"`
+	Pipes []*V1ExtendedPipeSpec `json:"pipes"`
 
 	// project UID
 	// Required: true
@@ -42,8 +39,8 @@ type V1GatewayInstanceResponse struct {
 	UID *string `json:"uid"`
 }
 
-// Validate validates this v1 gateway instance response
-func (m *V1GatewayInstanceResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 gateway client response
+func (m *V1GatewayClientResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateName(formats); err != nil {
@@ -72,7 +69,7 @@ func (m *V1GatewayInstanceResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1GatewayInstanceResponse) validateName(formats strfmt.Registry) error {
+func (m *V1GatewayClientResponse) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
@@ -81,7 +78,7 @@ func (m *V1GatewayInstanceResponse) validateName(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *V1GatewayInstanceResponse) validatePeers(formats strfmt.Registry) error {
+func (m *V1GatewayClientResponse) validatePeers(formats strfmt.Registry) error {
 	if swag.IsZero(m.Peers) { // not required
 		return nil
 	}
@@ -105,7 +102,7 @@ func (m *V1GatewayInstanceResponse) validatePeers(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *V1GatewayInstanceResponse) validatePipes(formats strfmt.Registry) error {
+func (m *V1GatewayClientResponse) validatePipes(formats strfmt.Registry) error {
 	if swag.IsZero(m.Pipes) { // not required
 		return nil
 	}
@@ -129,7 +126,7 @@ func (m *V1GatewayInstanceResponse) validatePipes(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *V1GatewayInstanceResponse) validateProjectUID(formats strfmt.Registry) error {
+func (m *V1GatewayClientResponse) validateProjectUID(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectUID", "body", m.ProjectUID); err != nil {
 		return err
@@ -138,7 +135,7 @@ func (m *V1GatewayInstanceResponse) validateProjectUID(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *V1GatewayInstanceResponse) validateUID(formats strfmt.Registry) error {
+func (m *V1GatewayClientResponse) validateUID(formats strfmt.Registry) error {
 
 	if err := validate.Required("uid", "body", m.UID); err != nil {
 		return err
@@ -147,8 +144,8 @@ func (m *V1GatewayInstanceResponse) validateUID(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this v1 gateway instance response based on the context it is used
-func (m *V1GatewayInstanceResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this v1 gateway client response based on the context it is used
+func (m *V1GatewayClientResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidatePeers(ctx, formats); err != nil {
@@ -165,7 +162,7 @@ func (m *V1GatewayInstanceResponse) ContextValidate(ctx context.Context, formats
 	return nil
 }
 
-func (m *V1GatewayInstanceResponse) contextValidatePeers(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1GatewayClientResponse) contextValidatePeers(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Peers); i++ {
 
@@ -183,7 +180,7 @@ func (m *V1GatewayInstanceResponse) contextValidatePeers(ctx context.Context, fo
 	return nil
 }
 
-func (m *V1GatewayInstanceResponse) contextValidatePipes(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1GatewayClientResponse) contextValidatePipes(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Pipes); i++ {
 
@@ -202,7 +199,7 @@ func (m *V1GatewayInstanceResponse) contextValidatePipes(ctx context.Context, fo
 }
 
 // MarshalBinary interface implementation
-func (m *V1GatewayInstanceResponse) MarshalBinary() ([]byte, error) {
+func (m *V1GatewayClientResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -210,8 +207,8 @@ func (m *V1GatewayInstanceResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1GatewayInstanceResponse) UnmarshalBinary(b []byte) error {
-	var res V1GatewayInstanceResponse
+func (m *V1GatewayClientResponse) UnmarshalBinary(b []byte) error {
+	var res V1GatewayClientResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

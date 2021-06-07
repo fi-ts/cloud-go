@@ -1352,44 +1352,29 @@
         "NetworkID"
       ]
     },
-    "v1.GatewayClientDescribeResponse": {
+    "v1.ExtendedPipeSpec": {
       "properties": {
+        "endpoint": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
-        "peers": {
-          "items": {
-            "$ref": "#/definitions/v1.PeerSpec"
-          },
-          "type": "array"
-        },
-        "pipes": {
-          "items": {
-            "$ref": "#/definitions/v1.PipeSpec"
-          },
-          "type": "array"
+        "peer": {
+          "type": "string"
         },
         "port": {
           "format": "integer",
           "type": "integer"
         },
-        "projectUID": {
-          "type": "string"
-        },
-        "services": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "uid": {
+        "remote": {
           "type": "string"
         }
       },
       "required": [
         "name",
-        "projectUID",
-        "uid"
+        "port",
+        "remote"
       ]
     },
     "v1.GatewayClientPatchRequest": {
@@ -1450,7 +1435,7 @@
         "uid"
       ]
     },
-    "v1.GatewayInstanceResponse": {
+    "v1.GatewayClientResponse": {
       "properties": {
         "name": {
           "type": "string"
@@ -1463,13 +1448,27 @@
         },
         "pipes": {
           "items": {
-            "$ref": "#/definitions/v1.PipeSpec"
+            "$ref": "#/definitions/v1.ExtendedPipeSpec"
           },
           "type": "array"
         },
-        "port": {
-          "format": "integer",
-          "type": "integer"
+        "projectUID": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "projectUID",
+        "uid"
+      ]
+    },
+    "v1.GatewayID": {
+      "properties": {
+        "name": {
+          "type": "string"
         },
         "projectUID": {
           "type": "string"
@@ -1511,6 +1510,46 @@
     },
     "v1.GatewayServerPostRequest": {
       "properties": {
+        "loadBalancerIP": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "peers": {
+          "items": {
+            "$ref": "#/definitions/v1.PeerSpec"
+          },
+          "type": "array"
+        },
+        "pipes": {
+          "items": {
+            "$ref": "#/definitions/v1.PipeSpec"
+          },
+          "type": "array"
+        },
+        "port": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "projectUID": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "projectUID",
+        "uid"
+      ]
+    },
+    "v1.GatewayServerResponse": {
+      "properties": {
+        "loadBalancerIP": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -3296,30 +3335,21 @@
     "title": "cloud-api"
   },
   "paths": {
-    "/gateway/v1/projects/{projectuid}": {
+    "/gateway/v1/clients": {
       "get": {
         "consumes": [
           "application/json"
         ],
-        "operationId": "listServers",
-        "parameters": [
-          {
-            "description": "project UUID",
-            "in": "path",
-            "name": "projectuid",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "operationId": "clientListAll",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "gateway servers fetched",
+            "description": "gateway clients fetched",
             "schema": {
               "items": {
-                "$ref": "#/definitions/v1.GatewayInstanceResponse"
+                "$ref": "#/definitions/v1.GatewayClientResponse"
               },
               "type": "array"
             }
@@ -3337,11 +3367,49 @@
       }
     },
     "/gateway/v1/projects/{projectuid}/clients": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "clientList",
+        "parameters": [
+          {
+            "description": "project UUID",
+            "in": "path",
+            "name": "projectuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway clients fetched",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.GatewayClientResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      },
       "post": {
         "consumes": [
           "application/json"
         ],
-        "operationId": "postClient",
+        "operationId": "clientPost",
         "parameters": [
           {
             "description": "project UUID",
@@ -3366,7 +3434,7 @@
           "201": {
             "description": "gateway client created",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+              "$ref": "#/definitions/v1.GatewayClientResponse"
             }
           },
           "default": {
@@ -3386,7 +3454,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "deleteClient",
+        "operationId": "clientDelete",
         "parameters": [
           {
             "description": "project UUID",
@@ -3410,7 +3478,7 @@
           "200": {
             "description": "gateway client deleted",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+              "$ref": "#/definitions/v1.GatewayID"
             }
           },
           "default": {
@@ -3428,7 +3496,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "getClient",
+        "operationId": "clientGet",
         "parameters": [
           {
             "description": "project UUID",
@@ -3452,7 +3520,7 @@
           "200": {
             "description": "gateway client fetched",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayClientDescribeResponse"
+              "$ref": "#/definitions/v1.GatewayClientResponse"
             }
           },
           "default": {
@@ -3470,7 +3538,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "patchClient",
+        "operationId": "clientPatch",
         "parameters": [
           {
             "description": "project UUID",
@@ -3502,7 +3570,7 @@
           "200": {
             "description": "gateway pipes added to the gateway client(s)",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+              "$ref": "#/definitions/v1.GatewayClientResponse"
             }
           },
           "default": {
@@ -3518,11 +3586,49 @@
       }
     },
     "/gateway/v1/projects/{projectuid}/servers": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "serverList",
+        "parameters": [
+          {
+            "description": "project UUID",
+            "in": "path",
+            "name": "projectuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway servers fetched",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.GatewayServerResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      },
       "post": {
         "consumes": [
           "application/json"
         ],
-        "operationId": "postServer",
+        "operationId": "serverPost",
         "parameters": [
           {
             "description": "project UUID",
@@ -3547,7 +3653,7 @@
           "201": {
             "description": "gateway server created",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+              "$ref": "#/definitions/v1.GatewayServerResponse"
             }
           },
           "default": {
@@ -3567,7 +3673,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "deleteServer",
+        "operationId": "serverDelete",
         "parameters": [
           {
             "description": "project UUID",
@@ -3591,7 +3697,7 @@
           "200": {
             "description": "gateway server deleted",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+              "$ref": "#/definitions/v1.GatewayID"
             }
           },
           "default": {
@@ -3609,7 +3715,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "getServer",
+        "operationId": "serverGet",
         "parameters": [
           {
             "description": "project UUID",
@@ -3633,7 +3739,7 @@
           "200": {
             "description": "gateway server fetched",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+              "$ref": "#/definitions/v1.GatewayServerResponse"
             }
           },
           "default": {
@@ -3651,7 +3757,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "patchServer",
+        "operationId": "serverPatch",
         "parameters": [
           {
             "description": "project UUID",
@@ -3683,7 +3789,38 @@
           "200": {
             "description": "gateway pipes added to server",
             "schema": {
-              "$ref": "#/definitions/v1.GatewayInstanceResponse"
+              "$ref": "#/definitions/v1.GatewayServerResponse"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "gateway"
+        ]
+      }
+    },
+    "/gateway/v1/servers": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "serverListAll",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway servers fetched",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.GatewayServerResponse"
+              },
+              "type": "array"
             }
           },
           "default": {
