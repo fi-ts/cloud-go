@@ -23,6 +23,10 @@ type V1VolumeResponse struct {
 	// Required: true
 	ConnectedHosts []string `json:"ConnectedHosts"`
 
+	// node IP list
+	// Required: true
+	NodeIPList []string `json:"NodeIPList"`
+
 	// partition ID
 	// Required: true
 	PartitionID *string `json:"PartitionID"`
@@ -58,6 +62,10 @@ type V1VolumeResponse struct {
 	// volume ID
 	// Required: true
 	VolumeID *string `json:"VolumeID"`
+
+	// volume name
+	// Required: true
+	VolumeName *string `json:"VolumeName"`
 }
 
 // Validate validates this v1 volume response
@@ -65,6 +73,10 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateConnectedHosts(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNodeIPList(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -104,6 +116,10 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateVolumeName(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -113,6 +129,15 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 func (m *V1VolumeResponse) validateConnectedHosts(formats strfmt.Registry) error {
 
 	if err := validate.Required("ConnectedHosts", "body", m.ConnectedHosts); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateNodeIPList(formats strfmt.Registry) error {
+
+	if err := validate.Required("NodeIPList", "body", m.NodeIPList); err != nil {
 		return err
 	}
 
@@ -203,6 +228,15 @@ func (m *V1VolumeResponse) validateVolumeHandle(formats strfmt.Registry) error {
 func (m *V1VolumeResponse) validateVolumeID(formats strfmt.Registry) error {
 
 	if err := validate.Required("VolumeID", "body", m.VolumeID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateVolumeName(formats strfmt.Registry) error {
+
+	if err := validate.Required("VolumeName", "body", m.VolumeName); err != nil {
 		return err
 	}
 

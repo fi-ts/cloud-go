@@ -24,6 +24,105 @@
         "type": "HTTPErrorResponse"
       }
     },
+    "metalgo.IPAllocateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "machineid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkid": {
+          "type": "string"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ipaddress",
+        "machineid",
+        "networkid",
+        "projectid"
+      ]
+    },
+    "metalgo.IPFindRequest": {
+      "properties": {
+        "IPAddress": {
+          "type": "string"
+        },
+        "MachineID": {
+          "type": "string"
+        },
+        "NetworkID": {
+          "type": "string"
+        },
+        "ParentPrefixCidr": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "Tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "IPAddress",
+        "MachineID",
+        "NetworkID",
+        "ParentPrefixCidr",
+        "ProjectID",
+        "Tags",
+        "Type"
+      ]
+    },
+    "metalgo.IPUpdateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ipaddress"
+      ]
+    },
     "models.V1BootInfo": {
       "properties": {
         "bootloaderid": {
@@ -671,6 +770,16 @@
         "version"
       ]
     },
+    "v1.AccessList": {
+      "properties": {
+        "sourceRanges": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
     "v1.ClusterCreateRequest": {
       "properties": {
         "AdditionalNetworks": {
@@ -787,6 +896,36 @@
         "PartitionID",
         "ProjectID",
         "Tenant"
+      ]
+    },
+    "v1.ClusterHealth": {
+      "properties": {
+        "NumDegradedVolumes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "NumInactiveNodes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "NumNotAvailableVolumes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "NumReadOnlyVolumes": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "State": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NumDegradedVolumes",
+        "NumInactiveNodes",
+        "NumNotAvailableVolumes",
+        "NumReadOnlyVolumes",
+        "State"
       ]
     },
     "v1.ClusterKubeconfigResponse": {
@@ -940,6 +1079,67 @@
         "Status",
         "Tenant",
         "Workers"
+      ]
+    },
+    "v1.ClusterStatisticsApi": {
+      "properties": {
+        "CompressionRatio": {
+          "format": "double",
+          "type": "number"
+        },
+        "EffectivePhysicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "EstimatedFreeLogicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "EstimatedLogicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "FreePhysicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "InstalledPhysicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "LogicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "LogicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "ManagedPhysicalStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalUsedStorageIncludingParity": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "CompressionRatio",
+        "EffectivePhysicalStorage",
+        "EstimatedFreeLogicalStorage",
+        "EstimatedLogicalStorage",
+        "FreePhysicalStorage",
+        "InstalledPhysicalStorage",
+        "LogicalStorage",
+        "LogicalUsedStorage",
+        "ManagedPhysicalStorage",
+        "PhysicalUsedStorage",
+        "PhysicalUsedStorageIncludingParity"
       ]
     },
     "v1.ClusterUpdateRequest": {
@@ -2154,6 +2354,7 @@
         "Type"
       ]
     },
+<<<<<<< HEAD
     "v1.PeerSpec": {
       "properties": {
         "endpoint": {
@@ -2192,6 +2393,551 @@
         "port",
         "remote"
       ]
+    },
+    "v1.Project": {
+=======
+    "v1.PostgresBackupConfigCreateRequest": {
+>>>>>>> master
+      "properties": {
+        "autocreate": {
+          "type": "boolean"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "partition": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "s3BucketName": {
+          "type": "string"
+        },
+        "s3Endpoint": {
+          "type": "string"
+        },
+        "s3Region": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "#/definitions/v1.PostgresBackupSecret"
+        }
+      },
+      "required": [
+        "createdBy"
+      ]
+    },
+    "v1.PostgresBackupConfigResponse": {
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "s3BucketName": {
+          "type": "string"
+        },
+        "s3Endpoint": {
+          "type": "string"
+        },
+        "s3Region": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "#/definitions/v1.PostgresBackupSecret"
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "createdBy",
+        "id"
+      ]
+    },
+    "v1.PostgresBackupConfigUpdateRequest": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "retention": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "schedule": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresBackupEntry": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "size",
+        "timestamp"
+      ]
+    },
+    "v1.PostgresBackupSecret": {
+      "properties": {
+        "accesskey": {
+          "type": "string"
+        },
+        "s3encryptionkey": {
+          "type": "string"
+        },
+        "secretkey": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresCreateRequest": {
+      "properties": {
+        "accessList": {
+          "$ref": "#/definitions/v1.AccessList"
+        },
+        "backup": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "maintenance": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "numberOfInstances": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "size": {
+          "$ref": "#/definitions/v1.PostgresSize"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresFindRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "tenant": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresPartition": {
+      "properties": {
+        "AllowedTenants": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "AllowedTenants"
+      ]
+    },
+    "v1.PostgresPartitionsResponse": {
+      "additionalProperties": {
+        "$ref": "#/definitions/v1.PostgresPartition"
+      },
+      "type": "object"
+    },
+    "v1.PostgresResponse": {
+      "properties": {
+        "accessList": {
+          "$ref": "#/definitions/v1.AccessList"
+        },
+        "backup": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "creationTimestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "maintenance": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "numberOfInstances": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "size": {
+          "$ref": "#/definitions/v1.PostgresSize"
+        },
+        "status": {
+          "$ref": "#/definitions/v1.PostgresStatus"
+        },
+        "tenant": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "v1.PostgresSecretsRespone": {
+      "properties": {
+        "userSecret": {
+          "items": {
+            "$ref": "#/definitions/v1.UserSecret"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "v1.PostgresSize": {
+      "properties": {
+        "cpu": {
+          "type": "string"
+        },
+        "sharedBuffer": {
+          "type": "string"
+        },
+        "storageSize": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.PostgresSocket": {
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "v1.PostgresStatus": {
+      "properties": {
+        "childReference": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "socket": {
+          "$ref": "#/definitions/v1.PostgresSocket"
+        }
+      }
+    },
+    "v1.PostgresUpdateRequest": {
+      "properties": {
+        "accessList": {
+          "$ref": "#/definitions/v1.AccessList"
+        },
+        "backup": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "labels": {
+          "$ref": "#/definitions/v1.PostgresUpdateRequest.labels"
+        },
+        "maintenance": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "numberOfInstances": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "string"
+        },
+        "size": {
+          "$ref": "#/definitions/v1.PostgresSize"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "v1.PostgresUpdateRequest.labels": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "v1.PostgresUsage": {
+      "properties": {
+        "cpuseconds": {
+          "description": "the cpu seconds of this postgres (s*s)",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "the duration that this postgres is running",
+          "format": "integer",
+          "type": "integer"
+        },
+        "memoryseconds": {
+          "description": "the memory seconds of this postgres (byte*s)",
+          "type": "string"
+        },
+        "partition": {
+          "description": "the partition of this postgres",
+          "type": "string"
+        },
+        "postgresdescription": {
+          "description": "the cluster name of this postgres",
+          "type": "string"
+        },
+        "postgresend": {
+          "description": "the end time of this postgres",
+          "format": "date-time",
+          "type": "string"
+        },
+        "postgresid": {
+          "description": "the id of this postgres",
+          "type": "string"
+        },
+        "postgresstart": {
+          "description": "the start time of this postgres",
+          "format": "date-time",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id of this postgres",
+          "type": "string"
+        },
+        "storageseconds": {
+          "description": "the accumulated storage seconds of the postgres in this response (byte*s)",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this postgres",
+          "type": "string"
+        },
+        "warnings": {
+          "description": "warnings that occurred when calculating the usage of this postgres",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "cpuseconds",
+        "lifetime",
+        "memoryseconds",
+        "partition",
+        "postgresdescription",
+        "postgresend",
+        "postgresid",
+        "postgresstart",
+        "projectid",
+        "storageseconds",
+        "tenant",
+        "warnings"
+      ]
+    },
+    "v1.PostgresUsageAccumuluated": {
+      "properties": {
+        "cpuseconds": {
+          "description": "the accumuluated cpu seconds of the postgres in this response (s*s)",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "the duration that this postgres is running",
+          "format": "integer",
+          "type": "integer"
+        },
+        "memoryseconds": {
+          "description": "the accumulated memory seconds of the postgres in this response (byte*s)",
+          "type": "string"
+        },
+        "storageseconds": {
+          "description": "the accumulated storage seconds of the postgres in this response (byte*s)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cpuseconds",
+        "lifetime",
+        "memoryseconds",
+        "storageseconds"
+      ]
+    },
+    "v1.PostgresUsageRequest": {
+      "properties": {
+        "clusterid": {
+          "description": "the cluster id to account for",
+          "type": "string"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "v1.PostgresUsageResponse": {
+      "properties": {
+        "accumulatedusage": {
+          "$ref": "#/definitions/v1.PostgresUsageAccumuluated",
+          "description": "just the usage data of the individual postgres summed up"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        },
+        "usage": {
+          "description": "the usage data of the individual postgres",
+          "items": {
+            "$ref": "#/definitions/v1.PostgresUsage"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "accumulatedusage",
+        "from",
+        "usage"
+      ]
+    },
+    "v1.PostgresVersion": {
+      "properties": {
+        "expirationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
     },
     "v1.Project": {
       "properties": {
@@ -2641,570 +3387,7 @@
           "description": "the accumulated reported size of the s3 buckets in this response",
           "type": "string"
         },
-        "lifetime": {
-          "description": "the duration that this s3 bucket is running",
-          "format": "integer",
-          "type": "integer"
-        },
-        "storageseconds": {
-          "description": "the accumulated storage seconds of the s3 buckets in this response (byte*s)",
-          "type": "string"
-        }
-      },
-      "required": [
-        "currentnumberofobjects",
-        "currentsize",
-        "lifetime",
-        "storageseconds"
-      ]
-    },
-    "v1.S3UsageRequest": {
-      "properties": {
-        "from": {
-          "description": "the start time in the accounting window to look at",
-          "format": "date-time",
-          "type": "string"
-        },
-        "projectid": {
-          "description": "the project id to account for",
-          "type": "string"
-        },
-        "tenant": {
-          "description": "the tenant to get the container usage for (defaults to all tenants)",
-          "type": "string"
-        },
-        "to": {
-          "description": "the end time in the accounting window to look at (defaults to current system time)",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "required": [
-        "from"
-      ]
-    },
-    "v1.S3UsageResponse": {
-      "properties": {
-        "accumulatedusage": {
-          "$ref": "#/definitions/v1.S3UsageAccumuluated",
-          "description": "just the usage data of the individual s3 buckets summed up"
-        },
-        "from": {
-          "description": "the start time in the accounting window to look at",
-          "format": "date-time",
-          "type": "string"
-        },
-        "to": {
-          "description": "the end time in the accounting window to look at (defaults to current system time)",
-          "format": "date-time",
-          "type": "string"
-        },
-        "usage": {
-          "description": "the usage data of the individual s3 buckets",
-          "items": {
-            "$ref": "#/definitions/v1.S3Usage"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "accumulatedusage",
-        "from",
-        "usage"
-      ]
-    },
-    "v1.SSHKeyPair": {
-      "properties": {
-        "PrivateKey": {
-          "type": "string"
-        },
-        "PublicKey": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "PrivateKey",
-        "PublicKey"
-      ]
-    },
-    "v1.ShootConstraints": {
-      "properties": {
-        "firewall_images": {
-          "description": "the list of available firewall images",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "firewall_types": {
-          "description": "the list of available firewall types",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "kubernetes_versions": {
-          "description": "the list of available kubernetes versions",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "machine_images": {
-          "description": "the list of available machine images",
-          "items": {
-            "$ref": "#/definitions/v1.MachineImage"
-          },
-          "type": "array"
-        },
-        "machine_types": {
-          "description": "the list of available machine types",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "networks": {
-          "description": "the list of available networks for cluster creation",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "partitions": {
-          "description": "the list of available partitions",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "firewall_images",
-        "firewall_types",
-        "kubernetes_versions",
-        "machine_images",
-        "machine_types",
-        "networks",
-        "partitions"
-      ]
-    },
-    "v1.Tenant": {
-      "properties": {
-        "default_quotas": {
-          "$ref": "#/definitions/v1.QuotaSet"
-        },
-        "description": {
-          "type": "string"
-        },
-        "iam_config": {
-          "$ref": "#/definitions/v1.IAMConfig"
-        },
-        "meta": {
-          "$ref": "#/definitions/v1.Meta"
-        },
-        "name": {
-          "type": "string"
-        },
-        "quotas": {
-          "$ref": "#/definitions/v1.QuotaSet"
-        }
-      }
-    },
-    "v1.TenantResponse": {
-      "properties": {
-        "default_quotas": {
-          "$ref": "#/definitions/v1.QuotaSet"
-        },
-        "description": {
-          "type": "string"
-        },
-        "iam_config": {
-          "$ref": "#/definitions/v1.IAMConfig"
-        },
-        "meta": {
-          "$ref": "#/definitions/v1.Meta"
-        },
-        "name": {
-          "type": "string"
-        },
-        "quotas": {
-          "$ref": "#/definitions/v1.QuotaSet"
-        }
-      }
-    },
-    "v1.TenantUpdateRequest": {
-      "properties": {
-        "tenant": {
-          "$ref": "#/definitions/v1.Tenant"
-        }
-      }
-    },
-    "v1.VolumeFindRequest": {
-      "properties": {
-        "PartitionID": {
-          "type": "string"
-        },
-        "ProjectID": {
-          "type": "string"
-        },
-        "VolumeID": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "PartitionID",
-        "ProjectID",
-        "VolumeID"
-      ]
-    },
-    "v1.VolumeResponse": {
-      "properties": {
-        "ConnectedHosts": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "PartitionID": {
-          "type": "string"
-        },
-        "ProjectID": {
-          "type": "string"
-        },
-        "ReplicaCount": {
-          "format": "integer",
-          "type": "integer"
-        },
-        "Size": {
-          "format": "integer",
-          "type": "integer"
-        },
-        "Statistics": {
-          "$ref": "#/definitions/v1.VolumeStatistics"
-        },
-        "StorageClass": {
-          "type": "string"
-        },
-        "TenantID": {
-          "type": "string"
-        },
-        "VolumeHandle": {
-          "type": "string"
-        },
-        "VolumeID": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ConnectedHosts",
-        "PartitionID",
-        "ProjectID",
-        "ReplicaCount",
-        "Size",
-        "Statistics",
-        "StorageClass",
-        "TenantID",
-        "VolumeHandle",
-        "VolumeID"
-      ]
-    },
-    "v1.VolumeStatistics": {
-      "properties": {
-        "CompressionRatio": {
-          "format": "double",
-          "type": "number"
-        },
-        "LogicalUsedStorage": {
-          "format": "integer",
-          "type": "integer"
-        },
-        "PhysicalUsedStorage": {
-          "format": "integer",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "CompressionRatio",
-        "LogicalUsedStorage",
-        "PhysicalUsedStorage"
-      ]
-    },
-    "v1.VolumeUsage": {
-      "properties": {
-        "annotations": {
-          "description": "accounting annotations present on the last accounting report of this volume",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "capacityseconds": {
-          "description": "the capacity seconds of this volume (byte*s)",
-          "type": "string"
-        },
-        "class": {
-          "description": "the class of this volume",
-          "type": "string"
-        },
-        "clusterid": {
-          "description": "the cluster id of this volume",
-          "type": "string"
-        },
-        "clustername": {
-          "description": "the cluster name of this volume",
-          "type": "string"
-        },
-        "end": {
-          "description": "the end time of this volume",
-          "format": "date-time",
-          "type": "string"
-        },
-        "lifetime": {
-          "description": "the duration that this volume is running",
-          "format": "integer",
-          "type": "integer"
-        },
-        "name": {
-          "description": "the name of this volume",
-          "type": "string"
-        },
-        "partition": {
-          "description": "the partition of this volume",
-          "type": "string"
-        },
-        "projectid": {
-          "description": "the project id of this volume",
-          "type": "string"
-        },
-        "projectname": {
-          "description": "the project name of this volume",
-          "type": "string"
-        },
-        "start": {
-          "description": "the start time of this volume",
-          "format": "date-time",
-          "type": "string"
-        },
-        "tenant": {
-          "description": "the tenant of this volume",
-          "type": "string"
-        },
-        "type": {
-          "description": "the type of this volume",
-          "type": "string"
-        },
-        "uuid": {
-          "description": "the uuid of this volume",
-          "type": "string"
-        },
-        "warnings": {
-          "description": "warnings that occurred when calculating the usage of this volume",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "annotations",
-        "capacityseconds",
-        "class",
-        "clusterid",
-        "clustername",
-        "end",
-        "lifetime",
-        "name",
-        "partition",
-        "projectid",
-        "projectname",
-        "start",
-        "tenant",
-        "type",
-        "uuid",
-        "warnings"
-      ]
-    },
-    "v1.VolumeUsageAccumuluated": {
-      "properties": {
-        "capacityseconds": {
-          "description": "the accumulated capacity seconds of the volumes in this response (byte*s)",
-          "type": "string"
-        },
-        "lifetime": {
-          "description": "the duration that this volume is running",
-          "format": "integer",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "capacityseconds",
-        "lifetime"
-      ]
-    },
-    "v1.VolumeUsageRequest": {
-      "properties": {
-        "annotations": {
-          "description": "accounting annotations present on the last accounting report of this container",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "clusterid": {
-          "description": "the cluster id to account for",
-          "type": "string"
-        },
-        "from": {
-          "description": "the start time in the accounting window to look at",
-          "format": "date-time",
-          "type": "string"
-        },
-        "namespace": {
-          "description": "the namespace name to account for",
-          "type": "string"
-        },
-        "projectid": {
-          "description": "the project id to account for",
-          "type": "string"
-        },
-        "tenant": {
-          "description": "the tenant to get the container usage for (defaults to all tenants)",
-          "type": "string"
-        },
-        "to": {
-          "description": "the end time in the accounting window to look at (defaults to current system time)",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "required": [
-        "annotations",
-        "from"
-      ]
-    },
-    "v1.VolumeUsageResponse": {
-      "properties": {
-        "accumulatedusage": {
-          "$ref": "#/definitions/v1.VolumeUsageAccumuluated",
-          "description": "just the usage data of the individual volumes summed up"
-        },
-        "from": {
-          "description": "the start time in the accounting window to look at",
-          "format": "date-time",
-          "type": "string"
-        },
-        "to": {
-          "description": "the end time in the accounting window to look at (defaults to current system time)",
-          "format": "date-time",
-          "type": "string"
-        },
-        "usage": {
-          "description": "the usage data of the individual volumes",
-          "items": {
-            "$ref": "#/definitions/v1.VolumeUsage"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "accumulatedusage",
-        "from",
-        "usage"
-      ]
-    },
-    "v1.Worker": {
-      "properties": {
-        "CRI": {
-          "type": "string"
-        },
-        "DrainTimeout": {
-          "format": "integer",
-          "type": "integer"
-        },
-        "HealthTimeout": {
-          "format": "integer",
-          "type": "integer"
-        },
-        "MachineImage": {
-          "$ref": "#/definitions/v1.MachineImage"
-        },
-        "MachineType": {
-          "type": "string"
-        },
-        "MaxSurge": {
-          "type": "string"
-        },
-        "MaxUnavailable": {
-          "type": "string"
-        },
-        "Maximum": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "Minimum": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "Name": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "CRI",
-        "MachineImage",
-        "MachineType",
-        "MaxSurge",
-        "MaxUnavailable",
-        "Maximum",
-        "Minimum",
-        "Name"
-      ]
-    },
-    "v1beta1.Condition": {
-      "properties": {
-        "codes": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "lastTransitionTime": {
-          "type": "string"
-        },
-        "lastUpdateTime": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "reason": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "lastTransitionTime",
-        "lastUpdateTime",
-        "message",
-        "reason",
-        "status",
-        "type"
-      ]
-    },
-    "v1beta1.Gardener": {
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
+<<<<<<< HEAD
         "version": {
           "type": "string"
         }
@@ -3310,10 +3493,20 @@
           "type": "string"
         },
         "uid": {
+=======
+        "lifetime": {
+          "description": "the duration that this s3 bucket is running",
+          "format": "integer",
+          "type": "integer"
+        },
+        "storageseconds": {
+          "description": "the accumulated storage seconds of the s3 buckets in this response (byte*s)",
+>>>>>>> master
           "type": "string"
         }
       },
       "required": [
+<<<<<<< HEAD
         "gardener",
         "hibernated",
         "technicalID",
@@ -3810,31 +4003,802 @@
           "application/json"
         ],
         "operationId": "serverListAll",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "gateway servers fetched",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/v1.GatewayServerResponse"
-              },
-              "type": "array"
-            }
-          },
-          "default": {
-            "description": "error",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
-            }
-          }
+=======
+        "currentnumberofobjects",
+        "currentsize",
+        "lifetime",
+        "storageseconds"
+      ]
+    },
+    "v1.S3UsageRequest": {
+      "properties": {
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
         },
-        "tags": [
-          "gateway"
-        ]
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "v1.S3UsageResponse": {
+      "properties": {
+        "accumulatedusage": {
+          "$ref": "#/definitions/v1.S3UsageAccumuluated",
+          "description": "just the usage data of the individual s3 buckets summed up"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        },
+        "usage": {
+          "description": "the usage data of the individual s3 buckets",
+          "items": {
+            "$ref": "#/definitions/v1.S3Usage"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "accumulatedusage",
+        "from",
+        "usage"
+      ]
+    },
+    "v1.SSHKeyPair": {
+      "properties": {
+        "PrivateKey": {
+          "type": "string"
+        },
+        "PublicKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "PrivateKey",
+        "PublicKey"
+      ]
+    },
+    "v1.ShootConstraints": {
+      "properties": {
+        "firewall_images": {
+          "description": "the list of available firewall images",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "firewall_types": {
+          "description": "the list of available firewall types",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kubernetes_versions": {
+          "description": "the list of available kubernetes versions",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "machine_images": {
+          "description": "the list of available machine images",
+          "items": {
+            "$ref": "#/definitions/v1.MachineImage"
+          },
+          "type": "array"
+        },
+        "machine_types": {
+          "description": "the list of available machine types",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "networks": {
+          "description": "the list of available networks for cluster creation",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "partitions": {
+          "description": "the list of available partitions",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "firewall_images",
+        "firewall_types",
+        "kubernetes_versions",
+        "machine_images",
+        "machine_types",
+        "networks",
+        "partitions"
+      ]
+    },
+    "v1.StorageClusterInfo": {
+      "properties": {
+        "ApiEndpoints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "CurrentMaxReplicas": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "DiscoveryEndpoints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Health": {
+          "$ref": "#/definitions/v1.ClusterHealth"
+        },
+        "MaxAllowedVersion": {
+          "type": "string"
+        },
+        "MinAllowedVersion": {
+          "type": "string"
+        },
+        "MinVersionInCluster": {
+          "type": "string"
+        },
+        "Partition": {
+          "type": "string"
+        },
+        "Statistics": {
+          "$ref": "#/definitions/v1.ClusterStatisticsApi"
+        },
+        "SubsystemNQN": {
+          "type": "string"
+        },
+        "SupportedMaxReplicas": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "UUID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ApiEndpoints",
+        "CurrentMaxReplicas",
+        "DiscoveryEndpoints",
+        "Health",
+        "MaxAllowedVersion",
+        "MinAllowedVersion",
+        "MinVersionInCluster",
+        "Partition",
+        "Statistics",
+        "SubsystemNQN",
+        "SupportedMaxReplicas",
+        "UUID"
+      ]
+    },
+    "v1.Tenant": {
+      "properties": {
+        "default_quotas": {
+          "$ref": "#/definitions/v1.QuotaSet"
+        },
+        "description": {
+          "type": "string"
+        },
+        "iam_config": {
+          "$ref": "#/definitions/v1.IAMConfig"
+        },
+        "meta": {
+          "$ref": "#/definitions/v1.Meta"
+        },
+        "name": {
+          "type": "string"
+        },
+        "quotas": {
+          "$ref": "#/definitions/v1.QuotaSet"
+        }
       }
     },
+    "v1.TenantResponse": {
+      "properties": {
+        "default_quotas": {
+          "$ref": "#/definitions/v1.QuotaSet"
+        },
+        "description": {
+          "type": "string"
+        },
+        "iam_config": {
+          "$ref": "#/definitions/v1.IAMConfig"
+        },
+        "meta": {
+          "$ref": "#/definitions/v1.Meta"
+        },
+        "name": {
+          "type": "string"
+        },
+        "quotas": {
+          "$ref": "#/definitions/v1.QuotaSet"
+        }
+      }
+    },
+    "v1.TenantUpdateRequest": {
+      "properties": {
+        "tenant": {
+          "$ref": "#/definitions/v1.Tenant"
+        }
+      }
+    },
+    "v1.UsageRequest": {
+      "properties": {
+        "clusterid": {
+          "description": "the cluster id to account for",
+          "type": "string"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "v1.UserSecret": {
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "v1.VolumeFindRequest": {
+      "properties": {
+        "PartitionID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "VolumeID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "PartitionID",
+        "ProjectID",
+        "VolumeID"
+      ]
+    },
+    "v1.VolumeResponse": {
+      "properties": {
+        "ConnectedHosts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "NodeIPList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "PartitionID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "ReplicaCount": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Size": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Statistics": {
+          "$ref": "#/definitions/v1.VolumeStatistics"
+        },
+        "StorageClass": {
+          "type": "string"
+        },
+        "TenantID": {
+          "type": "string"
+        },
+        "VolumeHandle": {
+          "type": "string"
+        },
+        "VolumeID": {
+          "type": "string"
+        },
+        "VolumeName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ConnectedHosts",
+        "NodeIPList",
+        "PartitionID",
+        "ProjectID",
+        "ReplicaCount",
+        "Size",
+        "Statistics",
+        "StorageClass",
+        "TenantID",
+        "VolumeHandle",
+        "VolumeID",
+        "VolumeName"
+      ]
+    },
+    "v1.VolumeStatistics": {
+      "properties": {
+        "CompressionRatio": {
+          "format": "double",
+          "type": "number"
+        },
+        "LogicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalUsedStorage": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "CompressionRatio",
+        "LogicalUsedStorage",
+        "PhysicalUsedStorage"
+      ]
+    },
+    "v1.VolumeUsage": {
+      "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this volume",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "capacityseconds": {
+          "description": "the capacity seconds of this volume (byte*s)",
+          "type": "string"
+        },
+        "class": {
+          "description": "the class of this volume",
+          "type": "string"
+        },
+        "clusterid": {
+          "description": "the cluster id of this volume",
+          "type": "string"
+        },
+        "clustername": {
+          "description": "the cluster name of this volume",
+          "type": "string"
+        },
+        "end": {
+          "description": "the end time of this volume",
+          "format": "date-time",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "the duration that this volume is running",
+          "format": "integer",
+          "type": "integer"
+        },
+        "name": {
+          "description": "the name of this volume",
+          "type": "string"
+        },
+        "partition": {
+          "description": "the partition of this volume",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id of this volume",
+          "type": "string"
+        },
+        "projectname": {
+          "description": "the project name of this volume",
+          "type": "string"
+        },
+        "start": {
+          "description": "the start time of this volume",
+          "format": "date-time",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this volume",
+          "type": "string"
+        },
+        "type": {
+          "description": "the type of this volume",
+          "type": "string"
+        },
+        "uuid": {
+          "description": "the uuid of this volume",
+          "type": "string"
+        },
+        "warnings": {
+          "description": "warnings that occurred when calculating the usage of this volume",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "annotations",
+        "capacityseconds",
+        "class",
+        "clusterid",
+        "clustername",
+        "end",
+        "lifetime",
+        "name",
+        "partition",
+        "projectid",
+        "projectname",
+        "start",
+        "tenant",
+        "type",
+        "uuid",
+        "warnings"
+      ]
+    },
+    "v1.VolumeUsageAccumuluated": {
+      "properties": {
+        "capacityseconds": {
+          "description": "the accumulated capacity seconds of the volumes in this response (byte*s)",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "the duration that this volume is running",
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "capacityseconds",
+        "lifetime"
+      ]
+    },
+    "v1.VolumeUsageRequest": {
+      "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this container",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "clusterid": {
+          "description": "the cluster id to account for",
+          "type": "string"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "the namespace name to account for",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "annotations",
+        "from"
+      ]
+    },
+    "v1.VolumeUsageResponse": {
+      "properties": {
+        "accumulatedusage": {
+          "$ref": "#/definitions/v1.VolumeUsageAccumuluated",
+          "description": "just the usage data of the individual volumes summed up"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        },
+        "usage": {
+          "description": "the usage data of the individual volumes",
+          "items": {
+            "$ref": "#/definitions/v1.VolumeUsage"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "accumulatedusage",
+        "from",
+        "usage"
+      ]
+    },
+    "v1.Worker": {
+      "properties": {
+        "CRI": {
+          "type": "string"
+        },
+        "DrainTimeout": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "HealthTimeout": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "MachineImage": {
+          "$ref": "#/definitions/v1.MachineImage"
+        },
+        "MachineType": {
+          "type": "string"
+        },
+        "MaxSurge": {
+          "type": "string"
+        },
+        "MaxUnavailable": {
+          "type": "string"
+        },
+        "Maximum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Minimum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CRI",
+        "MachineImage",
+        "MachineType",
+        "MaxSurge",
+        "MaxUnavailable",
+        "Maximum",
+        "Minimum",
+        "Name"
+      ]
+    },
+    "v1beta1.Condition": {
+      "properties": {
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "lastTransitionTime": {
+          "type": "string"
+        },
+        "lastUpdateTime": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "lastTransitionTime",
+        "lastUpdateTime",
+        "message",
+        "reason",
+        "status",
+        "type"
+      ]
+    },
+    "v1beta1.Gardener": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "version"
+      ]
+    },
+    "v1beta1.LastError": {
+      "properties": {
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "lastUpdateTime": {
+          "type": "string"
+        },
+        "taskID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "v1beta1.LastOperation": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "lastUpdateTime": {
+          "type": "string"
+        },
+        "progress": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "state": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "lastUpdateTime",
+        "progress",
+        "state",
+        "type"
+      ]
+    },
+    "v1beta1.ShootStatus": {
+      "properties": {
+        "clusterIdentity": {
+          "type": "string"
+        },
+        "conditions": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.Condition"
+          },
+          "type": "array"
+        },
+        "constraints": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.Condition"
+          },
+          "type": "array"
+        },
+        "gardener": {
+          "$ref": "#/definitions/v1beta1.Gardener"
+        },
+        "hibernated": {
+          "type": "boolean"
+        },
+        "lastErrors": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.LastError"
+          },
+          "type": "array"
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/v1beta1.LastOperation"
+        },
+        "observedGeneration": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "retryCycleStartTime": {
+          "type": "string"
+        },
+        "seedName": {
+          "type": "string"
+        },
+        "technicalID": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "gardener",
+        "hibernated",
+        "technicalID",
+        "uid"
+      ]
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "devops@f-i-ts.de",
+      "name": "Devops Team",
+      "url": "http://www.f-i-ts.de"
+    },
+    "description": "Resource for managing cloud entities",
+    "license": {
+      "name": "MIT",
+      "url": "http://mit.org"
+    },
+    "title": "cloud-api"
+  },
+  "paths": {
     "/v1/accounting/cluster-usage": {
       "post": {
         "consumes": [
@@ -4151,6 +5115,85 @@
         ]
       }
     },
+    "/v1/accounting/postgres-usage": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "postgresUsage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresUsageRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresUsageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find postgres usage for given accounting query",
+        "tags": [
+          "accounting"
+        ]
+      }
+    },
+    "/v1/accounting/postgres-usage-csv": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "postgresUsageCSV",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresUsageRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find postgres usage for given accounting query",
+        "tags": [
+          "accounting"
+        ]
+      }
+    },
     "/v1/accounting/s3-usage": {
       "post": {
         "consumes": [
@@ -4246,11 +5289,24 @@
             }
           }
         ],
+>>>>>>> master
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "gateway servers fetched",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.GatewayServerResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "error",
+=======
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/v1.VolumeUsageResponse"
@@ -4258,11 +5314,20 @@
           },
           "default": {
             "description": "Error",
+>>>>>>> master
             "schema": {
               "$ref": "#/definitions/httperrors.HTTPErrorResponse"
             }
           }
         },
+<<<<<<< HEAD
+        "tags": [
+          "gateway"
+        ]
+      }
+    },
+    "/v1/accounting/cluster-usage": {
+=======
         "summary": "find volume usage for given accounting query",
         "tags": [
           "accounting"
@@ -4270,6 +5335,7 @@
       }
     },
     "/v1/accounting/volume-usage-csv": {
+>>>>>>> master
       "post": {
         "consumes": [
           "application/json"
@@ -4707,6 +5773,548 @@
         "summary": "get all the ssh-keypairs of the cluster",
         "tags": [
           "cluster"
+        ]
+      }
+    },
+    "/v1/database/postgres": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "listPostgres",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.PostgresResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get all postgres databases",
+        "tags": [
+          "database"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "updatePostgres",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresUpdateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "updates a postgres. if the postgres was changed since this one was read, a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createPostgres",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresCreateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "create a postgres. if the given ID already exists a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/backup-config": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "listPostgresBackupConfigs",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get all postgres backups",
+        "tags": [
+          "database"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "updatePostgresBackupConfig",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresBackupConfigUpdateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "update the postgres backup",
+        "tags": [
+          "database"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createPostgresBackupConfig",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresBackupConfigCreateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "create a postgres backup",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/backup-config/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "deletePostgresBackupConfig",
+        "parameters": [
+          {
+            "description": "identifier of the backup config",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "delete a postgres backup",
+        "tags": [
+          "database"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getBackupConfig",
+        "parameters": [
+          {
+            "description": "identifier of the backup config",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresBackupConfigResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres backups",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/find": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "findPostgres",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.PostgresResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find postgres databases by multiple criteria",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/partitions": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresPartitions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresPartitionsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres partitions supported",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/versions": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresVersions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.PostgresVersion"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres versions supported",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "deletePostgres",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "deletes an postgres and returns the deleted entity",
+        "tags": [
+          "database"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgres",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres by id",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/{id}/backups": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresBackups",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.PostgresBackupEntry"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres stored backups by id",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/{id}/secrets": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getPostgresSecrets",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresSecretsRespone"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get postgres secrets by id",
+        "tags": [
+          "database"
         ]
       }
     },
@@ -5584,6 +7192,38 @@
           }
         },
         "summary": "get all volumes",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/clusterinfo": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "clusterInfo",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.StorageClusterInfo"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "return info and status to connected storage clusters",
         "tags": [
           "volume"
         ]
