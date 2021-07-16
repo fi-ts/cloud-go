@@ -27,6 +27,10 @@ type V1IPFindRequest struct {
 	// Required: true
 	MachineID *string `json:"MachineID"`
 
+	// name
+	// Required: true
+	Name *string `json:"Name"`
+
 	// network ID
 	// Required: true
 	NetworkID *string `json:"NetworkID"`
@@ -57,6 +61,10 @@ func (m *V1IPFindRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateMachineID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -98,6 +106,15 @@ func (m *V1IPFindRequest) validateIPAddress(formats strfmt.Registry) error {
 func (m *V1IPFindRequest) validateMachineID(formats strfmt.Registry) error {
 
 	if err := validate.Required("MachineID", "body", m.MachineID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1IPFindRequest) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("Name", "body", m.Name); err != nil {
 		return err
 	}
 

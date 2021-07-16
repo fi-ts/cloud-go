@@ -23,15 +23,19 @@ type ModelsV1MachineAllocation struct {
 	// boot info
 	BootInfo *ModelsV1BootInfo `json:"boot_info,omitempty"`
 
-	// console password
-	ConsolePassword string `json:"console_password,omitempty"`
-
 	// created
 	// Required: true
 	Created *string `json:"created"`
 
+	// creator
+	// Required: true
+	Creator *string `json:"creator"`
+
 	// description
 	Description string `json:"description,omitempty"`
+
+	// filesystemlayout
+	Filesystemlayout *ModelsV1FilesystemLayoutResponse `json:"filesystemlayout,omitempty"`
 
 	// hostname
 	// Required: true
@@ -77,6 +81,14 @@ func (m *ModelsV1MachineAllocation) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreated(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreator(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFilesystemlayout(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -139,6 +151,32 @@ func (m *ModelsV1MachineAllocation) validateCreated(formats strfmt.Registry) err
 
 	if err := validate.Required("created", "body", m.Created); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineAllocation) validateCreator(formats strfmt.Registry) error {
+
+	if err := validate.Required("creator", "body", m.Creator); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineAllocation) validateFilesystemlayout(formats strfmt.Registry) error {
+	if swag.IsZero(m.Filesystemlayout) { // not required
+		return nil
+	}
+
+	if m.Filesystemlayout != nil {
+		if err := m.Filesystemlayout.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("filesystemlayout")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -248,6 +286,10 @@ func (m *ModelsV1MachineAllocation) ContextValidate(ctx context.Context, formats
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateFilesystemlayout(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateImage(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -268,6 +310,20 @@ func (m *ModelsV1MachineAllocation) contextValidateBootInfo(ctx context.Context,
 		if err := m.BootInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("boot_info")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineAllocation) contextValidateFilesystemlayout(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Filesystemlayout != nil {
+		if err := m.Filesystemlayout.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("filesystemlayout")
 			}
 			return err
 		}
