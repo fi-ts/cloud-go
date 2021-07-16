@@ -30,6 +30,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterCreated, error)
 
+	CycleMachine(params *CycleMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CycleMachineOK, error)
+
 	DeleteCluster(params *DeleteClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterOK, error)
 
 	FindCluster(params *FindClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindClusterOK, error)
@@ -90,6 +92,44 @@ func (a *Client) CreateCluster(params *CreateClusterParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  CycleMachine triggers power cycle of a machine
+*/
+func (a *Client) CycleMachine(params *CycleMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CycleMachineOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCycleMachineParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "cycleMachine",
+		Method:             "POST",
+		PathPattern:        "/v1/cluster/{id}/cyclemachine",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CycleMachineReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CycleMachineOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CycleMachineDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

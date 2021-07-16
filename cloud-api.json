@@ -1114,6 +1114,17 @@
         "Kubeconfig"
       ]
     },
+    "v1.ClusterMachineCycleRequest": {
+      "properties": {
+        "machineid": {
+          "description": "uuid of the machine to power reset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "machineid"
+      ]
+    },
     "v1.ClusterMachineReinstallRequest": {
       "properties": {
         "machineid": {
@@ -4949,6 +4960,52 @@
           }
         },
         "summary": "get cluster by id",
+        "tags": [
+          "cluster"
+        ]
+      }
+    },
+    "/v1/cluster/{id}/cyclemachine": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "cycleMachine",
+        "parameters": [
+          {
+            "description": "identifier of the cluster",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterMachineCycleRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "trigger power cycle of a machine ",
         "tags": [
           "cluster"
         ]
