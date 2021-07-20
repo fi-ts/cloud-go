@@ -20,6 +20,10 @@ import (
 // swagger:model v1.ShootConstraints
 type V1ShootConstraints struct {
 
+	// the list of available firewall controller version
+	// Required: true
+	FirewallControllerVersions []*V1FirewallControllerVersion `json:"firewall_controller_versions"`
+
 	// the list of available firewall images
 	// Required: true
 	FirewallImages []string `json:"firewall_images"`
@@ -53,6 +57,10 @@ type V1ShootConstraints struct {
 func (m *V1ShootConstraints) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFirewallControllerVersions(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFirewallImages(formats); err != nil {
 		res = append(res, err)
 	}
@@ -84,6 +92,31 @@ func (m *V1ShootConstraints) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ShootConstraints) validateFirewallControllerVersions(formats strfmt.Registry) error {
+
+	if err := validate.Required("firewall_controller_versions", "body", m.FirewallControllerVersions); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.FirewallControllerVersions); i++ {
+		if swag.IsZero(m.FirewallControllerVersions[i]) { // not required
+			continue
+		}
+
+		if m.FirewallControllerVersions[i] != nil {
+			if err := m.FirewallControllerVersions[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("firewall_controller_versions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -170,6 +203,10 @@ func (m *V1ShootConstraints) validatePartitions(formats strfmt.Registry) error {
 func (m *V1ShootConstraints) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateFirewallControllerVersions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateMachineImages(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -177,6 +214,24 @@ func (m *V1ShootConstraints) ContextValidate(ctx context.Context, formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ShootConstraints) contextValidateFirewallControllerVersions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.FirewallControllerVersions); i++ {
+
+		if m.FirewallControllerVersions[i] != nil {
+			if err := m.FirewallControllerVersions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("firewall_controller_versions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
