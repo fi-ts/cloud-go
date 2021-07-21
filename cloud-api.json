@@ -69,6 +69,9 @@
         "MachineID": {
           "type": "string"
         },
+        "Name": {
+          "type": "string"
+        },
         "NetworkID": {
           "type": "string"
         },
@@ -91,6 +94,7 @@
       "required": [
         "IPAddress",
         "MachineID",
+        "Name",
         "NetworkID",
         "ParentPrefixCidr",
         "ProjectID",
@@ -169,6 +173,159 @@
       "required": [
         "description",
         "value"
+      ]
+    },
+    "models.V1Disk": {
+      "properties": {
+        "device": {
+          "type": "string"
+        },
+        "partitions": {
+          "items": {
+            "$ref": "#/definitions/models.V1DiskPartition"
+          },
+          "type": "array"
+        },
+        "wipeonreinstall": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "device",
+        "partitions",
+        "wipeonreinstall"
+      ]
+    },
+    "models.V1DiskPartition": {
+      "properties": {
+        "gpttype": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "number": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "size": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "gpttype",
+        "number",
+        "size"
+      ]
+    },
+    "models.V1Filesystem": {
+      "properties": {
+        "createoptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "device": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "mountoptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "createoptions",
+        "device",
+        "format",
+        "mountoptions"
+      ]
+    },
+    "models.V1FilesystemLayoutConstraints": {
+      "properties": {
+        "images": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "sizes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "images",
+        "sizes"
+      ]
+    },
+    "models.V1FilesystemLayoutResponse": {
+      "properties": {
+        "constraints": {
+          "$ref": "#/definitions/models.V1FilesystemLayoutConstraints"
+        },
+        "description": {
+          "type": "string"
+        },
+        "disks": {
+          "items": {
+            "$ref": "#/definitions/models.V1Disk"
+          },
+          "type": "array"
+        },
+        "filesystems": {
+          "items": {
+            "$ref": "#/definitions/models.V1Filesystem"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "logicalvolumes": {
+          "items": {
+            "$ref": "#/definitions/models.V1LogicalVolume"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "raid": {
+          "items": {
+            "$ref": "#/definitions/models.V1Raid"
+          },
+          "type": "array"
+        },
+        "volumegroups": {
+          "items": {
+            "$ref": "#/definitions/models.V1VolumeGroup"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "constraints",
+        "disks",
+        "filesystems",
+        "id",
+        "logicalvolumes",
+        "raid",
+        "volumegroups"
       ]
     },
     "models.V1IPResponse": {
@@ -262,19 +419,45 @@
         "usedby"
       ]
     },
+    "models.V1LogicalVolume": {
+      "properties": {
+        "lvmtype": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "volumegroup": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "lvmtype",
+        "name",
+        "size",
+        "volumegroup"
+      ]
+    },
     "models.V1MachineAllocation": {
       "properties": {
         "boot_info": {
           "$ref": "#/definitions/models.V1BootInfo"
         },
-        "console_password": {
+        "created": {
           "type": "string"
         },
-        "created": {
+        "creator": {
           "type": "string"
         },
         "description": {
           "type": "string"
+        },
+        "filesystemlayout": {
+          "$ref": "#/definitions/models.V1FilesystemLayoutResponse"
         },
         "hostname": {
           "type": "string"
@@ -312,6 +495,7 @@
       },
       "required": [
         "created",
+        "creator",
         "hostname",
         "name",
         "networks",
@@ -344,15 +528,6 @@
         "name": {
           "type": "string"
         },
-        "partitions": {
-          "items": {
-            "$ref": "#/definitions/models.V1MachineDiskPartition"
-          },
-          "type": "array"
-        },
-        "primary": {
-          "type": "boolean"
-        },
         "size": {
           "format": "int64",
           "type": "integer"
@@ -360,62 +535,6 @@
       },
       "required": [
         "name",
-        "partitions",
-        "primary",
-        "size"
-      ]
-    },
-    "models.V1MachineDiskPartition": {
-      "properties": {
-        "device": {
-          "type": "string"
-        },
-        "filesystem": {
-          "type": "string"
-        },
-        "gptguid": {
-          "type": "string"
-        },
-        "gpttyoe": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "mountoptions": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "mountpoint": {
-          "type": "string"
-        },
-        "number": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "properties": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "type": "object"
-        },
-        "size": {
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "device",
-        "filesystem",
-        "gptguid",
-        "gpttyoe",
-        "label",
-        "mountoptions",
-        "mountpoint",
-        "number",
-        "properties",
         "size"
       ]
     },
@@ -681,6 +800,39 @@
         "id"
       ]
     },
+    "models.V1Raid": {
+      "properties": {
+        "arrayname": {
+          "type": "string"
+        },
+        "createoptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "devices": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "level": {
+          "type": "string"
+        },
+        "spares": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "arrayname",
+        "createoptions",
+        "devices",
+        "level",
+        "spares"
+      ]
+    },
     "models.V1SizeConstraint": {
       "properties": {
         "max": {
@@ -728,6 +880,30 @@
       "required": [
         "constraints",
         "id"
+      ]
+    },
+    "models.V1VolumeGroup": {
+      "properties": {
+        "devices": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "devices",
+        "name",
+        "tags"
       ]
     },
     "rest.status": {
@@ -936,6 +1112,39 @@
       },
       "required": [
         "Kubeconfig"
+      ]
+    },
+    "v1.ClusterMachineCycleRequest": {
+      "properties": {
+        "machineid": {
+          "description": "uuid of the machine to power reset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "machineid"
+      ]
+    },
+    "v1.ClusterMachineReinstallRequest": {
+      "properties": {
+        "machineid": {
+          "description": "uuid of the machine to power reset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "machineid"
+      ]
+    },
+    "v1.ClusterMachineResetRequest": {
+      "properties": {
+        "machineid": {
+          "description": "uuid of the machine to power reset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "machineid"
       ]
     },
     "v1.ClusterNameProject": {
@@ -1614,6 +1823,9 @@
         "MachineID": {
           "type": "string"
         },
+        "Name": {
+          "type": "string"
+        },
         "NetworkID": {
           "type": "string"
         },
@@ -1636,6 +1848,7 @@
       "required": [
         "IPAddress",
         "MachineID",
+        "Name",
         "NetworkID",
         "ParentPrefixCidr",
         "ProjectID",
@@ -4752,6 +4965,52 @@
         ]
       }
     },
+    "/v1/cluster/{id}/cyclemachine": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "cycleMachine",
+        "parameters": [
+          {
+            "description": "identifier of the cluster",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterMachineCycleRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "trigger power cycle of a machine ",
+        "tags": [
+          "cluster"
+        ]
+      }
+    },
     "/v1/cluster/{id}/kubeconfigtpl": {
       "get": {
         "consumes": [
@@ -4831,6 +5090,98 @@
           }
         },
         "summary": "trigger cluster reconcilation ",
+        "tags": [
+          "cluster"
+        ]
+      }
+    },
+    "/v1/cluster/{id}/reinstallmachine": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "reinstallMachine",
+        "parameters": [
+          {
+            "description": "identifier of the cluster",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterMachineReinstallRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "trigger reinstall of a machine ",
+        "tags": [
+          "cluster"
+        ]
+      }
+    },
+    "/v1/cluster/{id}/resetmachine": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "resetMachine",
+        "parameters": [
+          {
+            "description": "identifier of the cluster",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterMachineResetRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "trigger hard power reset of a machine ",
         "tags": [
           "cluster"
         ]
