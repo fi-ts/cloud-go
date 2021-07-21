@@ -30,6 +30,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterCreated, error)
 
+	CycleMachine(params *CycleMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CycleMachineOK, error)
+
 	DeleteCluster(params *DeleteClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterOK, error)
 
 	FindCluster(params *FindClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindClusterOK, error)
@@ -45,6 +47,10 @@ type ClientService interface {
 	ListConstraints(params *ListConstraintsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConstraintsOK, error)
 
 	ReconcileCluster(params *ReconcileClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReconcileClusterOK, error)
+
+	ReinstallMachine(params *ReinstallMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReinstallMachineOK, error)
+
+	ResetMachine(params *ResetMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetMachineOK, error)
 
 	UpdateCluster(params *UpdateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateClusterOK, error)
 
@@ -86,6 +92,44 @@ func (a *Client) CreateCluster(params *CreateClusterParams, authInfo runtime.Cli
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  CycleMachine triggers power cycle of a machine
+*/
+func (a *Client) CycleMachine(params *CycleMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CycleMachineOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCycleMachineParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "cycleMachine",
+		Method:             "POST",
+		PathPattern:        "/v1/cluster/{id}/cyclemachine",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CycleMachineReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CycleMachineOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CycleMachineDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -390,6 +434,82 @@ func (a *Client) ReconcileCluster(params *ReconcileClusterParams, authInfo runti
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ReconcileClusterDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ReinstallMachine triggers reinstall of a machine
+*/
+func (a *Client) ReinstallMachine(params *ReinstallMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReinstallMachineOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReinstallMachineParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "reinstallMachine",
+		Method:             "POST",
+		PathPattern:        "/v1/cluster/{id}/reinstallmachine",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReinstallMachineReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReinstallMachineOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ReinstallMachineDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  ResetMachine triggers hard power reset of a machine
+*/
+func (a *Client) ResetMachine(params *ResetMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetMachineOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResetMachineParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "resetMachine",
+		Method:             "POST",
+		PathPattern:        "/v1/cluster/{id}/resetmachine",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResetMachineReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResetMachineOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ResetMachineDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
