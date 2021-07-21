@@ -1761,6 +1761,20 @@
         "NetworkID"
       ]
     },
+    "v1.FirewallControllerVersion": {
+      "properties": {
+        "URL": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "URL",
+        "Version"
+      ]
+    },
     "v1.IAMConfig": {
       "properties": {
         "idm_config": {
@@ -3415,6 +3429,13 @@
     },
     "v1.ShootConstraints": {
       "properties": {
+        "firewall_controller_versions": {
+          "description": "the list of available firewall controller version",
+          "items": {
+            "$ref": "#/definitions/v1.FirewallControllerVersion"
+          },
+          "type": "array"
+        },
         "firewall_images": {
           "description": "the list of available firewall images",
           "items": {
@@ -3466,6 +3487,7 @@
         }
       },
       "required": [
+        "firewall_controller_versions",
         "firewall_images",
         "firewall_types",
         "kubernetes_versions",
