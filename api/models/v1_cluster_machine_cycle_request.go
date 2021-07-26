@@ -19,7 +19,7 @@ import (
 // swagger:model v1.ClusterMachineCycleRequest
 type V1ClusterMachineCycleRequest struct {
 
-	// uuid of the machine to power reset
+	// uuid of the machine to power cycle
 	// Required: true
 	Machineid *string `json:"machineid"`
 }

@@ -1117,7 +1117,7 @@
     "v1.ClusterMachineCycleRequest": {
       "properties": {
         "machineid": {
-          "description": "uuid of the machine to power reset",
+          "description": "uuid of the machine to power cycle",
           "type": "string"
         }
       },
@@ -1127,8 +1127,12 @@
     },
     "v1.ClusterMachineReinstallRequest": {
       "properties": {
+        "imageid": {
+          "description": "id of the image to install",
+          "type": "string"
+        },
         "machineid": {
-          "description": "uuid of the machine to power reset",
+          "description": "uuid of the machine to reinstall",
           "type": "string"
         }
       },
