@@ -40,6 +40,10 @@ type V1ClusterUpdateRequest struct {
 	// Required: true
 	FirewallSize *string `json:"FirewallSize"`
 
+	// HTTPS to API server only
+	// Required: true
+	HTTPSToAPIServerOnly *bool `json:"HTTPSToAPIServerOnly"`
+
 	// ID
 	// Required: true
 	ID *string `json:"ID"`
@@ -86,6 +90,10 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFirewallSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHTTPSToAPIServerOnly(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -174,6 +182,15 @@ func (m *V1ClusterUpdateRequest) validateFirewallImage(formats strfmt.Registry) 
 func (m *V1ClusterUpdateRequest) validateFirewallSize(formats strfmt.Registry) error {
 
 	if err := validate.Required("FirewallSize", "body", m.FirewallSize); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateHTTPSToAPIServerOnly(formats strfmt.Registry) error {
+
+	if err := validate.Required("HTTPSToAPIServerOnly", "body", m.HTTPSToAPIServerOnly); err != nil {
 		return err
 	}
 

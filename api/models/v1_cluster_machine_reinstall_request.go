@@ -19,7 +19,10 @@ import (
 // swagger:model v1.ClusterMachineReinstallRequest
 type V1ClusterMachineReinstallRequest struct {
 
-	// uuid of the machine to power reset
+	// id of the image to install
+	Imageid string `json:"imageid,omitempty"`
+
+	// uuid of the machine to reinstall
 	// Required: true
 	Machineid *string `json:"machineid"`
 }
