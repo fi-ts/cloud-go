@@ -57,10 +57,6 @@ type V1ClusterResponse struct {
 	// Required: true
 	FirewallSize *string `json:"FirewallSize"`
 
-	// HTTPS to API server only
-	// Required: true
-	HTTPSToAPIServerOnly *bool `json:"HTTPSToAPIServerOnly"`
-
 	// ID
 	// Required: true
 	ID *string `json:"ID"`
@@ -84,6 +80,10 @@ type V1ClusterResponse struct {
 	// networking
 	// Required: true
 	Networking *V1Networking `json:"Networking"`
+
+	// only HTTPS to API server
+	// Required: true
+	OnlyHTTPSToAPIServer *bool `json:"OnlyHTTPSToAPIServer"`
 
 	// partition ID
 	// Required: true
@@ -156,10 +156,6 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateHTTPSToAPIServerOnly(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -181,6 +177,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNetworking(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOnlyHTTPSToAPIServer(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -323,15 +323,6 @@ func (m *V1ClusterResponse) validateFirewallSize(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *V1ClusterResponse) validateHTTPSToAPIServerOnly(formats strfmt.Registry) error {
-
-	if err := validate.Required("HTTPSToAPIServerOnly", "body", m.HTTPSToAPIServerOnly); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1ClusterResponse) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("ID", "body", m.ID); err != nil {
@@ -408,6 +399,15 @@ func (m *V1ClusterResponse) validateNetworking(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateOnlyHTTPSToAPIServer(formats strfmt.Registry) error {
+
+	if err := validate.Required("OnlyHTTPSToAPIServer", "body", m.OnlyHTTPSToAPIServer); err != nil {
+		return err
 	}
 
 	return nil

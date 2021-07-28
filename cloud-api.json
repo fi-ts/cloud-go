@@ -1213,9 +1213,6 @@
         "FirewallSize": {
           "type": "string"
         },
-        "HTTPSToAPIServerOnly": {
-          "type": "boolean"
-        },
         "ID": {
           "type": "string"
         },
@@ -1236,6 +1233,9 @@
         },
         "Networking": {
           "$ref": "#/definitions/v1.Networking"
+        },
+        "OnlyHTTPSToAPIServer": {
+          "type": "boolean"
         },
         "PartitionID": {
           "type": "string"
@@ -1283,13 +1283,13 @@
         "FirewallControllerVersion",
         "FirewallImage",
         "FirewallSize",
-        "HTTPSToAPIServerOnly",
         "ID",
         "Kubernetes",
         "Labels",
         "Maintenance",
         "Name",
         "Networking",
+        "OnlyHTTPSToAPIServer",
         "PartitionID",
         "ProjectID",
         "Purpose",
@@ -1382,9 +1382,6 @@
         "FirewallSize": {
           "type": "string"
         },
-        "HTTPSToAPIServerOnly": {
-          "type": "boolean"
-        },
         "ID": {
           "type": "string"
         },
@@ -1399,6 +1396,9 @@
         },
         "Maintenance": {
           "$ref": "#/definitions/v1.Maintenance"
+        },
+        "OnlyHTTPSToAPIServer": {
+          "type": "boolean"
         },
         "Purpose": {
           "type": "string"
@@ -1416,11 +1416,11 @@
         "FirewallControllerVersion",
         "FirewallImage",
         "FirewallSize",
-        "HTTPSToAPIServerOnly",
         "ID",
         "Kubernetes",
         "Labels",
         "Maintenance",
+        "OnlyHTTPSToAPIServer",
         "Purpose",
         "Workers"
       ]

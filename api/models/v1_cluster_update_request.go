@@ -40,10 +40,6 @@ type V1ClusterUpdateRequest struct {
 	// Required: true
 	FirewallSize *string `json:"FirewallSize"`
 
-	// HTTPS to API server only
-	// Required: true
-	HTTPSToAPIServerOnly *bool `json:"HTTPSToAPIServerOnly"`
-
 	// ID
 	// Required: true
 	ID *string `json:"ID"`
@@ -59,6 +55,10 @@ type V1ClusterUpdateRequest struct {
 	// maintenance
 	// Required: true
 	Maintenance *V1Maintenance `json:"Maintenance"`
+
+	// only HTTPS to API server
+	// Required: true
+	OnlyHTTPSToAPIServer *bool `json:"OnlyHTTPSToAPIServer"`
 
 	// purpose
 	// Required: true
@@ -93,10 +93,6 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateHTTPSToAPIServerOnly(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -110,6 +106,10 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateMaintenance(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOnlyHTTPSToAPIServer(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -188,15 +188,6 @@ func (m *V1ClusterUpdateRequest) validateFirewallSize(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *V1ClusterUpdateRequest) validateHTTPSToAPIServerOnly(formats strfmt.Registry) error {
-
-	if err := validate.Required("HTTPSToAPIServerOnly", "body", m.HTTPSToAPIServerOnly); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1ClusterUpdateRequest) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("ID", "body", m.ID); err != nil {
@@ -246,6 +237,15 @@ func (m *V1ClusterUpdateRequest) validateMaintenance(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateOnlyHTTPSToAPIServer(formats strfmt.Registry) error {
+
+	if err := validate.Required("OnlyHTTPSToAPIServer", "body", m.OnlyHTTPSToAPIServer); err != nil {
+		return err
 	}
 
 	return nil
