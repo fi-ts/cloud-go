@@ -1767,6 +1767,9 @@
     },
     "v1.FirewallControllerVersion": {
       "properties": {
+        "Classification": {
+          "type": "string"
+        },
         "URL": {
           "type": "string"
         },
@@ -1775,6 +1778,7 @@
         }
       },
       "required": [
+        "Classification",
         "URL",
         "Version"
       ]

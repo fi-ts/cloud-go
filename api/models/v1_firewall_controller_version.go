@@ -19,6 +19,10 @@ import (
 // swagger:model v1.FirewallControllerVersion
 type V1FirewallControllerVersion struct {
 
+	// classification
+	// Required: true
+	Classification *string `json:"Classification"`
+
 	// URL
 	// Required: true
 	URL *string `json:"URL"`
@@ -32,6 +36,10 @@ type V1FirewallControllerVersion struct {
 func (m *V1FirewallControllerVersion) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateClassification(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateURL(formats); err != nil {
 		res = append(res, err)
 	}
@@ -43,6 +51,15 @@ func (m *V1FirewallControllerVersion) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1FirewallControllerVersion) validateClassification(formats strfmt.Registry) error {
+
+	if err := validate.Required("Classification", "body", m.Classification); err != nil {
+		return err
+	}
+
 	return nil
 }
 
