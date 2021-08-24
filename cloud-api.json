@@ -956,6 +956,20 @@
         }
       }
     },
+    "v1.Audit": {
+      "properties": {
+        "AuditToSplunk": {
+          "type": "boolean"
+        },
+        "ClusterAudit": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "AuditToSplunk",
+        "ClusterAudit"
+      ]
+    },
     "v1.ClusterCreateRequest": {
       "properties": {
         "AdditionalNetworks": {
@@ -963,6 +977,9 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "Audit": {
+          "$ref": "#/definitions/v1.Audit"
         },
         "Description": {
           "type": "string"
@@ -1018,6 +1035,7 @@
       },
       "required": [
         "AdditionalNetworks",
+        "Audit",
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
@@ -1363,6 +1381,9 @@
           },
           "type": "array"
         },
+        "Audit": {
+          "$ref": "#/definitions/v1.Audit"
+        },
         "EgressRules": {
           "items": {
             "$ref": "#/definitions/v1.EgressRule"
@@ -1405,6 +1426,7 @@
       },
       "required": [
         "AdditionalNetworks",
+        "Audit",
         "EgressRules",
         "FirewallControllerVersion",
         "FirewallImage",
