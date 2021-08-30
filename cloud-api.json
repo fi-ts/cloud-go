@@ -6730,6 +6730,15 @@
           "application/json"
         ],
         "operationId": "clusterInfo",
+        "parameters": [
+          {
+            "description": "identifier of the partition",
+            "in": "path",
+            "name": "partitionid",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "produces": [
           "application/json"
         ],
