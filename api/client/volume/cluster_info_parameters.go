@@ -63,7 +63,7 @@ type ClusterInfoParams struct {
 
 	   identifier of the partition
 	*/
-	Partitionid string
+	Partitionid *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -119,13 +119,13 @@ func (o *ClusterInfoParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithPartitionid adds the partitionid to the cluster info params
-func (o *ClusterInfoParams) WithPartitionid(partitionid string) *ClusterInfoParams {
+func (o *ClusterInfoParams) WithPartitionid(partitionid *string) *ClusterInfoParams {
 	o.SetPartitionid(partitionid)
 	return o
 }
 
 // SetPartitionid adds the partitionid to the cluster info params
-func (o *ClusterInfoParams) SetPartitionid(partitionid string) {
+func (o *ClusterInfoParams) SetPartitionid(partitionid *string) {
 	o.Partitionid = partitionid
 }
 
@@ -137,9 +137,21 @@ func (o *ClusterInfoParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	}
 	var res []error
 
-	// path param partitionid
-	if err := r.SetPathParam("partitionid", o.Partitionid); err != nil {
-		return err
+	if o.Partitionid != nil {
+
+		// query param partitionid
+		var qrPartitionid string
+
+		if o.Partitionid != nil {
+			qrPartitionid = *o.Partitionid
+		}
+		qPartitionid := qrPartitionid
+		if qPartitionid != "" {
+
+			if err := r.SetQueryParam("partitionid", qPartitionid); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

@@ -6745,9 +6745,8 @@
         "parameters": [
           {
             "description": "identifier of the partition",
-            "in": "path",
+            "in": "query",
             "name": "partitionid",
-            "required": true,
             "type": "string"
           }
         ],
