@@ -3705,6 +3705,9 @@
         "ProjectID": {
           "type": "string"
         },
+        "TenantID": {
+          "type": "string"
+        },
         "VolumeID": {
           "type": "string"
         }
@@ -3712,6 +3715,7 @@
       "required": [
         "PartitionID",
         "ProjectID",
+        "TenantID",
         "VolumeID"
       ]
     },
