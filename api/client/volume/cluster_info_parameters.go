@@ -58,6 +58,13 @@ func NewClusterInfoParamsWithHTTPClient(client *http.Client) *ClusterInfoParams 
    Typically these are written to a http.Request.
 */
 type ClusterInfoParams struct {
+
+	/* Partitionid.
+
+	   identifier of the partition
+	*/
+	Partitionid *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -111,6 +118,17 @@ func (o *ClusterInfoParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithPartitionid adds the partitionid to the cluster info params
+func (o *ClusterInfoParams) WithPartitionid(partitionid *string) *ClusterInfoParams {
+	o.SetPartitionid(partitionid)
+	return o
+}
+
+// SetPartitionid adds the partitionid to the cluster info params
+func (o *ClusterInfoParams) SetPartitionid(partitionid *string) {
+	o.Partitionid = partitionid
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ClusterInfoParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -118,6 +136,23 @@ func (o *ClusterInfoParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
+
+	if o.Partitionid != nil {
+
+		// query param partitionid
+		var qrPartitionid string
+
+		if o.Partitionid != nil {
+			qrPartitionid = *o.Partitionid
+		}
+		qPartitionid := qrPartitionid
+		if qPartitionid != "" {
+
+			if err := r.SetQueryParam("partitionid", qPartitionid); err != nil {
+				return err
+			}
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

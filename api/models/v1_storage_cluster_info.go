@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -50,6 +51,10 @@ type V1StorageClusterInfo struct {
 	// partition
 	// Required: true
 	Partition *string `json:"Partition"`
+
+	// servers
+	// Required: true
+	Servers []*V1StorageServerInfo `json:"Servers"`
 
 	// statistics
 	// Required: true
@@ -101,6 +106,10 @@ func (m *V1StorageClusterInfo) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePartition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateServers(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -207,6 +216,31 @@ func (m *V1StorageClusterInfo) validatePartition(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *V1StorageClusterInfo) validateServers(formats strfmt.Registry) error {
+
+	if err := validate.Required("Servers", "body", m.Servers); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Servers); i++ {
+		if swag.IsZero(m.Servers[i]) { // not required
+			continue
+		}
+
+		if m.Servers[i] != nil {
+			if err := m.Servers[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("Servers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *V1StorageClusterInfo) validateStatistics(formats strfmt.Registry) error {
 
 	if err := validate.Required("Statistics", "body", m.Statistics); err != nil {
@@ -260,6 +294,10 @@ func (m *V1StorageClusterInfo) ContextValidate(ctx context.Context, formats strf
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateServers(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatistics(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -279,6 +317,24 @@ func (m *V1StorageClusterInfo) contextValidateHealth(ctx context.Context, format
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1StorageClusterInfo) contextValidateServers(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Servers); i++ {
+
+		if m.Servers[i] != nil {
+			if err := m.Servers[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("Servers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
