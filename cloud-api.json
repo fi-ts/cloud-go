@@ -480,6 +480,9 @@
         "reinstall": {
           "type": "boolean"
         },
+        "role": {
+          "type": "string"
+        },
         "ssh_pub_keys": {
           "items": {
             "type": "string"
@@ -501,6 +504,7 @@
         "networks",
         "project",
         "reinstall",
+        "role",
         "ssh_pub_keys",
         "succeeded"
       ]
