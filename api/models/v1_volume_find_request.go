@@ -27,6 +27,10 @@ type V1VolumeFindRequest struct {
 	// Required: true
 	ProjectID *string `json:"ProjectID"`
 
+	// tenant ID
+	// Required: true
+	TenantID *string `json:"TenantID"`
+
 	// volume ID
 	// Required: true
 	VolumeID *string `json:"VolumeID"`
@@ -41,6 +45,10 @@ func (m *V1VolumeFindRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProjectID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTenantID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -66,6 +74,15 @@ func (m *V1VolumeFindRequest) validatePartitionID(formats strfmt.Registry) error
 func (m *V1VolumeFindRequest) validateProjectID(formats strfmt.Registry) error {
 
 	if err := validate.Required("ProjectID", "body", m.ProjectID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeFindRequest) validateTenantID(formats strfmt.Registry) error {
+
+	if err := validate.Required("TenantID", "body", m.TenantID); err != nil {
 		return err
 	}
 

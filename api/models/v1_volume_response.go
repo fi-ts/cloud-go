@@ -35,6 +35,10 @@ type V1VolumeResponse struct {
 	// Required: true
 	ProjectID *string `json:"ProjectID"`
 
+	// protection state
+	// Required: true
+	ProtectionState *string `json:"ProtectionState"`
+
 	// replica count
 	// Required: true
 	ReplicaCount *int64 `json:"ReplicaCount"`
@@ -42,6 +46,10 @@ type V1VolumeResponse struct {
 	// size
 	// Required: true
 	Size *int64 `json:"Size"`
+
+	// state
+	// Required: true
+	State *string `json:"State"`
 
 	// statistics
 	// Required: true
@@ -88,11 +96,19 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateProtectionState(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateReplicaCount(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -162,6 +178,15 @@ func (m *V1VolumeResponse) validateProjectID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1VolumeResponse) validateProtectionState(formats strfmt.Registry) error {
+
+	if err := validate.Required("ProtectionState", "body", m.ProtectionState); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1VolumeResponse) validateReplicaCount(formats strfmt.Registry) error {
 
 	if err := validate.Required("ReplicaCount", "body", m.ReplicaCount); err != nil {
@@ -174,6 +199,15 @@ func (m *V1VolumeResponse) validateReplicaCount(formats strfmt.Registry) error {
 func (m *V1VolumeResponse) validateSize(formats strfmt.Registry) error {
 
 	if err := validate.Required("Size", "body", m.Size); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateState(formats strfmt.Registry) error {
+
+	if err := validate.Required("State", "body", m.State); err != nil {
 		return err
 	}
 

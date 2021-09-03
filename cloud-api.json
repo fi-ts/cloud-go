@@ -3560,6 +3560,12 @@
         "Partition": {
           "type": "string"
         },
+        "Servers": {
+          "items": {
+            "$ref": "#/definitions/v1.StorageServerInfo"
+          },
+          "type": "array"
+        },
         "Statistics": {
           "$ref": "#/definitions/v1.ClusterStatisticsApi"
         },
@@ -3583,9 +3589,43 @@
         "MinAllowedVersion",
         "MinVersionInCluster",
         "Partition",
+        "Servers",
         "Statistics",
         "SubsystemNQN",
         "SupportedMaxReplicas",
+        "UUID"
+      ]
+    },
+    "v1.StorageServerInfo": {
+      "properties": {
+        "LightOSVersion": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "RiskOfServiceLossState": {
+          "type": "string"
+        },
+        "ServerEndpoints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "State": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "LightOSVersion",
+        "Name",
+        "RiskOfServiceLossState",
+        "ServerEndpoints",
+        "State",
         "UUID"
       ]
     },
@@ -3687,6 +3727,9 @@
         "ProjectID": {
           "type": "string"
         },
+        "TenantID": {
+          "type": "string"
+        },
         "VolumeID": {
           "type": "string"
         }
@@ -3694,6 +3737,7 @@
       "required": [
         "PartitionID",
         "ProjectID",
+        "TenantID",
         "VolumeID"
       ]
     },
@@ -3717,6 +3761,9 @@
         "ProjectID": {
           "type": "string"
         },
+        "ProtectionState": {
+          "type": "string"
+        },
         "ReplicaCount": {
           "format": "integer",
           "type": "integer"
@@ -3724,6 +3771,9 @@
         "Size": {
           "format": "integer",
           "type": "integer"
+        },
+        "State": {
+          "type": "string"
         },
         "Statistics": {
           "$ref": "#/definitions/v1.VolumeStatistics"
@@ -3749,8 +3799,10 @@
         "NodeIPList",
         "PartitionID",
         "ProjectID",
+        "ProtectionState",
         "ReplicaCount",
         "Size",
+        "State",
         "Statistics",
         "StorageClass",
         "TenantID",
@@ -5840,6 +5892,12 @@
             "schema": {
               "$ref": "#/definitions/rest.status"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
           }
         },
         "summary": "perform a healthcheck",
@@ -6658,6 +6716,12 @@
             "schema": {
               "$ref": "#/definitions/rest.version"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
           }
         },
         "summary": "returns the current version information of this module",
@@ -6704,6 +6768,14 @@
           "application/json"
         ],
         "operationId": "clusterInfo",
+        "parameters": [
+          {
+            "description": "identifier of the partition",
+            "in": "query",
+            "name": "partitionid",
+            "type": "string"
+          }
+        ],
         "produces": [
           "application/json"
         ],
@@ -6805,6 +6877,42 @@
           }
         },
         "summary": "deletes a volume including all data",
+        "tags": [
+          "volume"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getVolume",
+        "parameters": [
+          {
+            "description": "identifier of the volume",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.VolumeResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get a volume",
         "tags": [
           "volume"
         ]
