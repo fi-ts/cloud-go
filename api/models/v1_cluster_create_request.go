@@ -24,6 +24,10 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	AdditionalNetworks []string `json:"AdditionalNetworks"`
 
+	// audit
+	// Required: true
+	Audit *V1Audit `json:"Audit"`
+
 	// description
 	// Required: true
 	Description *string `json:"Description"`
@@ -86,6 +90,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdditionalNetworks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAudit(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -155,6 +163,24 @@ func (m *V1ClusterCreateRequest) validateAdditionalNetworks(formats strfmt.Regis
 
 	if err := validate.Required("AdditionalNetworks", "body", m.AdditionalNetworks); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) validateAudit(formats strfmt.Registry) error {
+
+	if err := validate.Required("Audit", "body", m.Audit); err != nil {
+		return err
+	}
+
+	if m.Audit != nil {
+		if err := m.Audit.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Audit")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -340,6 +366,10 @@ func (m *V1ClusterCreateRequest) validateWorkers(formats strfmt.Registry) error 
 func (m *V1ClusterCreateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAudit(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEgressRules(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -359,6 +389,20 @@ func (m *V1ClusterCreateRequest) ContextValidate(ctx context.Context, formats st
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) contextValidateAudit(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Audit != nil {
+		if err := m.Audit.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Audit")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

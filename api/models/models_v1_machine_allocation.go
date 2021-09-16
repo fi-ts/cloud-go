@@ -60,6 +60,10 @@ type ModelsV1MachineAllocation struct {
 	// Required: true
 	Reinstall *bool `json:"reinstall"`
 
+	// role
+	// Required: true
+	Role *string `json:"role"`
+
 	// ssh pub keys
 	// Required: true
 	SSHPubKeys []string `json:"ssh_pub_keys"`
@@ -113,6 +117,10 @@ func (m *ModelsV1MachineAllocation) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateReinstall(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRole(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -254,6 +262,15 @@ func (m *ModelsV1MachineAllocation) validateProject(formats strfmt.Registry) err
 func (m *ModelsV1MachineAllocation) validateReinstall(formats strfmt.Registry) error {
 
 	if err := validate.Required("reinstall", "body", m.Reinstall); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineAllocation) validateRole(formats strfmt.Registry) error {
+
+	if err := validate.Required("role", "body", m.Role); err != nil {
 		return err
 	}
 
