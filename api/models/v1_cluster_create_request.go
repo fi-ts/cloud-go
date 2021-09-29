@@ -83,6 +83,9 @@ type V1ClusterCreateRequest struct {
 	// workers
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
+
+	// seed name on which the cluster will be scheduled
+	SeedName string `json:"seedName,omitempty"`
 }
 
 // Validate validates this v1 cluster create request
