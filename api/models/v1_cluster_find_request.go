@@ -23,6 +23,10 @@ type V1ClusterFindRequest struct {
 	// Required: true
 	ID *string `json:"ID"`
 
+	// labels
+	// Required: true
+	Labels map[string]string `json:"Labels"`
+
 	// name
 	// Required: true
 	Name *string `json:"Name"`
@@ -34,6 +38,10 @@ type V1ClusterFindRequest struct {
 	// project ID
 	// Required: true
 	ProjectID *string `json:"ProjectID"`
+
+	// purpose
+	// Required: true
+	Purpose *string `json:"Purpose"`
 
 	// tenant
 	// Required: true
@@ -48,6 +56,10 @@ func (m *V1ClusterFindRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateLabels(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -57,6 +69,10 @@ func (m *V1ClusterFindRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProjectID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePurpose(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,6 +89,15 @@ func (m *V1ClusterFindRequest) Validate(formats strfmt.Registry) error {
 func (m *V1ClusterFindRequest) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("ID", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterFindRequest) validateLabels(formats strfmt.Registry) error {
+
+	if err := validate.Required("Labels", "body", m.Labels); err != nil {
 		return err
 	}
 
@@ -100,6 +125,15 @@ func (m *V1ClusterFindRequest) validatePartitionID(formats strfmt.Registry) erro
 func (m *V1ClusterFindRequest) validateProjectID(formats strfmt.Registry) error {
 
 	if err := validate.Required("ProjectID", "body", m.ProjectID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterFindRequest) validatePurpose(formats strfmt.Registry) error {
+
+	if err := validate.Required("Purpose", "body", m.Purpose); err != nil {
 		return err
 	}
 

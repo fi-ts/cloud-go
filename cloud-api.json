@@ -1079,6 +1079,12 @@
         "ID": {
           "type": "string"
         },
+        "Labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "Name": {
           "type": "string"
         },
@@ -1088,15 +1094,20 @@
         "ProjectID": {
           "type": "string"
         },
+        "Purpose": {
+          "type": "string"
+        },
         "Tenant": {
           "type": "string"
         }
       },
       "required": [
         "ID",
+        "Labels",
         "Name",
         "PartitionID",
         "ProjectID",
+        "Purpose",
         "Tenant"
       ]
     },
