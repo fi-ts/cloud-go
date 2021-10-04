@@ -5113,6 +5113,13 @@
             "name": "id",
             "required": true,
             "type": "string"
+          },
+          {
+            "default": true,
+            "description": "returns machines in the response",
+            "in": "query",
+            "name": "return-machines",
+            "type": "bool"
           }
         ],
         "produces": [
