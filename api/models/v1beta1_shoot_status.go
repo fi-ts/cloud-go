@@ -20,6 +20,9 @@ import (
 // swagger:model v1beta1.ShootStatus
 type V1beta1ShootStatus struct {
 
+	// advertised addresses
+	AdvertisedAddresses []*V1beta1ShootAdvertisedAddress `json:"advertisedAddresses"`
+
 	// cluster identity
 	ClusterIdentity string `json:"clusterIdentity,omitempty"`
 
@@ -65,6 +68,10 @@ type V1beta1ShootStatus struct {
 func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAdvertisedAddresses(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateConditions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -100,6 +107,30 @@ func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1beta1ShootStatus) validateAdvertisedAddresses(formats strfmt.Registry) error {
+	if swag.IsZero(m.AdvertisedAddresses) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.AdvertisedAddresses); i++ {
+		if swag.IsZero(m.AdvertisedAddresses[i]) { // not required
+			continue
+		}
+
+		if m.AdvertisedAddresses[i] != nil {
+			if err := m.AdvertisedAddresses[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("advertisedAddresses" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -241,6 +272,10 @@ func (m *V1beta1ShootStatus) validateUID(formats strfmt.Registry) error {
 func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAdvertisedAddresses(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateConditions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -264,6 +299,24 @@ func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateAdvertisedAddresses(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AdvertisedAddresses); i++ {
+
+		if m.AdvertisedAddresses[i] != nil {
+			if err := m.AdvertisedAddresses[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("advertisedAddresses" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

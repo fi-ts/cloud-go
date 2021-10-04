@@ -58,6 +58,13 @@ func NewListConstraintsParamsWithHTTPClient(client *http.Client) *ListConstraint
    Typically these are written to a http.Request.
 */
 type ListConstraintsParams struct {
+
+	/* Partition.
+
+	   filter constraints for a certain partition
+	*/
+	Partition *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -111,6 +118,17 @@ func (o *ListConstraintsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithPartition adds the partition to the list constraints params
+func (o *ListConstraintsParams) WithPartition(partition *string) *ListConstraintsParams {
+	o.SetPartition(partition)
+	return o
+}
+
+// SetPartition adds the partition to the list constraints params
+func (o *ListConstraintsParams) SetPartition(partition *string) {
+	o.Partition = partition
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListConstraintsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -118,6 +136,23 @@ func (o *ListConstraintsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
+	if o.Partition != nil {
+
+		// query param partition
+		var qrPartition string
+
+		if o.Partition != nil {
+			qrPartition = *o.Partition
+		}
+		qPartition := qrPartition
+		if qPartition != "" {
+
+			if err := r.SetQueryParam("partition", qPartition); err != nil {
+				return err
+			}
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

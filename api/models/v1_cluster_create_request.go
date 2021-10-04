@@ -28,6 +28,10 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	Audit *V1Audit `json:"Audit"`
 
+	// cluster features
+	// Required: true
+	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures"`
+
 	// description
 	// Required: true
 	Description *string `json:"Description"`
@@ -97,6 +101,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAudit(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClusterFeatures(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -181,6 +189,24 @@ func (m *V1ClusterCreateRequest) validateAudit(formats strfmt.Registry) error {
 		if err := m.Audit.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Audit")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) validateClusterFeatures(formats strfmt.Registry) error {
+
+	if err := validate.Required("ClusterFeatures", "body", m.ClusterFeatures); err != nil {
+		return err
+	}
+
+	if m.ClusterFeatures != nil {
+		if err := m.ClusterFeatures.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ClusterFeatures")
 			}
 			return err
 		}
@@ -373,6 +399,10 @@ func (m *V1ClusterCreateRequest) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateClusterFeatures(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEgressRules(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -401,6 +431,20 @@ func (m *V1ClusterCreateRequest) contextValidateAudit(ctx context.Context, forma
 		if err := m.Audit.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Audit")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) contextValidateClusterFeatures(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ClusterFeatures != nil {
+		if err := m.ClusterFeatures.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ClusterFeatures")
 			}
 			return err
 		}

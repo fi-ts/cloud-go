@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewFindClusterParams creates a new FindClusterParams object,
@@ -65,6 +66,14 @@ type FindClusterParams struct {
 	*/
 	ID string
 
+	/* ReturnMachines.
+
+	   returns machines in the response
+
+	   Default: true
+	*/
+	ReturnMachines *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -82,7 +91,18 @@ func (o *FindClusterParams) WithDefaults() *FindClusterParams {
 //
 // All values with no default are reset to their zero value.
 func (o *FindClusterParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		returnMachinesDefault = bool(true)
+	)
+
+	val := FindClusterParams{
+		ReturnMachines: &returnMachinesDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the find cluster params
@@ -129,6 +149,17 @@ func (o *FindClusterParams) SetID(id string) {
 	o.ID = id
 }
 
+// WithReturnMachines adds the returnMachines to the find cluster params
+func (o *FindClusterParams) WithReturnMachines(returnMachines *bool) *FindClusterParams {
+	o.SetReturnMachines(returnMachines)
+	return o
+}
+
+// SetReturnMachines adds the returnMachines to the find cluster params
+func (o *FindClusterParams) SetReturnMachines(returnMachines *bool) {
+	o.ReturnMachines = returnMachines
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *FindClusterParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -140,6 +171,23 @@ func (o *FindClusterParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
+	}
+
+	if o.ReturnMachines != nil {
+
+		// query param return-machines
+		var qrReturnMachines bool
+
+		if o.ReturnMachines != nil {
+			qrReturnMachines = *o.ReturnMachines
+		}
+		qReturnMachines := swag.FormatBool(qrReturnMachines)
+		if qReturnMachines != "" {
+
+			if err := r.SetQueryParam("return-machines", qReturnMachines); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {
