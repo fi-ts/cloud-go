@@ -985,6 +985,9 @@
         "Audit": {
           "$ref": "#/definitions/v1.Audit"
         },
+        "ClusterFeatures": {
+          "$ref": "#/definitions/v1.ClusterFeatures"
+        },
         "Description": {
           "type": "string"
         },
@@ -1044,6 +1047,7 @@
       "required": [
         "AdditionalNetworks",
         "Audit",
+        "ClusterFeatures",
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
@@ -1072,6 +1076,16 @@
       "required": [
         "Kubeconfig",
         "SSHKeyPair"
+      ]
+    },
+    "v1.ClusterFeatures": {
+      "properties": {
+        "ReversedVPN": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ReversedVPN"
       ]
     },
     "v1.ClusterFindRequest": {
@@ -1219,6 +1233,9 @@
           },
           "type": "array"
         },
+        "ClusterFeatures": {
+          "$ref": "#/definitions/v1.ClusterFeatures"
+        },
         "ControlPlaneFeatureGates": {
           "items": {
             "type": "string"
@@ -1309,6 +1326,7 @@
       },
       "required": [
         "AdditionalNetworks",
+        "ClusterFeatures",
         "ControlPlaneFeatureGates",
         "CreationTimestamp",
         "DNSEndpoint",
@@ -1403,6 +1421,9 @@
         "Audit": {
           "$ref": "#/definitions/v1.Audit"
         },
+        "ClusterFeatures": {
+          "$ref": "#/definitions/v1.ClusterFeatures"
+        },
         "EgressRules": {
           "items": {
             "$ref": "#/definitions/v1.EgressRule"
@@ -1446,6 +1467,7 @@
       "required": [
         "AdditionalNetworks",
         "Audit",
+        "ClusterFeatures",
         "EgressRules",
         "FirewallControllerVersion",
         "FirewallImage",
@@ -4185,8 +4207,28 @@
         "type"
       ]
     },
+    "v1beta1.ShootAdvertisedAddress": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "url"
+      ]
+    },
     "v1beta1.ShootStatus": {
       "properties": {
+        "advertisedAddresses": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.ShootAdvertisedAddress"
+          },
+          "type": "array"
+        },
         "clusterIdentity": {
           "type": "string"
         },
@@ -4942,6 +4984,14 @@
           "application/json"
         ],
         "operationId": "listConstraints",
+        "parameters": [
+          {
+            "description": "filter constraints for a certain partition",
+            "in": "query",
+            "name": "partition",
+            "type": "string"
+          }
+        ],
         "produces": [
           "application/json"
         ],
