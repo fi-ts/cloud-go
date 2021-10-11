@@ -910,7 +910,28 @@
         "tags"
       ]
     },
-    "rest.status": {
+    "rest.healthResponse": {
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "services": {
+          "additionalProperties": {
+            "$ref": "#/definitions/rest.healthResult"
+          },
+          "type": "object"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message",
+        "services",
+        "status"
+      ]
+    },
+    "rest.healthResult": {
       "properties": {
         "message": {
           "type": "string"
@@ -5953,6 +5974,14 @@
           "application/json"
         ],
         "operationId": "health",
+        "parameters": [
+          {
+            "description": "return health for this specific service only",
+            "in": "query",
+            "name": "service",
+            "type": "string"
+          }
+        ],
         "produces": [
           "application/json"
         ],
@@ -5960,13 +5989,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/rest.status"
+              "$ref": "#/definitions/rest.healthResponse"
             }
           },
           "500": {
             "description": "Unhealthy",
             "schema": {
-              "$ref": "#/definitions/rest.status"
+              "$ref": "#/definitions/rest.healthResponse"
             }
           },
           "default": {
