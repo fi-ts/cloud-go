@@ -16,7 +16,7 @@ import (
 
 // RestHealthResult rest health result
 //
-// swagger:model rest.healthResult
+// swagger:model rest.HealthResult
 type RestHealthResult struct {
 
 	// message

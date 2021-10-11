@@ -910,14 +910,14 @@
         "tags"
       ]
     },
-    "rest.healthResponse": {
+    "rest.HealthResponse": {
       "properties": {
         "message": {
           "type": "string"
         },
         "services": {
           "additionalProperties": {
-            "$ref": "#/definitions/rest.healthResult"
+            "$ref": "#/definitions/rest.HealthResult"
           },
           "type": "object"
         },
@@ -931,7 +931,7 @@
         "status"
       ]
     },
-    "rest.healthResult": {
+    "rest.HealthResult": {
       "properties": {
         "message": {
           "type": "string"
@@ -5989,13 +5989,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/rest.healthResponse"
+              "$ref": "#/definitions/rest.HealthResponse"
             }
           },
           "500": {
             "description": "Unhealthy",
             "schema": {
-              "$ref": "#/definitions/rest.healthResponse"
+              "$ref": "#/definitions/rest.HealthResponse"
             }
           },
           "default": {
