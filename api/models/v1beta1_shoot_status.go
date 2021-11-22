@@ -124,6 +124,8 @@ func (m *V1beta1ShootStatus) validateAdvertisedAddresses(formats strfmt.Registry
 			if err := m.AdvertisedAddresses[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("advertisedAddresses" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("advertisedAddresses" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -148,6 +150,8 @@ func (m *V1beta1ShootStatus) validateConditions(formats strfmt.Registry) error {
 			if err := m.Conditions[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("conditions" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -172,6 +176,8 @@ func (m *V1beta1ShootStatus) validateConstraints(formats strfmt.Registry) error 
 			if err := m.Constraints[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("constraints" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("constraints" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -192,6 +198,8 @@ func (m *V1beta1ShootStatus) validateGardener(formats strfmt.Registry) error {
 		if err := m.Gardener.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gardener")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gardener")
 			}
 			return err
 		}
@@ -223,6 +231,8 @@ func (m *V1beta1ShootStatus) validateLastErrors(formats strfmt.Registry) error {
 			if err := m.LastErrors[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("lastErrors" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("lastErrors" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -242,6 +252,8 @@ func (m *V1beta1ShootStatus) validateLastOperation(formats strfmt.Registry) erro
 		if err := m.LastOperation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("lastOperation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("lastOperation")
 			}
 			return err
 		}
@@ -310,6 +322,8 @@ func (m *V1beta1ShootStatus) contextValidateAdvertisedAddresses(ctx context.Cont
 			if err := m.AdvertisedAddresses[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("advertisedAddresses" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("advertisedAddresses" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -328,6 +342,8 @@ func (m *V1beta1ShootStatus) contextValidateConditions(ctx context.Context, form
 			if err := m.Conditions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("conditions" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -346,6 +362,8 @@ func (m *V1beta1ShootStatus) contextValidateConstraints(ctx context.Context, for
 			if err := m.Constraints[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("constraints" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("constraints" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -362,6 +380,8 @@ func (m *V1beta1ShootStatus) contextValidateGardener(ctx context.Context, format
 		if err := m.Gardener.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gardener")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gardener")
 			}
 			return err
 		}
@@ -378,6 +398,8 @@ func (m *V1beta1ShootStatus) contextValidateLastErrors(ctx context.Context, form
 			if err := m.LastErrors[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("lastErrors" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("lastErrors" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -394,6 +416,8 @@ func (m *V1beta1ShootStatus) contextValidateLastOperation(ctx context.Context, f
 		if err := m.LastOperation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("lastOperation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("lastOperation")
 			}
 			return err
 		}

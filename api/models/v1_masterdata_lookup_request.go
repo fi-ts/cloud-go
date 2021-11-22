@@ -55,6 +55,8 @@ func (m *V1MasterdataLookupRequest) validateClusterNameProject(formats strfmt.Re
 		if err := m.ClusterNameProject.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cluster_name_project")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cluster_name_project")
 			}
 			return err
 		}
@@ -72,6 +74,8 @@ func (m *V1MasterdataLookupRequest) validateProjectIDTime(formats strfmt.Registr
 		if err := m.ProjectIDTime.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("project_id_time")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("project_id_time")
 			}
 			return err
 		}
@@ -104,6 +108,8 @@ func (m *V1MasterdataLookupRequest) contextValidateClusterNameProject(ctx contex
 		if err := m.ClusterNameProject.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cluster_name_project")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cluster_name_project")
 			}
 			return err
 		}
@@ -118,6 +124,8 @@ func (m *V1MasterdataLookupRequest) contextValidateProjectIDTime(ctx context.Con
 		if err := m.ProjectIDTime.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("project_id_time")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("project_id_time")
 			}
 			return err
 		}

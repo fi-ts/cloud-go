@@ -74,6 +74,8 @@ func (m *V1ContainerUsageResponse) validateAccumulatedusage(formats strfmt.Regis
 		if err := m.Accumulatedusage.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accumulatedusage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("accumulatedusage")
 			}
 			return err
 		}
@@ -122,6 +124,8 @@ func (m *V1ContainerUsageResponse) validateUsage(formats strfmt.Registry) error 
 			if err := m.Usage[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("usage" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("usage" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -156,6 +160,8 @@ func (m *V1ContainerUsageResponse) contextValidateAccumulatedusage(ctx context.C
 		if err := m.Accumulatedusage.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accumulatedusage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("accumulatedusage")
 			}
 			return err
 		}
@@ -172,6 +178,8 @@ func (m *V1ContainerUsageResponse) contextValidateUsage(ctx context.Context, for
 			if err := m.Usage[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("usage" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("usage" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

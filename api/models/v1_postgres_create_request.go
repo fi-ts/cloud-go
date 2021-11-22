@@ -76,6 +76,8 @@ func (m *V1PostgresCreateRequest) validateAccessList(formats strfmt.Registry) er
 		if err := m.AccessList.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("accessList")
 			}
 			return err
 		}
@@ -93,6 +95,8 @@ func (m *V1PostgresCreateRequest) validateSize(formats strfmt.Registry) error {
 		if err := m.Size.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("size")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("size")
 			}
 			return err
 		}
@@ -125,6 +129,8 @@ func (m *V1PostgresCreateRequest) contextValidateAccessList(ctx context.Context,
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("accessList")
 			}
 			return err
 		}
@@ -139,6 +145,8 @@ func (m *V1PostgresCreateRequest) contextValidateSize(ctx context.Context, forma
 		if err := m.Size.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("size")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("size")
 			}
 			return err
 		}
