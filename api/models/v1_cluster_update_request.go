@@ -154,6 +154,8 @@ func (m *V1ClusterUpdateRequest) validateAudit(formats strfmt.Registry) error {
 		if err := m.Audit.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Audit")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Audit")
 			}
 			return err
 		}
@@ -172,6 +174,8 @@ func (m *V1ClusterUpdateRequest) validateClusterFeatures(formats strfmt.Registry
 		if err := m.ClusterFeatures.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ClusterFeatures")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ClusterFeatures")
 			}
 			return err
 		}
@@ -195,6 +199,8 @@ func (m *V1ClusterUpdateRequest) validateEgressRules(formats strfmt.Registry) er
 			if err := m.EgressRules[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("EgressRules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("EgressRules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -251,6 +257,8 @@ func (m *V1ClusterUpdateRequest) validateKubernetes(formats strfmt.Registry) err
 		if err := m.Kubernetes.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Kubernetes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Kubernetes")
 			}
 			return err
 		}
@@ -278,6 +286,8 @@ func (m *V1ClusterUpdateRequest) validateMaintenance(formats strfmt.Registry) er
 		if err := m.Maintenance.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Maintenance")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Maintenance")
 			}
 			return err
 		}
@@ -310,6 +320,8 @@ func (m *V1ClusterUpdateRequest) validateWorkers(formats strfmt.Registry) error 
 			if err := m.Workers[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Workers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("Workers" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -360,6 +372,8 @@ func (m *V1ClusterUpdateRequest) contextValidateAudit(ctx context.Context, forma
 		if err := m.Audit.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Audit")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Audit")
 			}
 			return err
 		}
@@ -374,6 +388,8 @@ func (m *V1ClusterUpdateRequest) contextValidateClusterFeatures(ctx context.Cont
 		if err := m.ClusterFeatures.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ClusterFeatures")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ClusterFeatures")
 			}
 			return err
 		}
@@ -390,6 +406,8 @@ func (m *V1ClusterUpdateRequest) contextValidateEgressRules(ctx context.Context,
 			if err := m.EgressRules[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("EgressRules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("EgressRules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -406,6 +424,8 @@ func (m *V1ClusterUpdateRequest) contextValidateKubernetes(ctx context.Context, 
 		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Kubernetes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Kubernetes")
 			}
 			return err
 		}
@@ -420,6 +440,8 @@ func (m *V1ClusterUpdateRequest) contextValidateMaintenance(ctx context.Context,
 		if err := m.Maintenance.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Maintenance")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Maintenance")
 			}
 			return err
 		}
@@ -436,6 +458,8 @@ func (m *V1ClusterUpdateRequest) contextValidateWorkers(ctx context.Context, for
 			if err := m.Workers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Workers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("Workers" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

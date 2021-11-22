@@ -172,6 +172,8 @@ func (m *V1StorageClusterInfo) validateHealth(formats strfmt.Registry) error {
 		if err := m.Health.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Health")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Health")
 			}
 			return err
 		}
@@ -231,6 +233,8 @@ func (m *V1StorageClusterInfo) validateServers(formats strfmt.Registry) error {
 			if err := m.Servers[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Servers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("Servers" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -251,6 +255,8 @@ func (m *V1StorageClusterInfo) validateStatistics(formats strfmt.Registry) error
 		if err := m.Statistics.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Statistics")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Statistics")
 			}
 			return err
 		}
@@ -314,6 +320,8 @@ func (m *V1StorageClusterInfo) contextValidateHealth(ctx context.Context, format
 		if err := m.Health.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Health")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Health")
 			}
 			return err
 		}
@@ -330,6 +338,8 @@ func (m *V1StorageClusterInfo) contextValidateServers(ctx context.Context, forma
 			if err := m.Servers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Servers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("Servers" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -346,6 +356,8 @@ func (m *V1StorageClusterInfo) contextValidateStatistics(ctx context.Context, fo
 		if err := m.Statistics.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Statistics")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Statistics")
 			}
 			return err
 		}

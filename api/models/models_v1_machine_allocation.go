@@ -147,6 +147,8 @@ func (m *ModelsV1MachineAllocation) validateBootInfo(formats strfmt.Registry) er
 		if err := m.BootInfo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("boot_info")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("boot_info")
 			}
 			return err
 		}
@@ -182,6 +184,8 @@ func (m *ModelsV1MachineAllocation) validateFilesystemlayout(formats strfmt.Regi
 		if err := m.Filesystemlayout.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("filesystemlayout")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("filesystemlayout")
 			}
 			return err
 		}
@@ -208,6 +212,8 @@ func (m *ModelsV1MachineAllocation) validateImage(formats strfmt.Registry) error
 		if err := m.Image.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("image")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("image")
 			}
 			return err
 		}
@@ -240,6 +246,8 @@ func (m *ModelsV1MachineAllocation) validateNetworks(formats strfmt.Registry) er
 			if err := m.Networks[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("networks" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("networks" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -327,6 +335,8 @@ func (m *ModelsV1MachineAllocation) contextValidateBootInfo(ctx context.Context,
 		if err := m.BootInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("boot_info")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("boot_info")
 			}
 			return err
 		}
@@ -341,6 +351,8 @@ func (m *ModelsV1MachineAllocation) contextValidateFilesystemlayout(ctx context.
 		if err := m.Filesystemlayout.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("filesystemlayout")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("filesystemlayout")
 			}
 			return err
 		}
@@ -355,6 +367,8 @@ func (m *ModelsV1MachineAllocation) contextValidateImage(ctx context.Context, fo
 		if err := m.Image.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("image")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("image")
 			}
 			return err
 		}
@@ -371,6 +385,8 @@ func (m *ModelsV1MachineAllocation) contextValidateNetworks(ctx context.Context,
 			if err := m.Networks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("networks" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("networks" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

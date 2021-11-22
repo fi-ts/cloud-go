@@ -56,6 +56,8 @@ func (m *V1Maintenance) validateAutoUpdate(formats strfmt.Registry) error {
 		if err := m.AutoUpdate.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("AutoUpdate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("AutoUpdate")
 			}
 			return err
 		}
@@ -74,6 +76,8 @@ func (m *V1Maintenance) validateTimeWindow(formats strfmt.Registry) error {
 		if err := m.TimeWindow.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("TimeWindow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("TimeWindow")
 			}
 			return err
 		}
@@ -106,6 +110,8 @@ func (m *V1Maintenance) contextValidateAutoUpdate(ctx context.Context, formats s
 		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("AutoUpdate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("AutoUpdate")
 			}
 			return err
 		}
@@ -120,6 +126,8 @@ func (m *V1Maintenance) contextValidateTimeWindow(ctx context.Context, formats s
 		if err := m.TimeWindow.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("TimeWindow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("TimeWindow")
 			}
 			return err
 		}

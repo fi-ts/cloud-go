@@ -94,6 +94,8 @@ func (m *V1S3UpdateRequest) validateAddKeys(formats strfmt.Registry) error {
 			if err := m.AddKeys[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("add_keys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("add_keys" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -171,6 +173,8 @@ func (m *V1S3UpdateRequest) contextValidateAddKeys(ctx context.Context, formats 
 			if err := m.AddKeys[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("add_keys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("add_keys" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

@@ -107,6 +107,8 @@ func (m *V1PostgresResponse) validateAccessList(formats strfmt.Registry) error {
 		if err := m.AccessList.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("accessList")
 			}
 			return err
 		}
@@ -145,6 +147,8 @@ func (m *V1PostgresResponse) validateSize(formats strfmt.Registry) error {
 		if err := m.Size.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("size")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("size")
 			}
 			return err
 		}
@@ -163,6 +167,8 @@ func (m *V1PostgresResponse) validateStatus(formats strfmt.Registry) error {
 		if err := m.Status.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
 			}
 			return err
 		}
@@ -199,6 +205,8 @@ func (m *V1PostgresResponse) contextValidateAccessList(ctx context.Context, form
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("accessList")
 			}
 			return err
 		}
@@ -213,6 +221,8 @@ func (m *V1PostgresResponse) contextValidateSize(ctx context.Context, formats st
 		if err := m.Size.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("size")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("size")
 			}
 			return err
 		}
@@ -227,6 +237,8 @@ func (m *V1PostgresResponse) contextValidateStatus(ctx context.Context, formats 
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
 			}
 			return err
 		}

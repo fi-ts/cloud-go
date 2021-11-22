@@ -224,6 +224,8 @@ func (m *V1VolumeResponse) validateStatistics(formats strfmt.Registry) error {
 		if err := m.Statistics.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Statistics")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Statistics")
 			}
 			return err
 		}
@@ -297,6 +299,8 @@ func (m *V1VolumeResponse) contextValidateStatistics(ctx context.Context, format
 		if err := m.Statistics.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Statistics")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Statistics")
 			}
 			return err
 		}

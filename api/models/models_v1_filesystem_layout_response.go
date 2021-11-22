@@ -103,6 +103,8 @@ func (m *ModelsV1FilesystemLayoutResponse) validateConstraints(formats strfmt.Re
 		if err := m.Constraints.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("constraints")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("constraints")
 			}
 			return err
 		}
@@ -126,6 +128,8 @@ func (m *ModelsV1FilesystemLayoutResponse) validateDisks(formats strfmt.Registry
 			if err := m.Disks[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("disks" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("disks" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -151,6 +155,8 @@ func (m *ModelsV1FilesystemLayoutResponse) validateFilesystems(formats strfmt.Re
 			if err := m.Filesystems[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("filesystems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filesystems" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -185,6 +191,8 @@ func (m *ModelsV1FilesystemLayoutResponse) validateLogicalvolumes(formats strfmt
 			if err := m.Logicalvolumes[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("logicalvolumes" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("logicalvolumes" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -210,6 +218,8 @@ func (m *ModelsV1FilesystemLayoutResponse) validateRaid(formats strfmt.Registry)
 			if err := m.Raid[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("raid" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("raid" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -235,6 +245,8 @@ func (m *ModelsV1FilesystemLayoutResponse) validateVolumegroups(formats strfmt.R
 			if err := m.Volumegroups[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("volumegroups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("volumegroups" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -285,6 +297,8 @@ func (m *ModelsV1FilesystemLayoutResponse) contextValidateConstraints(ctx contex
 		if err := m.Constraints.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("constraints")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("constraints")
 			}
 			return err
 		}
@@ -301,6 +315,8 @@ func (m *ModelsV1FilesystemLayoutResponse) contextValidateDisks(ctx context.Cont
 			if err := m.Disks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("disks" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("disks" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -319,6 +335,8 @@ func (m *ModelsV1FilesystemLayoutResponse) contextValidateFilesystems(ctx contex
 			if err := m.Filesystems[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("filesystems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filesystems" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -337,6 +355,8 @@ func (m *ModelsV1FilesystemLayoutResponse) contextValidateLogicalvolumes(ctx con
 			if err := m.Logicalvolumes[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("logicalvolumes" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("logicalvolumes" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -355,6 +375,8 @@ func (m *ModelsV1FilesystemLayoutResponse) contextValidateRaid(ctx context.Conte
 			if err := m.Raid[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("raid" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("raid" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -373,6 +395,8 @@ func (m *ModelsV1FilesystemLayoutResponse) contextValidateVolumegroups(ctx conte
 			if err := m.Volumegroups[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("volumegroups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("volumegroups" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

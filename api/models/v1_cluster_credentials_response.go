@@ -65,6 +65,8 @@ func (m *V1ClusterCredentialsResponse) validateSSHKeyPair(formats strfmt.Registr
 		if err := m.SSHKeyPair.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("SSHKeyPair")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SSHKeyPair")
 			}
 			return err
 		}
@@ -93,6 +95,8 @@ func (m *V1ClusterCredentialsResponse) contextValidateSSHKeyPair(ctx context.Con
 		if err := m.SSHKeyPair.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("SSHKeyPair")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SSHKeyPair")
 			}
 			return err
 		}

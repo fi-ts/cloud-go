@@ -51,6 +51,8 @@ func (m *V1PostgresStatus) validateSocket(formats strfmt.Registry) error {
 		if err := m.Socket.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("socket")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("socket")
 			}
 			return err
 		}
@@ -79,6 +81,8 @@ func (m *V1PostgresStatus) contextValidateSocket(ctx context.Context, formats st
 		if err := m.Socket.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("socket")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("socket")
 			}
 			return err
 		}

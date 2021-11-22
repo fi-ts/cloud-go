@@ -90,6 +90,8 @@ func (m *V1PostgresBackupConfigCreateRequest) validateSecret(formats strfmt.Regi
 		if err := m.Secret.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secret")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secret")
 			}
 			return err
 		}
@@ -118,6 +120,8 @@ func (m *V1PostgresBackupConfigCreateRequest) contextValidateSecret(ctx context.
 		if err := m.Secret.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secret")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secret")
 			}
 			return err
 		}

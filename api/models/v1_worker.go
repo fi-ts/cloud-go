@@ -119,6 +119,8 @@ func (m *V1Worker) validateMachineImage(formats strfmt.Registry) error {
 		if err := m.MachineImage.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("MachineImage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("MachineImage")
 			}
 			return err
 		}
@@ -201,6 +203,8 @@ func (m *V1Worker) contextValidateMachineImage(ctx context.Context, formats strf
 		if err := m.MachineImage.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("MachineImage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("MachineImage")
 			}
 			return err
 		}

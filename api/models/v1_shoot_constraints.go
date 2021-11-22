@@ -110,6 +110,8 @@ func (m *V1ShootConstraints) validateFirewallControllerVersions(formats strfmt.R
 			if err := m.FirewallControllerVersions[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("firewall_controller_versions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("firewall_controller_versions" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -162,6 +164,8 @@ func (m *V1ShootConstraints) validateMachineImages(formats strfmt.Registry) erro
 			if err := m.MachineImages[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("machine_images" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("machine_images" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -225,6 +229,8 @@ func (m *V1ShootConstraints) contextValidateFirewallControllerVersions(ctx conte
 			if err := m.FirewallControllerVersions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("firewall_controller_versions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("firewall_controller_versions" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -243,6 +249,8 @@ func (m *V1ShootConstraints) contextValidateMachineImages(ctx context.Context, f
 			if err := m.MachineImages[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("machine_images" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("machine_images" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
