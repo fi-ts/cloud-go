@@ -1483,6 +1483,10 @@
             "$ref": "#/definitions/v1.Worker"
           },
           "type": "array"
+        },
+        "seedName": {
+          "description": "seed name on which the cluster will be scheduled",
+          "type": "string"
         }
       },
       "required": [
@@ -1498,7 +1502,8 @@
         "Labels",
         "Maintenance",
         "Purpose",
-        "Workers"
+        "Workers",
+        "seedName"
       ]
     },
     "v1.ClusterUsage": {
