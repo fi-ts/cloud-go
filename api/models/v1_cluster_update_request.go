@@ -71,6 +71,10 @@ type V1ClusterUpdateRequest struct {
 	// workers
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
+
+	// seed name on which the cluster will be scheduled
+	// Required: true
+	SeedName *string `json:"seedName"`
 }
 
 // Validate validates this v1 cluster update request
@@ -126,6 +130,10 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateWorkers(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSeedName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -327,6 +335,15 @@ func (m *V1ClusterUpdateRequest) validateWorkers(formats strfmt.Registry) error 
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateSeedName(formats strfmt.Registry) error {
+
+	if err := validate.Required("seedName", "body", m.SeedName); err != nil {
+		return err
 	}
 
 	return nil
