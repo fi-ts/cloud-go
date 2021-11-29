@@ -74,6 +74,36 @@ func (_m *ClientService) CreatePostgresBackupConfig(params *database.CreatePostg
 	return r0, r1
 }
 
+// CreatePostgresStandby provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) CreatePostgresStandby(params *database.CreatePostgresStandbyParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption) (*database.CreatePostgresStandbyCreated, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *database.CreatePostgresStandbyCreated
+	if rf, ok := ret.Get(0).(func(*database.CreatePostgresStandbyParams, runtime.ClientAuthInfoWriter, ...database.ClientOption) *database.CreatePostgresStandbyCreated); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*database.CreatePostgresStandbyCreated)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*database.CreatePostgresStandbyParams, runtime.ClientAuthInfoWriter, ...database.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // DeletePostgres provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) DeletePostgres(params *database.DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption) (*database.DeletePostgresOK, error) {
 	_va := make([]interface{}, len(opts))

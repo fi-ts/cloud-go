@@ -25,12 +25,18 @@ type V1PostgresUpdateRequest struct {
 	// backup
 	Backup string `json:"backup,omitempty"`
 
+	// connection info
+	ConnectionInfo *V1ConnectionInfo `json:"connectionInfo,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
 	// id
 	// Required: true
 	ID *string `json:"id"`
+
+	// is replication primary
+	IsReplicationPrimary bool `json:"isReplicationPrimary,omitempty"`
 
 	// labels
 	Labels V1PostgresUpdateRequestLabels `json:"labels,omitempty"`
@@ -59,6 +65,10 @@ func (m *V1PostgresUpdateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAccessList(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateConnectionInfo(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -91,6 +101,25 @@ func (m *V1PostgresUpdateRequest) validateAccessList(formats strfmt.Registry) er
 				return ve.ValidateName("accessList")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("accessList")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUpdateRequest) validateConnectionInfo(formats strfmt.Registry) error {
+	if swag.IsZero(m.ConnectionInfo) { // not required
+		return nil
+	}
+
+	if m.ConnectionInfo != nil {
+		if err := m.ConnectionInfo.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("connectionInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("connectionInfo")
 			}
 			return err
 		}
@@ -154,6 +183,10 @@ func (m *V1PostgresUpdateRequest) ContextValidate(ctx context.Context, formats s
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateConnectionInfo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLabels(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -176,6 +209,22 @@ func (m *V1PostgresUpdateRequest) contextValidateAccessList(ctx context.Context,
 				return ve.ValidateName("accessList")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("accessList")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUpdateRequest) contextValidateConnectionInfo(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ConnectionInfo != nil {
+		if err := m.ConnectionInfo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("connectionInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("connectionInfo")
 			}
 			return err
 		}
