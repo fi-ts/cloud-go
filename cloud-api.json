@@ -1649,6 +1649,9 @@
         },
         "secretName": {
           "type": "string"
+        },
+        "synchronous": {
+          "type": "boolean"
         }
       }
     },
@@ -2725,6 +2728,9 @@
         "backup": {
           "type": "string"
         },
+        "connectionInfo": {
+          "$ref": "#/definitions/v1.ConnectionInfo"
+        },
         "createdBy": {
           "type": "string"
         },
@@ -2737,6 +2743,9 @@
         },
         "id": {
           "type": "string"
+        },
+        "isReplicationPrimary": {
+          "type": "boolean"
         },
         "labels": {
           "additionalProperties": {

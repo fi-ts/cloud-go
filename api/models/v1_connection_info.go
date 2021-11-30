@@ -25,6 +25,9 @@ type V1ConnectionInfo struct {
 
 	// secret name
 	SecretName string `json:"secretName,omitempty"`
+
+	// synchronous
+	Synchronous bool `json:"synchronous,omitempty"`
 }
 
 // Validate validates this v1 connection info
