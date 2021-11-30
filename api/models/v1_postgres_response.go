@@ -42,9 +42,6 @@ type V1PostgresResponse struct {
 	// Required: true
 	ID *string `json:"id"`
 
-	// is replication primary
-	IsReplicationPrimary bool `json:"isReplicationPrimary,omitempty"`
-
 	// labels
 	Labels map[string]string `json:"labels,omitempty"`
 

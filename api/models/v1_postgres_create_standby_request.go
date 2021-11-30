@@ -43,9 +43,6 @@ type V1PostgresCreateStandbyRequest struct {
 	// primary Id
 	// Required: true
 	PrimaryID *string `json:"primaryId"`
-
-	// project ID
-	ProjectID string `json:"projectID,omitempty"`
 }
 
 // Validate validates this v1 postgres create standby request

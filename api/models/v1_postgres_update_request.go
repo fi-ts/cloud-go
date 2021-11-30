@@ -35,9 +35,6 @@ type V1PostgresUpdateRequest struct {
 	// Required: true
 	ID *string `json:"id"`
 
-	// is replication primary
-	IsReplicationPrimary bool `json:"isReplicationPrimary,omitempty"`
-
 	// labels
 	Labels V1PostgresUpdateRequestLabels `json:"labels,omitempty"`
 

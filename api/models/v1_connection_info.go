@@ -20,11 +20,8 @@ type V1ConnectionInfo struct {
 	// connected postgres ID
 	ConnectedPostgresID string `json:"connectedPostgresID,omitempty"`
 
-	// method
-	Method string `json:"method,omitempty"`
-
-	// secret name
-	SecretName string `json:"secretName,omitempty"`
+	// is replication primary
+	IsReplicationPrimary bool `json:"isReplicationPrimary,omitempty"`
 
 	// synchronous
 	Synchronous bool `json:"synchronous,omitempty"`
