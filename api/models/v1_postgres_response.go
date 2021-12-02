@@ -25,8 +25,8 @@ type V1PostgresResponse struct {
 	// backup
 	Backup string `json:"backup,omitempty"`
 
-	// connection info
-	ConnectionInfo *V1Connection `json:"connectionInfo,omitempty"`
+	// connection
+	Connection *V1Connection `json:"connection,omitempty"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
@@ -79,7 +79,7 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateConnectionInfo(formats); err != nil {
+	if err := m.validateConnection(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -124,17 +124,17 @@ func (m *V1PostgresResponse) validateAccessList(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1PostgresResponse) validateConnectionInfo(formats strfmt.Registry) error {
-	if swag.IsZero(m.ConnectionInfo) { // not required
+func (m *V1PostgresResponse) validateConnection(formats strfmt.Registry) error {
+	if swag.IsZero(m.Connection) { // not required
 		return nil
 	}
 
-	if m.ConnectionInfo != nil {
-		if err := m.ConnectionInfo.Validate(formats); err != nil {
+	if m.Connection != nil {
+		if err := m.Connection.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("connectionInfo")
+				return ve.ValidateName("connection")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("connectionInfo")
+				return ce.ValidateName("connection")
 			}
 			return err
 		}
@@ -211,7 +211,7 @@ func (m *V1PostgresResponse) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateConnectionInfo(ctx, formats); err != nil {
+	if err := m.contextValidateConnection(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -245,14 +245,14 @@ func (m *V1PostgresResponse) contextValidateAccessList(ctx context.Context, form
 	return nil
 }
 
-func (m *V1PostgresResponse) contextValidateConnectionInfo(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1PostgresResponse) contextValidateConnection(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.ConnectionInfo != nil {
-		if err := m.ConnectionInfo.ContextValidate(ctx, formats); err != nil {
+	if m.Connection != nil {
+		if err := m.Connection.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("connectionInfo")
+				return ve.ValidateName("connection")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("connectionInfo")
+				return ce.ValidateName("connection")
 			}
 			return err
 		}
