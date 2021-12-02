@@ -19,9 +19,6 @@ import (
 // swagger:model v1.PostgresCreateStandbyRequest
 type V1PostgresCreateStandbyRequest struct {
 
-	// access list
-	AccessList *V1AccessList `json:"accessList,omitempty"`
-
 	// backup
 	Backup string `json:"backup,omitempty"`
 
@@ -49,10 +46,6 @@ type V1PostgresCreateStandbyRequest struct {
 func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAccessList(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validatePrimaryID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -60,25 +53,6 @@ func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1PostgresCreateStandbyRequest) validateAccessList(formats strfmt.Registry) error {
-	if swag.IsZero(m.AccessList) { // not required
-		return nil
-	}
-
-	if m.AccessList != nil {
-		if err := m.AccessList.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("accessList")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("accessList")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -91,33 +65,8 @@ func (m *V1PostgresCreateStandbyRequest) validatePrimaryID(formats strfmt.Regist
 	return nil
 }
 
-// ContextValidate validate this v1 postgres create standby request based on the context it is used
+// ContextValidate validates this v1 postgres create standby request based on context it is used
 func (m *V1PostgresCreateStandbyRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateAccessList(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *V1PostgresCreateStandbyRequest) contextValidateAccessList(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.AccessList != nil {
-		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("accessList")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("accessList")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

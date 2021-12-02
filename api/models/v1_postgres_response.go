@@ -26,7 +26,7 @@ type V1PostgresResponse struct {
 	Backup string `json:"backup,omitempty"`
 
 	// connection info
-	ConnectionInfo *V1ConnectionInfo `json:"connectionInfo,omitempty"`
+	ConnectionInfo *V1Connection `json:"connectionInfo,omitempty"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`

@@ -1639,13 +1639,13 @@
         "usage"
       ]
     },
-    "v1.ConnectionInfo": {
+    "v1.Connection": {
       "properties": {
-        "connectedPostgresID": {
-          "type": "string"
-        },
-        "isReplicationPrimary": {
+        "localSideIsPrimary": {
           "type": "boolean"
+        },
+        "postgresID": {
+          "type": "string"
         },
         "synchronous": {
           "type": "boolean"
@@ -2634,9 +2634,6 @@
     },
     "v1.PostgresCreateStandbyRequest": {
       "properties": {
-        "accessList": {
-          "$ref": "#/definitions/v1.AccessList"
-        },
         "backup": {
           "type": "string"
         },
@@ -2723,7 +2720,7 @@
           "type": "string"
         },
         "connectionInfo": {
-          "$ref": "#/definitions/v1.ConnectionInfo"
+          "$ref": "#/definitions/v1.Connection"
         },
         "createdBy": {
           "type": "string"
@@ -2833,8 +2830,8 @@
         "backup": {
           "type": "string"
         },
-        "connectionInfo": {
-          "$ref": "#/definitions/v1.ConnectionInfo"
+        "connection": {
+          "$ref": "#/definitions/v1.Connection"
         },
         "description": {
           "type": "string"
