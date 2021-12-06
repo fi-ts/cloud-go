@@ -1639,6 +1639,19 @@
         "usage"
       ]
     },
+    "v1.Connection": {
+      "properties": {
+        "localSideIsPrimary": {
+          "type": "boolean"
+        },
+        "postgresID": {
+          "type": "string"
+        },
+        "synchronous": {
+          "type": "boolean"
+        }
+      }
+    },
     "v1.ContainerUsage": {
       "properties": {
         "annotations": {
@@ -2619,6 +2632,41 @@
         }
       }
     },
+    "v1.PostgresCreateStandbyRequest": {
+      "properties": {
+        "backup": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "maintenance": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "numberOfInstances": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "primaryId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "primaryId"
+      ]
+    },
     "v1.PostgresFindRequest": {
       "properties": {
         "description": {
@@ -2670,6 +2718,9 @@
         },
         "backup": {
           "type": "string"
+        },
+        "connection": {
+          "$ref": "#/definitions/v1.Connection"
         },
         "createdBy": {
           "type": "string"
@@ -2778,6 +2829,9 @@
         },
         "backup": {
           "type": "string"
+        },
+        "connection": {
+          "$ref": "#/definitions/v1.Connection"
         },
         "description": {
           "type": "string"
@@ -5783,6 +5837,45 @@
           }
         },
         "summary": "get postgres partitions supported",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/standby": {
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createPostgresStandby",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresCreateStandbyRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "create a standby postgres. if the given ID does not already exists a conflict is returned",
         "tags": [
           "database"
         ]

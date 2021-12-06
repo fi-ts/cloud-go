@@ -32,6 +32,8 @@ type ClientService interface {
 
 	CreatePostgresBackupConfig(params *CreatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupConfigCreated, error)
 
+	CreatePostgresStandby(params *CreatePostgresStandbyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresStandbyCreated, error)
+
 	DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresOK, error)
 
 	DeletePostgresBackupConfig(params *DeletePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupConfigOK, error)
@@ -134,6 +136,44 @@ func (a *Client) CreatePostgresBackupConfig(params *CreatePostgresBackupConfigPa
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreatePostgresBackupConfigDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  CreatePostgresStandby creates a standby postgres if the given ID does not already exists a conflict is returned
+*/
+func (a *Client) CreatePostgresStandby(params *CreatePostgresStandbyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresStandbyCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePostgresStandbyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createPostgresStandby",
+		Method:             "PUT",
+		PathPattern:        "/v1/database/postgres/standby",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePostgresStandbyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePostgresStandbyCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreatePostgresStandbyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
