@@ -56,6 +56,8 @@ type ClientService interface {
 
 	ListPostgresBackupConfigs(params *ListPostgresBackupConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresBackupConfigsOK, error)
 
+	RestorePostgres(params *RestorePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestorePostgresCreated, error)
+
 	UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresOK, error)
 
 	UpdatePostgresBackupConfig(params *UpdatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupConfigOK, error)
@@ -592,6 +594,44 @@ func (a *Client) ListPostgresBackupConfigs(params *ListPostgresBackupConfigsPara
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListPostgresBackupConfigsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  RestorePostgres restores a postgres based on an existing postgres if the given source ID does already exist a conflict is returned
+*/
+func (a *Client) RestorePostgres(params *RestorePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestorePostgresCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRestorePostgresParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "restorePostgres",
+		Method:             "PUT",
+		PathPattern:        "/v1/database/postgres/restore",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RestorePostgresReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RestorePostgresCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*RestorePostgresDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
