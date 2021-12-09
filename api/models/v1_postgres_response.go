@@ -25,6 +25,9 @@ type V1PostgresResponse struct {
 	// backup
 	Backup string `json:"backup,omitempty"`
 
+	// clone
+	Clone *V1Clone `json:"clone,omitempty"`
+
 	// connection
 	Connection *V1Connection `json:"connection,omitempty"`
 
@@ -79,6 +82,10 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateClone(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateConnection(formats); err != nil {
 		res = append(res, err)
 	}
@@ -116,6 +123,25 @@ func (m *V1PostgresResponse) validateAccessList(formats strfmt.Registry) error {
 				return ve.ValidateName("accessList")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("accessList")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) validateClone(formats strfmt.Registry) error {
+	if swag.IsZero(m.Clone) { // not required
+		return nil
+	}
+
+	if m.Clone != nil {
+		if err := m.Clone.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("clone")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("clone")
 			}
 			return err
 		}
@@ -211,6 +237,10 @@ func (m *V1PostgresResponse) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateClone(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateConnection(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -237,6 +267,22 @@ func (m *V1PostgresResponse) contextValidateAccessList(ctx context.Context, form
 				return ve.ValidateName("accessList")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("accessList")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) contextValidateClone(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Clone != nil {
+		if err := m.Clone.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("clone")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("clone")
 			}
 			return err
 		}
