@@ -2794,6 +2794,16 @@
         "status"
       ]
     },
+    "v1.PostgresRestoreAcceptedRequest": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "v1.PostgresRestoreRequest": {
       "properties": {
         "description": {
@@ -5896,6 +5906,43 @@
       }
     },
     "/v1/database/postgres/restore": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "acceptPostgresRestore",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresRestoreAcceptedRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "indicates a validated restore. if the postgres was changed since this one was read, a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      },
       "put": {
         "consumes": [
           "application/json"

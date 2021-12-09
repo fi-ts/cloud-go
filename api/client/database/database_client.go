@@ -28,6 +28,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	AcceptPostgresRestore(params *AcceptPostgresRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptPostgresRestoreOK, error)
+
 	CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresCreated, error)
 
 	CreatePostgresBackupConfig(params *CreatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupConfigCreated, error)
@@ -63,6 +65,44 @@ type ClientService interface {
 	UpdatePostgresBackupConfig(params *UpdatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupConfigOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  AcceptPostgresRestore indicates a validated restore if the postgres was changed since this one was read a conflict is returned
+*/
+func (a *Client) AcceptPostgresRestore(params *AcceptPostgresRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptPostgresRestoreOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAcceptPostgresRestoreParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "acceptPostgresRestore",
+		Method:             "POST",
+		PathPattern:        "/v1/database/postgres/restore",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &AcceptPostgresRestoreReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AcceptPostgresRestoreOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*AcceptPostgresRestoreDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
