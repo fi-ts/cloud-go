@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // NewAcceptPostgresRestoreParams creates a new AcceptPostgresRestoreParams object,
@@ -61,8 +59,11 @@ func NewAcceptPostgresRestoreParamsWithHTTPClient(client *http.Client) *AcceptPo
 */
 type AcceptPostgresRestoreParams struct {
 
-	// Body.
-	Body *models.V1PostgresRestoreAcceptedRequest
+	/* ID.
+
+	   identifier of the postgres
+	*/
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -117,15 +118,15 @@ func (o *AcceptPostgresRestoreParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the accept postgres restore params
-func (o *AcceptPostgresRestoreParams) WithBody(body *models.V1PostgresRestoreAcceptedRequest) *AcceptPostgresRestoreParams {
-	o.SetBody(body)
+// WithID adds the id to the accept postgres restore params
+func (o *AcceptPostgresRestoreParams) WithID(id string) *AcceptPostgresRestoreParams {
+	o.SetID(id)
 	return o
 }
 
-// SetBody adds the body to the accept postgres restore params
-func (o *AcceptPostgresRestoreParams) SetBody(body *models.V1PostgresRestoreAcceptedRequest) {
-	o.Body = body
+// SetID adds the id to the accept postgres restore params
+func (o *AcceptPostgresRestoreParams) SetID(id string) {
+	o.ID = id
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -135,10 +136,10 @@ func (o *AcceptPostgresRestoreParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+
+	// path param id
+	if err := r.SetPathParam("id", o.ID); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

@@ -2794,16 +2794,6 @@
         "status"
       ]
     },
-    "v1.PostgresRestoreAcceptedRequest": {
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "v1.PostgresRestoreRequest": {
       "properties": {
         "description": {
@@ -5913,12 +5903,11 @@
         "operationId": "acceptPostgresRestore",
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1.PostgresRestoreAcceptedRequest"
-            }
+            "type": "string"
           }
         ],
         "produces": [
