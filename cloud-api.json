@@ -995,22 +995,6 @@
         "ClusterAudit"
       ]
     },
-    "v1.Clone": {
-      "properties": {
-        "cluster": {
-          "type": "string"
-        },
-        "s3AccessKey": {
-          "type": "string"
-        },
-        "s3Endpoint": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string"
-        }
-      }
-    },
     "v1.ClusterCreateRequest": {
       "properties": {
         "AdditionalNetworks": {
@@ -2735,9 +2719,6 @@
         "backup": {
           "type": "string"
         },
-        "clone": {
-          "$ref": "#/definitions/v1.Clone"
-        },
         "connection": {
           "$ref": "#/definitions/v1.Connection"
         },
@@ -2775,6 +2756,9 @@
         },
         "projectID": {
           "type": "string"
+        },
+        "restore": {
+          "$ref": "#/definitions/v1.Restore"
         },
         "size": {
           "$ref": "#/definitions/v1.PostgresSize"
@@ -3221,6 +3205,16 @@
         },
         "project": {
           "$ref": "#/definitions/v1.Quota"
+        }
+      }
+    },
+    "v1.Restore": {
+      "properties": {
+        "postgresID": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
         }
       }
     },
