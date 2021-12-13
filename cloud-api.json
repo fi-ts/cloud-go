@@ -5896,42 +5896,6 @@
       }
     },
     "/v1/database/postgres/restore": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "acceptPostgresRestore",
-        "parameters": [
-          {
-            "description": "identifier of the postgres",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/v1.PostgresResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
-            }
-          }
-        },
-        "summary": "indicates a validated restore. if the postgres was changed since this one was read, a conflict is returned",
-        "tags": [
-          "database"
-        ]
-      },
       "put": {
         "consumes": [
           "application/json"
@@ -5965,6 +5929,44 @@
           }
         },
         "summary": "restore a postgres based on an existing postgres. if the given source ID does already exist a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/restore/{id}": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "acceptPostgresRestore",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "indicates a validated restore. if the postgres was changed since this one was read, a conflict is returned",
         "tags": [
           "database"
         ]
