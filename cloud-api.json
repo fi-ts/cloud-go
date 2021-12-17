@@ -2596,6 +2596,9 @@
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
+        "auditLogs": {
+          "type": "boolean"
+        },
         "backup": {
           "type": "string"
         },
@@ -2620,6 +2623,12 @@
         },
         "partitionID": {
           "type": "string"
+        },
+        "postgresParams": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         },
         "projectID": {
           "type": "string"
@@ -2716,6 +2725,9 @@
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
+        "auditLogs": {
+          "type": "boolean"
+        },
         "backup": {
           "type": "string"
         },
@@ -2754,8 +2766,17 @@
         "partitionID": {
           "type": "string"
         },
+        "postgresParams": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "projectID": {
           "type": "string"
+        },
+        "restore": {
+          "$ref": "#/definitions/v1.Restore"
         },
         "size": {
           "$ref": "#/definitions/v1.PostgresSize"
@@ -2773,6 +2794,40 @@
       "required": [
         "id",
         "status"
+      ]
+    },
+    "v1.PostgresRestoreRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "maintenance": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "partitionID": {
+          "type": "string"
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sourceId"
       ]
     },
     "v1.PostgresSecretsRespone": {
@@ -2827,6 +2882,9 @@
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
+        "auditLogs": {
+          "type": "boolean"
+        },
         "backup": {
           "type": "string"
         },
@@ -2854,6 +2912,12 @@
         },
         "partitionID": {
           "type": "string"
+        },
+        "postgresParams": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         },
         "projectID": {
           "type": "string"
@@ -3168,6 +3232,16 @@
         },
         "project": {
           "$ref": "#/definitions/v1.Quota"
+        }
+      }
+    },
+    "v1.Restore": {
+      "properties": {
+        "postgresID": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
         }
       }
     },
@@ -5837,6 +5911,83 @@
           }
         },
         "summary": "get postgres partitions supported",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/restore": {
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "restorePostgres",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresRestoreRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "restore a postgres based on an existing postgres. if the given source ID does already exist a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      }
+    },
+    "/v1/database/postgres/restore/{id}": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "acceptPostgresRestore",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "indicates a validated restore. if the postgres was changed since this one was read, a conflict is returned",
         "tags": [
           "database"
         ]

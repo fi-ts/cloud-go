@@ -21,6 +21,9 @@ type V1PostgresCreateRequest struct {
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
 
+	// audit logs
+	AuditLogs bool `json:"auditLogs,omitempty"`
+
 	// backup
 	Backup string `json:"backup,omitempty"`
 
@@ -38,6 +41,9 @@ type V1PostgresCreateRequest struct {
 
 	// partition ID
 	PartitionID string `json:"partitionID,omitempty"`
+
+	// postgres params
+	PostgresParams map[string]string `json:"postgresParams,omitempty"`
 
 	// project ID
 	ProjectID string `json:"projectID,omitempty"`

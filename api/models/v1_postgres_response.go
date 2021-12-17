@@ -22,6 +22,9 @@ type V1PostgresResponse struct {
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
 
+	// audit logs
+	AuditLogs bool `json:"auditLogs,omitempty"`
+
 	// backup
 	Backup string `json:"backup,omitempty"`
 
@@ -54,8 +57,14 @@ type V1PostgresResponse struct {
 	// partition ID
 	PartitionID string `json:"partitionID,omitempty"`
 
+	// postgres params
+	PostgresParams map[string]string `json:"postgresParams,omitempty"`
+
 	// project ID
 	ProjectID string `json:"projectID,omitempty"`
+
+	// restore
+	Restore *V1Restore `json:"restore,omitempty"`
 
 	// size
 	Size *V1PostgresSize `json:"size,omitempty"`
@@ -88,6 +97,10 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRestore(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -164,6 +177,25 @@ func (m *V1PostgresResponse) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1PostgresResponse) validateRestore(formats strfmt.Registry) error {
+	if swag.IsZero(m.Restore) { // not required
+		return nil
+	}
+
+	if m.Restore != nil {
+		if err := m.Restore.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("restore")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("restore")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1PostgresResponse) validateSize(formats strfmt.Registry) error {
 	if swag.IsZero(m.Size) { // not required
 		return nil
@@ -215,6 +247,10 @@ func (m *V1PostgresResponse) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateRestore(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSize(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -253,6 +289,22 @@ func (m *V1PostgresResponse) contextValidateConnection(ctx context.Context, form
 				return ve.ValidateName("connection")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("connection")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) contextValidateRestore(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Restore != nil {
+		if err := m.Restore.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("restore")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("restore")
 			}
 			return err
 		}
