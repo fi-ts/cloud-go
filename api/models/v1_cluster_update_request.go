@@ -32,6 +32,10 @@ type V1ClusterUpdateRequest struct {
 	// Required: true
 	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures"`
 
+	// custom default storage class
+	// Required: true
+	CustomDefaultStorageClass *V1CustomDefaultStorageClass `json:"CustomDefaultStorageClass"`
+
 	// egress rules
 	// Required: true
 	EgressRules []*V1EgressRule `json:"EgressRules"`
@@ -90,6 +94,10 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateClusterFeatures(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCustomDefaultStorageClass(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -184,6 +192,26 @@ func (m *V1ClusterUpdateRequest) validateClusterFeatures(formats strfmt.Registry
 				return ve.ValidateName("ClusterFeatures")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ClusterFeatures")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateCustomDefaultStorageClass(formats strfmt.Registry) error {
+
+	if err := validate.Required("CustomDefaultStorageClass", "body", m.CustomDefaultStorageClass); err != nil {
+		return err
+	}
+
+	if m.CustomDefaultStorageClass != nil {
+		if err := m.CustomDefaultStorageClass.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("CustomDefaultStorageClass")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("CustomDefaultStorageClass")
 			}
 			return err
 		}
@@ -361,6 +389,10 @@ func (m *V1ClusterUpdateRequest) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCustomDefaultStorageClass(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEgressRules(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -407,6 +439,22 @@ func (m *V1ClusterUpdateRequest) contextValidateClusterFeatures(ctx context.Cont
 				return ve.ValidateName("ClusterFeatures")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ClusterFeatures")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) contextValidateCustomDefaultStorageClass(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CustomDefaultStorageClass != nil {
+		if err := m.CustomDefaultStorageClass.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("CustomDefaultStorageClass")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("CustomDefaultStorageClass")
 			}
 			return err
 		}
