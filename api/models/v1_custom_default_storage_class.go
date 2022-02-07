@@ -22,10 +22,6 @@ type V1CustomDefaultStorageClass struct {
 	// class name
 	// Required: true
 	ClassName *string `json:"ClassName"`
-
-	// enabled
-	// Required: true
-	Enabled *bool `json:"Enabled"`
 }
 
 // Validate validates this v1 custom default storage class
@@ -33,10 +29,6 @@ func (m *V1CustomDefaultStorageClass) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateClassName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEnabled(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -49,15 +41,6 @@ func (m *V1CustomDefaultStorageClass) Validate(formats strfmt.Registry) error {
 func (m *V1CustomDefaultStorageClass) validateClassName(formats strfmt.Registry) error {
 
 	if err := validate.Required("ClassName", "body", m.ClassName); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1CustomDefaultStorageClass) validateEnabled(formats strfmt.Registry) error {
-
-	if err := validate.Required("Enabled", "body", m.Enabled); err != nil {
 		return err
 	}
 

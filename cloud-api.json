@@ -1009,6 +1009,9 @@
         "ClusterFeatures": {
           "$ref": "#/definitions/v1.ClusterFeatures"
         },
+        "CustomDefaultStorageClass": {
+          "$ref": "#/definitions/v1.CustomDefaultStorageClass"
+        },
         "Description": {
           "type": "string"
         },
@@ -1069,6 +1072,7 @@
         "AdditionalNetworks",
         "Audit",
         "ClusterFeatures",
+        "CustomDefaultStorageClass",
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
@@ -1862,14 +1866,10 @@
       "properties": {
         "ClassName": {
           "type": "string"
-        },
-        "Enabled": {
-          "type": "boolean"
         }
       },
       "required": [
-        "ClassName",
-        "Enabled"
+        "ClassName"
       ]
     },
     "v1.EgressRule": {
