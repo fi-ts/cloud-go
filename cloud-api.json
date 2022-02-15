@@ -3731,6 +3731,16 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "seeds": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "description": "the available seeds by partition id",
+          "type": "object"
         }
       },
       "required": [
@@ -3741,7 +3751,8 @@
         "machine_images",
         "machine_types",
         "networks",
-        "partitions"
+        "partitions",
+        "seeds"
       ]
     },
     "v1.StorageClusterInfo": {
