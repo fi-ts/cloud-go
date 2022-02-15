@@ -1136,6 +1136,9 @@
         "Purpose": {
           "type": "string"
         },
+        "SeedName": {
+          "type": "string"
+        },
         "Tenant": {
           "type": "string"
         }
@@ -1147,6 +1150,7 @@
         "PartitionID",
         "ProjectID",
         "Purpose",
+        "SeedName",
         "Tenant"
       ]
     },
