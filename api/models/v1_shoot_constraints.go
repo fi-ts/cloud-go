@@ -51,6 +51,10 @@ type V1ShootConstraints struct {
 	// the list of available partitions
 	// Required: true
 	Partitions []string `json:"partitions"`
+
+	// the available seeds by partition id
+	// Required: true
+	Seeds map[string][]string `json:"seeds"`
 }
 
 // Validate validates this v1 shoot constraints
@@ -86,6 +90,10 @@ func (m *V1ShootConstraints) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePartitions(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSeeds(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -197,6 +205,15 @@ func (m *V1ShootConstraints) validateNetworks(formats strfmt.Registry) error {
 func (m *V1ShootConstraints) validatePartitions(formats strfmt.Registry) error {
 
 	if err := validate.Required("partitions", "body", m.Partitions); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ShootConstraints) validateSeeds(formats strfmt.Registry) error {
+
+	if err := validate.Required("seeds", "body", m.Seeds); err != nil {
 		return err
 	}
 
