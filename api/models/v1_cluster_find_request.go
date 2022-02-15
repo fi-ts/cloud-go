@@ -43,6 +43,10 @@ type V1ClusterFindRequest struct {
 	// Required: true
 	Purpose *string `json:"Purpose"`
 
+	// seed name
+	// Required: true
+	SeedName *string `json:"SeedName"`
+
 	// tenant
 	// Required: true
 	Tenant *string `json:"Tenant"`
@@ -73,6 +77,10 @@ func (m *V1ClusterFindRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePurpose(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSeedName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -134,6 +142,15 @@ func (m *V1ClusterFindRequest) validateProjectID(formats strfmt.Registry) error 
 func (m *V1ClusterFindRequest) validatePurpose(formats strfmt.Registry) error {
 
 	if err := validate.Required("Purpose", "body", m.Purpose); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterFindRequest) validateSeedName(formats strfmt.Registry) error {
+
+	if err := validate.Required("SeedName", "body", m.SeedName); err != nil {
 		return err
 	}
 
