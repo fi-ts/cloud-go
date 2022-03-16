@@ -28,6 +28,9 @@ type V1Kubernetes struct {
 	// Format: date-time
 	ExpirationDate *strfmt.DateTime `json:"ExpirationDate"`
 
+	// max pods per node
+	MaxPodsPerNode int32 `json:"MaxPodsPerNode,omitempty"`
+
 	// version
 	// Required: true
 	Version *string `json:"Version"`

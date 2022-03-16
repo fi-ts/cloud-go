@@ -1544,7 +1544,7 @@
         },
         "lifetime": {
           "description": "the duration that this cluster is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "partition": {
@@ -1588,7 +1588,7 @@
       "properties": {
         "lifetime": {
           "description": "the duration that this cluster is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       },
@@ -1699,7 +1699,7 @@
         },
         "lifetime": {
           "description": "the duration that this container is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "memoryseconds": {
@@ -1781,7 +1781,7 @@
         },
         "lifetime": {
           "description": "the duration that this container is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "memoryseconds": {
@@ -2044,7 +2044,7 @@
         },
         "lifetime": {
           "description": "the duration that this ip is allocated",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "projectid": {
@@ -2092,7 +2092,7 @@
       "properties": {
         "lifetime": {
           "description": "the duration that this ip is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       },
@@ -2173,6 +2173,10 @@
         "ExpirationDate": {
           "format": "date-time",
           "type": "string"
+        },
+        "MaxPodsPerNode": {
+          "format": "int32",
+          "type": "integer"
         },
         "Version": {
           "type": "string"
@@ -2325,7 +2329,7 @@
         },
         "lifetime": {
           "description": "the duration that this network device is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "out": {
@@ -2383,7 +2387,7 @@
         },
         "lifetime": {
           "description": "the duration for that the network usage is accounted",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "out": {
@@ -2973,7 +2977,7 @@
         },
         "lifetime": {
           "description": "the duration that this postgres is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "memoryseconds": {
@@ -3045,7 +3049,7 @@
         },
         "lifetime": {
           "description": "the duration that this postgres is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "memoryseconds": {
@@ -3525,7 +3529,7 @@
         },
         "lifetime": {
           "description": "the duration that this s3 bucket is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "partition": {
@@ -3594,7 +3598,7 @@
         },
         "lifetime": {
           "description": "the duration that this s3 bucket is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "storageseconds": {
@@ -4096,7 +4100,7 @@
         },
         "lifetime": {
           "description": "the duration that this volume is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "name": {
@@ -4167,7 +4171,7 @@
         },
         "lifetime": {
           "description": "the duration that this volume is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       },
@@ -4253,11 +4257,11 @@
           "type": "string"
         },
         "DrainTimeout": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "HealthTimeout": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "MachineImage": {
