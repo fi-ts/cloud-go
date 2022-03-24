@@ -39,6 +39,14 @@ type V1VolumeUsage struct {
 	// Required: true
 	Clustername *string `json:"clustername"`
 
+	// the contract number attached to this entity
+	// Required: true
+	Contract *string `json:"contract"`
+
+	// the debtor id attached to this entity
+	// Required: true
+	Debtorid *string `json:"debtorid"`
+
 	// the end time of this volume
 	// Required: true
 	// Format: date-time
@@ -56,11 +64,11 @@ type V1VolumeUsage struct {
 	// Required: true
 	Partition *string `json:"partition"`
 
-	// the project id of this volume
+	// the project id of this entity
 	// Required: true
 	Projectid *string `json:"projectid"`
 
-	// the project name of this volume
+	// the project name of this entity
 	// Required: true
 	Projectname *string `json:"projectname"`
 
@@ -69,9 +77,13 @@ type V1VolumeUsage struct {
 	// Format: date-time
 	Start *strfmt.DateTime `json:"start"`
 
-	// the tenant of this volume
+	// the tenant of this entity
 	// Required: true
 	Tenant *string `json:"tenant"`
+
+	// the tenant name of this entity
+	// Required: true
+	Tenantname *string `json:"tenantname"`
 
 	// the type of this volume
 	// Required: true
@@ -80,10 +92,6 @@ type V1VolumeUsage struct {
 	// the uuid of this volume
 	// Required: true
 	UUID *string `json:"uuid"`
-
-	// warnings that occurred when calculating the usage of this volume
-	// Required: true
-	Warnings []string `json:"warnings"`
 }
 
 // Validate validates this v1 volume usage
@@ -107,6 +115,14 @@ func (m *V1VolumeUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateClustername(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateContract(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtorid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -142,15 +158,15 @@ func (m *V1VolumeUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTenantname(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateUUID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateWarnings(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -199,6 +215,24 @@ func (m *V1VolumeUsage) validateClusterid(formats strfmt.Registry) error {
 func (m *V1VolumeUsage) validateClustername(formats strfmt.Registry) error {
 
 	if err := validate.Required("clustername", "body", m.Clustername); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeUsage) validateContract(formats strfmt.Registry) error {
+
+	if err := validate.Required("contract", "body", m.Contract); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeUsage) validateDebtorid(formats strfmt.Registry) error {
+
+	if err := validate.Required("debtorid", "body", m.Debtorid); err != nil {
 		return err
 	}
 
@@ -285,6 +319,15 @@ func (m *V1VolumeUsage) validateTenant(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1VolumeUsage) validateTenantname(formats strfmt.Registry) error {
+
+	if err := validate.Required("tenantname", "body", m.Tenantname); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1VolumeUsage) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
@@ -297,15 +340,6 @@ func (m *V1VolumeUsage) validateType(formats strfmt.Registry) error {
 func (m *V1VolumeUsage) validateUUID(formats strfmt.Registry) error {
 
 	if err := validate.Required("uuid", "body", m.UUID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1VolumeUsage) validateWarnings(formats strfmt.Registry) error {
-
-	if err := validate.Required("warnings", "body", m.Warnings); err != nil {
 		return err
 	}
 

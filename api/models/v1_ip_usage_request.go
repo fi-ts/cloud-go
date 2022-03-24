@@ -19,6 +19,10 @@ import (
 // swagger:model v1.IPUsageRequest
 type V1IPUsageRequest struct {
 
+	// accounting annotations present on the last accounting report of this ip
+	// Required: true
+	Annotations []string `json:"annotations"`
+
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
@@ -27,7 +31,7 @@ type V1IPUsageRequest struct {
 	// the project id to account for
 	Projectid string `json:"projectid,omitempty"`
 
-	// the tenant to get the container usage for (defaults to all tenants)
+	// the tenant to get the ip usage for (defaults to all tenants)
 	Tenant string `json:"tenant,omitempty"`
 
 	// the end time in the accounting window to look at (defaults to current system time)
@@ -38,6 +42,10 @@ type V1IPUsageRequest struct {
 // Validate validates this v1 IP usage request
 func (m *V1IPUsageRequest) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateFrom(formats); err != nil {
 		res = append(res, err)
@@ -50,6 +58,15 @@ func (m *V1IPUsageRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1IPUsageRequest) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
 	return nil
 }
 
