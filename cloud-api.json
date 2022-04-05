@@ -1275,6 +1275,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "Creator": {
+          "type": "string"
+        },
         "CustomDefaultStorageClass": {
           "$ref": "#/definitions/v1.CustomDefaultStorageClass"
         },
@@ -1361,6 +1364,7 @@
         "ClusterFeatures",
         "ControlPlaneFeatureGates",
         "CreationTimestamp",
+        "Creator",
         "CustomDefaultStorageClass",
         "DNSEndpoint",
         "Description",
