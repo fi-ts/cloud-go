@@ -1275,6 +1275,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "Creator": {
+          "type": "string"
+        },
         "CustomDefaultStorageClass": {
           "$ref": "#/definitions/v1.CustomDefaultStorageClass"
         },
@@ -1361,6 +1364,7 @@
         "ClusterFeatures",
         "ControlPlaneFeatureGates",
         "CreationTimestamp",
+        "Creator",
         "CustomDefaultStorageClass",
         "DNSEndpoint",
         "Description",
@@ -1542,9 +1546,17 @@
           "format": "date-time",
           "type": "string"
         },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
         "lifetime": {
           "description": "the duration that this cluster is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "partition": {
@@ -1552,23 +1564,20 @@
           "type": "string"
         },
         "projectid": {
-          "description": "the project id of this cluster",
+          "description": "the project id of this entity",
           "type": "string"
         },
         "projectname": {
-          "description": "the project name of this cluster",
+          "description": "the project name of this entity",
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant of this cluster",
+          "description": "the tenant of this entity",
           "type": "string"
         },
-        "warnings": {
-          "description": "warnings that occurred when calculating the usage of this cluster",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
+        "tenantname": {
+          "description": "the tenant name of this entity",
+          "type": "string"
         }
       },
       "required": [
@@ -1576,19 +1585,21 @@
         "clusterid",
         "clustername",
         "clusterstart",
+        "contract",
+        "debtorid",
         "lifetime",
         "partition",
         "projectid",
         "projectname",
         "tenant",
-        "warnings"
+        "tenantname"
       ]
     },
     "v1.ClusterUsageAccumuluated": {
       "properties": {
         "lifetime": {
           "description": "the duration that this cluster is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       },
@@ -1693,13 +1704,21 @@
           "description": "the name of this container",
           "type": "string"
         },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
         "cpuseconds": {
           "description": "the cpu seconds of this container (s*s)",
           "type": "string"
         },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
         "lifetime": {
           "description": "the duration that this container is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "memoryseconds": {
@@ -1733,23 +1752,20 @@
           "type": "string"
         },
         "projectid": {
-          "description": "the project id of this container",
+          "description": "the project id of this entity",
           "type": "string"
         },
         "projectname": {
-          "description": "the project name of this container",
+          "description": "the project name of this entity",
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant of this container",
+          "description": "the tenant of this entity",
           "type": "string"
         },
-        "warnings": {
-          "description": "warnings that occurred when calculating the usage of this container",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
+        "tenantname": {
+          "description": "the tenant name of this entity",
+          "type": "string"
         }
       },
       "required": [
@@ -1758,7 +1774,9 @@
         "clustername",
         "containerimage",
         "containername",
+        "contract",
         "cpuseconds",
+        "debtorid",
         "lifetime",
         "memoryseconds",
         "namespace",
@@ -1770,7 +1788,7 @@
         "projectid",
         "projectname",
         "tenant",
-        "warnings"
+        "tenantname"
       ]
     },
     "v1.ContainerUsageAccumuluated": {
@@ -1781,7 +1799,7 @@
         },
         "lifetime": {
           "description": "the duration that this container is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "memoryseconds": {
@@ -2033,6 +2051,21 @@
     },
     "v1.IPUsage": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this ip",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
         "end": {
           "description": "the end time of this ip",
           "format": "date-time",
@@ -2044,15 +2077,15 @@
         },
         "lifetime": {
           "description": "the duration that this ip is allocated",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "projectid": {
-          "description": "the project id of this ip",
+          "description": "the project id of this entity",
           "type": "string"
         },
         "projectname": {
-          "description": "the project name of this ip",
+          "description": "the project name of this entity",
           "type": "string"
         },
         "start": {
@@ -2061,22 +2094,22 @@
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant of this ip",
+          "description": "the tenant of this entity",
+          "type": "string"
+        },
+        "tenantname": {
+          "description": "the tenant name of this entity",
           "type": "string"
         },
         "uuid": {
           "description": "the allocation uuid of this ip",
           "type": "string"
-        },
-        "warnings": {
-          "description": "warnings that occurred when calculating the usage of this ip",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         }
       },
       "required": [
+        "annotations",
+        "contract",
+        "debtorid",
         "end",
         "ip",
         "lifetime",
@@ -2084,15 +2117,15 @@
         "projectname",
         "start",
         "tenant",
-        "uuid",
-        "warnings"
+        "tenantname",
+        "uuid"
       ]
     },
     "v1.IPUsageAccumuluated": {
       "properties": {
         "lifetime": {
           "description": "the duration that this ip is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       },
@@ -2102,6 +2135,13 @@
     },
     "v1.IPUsageRequest": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this ip",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "from": {
           "description": "the start time in the accounting window to look at",
           "format": "date-time",
@@ -2112,7 +2152,7 @@
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "description": "the tenant to get the ip usage for (defaults to all tenants)",
           "type": "string"
         },
         "to": {
@@ -2122,6 +2162,7 @@
         }
       },
       "required": [
+        "annotations",
         "from"
       ]
     },
@@ -2307,12 +2348,27 @@
     },
     "v1.NetworkUsage": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this network device",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id of this network device",
           "type": "string"
         },
         "clustername": {
           "description": "the cluster name of this network device",
+          "type": "string"
+        },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
           "type": "string"
         },
         "device": {
@@ -2325,7 +2381,7 @@
         },
         "lifetime": {
           "description": "the duration that this network device is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "out": {
@@ -2337,32 +2393,32 @@
           "type": "string"
         },
         "projectid": {
-          "description": "the project id of this network device",
+          "description": "the project id of this entity",
           "type": "string"
         },
         "projectname": {
-          "description": "the project name of this network device",
+          "description": "the project name of this entity",
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant of this network device",
+          "description": "the tenant of this entity",
+          "type": "string"
+        },
+        "tenantname": {
+          "description": "the tenant name of this entity",
           "type": "string"
         },
         "total": {
           "description": "the total traffic of this network device (byte)",
           "type": "string"
-        },
-        "warnings": {
-          "description": "warnings that occurred when calculating the usage of this device's network traffic",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         }
       },
       "required": [
+        "annotations",
         "clusterid",
         "clustername",
+        "contract",
+        "debtorid",
         "device",
         "in",
         "lifetime",
@@ -2371,8 +2427,8 @@
         "projectid",
         "projectname",
         "tenant",
-        "total",
-        "warnings"
+        "tenantname",
+        "total"
       ]
     },
     "v1.NetworkUsageAccumuluated": {
@@ -2383,7 +2439,7 @@
         },
         "lifetime": {
           "description": "the duration for that the network usage is accounted",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "out": {
@@ -2967,13 +3023,28 @@
     },
     "v1.PostgresUsage": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this postgres",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
         "cpuseconds": {
           "description": "the cpu seconds of this postgres (s*s)",
           "type": "string"
         },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
         "lifetime": {
           "description": "the duration that this postgres is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "memoryseconds": {
@@ -3003,7 +3074,11 @@
           "type": "string"
         },
         "projectid": {
-          "description": "the project id of this postgres",
+          "description": "the project id of this entity",
+          "type": "string"
+        },
+        "projectname": {
+          "description": "the project name of this entity",
           "type": "string"
         },
         "storageseconds": {
@@ -3011,19 +3086,19 @@
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant of this postgres",
+          "description": "the tenant of this entity",
           "type": "string"
         },
-        "warnings": {
-          "description": "warnings that occurred when calculating the usage of this postgres",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
+        "tenantname": {
+          "description": "the tenant name of this entity",
+          "type": "string"
         }
       },
       "required": [
+        "annotations",
+        "contract",
         "cpuseconds",
+        "debtorid",
         "lifetime",
         "memoryseconds",
         "partition",
@@ -3032,9 +3107,10 @@
         "postgresid",
         "postgresstart",
         "projectid",
+        "projectname",
         "storageseconds",
         "tenant",
-        "warnings"
+        "tenantname"
       ]
     },
     "v1.PostgresUsageAccumuluated": {
@@ -3045,7 +3121,7 @@
         },
         "lifetime": {
           "description": "the duration that this postgres is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "memoryseconds": {
@@ -3066,6 +3142,13 @@
     },
     "v1.PostgresUsageRequest": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this postgres",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id to account for",
           "type": "string"
@@ -3087,9 +3170,14 @@
           "description": "the end time in the accounting window to look at (defaults to current system time)",
           "format": "date-time",
           "type": "string"
+        },
+        "uuid": {
+          "description": "the uuid of this postgres",
+          "type": "string"
         }
       },
       "required": [
+        "annotations",
         "from"
       ]
     },
@@ -3510,12 +3598,20 @@
           "description": "the bucket name of this s3 bucket",
           "type": "string"
         },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
         "currentnumberofobjects": {
           "description": "the last reported number of objects of this s3 bucket",
           "type": "string"
         },
         "currentsize": {
           "description": "the last reported size of this s3 bucket",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
           "type": "string"
         },
         "end": {
@@ -3525,7 +3621,7 @@
         },
         "lifetime": {
           "description": "the duration that this s3 bucket is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "partition": {
@@ -3533,11 +3629,11 @@
           "type": "string"
         },
         "projectid": {
-          "description": "the project id of this s3 bucket",
+          "description": "the project id of this entity",
           "type": "string"
         },
         "projectname": {
-          "description": "the project name of this s3 bucket",
+          "description": "the project name of this entity",
           "type": "string"
         },
         "start": {
@@ -3550,26 +3646,25 @@
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant of this s3 bucket",
+          "description": "the tenant of this entity",
+          "type": "string"
+        },
+        "tenantname": {
+          "description": "the tenant name of this entity",
           "type": "string"
         },
         "user": {
           "description": "the user name of this s3 bucket",
           "type": "string"
-        },
-        "warnings": {
-          "description": "warnings that occurred when calculating the usage of this s3 bucket",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         }
       },
       "required": [
         "bucketid",
         "bucketname",
+        "contract",
         "currentnumberofobjects",
         "currentsize",
+        "debtorid",
         "end",
         "lifetime",
         "partition",
@@ -3578,8 +3673,8 @@
         "start",
         "storageseconds",
         "tenant",
-        "user",
-        "warnings"
+        "tenantname",
+        "user"
       ]
     },
     "v1.S3UsageAccumuluated": {
@@ -3594,7 +3689,7 @@
         },
         "lifetime": {
           "description": "the duration that this s3 bucket is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "storageseconds": {
@@ -3912,6 +4007,42 @@
         }
       }
     },
+    "v1.UsageCommon": {
+      "properties": {
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id of this entity",
+          "type": "string"
+        },
+        "projectname": {
+          "description": "the project name of this entity",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this entity",
+          "type": "string"
+        },
+        "tenantname": {
+          "description": "the tenant name of this entity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract",
+        "debtorid",
+        "projectid",
+        "projectname",
+        "tenant",
+        "tenantname"
+      ]
+    },
     "v1.UsageRequest": {
       "properties": {
         "clusterid": {
@@ -4089,6 +4220,14 @@
           "description": "the cluster name of this volume",
           "type": "string"
         },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
         "end": {
           "description": "the end time of this volume",
           "format": "date-time",
@@ -4096,7 +4235,7 @@
         },
         "lifetime": {
           "description": "the duration that this volume is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "name": {
@@ -4108,11 +4247,11 @@
           "type": "string"
         },
         "projectid": {
-          "description": "the project id of this volume",
+          "description": "the project id of this entity",
           "type": "string"
         },
         "projectname": {
-          "description": "the project name of this volume",
+          "description": "the project name of this entity",
           "type": "string"
         },
         "start": {
@@ -4121,7 +4260,11 @@
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant of this volume",
+          "description": "the tenant of this entity",
+          "type": "string"
+        },
+        "tenantname": {
+          "description": "the tenant name of this entity",
           "type": "string"
         },
         "type": {
@@ -4131,13 +4274,6 @@
         "uuid": {
           "description": "the uuid of this volume",
           "type": "string"
-        },
-        "warnings": {
-          "description": "warnings that occurred when calculating the usage of this volume",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         }
       },
       "required": [
@@ -4146,6 +4282,8 @@
         "class",
         "clusterid",
         "clustername",
+        "contract",
+        "debtorid",
         "end",
         "lifetime",
         "name",
@@ -4154,9 +4292,9 @@
         "projectname",
         "start",
         "tenant",
+        "tenantname",
         "type",
-        "uuid",
-        "warnings"
+        "uuid"
       ]
     },
     "v1.VolumeUsageAccumuluated": {
@@ -4167,7 +4305,7 @@
         },
         "lifetime": {
           "description": "the duration that this volume is running",
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         }
       },
@@ -4253,11 +4391,11 @@
           "type": "string"
         },
         "DrainTimeout": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "HealthTimeout": {
-          "format": "integer",
+          "format": "int64",
           "type": "integer"
         },
         "MachineImage": {

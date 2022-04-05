@@ -27,6 +27,10 @@ type V1S3Usage struct {
 	// Required: true
 	Bucketname *string `json:"bucketname"`
 
+	// the contract number attached to this entity
+	// Required: true
+	Contract *string `json:"contract"`
+
 	// the last reported number of objects of this s3 bucket
 	// Required: true
 	Currentnumberofobjects *string `json:"currentnumberofobjects"`
@@ -34,6 +38,10 @@ type V1S3Usage struct {
 	// the last reported size of this s3 bucket
 	// Required: true
 	Currentsize *string `json:"currentsize"`
+
+	// the debtor id attached to this entity
+	// Required: true
+	Debtorid *string `json:"debtorid"`
 
 	// the end time of this s3 bucket
 	// Required: true
@@ -48,11 +56,11 @@ type V1S3Usage struct {
 	// Required: true
 	Partition *string `json:"partition"`
 
-	// the project id of this s3 bucket
+	// the project id of this entity
 	// Required: true
 	Projectid *string `json:"projectid"`
 
-	// the project name of this s3 bucket
+	// the project name of this entity
 	// Required: true
 	Projectname *string `json:"projectname"`
 
@@ -65,17 +73,17 @@ type V1S3Usage struct {
 	// Required: true
 	Storageseconds *string `json:"storageseconds"`
 
-	// the tenant of this s3 bucket
+	// the tenant of this entity
 	// Required: true
 	Tenant *string `json:"tenant"`
+
+	// the tenant name of this entity
+	// Required: true
+	Tenantname *string `json:"tenantname"`
 
 	// the user name of this s3 bucket
 	// Required: true
 	User *string `json:"user"`
-
-	// warnings that occurred when calculating the usage of this s3 bucket
-	// Required: true
-	Warnings []string `json:"warnings"`
 }
 
 // Validate validates this v1 s3 usage
@@ -90,11 +98,19 @@ func (m *V1S3Usage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateContract(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCurrentnumberofobjects(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateCurrentsize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtorid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -130,11 +146,11 @@ func (m *V1S3Usage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateUser(formats); err != nil {
+	if err := m.validateTenantname(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateWarnings(formats); err != nil {
+	if err := m.validateUser(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -162,6 +178,15 @@ func (m *V1S3Usage) validateBucketname(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1S3Usage) validateContract(formats strfmt.Registry) error {
+
+	if err := validate.Required("contract", "body", m.Contract); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1S3Usage) validateCurrentnumberofobjects(formats strfmt.Registry) error {
 
 	if err := validate.Required("currentnumberofobjects", "body", m.Currentnumberofobjects); err != nil {
@@ -174,6 +199,15 @@ func (m *V1S3Usage) validateCurrentnumberofobjects(formats strfmt.Registry) erro
 func (m *V1S3Usage) validateCurrentsize(formats strfmt.Registry) error {
 
 	if err := validate.Required("currentsize", "body", m.Currentsize); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1S3Usage) validateDebtorid(formats strfmt.Registry) error {
+
+	if err := validate.Required("debtorid", "body", m.Debtorid); err != nil {
 		return err
 	}
 
@@ -260,18 +294,18 @@ func (m *V1S3Usage) validateTenant(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1S3Usage) validateUser(formats strfmt.Registry) error {
+func (m *V1S3Usage) validateTenantname(formats strfmt.Registry) error {
 
-	if err := validate.Required("user", "body", m.User); err != nil {
+	if err := validate.Required("tenantname", "body", m.Tenantname); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *V1S3Usage) validateWarnings(formats strfmt.Registry) error {
+func (m *V1S3Usage) validateUser(formats strfmt.Registry) error {
 
-	if err := validate.Required("warnings", "body", m.Warnings); err != nil {
+	if err := validate.Required("user", "body", m.User); err != nil {
 		return err
 	}
 

@@ -37,6 +37,10 @@ type V1ClusterResponse struct {
 	// Format: date-time
 	CreationTimestamp *strfmt.DateTime `json:"CreationTimestamp"`
 
+	// creator
+	// Required: true
+	Creator *string `json:"Creator"`
+
 	// custom default storage class
 	// Required: true
 	CustomDefaultStorageClass *V1CustomDefaultStorageClass `json:"CustomDefaultStorageClass"`
@@ -137,6 +141,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreator(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -275,6 +283,15 @@ func (m *V1ClusterResponse) validateCreationTimestamp(formats strfmt.Registry) e
 	}
 
 	if err := validate.FormatOf("CreationTimestamp", "body", "date-time", m.CreationTimestamp.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateCreator(formats strfmt.Registry) error {
+
+	if err := validate.Required("Creator", "body", m.Creator); err != nil {
 		return err
 	}
 

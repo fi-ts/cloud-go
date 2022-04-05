@@ -19,6 +19,18 @@ import (
 // swagger:model v1.IPUsage
 type V1IPUsage struct {
 
+	// accounting annotations present on the last accounting report of this ip
+	// Required: true
+	Annotations []string `json:"annotations"`
+
+	// the contract number attached to this entity
+	// Required: true
+	Contract *string `json:"contract"`
+
+	// the debtor id attached to this entity
+	// Required: true
+	Debtorid *string `json:"debtorid"`
+
 	// the end time of this ip
 	// Required: true
 	// Format: date-time
@@ -32,11 +44,11 @@ type V1IPUsage struct {
 	// Required: true
 	Lifetime *int64 `json:"lifetime"`
 
-	// the project id of this ip
+	// the project id of this entity
 	// Required: true
 	Projectid *string `json:"projectid"`
 
-	// the project name of this ip
+	// the project name of this entity
 	// Required: true
 	Projectname *string `json:"projectname"`
 
@@ -45,22 +57,34 @@ type V1IPUsage struct {
 	// Format: date-time
 	Start *strfmt.DateTime `json:"start"`
 
-	// the tenant of this ip
+	// the tenant of this entity
 	// Required: true
 	Tenant *string `json:"tenant"`
+
+	// the tenant name of this entity
+	// Required: true
+	Tenantname *string `json:"tenantname"`
 
 	// the allocation uuid of this ip
 	// Required: true
 	UUID *string `json:"uuid"`
-
-	// warnings that occurred when calculating the usage of this ip
-	// Required: true
-	Warnings []string `json:"warnings"`
 }
 
 // Validate validates this v1 IP usage
 func (m *V1IPUsage) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateContract(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtorid(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateEnd(formats); err != nil {
 		res = append(res, err)
@@ -90,17 +114,44 @@ func (m *V1IPUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateUUID(formats); err != nil {
+	if err := m.validateTenantname(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateWarnings(formats); err != nil {
+	if err := m.validateUUID(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1IPUsage) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1IPUsage) validateContract(formats strfmt.Registry) error {
+
+	if err := validate.Required("contract", "body", m.Contract); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1IPUsage) validateDebtorid(formats strfmt.Registry) error {
+
+	if err := validate.Required("debtorid", "body", m.Debtorid); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -175,18 +226,18 @@ func (m *V1IPUsage) validateTenant(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPUsage) validateUUID(formats strfmt.Registry) error {
+func (m *V1IPUsage) validateTenantname(formats strfmt.Registry) error {
 
-	if err := validate.Required("uuid", "body", m.UUID); err != nil {
+	if err := validate.Required("tenantname", "body", m.Tenantname); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *V1IPUsage) validateWarnings(formats strfmt.Registry) error {
+func (m *V1IPUsage) validateUUID(formats strfmt.Registry) error {
 
-	if err := validate.Required("warnings", "body", m.Warnings); err != nil {
+	if err := validate.Required("uuid", "body", m.UUID); err != nil {
 		return err
 	}
 
