@@ -2215,6 +2215,10 @@
           "format": "date-time",
           "type": "string"
         },
+        "MaxPodsPerNode": {
+          "format": "int32",
+          "type": "integer"
+        },
         "Version": {
           "type": "string"
         }
