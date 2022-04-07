@@ -19,9 +19,21 @@ import (
 // swagger:model v1.PostgresUsage
 type V1PostgresUsage struct {
 
+	// accounting annotations present on the last accounting report of this postgres
+	// Required: true
+	Annotations []string `json:"annotations"`
+
+	// the contract number attached to this entity
+	// Required: true
+	Contract *string `json:"contract"`
+
 	// the cpu seconds of this postgres (s*s)
 	// Required: true
 	Cpuseconds *string `json:"cpuseconds"`
+
+	// the debtor id attached to this entity
+	// Required: true
+	Debtorid *string `json:"debtorid"`
 
 	// the duration that this postgres is running
 	// Required: true
@@ -53,28 +65,44 @@ type V1PostgresUsage struct {
 	// Format: date-time
 	Postgresstart *strfmt.DateTime `json:"postgresstart"`
 
-	// the project id of this postgres
+	// the project id of this entity
 	// Required: true
 	Projectid *string `json:"projectid"`
+
+	// the project name of this entity
+	// Required: true
+	Projectname *string `json:"projectname"`
 
 	// the accumulated storage seconds of the postgres in this response (byte*s)
 	// Required: true
 	Storageseconds *string `json:"storageseconds"`
 
-	// the tenant of this postgres
+	// the tenant of this entity
 	// Required: true
 	Tenant *string `json:"tenant"`
 
-	// warnings that occurred when calculating the usage of this postgres
+	// the tenant name of this entity
 	// Required: true
-	Warnings []string `json:"warnings"`
+	Tenantname *string `json:"tenantname"`
 }
 
 // Validate validates this v1 postgres usage
 func (m *V1PostgresUsage) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateContract(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCpuseconds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtorid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,6 +138,10 @@ func (m *V1PostgresUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateProjectname(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStorageseconds(formats); err != nil {
 		res = append(res, err)
 	}
@@ -118,7 +150,7 @@ func (m *V1PostgresUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateWarnings(formats); err != nil {
+	if err := m.validateTenantname(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -128,9 +160,36 @@ func (m *V1PostgresUsage) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1PostgresUsage) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUsage) validateContract(formats strfmt.Registry) error {
+
+	if err := validate.Required("contract", "body", m.Contract); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1PostgresUsage) validateCpuseconds(formats strfmt.Registry) error {
 
 	if err := validate.Required("cpuseconds", "body", m.Cpuseconds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUsage) validateDebtorid(formats strfmt.Registry) error {
+
+	if err := validate.Required("debtorid", "body", m.Debtorid); err != nil {
 		return err
 	}
 
@@ -217,6 +276,15 @@ func (m *V1PostgresUsage) validateProjectid(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1PostgresUsage) validateProjectname(formats strfmt.Registry) error {
+
+	if err := validate.Required("projectname", "body", m.Projectname); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1PostgresUsage) validateStorageseconds(formats strfmt.Registry) error {
 
 	if err := validate.Required("storageseconds", "body", m.Storageseconds); err != nil {
@@ -235,9 +303,9 @@ func (m *V1PostgresUsage) validateTenant(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1PostgresUsage) validateWarnings(formats strfmt.Registry) error {
+func (m *V1PostgresUsage) validateTenantname(formats strfmt.Registry) error {
 
-	if err := validate.Required("warnings", "body", m.Warnings); err != nil {
+	if err := validate.Required("tenantname", "body", m.Tenantname); err != nil {
 		return err
 	}
 

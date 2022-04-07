@@ -19,6 +19,10 @@ import (
 // swagger:model v1.PostgresUsageRequest
 type V1PostgresUsageRequest struct {
 
+	// accounting annotations present on the last accounting report of this postgres
+	// Required: true
+	Annotations []string `json:"annotations"`
+
 	// the cluster id to account for
 	Clusterid string `json:"clusterid,omitempty"`
 
@@ -36,11 +40,18 @@ type V1PostgresUsageRequest struct {
 	// the end time in the accounting window to look at (defaults to current system time)
 	// Format: date-time
 	To strfmt.DateTime `json:"to,omitempty"`
+
+	// the uuid of this postgres
+	UUID string `json:"uuid,omitempty"`
 }
 
 // Validate validates this v1 postgres usage request
 func (m *V1PostgresUsageRequest) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateFrom(formats); err != nil {
 		res = append(res, err)
@@ -53,6 +64,15 @@ func (m *V1PostgresUsageRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1PostgresUsageRequest) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
 	return nil
 }
 

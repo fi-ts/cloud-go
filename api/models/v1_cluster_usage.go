@@ -37,6 +37,14 @@ type V1ClusterUsage struct {
 	// Format: date-time
 	Clusterstart *strfmt.DateTime `json:"clusterstart"`
 
+	// the contract number attached to this entity
+	// Required: true
+	Contract *string `json:"contract"`
+
+	// the debtor id attached to this entity
+	// Required: true
+	Debtorid *string `json:"debtorid"`
+
 	// the duration that this cluster is running
 	// Required: true
 	Lifetime *int64 `json:"lifetime"`
@@ -45,21 +53,21 @@ type V1ClusterUsage struct {
 	// Required: true
 	Partition *string `json:"partition"`
 
-	// the project id of this cluster
+	// the project id of this entity
 	// Required: true
 	Projectid *string `json:"projectid"`
 
-	// the project name of this cluster
+	// the project name of this entity
 	// Required: true
 	Projectname *string `json:"projectname"`
 
-	// the tenant of this cluster
+	// the tenant of this entity
 	// Required: true
 	Tenant *string `json:"tenant"`
 
-	// warnings that occurred when calculating the usage of this cluster
+	// the tenant name of this entity
 	// Required: true
-	Warnings []string `json:"warnings"`
+	Tenantname *string `json:"tenantname"`
 }
 
 // Validate validates this v1 cluster usage
@@ -79,6 +87,14 @@ func (m *V1ClusterUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateClusterstart(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateContract(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtorid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -102,7 +118,7 @@ func (m *V1ClusterUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateWarnings(formats); err != nil {
+	if err := m.validateTenantname(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -156,6 +172,24 @@ func (m *V1ClusterUsage) validateClusterstart(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1ClusterUsage) validateContract(formats strfmt.Registry) error {
+
+	if err := validate.Required("contract", "body", m.Contract); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUsage) validateDebtorid(formats strfmt.Registry) error {
+
+	if err := validate.Required("debtorid", "body", m.Debtorid); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1ClusterUsage) validateLifetime(formats strfmt.Registry) error {
 
 	if err := validate.Required("lifetime", "body", m.Lifetime); err != nil {
@@ -201,9 +235,9 @@ func (m *V1ClusterUsage) validateTenant(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1ClusterUsage) validateWarnings(formats strfmt.Registry) error {
+func (m *V1ClusterUsage) validateTenantname(formats strfmt.Registry) error {
 
-	if err := validate.Required("warnings", "body", m.Warnings); err != nil {
+	if err := validate.Required("tenantname", "body", m.Tenantname); err != nil {
 		return err
 	}
 

@@ -19,6 +19,10 @@ import (
 // swagger:model v1.NetworkUsage
 type V1NetworkUsage struct {
 
+	// accounting annotations present on the last accounting report of this network device
+	// Required: true
+	Annotations []string `json:"annotations"`
+
 	// the cluster id of this network device
 	// Required: true
 	Clusterid *string `json:"clusterid"`
@@ -26,6 +30,14 @@ type V1NetworkUsage struct {
 	// the cluster name of this network device
 	// Required: true
 	Clustername *string `json:"clustername"`
+
+	// the contract number attached to this entity
+	// Required: true
+	Contract *string `json:"contract"`
+
+	// the debtor id attached to this entity
+	// Required: true
+	Debtorid *string `json:"debtorid"`
 
 	// the device name of this network device
 	// Required: true
@@ -47,36 +59,48 @@ type V1NetworkUsage struct {
 	// Required: true
 	Partition *string `json:"partition"`
 
-	// the project id of this network device
+	// the project id of this entity
 	// Required: true
 	Projectid *string `json:"projectid"`
 
-	// the project name of this network device
+	// the project name of this entity
 	// Required: true
 	Projectname *string `json:"projectname"`
 
-	// the tenant of this network device
+	// the tenant of this entity
 	// Required: true
 	Tenant *string `json:"tenant"`
+
+	// the tenant name of this entity
+	// Required: true
+	Tenantname *string `json:"tenantname"`
 
 	// the total traffic of this network device (byte)
 	// Required: true
 	Total *string `json:"total"`
-
-	// warnings that occurred when calculating the usage of this device's network traffic
-	// Required: true
-	Warnings []string `json:"warnings"`
 }
 
 // Validate validates this v1 network usage
 func (m *V1NetworkUsage) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateClusterid(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateClustername(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateContract(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtorid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -112,17 +136,26 @@ func (m *V1NetworkUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateTotal(formats); err != nil {
+	if err := m.validateTenantname(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateWarnings(formats); err != nil {
+	if err := m.validateTotal(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1NetworkUsage) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -138,6 +171,24 @@ func (m *V1NetworkUsage) validateClusterid(formats strfmt.Registry) error {
 func (m *V1NetworkUsage) validateClustername(formats strfmt.Registry) error {
 
 	if err := validate.Required("clustername", "body", m.Clustername); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1NetworkUsage) validateContract(formats strfmt.Registry) error {
+
+	if err := validate.Required("contract", "body", m.Contract); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1NetworkUsage) validateDebtorid(formats strfmt.Registry) error {
+
+	if err := validate.Required("debtorid", "body", m.Debtorid); err != nil {
 		return err
 	}
 
@@ -216,18 +267,18 @@ func (m *V1NetworkUsage) validateTenant(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1NetworkUsage) validateTotal(formats strfmt.Registry) error {
+func (m *V1NetworkUsage) validateTenantname(formats strfmt.Registry) error {
 
-	if err := validate.Required("total", "body", m.Total); err != nil {
+	if err := validate.Required("tenantname", "body", m.Tenantname); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *V1NetworkUsage) validateWarnings(formats strfmt.Registry) error {
+func (m *V1NetworkUsage) validateTotal(formats strfmt.Registry) error {
 
-	if err := validate.Required("warnings", "body", m.Warnings); err != nil {
+	if err := validate.Required("total", "body", m.Total); err != nil {
 		return err
 	}
 
