@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -18,6 +19,10 @@ import (
 //
 // swagger:model v1.ClusterUsage
 type V1ClusterUsage struct {
+
+	// the average amount of worker groups during the time window
+	// Required: true
+	Averageworkergroups *string `json:"averageworkergroups"`
 
 	// the end time of this cluster
 	// Required: true
@@ -68,11 +73,19 @@ type V1ClusterUsage struct {
 	// the tenant name of this entity
 	// Required: true
 	Tenantname *string `json:"tenantname"`
+
+	// the worker groups of this cluster
+	// Required: true
+	Workergroups []*V1ClusterWorker `json:"workergroups"`
 }
 
 // Validate validates this v1 cluster usage
 func (m *V1ClusterUsage) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAverageworkergroups(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateClusterend(formats); err != nil {
 		res = append(res, err)
@@ -122,9 +135,22 @@ func (m *V1ClusterUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateWorkergroups(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterUsage) validateAverageworkergroups(formats strfmt.Registry) error {
+
+	if err := validate.Required("averageworkergroups", "body", m.Averageworkergroups); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -244,8 +270,64 @@ func (m *V1ClusterUsage) validateTenantname(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1 cluster usage based on context it is used
+func (m *V1ClusterUsage) validateWorkergroups(formats strfmt.Registry) error {
+
+	if err := validate.Required("workergroups", "body", m.Workergroups); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Workergroups); i++ {
+		if swag.IsZero(m.Workergroups[i]) { // not required
+			continue
+		}
+
+		if m.Workergroups[i] != nil {
+			if err := m.Workergroups[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("workergroups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("workergroups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 cluster usage based on the context it is used
 func (m *V1ClusterUsage) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateWorkergroups(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1ClusterUsage) contextValidateWorkergroups(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Workergroups); i++ {
+
+		if m.Workergroups[i] != nil {
+			if err := m.Workergroups[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("workergroups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("workergroups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
