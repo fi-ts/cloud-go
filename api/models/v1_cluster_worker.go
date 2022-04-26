@@ -26,6 +26,10 @@ type V1ClusterWorker struct {
 	// the machine type
 	// Required: true
 	Machinetype *string `json:"machinetype"`
+
+	// name of the worker group
+	// Required: true
+	Name *string `json:"name"`
 }
 
 // Validate validates this v1 cluster worker
@@ -37,6 +41,10 @@ func (m *V1ClusterWorker) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateMachinetype(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -58,6 +66,15 @@ func (m *V1ClusterWorker) validateMachinecount(formats strfmt.Registry) error {
 func (m *V1ClusterWorker) validateMachinetype(formats strfmt.Registry) error {
 
 	if err := validate.Required("machinetype", "body", m.Machinetype); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterWorker) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
 	}
 

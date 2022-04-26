@@ -1689,11 +1689,16 @@
         "machinetype": {
           "description": "the machine type",
           "type": "string"
+        },
+        "name": {
+          "description": "name of the worker group",
+          "type": "string"
         }
       },
       "required": [
         "machinecount",
-        "machinetype"
+        "machinetype",
+        "name"
       ]
     },
     "v1.Connection": {
