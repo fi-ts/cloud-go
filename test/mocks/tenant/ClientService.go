@@ -14,6 +14,36 @@ type ClientService struct {
 	mock.Mock
 }
 
+// FindTenants provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) FindTenants(params *tenant.FindTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...tenant.ClientOption) (*tenant.FindTenantsOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *tenant.FindTenantsOK
+	if rf, ok := ret.Get(0).(func(*tenant.FindTenantsParams, runtime.ClientAuthInfoWriter, ...tenant.ClientOption) *tenant.FindTenantsOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*tenant.FindTenantsOK)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*tenant.FindTenantsParams, runtime.ClientAuthInfoWriter, ...tenant.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // GetTenant provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) GetTenant(params *tenant.GetTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...tenant.ClientOption) (*tenant.GetTenantOK, error) {
 	_va := make([]interface{}, len(opts))

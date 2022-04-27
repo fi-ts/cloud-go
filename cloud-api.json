@@ -3299,6 +3299,22 @@
         }
       }
     },
+    "v1.ProjectFindRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tenant_id": {
+          "type": "string"
+        }
+      }
+    },
     "v1.ProjectIDTime": {
       "properties": {
         "project_id": {
@@ -4014,6 +4030,16 @@
         },
         "quotas": {
           "$ref": "#/definitions/v1.QuotaSet"
+        }
+      }
+    },
+    "v1.TenantFindRequest": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
         }
       }
     },
@@ -6858,6 +6884,45 @@
         ]
       }
     },
+    "/v1/project/find": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "findProjects",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ProjectFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ProjectListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find projects by multiple criteria",
+        "tags": [
+          "project"
+        ]
+      }
+    },
     "/v1/project/{id}": {
       "delete": {
         "consumes": [
@@ -7226,6 +7291,48 @@
           }
         },
         "summary": "update a tenant. optimistic lock error can occur.",
+        "tags": [
+          "tenant"
+        ]
+      }
+    },
+    "/v1/tenant/find": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "findTenants",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.TenantFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.TenantResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find tenants by multiple criteria",
         "tags": [
           "tenant"
         ]
