@@ -28,6 +28,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	FindTenants(params *FindTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindTenantsOK, error)
+
 	GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTenantOK, error)
 
 	ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTenantsOK, error)
@@ -35,6 +37,44 @@ type ClientService interface {
 	UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTenantOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  FindTenants finds tenants by multiple criteria
+*/
+func (a *Client) FindTenants(params *FindTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindTenantsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewFindTenantsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "findTenants",
+		Method:             "POST",
+		PathPattern:        "/v1/tenant/find",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &FindTenantsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*FindTenantsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*FindTenantsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
