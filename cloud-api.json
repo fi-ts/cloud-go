@@ -1528,6 +1528,10 @@
     },
     "v1.ClusterUsage": {
       "properties": {
+        "averageworkergroups": {
+          "description": "the average amount of worker groups during the time window",
+          "type": "string"
+        },
         "clusterend": {
           "description": "the end time of this cluster",
           "format": "date-time",
@@ -1578,9 +1582,17 @@
         "tenantname": {
           "description": "the tenant name of this entity",
           "type": "string"
+        },
+        "workergroups": {
+          "description": "the worker groups of this cluster",
+          "items": {
+            "$ref": "#/definitions/v1.ClusterWorker"
+          },
+          "type": "array"
         }
       },
       "required": [
+        "averageworkergroups",
         "clusterend",
         "clusterid",
         "clustername",
@@ -1592,7 +1604,8 @@
         "projectid",
         "projectname",
         "tenant",
-        "tenantname"
+        "tenantname",
+        "workergroups"
       ]
     },
     "v1.ClusterUsageAccumuluated": {
@@ -1664,6 +1677,28 @@
         "accumulatedusage",
         "from",
         "usage"
+      ]
+    },
+    "v1.ClusterWorker": {
+      "properties": {
+        "machinecount": {
+          "description": "the machine count of this worker group",
+          "format": "integer",
+          "type": "integer"
+        },
+        "machinetype": {
+          "description": "the machine type",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the worker group",
+          "type": "string"
+        }
+      },
+      "required": [
+        "machinecount",
+        "machinetype",
+        "name"
       ]
     },
     "v1.Connection": {
