@@ -19,10 +19,6 @@ import (
 // swagger:model v1.ClusterFeatures
 type V1ClusterFeatures struct {
 
-	// log accepted connections
-	// Required: true
-	LogAcceptedConnections *string `json:"LogAcceptedConnections"`
-
 	// reversed v p n
 	// Required: true
 	ReversedVPN *string `json:"ReversedVPN"`
@@ -32,10 +28,6 @@ type V1ClusterFeatures struct {
 func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateLogAcceptedConnections(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateReversedVPN(formats); err != nil {
 		res = append(res, err)
 	}
@@ -43,15 +35,6 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *V1ClusterFeatures) validateLogAcceptedConnections(formats strfmt.Registry) error {
-
-	if err := validate.Required("LogAcceptedConnections", "body", m.LogAcceptedConnections); err != nil {
-		return err
-	}
-
 	return nil
 }
 

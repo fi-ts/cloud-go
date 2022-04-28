@@ -1105,15 +1105,11 @@
     },
     "v1.ClusterFeatures": {
       "properties": {
-        "LogAcceptedConnections": {
-          "type": "string"
-        },
         "ReversedVPN": {
           "type": "string"
         }
       },
       "required": [
-        "LogAcceptedConnections",
         "ReversedVPN"
       ]
     },
