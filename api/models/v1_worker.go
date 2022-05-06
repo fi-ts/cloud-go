@@ -19,6 +19,10 @@ import (
 // swagger:model v1.Worker
 type V1Worker struct {
 
+	// annotations
+	// Required: true
+	Annotations map[string]string `json:"Annotations"`
+
 	// c r i
 	// Required: true
 	CRI *string `json:"CRI"`
@@ -28,6 +32,10 @@ type V1Worker struct {
 
 	// health timeout
 	HealthTimeout int64 `json:"HealthTimeout,omitempty"`
+
+	// labels
+	// Required: true
+	Labels map[string]string `json:"Labels"`
 
 	// machine image
 	// Required: true
@@ -62,7 +70,15 @@ type V1Worker struct {
 func (m *V1Worker) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCRI(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLabels(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -100,9 +116,27 @@ func (m *V1Worker) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1Worker) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("Annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1Worker) validateCRI(formats strfmt.Registry) error {
 
 	if err := validate.Required("CRI", "body", m.CRI); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1Worker) validateLabels(formats strfmt.Registry) error {
+
+	if err := validate.Required("Labels", "body", m.Labels); err != nil {
 		return err
 	}
 
