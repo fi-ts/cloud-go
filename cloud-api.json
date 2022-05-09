@@ -4452,6 +4452,12 @@
     },
     "v1.Worker": {
       "properties": {
+        "Annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "CRI": {
           "type": "string"
         },
@@ -4462,6 +4468,12 @@
         "HealthTimeout": {
           "format": "int64",
           "type": "integer"
+        },
+        "Labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         },
         "MachineImage": {
           "$ref": "#/definitions/v1.MachineImage"
@@ -4488,7 +4500,9 @@
         }
       },
       "required": [
+        "Annotations",
         "CRI",
+        "Labels",
         "MachineImage",
         "MachineType",
         "MaxSurge",
