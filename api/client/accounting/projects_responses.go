@@ -52,22 +52,20 @@ func NewProjectsOK() *ProjectsOK {
 OK
 */
 type ProjectsOK struct {
-	Payload *models.V1ProjectInfoResponse
+	Payload []*models.V1ProjectInfoResponse
 }
 
 func (o *ProjectsOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/projects][%d] projectsOK  %+v", 200, o.Payload)
 }
-func (o *ProjectsOK) GetPayload() *models.V1ProjectInfoResponse {
+func (o *ProjectsOK) GetPayload() []*models.V1ProjectInfoResponse {
 	return o.Payload
 }
 
 func (o *ProjectsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V1ProjectInfoResponse)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
