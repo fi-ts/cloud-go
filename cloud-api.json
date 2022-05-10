@@ -3328,6 +3328,39 @@
         }
       }
     },
+    "v1.ProjectInfoRequest": {
+      "properties": {
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "v1.ProjectInfoResponse": {
+      "properties": {
+        "projectid": {
+          "description": "the project id",
+          "type": "string"
+        },
+        "tenantid": {
+          "description": "the tenant id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "projectid",
+        "tenantid"
+      ]
+    },
     "v1.ProjectListResponse": {
       "properties": {
         "projects": {
@@ -5096,6 +5129,45 @@
           }
         },
         "summary": "find postgres usage for given accounting query",
+        "tags": [
+          "accounting"
+        ]
+      }
+    },
+    "/v1/accounting/projects": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "projects",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ProjectInfoRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ProjectInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "discover accounted projects witihin a given time period",
         "tags": [
           "accounting"
         ]
