@@ -8,6 +8,7 @@ import (
 
 	"github.com/fi-ts/cloud-go/api/client"
 	"github.com/go-openapi/runtime"
+	openclient "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/metal-stack/security"
 
@@ -41,6 +42,11 @@ func AuthType(authType string) option {
 
 //Timeout sets the timeout for a new client
 func Timeout(timeout time.Duration) option {
+	// overriding the default timeout as otherwise all request need to be called with
+	// WithTimeout or WithContext
+	// still open issue: https://github.com/go-swagger/go-swagger/issues/2583
+	openclient.DefaultTimeout = timeout
+
 	return func(c *clientSpec) {
 		c.timeout = timeout
 	}
