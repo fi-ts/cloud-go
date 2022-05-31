@@ -48,8 +48,6 @@ type ClientService interface {
 
 	PostgresUsageCSV(params *PostgresUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageCSVOK, error)
 
-	Projects(params *ProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectsOK, error)
-
 	S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageOK, error)
 
 	S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageCSVOK, error)
@@ -438,44 +436,6 @@ func (a *Client) PostgresUsageCSV(params *PostgresUsageCSVParams, authInfo runti
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PostgresUsageCSVDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  Projects discovers accounted projects witihin a given time period
-*/
-func (a *Client) Projects(params *ProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewProjectsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "projects",
-		Method:             "POST",
-		PathPattern:        "/v1/accounting/projects",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &ProjectsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ProjectsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ProjectsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

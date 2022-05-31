@@ -314,36 +314,6 @@ func (_m *ClientService) PostgresUsageCSV(params *accounting.PostgresUsageCSVPar
 	return r0, r1
 }
 
-// Projects provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) Projects(params *accounting.ProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption) (*accounting.ProjectsOK, error) {
-	_va := make([]interface{}, len(opts))
-	for _i := range opts {
-		_va[_i] = opts[_i]
-	}
-	var _ca []interface{}
-	_ca = append(_ca, params, authInfo)
-	_ca = append(_ca, _va...)
-	ret := _m.Called(_ca...)
-
-	var r0 *accounting.ProjectsOK
-	if rf, ok := ret.Get(0).(func(*accounting.ProjectsParams, runtime.ClientAuthInfoWriter, ...accounting.ClientOption) *accounting.ProjectsOK); ok {
-		r0 = rf(params, authInfo, opts...)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*accounting.ProjectsOK)
-		}
-	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func(*accounting.ProjectsParams, runtime.ClientAuthInfoWriter, ...accounting.ClientOption) error); ok {
-		r1 = rf(params, authInfo, opts...)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
 // S3Usage provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) S3Usage(params *accounting.S3UsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption) (*accounting.S3UsageOK, error) {
 	_va := make([]interface{}, len(opts))
