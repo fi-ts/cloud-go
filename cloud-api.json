@@ -63,6 +63,9 @@
     },
     "metalgo.IPFindRequest": {
       "properties": {
+        "AllocationUUID": {
+          "type": "string"
+        },
         "IPAddress": {
           "type": "string"
         },
@@ -92,6 +95,7 @@
         }
       },
       "required": [
+        "AllocationUUID",
         "IPAddress",
         "MachineID",
         "Name",
@@ -2024,6 +2028,9 @@
     },
     "v1.IPFindRequest": {
       "properties": {
+        "AllocationUUID": {
+          "type": "string"
+        },
         "IPAddress": {
           "type": "string"
         },
@@ -2053,6 +2060,7 @@
         }
       },
       "required": [
+        "AllocationUUID",
         "IPAddress",
         "MachineID",
         "Name",

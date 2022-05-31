@@ -19,6 +19,10 @@ import (
 // swagger:model v1.IPFindRequest
 type V1IPFindRequest struct {
 
+	// allocation UUID
+	// Required: true
+	AllocationUUID *string `json:"AllocationUUID"`
+
 	// IP address
 	// Required: true
 	IPAddress *string `json:"IPAddress"`
@@ -56,6 +60,10 @@ type V1IPFindRequest struct {
 func (m *V1IPFindRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAllocationUUID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateIPAddress(formats); err != nil {
 		res = append(res, err)
 	}
@@ -91,6 +99,15 @@ func (m *V1IPFindRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1IPFindRequest) validateAllocationUUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("AllocationUUID", "body", m.AllocationUUID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

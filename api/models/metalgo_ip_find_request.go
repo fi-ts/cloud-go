@@ -19,6 +19,10 @@ import (
 // swagger:model metalgo.IPFindRequest
 type MetalgoIPFindRequest struct {
 
+	// allocation UUID
+	// Required: true
+	AllocationUUID *string `json:"AllocationUUID"`
+
 	// IP address
 	// Required: true
 	IPAddress *string `json:"IPAddress"`
@@ -56,6 +60,10 @@ type MetalgoIPFindRequest struct {
 func (m *MetalgoIPFindRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAllocationUUID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateIPAddress(formats); err != nil {
 		res = append(res, err)
 	}
@@ -91,6 +99,15 @@ func (m *MetalgoIPFindRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *MetalgoIPFindRequest) validateAllocationUUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("AllocationUUID", "body", m.AllocationUUID); err != nil {
+		return err
+	}
+
 	return nil
 }
 
