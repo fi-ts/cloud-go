@@ -23,6 +23,10 @@ type ModelsV1MachineState struct {
 	// Required: true
 	Description *string `json:"description"`
 
+	// metal hammer version
+	// Required: true
+	MetalHammerVersion *string `json:"metal_hammer_version"`
+
 	// value
 	// Required: true
 	Value *string `json:"value"`
@@ -33,6 +37,10 @@ func (m *ModelsV1MachineState) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMetalHammerVersion(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -49,6 +57,15 @@ func (m *ModelsV1MachineState) Validate(formats strfmt.Registry) error {
 func (m *ModelsV1MachineState) validateDescription(formats strfmt.Registry) error {
 
 	if err := validate.Required("description", "body", m.Description); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineState) validateMetalHammerVersion(formats strfmt.Registry) error {
+
+	if err := validate.Required("metal_hammer_version", "body", m.MetalHammerVersion); err != nil {
 		return err
 	}
 
