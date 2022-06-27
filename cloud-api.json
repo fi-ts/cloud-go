@@ -640,11 +640,18 @@
         },
         "name": {
           "type": "string"
+        },
+        "neighbors": {
+          "items": {
+            "$ref": "#/definitions/models.V1MachineNic"
+          },
+          "type": "array"
         }
       },
       "required": [
         "mac",
-        "name"
+        "name",
+        "neighbors"
       ]
     },
     "models.V1MachineProvisioningEvent": {
@@ -753,12 +760,16 @@
         "description": {
           "type": "string"
         },
+        "metal_hammer_version": {
+          "type": "string"
+        },
         "value": {
           "type": "string"
         }
       },
       "required": [
         "description",
+        "metal_hammer_version",
         "value"
       ]
     },
@@ -6297,7 +6308,7 @@
       }
     },
     "/v1/database/postgres/restore/{id}": {
-      "post": {
+      "delete": {
         "consumes": [
           "application/json"
         ],
