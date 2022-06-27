@@ -56,7 +56,7 @@ type AcceptPostgresRestoreOK struct {
 }
 
 func (o *AcceptPostgresRestoreOK) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreOK  %+v", 200, o.Payload)
 }
 func (o *AcceptPostgresRestoreOK) GetPayload() *models.V1PostgresResponse {
 	return o.Payload
@@ -97,7 +97,7 @@ func (o *AcceptPostgresRestoreDefault) Code() int {
 }
 
 func (o *AcceptPostgresRestoreDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestore default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestore default  %+v", o._statusCode, o.Payload)
 }
 func (o *AcceptPostgresRestoreDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
