@@ -77,10 +77,10 @@ func (a *Client) AcceptPostgresRestore(params *AcceptPostgresRestoreParams, auth
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "acceptPostgresRestore",
-		Method:             "DELETE",
+		Method:             "POST",
 		PathPattern:        "/v1/database/postgres/restore/{id}",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"*/*", "application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &AcceptPostgresRestoreReader{formats: a.formats},

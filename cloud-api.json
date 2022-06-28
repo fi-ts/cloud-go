@@ -6343,6 +6343,44 @@
         "tags": [
           "database"
         ]
+      },
+      "post": {
+        "consumes": [
+          "*/*",
+          "application/json"
+        ],
+        "deprecated": true,
+        "operationId": "acceptPostgresRestore",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "indicates a validated restore. if the postgres was changed since this one was read, a conflict is returned",
+        "tags": [
+          "database"
+        ]
       }
     },
     "/v1/database/postgres/standby": {
