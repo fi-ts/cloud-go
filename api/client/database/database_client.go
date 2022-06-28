@@ -30,6 +30,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	AcceptPostgresRestore(params *AcceptPostgresRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptPostgresRestoreOK, error)
 
+	AcceptPostgresRestoreDeprecated(params *AcceptPostgresRestoreDeprecatedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptPostgresRestoreDeprecatedOK, error)
+
 	CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresCreated, error)
 
 	CreatePostgresBackupConfig(params *CreatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupConfigCreated, error)
@@ -77,7 +79,7 @@ func (a *Client) AcceptPostgresRestore(params *AcceptPostgresRestoreParams, auth
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "acceptPostgresRestore",
-		Method:             "POST",
+		Method:             "DELETE",
 		PathPattern:        "/v1/database/postgres/restore/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -102,6 +104,44 @@ func (a *Client) AcceptPostgresRestore(params *AcceptPostgresRestoreParams, auth
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*AcceptPostgresRestoreDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  AcceptPostgresRestoreDeprecated indicates a validated restore if the postgres was changed since this one was read a conflict is returned
+*/
+func (a *Client) AcceptPostgresRestoreDeprecated(params *AcceptPostgresRestoreDeprecatedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptPostgresRestoreDeprecatedOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAcceptPostgresRestoreDeprecatedParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "acceptPostgresRestoreDeprecated",
+		Method:             "POST",
+		PathPattern:        "/v1/database/postgres/restore/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"*/*", "application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &AcceptPostgresRestoreDeprecatedReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AcceptPostgresRestoreDeprecatedOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*AcceptPostgresRestoreDeprecatedDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

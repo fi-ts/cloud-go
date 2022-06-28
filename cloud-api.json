@@ -640,11 +640,18 @@
         },
         "name": {
           "type": "string"
+        },
+        "neighbors": {
+          "items": {
+            "$ref": "#/definitions/models.V1MachineNic"
+          },
+          "type": "array"
         }
       },
       "required": [
         "mac",
-        "name"
+        "name",
+        "neighbors"
       ]
     },
     "models.V1MachineProvisioningEvent": {
@@ -753,12 +760,16 @@
         "description": {
           "type": "string"
         },
+        "metal_hammer_version": {
+          "type": "string"
+        },
         "value": {
           "type": "string"
         }
       },
       "required": [
         "description",
+        "metal_hammer_version",
         "value"
       ]
     },
@@ -6297,11 +6308,49 @@
       }
     },
     "/v1/database/postgres/restore/{id}": {
-      "post": {
+      "delete": {
         "consumes": [
           "application/json"
         ],
         "operationId": "acceptPostgresRestore",
+        "parameters": [
+          {
+            "description": "identifier of the postgres",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.PostgresResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "indicates a validated restore. if the postgres was changed since this one was read, a conflict is returned",
+        "tags": [
+          "database"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "*/*",
+          "application/json"
+        ],
+        "deprecated": true,
+        "operationId": "acceptPostgresRestoreDeprecated",
         "parameters": [
           {
             "description": "identifier of the postgres",
