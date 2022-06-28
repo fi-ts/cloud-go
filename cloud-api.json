@@ -6350,7 +6350,7 @@
           "application/json"
         ],
         "deprecated": true,
-        "operationId": "acceptPostgresRestore",
+        "operationId": "acceptPostgresRestoreDeprecated",
         "parameters": [
           {
             "description": "identifier of the postgres",
