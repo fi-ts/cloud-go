@@ -40,6 +40,8 @@ type ClientService interface {
 
 	GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterKubeconfigTplOK, error)
 
+	GetMonitoringSecret(params *GetMonitoringSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMonitoringSecretOK, error)
+
 	GetSSHKeyPair(params *GetSSHKeyPairParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSSHKeyPairOK, error)
 
 	ListClusters(params *ListClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersOK, error)
@@ -282,6 +284,44 @@ func (a *Client) GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, 
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetClusterKubeconfigTplDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+  GetMonitoringSecret gets the monitoring access of the cluster to access the cluster s grafana dashboard
+*/
+func (a *Client) GetMonitoringSecret(params *GetMonitoringSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMonitoringSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetMonitoringSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getMonitoringSecret",
+		Method:             "GET",
+		PathPattern:        "/v1/cluster/{id}/monitoringsecret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetMonitoringSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetMonitoringSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetMonitoringSecretDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
