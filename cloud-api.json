@@ -1250,6 +1250,24 @@
         "machineid"
       ]
     },
+    "v1.ClusterMonitoringSecretResponse": {
+      "properties": {
+        "Endpoint": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "User": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Endpoint",
+        "Password",
+        "User"
+      ]
+    },
     "v1.ClusterNameProject": {
       "properties": {
         "cluster_name": {
@@ -5730,6 +5748,44 @@
           }
         },
         "summary": "gets the kubeconfig-template just with cluster-infos for the cluster",
+        "tags": [
+          "cluster"
+        ]
+      }
+    },
+    "/v1/cluster/{id}/monitoringsecret": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getMonitoringSecret",
+        "parameters": [
+          {
+            "description": "identifier of the cluster",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterMonitoringSecretResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get the monitoring access of the cluster to access the cluster's grafana dashboard",
         "tags": [
           "cluster"
         ]
