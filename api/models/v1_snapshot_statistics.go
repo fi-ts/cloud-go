@@ -21,23 +21,23 @@ type V1SnapshotStatistics struct {
 
 	// physical capacity
 	// Required: true
-	PhysicalCapacity *int64 `json:"PhysicalCapacity"`
+	PhysicalCapacity *int64 `json:"PhysicalCapacity" yaml:"PhysicalCapacity"`
 
 	// physical memory
 	// Required: true
-	PhysicalMemory *int64 `json:"PhysicalMemory"`
+	PhysicalMemory *int64 `json:"PhysicalMemory" yaml:"PhysicalMemory"`
 
 	// physical owned capacity
 	// Required: true
-	PhysicalOwnedCapacity *int64 `json:"PhysicalOwnedCapacity"`
+	PhysicalOwnedCapacity *int64 `json:"PhysicalOwnedCapacity" yaml:"PhysicalOwnedCapacity"`
 
 	// physical owned memory
 	// Required: true
-	PhysicalOwnedMemory *int64 `json:"PhysicalOwnedMemory"`
+	PhysicalOwnedMemory *int64 `json:"PhysicalOwnedMemory" yaml:"PhysicalOwnedMemory"`
 
 	// user written
 	// Required: true
-	UserWritten *int64 `json:"UserWritten"`
+	UserWritten *int64 `json:"UserWritten" yaml:"UserWritten"`
 }
 
 // Validate validates this v1 snapshot statistics

@@ -20,26 +20,26 @@ import (
 type V1PostgresRestoreRequest struct {
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// labels
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" yaml:"labels,omitempty"`
 
 	// maintenance
-	Maintenance []string `json:"maintenance"`
+	Maintenance []string `json:"maintenance" yaml:"maintenance"`
 
 	// partition ID
-	PartitionID string `json:"partitionID,omitempty"`
+	PartitionID string `json:"partitionID,omitempty" yaml:"partitionID,omitempty"`
 
 	// source Id
 	// Required: true
-	SourceID *string `json:"sourceId"`
+	SourceID *string `json:"sourceId" yaml:"sourceId"`
 
 	// timestamp
-	Timestamp string `json:"timestamp,omitempty"`
+	Timestamp string `json:"timestamp,omitempty" yaml:"timestamp,omitempty"`
 
 	// version
-	Version string `json:"version,omitempty"`
+	Version string `json:"version,omitempty" yaml:"version,omitempty"`
 }
 
 // Validate validates this v1 postgres restore request

@@ -21,15 +21,15 @@ type V1ContainerUsageAccumuluated struct {
 
 	// the accumuluated cpu seconds of the containers in this response (s*s)
 	// Required: true
-	Cpuseconds *string `json:"cpuseconds"`
+	Cpuseconds *string `json:"cpuseconds" yaml:"cpuseconds"`
 
 	// the duration that this container is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the accumulated memory seconds of the containers in this response (byte*s)
 	// Required: true
-	Memoryseconds *string `json:"memoryseconds"`
+	Memoryseconds *string `json:"memoryseconds" yaml:"memoryseconds"`
 }
 
 // Validate validates this v1 container usage accumuluated

@@ -22,20 +22,20 @@ type V1PostgresUsageResponse struct {
 
 	// just the usage data of the individual postgres summed up
 	// Required: true
-	Accumulatedusage *V1PostgresUsageAccumuluated `json:"accumulatedusage"`
+	Accumulatedusage *V1PostgresUsageAccumuluated `json:"accumulatedusage" yaml:"accumulatedusage"`
 
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
-	From *strfmt.DateTime `json:"from"`
+	From *strfmt.DateTime `json:"from" yaml:"from"`
 
 	// the end time in the accounting window to look at (defaults to current system time)
 	// Format: date-time
-	To strfmt.DateTime `json:"to,omitempty"`
+	To strfmt.DateTime `json:"to,omitempty" yaml:"to,omitempty"`
 
 	// the usage data of the individual postgres
 	// Required: true
-	Usage []*V1PostgresUsage `json:"usage"`
+	Usage []*V1PostgresUsage `json:"usage" yaml:"usage"`
 }
 
 // Validate validates this v1 postgres usage response

@@ -21,7 +21,7 @@ type V1PostgresPartition struct {
 
 	// allowed tenants
 	// Required: true
-	AllowedTenants map[string]bool `json:"AllowedTenants"`
+	AllowedTenants map[string]bool `json:"AllowedTenants" yaml:"AllowedTenants"`
 }
 
 // Validate validates this v1 postgres partition

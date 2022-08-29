@@ -21,19 +21,19 @@ type ModelsV1LogicalVolume struct {
 
 	// lvmtype
 	// Required: true
-	Lvmtype *string `json:"lvmtype"`
+	Lvmtype *string `json:"lvmtype" yaml:"lvmtype"`
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// size
 	// Required: true
-	Size *int64 `json:"size"`
+	Size *int64 `json:"size" yaml:"size"`
 
 	// volumegroup
 	// Required: true
-	Volumegroup *string `json:"volumegroup"`
+	Volumegroup *string `json:"volumegroup" yaml:"volumegroup"`
 }
 
 // Validate validates this models v1 logical volume

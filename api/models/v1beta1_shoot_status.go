@@ -21,47 +21,47 @@ import (
 type V1beta1ShootStatus struct {
 
 	// advertised addresses
-	AdvertisedAddresses []*V1beta1ShootAdvertisedAddress `json:"advertisedAddresses"`
+	AdvertisedAddresses []*V1beta1ShootAdvertisedAddress `json:"advertisedAddresses" yaml:"advertisedAddresses"`
 
 	// cluster identity
-	ClusterIdentity string `json:"clusterIdentity,omitempty"`
+	ClusterIdentity string `json:"clusterIdentity,omitempty" yaml:"clusterIdentity,omitempty"`
 
 	// conditions
-	Conditions []*V1beta1Condition `json:"conditions"`
+	Conditions []*V1beta1Condition `json:"conditions" yaml:"conditions"`
 
 	// constraints
-	Constraints []*V1beta1Condition `json:"constraints"`
+	Constraints []*V1beta1Condition `json:"constraints" yaml:"constraints"`
 
 	// gardener
 	// Required: true
-	Gardener *V1beta1Gardener `json:"gardener"`
+	Gardener *V1beta1Gardener `json:"gardener" yaml:"gardener"`
 
 	// hibernated
 	// Required: true
-	Hibernated *bool `json:"hibernated"`
+	Hibernated *bool `json:"hibernated" yaml:"hibernated"`
 
 	// last errors
-	LastErrors []*V1beta1LastError `json:"lastErrors"`
+	LastErrors []*V1beta1LastError `json:"lastErrors" yaml:"lastErrors"`
 
 	// last operation
-	LastOperation *V1beta1LastOperation `json:"lastOperation,omitempty"`
+	LastOperation *V1beta1LastOperation `json:"lastOperation,omitempty" yaml:"lastOperation,omitempty"`
 
 	// observed generation
-	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	ObservedGeneration int64 `json:"observedGeneration,omitempty" yaml:"observedGeneration,omitempty"`
 
 	// retry cycle start time
-	RetryCycleStartTime string `json:"retryCycleStartTime,omitempty"`
+	RetryCycleStartTime string `json:"retryCycleStartTime,omitempty" yaml:"retryCycleStartTime,omitempty"`
 
 	// seed name
-	SeedName string `json:"seedName,omitempty"`
+	SeedName string `json:"seedName,omitempty" yaml:"seedName,omitempty"`
 
 	// technical ID
 	// Required: true
-	TechnicalID *string `json:"technicalID"`
+	TechnicalID *string `json:"technicalID" yaml:"technicalID"`
 
 	// uid
 	// Required: true
-	UID *string `json:"uid"`
+	UID *string `json:"uid" yaml:"uid"`
 }
 
 // Validate validates this v1beta1 shoot status

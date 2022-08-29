@@ -21,15 +21,15 @@ type ModelsV1SizeConstraint struct {
 
 	// max
 	// Required: true
-	Max *int64 `json:"max"`
+	Max *int64 `json:"max" yaml:"max"`
 
 	// min
 	// Required: true
-	Min *int64 `json:"min"`
+	Min *int64 `json:"min" yaml:"min"`
 
 	// type
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" yaml:"type"`
 }
 
 // Validate validates this models v1 size constraint

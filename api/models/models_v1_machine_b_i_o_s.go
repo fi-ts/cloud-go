@@ -21,15 +21,15 @@ type ModelsV1MachineBIOS struct {
 
 	// date
 	// Required: true
-	Date *string `json:"date"`
+	Date *string `json:"date" yaml:"date"`
 
 	// vendor
 	// Required: true
-	Vendor *string `json:"vendor"`
+	Vendor *string `json:"vendor" yaml:"vendor"`
 
 	// version
 	// Required: true
-	Version *string `json:"version"`
+	Version *string `json:"version" yaml:"version"`
 }
 
 // Validate validates this models v1 machine b i o s

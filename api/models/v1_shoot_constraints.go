@@ -22,39 +22,39 @@ type V1ShootConstraints struct {
 
 	// the list of available firewall controller version
 	// Required: true
-	FirewallControllerVersions []*V1FirewallControllerVersion `json:"firewall_controller_versions"`
+	FirewallControllerVersions []*V1FirewallControllerVersion `json:"firewall_controller_versions" yaml:"firewall_controller_versions"`
 
 	// the list of available firewall images
 	// Required: true
-	FirewallImages []string `json:"firewall_images"`
+	FirewallImages []string `json:"firewall_images" yaml:"firewall_images"`
 
 	// the list of available firewall types
 	// Required: true
-	FirewallTypes []string `json:"firewall_types"`
+	FirewallTypes []string `json:"firewall_types" yaml:"firewall_types"`
 
 	// the list of available kubernetes versions
 	// Required: true
-	KubernetesVersions []string `json:"kubernetes_versions"`
+	KubernetesVersions []string `json:"kubernetes_versions" yaml:"kubernetes_versions"`
 
 	// the list of available machine images
 	// Required: true
-	MachineImages []*V1MachineImage `json:"machine_images"`
+	MachineImages []*V1MachineImage `json:"machine_images" yaml:"machine_images"`
 
 	// the list of available machine types
 	// Required: true
-	MachineTypes []string `json:"machine_types"`
+	MachineTypes []string `json:"machine_types" yaml:"machine_types"`
 
 	// the list of available networks for cluster creation
 	// Required: true
-	Networks []*V1Network `json:"networks"`
+	Networks []*V1Network `json:"networks" yaml:"networks"`
 
 	// the list of available partitions
 	// Required: true
-	Partitions []string `json:"partitions"`
+	Partitions []string `json:"partitions" yaml:"partitions"`
 
 	// the available seeds by partition id
 	// Required: true
-	Seeds map[string][]string `json:"seeds"`
+	Seeds map[string][]string `json:"seeds" yaml:"seeds"`
 }
 
 // Validate validates this v1 shoot constraints

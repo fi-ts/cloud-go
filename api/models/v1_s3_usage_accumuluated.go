@@ -21,19 +21,19 @@ type V1S3UsageAccumuluated struct {
 
 	// the accumulated reported number of objects of the s3 buckets in this response
 	// Required: true
-	Currentnumberofobjects *string `json:"currentnumberofobjects"`
+	Currentnumberofobjects *string `json:"currentnumberofobjects" yaml:"currentnumberofobjects"`
 
 	// the accumulated reported size of the s3 buckets in this response
 	// Required: true
-	Currentsize *string `json:"currentsize"`
+	Currentsize *string `json:"currentsize" yaml:"currentsize"`
 
 	// the duration that this s3 bucket is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the accumulated storage seconds of the s3 buckets in this response (byte*s)
 	// Required: true
-	Storageseconds *string `json:"storageseconds"`
+	Storageseconds *string `json:"storageseconds" yaml:"storageseconds"`
 }
 
 // Validate validates this v1 s3 usage accumuluated

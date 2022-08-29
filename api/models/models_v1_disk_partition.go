@@ -21,18 +21,18 @@ type ModelsV1DiskPartition struct {
 
 	// gpttype
 	// Required: true
-	Gpttype *string `json:"gpttype"`
+	Gpttype *string `json:"gpttype" yaml:"gpttype"`
 
 	// label
-	Label string `json:"label,omitempty"`
+	Label string `json:"label,omitempty" yaml:"label,omitempty"`
 
 	// number
 	// Required: true
-	Number *int64 `json:"number"`
+	Number *int64 `json:"number" yaml:"number"`
 
 	// size
 	// Required: true
-	Size *int64 `json:"size"`
+	Size *int64 `json:"size" yaml:"size"`
 }
 
 // Validate validates this models v1 disk partition

@@ -21,11 +21,11 @@ type V1beta1ShootAdvertisedAddress struct {
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// url
 	// Required: true
-	URL *string `json:"url"`
+	URL *string `json:"url" yaml:"url"`
 }
 
 // Validate validates this v1beta1 shoot advertised address

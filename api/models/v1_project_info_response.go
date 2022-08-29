@@ -21,11 +21,11 @@ type V1ProjectInfoResponse struct {
 
 	// the project id
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the tenant id
 	// Required: true
-	Tenantid *string `json:"tenantid"`
+	Tenantid *string `json:"tenantid" yaml:"tenantid"`
 }
 
 // Validate validates this v1 project info response

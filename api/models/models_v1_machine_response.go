@@ -20,60 +20,60 @@ import (
 type ModelsV1MachineResponse struct {
 
 	// allocation
-	Allocation *ModelsV1MachineAllocation `json:"allocation,omitempty"`
+	Allocation *ModelsV1MachineAllocation `json:"allocation,omitempty" yaml:"allocation,omitempty"`
 
 	// bios
 	// Required: true
-	Bios *ModelsV1MachineBIOS `json:"bios"`
+	Bios *ModelsV1MachineBIOS `json:"bios" yaml:"bios"`
 
 	// changed
-	Changed string `json:"changed,omitempty"`
+	Changed string `json:"changed,omitempty" yaml:"changed,omitempty"`
 
 	// created
-	Created string `json:"created,omitempty"`
+	Created string `json:"created,omitempty" yaml:"created,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// events
 	// Required: true
-	Events *ModelsV1MachineRecentProvisioningEvents `json:"events"`
+	Events *ModelsV1MachineRecentProvisioningEvents `json:"events" yaml:"events"`
 
 	// hardware
 	// Required: true
-	Hardware *ModelsV1MachineHardware `json:"hardware"`
+	Hardware *ModelsV1MachineHardware `json:"hardware" yaml:"hardware"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// ledstate
 	// Required: true
-	Ledstate *ModelsV1ChassisIdentifyLEDState `json:"ledstate"`
+	Ledstate *ModelsV1ChassisIdentifyLEDState `json:"ledstate" yaml:"ledstate"`
 
 	// liveliness
 	// Required: true
-	Liveliness *string `json:"liveliness"`
+	Liveliness *string `json:"liveliness" yaml:"liveliness"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// partition
-	Partition *ModelsV1PartitionResponse `json:"partition,omitempty"`
+	Partition *ModelsV1PartitionResponse `json:"partition,omitempty" yaml:"partition,omitempty"`
 
 	// rackid
-	Rackid string `json:"rackid,omitempty"`
+	Rackid string `json:"rackid,omitempty" yaml:"rackid,omitempty"`
 
 	// size
-	Size *ModelsV1SizeResponse `json:"size,omitempty"`
+	Size *ModelsV1SizeResponse `json:"size,omitempty" yaml:"size,omitempty"`
 
 	// state
 	// Required: true
-	State *ModelsV1MachineState `json:"state"`
+	State *ModelsV1MachineState `json:"state" yaml:"state"`
 
 	// tags
 	// Required: true
-	Tags []string `json:"tags"`
+	Tags []string `json:"tags" yaml:"tags"`
 }
 
 // Validate validates this models v1 machine response

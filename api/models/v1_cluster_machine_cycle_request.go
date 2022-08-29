@@ -21,7 +21,7 @@ type V1ClusterMachineCycleRequest struct {
 
 	// uuid of the machine to power cycle
 	// Required: true
-	Machineid *string `json:"machineid"`
+	Machineid *string `json:"machineid" yaml:"machineid"`
 }
 
 // Validate validates this v1 cluster machine cycle request

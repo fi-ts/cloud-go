@@ -20,47 +20,47 @@ import (
 type V1PostgresUpdateRequest struct {
 
 	// access list
-	AccessList *V1AccessList `json:"accessList,omitempty"`
+	AccessList *V1AccessList `json:"accessList,omitempty" yaml:"accessList,omitempty"`
 
 	// audit logs
-	AuditLogs bool `json:"auditLogs,omitempty"`
+	AuditLogs bool `json:"auditLogs,omitempty" yaml:"auditLogs,omitempty"`
 
 	// backup
-	Backup string `json:"backup,omitempty"`
+	Backup string `json:"backup,omitempty" yaml:"backup,omitempty"`
 
 	// connection
-	Connection *V1Connection `json:"connection,omitempty"`
+	Connection *V1Connection `json:"connection,omitempty" yaml:"connection,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// labels
-	Labels V1PostgresUpdateRequestLabels `json:"labels,omitempty"`
+	Labels V1PostgresUpdateRequestLabels `json:"labels,omitempty" yaml:"labels,omitempty"`
 
 	// maintenance
-	Maintenance []string `json:"maintenance"`
+	Maintenance []string `json:"maintenance" yaml:"maintenance"`
 
 	// number of instances
-	NumberOfInstances int32 `json:"numberOfInstances,omitempty"`
+	NumberOfInstances int32 `json:"numberOfInstances,omitempty" yaml:"numberOfInstances,omitempty"`
 
 	// partition ID
-	PartitionID string `json:"partitionID,omitempty"`
+	PartitionID string `json:"partitionID,omitempty" yaml:"partitionID,omitempty"`
 
 	// postgres params
-	PostgresParams map[string]string `json:"postgresParams,omitempty"`
+	PostgresParams map[string]string `json:"postgresParams,omitempty" yaml:"postgresParams,omitempty"`
 
 	// project ID
-	ProjectID string `json:"projectID,omitempty"`
+	ProjectID string `json:"projectID,omitempty" yaml:"projectID,omitempty"`
 
 	// size
-	Size *V1PostgresSize `json:"size,omitempty"`
+	Size *V1PostgresSize `json:"size,omitempty" yaml:"size,omitempty"`
 
 	// version
-	Version string `json:"version,omitempty"`
+	Version string `json:"version,omitempty" yaml:"version,omitempty"`
 }
 
 // Validate validates this v1 postgres update request

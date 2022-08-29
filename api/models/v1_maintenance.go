@@ -21,11 +21,11 @@ type V1Maintenance struct {
 
 	// auto update
 	// Required: true
-	AutoUpdate *V1MaintenanceAutoUpdate `json:"AutoUpdate"`
+	AutoUpdate *V1MaintenanceAutoUpdate `json:"AutoUpdate" yaml:"AutoUpdate"`
 
 	// time window
 	// Required: true
-	TimeWindow *V1MaintenanceTimeWindow `json:"TimeWindow"`
+	TimeWindow *V1MaintenanceTimeWindow `json:"TimeWindow" yaml:"TimeWindow"`
 }
 
 // Validate validates this v1 maintenance

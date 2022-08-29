@@ -21,7 +21,7 @@ type V1ClusterKubeconfigResponse struct {
 
 	// kubeconfig
 	// Required: true
-	Kubeconfig *string `json:"Kubeconfig"`
+	Kubeconfig *string `json:"Kubeconfig" yaml:"Kubeconfig"`
 }
 
 // Validate validates this v1 cluster kubeconfig response

@@ -22,20 +22,20 @@ type V1VolumeUsageResponse struct {
 
 	// just the usage data of the individual volumes summed up
 	// Required: true
-	Accumulatedusage *V1VolumeUsageAccumuluated `json:"accumulatedusage"`
+	Accumulatedusage *V1VolumeUsageAccumuluated `json:"accumulatedusage" yaml:"accumulatedusage"`
 
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
-	From *strfmt.DateTime `json:"from"`
+	From *strfmt.DateTime `json:"from" yaml:"from"`
 
 	// the end time in the accounting window to look at (defaults to current system time)
 	// Format: date-time
-	To strfmt.DateTime `json:"to,omitempty"`
+	To strfmt.DateTime `json:"to,omitempty" yaml:"to,omitempty"`
 
 	// the usage data of the individual volumes
 	// Required: true
-	Usage []*V1VolumeUsage `json:"usage"`
+	Usage []*V1VolumeUsage `json:"usage" yaml:"usage"`
 }
 
 // Validate validates this v1 volume usage response

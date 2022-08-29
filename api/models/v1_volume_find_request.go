@@ -21,19 +21,19 @@ type V1VolumeFindRequest struct {
 
 	// partition ID
 	// Required: true
-	PartitionID *string `json:"PartitionID"`
+	PartitionID *string `json:"PartitionID" yaml:"PartitionID"`
 
 	// project ID
 	// Required: true
-	ProjectID *string `json:"ProjectID"`
+	ProjectID *string `json:"ProjectID" yaml:"ProjectID"`
 
 	// tenant ID
 	// Required: true
-	TenantID *string `json:"TenantID"`
+	TenantID *string `json:"TenantID" yaml:"TenantID"`
 
 	// volume ID
 	// Required: true
-	VolumeID *string `json:"VolumeID"`
+	VolumeID *string `json:"VolumeID" yaml:"VolumeID"`
 }
 
 // Validate validates this v1 volume find request

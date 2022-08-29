@@ -21,15 +21,15 @@ type V1S3PartitionResponse struct {
 
 	// endpoint
 	// Required: true
-	Endpoint *string `json:"endpoint"`
+	Endpoint *string `json:"endpoint" yaml:"endpoint"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// ready
 	// Required: true
-	Ready *bool `json:"ready"`
+	Ready *bool `json:"ready" yaml:"ready"`
 }
 
 // Validate validates this v1 s3 partition response

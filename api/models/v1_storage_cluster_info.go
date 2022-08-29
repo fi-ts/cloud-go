@@ -22,55 +22,55 @@ type V1StorageClusterInfo struct {
 
 	// Api endpoints
 	// Required: true
-	APIEndpoints []string `json:"ApiEndpoints"`
+	APIEndpoints []string `json:"ApiEndpoints" yaml:"ApiEndpoints"`
 
 	// current max replicas
 	// Required: true
-	CurrentMaxReplicas *int64 `json:"CurrentMaxReplicas"`
+	CurrentMaxReplicas *int64 `json:"CurrentMaxReplicas" yaml:"CurrentMaxReplicas"`
 
 	// discovery endpoints
 	// Required: true
-	DiscoveryEndpoints []string `json:"DiscoveryEndpoints"`
+	DiscoveryEndpoints []string `json:"DiscoveryEndpoints" yaml:"DiscoveryEndpoints"`
 
 	// health
 	// Required: true
-	Health *V1ClusterHealth `json:"Health"`
+	Health *V1ClusterHealth `json:"Health" yaml:"Health"`
 
 	// max allowed version
 	// Required: true
-	MaxAllowedVersion *string `json:"MaxAllowedVersion"`
+	MaxAllowedVersion *string `json:"MaxAllowedVersion" yaml:"MaxAllowedVersion"`
 
 	// min allowed version
 	// Required: true
-	MinAllowedVersion *string `json:"MinAllowedVersion"`
+	MinAllowedVersion *string `json:"MinAllowedVersion" yaml:"MinAllowedVersion"`
 
 	// min version in cluster
 	// Required: true
-	MinVersionInCluster *string `json:"MinVersionInCluster"`
+	MinVersionInCluster *string `json:"MinVersionInCluster" yaml:"MinVersionInCluster"`
 
 	// partition
 	// Required: true
-	Partition *string `json:"Partition"`
+	Partition *string `json:"Partition" yaml:"Partition"`
 
 	// servers
 	// Required: true
-	Servers []*V1StorageServerInfo `json:"Servers"`
+	Servers []*V1StorageServerInfo `json:"Servers" yaml:"Servers"`
 
 	// statistics
 	// Required: true
-	Statistics *V1ClusterStatisticsAPI `json:"Statistics"`
+	Statistics *V1ClusterStatisticsAPI `json:"Statistics" yaml:"Statistics"`
 
 	// subsystem n q n
 	// Required: true
-	SubsystemNQN *string `json:"SubsystemNQN"`
+	SubsystemNQN *string `json:"SubsystemNQN" yaml:"SubsystemNQN"`
 
 	// supported max replicas
 	// Required: true
-	SupportedMaxReplicas *int64 `json:"SupportedMaxReplicas"`
+	SupportedMaxReplicas *int64 `json:"SupportedMaxReplicas" yaml:"SupportedMaxReplicas"`
 
 	// UUID
 	// Required: true
-	UUID *string `json:"UUID"`
+	UUID *string `json:"UUID" yaml:"UUID"`
 }
 
 // Validate validates this v1 storage cluster info

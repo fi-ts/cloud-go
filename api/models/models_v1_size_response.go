@@ -21,24 +21,24 @@ import (
 type ModelsV1SizeResponse struct {
 
 	// changed
-	Changed string `json:"changed,omitempty"`
+	Changed string `json:"changed,omitempty" yaml:"changed,omitempty"`
 
 	// constraints
 	// Required: true
-	Constraints []*ModelsV1SizeConstraint `json:"constraints"`
+	Constraints []*ModelsV1SizeConstraint `json:"constraints" yaml:"constraints"`
 
 	// created
-	Created string `json:"created,omitempty"`
+	Created string `json:"created,omitempty" yaml:"created,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 }
 
 // Validate validates this models v1 size response

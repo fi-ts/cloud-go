@@ -20,31 +20,31 @@ import (
 type V1beta1Condition struct {
 
 	// codes
-	Codes []string `json:"codes"`
+	Codes []string `json:"codes" yaml:"codes"`
 
 	// last transition time
 	// Required: true
-	LastTransitionTime *string `json:"lastTransitionTime"`
+	LastTransitionTime *string `json:"lastTransitionTime" yaml:"lastTransitionTime"`
 
 	// last update time
 	// Required: true
-	LastUpdateTime *string `json:"lastUpdateTime"`
+	LastUpdateTime *string `json:"lastUpdateTime" yaml:"lastUpdateTime"`
 
 	// message
 	// Required: true
-	Message *string `json:"message"`
+	Message *string `json:"message" yaml:"message"`
 
 	// reason
 	// Required: true
-	Reason *string `json:"reason"`
+	Reason *string `json:"reason" yaml:"reason"`
 
 	// status
 	// Required: true
-	Status *string `json:"status"`
+	Status *string `json:"status" yaml:"status"`
 
 	// type
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" yaml:"type"`
 }
 
 // Validate validates this v1beta1 condition

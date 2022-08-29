@@ -22,35 +22,35 @@ type V1S3CredentialsResponse struct {
 
 	// endpoint
 	// Required: true
-	Endpoint *string `json:"endpoint"`
+	Endpoint *string `json:"endpoint" yaml:"endpoint"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// keys
 	// Required: true
-	Keys []*V1S3Key `json:"keys"`
+	Keys []*V1S3Key `json:"keys" yaml:"keys"`
 
 	// max buckets
 	// Required: true
-	MaxBuckets *int64 `json:"max_buckets"`
+	MaxBuckets *int64 `json:"max_buckets" yaml:"max_buckets"`
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// partition
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// project
 	// Required: true
-	Project *string `json:"project"`
+	Project *string `json:"project" yaml:"project"`
 
 	// tenant
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 }
 
 // Validate validates this v1 s3 credentials response

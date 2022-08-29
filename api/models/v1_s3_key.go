@@ -21,11 +21,11 @@ type V1S3Key struct {
 
 	// access key
 	// Required: true
-	AccessKey *string `json:"access_key"`
+	AccessKey *string `json:"access_key" yaml:"access_key"`
 
 	// secret key
 	// Required: true
-	SecretKey *string `json:"secret_key"`
+	SecretKey *string `json:"secret_key" yaml:"secret_key"`
 }
 
 // Validate validates this v1 s3 key

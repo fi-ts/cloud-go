@@ -22,37 +22,37 @@ type ModelsV1FilesystemLayoutResponse struct {
 
 	// constraints
 	// Required: true
-	Constraints *ModelsV1FilesystemLayoutConstraints `json:"constraints"`
+	Constraints *ModelsV1FilesystemLayoutConstraints `json:"constraints" yaml:"constraints"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// disks
 	// Required: true
-	Disks []*ModelsV1Disk `json:"disks"`
+	Disks []*ModelsV1Disk `json:"disks" yaml:"disks"`
 
 	// filesystems
 	// Required: true
-	Filesystems []*ModelsV1Filesystem `json:"filesystems"`
+	Filesystems []*ModelsV1Filesystem `json:"filesystems" yaml:"filesystems"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// logicalvolumes
 	// Required: true
-	Logicalvolumes []*ModelsV1LogicalVolume `json:"logicalvolumes"`
+	Logicalvolumes []*ModelsV1LogicalVolume `json:"logicalvolumes" yaml:"logicalvolumes"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// raid
 	// Required: true
-	Raid []*ModelsV1Raid `json:"raid"`
+	Raid []*ModelsV1Raid `json:"raid" yaml:"raid"`
 
 	// volumegroups
 	// Required: true
-	Volumegroups []*ModelsV1VolumeGroup `json:"volumegroups"`
+	Volumegroups []*ModelsV1VolumeGroup `json:"volumegroups" yaml:"volumegroups"`
 }
 
 // Validate validates this models v1 filesystem layout response

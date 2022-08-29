@@ -19,7 +19,7 @@ import (
 type V1TenantUpdateRequest struct {
 
 	// tenant
-	Tenant *V1Tenant `json:"tenant,omitempty"`
+	Tenant *V1Tenant `json:"tenant,omitempty" yaml:"tenant,omitempty"`
 }
 
 // Validate validates this v1 tenant update request

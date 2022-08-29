@@ -20,26 +20,26 @@ import (
 type V1PostgresCreateStandbyRequest struct {
 
 	// backup
-	Backup string `json:"backup,omitempty"`
+	Backup string `json:"backup,omitempty" yaml:"backup,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// labels
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" yaml:"labels,omitempty"`
 
 	// maintenance
-	Maintenance []string `json:"maintenance"`
+	Maintenance []string `json:"maintenance" yaml:"maintenance"`
 
 	// number of instances
-	NumberOfInstances int32 `json:"numberOfInstances,omitempty"`
+	NumberOfInstances int32 `json:"numberOfInstances,omitempty" yaml:"numberOfInstances,omitempty"`
 
 	// partition ID
-	PartitionID string `json:"partitionID,omitempty"`
+	PartitionID string `json:"partitionID,omitempty" yaml:"partitionID,omitempty"`
 
 	// primary Id
 	// Required: true
-	PrimaryID *string `json:"primaryId"`
+	PrimaryID *string `json:"primaryId" yaml:"primaryId"`
 }
 
 // Validate validates this v1 postgres create standby request

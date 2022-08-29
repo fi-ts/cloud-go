@@ -21,63 +21,63 @@ type V1NetworkUsage struct {
 
 	// accounting annotations present on the last accounting report of this network device
 	// Required: true
-	Annotations []string `json:"annotations"`
+	Annotations []string `json:"annotations" yaml:"annotations"`
 
 	// the cluster id of this network device
 	// Required: true
-	Clusterid *string `json:"clusterid"`
+	Clusterid *string `json:"clusterid" yaml:"clusterid"`
 
 	// the cluster name of this network device
 	// Required: true
-	Clustername *string `json:"clustername"`
+	Clustername *string `json:"clustername" yaml:"clustername"`
 
 	// the contract number attached to this entity
 	// Required: true
-	Contract *string `json:"contract"`
+	Contract *string `json:"contract" yaml:"contract"`
 
 	// the debtor id attached to this entity
 	// Required: true
-	Debtorid *string `json:"debtorid"`
+	Debtorid *string `json:"debtorid" yaml:"debtorid"`
 
 	// the device name of this network device
 	// Required: true
-	Device *string `json:"device"`
+	Device *string `json:"device" yaml:"device"`
 
 	// the ingoing traffic of this network device (byte)
 	// Required: true
-	In *string `json:"in"`
+	In *string `json:"in" yaml:"in"`
 
 	// the duration that this network device is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the outgoing traffic of this network device (byte)
 	// Required: true
-	Out *string `json:"out"`
+	Out *string `json:"out" yaml:"out"`
 
 	// the partition of this network device
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// the project id of this entity
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the project name of this entity
 	// Required: true
-	Projectname *string `json:"projectname"`
+	Projectname *string `json:"projectname" yaml:"projectname"`
 
 	// the tenant of this entity
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 
 	// the tenant name of this entity
 	// Required: true
-	Tenantname *string `json:"tenantname"`
+	Tenantname *string `json:"tenantname" yaml:"tenantname"`
 
 	// the total traffic of this network device (byte)
 	// Required: true
-	Total *string `json:"total"`
+	Total *string `json:"total" yaml:"total"`
 }
 
 // Validate validates this v1 network usage

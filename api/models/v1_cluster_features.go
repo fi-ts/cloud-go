@@ -21,15 +21,15 @@ type V1ClusterFeatures struct {
 
 	// duros storage encryption
 	// Required: true
-	DurosStorageEncryption *string `json:"DurosStorageEncryption"`
+	DurosStorageEncryption *string `json:"DurosStorageEncryption" yaml:"DurosStorageEncryption"`
 
 	// log accepted connections
 	// Required: true
-	LogAcceptedConnections *string `json:"LogAcceptedConnections"`
+	LogAcceptedConnections *string `json:"LogAcceptedConnections" yaml:"LogAcceptedConnections"`
 
 	// reversed v p n
 	// Required: true
-	ReversedVPN *string `json:"ReversedVPN"`
+	ReversedVPN *string `json:"ReversedVPN" yaml:"ReversedVPN"`
 }
 
 // Validate validates this v1 cluster features

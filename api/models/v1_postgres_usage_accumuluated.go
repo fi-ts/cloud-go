@@ -21,19 +21,19 @@ type V1PostgresUsageAccumuluated struct {
 
 	// the accumuluated cpu seconds of the postgres in this response (s*s)
 	// Required: true
-	Cpuseconds *string `json:"cpuseconds"`
+	Cpuseconds *string `json:"cpuseconds" yaml:"cpuseconds"`
 
 	// the duration that this postgres is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the accumulated memory seconds of the postgres in this response (byte*s)
 	// Required: true
-	Memoryseconds *string `json:"memoryseconds"`
+	Memoryseconds *string `json:"memoryseconds" yaml:"memoryseconds"`
 
 	// the accumulated storage seconds of the postgres in this response (byte*s)
 	// Required: true
-	Storageseconds *string `json:"storageseconds"`
+	Storageseconds *string `json:"storageseconds" yaml:"storageseconds"`
 }
 
 // Validate validates this v1 postgres usage accumuluated

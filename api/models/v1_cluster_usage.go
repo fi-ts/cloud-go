@@ -22,61 +22,61 @@ type V1ClusterUsage struct {
 
 	// the average amount of worker groups during the time window
 	// Required: true
-	Averageworkergroups *string `json:"averageworkergroups"`
+	Averageworkergroups *string `json:"averageworkergroups" yaml:"averageworkergroups"`
 
 	// the end time of this cluster
 	// Required: true
 	// Format: date-time
-	Clusterend *strfmt.DateTime `json:"clusterend"`
+	Clusterend *strfmt.DateTime `json:"clusterend" yaml:"clusterend"`
 
 	// the cluster id of this cluster
 	// Required: true
-	Clusterid *string `json:"clusterid"`
+	Clusterid *string `json:"clusterid" yaml:"clusterid"`
 
 	// the cluster name of this cluster
 	// Required: true
-	Clustername *string `json:"clustername"`
+	Clustername *string `json:"clustername" yaml:"clustername"`
 
 	// the start time of this cluster
 	// Required: true
 	// Format: date-time
-	Clusterstart *strfmt.DateTime `json:"clusterstart"`
+	Clusterstart *strfmt.DateTime `json:"clusterstart" yaml:"clusterstart"`
 
 	// the contract number attached to this entity
 	// Required: true
-	Contract *string `json:"contract"`
+	Contract *string `json:"contract" yaml:"contract"`
 
 	// the debtor id attached to this entity
 	// Required: true
-	Debtorid *string `json:"debtorid"`
+	Debtorid *string `json:"debtorid" yaml:"debtorid"`
 
 	// the duration that this cluster is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the partition of this cluster
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// the project id of this entity
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the project name of this entity
 	// Required: true
-	Projectname *string `json:"projectname"`
+	Projectname *string `json:"projectname" yaml:"projectname"`
 
 	// the tenant of this entity
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 
 	// the tenant name of this entity
 	// Required: true
-	Tenantname *string `json:"tenantname"`
+	Tenantname *string `json:"tenantname" yaml:"tenantname"`
 
 	// the worker groups of this cluster
 	// Required: true
-	Workergroups []*V1ClusterWorker `json:"workergroups"`
+	Workergroups []*V1ClusterWorker `json:"workergroups" yaml:"workergroups"`
 }
 
 // Validate validates this v1 cluster usage

@@ -21,19 +21,19 @@ type V1Network struct {
 
 	// description
 	// Required: true
-	Description *string `json:"Description"`
+	Description *string `json:"Description" yaml:"Description"`
 
 	// ID
 	// Required: true
-	ID *string `json:"ID"`
+	ID *string `json:"ID" yaml:"ID"`
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 
 	// prefixes
 	// Required: true
-	Prefixes []string `json:"Prefixes"`
+	Prefixes []string `json:"Prefixes" yaml:"Prefixes"`
 }
 
 // Validate validates this v1 network

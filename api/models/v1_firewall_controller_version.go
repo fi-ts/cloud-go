@@ -21,15 +21,15 @@ type V1FirewallControllerVersion struct {
 
 	// classification
 	// Required: true
-	Classification *string `json:"Classification"`
+	Classification *string `json:"Classification" yaml:"Classification"`
 
 	// URL
 	// Required: true
-	URL *string `json:"URL"`
+	URL *string `json:"URL" yaml:"URL"`
 
 	// version
 	// Required: true
-	Version *string `json:"Version"`
+	Version *string `json:"Version" yaml:"Version"`
 }
 
 // Validate validates this v1 firewall controller version

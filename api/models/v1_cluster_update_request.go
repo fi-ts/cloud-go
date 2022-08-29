@@ -22,63 +22,63 @@ type V1ClusterUpdateRequest struct {
 
 	// additional networks
 	// Required: true
-	AdditionalNetworks []string `json:"AdditionalNetworks"`
+	AdditionalNetworks []string `json:"AdditionalNetworks" yaml:"AdditionalNetworks"`
 
 	// audit
 	// Required: true
-	Audit *V1Audit `json:"Audit"`
+	Audit *V1Audit `json:"Audit" yaml:"Audit"`
 
 	// cluster features
 	// Required: true
-	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures"`
+	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures" yaml:"ClusterFeatures"`
 
 	// custom default storage class
 	// Required: true
-	CustomDefaultStorageClass *V1CustomDefaultStorageClass `json:"CustomDefaultStorageClass"`
+	CustomDefaultStorageClass *V1CustomDefaultStorageClass `json:"CustomDefaultStorageClass" yaml:"CustomDefaultStorageClass"`
 
 	// egress rules
 	// Required: true
-	EgressRules []*V1EgressRule `json:"EgressRules"`
+	EgressRules []*V1EgressRule `json:"EgressRules" yaml:"EgressRules"`
 
 	// firewall controller version
 	// Required: true
-	FirewallControllerVersion *string `json:"FirewallControllerVersion"`
+	FirewallControllerVersion *string `json:"FirewallControllerVersion" yaml:"FirewallControllerVersion"`
 
 	// firewall image
 	// Required: true
-	FirewallImage *string `json:"FirewallImage"`
+	FirewallImage *string `json:"FirewallImage" yaml:"FirewallImage"`
 
 	// firewall size
 	// Required: true
-	FirewallSize *string `json:"FirewallSize"`
+	FirewallSize *string `json:"FirewallSize" yaml:"FirewallSize"`
 
 	// ID
 	// Required: true
-	ID *string `json:"ID"`
+	ID *string `json:"ID" yaml:"ID"`
 
 	// kubernetes
 	// Required: true
-	Kubernetes *V1Kubernetes `json:"Kubernetes"`
+	Kubernetes *V1Kubernetes `json:"Kubernetes" yaml:"Kubernetes"`
 
 	// labels
 	// Required: true
-	Labels map[string]string `json:"Labels"`
+	Labels map[string]string `json:"Labels" yaml:"Labels"`
 
 	// maintenance
 	// Required: true
-	Maintenance *V1Maintenance `json:"Maintenance"`
+	Maintenance *V1Maintenance `json:"Maintenance" yaml:"Maintenance"`
 
 	// purpose
 	// Required: true
-	Purpose *string `json:"Purpose"`
+	Purpose *string `json:"Purpose" yaml:"Purpose"`
 
 	// workers
 	// Required: true
-	Workers []*V1Worker `json:"Workers"`
+	Workers []*V1Worker `json:"Workers" yaml:"Workers"`
 
 	// seed name on which the cluster will be scheduled
 	// Required: true
-	SeedName *string `json:"seedName"`
+	SeedName *string `json:"seedName" yaml:"seedName"`
 }
 
 // Validate validates this v1 cluster update request

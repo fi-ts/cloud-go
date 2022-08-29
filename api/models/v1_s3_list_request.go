@@ -21,7 +21,7 @@ type V1S3ListRequest struct {
 
 	// partition
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 }
 
 // Validate validates this v1 s3 list request

@@ -22,27 +22,27 @@ type V1S3UpdateRequest struct {
 
 	// add keys
 	// Required: true
-	AddKeys []*V1S3Key `json:"add_keys"`
+	AddKeys []*V1S3Key `json:"add_keys" yaml:"add_keys"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// partition
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// project
 	// Required: true
-	Project *string `json:"project"`
+	Project *string `json:"project" yaml:"project"`
 
 	// remove access keys
 	// Required: true
-	RemoveAccessKeys []string `json:"remove_access_keys"`
+	RemoveAccessKeys []string `json:"remove_access_keys" yaml:"remove_access_keys"`
 
 	// tenant
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 }
 
 // Validate validates this v1 s3 update request

@@ -21,15 +21,15 @@ type V1beta1Gardener struct {
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// version
 	// Required: true
-	Version *string `json:"version"`
+	Version *string `json:"version" yaml:"version"`
 }
 
 // Validate validates this v1beta1 gardener

@@ -20,11 +20,11 @@ import (
 type V1ProjectIDTime struct {
 
 	// projectID as returned by cloud-api (e.g. 10241dd7-a8de-4856-8ac0-b55830b22036)
-	ProjectID string `json:"project_id,omitempty"`
+	ProjectID string `json:"project_id,omitempty" yaml:"project_id,omitempty"`
 
 	// point in time
 	// Format: date-time
-	Time strfmt.DateTime `json:"time,omitempty"`
+	Time strfmt.DateTime `json:"time,omitempty" yaml:"time,omitempty"`
 }
 
 // Validate validates this v1 project ID time

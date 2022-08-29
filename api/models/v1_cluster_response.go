@@ -22,110 +22,110 @@ type V1ClusterResponse struct {
 
 	// additional networks
 	// Required: true
-	AdditionalNetworks []string `json:"AdditionalNetworks"`
+	AdditionalNetworks []string `json:"AdditionalNetworks" yaml:"AdditionalNetworks"`
 
 	// cluster features
 	// Required: true
-	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures"`
+	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures" yaml:"ClusterFeatures"`
 
 	// control plane feature gates
 	// Required: true
-	ControlPlaneFeatureGates []string `json:"ControlPlaneFeatureGates"`
+	ControlPlaneFeatureGates []string `json:"ControlPlaneFeatureGates" yaml:"ControlPlaneFeatureGates"`
 
 	// creation timestamp
 	// Required: true
 	// Format: date-time
-	CreationTimestamp *strfmt.DateTime `json:"CreationTimestamp"`
+	CreationTimestamp *strfmt.DateTime `json:"CreationTimestamp" yaml:"CreationTimestamp"`
 
 	// creator
 	// Required: true
-	Creator *string `json:"Creator"`
+	Creator *string `json:"Creator" yaml:"Creator"`
 
 	// custom default storage class
 	// Required: true
-	CustomDefaultStorageClass *V1CustomDefaultStorageClass `json:"CustomDefaultStorageClass"`
+	CustomDefaultStorageClass *V1CustomDefaultStorageClass `json:"CustomDefaultStorageClass" yaml:"CustomDefaultStorageClass"`
 
 	// DNS endpoint
 	// Required: true
-	DNSEndpoint *string `json:"DNSEndpoint"`
+	DNSEndpoint *string `json:"DNSEndpoint" yaml:"DNSEndpoint"`
 
 	// description
 	// Required: true
-	Description *string `json:"Description"`
+	Description *string `json:"Description" yaml:"Description"`
 
 	// egress rules
 	// Required: true
-	EgressRules []*V1EgressRule `json:"EgressRules"`
+	EgressRules []*V1EgressRule `json:"EgressRules" yaml:"EgressRules"`
 
 	// firewall controller version
 	// Required: true
-	FirewallControllerVersion *string `json:"FirewallControllerVersion"`
+	FirewallControllerVersion *string `json:"FirewallControllerVersion" yaml:"FirewallControllerVersion"`
 
 	// firewall image
 	// Required: true
-	FirewallImage *string `json:"FirewallImage"`
+	FirewallImage *string `json:"FirewallImage" yaml:"FirewallImage"`
 
 	// firewall size
 	// Required: true
-	FirewallSize *string `json:"FirewallSize"`
+	FirewallSize *string `json:"FirewallSize" yaml:"FirewallSize"`
 
 	// ID
 	// Required: true
-	ID *string `json:"ID"`
+	ID *string `json:"ID" yaml:"ID"`
 
 	// kubernetes
 	// Required: true
-	Kubernetes *V1Kubernetes `json:"Kubernetes"`
+	Kubernetes *V1Kubernetes `json:"Kubernetes" yaml:"Kubernetes"`
 
 	// labels
 	// Required: true
-	Labels map[string]string `json:"Labels"`
+	Labels map[string]string `json:"Labels" yaml:"Labels"`
 
 	// maintenance
 	// Required: true
-	Maintenance *V1Maintenance `json:"Maintenance"`
+	Maintenance *V1Maintenance `json:"Maintenance" yaml:"Maintenance"`
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 
 	// networking
 	// Required: true
-	Networking *V1Networking `json:"Networking"`
+	Networking *V1Networking `json:"Networking" yaml:"Networking"`
 
 	// partition ID
 	// Required: true
-	PartitionID *string `json:"PartitionID"`
+	PartitionID *string `json:"PartitionID" yaml:"PartitionID"`
 
 	// project ID
 	// Required: true
-	ProjectID *string `json:"ProjectID"`
+	ProjectID *string `json:"ProjectID" yaml:"ProjectID"`
 
 	// purpose
 	// Required: true
-	Purpose *string `json:"Purpose"`
+	Purpose *string `json:"Purpose" yaml:"Purpose"`
 
 	// status
 	// Required: true
-	Status *V1beta1ShootStatus `json:"Status"`
+	Status *V1beta1ShootStatus `json:"Status" yaml:"Status"`
 
 	// tenant
 	// Required: true
-	Tenant *string `json:"Tenant"`
+	Tenant *string `json:"Tenant" yaml:"Tenant"`
 
 	// workers
 	// Required: true
-	Workers []*V1Worker `json:"Workers"`
+	Workers []*V1Worker `json:"Workers" yaml:"Workers"`
 
 	// cni
 	// Required: true
-	Cni *string `json:"cni"`
+	Cni *string `json:"cni" yaml:"cni"`
 
 	// the firewalls which belong to this cluster
-	Firewalls []*ModelsV1MachineResponse `json:"firewalls"`
+	Firewalls []*ModelsV1MachineResponse `json:"firewalls" yaml:"firewalls"`
 
 	// the machines which belong to this cluster
-	Machines []*ModelsV1MachineResponse `json:"machines"`
+	Machines []*ModelsV1MachineResponse `json:"machines" yaml:"machines"`
 }
 
 // Validate validates this v1 cluster response

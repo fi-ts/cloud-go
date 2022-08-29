@@ -22,15 +22,15 @@ type ModelsV1Disk struct {
 
 	// device
 	// Required: true
-	Device *string `json:"device"`
+	Device *string `json:"device" yaml:"device"`
 
 	// partitions
 	// Required: true
-	Partitions []*ModelsV1DiskPartition `json:"partitions"`
+	Partitions []*ModelsV1DiskPartition `json:"partitions" yaml:"partitions"`
 
 	// wipeonreinstall
 	// Required: true
-	Wipeonreinstall *bool `json:"wipeonreinstall"`
+	Wipeonreinstall *bool `json:"wipeonreinstall" yaml:"wipeonreinstall"`
 }
 
 // Validate validates this models v1 disk

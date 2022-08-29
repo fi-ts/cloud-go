@@ -21,39 +21,39 @@ type ModelsV1IPResponse struct {
 
 	// allocationuuid
 	// Required: true
-	Allocationuuid *string `json:"allocationuuid"`
+	Allocationuuid *string `json:"allocationuuid" yaml:"allocationuuid"`
 
 	// changed
-	Changed string `json:"changed,omitempty"`
+	Changed string `json:"changed,omitempty" yaml:"changed,omitempty"`
 
 	// created
-	Created string `json:"created,omitempty"`
+	Created string `json:"created,omitempty" yaml:"created,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// ipaddress
 	// Required: true
-	Ipaddress *string `json:"ipaddress"`
+	Ipaddress *string `json:"ipaddress" yaml:"ipaddress"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// networkid
 	// Required: true
-	Networkid *string `json:"networkid"`
+	Networkid *string `json:"networkid" yaml:"networkid"`
 
 	// projectid
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// tags
 	// Required: true
-	Tags []string `json:"tags"`
+	Tags []string `json:"tags" yaml:"tags"`
 
 	// type
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" yaml:"type"`
 }
 
 // Validate validates this models v1 IP response

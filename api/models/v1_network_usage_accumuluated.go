@@ -21,19 +21,19 @@ type V1NetworkUsageAccumuluated struct {
 
 	// the accumuluated ingoing traffic (byte)
 	// Required: true
-	In *string `json:"in"`
+	In *string `json:"in" yaml:"in"`
 
 	// the duration for that the network usage is accounted
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the accumulated outgoing traffic (byte)
 	// Required: true
-	Out *string `json:"out"`
+	Out *string `json:"out" yaml:"out"`
 
 	// the accumulated total traffic (byte)
 	// Required: true
-	Total *string `json:"total"`
+	Total *string `json:"total" yaml:"total"`
 }
 
 // Validate validates this v1 network usage accumuluated

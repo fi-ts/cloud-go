@@ -21,11 +21,11 @@ type ModelsV1ChassisIdentifyLEDState struct {
 
 	// description
 	// Required: true
-	Description *string `json:"description"`
+	Description *string `json:"description" yaml:"description"`
 
 	// value
 	// Required: true
-	Value *string `json:"value"`
+	Value *string `json:"value" yaml:"value"`
 }
 
 // Validate validates this models v1 chassis identify l e d state

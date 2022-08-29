@@ -18,13 +18,13 @@ import (
 type ModelsV1PartitionBootConfiguration struct {
 
 	// commandline
-	Commandline string `json:"commandline,omitempty"`
+	Commandline string `json:"commandline,omitempty" yaml:"commandline,omitempty"`
 
 	// imageurl
-	Imageurl string `json:"imageurl,omitempty"`
+	Imageurl string `json:"imageurl,omitempty" yaml:"imageurl,omitempty"`
 
 	// kernelurl
-	Kernelurl string `json:"kernelurl,omitempty"`
+	Kernelurl string `json:"kernelurl,omitempty" yaml:"kernelurl,omitempty"`
 }
 
 // Validate validates this models v1 partition boot configuration

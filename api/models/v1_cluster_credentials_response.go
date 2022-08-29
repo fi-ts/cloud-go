@@ -21,15 +21,15 @@ type V1ClusterCredentialsResponse struct {
 
 	// kubeconfig
 	// Required: true
-	Kubeconfig *string `json:"Kubeconfig"`
+	Kubeconfig *string `json:"Kubeconfig" yaml:"Kubeconfig"`
 
 	// SSH key pair
 	// Required: true
-	SSHKeyPair *V1SSHKeyPair `json:"SSHKeyPair"`
+	SSHKeyPair *V1SSHKeyPair `json:"SSHKeyPair" yaml:"SSHKeyPair"`
 
 	// v p n
 	// Required: true
-	VPN *V1VPN `json:"VPN"`
+	VPN *V1VPN `json:"VPN" yaml:"VPN"`
 }
 
 // Validate validates this v1 cluster credentials response

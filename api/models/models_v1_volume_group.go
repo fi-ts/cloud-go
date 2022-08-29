@@ -21,15 +21,15 @@ type ModelsV1VolumeGroup struct {
 
 	// devices
 	// Required: true
-	Devices []string `json:"devices"`
+	Devices []string `json:"devices" yaml:"devices"`
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// tags
 	// Required: true
-	Tags []string `json:"tags"`
+	Tags []string `json:"tags" yaml:"tags"`
 }
 
 // Validate validates this models v1 volume group

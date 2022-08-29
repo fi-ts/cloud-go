@@ -21,7 +21,7 @@ type V1ClusterReconcileRequest struct {
 
 	// the gardener shoot operation annotation to annotate the shoot with
 	// Required: true
-	Operation *string `json:"operation"`
+	Operation *string `json:"operation" yaml:"operation"`
 }
 
 // Validate validates this v1 cluster reconcile request

@@ -21,13 +21,13 @@ type ModelsV1MachineProvisioningEvent struct {
 
 	// event
 	// Required: true
-	Event *string `json:"event"`
+	Event *string `json:"event" yaml:"event"`
 
 	// message
-	Message string `json:"message,omitempty"`
+	Message string `json:"message,omitempty" yaml:"message,omitempty"`
 
 	// time
-	Time string `json:"time,omitempty"`
+	Time string `json:"time,omitempty" yaml:"time,omitempty"`
 }
 
 // Validate validates this models v1 machine provisioning event

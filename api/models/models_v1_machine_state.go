@@ -21,18 +21,18 @@ type ModelsV1MachineState struct {
 
 	// description
 	// Required: true
-	Description *string `json:"description"`
+	Description *string `json:"description" yaml:"description"`
 
 	// issuer
-	Issuer string `json:"issuer,omitempty"`
+	Issuer string `json:"issuer,omitempty" yaml:"issuer,omitempty"`
 
 	// metal hammer version
 	// Required: true
-	MetalHammerVersion *string `json:"metal_hammer_version"`
+	MetalHammerVersion *string `json:"metal_hammer_version" yaml:"metal_hammer_version"`
 
 	// value
 	// Required: true
-	Value *string `json:"value"`
+	Value *string `json:"value" yaml:"value"`
 }
 
 // Validate validates this models v1 machine state

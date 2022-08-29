@@ -21,28 +21,28 @@ type V1VolumeUsageRequest struct {
 
 	// accounting annotations present on the last accounting report of this container
 	// Required: true
-	Annotations []string `json:"annotations"`
+	Annotations []string `json:"annotations" yaml:"annotations"`
 
 	// the cluster id to account for
-	Clusterid string `json:"clusterid,omitempty"`
+	Clusterid string `json:"clusterid,omitempty" yaml:"clusterid,omitempty"`
 
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
-	From *strfmt.DateTime `json:"from"`
+	From *strfmt.DateTime `json:"from" yaml:"from"`
 
 	// the namespace name to account for
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" yaml:"namespace,omitempty"`
 
 	// the project id to account for
-	Projectid string `json:"projectid,omitempty"`
+	Projectid string `json:"projectid,omitempty" yaml:"projectid,omitempty"`
 
 	// the tenant to get the container usage for (defaults to all tenants)
-	Tenant string `json:"tenant,omitempty"`
+	Tenant string `json:"tenant,omitempty" yaml:"tenant,omitempty"`
 
 	// the end time in the accounting window to look at (defaults to current system time)
 	// Format: date-time
-	To strfmt.DateTime `json:"to,omitempty"`
+	To strfmt.DateTime `json:"to,omitempty" yaml:"to,omitempty"`
 }
 
 // Validate validates this v1 volume usage request

@@ -21,69 +21,69 @@ type V1PostgresUsage struct {
 
 	// accounting annotations present on the last accounting report of this postgres
 	// Required: true
-	Annotations []string `json:"annotations"`
+	Annotations []string `json:"annotations" yaml:"annotations"`
 
 	// the contract number attached to this entity
 	// Required: true
-	Contract *string `json:"contract"`
+	Contract *string `json:"contract" yaml:"contract"`
 
 	// the cpu seconds of this postgres (s*s)
 	// Required: true
-	Cpuseconds *string `json:"cpuseconds"`
+	Cpuseconds *string `json:"cpuseconds" yaml:"cpuseconds"`
 
 	// the debtor id attached to this entity
 	// Required: true
-	Debtorid *string `json:"debtorid"`
+	Debtorid *string `json:"debtorid" yaml:"debtorid"`
 
 	// the duration that this postgres is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the memory seconds of this postgres (byte*s)
 	// Required: true
-	Memoryseconds *string `json:"memoryseconds"`
+	Memoryseconds *string `json:"memoryseconds" yaml:"memoryseconds"`
 
 	// the partition of this postgres
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// the cluster name of this postgres
 	// Required: true
-	Postgresdescription *string `json:"postgresdescription"`
+	Postgresdescription *string `json:"postgresdescription" yaml:"postgresdescription"`
 
 	// the end time of this postgres
 	// Required: true
 	// Format: date-time
-	Postgresend *strfmt.DateTime `json:"postgresend"`
+	Postgresend *strfmt.DateTime `json:"postgresend" yaml:"postgresend"`
 
 	// the id of this postgres
 	// Required: true
-	Postgresid *string `json:"postgresid"`
+	Postgresid *string `json:"postgresid" yaml:"postgresid"`
 
 	// the start time of this postgres
 	// Required: true
 	// Format: date-time
-	Postgresstart *strfmt.DateTime `json:"postgresstart"`
+	Postgresstart *strfmt.DateTime `json:"postgresstart" yaml:"postgresstart"`
 
 	// the project id of this entity
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the project name of this entity
 	// Required: true
-	Projectname *string `json:"projectname"`
+	Projectname *string `json:"projectname" yaml:"projectname"`
 
 	// the accumulated storage seconds of the postgres in this response (byte*s)
 	// Required: true
-	Storageseconds *string `json:"storageseconds"`
+	Storageseconds *string `json:"storageseconds" yaml:"storageseconds"`
 
 	// the tenant of this entity
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 
 	// the tenant name of this entity
 	// Required: true
-	Tenantname *string `json:"tenantname"`
+	Tenantname *string `json:"tenantname" yaml:"tenantname"`
 }
 
 // Validate validates this v1 postgres usage

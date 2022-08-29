@@ -21,11 +21,11 @@ type ModelsV1FilesystemLayoutConstraints struct {
 
 	// images
 	// Required: true
-	Images map[string]string `json:"images"`
+	Images map[string]string `json:"images" yaml:"images"`
 
 	// sizes
 	// Required: true
-	Sizes []string `json:"sizes"`
+	Sizes []string `json:"sizes" yaml:"sizes"`
 }
 
 // Validate validates this models v1 filesystem layout constraints

@@ -21,19 +21,19 @@ type V1Kubernetes struct {
 
 	// allow privileged containers
 	// Required: true
-	AllowPrivilegedContainers *bool `json:"AllowPrivilegedContainers"`
+	AllowPrivilegedContainers *bool `json:"AllowPrivilegedContainers" yaml:"AllowPrivilegedContainers"`
 
 	// expiration date
 	// Required: true
 	// Format: date-time
-	ExpirationDate *strfmt.DateTime `json:"ExpirationDate"`
+	ExpirationDate *strfmt.DateTime `json:"ExpirationDate" yaml:"ExpirationDate"`
 
 	// max pods per node
-	MaxPodsPerNode int32 `json:"MaxPodsPerNode,omitempty"`
+	MaxPodsPerNode int32 `json:"MaxPodsPerNode,omitempty" yaml:"MaxPodsPerNode,omitempty"`
 
 	// version
 	// Required: true
-	Version *string `json:"Version"`
+	Version *string `json:"Version" yaml:"Version"`
 }
 
 // Validate validates this v1 kubernetes

@@ -22,67 +22,67 @@ type V1SnapshotResponse struct {
 	// creation time
 	// Required: true
 	// Format: date-time
-	CreationTime *strfmt.DateTime `json:"CreationTime"`
+	CreationTime *strfmt.DateTime `json:"CreationTime" yaml:"CreationTime"`
 
 	// description
 	// Required: true
-	Description *string `json:"Description"`
+	Description *string `json:"Description" yaml:"Description"`
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 
 	// node IP list
 	// Required: true
-	NodeIPList []string `json:"NodeIPList"`
+	NodeIPList []string `json:"NodeIPList" yaml:"NodeIPList"`
 
 	// partition ID
 	// Required: true
-	PartitionID *string `json:"PartitionID"`
+	PartitionID *string `json:"PartitionID" yaml:"PartitionID"`
 
 	// primary node UUID
 	// Required: true
-	PrimaryNodeUUID *string `json:"PrimaryNodeUUID"`
+	PrimaryNodeUUID *string `json:"PrimaryNodeUUID" yaml:"PrimaryNodeUUID"`
 
 	// project ID
 	// Required: true
-	ProjectID *string `json:"ProjectID"`
+	ProjectID *string `json:"ProjectID" yaml:"ProjectID"`
 
 	// replica count
 	// Required: true
-	ReplicaCount *int64 `json:"ReplicaCount"`
+	ReplicaCount *int64 `json:"ReplicaCount" yaml:"ReplicaCount"`
 
 	// retention time
 	// Required: true
-	RetentionTime *int64 `json:"RetentionTime"`
+	RetentionTime *int64 `json:"RetentionTime" yaml:"RetentionTime"`
 
 	// size
 	// Required: true
-	Size *int64 `json:"Size"`
+	Size *int64 `json:"Size" yaml:"Size"`
 
 	// snapshot ID
 	// Required: true
-	SnapshotID *string `json:"SnapshotID"`
+	SnapshotID *string `json:"SnapshotID" yaml:"SnapshotID"`
 
 	// source volume ID
 	// Required: true
-	SourceVolumeID *string `json:"SourceVolumeID"`
+	SourceVolumeID *string `json:"SourceVolumeID" yaml:"SourceVolumeID"`
 
 	// source volume name
 	// Required: true
-	SourceVolumeName *string `json:"SourceVolumeName"`
+	SourceVolumeName *string `json:"SourceVolumeName" yaml:"SourceVolumeName"`
 
 	// state
 	// Required: true
-	State *string `json:"State"`
+	State *string `json:"State" yaml:"State"`
 
 	// statistics
 	// Required: true
-	Statistics *V1SnapshotStatistics `json:"Statistics"`
+	Statistics *V1SnapshotStatistics `json:"Statistics" yaml:"Statistics"`
 
 	// tenant ID
 	// Required: true
-	TenantID *string `json:"TenantID"`
+	TenantID *string `json:"TenantID" yaml:"TenantID"`
 }
 
 // Validate validates this v1 snapshot response

@@ -22,20 +22,20 @@ type V1ContainerUsageResponse struct {
 
 	// just the usage data of the individual containers summed up
 	// Required: true
-	Accumulatedusage *V1ContainerUsageAccumuluated `json:"accumulatedusage"`
+	Accumulatedusage *V1ContainerUsageAccumuluated `json:"accumulatedusage" yaml:"accumulatedusage"`
 
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
-	From *strfmt.DateTime `json:"from"`
+	From *strfmt.DateTime `json:"from" yaml:"from"`
 
 	// the end time in the accounting window to look at (defaults to current system time)
 	// Format: date-time
-	To strfmt.DateTime `json:"to,omitempty"`
+	To strfmt.DateTime `json:"to,omitempty" yaml:"to,omitempty"`
 
 	// the usage data of the individual containers
 	// Required: true
-	Usage []*V1ContainerUsage `json:"usage"`
+	Usage []*V1ContainerUsage `json:"usage" yaml:"usage"`
 }
 
 // Validate validates this v1 container usage response

@@ -21,7 +21,7 @@ type V1CustomDefaultStorageClass struct {
 
 	// class name
 	// Required: true
-	ClassName *string `json:"ClassName"`
+	ClassName *string `json:"ClassName" yaml:"ClassName"`
 }
 
 // Validate validates this v1 custom default storage class

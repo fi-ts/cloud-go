@@ -21,7 +21,7 @@ type V1ClusterUsageAccumuluated struct {
 
 	// the duration that this cluster is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 }
 
 // Validate validates this v1 cluster usage accumuluated

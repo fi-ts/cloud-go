@@ -21,27 +21,27 @@ type V1StorageServerInfo struct {
 
 	// light o s version
 	// Required: true
-	LightOSVersion *string `json:"LightOSVersion"`
+	LightOSVersion *string `json:"LightOSVersion" yaml:"LightOSVersion"`
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 
 	// risk of service loss state
 	// Required: true
-	RiskOfServiceLossState *string `json:"RiskOfServiceLossState"`
+	RiskOfServiceLossState *string `json:"RiskOfServiceLossState" yaml:"RiskOfServiceLossState"`
 
 	// server endpoints
 	// Required: true
-	ServerEndpoints []string `json:"ServerEndpoints"`
+	ServerEndpoints []string `json:"ServerEndpoints" yaml:"ServerEndpoints"`
 
 	// state
 	// Required: true
-	State *string `json:"State"`
+	State *string `json:"State" yaml:"State"`
 
 	// UUID
 	// Required: true
-	UUID *string `json:"UUID"`
+	UUID *string `json:"UUID" yaml:"UUID"`
 }
 
 // Validate validates this v1 storage server info

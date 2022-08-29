@@ -21,85 +21,85 @@ type V1ContainerUsage struct {
 
 	// accounting annotations present on the last accounting report of this container
 	// Required: true
-	Annotations []string `json:"annotations"`
+	Annotations []string `json:"annotations" yaml:"annotations"`
 
 	// the cluster id of this container
 	// Required: true
-	Clusterid *string `json:"clusterid"`
+	Clusterid *string `json:"clusterid" yaml:"clusterid"`
 
 	// the cluster name of this container
 	// Required: true
-	Clustername *string `json:"clustername"`
+	Clustername *string `json:"clustername" yaml:"clustername"`
 
 	// the container image of this container
 	// Required: true
-	Containerimage *string `json:"containerimage"`
+	Containerimage *string `json:"containerimage" yaml:"containerimage"`
 
 	// the name of this container
 	// Required: true
-	Containername *string `json:"containername"`
+	Containername *string `json:"containername" yaml:"containername"`
 
 	// the contract number attached to this entity
 	// Required: true
-	Contract *string `json:"contract"`
+	Contract *string `json:"contract" yaml:"contract"`
 
 	// the cpu seconds of this container (s*s)
 	// Required: true
-	Cpuseconds *string `json:"cpuseconds"`
+	Cpuseconds *string `json:"cpuseconds" yaml:"cpuseconds"`
 
 	// the debtor id attached to this entity
 	// Required: true
-	Debtorid *string `json:"debtorid"`
+	Debtorid *string `json:"debtorid" yaml:"debtorid"`
 
 	// the duration that this container is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the memory seconds of this container (byte*s)
 	// Required: true
-	Memoryseconds *string `json:"memoryseconds"`
+	Memoryseconds *string `json:"memoryseconds" yaml:"memoryseconds"`
 
 	// the namespace of this container
 	// Required: true
-	Namespace *string `json:"namespace"`
+	Namespace *string `json:"namespace" yaml:"namespace"`
 
 	// the partition of this container
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// the pod end time of this container
 	// Required: true
 	// Format: date-time
-	Podend *strfmt.DateTime `json:"podend"`
+	Podend *strfmt.DateTime `json:"podend" yaml:"podend"`
 
 	// the pod name of this container
 	// Required: true
-	Podname *string `json:"podname"`
+	Podname *string `json:"podname" yaml:"podname"`
 
 	// the pod start time of this container
 	// Required: true
 	// Format: date-time
-	Podstart *strfmt.DateTime `json:"podstart"`
+	Podstart *strfmt.DateTime `json:"podstart" yaml:"podstart"`
 
 	// the pod uuid of this container
 	// Required: true
-	Poduuid *string `json:"poduuid"`
+	Poduuid *string `json:"poduuid" yaml:"poduuid"`
 
 	// the project id of this entity
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the project name of this entity
 	// Required: true
-	Projectname *string `json:"projectname"`
+	Projectname *string `json:"projectname" yaml:"projectname"`
 
 	// the tenant of this entity
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 
 	// the tenant name of this entity
 	// Required: true
-	Tenantname *string `json:"tenantname"`
+	Tenantname *string `json:"tenantname" yaml:"tenantname"`
 }
 
 // Validate validates this v1 container usage

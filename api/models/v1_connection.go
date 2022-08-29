@@ -18,13 +18,13 @@ import (
 type V1Connection struct {
 
 	// local side is primary
-	LocalSideIsPrimary bool `json:"localSideIsPrimary,omitempty"`
+	LocalSideIsPrimary bool `json:"localSideIsPrimary,omitempty" yaml:"localSideIsPrimary,omitempty"`
 
 	// postgres ID
-	PostgresID string `json:"postgresID,omitempty"`
+	PostgresID string `json:"postgresID,omitempty" yaml:"postgresID,omitempty"`
 
 	// synchronous
-	Synchronous bool `json:"synchronous,omitempty"`
+	Synchronous bool `json:"synchronous,omitempty" yaml:"synchronous,omitempty"`
 }
 
 // Validate validates this v1 connection

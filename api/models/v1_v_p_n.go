@@ -21,11 +21,11 @@ type V1VPN struct {
 
 	// address
 	// Required: true
-	Address *string `json:"Address"`
+	Address *string `json:"Address" yaml:"Address"`
 
 	// auth key
 	// Required: true
-	AuthKey *string `json:"AuthKey"`
+	AuthKey *string `json:"AuthKey" yaml:"AuthKey"`
 }
 
 // Validate validates this v1 v p n

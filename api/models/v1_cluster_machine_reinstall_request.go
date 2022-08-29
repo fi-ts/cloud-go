@@ -20,11 +20,11 @@ import (
 type V1ClusterMachineReinstallRequest struct {
 
 	// id of the image to install
-	Imageid string `json:"imageid,omitempty"`
+	Imageid string `json:"imageid,omitempty" yaml:"imageid,omitempty"`
 
 	// uuid of the machine to reinstall
 	// Required: true
-	Machineid *string `json:"machineid"`
+	Machineid *string `json:"machineid" yaml:"machineid"`
 }
 
 // Validate validates this v1 cluster machine reinstall request

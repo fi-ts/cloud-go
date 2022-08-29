@@ -22,20 +22,20 @@ type V1ClusterUsageResponse struct {
 
 	// just the usage data of the individual clusters summed up
 	// Required: true
-	Accumulatedusage *V1ClusterUsageAccumuluated `json:"accumulatedusage"`
+	Accumulatedusage *V1ClusterUsageAccumuluated `json:"accumulatedusage" yaml:"accumulatedusage"`
 
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
-	From *strfmt.DateTime `json:"from"`
+	From *strfmt.DateTime `json:"from" yaml:"from"`
 
 	// the end time in the accounting window to look at (defaults to current system time)
 	// Format: date-time
-	To strfmt.DateTime `json:"to,omitempty"`
+	To strfmt.DateTime `json:"to,omitempty" yaml:"to,omitempty"`
 
 	// the usage data of the individual clusters
 	// Required: true
-	Usage []*V1ClusterUsage `json:"usage"`
+	Usage []*V1ClusterUsage `json:"usage" yaml:"usage"`
 }
 
 // Validate validates this v1 cluster usage response

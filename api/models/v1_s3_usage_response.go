@@ -22,20 +22,20 @@ type V1S3UsageResponse struct {
 
 	// just the usage data of the individual s3 buckets summed up
 	// Required: true
-	Accumulatedusage *V1S3UsageAccumuluated `json:"accumulatedusage"`
+	Accumulatedusage *V1S3UsageAccumuluated `json:"accumulatedusage" yaml:"accumulatedusage"`
 
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
-	From *strfmt.DateTime `json:"from"`
+	From *strfmt.DateTime `json:"from" yaml:"from"`
 
 	// the end time in the accounting window to look at (defaults to current system time)
 	// Format: date-time
-	To strfmt.DateTime `json:"to,omitempty"`
+	To strfmt.DateTime `json:"to,omitempty" yaml:"to,omitempty"`
 
 	// the usage data of the individual s3 buckets
 	// Required: true
-	Usage []*V1S3Usage `json:"usage"`
+	Usage []*V1S3Usage `json:"usage" yaml:"usage"`
 }
 
 // Validate validates this v1 s3 usage response
