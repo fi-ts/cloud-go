@@ -47,7 +47,8 @@ func NewReconcileClusterOK() *ReconcileClusterOK {
 	return &ReconcileClusterOK{}
 }
 
-/* ReconcileClusterOK describes a response with status code 200, with default header values.
+/*
+	ReconcileClusterOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewReconcileClusterDefault(code int) *ReconcileClusterDefault {
 	}
 }
 
-/* ReconcileClusterDefault describes a response with status code -1, with default header values.
+/*
+	ReconcileClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */

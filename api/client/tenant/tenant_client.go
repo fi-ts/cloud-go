@@ -40,7 +40,7 @@ type ClientService interface {
 }
 
 /*
-  FindTenants finds tenants by multiple criteria
+FindTenants finds tenants by multiple criteria
 */
 func (a *Client) FindTenants(params *FindTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindTenantsOK, error) {
 	// TODO: Validate the params before sending
@@ -78,7 +78,7 @@ func (a *Client) FindTenants(params *FindTenantsParams, authInfo runtime.ClientA
 }
 
 /*
-  GetTenant gets tenant by id
+GetTenant gets tenant by id
 */
 func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTenantOK, error) {
 	// TODO: Validate the params before sending
@@ -116,7 +116,7 @@ func (a *Client) GetTenant(params *GetTenantParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  ListTenants gets a tenant list
+ListTenants gets a tenant list
 */
 func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListTenantsOK, error) {
 	// TODO: Validate the params before sending
@@ -154,7 +154,7 @@ func (a *Client) ListTenants(params *ListTenantsParams, authInfo runtime.ClientA
 }
 
 /*
-  UpdateTenant updates a tenant optimistic lock error can occur
+UpdateTenant updates a tenant optimistic lock error can occur
 */
 func (a *Client) UpdateTenant(params *UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTenantOK, error) {
 	// TODO: Validate the params before sending

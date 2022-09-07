@@ -24,6 +24,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	AdditionalNetworks []string `json:"AdditionalNetworks"`
 
+	// c n i
+	// Required: true
+	CNI *string `json:"CNI"`
+
 	// cluster features
 	// Required: true
 	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures"`
@@ -129,6 +133,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdditionalNetworks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCNI(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -241,6 +249,15 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 func (m *V1ClusterResponse) validateAdditionalNetworks(formats strfmt.Registry) error {
 
 	if err := validate.Required("AdditionalNetworks", "body", m.AdditionalNetworks); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateCNI(formats strfmt.Registry) error {
+
+	if err := validate.Required("CNI", "body", m.CNI); err != nil {
 		return err
 	}
 

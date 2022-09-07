@@ -54,10 +54,12 @@ func NewCreatePostgresStandbyParamsWithHTTPClient(client *http.Client) *CreatePo
 	}
 }
 
-/* CreatePostgresStandbyParams contains all the parameters to send to the API endpoint
-   for the create postgres standby operation.
+/*
+CreatePostgresStandbyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create postgres standby operation.
+
+	Typically these are written to a http.Request.
 */
 type CreatePostgresStandbyParams struct {
 

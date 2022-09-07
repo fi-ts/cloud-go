@@ -47,7 +47,8 @@ func NewContainerUsageOK() *ContainerUsageOK {
 	return &ContainerUsageOK{}
 }
 
-/* ContainerUsageOK describes a response with status code 200, with default header values.
+/*
+	ContainerUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewContainerUsageDefault(code int) *ContainerUsageDefault {
 	}
 }
 
-/* ContainerUsageDefault describes a response with status code -1, with default header values.
+/*
+	ContainerUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */

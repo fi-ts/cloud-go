@@ -92,6 +92,9 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
 
+	// cni
+	Cni string `json:"cni,omitempty"`
+
 	// seed name on which the cluster will be scheduled
 	SeedName string `json:"seedName,omitempty"`
 }

@@ -47,7 +47,8 @@ func NewRestorePostgresCreated() *RestorePostgresCreated {
 	return &RestorePostgresCreated{}
 }
 
-/* RestorePostgresCreated describes a response with status code 201, with default header values.
+/*
+	RestorePostgresCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -81,7 +82,8 @@ func NewRestorePostgresDefault(code int) *RestorePostgresDefault {
 	}
 }
 
-/* RestorePostgresDefault describes a response with status code -1, with default header values.
+/*
+	RestorePostgresDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -62,7 +62,7 @@ type ClientService interface {
 }
 
 /*
-  ClusterUsage finds cluster usage for given accounting query
+ClusterUsage finds cluster usage for given accounting query
 */
 func (a *Client) ClusterUsage(params *ClusterUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterUsageOK, error) {
 	// TODO: Validate the params before sending
@@ -100,7 +100,7 @@ func (a *Client) ClusterUsage(params *ClusterUsageParams, authInfo runtime.Clien
 }
 
 /*
-  ClusterUsageCSV finds cluster usage for given accounting query
+ClusterUsageCSV finds cluster usage for given accounting query
 */
 func (a *Client) ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterUsageCSVOK, error) {
 	// TODO: Validate the params before sending
@@ -138,7 +138,7 @@ func (a *Client) ClusterUsageCSV(params *ClusterUsageCSVParams, authInfo runtime
 }
 
 /*
-  ContainerUsage finds container usage for given accounting query
+ContainerUsage finds container usage for given accounting query
 */
 func (a *Client) ContainerUsage(params *ContainerUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerUsageOK, error) {
 	// TODO: Validate the params before sending
@@ -176,7 +176,7 @@ func (a *Client) ContainerUsage(params *ContainerUsageParams, authInfo runtime.C
 }
 
 /*
-  ContainerUsageCSV finds container usage for given accounting query
+ContainerUsageCSV finds container usage for given accounting query
 */
 func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerUsageCSVOK, error) {
 	// TODO: Validate the params before sending
@@ -214,7 +214,7 @@ func (a *Client) ContainerUsageCSV(params *ContainerUsageCSVParams, authInfo run
 }
 
 /*
-  IPUsage finds ip usage for given accounting query
+IPUsage finds ip usage for given accounting query
 */
 func (a *Client) IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPUsageOK, error) {
 	// TODO: Validate the params before sending
@@ -252,7 +252,7 @@ func (a *Client) IPUsage(params *IPUsageParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  IPUsageCSV finds ip usage for given accounting query
+IPUsageCSV finds ip usage for given accounting query
 */
 func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPUsageCSVOK, error) {
 	// TODO: Validate the params before sending
@@ -290,7 +290,7 @@ func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAut
 }
 
 /*
-  NetworkUsage finds network usage for given accounting query
+NetworkUsage finds network usage for given accounting query
 */
 func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageOK, error) {
 	// TODO: Validate the params before sending
@@ -328,7 +328,7 @@ func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.Clien
 }
 
 /*
-  NetworkUsageCSV finds network usage for given accounting query
+NetworkUsageCSV finds network usage for given accounting query
 */
 func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageCSVOK, error) {
 	// TODO: Validate the params before sending
@@ -366,7 +366,7 @@ func (a *Client) NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime
 }
 
 /*
-  PostgresUsage finds postgres usage for given accounting query
+PostgresUsage finds postgres usage for given accounting query
 */
 func (a *Client) PostgresUsage(params *PostgresUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageOK, error) {
 	// TODO: Validate the params before sending
@@ -404,7 +404,7 @@ func (a *Client) PostgresUsage(params *PostgresUsageParams, authInfo runtime.Cli
 }
 
 /*
-  PostgresUsageCSV finds postgres usage for given accounting query
+PostgresUsageCSV finds postgres usage for given accounting query
 */
 func (a *Client) PostgresUsageCSV(params *PostgresUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageCSVOK, error) {
 	// TODO: Validate the params before sending
@@ -442,7 +442,7 @@ func (a *Client) PostgresUsageCSV(params *PostgresUsageCSVParams, authInfo runti
 }
 
 /*
-  Projects discovers accounted projects witihin a given time period
+Projects discovers accounted projects witihin a given time period
 */
 func (a *Client) Projects(params *ProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectsOK, error) {
 	// TODO: Validate the params before sending
@@ -480,7 +480,7 @@ func (a *Client) Projects(params *ProjectsParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  S3Usage finds s3 bucket usage for given accounting query
+S3Usage finds s3 bucket usage for given accounting query
 */
 func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageOK, error) {
 	// TODO: Validate the params before sending
@@ -518,7 +518,7 @@ func (a *Client) S3Usage(params *S3UsageParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  S3UsageCSV finds s3 bucket usage for given accounting query
+S3UsageCSV finds s3 bucket usage for given accounting query
 */
 func (a *Client) S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3UsageCSVOK, error) {
 	// TODO: Validate the params before sending
@@ -556,7 +556,7 @@ func (a *Client) S3UsageCSV(params *S3UsageCSVParams, authInfo runtime.ClientAut
 }
 
 /*
-  VolumeUsage finds volume usage for given accounting query
+VolumeUsage finds volume usage for given accounting query
 */
 func (a *Client) VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VolumeUsageOK, error) {
 	// TODO: Validate the params before sending
@@ -594,7 +594,7 @@ func (a *Client) VolumeUsage(params *VolumeUsageParams, authInfo runtime.ClientA
 }
 
 /*
-  VolumeUsageCSV finds volume usage for given accounting query
+VolumeUsageCSV finds volume usage for given accounting query
 */
 func (a *Client) VolumeUsageCSV(params *VolumeUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VolumeUsageCSVOK, error) {
 	// TODO: Validate the params before sending

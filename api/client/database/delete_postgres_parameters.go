@@ -52,10 +52,12 @@ func NewDeletePostgresParamsWithHTTPClient(client *http.Client) *DeletePostgresP
 	}
 }
 
-/* DeletePostgresParams contains all the parameters to send to the API endpoint
-   for the delete postgres operation.
+/*
+DeletePostgresParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete postgres operation.
+
+	Typically these are written to a http.Request.
 */
 type DeletePostgresParams struct {
 

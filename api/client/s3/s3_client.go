@@ -44,7 +44,7 @@ type ClientService interface {
 }
 
 /*
-  Creates3 creates an s3 user if the given name for this tenant already exists a conflict is returned
+Creates3 creates an s3 user if the given name for this tenant already exists a conflict is returned
 */
 func (a *Client) Creates3(params *Creates3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Creates3OK, error) {
 	// TODO: Validate the params before sending
@@ -82,7 +82,7 @@ func (a *Client) Creates3(params *Creates3Params, authInfo runtime.ClientAuthInf
 }
 
 /*
-  Deletes3 deletes an s3 user
+Deletes3 deletes an s3 user
 */
 func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Deletes3OK, error) {
 	// TODO: Validate the params before sending
@@ -120,7 +120,7 @@ func (a *Client) Deletes3(params *Deletes3Params, authInfo runtime.ClientAuthInf
 }
 
 /*
-  Gets3 gets s3 user
+Gets3 gets s3 user
 */
 func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Gets3OK, error) {
 	// TODO: Validate the params before sending
@@ -158,7 +158,7 @@ func (a *Client) Gets3(params *Gets3Params, authInfo runtime.ClientAuthInfoWrite
 }
 
 /*
-  Lists3 lists s3 users
+Lists3 lists s3 users
 */
 func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Lists3OK, error) {
 	// TODO: Validate the params before sending
@@ -196,7 +196,7 @@ func (a *Client) Lists3(params *Lists3Params, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  Lists3partitions lists s3 partitions
+Lists3partitions lists s3 partitions
 */
 func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Lists3partitionsOK, error) {
 	// TODO: Validate the params before sending
@@ -234,7 +234,7 @@ func (a *Client) Lists3partitions(params *Lists3partitionsParams, authInfo runti
 }
 
 /*
-  Updates3 updates an s3 user
+Updates3 updates an s3 user
 */
 func (a *Client) Updates3(params *Updates3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Updates3OK, error) {
 	// TODO: Validate the params before sending

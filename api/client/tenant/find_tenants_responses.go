@@ -47,7 +47,8 @@ func NewFindTenantsOK() *FindTenantsOK {
 	return &FindTenantsOK{}
 }
 
-/* FindTenantsOK describes a response with status code 200, with default header values.
+/*
+	FindTenantsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewFindTenantsDefault(code int) *FindTenantsDefault {
 	}
 }
 
-/* FindTenantsDefault describes a response with status code -1, with default header values.
+/*
+	FindTenantsDefault describes a response with status code -1, with default header values.
 
 Error
 */

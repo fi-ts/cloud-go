@@ -47,7 +47,8 @@ func NewGetPostgresSecretsOK() *GetPostgresSecretsOK {
 	return &GetPostgresSecretsOK{}
 }
 
-/* GetPostgresSecretsOK describes a response with status code 200, with default header values.
+/*
+	GetPostgresSecretsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewGetPostgresSecretsDefault(code int) *GetPostgresSecretsDefault {
 	}
 }
 
-/* GetPostgresSecretsDefault describes a response with status code -1, with default header values.
+/*
+	GetPostgresSecretsDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -46,7 +46,8 @@ func NewNetworkUsageCSVOK() *NetworkUsageCSVOK {
 	return &NetworkUsageCSVOK{}
 }
 
-/* NetworkUsageCSVOK describes a response with status code 200, with default header values.
+/*
+	NetworkUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -78,7 +79,8 @@ func NewNetworkUsageCSVDefault(code int) *NetworkUsageCSVDefault {
 	}
 }
 
-/* NetworkUsageCSVDefault describes a response with status code -1, with default header values.
+/*
+	NetworkUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -47,7 +47,8 @@ func NewUpdates3OK() *Updates3OK {
 	return &Updates3OK{}
 }
 
-/* Updates3OK describes a response with status code 200, with default header values.
+/*
+	Updates3OK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewUpdates3Default(code int) *Updates3Default {
 	}
 }
 
-/* Updates3Default describes a response with status code -1, with default header values.
+/*
+	Updates3Default describes a response with status code -1, with default header values.
 
 Error
 */

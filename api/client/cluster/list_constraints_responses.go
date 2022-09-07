@@ -47,7 +47,8 @@ func NewListConstraintsOK() *ListConstraintsOK {
 	return &ListConstraintsOK{}
 }
 
-/* ListConstraintsOK describes a response with status code 200, with default header values.
+/*
+	ListConstraintsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewListConstraintsDefault(code int) *ListConstraintsDefault {
 	}
 }
 
-/* ListConstraintsDefault describes a response with status code -1, with default header values.
+/*
+	ListConstraintsDefault describes a response with status code -1, with default header values.
 
 Error
 */

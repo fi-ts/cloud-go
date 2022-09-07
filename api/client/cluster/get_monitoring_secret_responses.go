@@ -47,7 +47,8 @@ func NewGetMonitoringSecretOK() *GetMonitoringSecretOK {
 	return &GetMonitoringSecretOK{}
 }
 
-/* GetMonitoringSecretOK describes a response with status code 200, with default header values.
+/*
+	GetMonitoringSecretOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewGetMonitoringSecretDefault(code int) *GetMonitoringSecretDefault {
 	}
 }
 
-/* GetMonitoringSecretDefault describes a response with status code -1, with default header values.
+/*
+	GetMonitoringSecretDefault describes a response with status code -1, with default header values.
 
 Error
 */

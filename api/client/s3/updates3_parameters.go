@@ -54,10 +54,12 @@ func NewUpdates3ParamsWithHTTPClient(client *http.Client) *Updates3Params {
 	}
 }
 
-/* Updates3Params contains all the parameters to send to the API endpoint
-   for the updates3 operation.
+/*
+Updates3Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the updates3 operation.
+
+	Typically these are written to a http.Request.
 */
 type Updates3Params struct {
 

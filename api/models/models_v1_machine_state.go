@@ -23,6 +23,9 @@ type ModelsV1MachineState struct {
 	// Required: true
 	Description *string `json:"description"`
 
+	// issuer
+	Issuer string `json:"issuer,omitempty"`
+
 	// metal hammer version
 	// Required: true
 	MetalHammerVersion *string `json:"metal_hammer_version"`

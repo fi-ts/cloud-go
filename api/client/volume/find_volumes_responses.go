@@ -47,7 +47,8 @@ func NewFindVolumesOK() *FindVolumesOK {
 	return &FindVolumesOK{}
 }
 
-/* FindVolumesOK describes a response with status code 200, with default header values.
+/*
+	FindVolumesOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewFindVolumesDefault(code int) *FindVolumesDefault {
 	}
 }
 
-/* FindVolumesDefault describes a response with status code -1, with default header values.
+/*
+	FindVolumesDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -47,7 +47,8 @@ func NewGetPostgresBackupsOK() *GetPostgresBackupsOK {
 	return &GetPostgresBackupsOK{}
 }
 
-/* GetPostgresBackupsOK describes a response with status code 200, with default header values.
+/*
+	GetPostgresBackupsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewGetPostgresBackupsDefault(code int) *GetPostgresBackupsDefault {
 	}
 }
 
-/* GetPostgresBackupsDefault describes a response with status code -1, with default header values.
+/*
+	GetPostgresBackupsDefault describes a response with status code -1, with default header values.
 
 Error
 */

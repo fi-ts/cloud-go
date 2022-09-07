@@ -47,7 +47,8 @@ func NewUpdatePostgresBackupConfigOK() *UpdatePostgresBackupConfigOK {
 	return &UpdatePostgresBackupConfigOK{}
 }
 
-/* UpdatePostgresBackupConfigOK describes a response with status code 200, with default header values.
+/*
+	UpdatePostgresBackupConfigOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewUpdatePostgresBackupConfigDefault(code int) *UpdatePostgresBackupConfigD
 	}
 }
 
-/* UpdatePostgresBackupConfigDefault describes a response with status code -1, with default header values.
+/*
+	UpdatePostgresBackupConfigDefault describes a response with status code -1, with default header values.
 
 Error
 */

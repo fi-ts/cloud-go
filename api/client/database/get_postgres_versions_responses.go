@@ -47,7 +47,8 @@ func NewGetPostgresVersionsOK() *GetPostgresVersionsOK {
 	return &GetPostgresVersionsOK{}
 }
 
-/* GetPostgresVersionsOK describes a response with status code 200, with default header values.
+/*
+	GetPostgresVersionsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewGetPostgresVersionsDefault(code int) *GetPostgresVersionsDefault {
 	}
 }
 
-/* GetPostgresVersionsDefault describes a response with status code -1, with default header values.
+/*
+	GetPostgresVersionsDefault describes a response with status code -1, with default header values.
 
 Error
 */

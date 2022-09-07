@@ -53,7 +53,8 @@ func NewCreateClusterCreated() *CreateClusterCreated {
 	return &CreateClusterCreated{}
 }
 
-/* CreateClusterCreated describes a response with status code 201, with default header values.
+/*
+	CreateClusterCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -85,7 +86,8 @@ func NewCreateClusterConflict() *CreateClusterConflict {
 	return &CreateClusterConflict{}
 }
 
-/* CreateClusterConflict describes a response with status code 409, with default header values.
+/*
+	CreateClusterConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -119,7 +121,8 @@ func NewCreateClusterDefault(code int) *CreateClusterDefault {
 	}
 }
 
-/* CreateClusterDefault describes a response with status code -1, with default header values.
+/*
+	CreateClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */

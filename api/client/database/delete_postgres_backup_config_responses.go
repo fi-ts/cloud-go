@@ -47,7 +47,8 @@ func NewDeletePostgresBackupConfigOK() *DeletePostgresBackupConfigOK {
 	return &DeletePostgresBackupConfigOK{}
 }
 
-/* DeletePostgresBackupConfigOK describes a response with status code 200, with default header values.
+/*
+	DeletePostgresBackupConfigOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewDeletePostgresBackupConfigDefault(code int) *DeletePostgresBackupConfigD
 	}
 }
 
-/* DeletePostgresBackupConfigDefault describes a response with status code -1, with default header values.
+/*
+	DeletePostgresBackupConfigDefault describes a response with status code -1, with default header values.
 
 Error
 */

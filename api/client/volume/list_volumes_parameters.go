@@ -52,10 +52,12 @@ func NewListVolumesParamsWithHTTPClient(client *http.Client) *ListVolumesParams 
 	}
 }
 
-/* ListVolumesParams contains all the parameters to send to the API endpoint
-   for the list volumes operation.
+/*
+ListVolumesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list volumes operation.
+
+	Typically these are written to a http.Request.
 */
 type ListVolumesParams struct {
 	timeout    time.Duration

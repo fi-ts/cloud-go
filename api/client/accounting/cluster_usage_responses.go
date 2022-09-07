@@ -47,7 +47,8 @@ func NewClusterUsageOK() *ClusterUsageOK {
 	return &ClusterUsageOK{}
 }
 
-/* ClusterUsageOK describes a response with status code 200, with default header values.
+/*
+	ClusterUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewClusterUsageDefault(code int) *ClusterUsageDefault {
 	}
 }
 
-/* ClusterUsageDefault describes a response with status code -1, with default header values.
+/*
+	ClusterUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */

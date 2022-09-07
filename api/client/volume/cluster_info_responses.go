@@ -47,7 +47,8 @@ func NewClusterInfoOK() *ClusterInfoOK {
 	return &ClusterInfoOK{}
 }
 
-/* ClusterInfoOK describes a response with status code 200, with default header values.
+/*
+	ClusterInfoOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewClusterInfoDefault(code int) *ClusterInfoDefault {
 	}
 }
 
-/* ClusterInfoDefault describes a response with status code -1, with default header values.
+/*
+	ClusterInfoDefault describes a response with status code -1, with default header values.
 
 Error
 */

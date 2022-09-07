@@ -47,7 +47,8 @@ func NewFindPostgresOK() *FindPostgresOK {
 	return &FindPostgresOK{}
 }
 
-/* FindPostgresOK describes a response with status code 200, with default header values.
+/*
+	FindPostgresOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewFindPostgresDefault(code int) *FindPostgresDefault {
 	}
 }
 
-/* FindPostgresDefault describes a response with status code -1, with default header values.
+/*
+	FindPostgresDefault describes a response with status code -1, with default header values.
 
 Error
 */

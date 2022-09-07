@@ -54,10 +54,12 @@ func NewContainerUsageParamsWithHTTPClient(client *http.Client) *ContainerUsageP
 	}
 }
 
-/* ContainerUsageParams contains all the parameters to send to the API endpoint
-   for the container usage operation.
+/*
+ContainerUsageParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the container usage operation.
+
+	Typically these are written to a http.Request.
 */
 type ContainerUsageParams struct {
 

@@ -47,7 +47,8 @@ func NewLists3partitionsOK() *Lists3partitionsOK {
 	return &Lists3partitionsOK{}
 }
 
-/* Lists3partitionsOK describes a response with status code 200, with default header values.
+/*
+	Lists3partitionsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewLists3partitionsDefault(code int) *Lists3partitionsDefault {
 	}
 }
 
-/* Lists3partitionsDefault describes a response with status code -1, with default header values.
+/*
+	Lists3partitionsDefault describes a response with status code -1, with default header values.
 
 Error
 */

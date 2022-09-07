@@ -54,10 +54,12 @@ func NewGets3ParamsWithHTTPClient(client *http.Client) *Gets3Params {
 	}
 }
 
-/* Gets3Params contains all the parameters to send to the API endpoint
-   for the gets3 operation.
+/*
+Gets3Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the gets3 operation.
+
+	Typically these are written to a http.Request.
 */
 type Gets3Params struct {
 

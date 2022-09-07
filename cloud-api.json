@@ -672,8 +672,17 @@
     },
     "models.V1MachineRecentProvisioningEvents": {
       "properties": {
+        "crash_loop": {
+          "type": "boolean"
+        },
+        "failed_machine_reclaim": {
+          "type": "boolean"
+        },
         "incomplete_provisioning_cycles": {
           "type": "string"
+        },
+        "last_error_event": {
+          "$ref": "#/definitions/models.V1MachineProvisioningEvent"
         },
         "last_event_time": {
           "type": "string"
@@ -686,6 +695,8 @@
         }
       },
       "required": [
+        "crash_loop",
+        "failed_machine_reclaim",
         "incomplete_provisioning_cycles",
         "log"
       ]
@@ -758,6 +769,9 @@
     "models.V1MachineState": {
       "properties": {
         "description": {
+          "type": "string"
+        },
+        "issuer": {
           "type": "string"
         },
         "metal_hammer_version": {
@@ -1078,6 +1092,9 @@
           },
           "type": "array"
         },
+        "cni": {
+          "type": "string"
+        },
         "seedName": {
           "description": "seed name on which the cluster will be scheduled",
           "type": "string"
@@ -1299,6 +1316,9 @@
           },
           "type": "array"
         },
+        "CNI": {
+          "type": "string"
+        },
         "ClusterFeatures": {
           "$ref": "#/definitions/v1.ClusterFeatures"
         },
@@ -1398,6 +1418,7 @@
       },
       "required": [
         "AdditionalNetworks",
+        "CNI",
         "ClusterFeatures",
         "ControlPlaneFeatureGates",
         "CreationTimestamp",
@@ -5387,7 +5408,7 @@
             "description": "returns machines in the response, which is disabled by default for list responses because it makes the request slower",
             "in": "query",
             "name": "return-machines",
-            "type": "bool"
+            "type": "boolean"
           }
         ],
         "produces": [
@@ -5551,7 +5572,7 @@
             "description": "returns machines in the response, which is disabled by default for list responses because it makes the request slower",
             "in": "query",
             "name": "return-machines",
-            "type": "bool"
+            "type": "boolean"
           },
           {
             "in": "body",
@@ -5643,7 +5664,7 @@
             "description": "returns machines in the response",
             "in": "query",
             "name": "return-machines",
-            "type": "bool"
+            "type": "boolean"
           }
         ],
         "produces": [

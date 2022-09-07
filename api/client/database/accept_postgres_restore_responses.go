@@ -47,7 +47,8 @@ func NewAcceptPostgresRestoreOK() *AcceptPostgresRestoreOK {
 	return &AcceptPostgresRestoreOK{}
 }
 
-/* AcceptPostgresRestoreOK describes a response with status code 200, with default header values.
+/*
+	AcceptPostgresRestoreOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewAcceptPostgresRestoreDefault(code int) *AcceptPostgresRestoreDefault {
 	}
 }
 
-/* AcceptPostgresRestoreDefault describes a response with status code -1, with default header values.
+/*
+	AcceptPostgresRestoreDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -52,10 +52,12 @@ func NewGetPostgresPartitionsParamsWithHTTPClient(client *http.Client) *GetPostg
 	}
 }
 
-/* GetPostgresPartitionsParams contains all the parameters to send to the API endpoint
-   for the get postgres partitions operation.
+/*
+GetPostgresPartitionsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get postgres partitions operation.
+
+	Typically these are written to a http.Request.
 */
 type GetPostgresPartitionsParams struct {
 	timeout    time.Duration

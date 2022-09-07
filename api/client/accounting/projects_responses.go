@@ -47,7 +47,8 @@ func NewProjectsOK() *ProjectsOK {
 	return &ProjectsOK{}
 }
 
-/* ProjectsOK describes a response with status code 200, with default header values.
+/*
+	ProjectsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewProjectsDefault(code int) *ProjectsDefault {
 	}
 }
 
-/* ProjectsDefault describes a response with status code -1, with default header values.
+/*
+	ProjectsDefault describes a response with status code -1, with default header values.
 
 Error
 */

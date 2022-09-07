@@ -47,7 +47,8 @@ func NewLists3OK() *Lists3OK {
 	return &Lists3OK{}
 }
 
-/* Lists3OK describes a response with status code 200, with default header values.
+/*
+	Lists3OK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewLists3Default(code int) *Lists3Default {
 	}
 }
 
-/* Lists3Default describes a response with status code -1, with default header values.
+/*
+	Lists3Default describes a response with status code -1, with default header values.
 
 Error
 */

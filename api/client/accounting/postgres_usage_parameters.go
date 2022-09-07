@@ -54,10 +54,12 @@ func NewPostgresUsageParamsWithHTTPClient(client *http.Client) *PostgresUsagePar
 	}
 }
 
-/* PostgresUsageParams contains all the parameters to send to the API endpoint
-   for the postgres usage operation.
+/*
+PostgresUsageParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the postgres usage operation.
+
+	Typically these are written to a http.Request.
 */
 type PostgresUsageParams struct {
 

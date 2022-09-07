@@ -47,7 +47,8 @@ func NewGetVolumeOK() *GetVolumeOK {
 	return &GetVolumeOK{}
 }
 
-/* GetVolumeOK describes a response with status code 200, with default header values.
+/*
+	GetVolumeOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewGetVolumeDefault(code int) *GetVolumeDefault {
 	}
 }
 
-/* GetVolumeDefault describes a response with status code -1, with default header values.
+/*
+	GetVolumeDefault describes a response with status code -1, with default header values.
 
 Error
 */

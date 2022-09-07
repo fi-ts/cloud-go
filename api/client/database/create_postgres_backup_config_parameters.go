@@ -54,10 +54,12 @@ func NewCreatePostgresBackupConfigParamsWithHTTPClient(client *http.Client) *Cre
 	}
 }
 
-/* CreatePostgresBackupConfigParams contains all the parameters to send to the API endpoint
-   for the create postgres backup config operation.
+/*
+CreatePostgresBackupConfigParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create postgres backup config operation.
+
+	Typically these are written to a http.Request.
 */
 type CreatePostgresBackupConfigParams struct {
 

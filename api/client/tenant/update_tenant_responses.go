@@ -53,7 +53,8 @@ func NewUpdateTenantOK() *UpdateTenantOK {
 	return &UpdateTenantOK{}
 }
 
-/* UpdateTenantOK describes a response with status code 200, with default header values.
+/*
+	UpdateTenantOK describes a response with status code 200, with default header values.
 
 Updated
 */
@@ -85,7 +86,8 @@ func NewUpdateTenantPreconditionFailed() *UpdateTenantPreconditionFailed {
 	return &UpdateTenantPreconditionFailed{}
 }
 
-/* UpdateTenantPreconditionFailed describes a response with status code 412, with default header values.
+/*
+	UpdateTenantPreconditionFailed describes a response with status code 412, with default header values.
 
 OptimisticLock
 */
@@ -119,7 +121,8 @@ func NewUpdateTenantDefault(code int) *UpdateTenantDefault {
 	}
 }
 
-/* UpdateTenantDefault describes a response with status code -1, with default header values.
+/*
+	UpdateTenantDefault describes a response with status code -1, with default header values.
 
 Error
 */

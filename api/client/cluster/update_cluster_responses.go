@@ -53,7 +53,8 @@ func NewUpdateClusterOK() *UpdateClusterOK {
 	return &UpdateClusterOK{}
 }
 
-/* UpdateClusterOK describes a response with status code 200, with default header values.
+/*
+	UpdateClusterOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -85,7 +86,8 @@ func NewUpdateClusterConflict() *UpdateClusterConflict {
 	return &UpdateClusterConflict{}
 }
 
-/* UpdateClusterConflict describes a response with status code 409, with default header values.
+/*
+	UpdateClusterConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -119,7 +121,8 @@ func NewUpdateClusterDefault(code int) *UpdateClusterDefault {
 	}
 }
 
-/* UpdateClusterDefault describes a response with status code -1, with default header values.
+/*
+	UpdateClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */

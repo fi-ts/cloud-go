@@ -54,10 +54,12 @@ func NewCreatePostgresParamsWithHTTPClient(client *http.Client) *CreatePostgresP
 	}
 }
 
-/* CreatePostgresParams contains all the parameters to send to the API endpoint
-   for the create postgres operation.
+/*
+CreatePostgresParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create postgres operation.
+
+	Typically these are written to a http.Request.
 */
 type CreatePostgresParams struct {
 

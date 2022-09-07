@@ -47,7 +47,8 @@ func NewGetSSHKeyPairOK() *GetSSHKeyPairOK {
 	return &GetSSHKeyPairOK{}
 }
 
-/* GetSSHKeyPairOK describes a response with status code 200, with default header values.
+/*
+	GetSSHKeyPairOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewGetSSHKeyPairDefault(code int) *GetSSHKeyPairDefault {
 	}
 }
 
-/* GetSSHKeyPairDefault describes a response with status code -1, with default header values.
+/*
+	GetSSHKeyPairDefault describes a response with status code -1, with default header values.
 
 Error
 */

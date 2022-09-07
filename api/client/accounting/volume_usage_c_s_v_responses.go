@@ -46,7 +46,8 @@ func NewVolumeUsageCSVOK() *VolumeUsageCSVOK {
 	return &VolumeUsageCSVOK{}
 }
 
-/* VolumeUsageCSVOK describes a response with status code 200, with default header values.
+/*
+	VolumeUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -78,7 +79,8 @@ func NewVolumeUsageCSVDefault(code int) *VolumeUsageCSVDefault {
 	}
 }
 
-/* VolumeUsageCSVDefault describes a response with status code -1, with default header values.
+/*
+	VolumeUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */

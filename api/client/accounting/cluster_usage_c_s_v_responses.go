@@ -46,7 +46,8 @@ func NewClusterUsageCSVOK() *ClusterUsageCSVOK {
 	return &ClusterUsageCSVOK{}
 }
 
-/* ClusterUsageCSVOK describes a response with status code 200, with default header values.
+/*
+	ClusterUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -78,7 +79,8 @@ func NewClusterUsageCSVDefault(code int) *ClusterUsageCSVDefault {
 	}
 }
 
-/* ClusterUsageCSVDefault describes a response with status code -1, with default header values.
+/*
+	ClusterUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */

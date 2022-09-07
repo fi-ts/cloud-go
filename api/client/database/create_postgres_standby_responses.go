@@ -47,7 +47,8 @@ func NewCreatePostgresStandbyCreated() *CreatePostgresStandbyCreated {
 	return &CreatePostgresStandbyCreated{}
 }
 
-/* CreatePostgresStandbyCreated describes a response with status code 201, with default header values.
+/*
+	CreatePostgresStandbyCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -81,7 +82,8 @@ func NewCreatePostgresStandbyDefault(code int) *CreatePostgresStandbyDefault {
 	}
 }
 
-/* CreatePostgresStandbyDefault describes a response with status code -1, with default header values.
+/*
+	CreatePostgresStandbyDefault describes a response with status code -1, with default header values.
 
 Error
 */

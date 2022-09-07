@@ -54,10 +54,12 @@ func NewFindPostgresParamsWithHTTPClient(client *http.Client) *FindPostgresParam
 	}
 }
 
-/* FindPostgresParams contains all the parameters to send to the API endpoint
-   for the find postgres operation.
+/*
+FindPostgresParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the find postgres operation.
+
+	Typically these are written to a http.Request.
 */
 type FindPostgresParams struct {
 

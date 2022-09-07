@@ -47,7 +47,8 @@ func NewGetIPOK() *GetIPOK {
 	return &GetIPOK{}
 }
 
-/* GetIPOK describes a response with status code 200, with default header values.
+/*
+	GetIPOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewGetIPDefault(code int) *GetIPDefault {
 	}
 }
 
-/* GetIPDefault describes a response with status code -1, with default header values.
+/*
+	GetIPDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -54,10 +54,12 @@ func NewNetworkUsageParamsWithHTTPClient(client *http.Client) *NetworkUsageParam
 	}
 }
 
-/* NetworkUsageParams contains all the parameters to send to the API endpoint
-   for the network usage operation.
+/*
+NetworkUsageParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the network usage operation.
+
+	Typically these are written to a http.Request.
 */
 type NetworkUsageParams struct {
 

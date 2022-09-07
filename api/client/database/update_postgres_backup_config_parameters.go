@@ -54,10 +54,12 @@ func NewUpdatePostgresBackupConfigParamsWithHTTPClient(client *http.Client) *Upd
 	}
 }
 
-/* UpdatePostgresBackupConfigParams contains all the parameters to send to the API endpoint
-   for the update postgres backup config operation.
+/*
+UpdatePostgresBackupConfigParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update postgres backup config operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdatePostgresBackupConfigParams struct {
 

@@ -54,10 +54,12 @@ func NewClusterUsageParamsWithHTTPClient(client *http.Client) *ClusterUsageParam
 	}
 }
 
-/* ClusterUsageParams contains all the parameters to send to the API endpoint
-   for the cluster usage operation.
+/*
+ClusterUsageParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the cluster usage operation.
+
+	Typically these are written to a http.Request.
 */
 type ClusterUsageParams struct {
 

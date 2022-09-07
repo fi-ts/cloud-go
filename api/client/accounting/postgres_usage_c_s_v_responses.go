@@ -46,7 +46,8 @@ func NewPostgresUsageCSVOK() *PostgresUsageCSVOK {
 	return &PostgresUsageCSVOK{}
 }
 
-/* PostgresUsageCSVOK describes a response with status code 200, with default header values.
+/*
+	PostgresUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -78,7 +79,8 @@ func NewPostgresUsageCSVDefault(code int) *PostgresUsageCSVDefault {
 	}
 }
 
-/* PostgresUsageCSVDefault describes a response with status code -1, with default header values.
+/*
+	PostgresUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */

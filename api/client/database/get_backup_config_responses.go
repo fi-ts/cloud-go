@@ -47,7 +47,8 @@ func NewGetBackupConfigOK() *GetBackupConfigOK {
 	return &GetBackupConfigOK{}
 }
 
-/* GetBackupConfigOK describes a response with status code 200, with default header values.
+/*
+	GetBackupConfigOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewGetBackupConfigDefault(code int) *GetBackupConfigDefault {
 	}
 }
 
-/* GetBackupConfigDefault describes a response with status code -1, with default header values.
+/*
+	GetBackupConfigDefault describes a response with status code -1, with default header values.
 
 Error
 */

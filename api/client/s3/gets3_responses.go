@@ -47,7 +47,8 @@ func NewGets3OK() *Gets3OK {
 	return &Gets3OK{}
 }
 
-/* Gets3OK describes a response with status code 200, with default header values.
+/*
+	Gets3OK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewGets3Default(code int) *Gets3Default {
 	}
 }
 
-/* Gets3Default describes a response with status code -1, with default header values.
+/*
+	Gets3Default describes a response with status code -1, with default header values.
 
 Error
 */

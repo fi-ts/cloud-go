@@ -46,7 +46,8 @@ func NewS3UsageCSVOK() *S3UsageCSVOK {
 	return &S3UsageCSVOK{}
 }
 
-/* S3UsageCSVOK describes a response with status code 200, with default header values.
+/*
+	S3UsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -78,7 +79,8 @@ func NewS3UsageCSVDefault(code int) *S3UsageCSVDefault {
 	}
 }
 
-/* S3UsageCSVDefault describes a response with status code -1, with default header values.
+/*
+	S3UsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */

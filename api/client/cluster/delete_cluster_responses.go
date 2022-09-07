@@ -47,7 +47,8 @@ func NewDeleteClusterOK() *DeleteClusterOK {
 	return &DeleteClusterOK{}
 }
 
-/* DeleteClusterOK describes a response with status code 200, with default header values.
+/*
+	DeleteClusterOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewDeleteClusterDefault(code int) *DeleteClusterDefault {
 	}
 }
 
-/* DeleteClusterDefault describes a response with status code -1, with default header values.
+/*
+	DeleteClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */

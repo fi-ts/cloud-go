@@ -47,7 +47,8 @@ func NewCreates3OK() *Creates3OK {
 	return &Creates3OK{}
 }
 
-/* Creates3OK describes a response with status code 200, with default header values.
+/*
+	Creates3OK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewCreates3Default(code int) *Creates3Default {
 	}
 }
 
-/* Creates3Default describes a response with status code -1, with default header values.
+/*
+	Creates3Default describes a response with status code -1, with default header values.
 
 Error
 */

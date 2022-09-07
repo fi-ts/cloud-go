@@ -54,10 +54,12 @@ func NewContainerUsageCSVParamsWithHTTPClient(client *http.Client) *ContainerUsa
 	}
 }
 
-/* ContainerUsageCSVParams contains all the parameters to send to the API endpoint
-   for the container usage c s v operation.
+/*
+ContainerUsageCSVParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the container usage c s v operation.
+
+	Typically these are written to a http.Request.
 */
 type ContainerUsageCSVParams struct {
 

@@ -54,10 +54,12 @@ func NewPostgresUsageCSVParamsWithHTTPClient(client *http.Client) *PostgresUsage
 	}
 }
 
-/* PostgresUsageCSVParams contains all the parameters to send to the API endpoint
-   for the postgres usage c s v operation.
+/*
+PostgresUsageCSVParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the postgres usage c s v operation.
+
+	Typically these are written to a http.Request.
 */
 type PostgresUsageCSVParams struct {
 

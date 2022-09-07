@@ -54,10 +54,12 @@ func NewGetMasterdataParamsWithHTTPClient(client *http.Client) *GetMasterdataPar
 	}
 }
 
-/* GetMasterdataParams contains all the parameters to send to the API endpoint
-   for the get masterdata operation.
+/*
+GetMasterdataParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get masterdata operation.
+
+	Typically these are written to a http.Request.
 */
 type GetMasterdataParams struct {
 

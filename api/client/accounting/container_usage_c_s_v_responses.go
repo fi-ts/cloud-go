@@ -46,7 +46,8 @@ func NewContainerUsageCSVOK() *ContainerUsageCSVOK {
 	return &ContainerUsageCSVOK{}
 }
 
-/* ContainerUsageCSVOK describes a response with status code 200, with default header values.
+/*
+	ContainerUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -78,7 +79,8 @@ func NewContainerUsageCSVDefault(code int) *ContainerUsageCSVDefault {
 	}
 }
 
-/* ContainerUsageCSVDefault describes a response with status code -1, with default header values.
+/*
+	ContainerUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */

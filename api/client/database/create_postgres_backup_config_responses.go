@@ -47,7 +47,8 @@ func NewCreatePostgresBackupConfigCreated() *CreatePostgresBackupConfigCreated {
 	return &CreatePostgresBackupConfigCreated{}
 }
 
-/* CreatePostgresBackupConfigCreated describes a response with status code 201, with default header values.
+/*
+	CreatePostgresBackupConfigCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -81,7 +82,8 @@ func NewCreatePostgresBackupConfigDefault(code int) *CreatePostgresBackupConfigD
 	}
 }
 
-/* CreatePostgresBackupConfigDefault describes a response with status code -1, with default header values.
+/*
+	CreatePostgresBackupConfigDefault describes a response with status code -1, with default header values.
 
 Error
 */

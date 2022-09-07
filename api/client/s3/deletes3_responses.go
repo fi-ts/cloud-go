@@ -47,7 +47,8 @@ func NewDeletes3OK() *Deletes3OK {
 	return &Deletes3OK{}
 }
 
-/* Deletes3OK describes a response with status code 200, with default header values.
+/*
+	Deletes3OK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewDeletes3Default(code int) *Deletes3Default {
 	}
 }
 
-/* Deletes3Default describes a response with status code -1, with default header values.
+/*
+	Deletes3Default describes a response with status code -1, with default header values.
 
 Error
 */

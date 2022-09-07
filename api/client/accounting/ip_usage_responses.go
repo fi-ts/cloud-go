@@ -47,7 +47,8 @@ func NewIPUsageOK() *IPUsageOK {
 	return &IPUsageOK{}
 }
 
-/* IPUsageOK describes a response with status code 200, with default header values.
+/*
+	IPUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewIPUsageDefault(code int) *IPUsageDefault {
 	}
 }
 
-/* IPUsageDefault describes a response with status code -1, with default header values.
+/*
+	IPUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */

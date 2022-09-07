@@ -42,7 +42,7 @@ type ClientService interface {
 }
 
 /*
-  ClusterInfo returns info and status to connected storage clusters
+ClusterInfo returns info and status to connected storage clusters
 */
 func (a *Client) ClusterInfo(params *ClusterInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterInfoOK, error) {
 	// TODO: Validate the params before sending
@@ -80,7 +80,7 @@ func (a *Client) ClusterInfo(params *ClusterInfoParams, authInfo runtime.ClientA
 }
 
 /*
-  DeleteVolume deletes a volume including all data
+DeleteVolume deletes a volume including all data
 */
 func (a *Client) DeleteVolume(params *DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVolumeOK, error) {
 	// TODO: Validate the params before sending
@@ -118,7 +118,7 @@ func (a *Client) DeleteVolume(params *DeleteVolumeParams, authInfo runtime.Clien
 }
 
 /*
-  FindVolumes finds volumes by multiple criteria
+FindVolumes finds volumes by multiple criteria
 */
 func (a *Client) FindVolumes(params *FindVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindVolumesOK, error) {
 	// TODO: Validate the params before sending
@@ -156,7 +156,7 @@ func (a *Client) FindVolumes(params *FindVolumesParams, authInfo runtime.ClientA
 }
 
 /*
-  GetVolume gets a volume
+GetVolume gets a volume
 */
 func (a *Client) GetVolume(params *GetVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVolumeOK, error) {
 	// TODO: Validate the params before sending
@@ -194,7 +194,7 @@ func (a *Client) GetVolume(params *GetVolumeParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  ListVolumes gets all volumes
+ListVolumes gets all volumes
 */
 func (a *Client) ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVolumesOK, error) {
 	// TODO: Validate the params before sending

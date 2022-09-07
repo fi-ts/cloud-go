@@ -47,7 +47,8 @@ func NewAcceptPostgresRestoreDeprecatedOK() *AcceptPostgresRestoreDeprecatedOK {
 	return &AcceptPostgresRestoreDeprecatedOK{}
 }
 
-/* AcceptPostgresRestoreDeprecatedOK describes a response with status code 200, with default header values.
+/*
+	AcceptPostgresRestoreDeprecatedOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewAcceptPostgresRestoreDeprecatedDefault(code int) *AcceptPostgresRestoreD
 	}
 }
 
-/* AcceptPostgresRestoreDeprecatedDefault describes a response with status code -1, with default header values.
+/*
+	AcceptPostgresRestoreDeprecatedDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -47,7 +47,8 @@ func NewGetPostgresPartitionsOK() *GetPostgresPartitionsOK {
 	return &GetPostgresPartitionsOK{}
 }
 
-/* GetPostgresPartitionsOK describes a response with status code 200, with default header values.
+/*
+	GetPostgresPartitionsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewGetPostgresPartitionsDefault(code int) *GetPostgresPartitionsDefault {
 	}
 }
 
-/* GetPostgresPartitionsDefault describes a response with status code -1, with default header values.
+/*
+	GetPostgresPartitionsDefault describes a response with status code -1, with default header values.
 
 Error
 */

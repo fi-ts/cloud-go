@@ -47,7 +47,8 @@ func NewS3UsageOK() *S3UsageOK {
 	return &S3UsageOK{}
 }
 
-/* S3UsageOK describes a response with status code 200, with default header values.
+/*
+	S3UsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewS3UsageDefault(code int) *S3UsageDefault {
 	}
 }
 
-/* S3UsageDefault describes a response with status code -1, with default header values.
+/*
+	S3UsageDefault describes a response with status code -1, with default header values.
 
 Error
 */

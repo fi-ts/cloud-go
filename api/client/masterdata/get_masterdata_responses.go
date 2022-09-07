@@ -53,7 +53,8 @@ func NewGetMasterdataOK() *GetMasterdataOK {
 	return &GetMasterdataOK{}
 }
 
-/* GetMasterdataOK describes a response with status code 200, with default header values.
+/*
+	GetMasterdataOK describes a response with status code 200, with default header values.
 
 Ok
 */
@@ -85,7 +86,8 @@ func NewGetMasterdataNotFound() *GetMasterdataNotFound {
 	return &GetMasterdataNotFound{}
 }
 
-/* GetMasterdataNotFound describes a response with status code 404, with default header values.
+/*
+	GetMasterdataNotFound describes a response with status code 404, with default header values.
 
 NotFound
 */
@@ -119,7 +121,8 @@ func NewGetMasterdataDefault(code int) *GetMasterdataDefault {
 	}
 }
 
-/* GetMasterdataDefault describes a response with status code -1, with default header values.
+/*
+	GetMasterdataDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -47,7 +47,8 @@ func NewGetClusterKubeconfigTplOK() *GetClusterKubeconfigTplOK {
 	return &GetClusterKubeconfigTplOK{}
 }
 
-/* GetClusterKubeconfigTplOK describes a response with status code 200, with default header values.
+/*
+	GetClusterKubeconfigTplOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewGetClusterKubeconfigTplDefault(code int) *GetClusterKubeconfigTplDefault
 	}
 }
 
-/* GetClusterKubeconfigTplDefault describes a response with status code -1, with default header values.
+/*
+	GetClusterKubeconfigTplDefault describes a response with status code -1, with default header values.
 
 Error
 */

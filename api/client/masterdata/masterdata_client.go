@@ -34,7 +34,7 @@ type ClientService interface {
 }
 
 /*
-  GetMasterdata gets masterdata for given lookup criteria
+GetMasterdata gets masterdata for given lookup criteria
 */
 func (a *Client) GetMasterdata(params *GetMasterdataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMasterdataOK, error) {
 	// TODO: Validate the params before sending

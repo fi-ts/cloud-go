@@ -47,7 +47,8 @@ func NewVolumeUsageOK() *VolumeUsageOK {
 	return &VolumeUsageOK{}
 }
 
-/* VolumeUsageOK describes a response with status code 200, with default header values.
+/*
+	VolumeUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewVolumeUsageDefault(code int) *VolumeUsageDefault {
 	}
 }
 
-/* VolumeUsageDefault describes a response with status code -1, with default header values.
+/*
+	VolumeUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -47,7 +47,8 @@ func NewFindClustersOK() *FindClustersOK {
 	return &FindClustersOK{}
 }
 
-/* FindClustersOK describes a response with status code 200, with default header values.
+/*
+	FindClustersOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewFindClustersDefault(code int) *FindClustersDefault {
 	}
 }
 
-/* FindClustersDefault describes a response with status code -1, with default header values.
+/*
+	FindClustersDefault describes a response with status code -1, with default header values.
 
 Error
 */

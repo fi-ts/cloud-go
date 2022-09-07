@@ -47,7 +47,8 @@ func NewUpdatePostgresOK() *UpdatePostgresOK {
 	return &UpdatePostgresOK{}
 }
 
-/* UpdatePostgresOK describes a response with status code 200, with default header values.
+/*
+	UpdatePostgresOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewUpdatePostgresDefault(code int) *UpdatePostgresDefault {
 	}
 }
 
-/* UpdatePostgresDefault describes a response with status code -1, with default header values.
+/*
+	UpdatePostgresDefault describes a response with status code -1, with default header values.
 
 Error
 */

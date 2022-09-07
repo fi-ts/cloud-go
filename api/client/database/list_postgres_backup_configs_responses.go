@@ -47,7 +47,8 @@ func NewListPostgresBackupConfigsOK() *ListPostgresBackupConfigsOK {
 	return &ListPostgresBackupConfigsOK{}
 }
 
-/* ListPostgresBackupConfigsOK describes a response with status code 200, with default header values.
+/*
+	ListPostgresBackupConfigsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewListPostgresBackupConfigsDefault(code int) *ListPostgresBackupConfigsDef
 	}
 }
 
-/* ListPostgresBackupConfigsDefault describes a response with status code -1, with default header values.
+/*
+	ListPostgresBackupConfigsDefault describes a response with status code -1, with default header values.
 
 Error
 */

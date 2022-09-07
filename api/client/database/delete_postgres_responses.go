@@ -47,7 +47,8 @@ func NewDeletePostgresOK() *DeletePostgresOK {
 	return &DeletePostgresOK{}
 }
 
-/* DeletePostgresOK describes a response with status code 200, with default header values.
+/*
+	DeletePostgresOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewDeletePostgresDefault(code int) *DeletePostgresDefault {
 	}
 }
 
-/* DeletePostgresDefault describes a response with status code -1, with default header values.
+/*
+	DeletePostgresDefault describes a response with status code -1, with default header values.
 
 Error
 */

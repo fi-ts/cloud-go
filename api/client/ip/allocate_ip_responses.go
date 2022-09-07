@@ -47,7 +47,8 @@ func NewAllocateIPCreated() *AllocateIPCreated {
 	return &AllocateIPCreated{}
 }
 
-/* AllocateIPCreated describes a response with status code 201, with default header values.
+/*
+	AllocateIPCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -81,7 +82,8 @@ func NewAllocateIPDefault(code int) *AllocateIPDefault {
 	}
 }
 
-/* AllocateIPDefault describes a response with status code -1, with default header values.
+/*
+	AllocateIPDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -47,7 +47,8 @@ func NewListClustersOK() *ListClustersOK {
 	return &ListClustersOK{}
 }
 
-/* ListClustersOK describes a response with status code 200, with default header values.
+/*
+	ListClustersOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewListClustersDefault(code int) *ListClustersDefault {
 	}
 }
 
-/* ListClustersDefault describes a response with status code -1, with default header values.
+/*
+	ListClustersDefault describes a response with status code -1, with default header values.
 
 Error
 */

@@ -47,7 +47,8 @@ func NewListPostgresOK() *ListPostgresOK {
 	return &ListPostgresOK{}
 }
 
-/* ListPostgresOK describes a response with status code 200, with default header values.
+/*
+	ListPostgresOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -79,7 +80,8 @@ func NewListPostgresDefault(code int) *ListPostgresDefault {
 	}
 }
 
-/* ListPostgresDefault describes a response with status code -1, with default header values.
+/*
+	ListPostgresDefault describes a response with status code -1, with default header values.
 
 Error
 */

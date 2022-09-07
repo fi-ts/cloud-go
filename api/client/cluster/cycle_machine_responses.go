@@ -47,7 +47,8 @@ func NewCycleMachineOK() *CycleMachineOK {
 	return &CycleMachineOK{}
 }
 
-/* CycleMachineOK describes a response with status code 200, with default header values.
+/*
+	CycleMachineOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +82,8 @@ func NewCycleMachineDefault(code int) *CycleMachineDefault {
 	}
 }
 
-/* CycleMachineDefault describes a response with status code -1, with default header values.
+/*
+	CycleMachineDefault describes a response with status code -1, with default header values.
 
 Error
 */

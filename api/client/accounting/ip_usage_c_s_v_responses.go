@@ -46,7 +46,8 @@ func NewIPUsageCSVOK() *IPUsageCSVOK {
 	return &IPUsageCSVOK{}
 }
 
-/* IPUsageCSVOK describes a response with status code 200, with default header values.
+/*
+	IPUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -78,7 +79,8 @@ func NewIPUsageCSVDefault(code int) *IPUsageCSVDefault {
 	}
 }
 
-/* IPUsageCSVDefault describes a response with status code -1, with default header values.
+/*
+	IPUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */
