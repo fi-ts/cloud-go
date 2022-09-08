@@ -47,7 +47,8 @@ func NewReconcileClusterOK() *ReconcileClusterOK {
 	return &ReconcileClusterOK{}
 }
 
-/* ReconcileClusterOK describes a response with status code 200, with default header values.
+/*
+ReconcileClusterOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type ReconcileClusterOK struct {
 	Payload *models.V1ClusterResponse
 }
 
+// IsSuccess returns true when this reconcile cluster o k response has a 2xx status code
+func (o *ReconcileClusterOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this reconcile cluster o k response has a 3xx status code
+func (o *ReconcileClusterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this reconcile cluster o k response has a 4xx status code
+func (o *ReconcileClusterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this reconcile cluster o k response has a 5xx status code
+func (o *ReconcileClusterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this reconcile cluster o k response a status code equal to that given
+func (o *ReconcileClusterOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ReconcileClusterOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileClusterOK  %+v", 200, o.Payload)
 }
+
+func (o *ReconcileClusterOK) String() string {
+	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileClusterOK  %+v", 200, o.Payload)
+}
+
 func (o *ReconcileClusterOK) GetPayload() *models.V1ClusterResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewReconcileClusterDefault(code int) *ReconcileClusterDefault {
 	}
 }
 
-/* ReconcileClusterDefault describes a response with status code -1, with default header values.
+/*
+ReconcileClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *ReconcileClusterDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this reconcile cluster default response has a 2xx status code
+func (o *ReconcileClusterDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this reconcile cluster default response has a 3xx status code
+func (o *ReconcileClusterDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this reconcile cluster default response has a 4xx status code
+func (o *ReconcileClusterDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this reconcile cluster default response has a 5xx status code
+func (o *ReconcileClusterDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this reconcile cluster default response a status code equal to that given
+func (o *ReconcileClusterDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ReconcileClusterDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileCluster default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ReconcileClusterDefault) String() string {
+	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileCluster default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ReconcileClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

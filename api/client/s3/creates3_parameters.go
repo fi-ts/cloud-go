@@ -54,10 +54,12 @@ func NewCreates3ParamsWithHTTPClient(client *http.Client) *Creates3Params {
 	}
 }
 
-/* Creates3Params contains all the parameters to send to the API endpoint
-   for the creates3 operation.
+/*
+Creates3Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the creates3 operation.
+
+	Typically these are written to a http.Request.
 */
 type Creates3Params struct {
 

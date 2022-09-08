@@ -52,10 +52,12 @@ func NewAcceptPostgresRestoreParamsWithHTTPClient(client *http.Client) *AcceptPo
 	}
 }
 
-/* AcceptPostgresRestoreParams contains all the parameters to send to the API endpoint
-   for the accept postgres restore operation.
+/*
+AcceptPostgresRestoreParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the accept postgres restore operation.
+
+	Typically these are written to a http.Request.
 */
 type AcceptPostgresRestoreParams struct {
 

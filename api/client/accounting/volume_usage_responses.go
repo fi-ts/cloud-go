@@ -47,7 +47,8 @@ func NewVolumeUsageOK() *VolumeUsageOK {
 	return &VolumeUsageOK{}
 }
 
-/* VolumeUsageOK describes a response with status code 200, with default header values.
+/*
+VolumeUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type VolumeUsageOK struct {
 	Payload *models.V1VolumeUsageResponse
 }
 
+// IsSuccess returns true when this volume usage o k response has a 2xx status code
+func (o *VolumeUsageOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this volume usage o k response has a 3xx status code
+func (o *VolumeUsageOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this volume usage o k response has a 4xx status code
+func (o *VolumeUsageOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this volume usage o k response has a 5xx status code
+func (o *VolumeUsageOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this volume usage o k response a status code equal to that given
+func (o *VolumeUsageOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *VolumeUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsageOK  %+v", 200, o.Payload)
 }
+
+func (o *VolumeUsageOK) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsageOK  %+v", 200, o.Payload)
+}
+
 func (o *VolumeUsageOK) GetPayload() *models.V1VolumeUsageResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewVolumeUsageDefault(code int) *VolumeUsageDefault {
 	}
 }
 
-/* VolumeUsageDefault describes a response with status code -1, with default header values.
+/*
+VolumeUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *VolumeUsageDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this volume usage default response has a 2xx status code
+func (o *VolumeUsageDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this volume usage default response has a 3xx status code
+func (o *VolumeUsageDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this volume usage default response has a 4xx status code
+func (o *VolumeUsageDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this volume usage default response has a 5xx status code
+func (o *VolumeUsageDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this volume usage default response a status code equal to that given
+func (o *VolumeUsageDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *VolumeUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsage default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *VolumeUsageDefault) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsage default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *VolumeUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

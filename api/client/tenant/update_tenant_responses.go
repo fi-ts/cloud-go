@@ -53,7 +53,8 @@ func NewUpdateTenantOK() *UpdateTenantOK {
 	return &UpdateTenantOK{}
 }
 
-/* UpdateTenantOK describes a response with status code 200, with default header values.
+/*
+UpdateTenantOK describes a response with status code 200, with default header values.
 
 Updated
 */
@@ -61,9 +62,39 @@ type UpdateTenantOK struct {
 	Payload *models.V1TenantResponse
 }
 
+// IsSuccess returns true when this update tenant o k response has a 2xx status code
+func (o *UpdateTenantOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update tenant o k response has a 3xx status code
+func (o *UpdateTenantOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update tenant o k response has a 4xx status code
+func (o *UpdateTenantOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update tenant o k response has a 5xx status code
+func (o *UpdateTenantOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update tenant o k response a status code equal to that given
+func (o *UpdateTenantOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdateTenantOK) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenantOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdateTenantOK) String() string {
+	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenantOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdateTenantOK) GetPayload() *models.V1TenantResponse {
 	return o.Payload
 }
@@ -85,7 +116,8 @@ func NewUpdateTenantPreconditionFailed() *UpdateTenantPreconditionFailed {
 	return &UpdateTenantPreconditionFailed{}
 }
 
-/* UpdateTenantPreconditionFailed describes a response with status code 412, with default header values.
+/*
+UpdateTenantPreconditionFailed describes a response with status code 412, with default header values.
 
 OptimisticLock
 */
@@ -93,9 +125,39 @@ type UpdateTenantPreconditionFailed struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
+// IsSuccess returns true when this update tenant precondition failed response has a 2xx status code
+func (o *UpdateTenantPreconditionFailed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update tenant precondition failed response has a 3xx status code
+func (o *UpdateTenantPreconditionFailed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update tenant precondition failed response has a 4xx status code
+func (o *UpdateTenantPreconditionFailed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update tenant precondition failed response has a 5xx status code
+func (o *UpdateTenantPreconditionFailed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update tenant precondition failed response a status code equal to that given
+func (o *UpdateTenantPreconditionFailed) IsCode(code int) bool {
+	return code == 412
+}
+
 func (o *UpdateTenantPreconditionFailed) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenantPreconditionFailed  %+v", 412, o.Payload)
 }
+
+func (o *UpdateTenantPreconditionFailed) String() string {
+	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenantPreconditionFailed  %+v", 412, o.Payload)
+}
+
 func (o *UpdateTenantPreconditionFailed) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -119,7 +181,8 @@ func NewUpdateTenantDefault(code int) *UpdateTenantDefault {
 	}
 }
 
-/* UpdateTenantDefault describes a response with status code -1, with default header values.
+/*
+UpdateTenantDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -134,9 +197,39 @@ func (o *UpdateTenantDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update tenant default response has a 2xx status code
+func (o *UpdateTenantDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update tenant default response has a 3xx status code
+func (o *UpdateTenantDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update tenant default response has a 4xx status code
+func (o *UpdateTenantDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update tenant default response has a 5xx status code
+func (o *UpdateTenantDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update tenant default response a status code equal to that given
+func (o *UpdateTenantDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdateTenantDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenant default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdateTenantDefault) String() string {
+	return fmt.Sprintf("[POST /v1/tenant][%d] updateTenant default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdateTenantDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

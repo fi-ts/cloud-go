@@ -54,10 +54,12 @@ func NewLists3ParamsWithHTTPClient(client *http.Client) *Lists3Params {
 	}
 }
 
-/* Lists3Params contains all the parameters to send to the API endpoint
-   for the lists3 operation.
+/*
+Lists3Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the lists3 operation.
+
+	Typically these are written to a http.Request.
 */
 type Lists3Params struct {
 

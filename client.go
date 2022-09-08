@@ -40,7 +40,7 @@ func AuthType(authType string) option {
 	}
 }
 
-//Timeout sets the timeout for a new client
+// Timeout sets the timeout for a new client
 func Timeout(timeout time.Duration) option {
 	// overriding the default timeout as otherwise all request need to be called with
 	// WithTimeout or WithContext

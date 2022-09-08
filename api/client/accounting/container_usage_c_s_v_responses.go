@@ -46,7 +46,8 @@ func NewContainerUsageCSVOK() *ContainerUsageCSVOK {
 	return &ContainerUsageCSVOK{}
 }
 
-/* ContainerUsageCSVOK describes a response with status code 200, with default header values.
+/*
+ContainerUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -54,9 +55,39 @@ type ContainerUsageCSVOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this container usage c s v o k response has a 2xx status code
+func (o *ContainerUsageCSVOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this container usage c s v o k response has a 3xx status code
+func (o *ContainerUsageCSVOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this container usage c s v o k response has a 4xx status code
+func (o *ContainerUsageCSVOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this container usage c s v o k response has a 5xx status code
+func (o *ContainerUsageCSVOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this container usage c s v o k response a status code equal to that given
+func (o *ContainerUsageCSVOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ContainerUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage-csv][%d] containerUsageCSVOK  %+v", 200, o.Payload)
 }
+
+func (o *ContainerUsageCSVOK) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/container-usage-csv][%d] containerUsageCSVOK  %+v", 200, o.Payload)
+}
+
 func (o *ContainerUsageCSVOK) GetPayload() string {
 	return o.Payload
 }
@@ -78,7 +109,8 @@ func NewContainerUsageCSVDefault(code int) *ContainerUsageCSVDefault {
 	}
 }
 
-/* ContainerUsageCSVDefault describes a response with status code -1, with default header values.
+/*
+ContainerUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -93,9 +125,39 @@ func (o *ContainerUsageCSVDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this container usage c s v default response has a 2xx status code
+func (o *ContainerUsageCSVDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this container usage c s v default response has a 3xx status code
+func (o *ContainerUsageCSVDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this container usage c s v default response has a 4xx status code
+func (o *ContainerUsageCSVDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this container usage c s v default response has a 5xx status code
+func (o *ContainerUsageCSVDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this container usage c s v default response a status code equal to that given
+func (o *ContainerUsageCSVDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ContainerUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage-csv][%d] containerUsageCSV default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ContainerUsageCSVDefault) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/container-usage-csv][%d] containerUsageCSV default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ContainerUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

@@ -52,10 +52,12 @@ func NewGetPostgresBackupsParamsWithHTTPClient(client *http.Client) *GetPostgres
 	}
 }
 
-/* GetPostgresBackupsParams contains all the parameters to send to the API endpoint
-   for the get postgres backups operation.
+/*
+GetPostgresBackupsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get postgres backups operation.
+
+	Typically these are written to a http.Request.
 */
 type GetPostgresBackupsParams struct {
 

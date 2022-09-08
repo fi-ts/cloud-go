@@ -54,10 +54,12 @@ func NewIPUsageCSVParamsWithHTTPClient(client *http.Client) *IPUsageCSVParams {
 	}
 }
 
-/* IPUsageCSVParams contains all the parameters to send to the API endpoint
-   for the ip usage c s v operation.
+/*
+IPUsageCSVParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ip usage c s v operation.
+
+	Typically these are written to a http.Request.
 */
 type IPUsageCSVParams struct {
 

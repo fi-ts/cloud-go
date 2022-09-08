@@ -47,7 +47,8 @@ func NewListVolumesOK() *ListVolumesOK {
 	return &ListVolumesOK{}
 }
 
-/* ListVolumesOK describes a response with status code 200, with default header values.
+/*
+ListVolumesOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type ListVolumesOK struct {
 	Payload []*models.V1VolumeResponse
 }
 
+// IsSuccess returns true when this list volumes o k response has a 2xx status code
+func (o *ListVolumesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list volumes o k response has a 3xx status code
+func (o *ListVolumesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list volumes o k response has a 4xx status code
+func (o *ListVolumesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list volumes o k response has a 5xx status code
+func (o *ListVolumesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list volumes o k response a status code equal to that given
+func (o *ListVolumesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListVolumesOK) Error() string {
 	return fmt.Sprintf("[GET /v1/volume][%d] listVolumesOK  %+v", 200, o.Payload)
 }
+
+func (o *ListVolumesOK) String() string {
+	return fmt.Sprintf("[GET /v1/volume][%d] listVolumesOK  %+v", 200, o.Payload)
+}
+
 func (o *ListVolumesOK) GetPayload() []*models.V1VolumeResponse {
 	return o.Payload
 }
@@ -79,7 +110,8 @@ func NewListVolumesDefault(code int) *ListVolumesDefault {
 	}
 }
 
-/* ListVolumesDefault describes a response with status code -1, with default header values.
+/*
+ListVolumesDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -94,9 +126,39 @@ func (o *ListVolumesDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list volumes default response has a 2xx status code
+func (o *ListVolumesDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list volumes default response has a 3xx status code
+func (o *ListVolumesDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list volumes default response has a 4xx status code
+func (o *ListVolumesDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list volumes default response has a 5xx status code
+func (o *ListVolumesDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list volumes default response a status code equal to that given
+func (o *ListVolumesDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListVolumesDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/volume][%d] listVolumes default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListVolumesDefault) String() string {
+	return fmt.Sprintf("[GET /v1/volume][%d] listVolumes default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListVolumesDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

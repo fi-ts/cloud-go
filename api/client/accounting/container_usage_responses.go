@@ -47,7 +47,8 @@ func NewContainerUsageOK() *ContainerUsageOK {
 	return &ContainerUsageOK{}
 }
 
-/* ContainerUsageOK describes a response with status code 200, with default header values.
+/*
+ContainerUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type ContainerUsageOK struct {
 	Payload *models.V1ContainerUsageResponse
 }
 
+// IsSuccess returns true when this container usage o k response has a 2xx status code
+func (o *ContainerUsageOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this container usage o k response has a 3xx status code
+func (o *ContainerUsageOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this container usage o k response has a 4xx status code
+func (o *ContainerUsageOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this container usage o k response has a 5xx status code
+func (o *ContainerUsageOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this container usage o k response a status code equal to that given
+func (o *ContainerUsageOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ContainerUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
 }
+
+func (o *ContainerUsageOK) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
+}
+
 func (o *ContainerUsageOK) GetPayload() *models.V1ContainerUsageResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewContainerUsageDefault(code int) *ContainerUsageDefault {
 	}
 }
 
-/* ContainerUsageDefault describes a response with status code -1, with default header values.
+/*
+ContainerUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *ContainerUsageDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this container usage default response has a 2xx status code
+func (o *ContainerUsageDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this container usage default response has a 3xx status code
+func (o *ContainerUsageDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this container usage default response has a 4xx status code
+func (o *ContainerUsageDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this container usage default response has a 5xx status code
+func (o *ContainerUsageDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this container usage default response a status code equal to that given
+func (o *ContainerUsageDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ContainerUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ContainerUsageDefault) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ContainerUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

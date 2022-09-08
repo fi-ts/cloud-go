@@ -54,10 +54,12 @@ func NewNetworkUsageCSVParamsWithHTTPClient(client *http.Client) *NetworkUsageCS
 	}
 }
 
-/* NetworkUsageCSVParams contains all the parameters to send to the API endpoint
-   for the network usage c s v operation.
+/*
+NetworkUsageCSVParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the network usage c s v operation.
+
+	Typically these are written to a http.Request.
 */
 type NetworkUsageCSVParams struct {
 

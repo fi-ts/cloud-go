@@ -53,10 +53,12 @@ func NewFindClusterParamsWithHTTPClient(client *http.Client) *FindClusterParams 
 	}
 }
 
-/* FindClusterParams contains all the parameters to send to the API endpoint
-   for the find cluster operation.
+/*
+FindClusterParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the find cluster operation.
+
+	Typically these are written to a http.Request.
 */
 type FindClusterParams struct {
 

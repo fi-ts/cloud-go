@@ -54,10 +54,12 @@ func NewReconcileClusterParamsWithHTTPClient(client *http.Client) *ReconcileClus
 	}
 }
 
-/* ReconcileClusterParams contains all the parameters to send to the API endpoint
-   for the reconcile cluster operation.
+/*
+ReconcileClusterParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the reconcile cluster operation.
+
+	Typically these are written to a http.Request.
 */
 type ReconcileClusterParams struct {
 

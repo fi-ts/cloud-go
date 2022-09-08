@@ -52,10 +52,12 @@ func NewAcceptPostgresRestoreDeprecatedParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* AcceptPostgresRestoreDeprecatedParams contains all the parameters to send to the API endpoint
-   for the accept postgres restore deprecated operation.
+/*
+AcceptPostgresRestoreDeprecatedParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the accept postgres restore deprecated operation.
+
+	Typically these are written to a http.Request.
 */
 type AcceptPostgresRestoreDeprecatedParams struct {
 

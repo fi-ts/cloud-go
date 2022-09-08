@@ -20,9 +20,20 @@ import (
 // swagger:model models.V1MachineRecentProvisioningEvents
 type ModelsV1MachineRecentProvisioningEvents struct {
 
+	// crash loop
+	// Required: true
+	CrashLoop *bool `json:"crash_loop"`
+
+	// failed machine reclaim
+	// Required: true
+	FailedMachineReclaim *bool `json:"failed_machine_reclaim"`
+
 	// incomplete provisioning cycles
 	// Required: true
 	IncompleteProvisioningCycles *string `json:"incomplete_provisioning_cycles"`
+
+	// last error event
+	LastErrorEvent *ModelsV1MachineProvisioningEvent `json:"last_error_event,omitempty"`
 
 	// last event time
 	LastEventTime string `json:"last_event_time,omitempty"`
@@ -36,7 +47,19 @@ type ModelsV1MachineRecentProvisioningEvents struct {
 func (m *ModelsV1MachineRecentProvisioningEvents) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCrashLoop(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFailedMachineReclaim(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateIncompleteProvisioningCycles(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLastErrorEvent(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -50,10 +73,47 @@ func (m *ModelsV1MachineRecentProvisioningEvents) Validate(formats strfmt.Regist
 	return nil
 }
 
+func (m *ModelsV1MachineRecentProvisioningEvents) validateCrashLoop(formats strfmt.Registry) error {
+
+	if err := validate.Required("crash_loop", "body", m.CrashLoop); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineRecentProvisioningEvents) validateFailedMachineReclaim(formats strfmt.Registry) error {
+
+	if err := validate.Required("failed_machine_reclaim", "body", m.FailedMachineReclaim); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ModelsV1MachineRecentProvisioningEvents) validateIncompleteProvisioningCycles(formats strfmt.Registry) error {
 
 	if err := validate.Required("incomplete_provisioning_cycles", "body", m.IncompleteProvisioningCycles); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineRecentProvisioningEvents) validateLastErrorEvent(formats strfmt.Registry) error {
+	if swag.IsZero(m.LastErrorEvent) { // not required
+		return nil
+	}
+
+	if m.LastErrorEvent != nil {
+		if err := m.LastErrorEvent.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("last_error_event")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("last_error_event")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -90,6 +150,10 @@ func (m *ModelsV1MachineRecentProvisioningEvents) validateLog(formats strfmt.Reg
 func (m *ModelsV1MachineRecentProvisioningEvents) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateLastErrorEvent(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLog(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -97,6 +161,22 @@ func (m *ModelsV1MachineRecentProvisioningEvents) ContextValidate(ctx context.Co
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ModelsV1MachineRecentProvisioningEvents) contextValidateLastErrorEvent(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LastErrorEvent != nil {
+		if err := m.LastErrorEvent.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("last_error_event")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("last_error_event")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

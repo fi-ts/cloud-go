@@ -52,10 +52,12 @@ func NewListPostgresBackupConfigsParamsWithHTTPClient(client *http.Client) *List
 	}
 }
 
-/* ListPostgresBackupConfigsParams contains all the parameters to send to the API endpoint
-   for the list postgres backup configs operation.
+/*
+ListPostgresBackupConfigsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list postgres backup configs operation.
+
+	Typically these are written to a http.Request.
 */
 type ListPostgresBackupConfigsParams struct {
 	timeout    time.Duration

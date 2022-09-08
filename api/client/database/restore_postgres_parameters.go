@@ -54,10 +54,12 @@ func NewRestorePostgresParamsWithHTTPClient(client *http.Client) *RestorePostgre
 	}
 }
 
-/* RestorePostgresParams contains all the parameters to send to the API endpoint
-   for the restore postgres operation.
+/*
+RestorePostgresParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the restore postgres operation.
+
+	Typically these are written to a http.Request.
 */
 type RestorePostgresParams struct {
 

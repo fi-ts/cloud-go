@@ -52,10 +52,12 @@ func NewListPostgresParamsWithHTTPClient(client *http.Client) *ListPostgresParam
 	}
 }
 
-/* ListPostgresParams contains all the parameters to send to the API endpoint
-   for the list postgres operation.
+/*
+ListPostgresParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list postgres operation.
+
+	Typically these are written to a http.Request.
 */
 type ListPostgresParams struct {
 	timeout    time.Duration

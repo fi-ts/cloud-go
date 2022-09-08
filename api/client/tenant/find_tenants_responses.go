@@ -47,7 +47,8 @@ func NewFindTenantsOK() *FindTenantsOK {
 	return &FindTenantsOK{}
 }
 
-/* FindTenantsOK describes a response with status code 200, with default header values.
+/*
+FindTenantsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type FindTenantsOK struct {
 	Payload []*models.V1TenantResponse
 }
 
+// IsSuccess returns true when this find tenants o k response has a 2xx status code
+func (o *FindTenantsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this find tenants o k response has a 3xx status code
+func (o *FindTenantsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this find tenants o k response has a 4xx status code
+func (o *FindTenantsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this find tenants o k response has a 5xx status code
+func (o *FindTenantsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this find tenants o k response a status code equal to that given
+func (o *FindTenantsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *FindTenantsOK) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant/find][%d] findTenantsOK  %+v", 200, o.Payload)
 }
+
+func (o *FindTenantsOK) String() string {
+	return fmt.Sprintf("[POST /v1/tenant/find][%d] findTenantsOK  %+v", 200, o.Payload)
+}
+
 func (o *FindTenantsOK) GetPayload() []*models.V1TenantResponse {
 	return o.Payload
 }
@@ -79,7 +110,8 @@ func NewFindTenantsDefault(code int) *FindTenantsDefault {
 	}
 }
 
-/* FindTenantsDefault describes a response with status code -1, with default header values.
+/*
+FindTenantsDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -94,9 +126,39 @@ func (o *FindTenantsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this find tenants default response has a 2xx status code
+func (o *FindTenantsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this find tenants default response has a 3xx status code
+func (o *FindTenantsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this find tenants default response has a 4xx status code
+func (o *FindTenantsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this find tenants default response has a 5xx status code
+func (o *FindTenantsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this find tenants default response a status code equal to that given
+func (o *FindTenantsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *FindTenantsDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/tenant/find][%d] findTenants default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *FindTenantsDefault) String() string {
+	return fmt.Sprintf("[POST /v1/tenant/find][%d] findTenants default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *FindTenantsDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

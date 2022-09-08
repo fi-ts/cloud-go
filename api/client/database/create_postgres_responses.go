@@ -47,7 +47,8 @@ func NewCreatePostgresCreated() *CreatePostgresCreated {
 	return &CreatePostgresCreated{}
 }
 
-/* CreatePostgresCreated describes a response with status code 201, with default header values.
+/*
+CreatePostgresCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -55,9 +56,39 @@ type CreatePostgresCreated struct {
 	Payload *models.V1PostgresResponse
 }
 
+// IsSuccess returns true when this create postgres created response has a 2xx status code
+func (o *CreatePostgresCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create postgres created response has a 3xx status code
+func (o *CreatePostgresCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create postgres created response has a 4xx status code
+func (o *CreatePostgresCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create postgres created response has a 5xx status code
+func (o *CreatePostgresCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create postgres created response a status code equal to that given
+func (o *CreatePostgresCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *CreatePostgresCreated) Error() string {
 	return fmt.Sprintf("[PUT /v1/database/postgres][%d] createPostgresCreated  %+v", 201, o.Payload)
 }
+
+func (o *CreatePostgresCreated) String() string {
+	return fmt.Sprintf("[PUT /v1/database/postgres][%d] createPostgresCreated  %+v", 201, o.Payload)
+}
+
 func (o *CreatePostgresCreated) GetPayload() *models.V1PostgresResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewCreatePostgresDefault(code int) *CreatePostgresDefault {
 	}
 }
 
-/* CreatePostgresDefault describes a response with status code -1, with default header values.
+/*
+CreatePostgresDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *CreatePostgresDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this create postgres default response has a 2xx status code
+func (o *CreatePostgresDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create postgres default response has a 3xx status code
+func (o *CreatePostgresDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create postgres default response has a 4xx status code
+func (o *CreatePostgresDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create postgres default response has a 5xx status code
+func (o *CreatePostgresDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create postgres default response a status code equal to that given
+func (o *CreatePostgresDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *CreatePostgresDefault) Error() string {
 	return fmt.Sprintf("[PUT /v1/database/postgres][%d] createPostgres default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *CreatePostgresDefault) String() string {
+	return fmt.Sprintf("[PUT /v1/database/postgres][%d] createPostgres default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *CreatePostgresDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

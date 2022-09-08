@@ -52,10 +52,12 @@ func NewGetSSHKeyPairParamsWithHTTPClient(client *http.Client) *GetSSHKeyPairPar
 	}
 }
 
-/* GetSSHKeyPairParams contains all the parameters to send to the API endpoint
-   for the get SSH key pair operation.
+/*
+GetSSHKeyPairParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get SSH key pair operation.
+
+	Typically these are written to a http.Request.
 */
 type GetSSHKeyPairParams struct {
 

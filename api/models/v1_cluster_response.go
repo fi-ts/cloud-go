@@ -117,6 +117,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
 
+	// cni
+	// Required: true
+	Cni *string `json:"cni"`
+
 	// the firewalls which belong to this cluster
 	Firewalls []*ModelsV1MachineResponse `json:"firewalls"`
 
@@ -221,6 +225,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateWorkers(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCni(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -555,6 +563,15 @@ func (m *V1ClusterResponse) validateWorkers(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateCni(formats strfmt.Registry) error {
+
+	if err := validate.Required("cni", "body", m.Cni); err != nil {
+		return err
 	}
 
 	return nil

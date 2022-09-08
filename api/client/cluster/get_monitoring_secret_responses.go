@@ -47,7 +47,8 @@ func NewGetMonitoringSecretOK() *GetMonitoringSecretOK {
 	return &GetMonitoringSecretOK{}
 }
 
-/* GetMonitoringSecretOK describes a response with status code 200, with default header values.
+/*
+GetMonitoringSecretOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type GetMonitoringSecretOK struct {
 	Payload *models.V1ClusterMonitoringSecretResponse
 }
 
+// IsSuccess returns true when this get monitoring secret o k response has a 2xx status code
+func (o *GetMonitoringSecretOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get monitoring secret o k response has a 3xx status code
+func (o *GetMonitoringSecretOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get monitoring secret o k response has a 4xx status code
+func (o *GetMonitoringSecretOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get monitoring secret o k response has a 5xx status code
+func (o *GetMonitoringSecretOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get monitoring secret o k response a status code equal to that given
+func (o *GetMonitoringSecretOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetMonitoringSecretOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecretOK  %+v", 200, o.Payload)
 }
+
+func (o *GetMonitoringSecretOK) String() string {
+	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecretOK  %+v", 200, o.Payload)
+}
+
 func (o *GetMonitoringSecretOK) GetPayload() *models.V1ClusterMonitoringSecretResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetMonitoringSecretDefault(code int) *GetMonitoringSecretDefault {
 	}
 }
 
-/* GetMonitoringSecretDefault describes a response with status code -1, with default header values.
+/*
+GetMonitoringSecretDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *GetMonitoringSecretDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get monitoring secret default response has a 2xx status code
+func (o *GetMonitoringSecretDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get monitoring secret default response has a 3xx status code
+func (o *GetMonitoringSecretDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get monitoring secret default response has a 4xx status code
+func (o *GetMonitoringSecretDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get monitoring secret default response has a 5xx status code
+func (o *GetMonitoringSecretDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get monitoring secret default response a status code equal to that given
+func (o *GetMonitoringSecretDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetMonitoringSecretDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecret default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetMonitoringSecretDefault) String() string {
+	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecret default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetMonitoringSecretDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

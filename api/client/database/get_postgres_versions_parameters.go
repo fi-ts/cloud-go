@@ -52,10 +52,12 @@ func NewGetPostgresVersionsParamsWithHTTPClient(client *http.Client) *GetPostgre
 	}
 }
 
-/* GetPostgresVersionsParams contains all the parameters to send to the API endpoint
-   for the get postgres versions operation.
+/*
+GetPostgresVersionsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get postgres versions operation.
+
+	Typically these are written to a http.Request.
 */
 type GetPostgresVersionsParams struct {
 	timeout    time.Duration

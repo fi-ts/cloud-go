@@ -47,7 +47,8 @@ func NewCreates3OK() *Creates3OK {
 	return &Creates3OK{}
 }
 
-/* Creates3OK describes a response with status code 200, with default header values.
+/*
+Creates3OK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type Creates3OK struct {
 	Payload *models.V1S3CredentialsResponse
 }
 
+// IsSuccess returns true when this creates3 o k response has a 2xx status code
+func (o *Creates3OK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this creates3 o k response has a 3xx status code
+func (o *Creates3OK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this creates3 o k response has a 4xx status code
+func (o *Creates3OK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this creates3 o k response has a 5xx status code
+func (o *Creates3OK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this creates3 o k response a status code equal to that given
+func (o *Creates3OK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *Creates3OK) Error() string {
 	return fmt.Sprintf("[PUT /v1/s3][%d] creates3OK  %+v", 200, o.Payload)
 }
+
+func (o *Creates3OK) String() string {
+	return fmt.Sprintf("[PUT /v1/s3][%d] creates3OK  %+v", 200, o.Payload)
+}
+
 func (o *Creates3OK) GetPayload() *models.V1S3CredentialsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewCreates3Default(code int) *Creates3Default {
 	}
 }
 
-/* Creates3Default describes a response with status code -1, with default header values.
+/*
+Creates3Default describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *Creates3Default) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this creates3 default response has a 2xx status code
+func (o *Creates3Default) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this creates3 default response has a 3xx status code
+func (o *Creates3Default) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this creates3 default response has a 4xx status code
+func (o *Creates3Default) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this creates3 default response has a 5xx status code
+func (o *Creates3Default) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this creates3 default response a status code equal to that given
+func (o *Creates3Default) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *Creates3Default) Error() string {
 	return fmt.Sprintf("[PUT /v1/s3][%d] creates3 default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *Creates3Default) String() string {
+	return fmt.Sprintf("[PUT /v1/s3][%d] creates3 default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *Creates3Default) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

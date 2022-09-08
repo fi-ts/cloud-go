@@ -70,7 +70,7 @@ type ClientService interface {
 }
 
 /*
-  AcceptPostgresRestore indicates a validated restore if the postgres was changed since this one was read a conflict is returned
+AcceptPostgresRestore indicates a validated restore if the postgres was changed since this one was read a conflict is returned
 */
 func (a *Client) AcceptPostgresRestore(params *AcceptPostgresRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptPostgresRestoreOK, error) {
 	// TODO: Validate the params before sending
@@ -108,7 +108,7 @@ func (a *Client) AcceptPostgresRestore(params *AcceptPostgresRestoreParams, auth
 }
 
 /*
-  AcceptPostgresRestoreDeprecated indicates a validated restore if the postgres was changed since this one was read a conflict is returned
+AcceptPostgresRestoreDeprecated indicates a validated restore if the postgres was changed since this one was read a conflict is returned
 */
 func (a *Client) AcceptPostgresRestoreDeprecated(params *AcceptPostgresRestoreDeprecatedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AcceptPostgresRestoreDeprecatedOK, error) {
 	// TODO: Validate the params before sending
@@ -146,7 +146,7 @@ func (a *Client) AcceptPostgresRestoreDeprecated(params *AcceptPostgresRestoreDe
 }
 
 /*
-  CreatePostgres creates a postgres if the given ID already exists a conflict is returned
+CreatePostgres creates a postgres if the given ID already exists a conflict is returned
 */
 func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresCreated, error) {
 	// TODO: Validate the params before sending
@@ -184,7 +184,7 @@ func (a *Client) CreatePostgres(params *CreatePostgresParams, authInfo runtime.C
 }
 
 /*
-  CreatePostgresBackupConfig creates a postgres backup
+CreatePostgresBackupConfig creates a postgres backup
 */
 func (a *Client) CreatePostgresBackupConfig(params *CreatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresBackupConfigCreated, error) {
 	// TODO: Validate the params before sending
@@ -222,7 +222,7 @@ func (a *Client) CreatePostgresBackupConfig(params *CreatePostgresBackupConfigPa
 }
 
 /*
-  CreatePostgresStandby creates a standby postgres if the given ID does not already exists a conflict is returned
+CreatePostgresStandby creates a standby postgres if the given ID does not already exists a conflict is returned
 */
 func (a *Client) CreatePostgresStandby(params *CreatePostgresStandbyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePostgresStandbyCreated, error) {
 	// TODO: Validate the params before sending
@@ -260,7 +260,7 @@ func (a *Client) CreatePostgresStandby(params *CreatePostgresStandbyParams, auth
 }
 
 /*
-  DeletePostgres deletes an postgres and returns the deleted entity
+DeletePostgres deletes an postgres and returns the deleted entity
 */
 func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresOK, error) {
 	// TODO: Validate the params before sending
@@ -298,7 +298,7 @@ func (a *Client) DeletePostgres(params *DeletePostgresParams, authInfo runtime.C
 }
 
 /*
-  DeletePostgresBackupConfig deletes a postgres backup
+DeletePostgresBackupConfig deletes a postgres backup
 */
 func (a *Client) DeletePostgresBackupConfig(params *DeletePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePostgresBackupConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -336,7 +336,7 @@ func (a *Client) DeletePostgresBackupConfig(params *DeletePostgresBackupConfigPa
 }
 
 /*
-  FindPostgres finds postgres databases by multiple criteria
+FindPostgres finds postgres databases by multiple criteria
 */
 func (a *Client) FindPostgres(params *FindPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindPostgresOK, error) {
 	// TODO: Validate the params before sending
@@ -374,7 +374,7 @@ func (a *Client) FindPostgres(params *FindPostgresParams, authInfo runtime.Clien
 }
 
 /*
-  GetBackupConfig gets postgres backups
+GetBackupConfig gets postgres backups
 */
 func (a *Client) GetBackupConfig(params *GetBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBackupConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -412,7 +412,7 @@ func (a *Client) GetBackupConfig(params *GetBackupConfigParams, authInfo runtime
 }
 
 /*
-  GetPostgres gets postgres by id
+GetPostgres gets postgres by id
 */
 func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresOK, error) {
 	// TODO: Validate the params before sending
@@ -450,7 +450,7 @@ func (a *Client) GetPostgres(params *GetPostgresParams, authInfo runtime.ClientA
 }
 
 /*
-  GetPostgresBackups gets postgres stored backups by id
+GetPostgresBackups gets postgres stored backups by id
 */
 func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresBackupsOK, error) {
 	// TODO: Validate the params before sending
@@ -488,7 +488,7 @@ func (a *Client) GetPostgresBackups(params *GetPostgresBackupsParams, authInfo r
 }
 
 /*
-  GetPostgresPartitions gets postgres partitions supported
+GetPostgresPartitions gets postgres partitions supported
 */
 func (a *Client) GetPostgresPartitions(params *GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresPartitionsOK, error) {
 	// TODO: Validate the params before sending
@@ -526,7 +526,7 @@ func (a *Client) GetPostgresPartitions(params *GetPostgresPartitionsParams, auth
 }
 
 /*
-  GetPostgresSecrets gets postgres secrets by id
+GetPostgresSecrets gets postgres secrets by id
 */
 func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresSecretsOK, error) {
 	// TODO: Validate the params before sending
@@ -564,7 +564,7 @@ func (a *Client) GetPostgresSecrets(params *GetPostgresSecretsParams, authInfo r
 }
 
 /*
-  GetPostgresVersions gets postgres versions supported
+GetPostgresVersions gets postgres versions supported
 */
 func (a *Client) GetPostgresVersions(params *GetPostgresVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPostgresVersionsOK, error) {
 	// TODO: Validate the params before sending
@@ -602,7 +602,7 @@ func (a *Client) GetPostgresVersions(params *GetPostgresVersionsParams, authInfo
 }
 
 /*
-  ListPostgres gets all postgres databases
+ListPostgres gets all postgres databases
 */
 func (a *Client) ListPostgres(params *ListPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresOK, error) {
 	// TODO: Validate the params before sending
@@ -640,7 +640,7 @@ func (a *Client) ListPostgres(params *ListPostgresParams, authInfo runtime.Clien
 }
 
 /*
-  ListPostgresBackupConfigs gets all postgres backups
+ListPostgresBackupConfigs gets all postgres backups
 */
 func (a *Client) ListPostgresBackupConfigs(params *ListPostgresBackupConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPostgresBackupConfigsOK, error) {
 	// TODO: Validate the params before sending
@@ -678,7 +678,7 @@ func (a *Client) ListPostgresBackupConfigs(params *ListPostgresBackupConfigsPara
 }
 
 /*
-  RestorePostgres restores a postgres based on an existing postgres if the given source ID does already exist a conflict is returned
+RestorePostgres restores a postgres based on an existing postgres if the given source ID does already exist a conflict is returned
 */
 func (a *Client) RestorePostgres(params *RestorePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestorePostgresCreated, error) {
 	// TODO: Validate the params before sending
@@ -716,7 +716,7 @@ func (a *Client) RestorePostgres(params *RestorePostgresParams, authInfo runtime
 }
 
 /*
-  UpdatePostgres updates a postgres if the postgres was changed since this one was read a conflict is returned
+UpdatePostgres updates a postgres if the postgres was changed since this one was read a conflict is returned
 */
 func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresOK, error) {
 	// TODO: Validate the params before sending
@@ -754,7 +754,7 @@ func (a *Client) UpdatePostgres(params *UpdatePostgresParams, authInfo runtime.C
 }
 
 /*
-  UpdatePostgresBackupConfig updates the postgres backup
+UpdatePostgresBackupConfig updates the postgres backup
 */
 func (a *Client) UpdatePostgresBackupConfig(params *UpdatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePostgresBackupConfigOK, error) {
 	// TODO: Validate the params before sending

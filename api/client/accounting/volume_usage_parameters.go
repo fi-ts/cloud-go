@@ -54,10 +54,12 @@ func NewVolumeUsageParamsWithHTTPClient(client *http.Client) *VolumeUsageParams 
 	}
 }
 
-/* VolumeUsageParams contains all the parameters to send to the API endpoint
-   for the volume usage operation.
+/*
+VolumeUsageParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the volume usage operation.
+
+	Typically these are written to a http.Request.
 */
 type VolumeUsageParams struct {
 

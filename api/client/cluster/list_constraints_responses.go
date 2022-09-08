@@ -47,7 +47,8 @@ func NewListConstraintsOK() *ListConstraintsOK {
 	return &ListConstraintsOK{}
 }
 
-/* ListConstraintsOK describes a response with status code 200, with default header values.
+/*
+ListConstraintsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type ListConstraintsOK struct {
 	Payload *models.V1ShootConstraints
 }
 
+// IsSuccess returns true when this list constraints o k response has a 2xx status code
+func (o *ListConstraintsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list constraints o k response has a 3xx status code
+func (o *ListConstraintsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list constraints o k response has a 4xx status code
+func (o *ListConstraintsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list constraints o k response has a 5xx status code
+func (o *ListConstraintsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list constraints o k response a status code equal to that given
+func (o *ListConstraintsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListConstraintsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/constraints][%d] listConstraintsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListConstraintsOK) String() string {
+	return fmt.Sprintf("[GET /v1/cluster/constraints][%d] listConstraintsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListConstraintsOK) GetPayload() *models.V1ShootConstraints {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewListConstraintsDefault(code int) *ListConstraintsDefault {
 	}
 }
 
-/* ListConstraintsDefault describes a response with status code -1, with default header values.
+/*
+ListConstraintsDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *ListConstraintsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list constraints default response has a 2xx status code
+func (o *ListConstraintsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list constraints default response has a 3xx status code
+func (o *ListConstraintsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list constraints default response has a 4xx status code
+func (o *ListConstraintsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list constraints default response has a 5xx status code
+func (o *ListConstraintsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list constraints default response a status code equal to that given
+func (o *ListConstraintsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListConstraintsDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/constraints][%d] listConstraints default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListConstraintsDefault) String() string {
+	return fmt.Sprintf("[GET /v1/cluster/constraints][%d] listConstraints default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListConstraintsDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

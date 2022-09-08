@@ -44,7 +44,7 @@ type ClientService interface {
 }
 
 /*
-  AllocateIP allocates an ip in a given network
+AllocateIP allocates an ip in a given network
 */
 func (a *Client) AllocateIP(params *AllocateIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AllocateIPCreated, error) {
 	// TODO: Validate the params before sending
@@ -82,7 +82,7 @@ func (a *Client) AllocateIP(params *AllocateIPParams, authInfo runtime.ClientAut
 }
 
 /*
-  FindIPs finds ips by multiple criteria
+FindIPs finds ips by multiple criteria
 */
 func (a *Client) FindIPs(params *FindIPsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindIPsOK, error) {
 	// TODO: Validate the params before sending
@@ -120,7 +120,7 @@ func (a *Client) FindIPs(params *FindIPsParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  FreeIP frees an ip and returns the freed entity
+FreeIP frees an ip and returns the freed entity
 */
 func (a *Client) FreeIP(params *FreeIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FreeIPOK, error) {
 	// TODO: Validate the params before sending
@@ -158,7 +158,7 @@ func (a *Client) FreeIP(params *FreeIPParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  GetIP gets ip by address
+GetIP gets ip by address
 */
 func (a *Client) GetIP(params *GetIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIPOK, error) {
 	// TODO: Validate the params before sending
@@ -196,7 +196,7 @@ func (a *Client) GetIP(params *GetIPParams, authInfo runtime.ClientAuthInfoWrite
 }
 
 /*
-  ListIPs gets all ips
+ListIPs gets all ips
 */
 func (a *Client) ListIPs(params *ListIPsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIPsOK, error) {
 	// TODO: Validate the params before sending
@@ -234,7 +234,7 @@ func (a *Client) ListIPs(params *ListIPsParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  UpdateIP updates an ip
+UpdateIP updates an ip
 */
 func (a *Client) UpdateIP(params *UpdateIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIPOK, error) {
 	// TODO: Validate the params before sending

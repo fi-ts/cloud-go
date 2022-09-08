@@ -47,7 +47,8 @@ func NewListClustersOK() *ListClustersOK {
 	return &ListClustersOK{}
 }
 
-/* ListClustersOK describes a response with status code 200, with default header values.
+/*
+ListClustersOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type ListClustersOK struct {
 	Payload []*models.V1ClusterResponse
 }
 
+// IsSuccess returns true when this list clusters o k response has a 2xx status code
+func (o *ListClustersOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list clusters o k response has a 3xx status code
+func (o *ListClustersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list clusters o k response has a 4xx status code
+func (o *ListClustersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list clusters o k response has a 5xx status code
+func (o *ListClustersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list clusters o k response a status code equal to that given
+func (o *ListClustersOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListClustersOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster][%d] listClustersOK  %+v", 200, o.Payload)
 }
+
+func (o *ListClustersOK) String() string {
+	return fmt.Sprintf("[GET /v1/cluster][%d] listClustersOK  %+v", 200, o.Payload)
+}
+
 func (o *ListClustersOK) GetPayload() []*models.V1ClusterResponse {
 	return o.Payload
 }
@@ -79,7 +110,8 @@ func NewListClustersDefault(code int) *ListClustersDefault {
 	}
 }
 
-/* ListClustersDefault describes a response with status code -1, with default header values.
+/*
+ListClustersDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -94,9 +126,39 @@ func (o *ListClustersDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list clusters default response has a 2xx status code
+func (o *ListClustersDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list clusters default response has a 3xx status code
+func (o *ListClustersDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list clusters default response has a 4xx status code
+func (o *ListClustersDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list clusters default response has a 5xx status code
+func (o *ListClustersDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list clusters default response a status code equal to that given
+func (o *ListClustersDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListClustersDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster][%d] listClusters default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListClustersDefault) String() string {
+	return fmt.Sprintf("[GET /v1/cluster][%d] listClusters default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListClustersDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

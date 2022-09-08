@@ -54,10 +54,12 @@ func NewClusterUsageCSVParamsWithHTTPClient(client *http.Client) *ClusterUsageCS
 	}
 }
 
-/* ClusterUsageCSVParams contains all the parameters to send to the API endpoint
-   for the cluster usage c s v operation.
+/*
+ClusterUsageCSVParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the cluster usage c s v operation.
+
+	Typically these are written to a http.Request.
 */
 type ClusterUsageCSVParams struct {
 

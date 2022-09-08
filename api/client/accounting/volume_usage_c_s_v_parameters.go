@@ -54,10 +54,12 @@ func NewVolumeUsageCSVParamsWithHTTPClient(client *http.Client) *VolumeUsageCSVP
 	}
 }
 
-/* VolumeUsageCSVParams contains all the parameters to send to the API endpoint
-   for the volume usage c s v operation.
+/*
+VolumeUsageCSVParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the volume usage c s v operation.
+
+	Typically these are written to a http.Request.
 */
 type VolumeUsageCSVParams struct {
 

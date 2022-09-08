@@ -54,10 +54,12 @@ func NewDeletes3ParamsWithHTTPClient(client *http.Client) *Deletes3Params {
 	}
 }
 
-/* Deletes3Params contains all the parameters to send to the API endpoint
-   for the deletes3 operation.
+/*
+Deletes3Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the deletes3 operation.
+
+	Typically these are written to a http.Request.
 */
 type Deletes3Params struct {
 

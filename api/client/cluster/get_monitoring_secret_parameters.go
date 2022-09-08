@@ -52,10 +52,12 @@ func NewGetMonitoringSecretParamsWithHTTPClient(client *http.Client) *GetMonitor
 	}
 }
 
-/* GetMonitoringSecretParams contains all the parameters to send to the API endpoint
-   for the get monitoring secret operation.
+/*
+GetMonitoringSecretParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get monitoring secret operation.
+
+	Typically these are written to a http.Request.
 */
 type GetMonitoringSecretParams struct {
 

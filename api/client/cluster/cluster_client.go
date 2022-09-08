@@ -60,7 +60,7 @@ type ClientService interface {
 }
 
 /*
-  CreateCluster creates a cluster if the given ID already exists a conflict is returned
+CreateCluster creates a cluster if the given ID already exists a conflict is returned
 */
 func (a *Client) CreateCluster(params *CreateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterCreated, error) {
 	// TODO: Validate the params before sending
@@ -98,7 +98,7 @@ func (a *Client) CreateCluster(params *CreateClusterParams, authInfo runtime.Cli
 }
 
 /*
-  CycleMachine triggers power cycle of a machine
+CycleMachine triggers power cycle of a machine
 */
 func (a *Client) CycleMachine(params *CycleMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CycleMachineOK, error) {
 	// TODO: Validate the params before sending
@@ -136,7 +136,7 @@ func (a *Client) CycleMachine(params *CycleMachineParams, authInfo runtime.Clien
 }
 
 /*
-  DeleteCluster deletes an cluster and returns the deleted entity
+DeleteCluster deletes an cluster and returns the deleted entity
 */
 func (a *Client) DeleteCluster(params *DeleteClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -174,7 +174,7 @@ func (a *Client) DeleteCluster(params *DeleteClusterParams, authInfo runtime.Cli
 }
 
 /*
-  FindCluster gets cluster by id
+FindCluster gets cluster by id
 */
 func (a *Client) FindCluster(params *FindClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -212,7 +212,7 @@ func (a *Client) FindCluster(params *FindClusterParams, authInfo runtime.ClientA
 }
 
 /*
-  FindClusters finds clusters by multiple criteria
+FindClusters finds clusters by multiple criteria
 */
 func (a *Client) FindClusters(params *FindClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindClustersOK, error) {
 	// TODO: Validate the params before sending
@@ -250,7 +250,7 @@ func (a *Client) FindClusters(params *FindClustersParams, authInfo runtime.Clien
 }
 
 /*
-  GetClusterKubeconfigTpl gets the kubeconfig template just with cluster infos for the cluster
+GetClusterKubeconfigTpl gets the kubeconfig template just with cluster infos for the cluster
 */
 func (a *Client) GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterKubeconfigTplOK, error) {
 	// TODO: Validate the params before sending
@@ -288,7 +288,7 @@ func (a *Client) GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, 
 }
 
 /*
-  GetMonitoringSecret gets the monitoring access of the cluster to access the cluster s grafana dashboard
+GetMonitoringSecret gets the monitoring access of the cluster to access the cluster s grafana dashboard
 */
 func (a *Client) GetMonitoringSecret(params *GetMonitoringSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMonitoringSecretOK, error) {
 	// TODO: Validate the params before sending
@@ -326,7 +326,7 @@ func (a *Client) GetMonitoringSecret(params *GetMonitoringSecretParams, authInfo
 }
 
 /*
-  GetSSHKeyPair gets all the ssh keypairs of the cluster
+GetSSHKeyPair gets all the ssh keypairs of the cluster
 */
 func (a *Client) GetSSHKeyPair(params *GetSSHKeyPairParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSSHKeyPairOK, error) {
 	// TODO: Validate the params before sending
@@ -364,7 +364,7 @@ func (a *Client) GetSSHKeyPair(params *GetSSHKeyPairParams, authInfo runtime.Cli
 }
 
 /*
-  ListClusters gets all clusters
+ListClusters gets all clusters
 */
 func (a *Client) ListClusters(params *ListClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersOK, error) {
 	// TODO: Validate the params before sending
@@ -402,7 +402,7 @@ func (a *Client) ListClusters(params *ListClustersParams, authInfo runtime.Clien
 }
 
 /*
-  ListConstraints gets constraints for cluster create
+ListConstraints gets constraints for cluster create
 */
 func (a *Client) ListConstraints(params *ListConstraintsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConstraintsOK, error) {
 	// TODO: Validate the params before sending
@@ -440,7 +440,7 @@ func (a *Client) ListConstraints(params *ListConstraintsParams, authInfo runtime
 }
 
 /*
-  ReconcileCluster triggers cluster reconcilation
+ReconcileCluster triggers cluster reconcilation
 */
 func (a *Client) ReconcileCluster(params *ReconcileClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReconcileClusterOK, error) {
 	// TODO: Validate the params before sending
@@ -478,7 +478,7 @@ func (a *Client) ReconcileCluster(params *ReconcileClusterParams, authInfo runti
 }
 
 /*
-  ReinstallMachine triggers reinstall of a machine
+ReinstallMachine triggers reinstall of a machine
 */
 func (a *Client) ReinstallMachine(params *ReinstallMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReinstallMachineOK, error) {
 	// TODO: Validate the params before sending
@@ -516,7 +516,7 @@ func (a *Client) ReinstallMachine(params *ReinstallMachineParams, authInfo runti
 }
 
 /*
-  ResetMachine triggers hard power reset of a machine
+ResetMachine triggers hard power reset of a machine
 */
 func (a *Client) ResetMachine(params *ResetMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetMachineOK, error) {
 	// TODO: Validate the params before sending
@@ -554,7 +554,7 @@ func (a *Client) ResetMachine(params *ResetMachineParams, authInfo runtime.Clien
 }
 
 /*
-  UpdateCluster updates a cluster if the cluster was changed since this one was read a conflict is returned
+UpdateCluster updates a cluster if the cluster was changed since this one was read a conflict is returned
 */
 func (a *Client) UpdateCluster(params *UpdateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateClusterOK, error) {
 	// TODO: Validate the params before sending

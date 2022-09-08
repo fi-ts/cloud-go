@@ -53,7 +53,8 @@ func NewUpdateClusterOK() *UpdateClusterOK {
 	return &UpdateClusterOK{}
 }
 
-/* UpdateClusterOK describes a response with status code 200, with default header values.
+/*
+UpdateClusterOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -61,9 +62,39 @@ type UpdateClusterOK struct {
 	Payload *models.V1ClusterResponse
 }
 
+// IsSuccess returns true when this update cluster o k response has a 2xx status code
+func (o *UpdateClusterOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update cluster o k response has a 3xx status code
+func (o *UpdateClusterOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update cluster o k response has a 4xx status code
+func (o *UpdateClusterOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update cluster o k response has a 5xx status code
+func (o *UpdateClusterOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update cluster o k response a status code equal to that given
+func (o *UpdateClusterOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdateClusterOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdateClusterOK) String() string {
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdateClusterOK) GetPayload() *models.V1ClusterResponse {
 	return o.Payload
 }
@@ -85,7 +116,8 @@ func NewUpdateClusterConflict() *UpdateClusterConflict {
 	return &UpdateClusterConflict{}
 }
 
-/* UpdateClusterConflict describes a response with status code 409, with default header values.
+/*
+UpdateClusterConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -93,9 +125,39 @@ type UpdateClusterConflict struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
+// IsSuccess returns true when this update cluster conflict response has a 2xx status code
+func (o *UpdateClusterConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update cluster conflict response has a 3xx status code
+func (o *UpdateClusterConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update cluster conflict response has a 4xx status code
+func (o *UpdateClusterConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update cluster conflict response has a 5xx status code
+func (o *UpdateClusterConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update cluster conflict response a status code equal to that given
+func (o *UpdateClusterConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *UpdateClusterConflict) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterConflict  %+v", 409, o.Payload)
 }
+
+func (o *UpdateClusterConflict) String() string {
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterConflict  %+v", 409, o.Payload)
+}
+
 func (o *UpdateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -119,7 +181,8 @@ func NewUpdateClusterDefault(code int) *UpdateClusterDefault {
 	}
 }
 
-/* UpdateClusterDefault describes a response with status code -1, with default header values.
+/*
+UpdateClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -134,9 +197,39 @@ func (o *UpdateClusterDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update cluster default response has a 2xx status code
+func (o *UpdateClusterDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update cluster default response has a 3xx status code
+func (o *UpdateClusterDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update cluster default response has a 4xx status code
+func (o *UpdateClusterDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update cluster default response has a 5xx status code
+func (o *UpdateClusterDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update cluster default response a status code equal to that given
+func (o *UpdateClusterDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdateClusterDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster][%d] updateCluster default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdateClusterDefault) String() string {
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateCluster default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

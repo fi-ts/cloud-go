@@ -52,10 +52,12 @@ func NewLists3partitionsParamsWithHTTPClient(client *http.Client) *Lists3partiti
 	}
 }
 
-/* Lists3partitionsParams contains all the parameters to send to the API endpoint
-   for the lists3partitions operation.
+/*
+Lists3partitionsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the lists3partitions operation.
+
+	Typically these are written to a http.Request.
 */
 type Lists3partitionsParams struct {
 	timeout    time.Duration

@@ -53,7 +53,8 @@ func NewGetMasterdataOK() *GetMasterdataOK {
 	return &GetMasterdataOK{}
 }
 
-/* GetMasterdataOK describes a response with status code 200, with default header values.
+/*
+GetMasterdataOK describes a response with status code 200, with default header values.
 
 Ok
 */
@@ -61,9 +62,39 @@ type GetMasterdataOK struct {
 	Payload *models.V1MasterdataLookupResponse
 }
 
+// IsSuccess returns true when this get masterdata o k response has a 2xx status code
+func (o *GetMasterdataOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get masterdata o k response has a 3xx status code
+func (o *GetMasterdataOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get masterdata o k response has a 4xx status code
+func (o *GetMasterdataOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get masterdata o k response has a 5xx status code
+func (o *GetMasterdataOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get masterdata o k response a status code equal to that given
+func (o *GetMasterdataOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetMasterdataOK) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK  %+v", 200, o.Payload)
 }
+
+func (o *GetMasterdataOK) String() string {
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK  %+v", 200, o.Payload)
+}
+
 func (o *GetMasterdataOK) GetPayload() *models.V1MasterdataLookupResponse {
 	return o.Payload
 }
@@ -85,7 +116,8 @@ func NewGetMasterdataNotFound() *GetMasterdataNotFound {
 	return &GetMasterdataNotFound{}
 }
 
-/* GetMasterdataNotFound describes a response with status code 404, with default header values.
+/*
+GetMasterdataNotFound describes a response with status code 404, with default header values.
 
 NotFound
 */
@@ -93,9 +125,39 @@ type GetMasterdataNotFound struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
+// IsSuccess returns true when this get masterdata not found response has a 2xx status code
+func (o *GetMasterdataNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get masterdata not found response has a 3xx status code
+func (o *GetMasterdataNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get masterdata not found response has a 4xx status code
+func (o *GetMasterdataNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get masterdata not found response has a 5xx status code
+func (o *GetMasterdataNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get masterdata not found response a status code equal to that given
+func (o *GetMasterdataNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetMasterdataNotFound) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetMasterdataNotFound) String() string {
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetMasterdataNotFound) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -119,7 +181,8 @@ func NewGetMasterdataDefault(code int) *GetMasterdataDefault {
 	}
 }
 
-/* GetMasterdataDefault describes a response with status code -1, with default header values.
+/*
+GetMasterdataDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -134,9 +197,39 @@ func (o *GetMasterdataDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get masterdata default response has a 2xx status code
+func (o *GetMasterdataDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get masterdata default response has a 3xx status code
+func (o *GetMasterdataDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get masterdata default response has a 4xx status code
+func (o *GetMasterdataDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get masterdata default response has a 5xx status code
+func (o *GetMasterdataDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get masterdata default response a status code equal to that given
+func (o *GetMasterdataDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetMasterdataDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetMasterdataDefault) String() string {
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetMasterdataDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

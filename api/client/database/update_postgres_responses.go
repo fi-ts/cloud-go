@@ -47,7 +47,8 @@ func NewUpdatePostgresOK() *UpdatePostgresOK {
 	return &UpdatePostgresOK{}
 }
 
-/* UpdatePostgresOK describes a response with status code 200, with default header values.
+/*
+UpdatePostgresOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type UpdatePostgresOK struct {
 	Payload *models.V1PostgresResponse
 }
 
+// IsSuccess returns true when this update postgres o k response has a 2xx status code
+func (o *UpdatePostgresOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update postgres o k response has a 3xx status code
+func (o *UpdatePostgresOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update postgres o k response has a 4xx status code
+func (o *UpdatePostgresOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update postgres o k response has a 5xx status code
+func (o *UpdatePostgresOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update postgres o k response a status code equal to that given
+func (o *UpdatePostgresOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdatePostgresOK) Error() string {
 	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgresOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdatePostgresOK) String() string {
+	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgresOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdatePostgresOK) GetPayload() *models.V1PostgresResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewUpdatePostgresDefault(code int) *UpdatePostgresDefault {
 	}
 }
 
-/* UpdatePostgresDefault describes a response with status code -1, with default header values.
+/*
+UpdatePostgresDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *UpdatePostgresDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update postgres default response has a 2xx status code
+func (o *UpdatePostgresDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update postgres default response has a 3xx status code
+func (o *UpdatePostgresDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update postgres default response has a 4xx status code
+func (o *UpdatePostgresDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update postgres default response has a 5xx status code
+func (o *UpdatePostgresDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update postgres default response a status code equal to that given
+func (o *UpdatePostgresDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdatePostgresDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgres default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdatePostgresDefault) String() string {
+	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgres default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdatePostgresDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

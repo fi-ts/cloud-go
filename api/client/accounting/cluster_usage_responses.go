@@ -47,7 +47,8 @@ func NewClusterUsageOK() *ClusterUsageOK {
 	return &ClusterUsageOK{}
 }
 
-/* ClusterUsageOK describes a response with status code 200, with default header values.
+/*
+ClusterUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type ClusterUsageOK struct {
 	Payload *models.V1ClusterUsageResponse
 }
 
+// IsSuccess returns true when this cluster usage o k response has a 2xx status code
+func (o *ClusterUsageOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this cluster usage o k response has a 3xx status code
+func (o *ClusterUsageOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this cluster usage o k response has a 4xx status code
+func (o *ClusterUsageOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this cluster usage o k response has a 5xx status code
+func (o *ClusterUsageOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this cluster usage o k response a status code equal to that given
+func (o *ClusterUsageOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ClusterUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK  %+v", 200, o.Payload)
 }
+
+func (o *ClusterUsageOK) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK  %+v", 200, o.Payload)
+}
+
 func (o *ClusterUsageOK) GetPayload() *models.V1ClusterUsageResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewClusterUsageDefault(code int) *ClusterUsageDefault {
 	}
 }
 
-/* ClusterUsageDefault describes a response with status code -1, with default header values.
+/*
+ClusterUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *ClusterUsageDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this cluster usage default response has a 2xx status code
+func (o *ClusterUsageDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this cluster usage default response has a 3xx status code
+func (o *ClusterUsageDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this cluster usage default response has a 4xx status code
+func (o *ClusterUsageDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this cluster usage default response has a 5xx status code
+func (o *ClusterUsageDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this cluster usage default response a status code equal to that given
+func (o *ClusterUsageDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ClusterUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsage default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ClusterUsageDefault) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsage default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ClusterUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

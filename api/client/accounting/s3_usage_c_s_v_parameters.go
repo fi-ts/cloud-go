@@ -54,10 +54,12 @@ func NewS3UsageCSVParamsWithHTTPClient(client *http.Client) *S3UsageCSVParams {
 	}
 }
 
-/* S3UsageCSVParams contains all the parameters to send to the API endpoint
-   for the s3 usage c s v operation.
+/*
+S3UsageCSVParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the s3 usage c s v operation.
+
+	Typically these are written to a http.Request.
 */
 type S3UsageCSVParams struct {
 

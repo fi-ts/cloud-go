@@ -54,10 +54,12 @@ func NewIPUsageParamsWithHTTPClient(client *http.Client) *IPUsageParams {
 	}
 }
 
-/* IPUsageParams contains all the parameters to send to the API endpoint
-   for the ip usage operation.
+/*
+IPUsageParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ip usage operation.
+
+	Typically these are written to a http.Request.
 */
 type IPUsageParams struct {
 

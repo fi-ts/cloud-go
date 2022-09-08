@@ -47,7 +47,8 @@ func NewGetSSHKeyPairOK() *GetSSHKeyPairOK {
 	return &GetSSHKeyPairOK{}
 }
 
-/* GetSSHKeyPairOK describes a response with status code 200, with default header values.
+/*
+GetSSHKeyPairOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +56,39 @@ type GetSSHKeyPairOK struct {
 	Payload *models.V1ClusterCredentialsResponse
 }
 
+// IsSuccess returns true when this get Ssh key pair o k response has a 2xx status code
+func (o *GetSSHKeyPairOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get Ssh key pair o k response has a 3xx status code
+func (o *GetSSHKeyPairOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Ssh key pair o k response has a 4xx status code
+func (o *GetSSHKeyPairOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get Ssh key pair o k response has a 5xx status code
+func (o *GetSSHKeyPairOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Ssh key pair o k response a status code equal to that given
+func (o *GetSSHKeyPairOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetSSHKeyPairOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSshKeyPairOK  %+v", 200, o.Payload)
 }
+
+func (o *GetSSHKeyPairOK) String() string {
+	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSshKeyPairOK  %+v", 200, o.Payload)
+}
+
 func (o *GetSSHKeyPairOK) GetPayload() *models.V1ClusterCredentialsResponse {
 	return o.Payload
 }
@@ -81,7 +112,8 @@ func NewGetSSHKeyPairDefault(code int) *GetSSHKeyPairDefault {
 	}
 }
 
-/* GetSSHKeyPairDefault describes a response with status code -1, with default header values.
+/*
+GetSSHKeyPairDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +128,39 @@ func (o *GetSSHKeyPairDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get SSH key pair default response has a 2xx status code
+func (o *GetSSHKeyPairDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get SSH key pair default response has a 3xx status code
+func (o *GetSSHKeyPairDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get SSH key pair default response has a 4xx status code
+func (o *GetSSHKeyPairDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get SSH key pair default response has a 5xx status code
+func (o *GetSSHKeyPairDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get SSH key pair default response a status code equal to that given
+func (o *GetSSHKeyPairDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetSSHKeyPairDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSSHKeyPair default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetSSHKeyPairDefault) String() string {
+	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSSHKeyPair default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetSSHKeyPairDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
