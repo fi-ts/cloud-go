@@ -48,7 +48,7 @@ func NewUpdatePostgresBackupConfigOK() *UpdatePostgresBackupConfigOK {
 }
 
 /*
-	UpdatePostgresBackupConfigOK describes a response with status code 200, with default header values.
+UpdatePostgresBackupConfigOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -56,9 +56,39 @@ type UpdatePostgresBackupConfigOK struct {
 	Payload *models.V1PostgresBackupConfigResponse
 }
 
+// IsSuccess returns true when this update postgres backup config o k response has a 2xx status code
+func (o *UpdatePostgresBackupConfigOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update postgres backup config o k response has a 3xx status code
+func (o *UpdatePostgresBackupConfigOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update postgres backup config o k response has a 4xx status code
+func (o *UpdatePostgresBackupConfigOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update postgres backup config o k response has a 5xx status code
+func (o *UpdatePostgresBackupConfigOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update postgres backup config o k response a status code equal to that given
+func (o *UpdatePostgresBackupConfigOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdatePostgresBackupConfigOK) Error() string {
 	return fmt.Sprintf("[POST /v1/database/postgres/backup-config][%d] updatePostgresBackupConfigOK  %+v", 200, o.Payload)
 }
+
+func (o *UpdatePostgresBackupConfigOK) String() string {
+	return fmt.Sprintf("[POST /v1/database/postgres/backup-config][%d] updatePostgresBackupConfigOK  %+v", 200, o.Payload)
+}
+
 func (o *UpdatePostgresBackupConfigOK) GetPayload() *models.V1PostgresBackupConfigResponse {
 	return o.Payload
 }
@@ -83,7 +113,7 @@ func NewUpdatePostgresBackupConfigDefault(code int) *UpdatePostgresBackupConfigD
 }
 
 /*
-	UpdatePostgresBackupConfigDefault describes a response with status code -1, with default header values.
+UpdatePostgresBackupConfigDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,9 +128,39 @@ func (o *UpdatePostgresBackupConfigDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this update postgres backup config default response has a 2xx status code
+func (o *UpdatePostgresBackupConfigDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this update postgres backup config default response has a 3xx status code
+func (o *UpdatePostgresBackupConfigDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this update postgres backup config default response has a 4xx status code
+func (o *UpdatePostgresBackupConfigDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this update postgres backup config default response has a 5xx status code
+func (o *UpdatePostgresBackupConfigDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this update postgres backup config default response a status code equal to that given
+func (o *UpdatePostgresBackupConfigDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *UpdatePostgresBackupConfigDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/database/postgres/backup-config][%d] updatePostgresBackupConfig default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *UpdatePostgresBackupConfigDefault) String() string {
+	return fmt.Sprintf("[POST /v1/database/postgres/backup-config][%d] updatePostgresBackupConfig default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *UpdatePostgresBackupConfigDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

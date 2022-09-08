@@ -24,10 +24,6 @@ type V1ClusterResponse struct {
 	// Required: true
 	AdditionalNetworks []string `json:"AdditionalNetworks"`
 
-	// c n i
-	// Required: true
-	CNI *string `json:"CNI"`
-
 	// cluster features
 	// Required: true
 	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures"`
@@ -121,6 +117,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
 
+	// cni
+	// Required: true
+	Cni *string `json:"cni"`
+
 	// the firewalls which belong to this cluster
 	Firewalls []*ModelsV1MachineResponse `json:"firewalls"`
 
@@ -133,10 +133,6 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdditionalNetworks(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateCNI(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -232,6 +228,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCni(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFirewalls(formats); err != nil {
 		res = append(res, err)
 	}
@@ -249,15 +249,6 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 func (m *V1ClusterResponse) validateAdditionalNetworks(formats strfmt.Registry) error {
 
 	if err := validate.Required("AdditionalNetworks", "body", m.AdditionalNetworks); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1ClusterResponse) validateCNI(formats strfmt.Registry) error {
-
-	if err := validate.Required("CNI", "body", m.CNI); err != nil {
 		return err
 	}
 
@@ -572,6 +563,15 @@ func (m *V1ClusterResponse) validateWorkers(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateCni(formats strfmt.Registry) error {
+
+	if err := validate.Required("cni", "body", m.Cni); err != nil {
+		return err
 	}
 
 	return nil

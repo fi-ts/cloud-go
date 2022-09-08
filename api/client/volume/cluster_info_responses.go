@@ -48,7 +48,7 @@ func NewClusterInfoOK() *ClusterInfoOK {
 }
 
 /*
-	ClusterInfoOK describes a response with status code 200, with default header values.
+ClusterInfoOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -56,9 +56,39 @@ type ClusterInfoOK struct {
 	Payload []*models.V1StorageClusterInfo
 }
 
+// IsSuccess returns true when this cluster info o k response has a 2xx status code
+func (o *ClusterInfoOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this cluster info o k response has a 3xx status code
+func (o *ClusterInfoOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this cluster info o k response has a 4xx status code
+func (o *ClusterInfoOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this cluster info o k response has a 5xx status code
+func (o *ClusterInfoOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this cluster info o k response a status code equal to that given
+func (o *ClusterInfoOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ClusterInfoOK) Error() string {
 	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfoOK  %+v", 200, o.Payload)
 }
+
+func (o *ClusterInfoOK) String() string {
+	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfoOK  %+v", 200, o.Payload)
+}
+
 func (o *ClusterInfoOK) GetPayload() []*models.V1StorageClusterInfo {
 	return o.Payload
 }
@@ -81,7 +111,7 @@ func NewClusterInfoDefault(code int) *ClusterInfoDefault {
 }
 
 /*
-	ClusterInfoDefault describes a response with status code -1, with default header values.
+ClusterInfoDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +126,39 @@ func (o *ClusterInfoDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this cluster info default response has a 2xx status code
+func (o *ClusterInfoDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this cluster info default response has a 3xx status code
+func (o *ClusterInfoDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this cluster info default response has a 4xx status code
+func (o *ClusterInfoDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this cluster info default response has a 5xx status code
+func (o *ClusterInfoDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this cluster info default response a status code equal to that given
+func (o *ClusterInfoDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ClusterInfoDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfo default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ClusterInfoDefault) String() string {
+	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfo default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ClusterInfoDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

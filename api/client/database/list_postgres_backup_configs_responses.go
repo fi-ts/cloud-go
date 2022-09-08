@@ -48,7 +48,7 @@ func NewListPostgresBackupConfigsOK() *ListPostgresBackupConfigsOK {
 }
 
 /*
-	ListPostgresBackupConfigsOK describes a response with status code 200, with default header values.
+ListPostgresBackupConfigsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -56,9 +56,39 @@ type ListPostgresBackupConfigsOK struct {
 	Payload []*models.V1PostgresBackupConfigResponse
 }
 
+// IsSuccess returns true when this list postgres backup configs o k response has a 2xx status code
+func (o *ListPostgresBackupConfigsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list postgres backup configs o k response has a 3xx status code
+func (o *ListPostgresBackupConfigsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list postgres backup configs o k response has a 4xx status code
+func (o *ListPostgresBackupConfigsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list postgres backup configs o k response has a 5xx status code
+func (o *ListPostgresBackupConfigsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list postgres backup configs o k response a status code equal to that given
+func (o *ListPostgresBackupConfigsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListPostgresBackupConfigsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/backup-config][%d] listPostgresBackupConfigsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListPostgresBackupConfigsOK) String() string {
+	return fmt.Sprintf("[GET /v1/database/postgres/backup-config][%d] listPostgresBackupConfigsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListPostgresBackupConfigsOK) GetPayload() []*models.V1PostgresBackupConfigResponse {
 	return o.Payload
 }
@@ -81,7 +111,7 @@ func NewListPostgresBackupConfigsDefault(code int) *ListPostgresBackupConfigsDef
 }
 
 /*
-	ListPostgresBackupConfigsDefault describes a response with status code -1, with default header values.
+ListPostgresBackupConfigsDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +126,39 @@ func (o *ListPostgresBackupConfigsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list postgres backup configs default response has a 2xx status code
+func (o *ListPostgresBackupConfigsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list postgres backup configs default response has a 3xx status code
+func (o *ListPostgresBackupConfigsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list postgres backup configs default response has a 4xx status code
+func (o *ListPostgresBackupConfigsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list postgres backup configs default response has a 5xx status code
+func (o *ListPostgresBackupConfigsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list postgres backup configs default response a status code equal to that given
+func (o *ListPostgresBackupConfigsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListPostgresBackupConfigsDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/backup-config][%d] listPostgresBackupConfigs default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ListPostgresBackupConfigsDefault) String() string {
+	return fmt.Sprintf("[GET /v1/database/postgres/backup-config][%d] listPostgresBackupConfigs default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ListPostgresBackupConfigsDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

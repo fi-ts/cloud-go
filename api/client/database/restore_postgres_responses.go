@@ -48,7 +48,7 @@ func NewRestorePostgresCreated() *RestorePostgresCreated {
 }
 
 /*
-	RestorePostgresCreated describes a response with status code 201, with default header values.
+RestorePostgresCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -56,9 +56,39 @@ type RestorePostgresCreated struct {
 	Payload *models.V1PostgresResponse
 }
 
+// IsSuccess returns true when this restore postgres created response has a 2xx status code
+func (o *RestorePostgresCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this restore postgres created response has a 3xx status code
+func (o *RestorePostgresCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this restore postgres created response has a 4xx status code
+func (o *RestorePostgresCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this restore postgres created response has a 5xx status code
+func (o *RestorePostgresCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this restore postgres created response a status code equal to that given
+func (o *RestorePostgresCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *RestorePostgresCreated) Error() string {
 	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgresCreated  %+v", 201, o.Payload)
 }
+
+func (o *RestorePostgresCreated) String() string {
+	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgresCreated  %+v", 201, o.Payload)
+}
+
 func (o *RestorePostgresCreated) GetPayload() *models.V1PostgresResponse {
 	return o.Payload
 }
@@ -83,7 +113,7 @@ func NewRestorePostgresDefault(code int) *RestorePostgresDefault {
 }
 
 /*
-	RestorePostgresDefault describes a response with status code -1, with default header values.
+RestorePostgresDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,9 +128,39 @@ func (o *RestorePostgresDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this restore postgres default response has a 2xx status code
+func (o *RestorePostgresDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this restore postgres default response has a 3xx status code
+func (o *RestorePostgresDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this restore postgres default response has a 4xx status code
+func (o *RestorePostgresDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this restore postgres default response has a 5xx status code
+func (o *RestorePostgresDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this restore postgres default response a status code equal to that given
+func (o *RestorePostgresDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *RestorePostgresDefault) Error() string {
 	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgres default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *RestorePostgresDefault) String() string {
+	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgres default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *RestorePostgresDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

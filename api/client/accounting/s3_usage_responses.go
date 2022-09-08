@@ -48,7 +48,7 @@ func NewS3UsageOK() *S3UsageOK {
 }
 
 /*
-	S3UsageOK describes a response with status code 200, with default header values.
+S3UsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -56,9 +56,39 @@ type S3UsageOK struct {
 	Payload *models.V1S3UsageResponse
 }
 
+// IsSuccess returns true when this s3 usage o k response has a 2xx status code
+func (o *S3UsageOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this s3 usage o k response has a 3xx status code
+func (o *S3UsageOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s3 usage o k response has a 4xx status code
+func (o *S3UsageOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this s3 usage o k response has a 5xx status code
+func (o *S3UsageOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this s3 usage o k response a status code equal to that given
+func (o *S3UsageOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *S3UsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3UsageOK  %+v", 200, o.Payload)
 }
+
+func (o *S3UsageOK) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3UsageOK  %+v", 200, o.Payload)
+}
+
 func (o *S3UsageOK) GetPayload() *models.V1S3UsageResponse {
 	return o.Payload
 }
@@ -83,7 +113,7 @@ func NewS3UsageDefault(code int) *S3UsageDefault {
 }
 
 /*
-	S3UsageDefault describes a response with status code -1, with default header values.
+S3UsageDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,9 +128,39 @@ func (o *S3UsageDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this s3 usage default response has a 2xx status code
+func (o *S3UsageDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this s3 usage default response has a 3xx status code
+func (o *S3UsageDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this s3 usage default response has a 4xx status code
+func (o *S3UsageDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this s3 usage default response has a 5xx status code
+func (o *S3UsageDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this s3 usage default response a status code equal to that given
+func (o *S3UsageDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *S3UsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *S3UsageDefault) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *S3UsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

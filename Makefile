@@ -17,7 +17,7 @@ test:
 generate-client:
 	rm -rf api
 	mkdir -p api
-	docker pull metalstack/builder
+	# docker pull metalstack/builder
 	docker run --user $$(id -u):$$(id -g) --rm -v ${PWD}:/work metalstack/builder swagger generate client -f cloud-api.json -t api --skip-validation
 
 .PHONY: golangcicheck
@@ -30,4 +30,4 @@ lint: golangcicheck
 
 .PHONY: mocks
 mocks:
-	docker run --user $$(id -u):$$(id -g) --rm -w /work -v ${PWD}:/work vektra/mockery:v2.12.2 -r --keeptree --inpackage --dir api/client --output test/mocks --all
+	docker run --user $$(id -u):$$(id -g) --rm -w /work -v ${PWD}:/work vektra/mockery:v2.14.0 -r --keeptree --inpackage --dir api/client --output test/mocks --all

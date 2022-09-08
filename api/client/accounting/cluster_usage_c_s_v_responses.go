@@ -47,7 +47,7 @@ func NewClusterUsageCSVOK() *ClusterUsageCSVOK {
 }
 
 /*
-	ClusterUsageCSVOK describes a response with status code 200, with default header values.
+ClusterUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +55,39 @@ type ClusterUsageCSVOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this cluster usage c s v o k response has a 2xx status code
+func (o *ClusterUsageCSVOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this cluster usage c s v o k response has a 3xx status code
+func (o *ClusterUsageCSVOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this cluster usage c s v o k response has a 4xx status code
+func (o *ClusterUsageCSVOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this cluster usage c s v o k response has a 5xx status code
+func (o *ClusterUsageCSVOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this cluster usage c s v o k response a status code equal to that given
+func (o *ClusterUsageCSVOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ClusterUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK  %+v", 200, o.Payload)
 }
+
+func (o *ClusterUsageCSVOK) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK  %+v", 200, o.Payload)
+}
+
 func (o *ClusterUsageCSVOK) GetPayload() string {
 	return o.Payload
 }
@@ -80,7 +110,7 @@ func NewClusterUsageCSVDefault(code int) *ClusterUsageCSVDefault {
 }
 
 /*
-	ClusterUsageCSVDefault describes a response with status code -1, with default header values.
+ClusterUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -95,9 +125,39 @@ func (o *ClusterUsageCSVDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this cluster usage c s v default response has a 2xx status code
+func (o *ClusterUsageCSVDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this cluster usage c s v default response has a 3xx status code
+func (o *ClusterUsageCSVDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this cluster usage c s v default response has a 4xx status code
+func (o *ClusterUsageCSVDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this cluster usage c s v default response has a 5xx status code
+func (o *ClusterUsageCSVDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this cluster usage c s v default response a status code equal to that given
+func (o *ClusterUsageCSVDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ClusterUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSV default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *ClusterUsageCSVDefault) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSV default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *ClusterUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

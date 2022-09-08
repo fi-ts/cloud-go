@@ -48,7 +48,7 @@ func NewPostgresUsageOK() *PostgresUsageOK {
 }
 
 /*
-	PostgresUsageOK describes a response with status code 200, with default header values.
+PostgresUsageOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -56,9 +56,39 @@ type PostgresUsageOK struct {
 	Payload *models.V1PostgresUsageResponse
 }
 
+// IsSuccess returns true when this postgres usage o k response has a 2xx status code
+func (o *PostgresUsageOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this postgres usage o k response has a 3xx status code
+func (o *PostgresUsageOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this postgres usage o k response has a 4xx status code
+func (o *PostgresUsageOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this postgres usage o k response has a 5xx status code
+func (o *PostgresUsageOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this postgres usage o k response a status code equal to that given
+func (o *PostgresUsageOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PostgresUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsageOK  %+v", 200, o.Payload)
 }
+
+func (o *PostgresUsageOK) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsageOK  %+v", 200, o.Payload)
+}
+
 func (o *PostgresUsageOK) GetPayload() *models.V1PostgresUsageResponse {
 	return o.Payload
 }
@@ -83,7 +113,7 @@ func NewPostgresUsageDefault(code int) *PostgresUsageDefault {
 }
 
 /*
-	PostgresUsageDefault describes a response with status code -1, with default header values.
+PostgresUsageDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,9 +128,39 @@ func (o *PostgresUsageDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this postgres usage default response has a 2xx status code
+func (o *PostgresUsageDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this postgres usage default response has a 3xx status code
+func (o *PostgresUsageDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this postgres usage default response has a 4xx status code
+func (o *PostgresUsageDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this postgres usage default response has a 5xx status code
+func (o *PostgresUsageDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this postgres usage default response a status code equal to that given
+func (o *PostgresUsageDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *PostgresUsageDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsage default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *PostgresUsageDefault) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsage default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *PostgresUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

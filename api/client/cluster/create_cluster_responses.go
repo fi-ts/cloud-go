@@ -54,7 +54,7 @@ func NewCreateClusterCreated() *CreateClusterCreated {
 }
 
 /*
-	CreateClusterCreated describes a response with status code 201, with default header values.
+CreateClusterCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -62,9 +62,39 @@ type CreateClusterCreated struct {
 	Payload *models.V1ClusterResponse
 }
 
+// IsSuccess returns true when this create cluster created response has a 2xx status code
+func (o *CreateClusterCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create cluster created response has a 3xx status code
+func (o *CreateClusterCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create cluster created response has a 4xx status code
+func (o *CreateClusterCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create cluster created response has a 5xx status code
+func (o *CreateClusterCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create cluster created response a status code equal to that given
+func (o *CreateClusterCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *CreateClusterCreated) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterCreated  %+v", 201, o.Payload)
 }
+
+func (o *CreateClusterCreated) String() string {
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterCreated  %+v", 201, o.Payload)
+}
+
 func (o *CreateClusterCreated) GetPayload() *models.V1ClusterResponse {
 	return o.Payload
 }
@@ -87,7 +117,7 @@ func NewCreateClusterConflict() *CreateClusterConflict {
 }
 
 /*
-	CreateClusterConflict describes a response with status code 409, with default header values.
+CreateClusterConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -95,9 +125,39 @@ type CreateClusterConflict struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
+// IsSuccess returns true when this create cluster conflict response has a 2xx status code
+func (o *CreateClusterConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create cluster conflict response has a 3xx status code
+func (o *CreateClusterConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create cluster conflict response has a 4xx status code
+func (o *CreateClusterConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create cluster conflict response has a 5xx status code
+func (o *CreateClusterConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create cluster conflict response a status code equal to that given
+func (o *CreateClusterConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *CreateClusterConflict) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict  %+v", 409, o.Payload)
 }
+
+func (o *CreateClusterConflict) String() string {
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict  %+v", 409, o.Payload)
+}
+
 func (o *CreateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
@@ -122,7 +182,7 @@ func NewCreateClusterDefault(code int) *CreateClusterDefault {
 }
 
 /*
-	CreateClusterDefault describes a response with status code -1, with default header values.
+CreateClusterDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -137,9 +197,39 @@ func (o *CreateClusterDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this create cluster default response has a 2xx status code
+func (o *CreateClusterDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create cluster default response has a 3xx status code
+func (o *CreateClusterDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create cluster default response has a 4xx status code
+func (o *CreateClusterDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create cluster default response has a 5xx status code
+func (o *CreateClusterDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create cluster default response a status code equal to that given
+func (o *CreateClusterDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *CreateClusterDefault) Error() string {
 	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *CreateClusterDefault) String() string {
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *CreateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

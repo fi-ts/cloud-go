@@ -1316,9 +1316,6 @@
           },
           "type": "array"
         },
-        "CNI": {
-          "type": "string"
-        },
         "ClusterFeatures": {
           "$ref": "#/definitions/v1.ClusterFeatures"
         },
@@ -1401,6 +1398,9 @@
           },
           "type": "array"
         },
+        "cni": {
+          "type": "string"
+        },
         "firewalls": {
           "description": "the firewalls which belong to this cluster",
           "items": {
@@ -1418,7 +1418,6 @@
       },
       "required": [
         "AdditionalNetworks",
-        "CNI",
         "ClusterFeatures",
         "ControlPlaneFeatureGates",
         "CreationTimestamp",
@@ -1441,7 +1440,8 @@
         "Purpose",
         "Status",
         "Tenant",
-        "Workers"
+        "Workers",
+        "cni"
       ]
     },
     "v1.ClusterStatisticsApi": {

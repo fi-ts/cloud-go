@@ -47,7 +47,7 @@ func NewNetworkUsageCSVOK() *NetworkUsageCSVOK {
 }
 
 /*
-	NetworkUsageCSVOK describes a response with status code 200, with default header values.
+NetworkUsageCSVOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -55,9 +55,39 @@ type NetworkUsageCSVOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this network usage c s v o k response has a 2xx status code
+func (o *NetworkUsageCSVOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this network usage c s v o k response has a 3xx status code
+func (o *NetworkUsageCSVOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this network usage c s v o k response has a 4xx status code
+func (o *NetworkUsageCSVOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this network usage c s v o k response has a 5xx status code
+func (o *NetworkUsageCSVOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this network usage c s v o k response a status code equal to that given
+func (o *NetworkUsageCSVOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *NetworkUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/network-usage-csv][%d] networkUsageCSVOK  %+v", 200, o.Payload)
 }
+
+func (o *NetworkUsageCSVOK) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/network-usage-csv][%d] networkUsageCSVOK  %+v", 200, o.Payload)
+}
+
 func (o *NetworkUsageCSVOK) GetPayload() string {
 	return o.Payload
 }
@@ -80,7 +110,7 @@ func NewNetworkUsageCSVDefault(code int) *NetworkUsageCSVDefault {
 }
 
 /*
-	NetworkUsageCSVDefault describes a response with status code -1, with default header values.
+NetworkUsageCSVDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -95,9 +125,39 @@ func (o *NetworkUsageCSVDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this network usage c s v default response has a 2xx status code
+func (o *NetworkUsageCSVDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this network usage c s v default response has a 3xx status code
+func (o *NetworkUsageCSVDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this network usage c s v default response has a 4xx status code
+func (o *NetworkUsageCSVDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this network usage c s v default response has a 5xx status code
+func (o *NetworkUsageCSVDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this network usage c s v default response a status code equal to that given
+func (o *NetworkUsageCSVDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *NetworkUsageCSVDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/network-usage-csv][%d] networkUsageCSV default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *NetworkUsageCSVDefault) String() string {
+	return fmt.Sprintf("[POST /v1/accounting/network-usage-csv][%d] networkUsageCSV default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *NetworkUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

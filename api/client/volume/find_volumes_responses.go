@@ -48,7 +48,7 @@ func NewFindVolumesOK() *FindVolumesOK {
 }
 
 /*
-	FindVolumesOK describes a response with status code 200, with default header values.
+FindVolumesOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -56,9 +56,39 @@ type FindVolumesOK struct {
 	Payload []*models.V1VolumeResponse
 }
 
+// IsSuccess returns true when this find volumes o k response has a 2xx status code
+func (o *FindVolumesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this find volumes o k response has a 3xx status code
+func (o *FindVolumesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this find volumes o k response has a 4xx status code
+func (o *FindVolumesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this find volumes o k response has a 5xx status code
+func (o *FindVolumesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this find volumes o k response a status code equal to that given
+func (o *FindVolumesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *FindVolumesOK) Error() string {
 	return fmt.Sprintf("[POST /v1/volume/find][%d] findVolumesOK  %+v", 200, o.Payload)
 }
+
+func (o *FindVolumesOK) String() string {
+	return fmt.Sprintf("[POST /v1/volume/find][%d] findVolumesOK  %+v", 200, o.Payload)
+}
+
 func (o *FindVolumesOK) GetPayload() []*models.V1VolumeResponse {
 	return o.Payload
 }
@@ -81,7 +111,7 @@ func NewFindVolumesDefault(code int) *FindVolumesDefault {
 }
 
 /*
-	FindVolumesDefault describes a response with status code -1, with default header values.
+FindVolumesDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -96,9 +126,39 @@ func (o *FindVolumesDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this find volumes default response has a 2xx status code
+func (o *FindVolumesDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this find volumes default response has a 3xx status code
+func (o *FindVolumesDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this find volumes default response has a 4xx status code
+func (o *FindVolumesDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this find volumes default response has a 5xx status code
+func (o *FindVolumesDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this find volumes default response a status code equal to that given
+func (o *FindVolumesDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *FindVolumesDefault) Error() string {
 	return fmt.Sprintf("[POST /v1/volume/find][%d] findVolumes default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *FindVolumesDefault) String() string {
+	return fmt.Sprintf("[POST /v1/volume/find][%d] findVolumes default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *FindVolumesDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }

@@ -48,7 +48,7 @@ func NewGetVolumeOK() *GetVolumeOK {
 }
 
 /*
-	GetVolumeOK describes a response with status code 200, with default header values.
+GetVolumeOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -56,9 +56,39 @@ type GetVolumeOK struct {
 	Payload *models.V1VolumeResponse
 }
 
+// IsSuccess returns true when this get volume o k response has a 2xx status code
+func (o *GetVolumeOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get volume o k response has a 3xx status code
+func (o *GetVolumeOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get volume o k response has a 4xx status code
+func (o *GetVolumeOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get volume o k response has a 5xx status code
+func (o *GetVolumeOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get volume o k response a status code equal to that given
+func (o *GetVolumeOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetVolumeOK) Error() string {
 	return fmt.Sprintf("[GET /v1/volume/{id}][%d] getVolumeOK  %+v", 200, o.Payload)
 }
+
+func (o *GetVolumeOK) String() string {
+	return fmt.Sprintf("[GET /v1/volume/{id}][%d] getVolumeOK  %+v", 200, o.Payload)
+}
+
 func (o *GetVolumeOK) GetPayload() *models.V1VolumeResponse {
 	return o.Payload
 }
@@ -83,7 +113,7 @@ func NewGetVolumeDefault(code int) *GetVolumeDefault {
 }
 
 /*
-	GetVolumeDefault describes a response with status code -1, with default header values.
+GetVolumeDefault describes a response with status code -1, with default header values.
 
 Error
 */
@@ -98,9 +128,39 @@ func (o *GetVolumeDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get volume default response has a 2xx status code
+func (o *GetVolumeDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get volume default response has a 3xx status code
+func (o *GetVolumeDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get volume default response has a 4xx status code
+func (o *GetVolumeDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get volume default response has a 5xx status code
+func (o *GetVolumeDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get volume default response a status code equal to that given
+func (o *GetVolumeDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetVolumeDefault) Error() string {
 	return fmt.Sprintf("[GET /v1/volume/{id}][%d] getVolume default  %+v", o._statusCode, o.Payload)
 }
+
+func (o *GetVolumeDefault) String() string {
+	return fmt.Sprintf("[GET /v1/volume/{id}][%d] getVolume default  %+v", o._statusCode, o.Payload)
+}
+
 func (o *GetVolumeDefault) GetPayload() *httperrors.HTTPErrorResponse {
 	return o.Payload
 }
