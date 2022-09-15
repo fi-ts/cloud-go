@@ -4281,10 +4281,22 @@
         "PartitionID": {
           "type": "string"
         },
+        "PrimaryNodeUUID": {
+          "type": "string"
+        },
         "ProjectID": {
           "type": "string"
         },
         "ProtectionState": {
+          "type": "string"
+        },
+        "QosPolicyName": {
+          "type": "string"
+        },
+        "QosPolicyUUID": {
+          "type": "string"
+        },
+        "RebuildProgress": {
           "type": "string"
         },
         "ReplicaCount": {
@@ -4294,6 +4306,9 @@
         "Size": {
           "format": "integer",
           "type": "integer"
+        },
+        "SourceSnapshotUUID": {
+          "type": "string"
         },
         "State": {
           "type": "string"
@@ -4321,10 +4336,15 @@
         "ConnectedHosts",
         "NodeIPList",
         "PartitionID",
+        "PrimaryNodeUUID",
         "ProjectID",
         "ProtectionState",
+        "QosPolicyName",
+        "QosPolicyUUID",
+        "RebuildProgress",
         "ReplicaCount",
         "Size",
+        "SourceSnapshotUUID",
         "State",
         "Statistics",
         "StorageClass",
@@ -4414,6 +4434,10 @@
           "description": "the project name of this entity",
           "type": "string"
         },
+        "sourcesnapshotuuid": {
+          "description": "the uuid of source of this volume, empty if this volume is no snapshot",
+          "type": "string"
+        },
         "start": {
           "description": "the start time of this volume",
           "format": "date-time",
@@ -4450,6 +4474,7 @@
         "partition",
         "projectid",
         "projectname",
+        "sourcesnapshotuuid",
         "start",
         "tenant",
         "tenantname",

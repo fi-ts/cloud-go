@@ -301,8 +301,8 @@ github.com/mailru/easyjson v0.7.7 h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0
 github.com/mailru/easyjson v0.7.7/go.mod h1:xzfreul335JAWq5oZzymOObrkdz5UnU4kGfJJLY9Nlc=
 github.com/markbates/oncer v0.0.0-20181203154359-bf2de49a0be2/go.mod h1:Ld9puTsIW75CHf65OeIOkyKbteujpZVXDpWK6YGZbxE=
 github.com/markbates/safe v1.0.1/go.mod h1:nAqgmRi7cY2nqMc92/bSEeQA+R4OheNU2T1kNSCBdG0=
-github.com/metal-stack/metal-lib v0.11.0 h1:kA0eCIc2Emu5dDNvHg4FaGvWOuErJe8nZz2kTH9zvFA=
-github.com/metal-stack/metal-lib v0.11.0/go.mod h1:Ge1ypz6aOf2ab98kr8GYMXD8eZ7VfKFUfUE3p/8Sm3g=
+github.com/metal-stack/metal-lib v0.11.1 h1:ucM86T0X0Y4bRR/fggNIuyZV1oTh+K2FbfhsgHBhge8=
+github.com/metal-stack/metal-lib v0.11.1/go.mod h1:Ge1ypz6aOf2ab98kr8GYMXD8eZ7VfKFUfUE3p/8Sm3g=
 github.com/metal-stack/security v0.6.5 h1:SqiMZ8B0v8bJostDUsOuXhzhSf95tlWYLER0kBp5n5k=
 github.com/metal-stack/security v0.6.5/go.mod h1:4zccRJSKN+zZK+mqIuVtt2LKQeGTjpmnFYH0NYjtUw8=
 github.com/mitchellh/mapstructure v1.3.3/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=

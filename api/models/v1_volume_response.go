@@ -31,6 +31,10 @@ type V1VolumeResponse struct {
 	// Required: true
 	PartitionID *string `json:"PartitionID"`
 
+	// primary node UUID
+	// Required: true
+	PrimaryNodeUUID *string `json:"PrimaryNodeUUID"`
+
 	// project ID
 	// Required: true
 	ProjectID *string `json:"ProjectID"`
@@ -39,6 +43,18 @@ type V1VolumeResponse struct {
 	// Required: true
 	ProtectionState *string `json:"ProtectionState"`
 
+	// qos policy name
+	// Required: true
+	QosPolicyName *string `json:"QosPolicyName"`
+
+	// qos policy UUID
+	// Required: true
+	QosPolicyUUID *string `json:"QosPolicyUUID"`
+
+	// rebuild progress
+	// Required: true
+	RebuildProgress *string `json:"RebuildProgress"`
+
 	// replica count
 	// Required: true
 	ReplicaCount *int64 `json:"ReplicaCount"`
@@ -46,6 +62,10 @@ type V1VolumeResponse struct {
 	// size
 	// Required: true
 	Size *int64 `json:"Size"`
+
+	// source snapshot UUID
+	// Required: true
+	SourceSnapshotUUID *string `json:"SourceSnapshotUUID"`
 
 	// state
 	// Required: true
@@ -92,6 +112,10 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePrimaryNodeUUID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateProjectID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -100,11 +124,27 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateQosPolicyName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQosPolicyUUID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRebuildProgress(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateReplicaCount(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSourceSnapshotUUID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -169,6 +209,15 @@ func (m *V1VolumeResponse) validatePartitionID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1VolumeResponse) validatePrimaryNodeUUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("PrimaryNodeUUID", "body", m.PrimaryNodeUUID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1VolumeResponse) validateProjectID(formats strfmt.Registry) error {
 
 	if err := validate.Required("ProjectID", "body", m.ProjectID); err != nil {
@@ -187,6 +236,33 @@ func (m *V1VolumeResponse) validateProtectionState(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *V1VolumeResponse) validateQosPolicyName(formats strfmt.Registry) error {
+
+	if err := validate.Required("QosPolicyName", "body", m.QosPolicyName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateQosPolicyUUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("QosPolicyUUID", "body", m.QosPolicyUUID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateRebuildProgress(formats strfmt.Registry) error {
+
+	if err := validate.Required("RebuildProgress", "body", m.RebuildProgress); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1VolumeResponse) validateReplicaCount(formats strfmt.Registry) error {
 
 	if err := validate.Required("ReplicaCount", "body", m.ReplicaCount); err != nil {
@@ -199,6 +275,15 @@ func (m *V1VolumeResponse) validateReplicaCount(formats strfmt.Registry) error {
 func (m *V1VolumeResponse) validateSize(formats strfmt.Registry) error {
 
 	if err := validate.Required("Size", "body", m.Size); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateSourceSnapshotUUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("SourceSnapshotUUID", "body", m.SourceSnapshotUUID); err != nil {
 		return err
 	}
 
