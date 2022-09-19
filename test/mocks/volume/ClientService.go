@@ -74,6 +74,36 @@ func (_m *ClientService) DeleteSnapshot(params *clientvolume.DeleteSnapshotParam
 	return r0, r1
 }
 
+// DeleteVolume provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) DeleteVolume(params *clientvolume.DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.DeleteVolumeOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *clientvolume.DeleteVolumeOK
+	if rf, ok := ret.Get(0).(func(*clientvolume.DeleteVolumeParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) *clientvolume.DeleteVolumeOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientvolume.DeleteVolumeOK)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*clientvolume.DeleteVolumeParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // FindSnapshots provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) FindSnapshots(params *clientvolume.FindSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.FindSnapshotsOK, error) {
 	_va := make([]interface{}, len(opts))
@@ -96,6 +126,36 @@ func (_m *ClientService) FindSnapshots(params *clientvolume.FindSnapshotsParams,
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(*clientvolume.FindSnapshotsParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// FindVolumes provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) FindVolumes(params *clientvolume.FindVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.FindVolumesOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *clientvolume.FindVolumesOK
+	if rf, ok := ret.Get(0).(func(*clientvolume.FindVolumesParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) *clientvolume.FindVolumesOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientvolume.FindVolumesOK)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*clientvolume.FindVolumesParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
 		r1 = ret.Error(1)
@@ -134,6 +194,36 @@ func (_m *ClientService) GetSnapshot(params *clientvolume.GetSnapshotParams, aut
 	return r0, r1
 }
 
+// GetVolume provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) GetVolume(params *clientvolume.GetVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.GetVolumeOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *clientvolume.GetVolumeOK
+	if rf, ok := ret.Get(0).(func(*clientvolume.GetVolumeParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) *clientvolume.GetVolumeOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientvolume.GetVolumeOK)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*clientvolume.GetVolumeParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // ListSnapshots provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) ListSnapshots(params *clientvolume.ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.ListSnapshotsOK, error) {
 	_va := make([]interface{}, len(opts))
@@ -156,6 +246,36 @@ func (_m *ClientService) ListSnapshots(params *clientvolume.ListSnapshotsParams,
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(*clientvolume.ListSnapshotsParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ListVolumes provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) ListVolumes(params *clientvolume.ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.ListVolumesOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *clientvolume.ListVolumesOK
+	if rf, ok := ret.Get(0).(func(*clientvolume.ListVolumesParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) *clientvolume.ListVolumesOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientvolume.ListVolumesOK)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*clientvolume.ListVolumesParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
 		r1 = ret.Error(1)

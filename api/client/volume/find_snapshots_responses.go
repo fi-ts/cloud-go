@@ -82,11 +82,11 @@ func (o *FindSnapshotsOK) IsCode(code int) bool {
 }
 
 func (o *FindSnapshotsOK) Error() string {
-	return fmt.Sprintf("[POST /v1/volume/find][%d] findSnapshotsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshotsOK  %+v", 200, o.Payload)
 }
 
 func (o *FindSnapshotsOK) String() string {
-	return fmt.Sprintf("[POST /v1/volume/find][%d] findSnapshotsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshotsOK  %+v", 200, o.Payload)
 }
 
 func (o *FindSnapshotsOK) GetPayload() []*models.V1SnapshotResponse {
@@ -152,11 +152,11 @@ func (o *FindSnapshotsDefault) IsCode(code int) bool {
 }
 
 func (o *FindSnapshotsDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/volume/find][%d] findSnapshots default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshots default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *FindSnapshotsDefault) String() string {
-	return fmt.Sprintf("[POST /v1/volume/find][%d] findSnapshots default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshots default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *FindSnapshotsDefault) GetPayload() *httperrors.HTTPErrorResponse {

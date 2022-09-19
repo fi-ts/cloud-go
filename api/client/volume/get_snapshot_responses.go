@@ -82,11 +82,11 @@ func (o *GetSnapshotOK) IsCode(code int) bool {
 }
 
 func (o *GetSnapshotOK) Error() string {
-	return fmt.Sprintf("[GET /v1/volume/{id}][%d] getSnapshotOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshotOK  %+v", 200, o.Payload)
 }
 
 func (o *GetSnapshotOK) String() string {
-	return fmt.Sprintf("[GET /v1/volume/{id}][%d] getSnapshotOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshotOK  %+v", 200, o.Payload)
 }
 
 func (o *GetSnapshotOK) GetPayload() *models.V1SnapshotResponse {
@@ -154,11 +154,11 @@ func (o *GetSnapshotDefault) IsCode(code int) bool {
 }
 
 func (o *GetSnapshotDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/volume/{id}][%d] getSnapshot default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshot default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetSnapshotDefault) String() string {
-	return fmt.Sprintf("[GET /v1/volume/{id}][%d] getSnapshot default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshot default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *GetSnapshotDefault) GetPayload() *httperrors.HTTPErrorResponse {
