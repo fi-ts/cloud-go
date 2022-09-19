@@ -4004,6 +4004,136 @@
         "seeds"
       ]
     },
+    "v1.SnapshotFindRequest": {
+      "properties": {
+        "PartitionID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "SnapshotID": {
+          "type": "string"
+        },
+        "TenantID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "PartitionID",
+        "ProjectID",
+        "SnapshotID",
+        "TenantID"
+      ]
+    },
+    "v1.SnapshotResponse": {
+      "properties": {
+        "CreationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "NodeIPList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "PartitionID": {
+          "type": "string"
+        },
+        "PrimaryNodeUUID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "ReplicaCount": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "RetentionTime": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "Size": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "SnapshotID": {
+          "type": "string"
+        },
+        "SourceVolumeID": {
+          "type": "string"
+        },
+        "SourceVolumeName": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        },
+        "Statistics": {
+          "$ref": "#/definitions/v1.SnapshotStatistics"
+        },
+        "TenantID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CreationTime",
+        "Description",
+        "Name",
+        "NodeIPList",
+        "PartitionID",
+        "PrimaryNodeUUID",
+        "ProjectID",
+        "ReplicaCount",
+        "RetentionTime",
+        "Size",
+        "SnapshotID",
+        "SourceVolumeID",
+        "SourceVolumeName",
+        "State",
+        "Statistics",
+        "TenantID"
+      ]
+    },
+    "v1.SnapshotStatistics": {
+      "properties": {
+        "PhysicalCapacity": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalMemory": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalOwnedCapacity": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalOwnedMemory": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "UserWritten": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "PhysicalCapacity",
+        "PhysicalMemory",
+        "PhysicalOwnedCapacity",
+        "PhysicalOwnedMemory",
+        "UserWritten"
+      ]
+    },
     "v1.StorageClusterInfo": {
       "properties": {
         "ApiEndpoints": {
@@ -4434,10 +4564,6 @@
           "description": "the project name of this entity",
           "type": "string"
         },
-        "sourcesnapshotuuid": {
-          "description": "the uuid of source of this volume, empty if this volume is no snapshot",
-          "type": "string"
-        },
         "start": {
           "description": "the start time of this volume",
           "format": "date-time",
@@ -4474,7 +4600,6 @@
         "partition",
         "projectid",
         "projectname",
-        "sourcesnapshotuuid",
         "start",
         "tenant",
         "tenantname",
@@ -7662,7 +7787,7 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "listVolumes",
+        "operationId": "listSnapshots",
         "produces": [
           "application/json"
         ],
@@ -7671,7 +7796,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "$ref": "#/definitions/v1.VolumeResponse"
+                "$ref": "#/definitions/v1.SnapshotResponse"
               },
               "type": "array"
             }
@@ -7683,7 +7808,7 @@
             }
           }
         },
-        "summary": "get all volumes",
+        "summary": "get all snapshots",
         "tags": [
           "volume"
         ]
@@ -7734,14 +7859,14 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "findVolumes",
+        "operationId": "findSnapshots",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.VolumeFindRequest"
+              "$ref": "#/definitions/v1.SnapshotFindRequest"
             }
           }
         ],
@@ -7753,7 +7878,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "$ref": "#/definitions/v1.VolumeResponse"
+                "$ref": "#/definitions/v1.SnapshotResponse"
               },
               "type": "array"
             }
@@ -7765,7 +7890,7 @@
             }
           }
         },
-        "summary": "find volumes by multiple criteria",
+        "summary": "find snapshots by multiple criteria",
         "tags": [
           "volume"
         ]
@@ -7776,10 +7901,10 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "deleteVolume",
+        "operationId": "deleteSnapshot",
         "parameters": [
           {
-            "description": "id of the volume",
+            "description": "id of the snapshot",
             "in": "path",
             "name": "id",
             "required": true,
@@ -7793,7 +7918,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.VolumeResponse"
+              "$ref": "#/definitions/v1.SnapshotResponse"
             }
           },
           "default": {
@@ -7803,7 +7928,7 @@
             }
           }
         },
-        "summary": "deletes a volume including all data",
+        "summary": "deletes a snapshot including all data",
         "tags": [
           "volume"
         ]
@@ -7812,10 +7937,10 @@
         "consumes": [
           "application/json"
         ],
-        "operationId": "getVolume",
+        "operationId": "getSnapshot",
         "parameters": [
           {
-            "description": "identifier of the volume",
+            "description": "identifier of the snapshot",
             "in": "path",
             "name": "id",
             "required": true,
@@ -7829,7 +7954,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.VolumeResponse"
+              "$ref": "#/definitions/v1.SnapshotResponse"
             }
           },
           "default": {
@@ -7839,7 +7964,7 @@
             }
           }
         },
-        "summary": "get a volume",
+        "summary": "get a snapshot",
         "tags": [
           "volume"
         ]

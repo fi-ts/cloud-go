@@ -72,10 +72,6 @@ type V1VolumeUsage struct {
 	// Required: true
 	Projectname *string `json:"projectname"`
 
-	// the uuid of source of this volume, empty if this volume is no snapshot
-	// Required: true
-	Sourcesnapshotuuid *string `json:"sourcesnapshotuuid"`
-
 	// the start time of this volume
 	// Required: true
 	// Format: date-time
@@ -151,10 +147,6 @@ func (m *V1VolumeUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProjectname(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSourcesnapshotuuid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -299,15 +291,6 @@ func (m *V1VolumeUsage) validateProjectid(formats strfmt.Registry) error {
 func (m *V1VolumeUsage) validateProjectname(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectname", "body", m.Projectname); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1VolumeUsage) validateSourcesnapshotuuid(formats strfmt.Registry) error {
-
-	if err := validate.Required("sourcesnapshotuuid", "body", m.Sourcesnapshotuuid); err != nil {
 		return err
 	}
 

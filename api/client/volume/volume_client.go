@@ -30,13 +30,13 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	ClusterInfo(params *ClusterInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterInfoOK, error)
 
-	DeleteVolume(params *DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVolumeOK, error)
+	DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSnapshotOK, error)
 
-	FindVolumes(params *FindVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindVolumesOK, error)
+	FindSnapshots(params *FindSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindSnapshotsOK, error)
 
-	GetVolume(params *GetVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVolumeOK, error)
+	GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSnapshotOK, error)
 
-	ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVolumesOK, error)
+	ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -80,22 +80,22 @@ func (a *Client) ClusterInfo(params *ClusterInfoParams, authInfo runtime.ClientA
 }
 
 /*
-DeleteVolume deletes a volume including all data
+DeleteSnapshot deletes a snapshot including all data
 */
-func (a *Client) DeleteVolume(params *DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVolumeOK, error) {
+func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteVolumeParams()
+		params = NewDeleteSnapshotParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteVolume",
+		ID:                 "deleteSnapshot",
 		Method:             "DELETE",
 		PathPattern:        "/v1/volume/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteVolumeReader{formats: a.formats},
+		Reader:             &DeleteSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -108,32 +108,32 @@ func (a *Client) DeleteVolume(params *DeleteVolumeParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteVolumeOK)
+	success, ok := result.(*DeleteSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*DeleteVolumeDefault)
+	unexpectedSuccess := result.(*DeleteSnapshotDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-FindVolumes finds volumes by multiple criteria
+FindSnapshots finds snapshots by multiple criteria
 */
-func (a *Client) FindVolumes(params *FindVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindVolumesOK, error) {
+func (a *Client) FindSnapshots(params *FindSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindSnapshotsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewFindVolumesParams()
+		params = NewFindSnapshotsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "findVolumes",
+		ID:                 "findSnapshots",
 		Method:             "POST",
 		PathPattern:        "/v1/volume/find",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &FindVolumesReader{formats: a.formats},
+		Reader:             &FindSnapshotsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -146,32 +146,32 @@ func (a *Client) FindVolumes(params *FindVolumesParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*FindVolumesOK)
+	success, ok := result.(*FindSnapshotsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*FindVolumesDefault)
+	unexpectedSuccess := result.(*FindSnapshotsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-GetVolume gets a volume
+GetSnapshot gets a snapshot
 */
-func (a *Client) GetVolume(params *GetVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVolumeOK, error) {
+func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSnapshotOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetVolumeParams()
+		params = NewGetSnapshotParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getVolume",
+		ID:                 "getSnapshot",
 		Method:             "GET",
 		PathPattern:        "/v1/volume/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetVolumeReader{formats: a.formats},
+		Reader:             &GetSnapshotReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -184,32 +184,32 @@ func (a *Client) GetVolume(params *GetVolumeParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetVolumeOK)
+	success, ok := result.(*GetSnapshotOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*GetVolumeDefault)
+	unexpectedSuccess := result.(*GetSnapshotDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-ListVolumes gets all volumes
+ListSnapshots gets all snapshots
 */
-func (a *Client) ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVolumesOK, error) {
+func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSnapshotsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListVolumesParams()
+		params = NewListSnapshotsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listVolumes",
+		ID:                 "listSnapshots",
 		Method:             "GET",
 		PathPattern:        "/v1/volume",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListVolumesReader{formats: a.formats},
+		Reader:             &ListSnapshotsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -222,12 +222,12 @@ func (a *Client) ListVolumes(params *ListVolumesParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListVolumesOK)
+	success, ok := result.(*ListSnapshotsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*ListVolumesDefault)
+	unexpectedSuccess := result.(*ListSnapshotsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
