@@ -67,6 +67,12 @@ type GetSnapshotParams struct {
 	*/
 	ID string
 
+	/* ProjectID.
+
+	   project id snapshot
+	*/
+	ProjectID *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -131,6 +137,17 @@ func (o *GetSnapshotParams) SetID(id string) {
 	o.ID = id
 }
 
+// WithProjectID adds the projectID to the get snapshot params
+func (o *GetSnapshotParams) WithProjectID(projectID *string) *GetSnapshotParams {
+	o.SetProjectID(projectID)
+	return o
+}
+
+// SetProjectID adds the projectId to the get snapshot params
+func (o *GetSnapshotParams) SetProjectID(projectID *string) {
+	o.ProjectID = projectID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -142,6 +159,23 @@ func (o *GetSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
+	}
+
+	if o.ProjectID != nil {
+
+		// query param project-id
+		var qrProjectID string
+
+		if o.ProjectID != nil {
+			qrProjectID = *o.ProjectID
+		}
+		qProjectID := qrProjectID
+		if qProjectID != "" {
+
+			if err := r.SetQueryParam("project-id", qProjectID); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

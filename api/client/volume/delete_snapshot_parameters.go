@@ -67,6 +67,12 @@ type DeleteSnapshotParams struct {
 	*/
 	ID string
 
+	/* ProjectID.
+
+	   project id snapshot
+	*/
+	ProjectID *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -131,6 +137,17 @@ func (o *DeleteSnapshotParams) SetID(id string) {
 	o.ID = id
 }
 
+// WithProjectID adds the projectID to the delete snapshot params
+func (o *DeleteSnapshotParams) WithProjectID(projectID *string) *DeleteSnapshotParams {
+	o.SetProjectID(projectID)
+	return o
+}
+
+// SetProjectID adds the projectId to the delete snapshot params
+func (o *DeleteSnapshotParams) SetProjectID(projectID *string) {
+	o.ProjectID = projectID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *DeleteSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -142,6 +159,23 @@ func (o *DeleteSnapshotParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
+	}
+
+	if o.ProjectID != nil {
+
+		// query param project-id
+		var qrProjectID string
+
+		if o.ProjectID != nil {
+			qrProjectID = *o.ProjectID
+		}
+		qProjectID := qrProjectID
+		if qProjectID != "" {
+
+			if err := r.SetQueryParam("project-id", qProjectID); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

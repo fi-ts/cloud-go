@@ -7947,6 +7947,12 @@
             "name": "id",
             "required": true,
             "type": "string"
+          },
+          {
+            "description": "project id snapshot",
+            "in": "query",
+            "name": "project-id",
+            "type": "string"
           }
         ],
         "produces": [
@@ -7982,6 +7988,12 @@
             "in": "path",
             "name": "id",
             "required": true,
+            "type": "string"
+          },
+          {
+            "description": "project id snapshot",
+            "in": "query",
+            "name": "project-id",
             "type": "string"
           }
         ],
