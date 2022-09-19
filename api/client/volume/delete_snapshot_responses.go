@@ -82,11 +82,11 @@ func (o *DeleteSnapshotOK) IsCode(code int) bool {
 }
 
 func (o *DeleteSnapshotOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/volume/-snapshot/{id}][%d] deleteSnapshotOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshotOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteSnapshotOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/volume/-snapshot/{id}][%d] deleteSnapshotOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshotOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteSnapshotOK) GetPayload() *models.V1SnapshotResponse {
@@ -154,11 +154,11 @@ func (o *DeleteSnapshotDefault) IsCode(code int) bool {
 }
 
 func (o *DeleteSnapshotDefault) Error() string {
-	return fmt.Sprintf("[DELETE /v1/volume/-snapshot/{id}][%d] deleteSnapshot default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshot default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DeleteSnapshotDefault) String() string {
-	return fmt.Sprintf("[DELETE /v1/volume/-snapshot/{id}][%d] deleteSnapshot default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshot default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DeleteSnapshotDefault) GetPayload() *httperrors.HTTPErrorResponse {

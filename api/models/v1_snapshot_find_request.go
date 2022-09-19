@@ -30,10 +30,6 @@ type V1SnapshotFindRequest struct {
 	// snapshot ID
 	// Required: true
 	SnapshotID *string `json:"SnapshotID"`
-
-	// tenant ID
-	// Required: true
-	TenantID *string `json:"TenantID"`
 }
 
 // Validate validates this v1 snapshot find request
@@ -49,10 +45,6 @@ func (m *V1SnapshotFindRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSnapshotID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTenantID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -83,15 +75,6 @@ func (m *V1SnapshotFindRequest) validateProjectID(formats strfmt.Registry) error
 func (m *V1SnapshotFindRequest) validateSnapshotID(formats strfmt.Registry) error {
 
 	if err := validate.Required("SnapshotID", "body", m.SnapshotID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1SnapshotFindRequest) validateTenantID(formats strfmt.Registry) error {
-
-	if err := validate.Required("TenantID", "body", m.TenantID); err != nil {
 		return err
 	}
 
