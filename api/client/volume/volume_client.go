@@ -98,7 +98,7 @@ func (a *Client) DeleteSnapshot(params *DeleteSnapshotParams, authInfo runtime.C
 	op := &runtime.ClientOperation{
 		ID:                 "deleteSnapshot",
 		Method:             "DELETE",
-		PathPattern:        "/v1/volume/snapshot/{id}",
+		PathPattern:        "/v1/volume/-snapshot/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -174,7 +174,7 @@ func (a *Client) FindSnapshots(params *FindSnapshotsParams, authInfo runtime.Cli
 	op := &runtime.ClientOperation{
 		ID:                 "findSnapshots",
 		Method:             "POST",
-		PathPattern:        "/v1/volume/snapshot/find",
+		PathPattern:        "/v1/volume/-snapshot/find",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -250,7 +250,7 @@ func (a *Client) GetSnapshot(params *GetSnapshotParams, authInfo runtime.ClientA
 	op := &runtime.ClientOperation{
 		ID:                 "getSnapshot",
 		Method:             "GET",
-		PathPattern:        "/v1/volume/snapshot/{id}",
+		PathPattern:        "/v1/volume/-snapshot/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -326,7 +326,7 @@ func (a *Client) ListSnapshots(params *ListSnapshotsParams, authInfo runtime.Cli
 	op := &runtime.ClientOperation{
 		ID:                 "listSnapshots",
 		Method:             "GET",
-		PathPattern:        "/v1/volume/snapshot",
+		PathPattern:        "/v1/volume/-snapshot",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
