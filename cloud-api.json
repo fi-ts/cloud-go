@@ -24,113 +24,6 @@
         "type": "HTTPErrorResponse"
       }
     },
-    "metalgo.IPAllocateRequest": {
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "ipaddress": {
-          "type": "string"
-        },
-        "machineid": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "networkid": {
-          "type": "string"
-        },
-        "projectid": {
-          "type": "string"
-        },
-        "tags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ipaddress",
-        "machineid",
-        "networkid",
-        "projectid"
-      ]
-    },
-    "metalgo.IPFindRequest": {
-      "properties": {
-        "AllocationUUID": {
-          "type": "string"
-        },
-        "IPAddress": {
-          "type": "string"
-        },
-        "MachineID": {
-          "type": "string"
-        },
-        "Name": {
-          "type": "string"
-        },
-        "NetworkID": {
-          "type": "string"
-        },
-        "ParentPrefixCidr": {
-          "type": "string"
-        },
-        "ProjectID": {
-          "type": "string"
-        },
-        "Tags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "Type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "AllocationUUID",
-        "IPAddress",
-        "MachineID",
-        "Name",
-        "NetworkID",
-        "ParentPrefixCidr",
-        "ProjectID",
-        "Tags",
-        "Type"
-      ]
-    },
-    "metalgo.IPUpdateRequest": {
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "ipaddress": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "tags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ipaddress"
-      ]
-    },
     "models.V1BootInfo": {
       "properties": {
         "bootloaderid": {
@@ -332,6 +225,77 @@
         "volumegroups"
       ]
     },
+    "models.V1IPAllocateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "machineid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkid": {
+          "type": "string"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkid",
+        "projectid",
+        "tags",
+        "type"
+      ]
+    },
+    "models.V1IPFindRequest": {
+      "properties": {
+        "allocationuuid": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "machineid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkid": {
+          "type": "string"
+        },
+        "networkprefix": {
+          "type": "string"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tags"
+      ]
+    },
     "models.V1IPResponse": {
       "properties": {
         "allocationuuid": {
@@ -373,6 +337,33 @@
         "ipaddress",
         "networkid",
         "projectid",
+        "tags",
+        "type"
+      ]
+    },
+    "models.V1IPUpdateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ipaddress",
         "tags",
         "type"
       ]
@@ -498,6 +489,9 @@
         },
         "user_data": {
           "type": "string"
+        },
+        "vpn": {
+          "$ref": "#/definitions/models.V1MachineVPN"
         }
       },
       "required": [
@@ -678,9 +672,6 @@
         "failed_machine_reclaim": {
           "type": "boolean"
         },
-        "incomplete_provisioning_cycles": {
-          "type": "string"
-        },
         "last_error_event": {
           "$ref": "#/definitions/models.V1MachineProvisioningEvent"
         },
@@ -697,7 +688,6 @@
       "required": [
         "crash_loop",
         "failed_machine_reclaim",
-        "incomplete_provisioning_cycles",
         "log"
       ]
     },
@@ -785,6 +775,20 @@
         "description",
         "metal_hammer_version",
         "value"
+      ]
+    },
+    "models.V1MachineVPN": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "auth_key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "auth_key"
       ]
     },
     "models.V1PartitionBootConfiguration": {
@@ -2041,10 +2045,10 @@
     },
     "v1.IPAllocateRequest": {
       "properties": {
-        "description": {
+        "SpecificIP": {
           "type": "string"
         },
-        "ipaddress": {
+        "description": {
           "type": "string"
         },
         "machineid": {
@@ -2070,55 +2074,48 @@
         }
       },
       "required": [
-        "ipaddress",
-        "machineid",
+        "SpecificIP",
         "networkid",
-        "projectid"
+        "projectid",
+        "tags",
+        "type"
       ]
     },
     "v1.IPFindRequest": {
       "properties": {
-        "AllocationUUID": {
+        "allocationuuid": {
           "type": "string"
         },
-        "IPAddress": {
+        "ipaddress": {
           "type": "string"
         },
-        "MachineID": {
+        "machineid": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "NetworkID": {
+        "networkid": {
           "type": "string"
         },
-        "ParentPrefixCidr": {
+        "networkprefix": {
           "type": "string"
         },
-        "ProjectID": {
+        "projectid": {
           "type": "string"
         },
-        "Tags": {
+        "tags": {
           "items": {
             "type": "string"
           },
           "type": "array"
         },
-        "Type": {
+        "type": {
           "type": "string"
         }
       },
       "required": [
-        "AllocationUUID",
-        "IPAddress",
-        "MachineID",
-        "Name",
-        "NetworkID",
-        "ParentPrefixCidr",
-        "ProjectID",
-        "Tags",
-        "Type"
+        "tags"
       ]
     },
     "v1.IPUpdateRequest": {
@@ -2143,7 +2140,9 @@
         }
       },
       "required": [
-        "ipaddress"
+        "ipaddress",
+        "tags",
+        "type"
       ]
     },
     "v1.IPUsage": {

@@ -14,10 +14,10 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1IPUpdateRequest v1 IP update request
+// ModelsV1IPUpdateRequest models v1 IP update request
 //
-// swagger:model v1.IPUpdateRequest
-type V1IPUpdateRequest struct {
+// swagger:model models.V1IPUpdateRequest
+type ModelsV1IPUpdateRequest struct {
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -38,8 +38,8 @@ type V1IPUpdateRequest struct {
 	Type *string `json:"type"`
 }
 
-// Validate validates this v1 IP update request
-func (m *V1IPUpdateRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this models v1 IP update request
+func (m *ModelsV1IPUpdateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateIpaddress(formats); err != nil {
@@ -60,7 +60,7 @@ func (m *V1IPUpdateRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPUpdateRequest) validateIpaddress(formats strfmt.Registry) error {
+func (m *ModelsV1IPUpdateRequest) validateIpaddress(formats strfmt.Registry) error {
 
 	if err := validate.Required("ipaddress", "body", m.Ipaddress); err != nil {
 		return err
@@ -69,7 +69,7 @@ func (m *V1IPUpdateRequest) validateIpaddress(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPUpdateRequest) validateTags(formats strfmt.Registry) error {
+func (m *ModelsV1IPUpdateRequest) validateTags(formats strfmt.Registry) error {
 
 	if err := validate.Required("tags", "body", m.Tags); err != nil {
 		return err
@@ -78,7 +78,7 @@ func (m *V1IPUpdateRequest) validateTags(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPUpdateRequest) validateType(formats strfmt.Registry) error {
+func (m *ModelsV1IPUpdateRequest) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
@@ -87,13 +87,13 @@ func (m *V1IPUpdateRequest) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1 IP update request based on context it is used
-func (m *V1IPUpdateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this models v1 IP update request based on context it is used
+func (m *ModelsV1IPUpdateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1IPUpdateRequest) MarshalBinary() ([]byte, error) {
+func (m *ModelsV1IPUpdateRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -101,8 +101,8 @@ func (m *V1IPUpdateRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1IPUpdateRequest) UnmarshalBinary(b []byte) error {
-	var res V1IPUpdateRequest
+func (m *ModelsV1IPUpdateRequest) UnmarshalBinary(b []byte) error {
+	var res ModelsV1IPUpdateRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

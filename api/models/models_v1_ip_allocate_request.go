@@ -14,14 +14,10 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1IPAllocateRequest v1 IP allocate request
+// ModelsV1IPAllocateRequest models v1 IP allocate request
 //
-// swagger:model v1.IPAllocateRequest
-type V1IPAllocateRequest struct {
-
-	// specific IP
-	// Required: true
-	SpecificIP *string `json:"SpecificIP"`
+// swagger:model models.V1IPAllocateRequest
+type ModelsV1IPAllocateRequest struct {
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -49,13 +45,9 @@ type V1IPAllocateRequest struct {
 	Type *string `json:"type"`
 }
 
-// Validate validates this v1 IP allocate request
-func (m *V1IPAllocateRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this models v1 IP allocate request
+func (m *ModelsV1IPAllocateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateSpecificIP(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateNetworkid(formats); err != nil {
 		res = append(res, err)
@@ -79,16 +71,7 @@ func (m *V1IPAllocateRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPAllocateRequest) validateSpecificIP(formats strfmt.Registry) error {
-
-	if err := validate.Required("SpecificIP", "body", m.SpecificIP); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1IPAllocateRequest) validateNetworkid(formats strfmt.Registry) error {
+func (m *ModelsV1IPAllocateRequest) validateNetworkid(formats strfmt.Registry) error {
 
 	if err := validate.Required("networkid", "body", m.Networkid); err != nil {
 		return err
@@ -97,7 +80,7 @@ func (m *V1IPAllocateRequest) validateNetworkid(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPAllocateRequest) validateProjectid(formats strfmt.Registry) error {
+func (m *ModelsV1IPAllocateRequest) validateProjectid(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectid", "body", m.Projectid); err != nil {
 		return err
@@ -106,7 +89,7 @@ func (m *V1IPAllocateRequest) validateProjectid(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPAllocateRequest) validateTags(formats strfmt.Registry) error {
+func (m *ModelsV1IPAllocateRequest) validateTags(formats strfmt.Registry) error {
 
 	if err := validate.Required("tags", "body", m.Tags); err != nil {
 		return err
@@ -115,7 +98,7 @@ func (m *V1IPAllocateRequest) validateTags(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPAllocateRequest) validateType(formats strfmt.Registry) error {
+func (m *ModelsV1IPAllocateRequest) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
@@ -124,13 +107,13 @@ func (m *V1IPAllocateRequest) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1 IP allocate request based on context it is used
-func (m *V1IPAllocateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this models v1 IP allocate request based on context it is used
+func (m *ModelsV1IPAllocateRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1IPAllocateRequest) MarshalBinary() ([]byte, error) {
+func (m *ModelsV1IPAllocateRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -138,8 +121,8 @@ func (m *V1IPAllocateRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1IPAllocateRequest) UnmarshalBinary(b []byte) error {
-	var res V1IPAllocateRequest
+func (m *ModelsV1IPAllocateRequest) UnmarshalBinary(b []byte) error {
+	var res ModelsV1IPAllocateRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
