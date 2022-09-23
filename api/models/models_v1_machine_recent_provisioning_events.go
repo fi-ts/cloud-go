@@ -28,10 +28,6 @@ type ModelsV1MachineRecentProvisioningEvents struct {
 	// Required: true
 	FailedMachineReclaim *bool `json:"failed_machine_reclaim"`
 
-	// incomplete provisioning cycles
-	// Required: true
-	IncompleteProvisioningCycles *string `json:"incomplete_provisioning_cycles"`
-
 	// last error event
 	LastErrorEvent *ModelsV1MachineProvisioningEvent `json:"last_error_event,omitempty"`
 
@@ -52,10 +48,6 @@ func (m *ModelsV1MachineRecentProvisioningEvents) Validate(formats strfmt.Regist
 	}
 
 	if err := m.validateFailedMachineReclaim(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateIncompleteProvisioningCycles(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,15 +77,6 @@ func (m *ModelsV1MachineRecentProvisioningEvents) validateCrashLoop(formats strf
 func (m *ModelsV1MachineRecentProvisioningEvents) validateFailedMachineReclaim(formats strfmt.Registry) error {
 
 	if err := validate.Required("failed_machine_reclaim", "body", m.FailedMachineReclaim); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *ModelsV1MachineRecentProvisioningEvents) validateIncompleteProvisioningCycles(formats strfmt.Registry) error {
-
-	if err := validate.Required("incomplete_provisioning_cycles", "body", m.IncompleteProvisioningCycles); err != nil {
 		return err
 	}
 

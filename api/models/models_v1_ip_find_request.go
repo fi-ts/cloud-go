@@ -14,10 +14,10 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1IPFindRequest v1 IP find request
+// ModelsV1IPFindRequest models v1 IP find request
 //
-// swagger:model v1.IPFindRequest
-type V1IPFindRequest struct {
+// swagger:model models.V1IPFindRequest
+type ModelsV1IPFindRequest struct {
 
 	// allocationuuid
 	Allocationuuid string `json:"allocationuuid,omitempty"`
@@ -48,8 +48,8 @@ type V1IPFindRequest struct {
 	Type string `json:"type,omitempty"`
 }
 
-// Validate validates this v1 IP find request
-func (m *V1IPFindRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this models v1 IP find request
+func (m *ModelsV1IPFindRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateTags(formats); err != nil {
@@ -62,7 +62,7 @@ func (m *V1IPFindRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1IPFindRequest) validateTags(formats strfmt.Registry) error {
+func (m *ModelsV1IPFindRequest) validateTags(formats strfmt.Registry) error {
 
 	if err := validate.Required("tags", "body", m.Tags); err != nil {
 		return err
@@ -71,13 +71,13 @@ func (m *V1IPFindRequest) validateTags(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1 IP find request based on context it is used
-func (m *V1IPFindRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this models v1 IP find request based on context it is used
+func (m *ModelsV1IPFindRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1IPFindRequest) MarshalBinary() ([]byte, error) {
+func (m *ModelsV1IPFindRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -85,8 +85,8 @@ func (m *V1IPFindRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1IPFindRequest) UnmarshalBinary(b []byte) error {
-	var res V1IPFindRequest
+func (m *ModelsV1IPFindRequest) UnmarshalBinary(b []byte) error {
+	var res ModelsV1IPFindRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

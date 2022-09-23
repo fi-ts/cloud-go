@@ -44,6 +44,36 @@ func (_m *ClientService) ClusterInfo(params *clientvolume.ClusterInfoParams, aut
 	return r0, r1
 }
 
+// DeleteSnapshot provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) DeleteSnapshot(params *clientvolume.DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.DeleteSnapshotOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *clientvolume.DeleteSnapshotOK
+	if rf, ok := ret.Get(0).(func(*clientvolume.DeleteSnapshotParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) *clientvolume.DeleteSnapshotOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientvolume.DeleteSnapshotOK)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*clientvolume.DeleteSnapshotParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // DeleteVolume provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) DeleteVolume(params *clientvolume.DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.DeleteVolumeOK, error) {
 	_va := make([]interface{}, len(opts))
@@ -74,6 +104,36 @@ func (_m *ClientService) DeleteVolume(params *clientvolume.DeleteVolumeParams, a
 	return r0, r1
 }
 
+// FindSnapshots provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) FindSnapshots(params *clientvolume.FindSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.FindSnapshotsOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *clientvolume.FindSnapshotsOK
+	if rf, ok := ret.Get(0).(func(*clientvolume.FindSnapshotsParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) *clientvolume.FindSnapshotsOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientvolume.FindSnapshotsOK)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*clientvolume.FindSnapshotsParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // FindVolumes provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) FindVolumes(params *clientvolume.FindVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.FindVolumesOK, error) {
 	_va := make([]interface{}, len(opts))
@@ -96,6 +156,36 @@ func (_m *ClientService) FindVolumes(params *clientvolume.FindVolumesParams, aut
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(*clientvolume.FindVolumesParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GetSnapshot provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) GetSnapshot(params *clientvolume.GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.GetSnapshotOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *clientvolume.GetSnapshotOK
+	if rf, ok := ret.Get(0).(func(*clientvolume.GetSnapshotParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) *clientvolume.GetSnapshotOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientvolume.GetSnapshotOK)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*clientvolume.GetSnapshotParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
 		r1 = ret.Error(1)

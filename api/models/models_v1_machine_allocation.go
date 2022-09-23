@@ -74,6 +74,9 @@ type ModelsV1MachineAllocation struct {
 
 	// user data
 	UserData string `json:"user_data,omitempty"`
+
+	// vpn
+	Vpn *ModelsV1MachineVPN `json:"vpn,omitempty"`
 }
 
 // Validate validates this models v1 machine allocation
@@ -129,6 +132,10 @@ func (m *ModelsV1MachineAllocation) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSucceeded(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVpn(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -303,6 +310,25 @@ func (m *ModelsV1MachineAllocation) validateSucceeded(formats strfmt.Registry) e
 	return nil
 }
 
+func (m *ModelsV1MachineAllocation) validateVpn(formats strfmt.Registry) error {
+	if swag.IsZero(m.Vpn) { // not required
+		return nil
+	}
+
+	if m.Vpn != nil {
+		if err := m.Vpn.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vpn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vpn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this models v1 machine allocation based on the context it is used
 func (m *ModelsV1MachineAllocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -320,6 +346,10 @@ func (m *ModelsV1MachineAllocation) ContextValidate(ctx context.Context, formats
 	}
 
 	if err := m.contextValidateNetworks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVpn(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -392,6 +422,22 @@ func (m *ModelsV1MachineAllocation) contextValidateNetworks(ctx context.Context,
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineAllocation) contextValidateVpn(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Vpn != nil {
+		if err := m.Vpn.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vpn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vpn")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -24,113 +24,6 @@
         "type": "HTTPErrorResponse"
       }
     },
-    "metalgo.IPAllocateRequest": {
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "ipaddress": {
-          "type": "string"
-        },
-        "machineid": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "networkid": {
-          "type": "string"
-        },
-        "projectid": {
-          "type": "string"
-        },
-        "tags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ipaddress",
-        "machineid",
-        "networkid",
-        "projectid"
-      ]
-    },
-    "metalgo.IPFindRequest": {
-      "properties": {
-        "AllocationUUID": {
-          "type": "string"
-        },
-        "IPAddress": {
-          "type": "string"
-        },
-        "MachineID": {
-          "type": "string"
-        },
-        "Name": {
-          "type": "string"
-        },
-        "NetworkID": {
-          "type": "string"
-        },
-        "ParentPrefixCidr": {
-          "type": "string"
-        },
-        "ProjectID": {
-          "type": "string"
-        },
-        "Tags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "Type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "AllocationUUID",
-        "IPAddress",
-        "MachineID",
-        "Name",
-        "NetworkID",
-        "ParentPrefixCidr",
-        "ProjectID",
-        "Tags",
-        "Type"
-      ]
-    },
-    "metalgo.IPUpdateRequest": {
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "ipaddress": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "tags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ipaddress"
-      ]
-    },
     "models.V1BootInfo": {
       "properties": {
         "bootloaderid": {
@@ -332,6 +225,77 @@
         "volumegroups"
       ]
     },
+    "models.V1IPAllocateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "machineid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkid": {
+          "type": "string"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkid",
+        "projectid",
+        "tags",
+        "type"
+      ]
+    },
+    "models.V1IPFindRequest": {
+      "properties": {
+        "allocationuuid": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "machineid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkid": {
+          "type": "string"
+        },
+        "networkprefix": {
+          "type": "string"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tags"
+      ]
+    },
     "models.V1IPResponse": {
       "properties": {
         "allocationuuid": {
@@ -373,6 +337,33 @@
         "ipaddress",
         "networkid",
         "projectid",
+        "tags",
+        "type"
+      ]
+    },
+    "models.V1IPUpdateRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ipaddress",
         "tags",
         "type"
       ]
@@ -498,6 +489,9 @@
         },
         "user_data": {
           "type": "string"
+        },
+        "vpn": {
+          "$ref": "#/definitions/models.V1MachineVPN"
         }
       },
       "required": [
@@ -678,9 +672,6 @@
         "failed_machine_reclaim": {
           "type": "boolean"
         },
-        "incomplete_provisioning_cycles": {
-          "type": "string"
-        },
         "last_error_event": {
           "$ref": "#/definitions/models.V1MachineProvisioningEvent"
         },
@@ -697,7 +688,6 @@
       "required": [
         "crash_loop",
         "failed_machine_reclaim",
-        "incomplete_provisioning_cycles",
         "log"
       ]
     },
@@ -785,6 +775,20 @@
         "description",
         "metal_hammer_version",
         "value"
+      ]
+    },
+    "models.V1MachineVPN": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "auth_key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "auth_key"
       ]
     },
     "models.V1PartitionBootConfiguration": {
@@ -2041,10 +2045,10 @@
     },
     "v1.IPAllocateRequest": {
       "properties": {
-        "description": {
+        "SpecificIP": {
           "type": "string"
         },
-        "ipaddress": {
+        "description": {
           "type": "string"
         },
         "machineid": {
@@ -2070,55 +2074,48 @@
         }
       },
       "required": [
-        "ipaddress",
-        "machineid",
+        "SpecificIP",
         "networkid",
-        "projectid"
+        "projectid",
+        "tags",
+        "type"
       ]
     },
     "v1.IPFindRequest": {
       "properties": {
-        "AllocationUUID": {
+        "allocationuuid": {
           "type": "string"
         },
-        "IPAddress": {
+        "ipaddress": {
           "type": "string"
         },
-        "MachineID": {
+        "machineid": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "NetworkID": {
+        "networkid": {
           "type": "string"
         },
-        "ParentPrefixCidr": {
+        "networkprefix": {
           "type": "string"
         },
-        "ProjectID": {
+        "projectid": {
           "type": "string"
         },
-        "Tags": {
+        "tags": {
           "items": {
             "type": "string"
           },
           "type": "array"
         },
-        "Type": {
+        "type": {
           "type": "string"
         }
       },
       "required": [
-        "AllocationUUID",
-        "IPAddress",
-        "MachineID",
-        "Name",
-        "NetworkID",
-        "ParentPrefixCidr",
-        "ProjectID",
-        "Tags",
-        "Type"
+        "tags"
       ]
     },
     "v1.IPUpdateRequest": {
@@ -2143,7 +2140,9 @@
         }
       },
       "required": [
-        "ipaddress"
+        "ipaddress",
+        "tags",
+        "type"
       ]
     },
     "v1.IPUsage": {
@@ -4004,6 +4003,136 @@
         "seeds"
       ]
     },
+    "v1.SnapshotFindRequest": {
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "PartitionID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "SnapshotID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "PartitionID",
+        "ProjectID",
+        "SnapshotID"
+      ]
+    },
+    "v1.SnapshotResponse": {
+      "properties": {
+        "CreationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "NodeIPList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "PartitionID": {
+          "type": "string"
+        },
+        "PrimaryNodeUUID": {
+          "type": "string"
+        },
+        "ProjectID": {
+          "type": "string"
+        },
+        "ReplicaCount": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "RetentionTime": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "Size": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "SnapshotID": {
+          "type": "string"
+        },
+        "SourceVolumeID": {
+          "type": "string"
+        },
+        "SourceVolumeName": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        },
+        "Statistics": {
+          "$ref": "#/definitions/v1.SnapshotStatistics"
+        },
+        "TenantID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CreationTime",
+        "Description",
+        "Name",
+        "NodeIPList",
+        "PartitionID",
+        "PrimaryNodeUUID",
+        "ProjectID",
+        "ReplicaCount",
+        "RetentionTime",
+        "Size",
+        "SnapshotID",
+        "SourceVolumeID",
+        "SourceVolumeName",
+        "State",
+        "Statistics",
+        "TenantID"
+      ]
+    },
+    "v1.SnapshotStatistics": {
+      "properties": {
+        "PhysicalCapacity": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalMemory": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalOwnedCapacity": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "PhysicalOwnedMemory": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "UserWritten": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "PhysicalCapacity",
+        "PhysicalMemory",
+        "PhysicalOwnedCapacity",
+        "PhysicalOwnedMemory",
+        "UserWritten"
+      ]
+    },
     "v1.StorageClusterInfo": {
       "properties": {
         "ApiEndpoints": {
@@ -4281,10 +4410,22 @@
         "PartitionID": {
           "type": "string"
         },
+        "PrimaryNodeUUID": {
+          "type": "string"
+        },
         "ProjectID": {
           "type": "string"
         },
         "ProtectionState": {
+          "type": "string"
+        },
+        "QosPolicyName": {
+          "type": "string"
+        },
+        "QosPolicyUUID": {
+          "type": "string"
+        },
+        "RebuildProgress": {
           "type": "string"
         },
         "ReplicaCount": {
@@ -4294,6 +4435,9 @@
         "Size": {
           "format": "integer",
           "type": "integer"
+        },
+        "SourceSnapshotUUID": {
+          "type": "string"
         },
         "State": {
           "type": "string"
@@ -4321,10 +4465,15 @@
         "ConnectedHosts",
         "NodeIPList",
         "PartitionID",
+        "PrimaryNodeUUID",
         "ProjectID",
         "ProtectionState",
+        "QosPolicyName",
+        "QosPolicyUUID",
+        "RebuildProgress",
         "ReplicaCount",
         "Size",
+        "SourceSnapshotUUID",
         "State",
         "Statistics",
         "StorageClass",
@@ -7741,6 +7890,134 @@
           }
         },
         "summary": "find volumes by multiple criteria",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/snapshot/find": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "findSnapshots",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.SnapshotFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.SnapshotResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find snapshots by multiple criteria",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/snapshot/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "deleteSnapshot",
+        "parameters": [
+          {
+            "description": "id of the snapshot",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "project id snapshot",
+            "in": "query",
+            "name": "project-id",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.SnapshotResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "deletes a snapshot including all data",
+        "tags": [
+          "volume"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getSnapshot",
+        "parameters": [
+          {
+            "description": "identifier of the snapshot",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "project id snapshot",
+            "in": "query",
+            "name": "project-id",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.SnapshotResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get a snapshot",
         "tags": [
           "volume"
         ]
