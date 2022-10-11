@@ -74,6 +74,9 @@ type ModelsV1MachineResponse struct {
 	// tags
 	// Required: true
 	Tags []string `json:"tags"`
+
+	// vpn
+	Vpn *ModelsV1MachineVPN `json:"vpn,omitempty"`
 }
 
 // Validate validates this models v1 machine response
@@ -121,6 +124,10 @@ func (m *ModelsV1MachineResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTags(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVpn(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -314,6 +321,25 @@ func (m *ModelsV1MachineResponse) validateTags(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ModelsV1MachineResponse) validateVpn(formats strfmt.Registry) error {
+	if swag.IsZero(m.Vpn) { // not required
+		return nil
+	}
+
+	if m.Vpn != nil {
+		if err := m.Vpn.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vpn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vpn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this models v1 machine response based on the context it is used
 func (m *ModelsV1MachineResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -347,6 +373,10 @@ func (m *ModelsV1MachineResponse) ContextValidate(ctx context.Context, formats s
 	}
 
 	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVpn(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -476,6 +506,22 @@ func (m *ModelsV1MachineResponse) contextValidateState(ctx context.Context, form
 				return ve.ValidateName("state")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("state")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineResponse) contextValidateVpn(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Vpn != nil {
+		if err := m.Vpn.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vpn")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vpn")
 			}
 			return err
 		}

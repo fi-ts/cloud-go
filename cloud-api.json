@@ -743,6 +743,9 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "vpn": {
+          "$ref": "#/definitions/models.V1MachineVPN"
         }
       },
       "required": [
@@ -784,11 +787,15 @@
         },
         "auth_key": {
           "type": "string"
+        },
+        "connected": {
+          "type": "boolean"
         }
       },
       "required": [
         "address",
-        "auth_key"
+        "auth_key",
+        "connected"
       ]
     },
     "models.V1PartitionBootConfiguration": {
