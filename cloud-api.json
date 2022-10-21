@@ -1139,11 +1139,15 @@
         },
         "SSHKeyPair": {
           "$ref": "#/definitions/v1.SSHKeyPair"
+        },
+        "VPN": {
+          "$ref": "#/definitions/v1.VPN"
         }
       },
       "required": [
         "Kubeconfig",
-        "SSHKeyPair"
+        "SSHKeyPair",
+        "VPN"
       ]
     },
     "v1.ClusterFeatures": {
@@ -4377,6 +4381,20 @@
           "type": "string"
         }
       }
+    },
+    "v1.VPN": {
+      "properties": {
+        "Address": {
+          "type": "string"
+        },
+        "AuthKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Address",
+        "AuthKey"
+      ]
     },
     "v1.VolumeFindRequest": {
       "properties": {

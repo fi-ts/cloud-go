@@ -26,6 +26,10 @@ type V1ClusterCredentialsResponse struct {
 	// SSH key pair
 	// Required: true
 	SSHKeyPair *V1SSHKeyPair `json:"SSHKeyPair"`
+
+	// v p n
+	// Required: true
+	VPN *V1VPN `json:"VPN"`
 }
 
 // Validate validates this v1 cluster credentials response
@@ -37,6 +41,10 @@ func (m *V1ClusterCredentialsResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSSHKeyPair(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVPN(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -75,11 +83,35 @@ func (m *V1ClusterCredentialsResponse) validateSSHKeyPair(formats strfmt.Registr
 	return nil
 }
 
+func (m *V1ClusterCredentialsResponse) validateVPN(formats strfmt.Registry) error {
+
+	if err := validate.Required("VPN", "body", m.VPN); err != nil {
+		return err
+	}
+
+	if m.VPN != nil {
+		if err := m.VPN.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("VPN")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("VPN")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this v1 cluster credentials response based on the context it is used
 func (m *V1ClusterCredentialsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateSSHKeyPair(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVPN(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -97,6 +129,22 @@ func (m *V1ClusterCredentialsResponse) contextValidateSSHKeyPair(ctx context.Con
 				return ve.ValidateName("SSHKeyPair")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("SSHKeyPair")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCredentialsResponse) contextValidateVPN(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VPN != nil {
+		if err := m.VPN.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("VPN")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("VPN")
 			}
 			return err
 		}
