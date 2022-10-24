@@ -743,9 +743,6 @@
             "type": "string"
           },
           "type": "array"
-        },
-        "vpn": {
-          "$ref": "#/definitions/models.V1MachineVPN"
         }
       },
       "required": [
