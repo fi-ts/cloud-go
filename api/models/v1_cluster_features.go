@@ -19,6 +19,10 @@ import (
 // swagger:model v1.ClusterFeatures
 type V1ClusterFeatures struct {
 
+	// duros storage encryption
+	// Required: true
+	DurosStorageEncryption *string `json:"DurosStorageEncryption"`
+
 	// log accepted connections
 	// Required: true
 	LogAcceptedConnections *string `json:"LogAcceptedConnections"`
@@ -32,6 +36,10 @@ type V1ClusterFeatures struct {
 func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDurosStorageEncryption(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLogAcceptedConnections(formats); err != nil {
 		res = append(res, err)
 	}
@@ -43,6 +51,15 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterFeatures) validateDurosStorageEncryption(formats strfmt.Registry) error {
+
+	if err := validate.Required("DurosStorageEncryption", "body", m.DurosStorageEncryption); err != nil {
+		return err
+	}
+
 	return nil
 }
 
