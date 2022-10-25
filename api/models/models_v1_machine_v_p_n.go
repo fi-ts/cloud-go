@@ -26,6 +26,10 @@ type ModelsV1MachineVPN struct {
 	// auth key
 	// Required: true
 	AuthKey *string `json:"auth_key"`
+
+	// connected
+	// Required: true
+	Connected *bool `json:"connected"`
 }
 
 // Validate validates this models v1 machine v p n
@@ -37,6 +41,10 @@ func (m *ModelsV1MachineVPN) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAuthKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateConnected(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -58,6 +66,15 @@ func (m *ModelsV1MachineVPN) validateAddress(formats strfmt.Registry) error {
 func (m *ModelsV1MachineVPN) validateAuthKey(formats strfmt.Registry) error {
 
 	if err := validate.Required("auth_key", "body", m.AuthKey); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineVPN) validateConnected(formats strfmt.Registry) error {
+
+	if err := validate.Required("connected", "body", m.Connected); err != nil {
 		return err
 	}
 
