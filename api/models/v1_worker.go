@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -64,6 +65,10 @@ type V1Worker struct {
 	// name
 	// Required: true
 	Name *string `json:"Name"`
+
+	// taints
+	// Required: true
+	Taints []*V1Taint `json:"Taints"`
 }
 
 // Validate validates this v1 worker
@@ -107,6 +112,10 @@ func (m *V1Worker) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTaints(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -217,11 +226,42 @@ func (m *V1Worker) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1Worker) validateTaints(formats strfmt.Registry) error {
+
+	if err := validate.Required("Taints", "body", m.Taints); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Taints); i++ {
+		if swag.IsZero(m.Taints[i]) { // not required
+			continue
+		}
+
+		if m.Taints[i] != nil {
+			if err := m.Taints[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("Taints" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("Taints" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this v1 worker based on the context it is used
 func (m *V1Worker) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateMachineImage(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTaints(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -242,6 +282,26 @@ func (m *V1Worker) contextValidateMachineImage(ctx context.Context, formats strf
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1Worker) contextValidateTaints(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Taints); i++ {
+
+		if m.Taints[i] != nil {
+			if err := m.Taints[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("Taints" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("Taints" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
