@@ -46,7 +46,7 @@ type V1ShootConstraints struct {
 
 	// the list of available networks for cluster creation
 	// Required: true
-	Networks []string `json:"networks"`
+	Networks []*V1Network `json:"networks"`
 
 	// the list of available partitions
 	// Required: true
@@ -199,6 +199,24 @@ func (m *V1ShootConstraints) validateNetworks(formats strfmt.Registry) error {
 		return err
 	}
 
+	for i := 0; i < len(m.Networks); i++ {
+		if swag.IsZero(m.Networks[i]) { // not required
+			continue
+		}
+
+		if m.Networks[i] != nil {
+			if err := m.Networks[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("networks" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("networks" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -229,6 +247,10 @@ func (m *V1ShootConstraints) ContextValidate(ctx context.Context, formats strfmt
 	}
 
 	if err := m.contextValidateMachineImages(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNetworks(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -268,6 +290,26 @@ func (m *V1ShootConstraints) contextValidateMachineImages(ctx context.Context, f
 					return ve.ValidateName("machine_images" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("machine_images" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *V1ShootConstraints) contextValidateNetworks(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Networks); i++ {
+
+		if m.Networks[i] != nil {
+			if err := m.Networks[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("networks" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("networks" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
