@@ -21,79 +21,79 @@ type V1VolumeResponse struct {
 
 	// connected hosts
 	// Required: true
-	ConnectedHosts []string `json:"ConnectedHosts"`
+	ConnectedHosts []string `json:"ConnectedHosts" yaml:"ConnectedHosts"`
 
 	// node IP list
 	// Required: true
-	NodeIPList []string `json:"NodeIPList"`
+	NodeIPList []string `json:"NodeIPList" yaml:"NodeIPList"`
 
 	// partition ID
 	// Required: true
-	PartitionID *string `json:"PartitionID"`
+	PartitionID *string `json:"PartitionID" yaml:"PartitionID"`
 
 	// primary node UUID
 	// Required: true
-	PrimaryNodeUUID *string `json:"PrimaryNodeUUID"`
+	PrimaryNodeUUID *string `json:"PrimaryNodeUUID" yaml:"PrimaryNodeUUID"`
 
 	// project ID
 	// Required: true
-	ProjectID *string `json:"ProjectID"`
+	ProjectID *string `json:"ProjectID" yaml:"ProjectID"`
 
 	// protection state
 	// Required: true
-	ProtectionState *string `json:"ProtectionState"`
+	ProtectionState *string `json:"ProtectionState" yaml:"ProtectionState"`
 
 	// qos policy name
 	// Required: true
-	QosPolicyName *string `json:"QosPolicyName"`
+	QosPolicyName *string `json:"QosPolicyName" yaml:"QosPolicyName"`
 
 	// qos policy UUID
 	// Required: true
-	QosPolicyUUID *string `json:"QosPolicyUUID"`
+	QosPolicyUUID *string `json:"QosPolicyUUID" yaml:"QosPolicyUUID"`
 
 	// rebuild progress
 	// Required: true
-	RebuildProgress *string `json:"RebuildProgress"`
+	RebuildProgress *string `json:"RebuildProgress" yaml:"RebuildProgress"`
 
 	// replica count
 	// Required: true
-	ReplicaCount *int64 `json:"ReplicaCount"`
+	ReplicaCount *int64 `json:"ReplicaCount" yaml:"ReplicaCount"`
 
 	// size
 	// Required: true
-	Size *int64 `json:"Size"`
+	Size *int64 `json:"Size" yaml:"Size"`
 
 	// source snapshot UUID
 	// Required: true
-	SourceSnapshotUUID *string `json:"SourceSnapshotUUID"`
+	SourceSnapshotUUID *string `json:"SourceSnapshotUUID" yaml:"SourceSnapshotUUID"`
 
 	// state
 	// Required: true
-	State *string `json:"State"`
+	State *string `json:"State" yaml:"State"`
 
 	// statistics
 	// Required: true
-	Statistics *V1VolumeStatistics `json:"Statistics"`
+	Statistics *V1VolumeStatistics `json:"Statistics" yaml:"Statistics"`
 
 	// storage class
 	// Required: true
-	StorageClass *string `json:"StorageClass"`
+	StorageClass *string `json:"StorageClass" yaml:"StorageClass"`
 
 	// tenant ID
 	// Required: true
-	TenantID *string `json:"TenantID"`
+	TenantID *string `json:"TenantID" yaml:"TenantID"`
 
 	// volume handle
 	// Required: true
-	VolumeHandle *string `json:"VolumeHandle"`
+	VolumeHandle *string `json:"VolumeHandle" yaml:"VolumeHandle"`
 
 	// volume ID
 	// Required: true
-	VolumeID *string `json:"VolumeID"`
+	VolumeID *string `json:"VolumeID" yaml:"VolumeID"`
 
 	// volume name
 	// Required: true
-	VolumeName *string `json:"VolumeName"`
+	VolumeName *string `json:"VolumeName" yaml:"VolumeName"`
 }
 
 // Validate validates this v1 volume response

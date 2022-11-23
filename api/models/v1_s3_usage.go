@@ -21,69 +21,69 @@ type V1S3Usage struct {
 
 	// the bucket id of this s3 bucket
 	// Required: true
-	Bucketid *string `json:"bucketid"`
+	Bucketid *string `json:"bucketid" yaml:"bucketid"`
 
 	// the bucket name of this s3 bucket
 	// Required: true
-	Bucketname *string `json:"bucketname"`
+	Bucketname *string `json:"bucketname" yaml:"bucketname"`
 
 	// the contract number attached to this entity
 	// Required: true
-	Contract *string `json:"contract"`
+	Contract *string `json:"contract" yaml:"contract"`
 
 	// the last reported number of objects of this s3 bucket
 	// Required: true
-	Currentnumberofobjects *string `json:"currentnumberofobjects"`
+	Currentnumberofobjects *string `json:"currentnumberofobjects" yaml:"currentnumberofobjects"`
 
 	// the last reported size of this s3 bucket
 	// Required: true
-	Currentsize *string `json:"currentsize"`
+	Currentsize *string `json:"currentsize" yaml:"currentsize"`
 
 	// the debtor id attached to this entity
 	// Required: true
-	Debtorid *string `json:"debtorid"`
+	Debtorid *string `json:"debtorid" yaml:"debtorid"`
 
 	// the end time of this s3 bucket
 	// Required: true
 	// Format: date-time
-	End *strfmt.DateTime `json:"end"`
+	End *strfmt.DateTime `json:"end" yaml:"end"`
 
 	// the duration that this s3 bucket is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the partition of this s3 bucket
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// the project id of this entity
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the project name of this entity
 	// Required: true
-	Projectname *string `json:"projectname"`
+	Projectname *string `json:"projectname" yaml:"projectname"`
 
 	// the start time of this s3 bucket
 	// Required: true
 	// Format: date-time
-	Start *strfmt.DateTime `json:"start"`
+	Start *strfmt.DateTime `json:"start" yaml:"start"`
 
 	// the storage seconds of this s3 bucket (byte*s)
 	// Required: true
-	Storageseconds *string `json:"storageseconds"`
+	Storageseconds *string `json:"storageseconds" yaml:"storageseconds"`
 
 	// the tenant of this entity
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 
 	// the tenant name of this entity
 	// Required: true
-	Tenantname *string `json:"tenantname"`
+	Tenantname *string `json:"tenantname" yaml:"tenantname"`
 
 	// the user name of this s3 bucket
 	// Required: true
-	User *string `json:"user"`
+	User *string `json:"user" yaml:"user"`
 }
 
 // Validate validates this v1 s3 usage

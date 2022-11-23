@@ -19,40 +19,40 @@ import (
 type V1PostgresCreateRequest struct {
 
 	// access list
-	AccessList *V1AccessList `json:"accessList,omitempty"`
+	AccessList *V1AccessList `json:"accessList,omitempty" yaml:"accessList,omitempty"`
 
 	// audit logs
-	AuditLogs bool `json:"auditLogs,omitempty"`
+	AuditLogs bool `json:"auditLogs,omitempty" yaml:"auditLogs,omitempty"`
 
 	// backup
-	Backup string `json:"backup,omitempty"`
+	Backup string `json:"backup,omitempty" yaml:"backup,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// labels
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" yaml:"labels,omitempty"`
 
 	// maintenance
-	Maintenance []string `json:"maintenance"`
+	Maintenance []string `json:"maintenance" yaml:"maintenance"`
 
 	// number of instances
-	NumberOfInstances int32 `json:"numberOfInstances,omitempty"`
+	NumberOfInstances int32 `json:"numberOfInstances,omitempty" yaml:"numberOfInstances,omitempty"`
 
 	// partition ID
-	PartitionID string `json:"partitionID,omitempty"`
+	PartitionID string `json:"partitionID,omitempty" yaml:"partitionID,omitempty"`
 
 	// postgres params
-	PostgresParams map[string]string `json:"postgresParams,omitempty"`
+	PostgresParams map[string]string `json:"postgresParams,omitempty" yaml:"postgresParams,omitempty"`
 
 	// project ID
-	ProjectID string `json:"projectID,omitempty"`
+	ProjectID string `json:"projectID,omitempty" yaml:"projectID,omitempty"`
 
 	// size
-	Size *V1PostgresSize `json:"size,omitempty"`
+	Size *V1PostgresSize `json:"size,omitempty" yaml:"size,omitempty"`
 
 	// version
-	Version string `json:"version,omitempty"`
+	Version string `json:"version,omitempty" yaml:"version,omitempty"`
 }
 
 // Validate validates this v1 postgres create request

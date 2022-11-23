@@ -22,15 +22,15 @@ type ModelsV1MachineNic struct {
 
 	// mac
 	// Required: true
-	Mac *string `json:"mac"`
+	Mac *string `json:"mac" yaml:"mac"`
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// neighbors
 	// Required: true
-	Neighbors []*ModelsV1MachineNic `json:"neighbors"`
+	Neighbors []*ModelsV1MachineNic `json:"neighbors" yaml:"neighbors"`
 }
 
 // Validate validates this models v1 machine nic

@@ -18,13 +18,13 @@ import (
 type V1PostgresSize struct {
 
 	// cpu
-	CPU string `json:"cpu,omitempty"`
+	CPU string `json:"cpu,omitempty" yaml:"cpu,omitempty"`
 
 	// shared buffer
-	SharedBuffer string `json:"sharedBuffer,omitempty"`
+	SharedBuffer string `json:"sharedBuffer,omitempty" yaml:"sharedBuffer,omitempty"`
 
 	// storage size
-	StorageSize string `json:"storageSize,omitempty"`
+	StorageSize string `json:"storageSize,omitempty" yaml:"storageSize,omitempty"`
 }
 
 // Validate validates this v1 postgres size

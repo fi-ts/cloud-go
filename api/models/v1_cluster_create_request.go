@@ -22,81 +22,81 @@ type V1ClusterCreateRequest struct {
 
 	// additional networks
 	// Required: true
-	AdditionalNetworks []string `json:"AdditionalNetworks"`
+	AdditionalNetworks []string `json:"AdditionalNetworks" yaml:"AdditionalNetworks"`
 
 	// audit
 	// Required: true
-	Audit *V1Audit `json:"Audit"`
+	Audit *V1Audit `json:"Audit" yaml:"Audit"`
 
 	// cluster features
 	// Required: true
-	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures"`
+	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures" yaml:"ClusterFeatures"`
 
 	// custom default storage class
 	// Required: true
-	CustomDefaultStorageClass *V1CustomDefaultStorageClass `json:"CustomDefaultStorageClass"`
+	CustomDefaultStorageClass *V1CustomDefaultStorageClass `json:"CustomDefaultStorageClass" yaml:"CustomDefaultStorageClass"`
 
 	// description
 	// Required: true
-	Description *string `json:"Description"`
+	Description *string `json:"Description" yaml:"Description"`
 
 	// egress rules
 	// Required: true
-	EgressRules []*V1EgressRule `json:"EgressRules"`
+	EgressRules []*V1EgressRule `json:"EgressRules" yaml:"EgressRules"`
 
 	// firewall controller version
 	// Required: true
-	FirewallControllerVersion *string `json:"FirewallControllerVersion"`
+	FirewallControllerVersion *string `json:"FirewallControllerVersion" yaml:"FirewallControllerVersion"`
 
 	// firewall image
 	// Required: true
-	FirewallImage *string `json:"FirewallImage"`
+	FirewallImage *string `json:"FirewallImage" yaml:"FirewallImage"`
 
 	// firewall size
 	// Required: true
-	FirewallSize *string `json:"FirewallSize"`
+	FirewallSize *string `json:"FirewallSize" yaml:"FirewallSize"`
 
 	// kubernetes
 	// Required: true
-	Kubernetes *V1Kubernetes `json:"Kubernetes"`
+	Kubernetes *V1Kubernetes `json:"Kubernetes" yaml:"Kubernetes"`
 
 	// labels
 	// Required: true
-	Labels map[string]string `json:"Labels"`
+	Labels map[string]string `json:"Labels" yaml:"Labels"`
 
 	// maintenance
 	// Required: true
-	Maintenance *V1Maintenance `json:"Maintenance"`
+	Maintenance *V1Maintenance `json:"Maintenance" yaml:"Maintenance"`
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 
 	// partition ID
 	// Required: true
-	PartitionID *string `json:"PartitionID"`
+	PartitionID *string `json:"PartitionID" yaml:"PartitionID"`
 
 	// project ID
 	// Required: true
-	ProjectID *string `json:"ProjectID"`
+	ProjectID *string `json:"ProjectID" yaml:"ProjectID"`
 
 	// purpose
 	// Required: true
-	Purpose *string `json:"Purpose"`
+	Purpose *string `json:"Purpose" yaml:"Purpose"`
 
 	// tenant
 	// Required: true
-	Tenant *string `json:"Tenant"`
+	Tenant *string `json:"Tenant" yaml:"Tenant"`
 
 	// workers
 	// Required: true
-	Workers []*V1Worker `json:"Workers"`
+	Workers []*V1Worker `json:"Workers" yaml:"Workers"`
 
 	// cni
-	Cni string `json:"cni,omitempty"`
+	Cni string `json:"cni,omitempty" yaml:"cni,omitempty"`
 
 	// seed name on which the cluster will be scheduled
-	SeedName string `json:"seedName,omitempty"`
+	SeedName string `json:"seedName,omitempty" yaml:"seedName,omitempty"`
 }
 
 // Validate validates this v1 cluster create request

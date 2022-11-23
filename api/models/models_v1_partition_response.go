@@ -21,29 +21,29 @@ type ModelsV1PartitionResponse struct {
 
 	// bootconfig
 	// Required: true
-	Bootconfig *ModelsV1PartitionBootConfiguration `json:"bootconfig"`
+	Bootconfig *ModelsV1PartitionBootConfiguration `json:"bootconfig" yaml:"bootconfig"`
 
 	// changed
-	Changed string `json:"changed,omitempty"`
+	Changed string `json:"changed,omitempty" yaml:"changed,omitempty"`
 
 	// created
-	Created string `json:"created,omitempty"`
+	Created string `json:"created,omitempty" yaml:"created,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// mgmtserviceaddress
-	Mgmtserviceaddress string `json:"mgmtserviceaddress,omitempty"`
+	Mgmtserviceaddress string `json:"mgmtserviceaddress,omitempty" yaml:"mgmtserviceaddress,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// privatenetworkprefixlength
-	Privatenetworkprefixlength int32 `json:"privatenetworkprefixlength,omitempty"`
+	Privatenetworkprefixlength int32 `json:"privatenetworkprefixlength,omitempty" yaml:"privatenetworkprefixlength,omitempty"`
 }
 
 // Validate validates this models v1 partition response

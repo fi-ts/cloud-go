@@ -18,13 +18,13 @@ import (
 type V1PostgresBackupConfigUpdateRequest struct {
 
 	// id
-	ID string `json:"id,omitempty"`
+	ID string `json:"id,omitempty" yaml:"id,omitempty"`
 
 	// retention
-	Retention int32 `json:"retention,omitempty"`
+	Retention int32 `json:"retention,omitempty" yaml:"retention,omitempty"`
 
 	// schedule
-	Schedule string `json:"schedule,omitempty"`
+	Schedule string `json:"schedule,omitempty" yaml:"schedule,omitempty"`
 }
 
 // Validate validates this v1 postgres backup config update request

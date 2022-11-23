@@ -18,10 +18,10 @@ import (
 type V1Restore struct {
 
 	// postgres ID
-	PostgresID string `json:"postgresID,omitempty"`
+	PostgresID string `json:"postgresID,omitempty" yaml:"postgresID,omitempty"`
 
 	// timestamp
-	Timestamp string `json:"timestamp,omitempty"`
+	Timestamp string `json:"timestamp,omitempty" yaml:"timestamp,omitempty"`
 }
 
 // Validate validates this v1 restore

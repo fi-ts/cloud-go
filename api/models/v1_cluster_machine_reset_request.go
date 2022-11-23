@@ -21,7 +21,7 @@ type V1ClusterMachineResetRequest struct {
 
 	// uuid of the machine to power reset
 	// Required: true
-	Machineid *string `json:"machineid"`
+	Machineid *string `json:"machineid" yaml:"machineid"`
 }
 
 // Validate validates this v1 cluster machine reset request

@@ -21,23 +21,23 @@ type ModelsV1Raid struct {
 
 	// arrayname
 	// Required: true
-	Arrayname *string `json:"arrayname"`
+	Arrayname *string `json:"arrayname" yaml:"arrayname"`
 
 	// createoptions
 	// Required: true
-	Createoptions []string `json:"createoptions"`
+	Createoptions []string `json:"createoptions" yaml:"createoptions"`
 
 	// devices
 	// Required: true
-	Devices []string `json:"devices"`
+	Devices []string `json:"devices" yaml:"devices"`
 
 	// level
 	// Required: true
-	Level *string `json:"level"`
+	Level *string `json:"level" yaml:"level"`
 
 	// spares
 	// Required: true
-	Spares *int32 `json:"spares"`
+	Spares *int32 `json:"spares" yaml:"spares"`
 }
 
 // Validate validates this models v1 raid

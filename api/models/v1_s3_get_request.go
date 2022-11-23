@@ -21,19 +21,19 @@ type V1S3GetRequest struct {
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// partition
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// project
 	// Required: true
-	Project *string `json:"project"`
+	Project *string `json:"project" yaml:"project"`
 
 	// tenant
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 }
 
 // Validate validates this v1 s3 get request

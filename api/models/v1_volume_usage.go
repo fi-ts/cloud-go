@@ -21,77 +21,77 @@ type V1VolumeUsage struct {
 
 	// accounting annotations present on the last accounting report of this volume
 	// Required: true
-	Annotations []string `json:"annotations"`
+	Annotations []string `json:"annotations" yaml:"annotations"`
 
 	// the capacity seconds of this volume (byte*s)
 	// Required: true
-	Capacityseconds *string `json:"capacityseconds"`
+	Capacityseconds *string `json:"capacityseconds" yaml:"capacityseconds"`
 
 	// the class of this volume
 	// Required: true
-	Class *string `json:"class"`
+	Class *string `json:"class" yaml:"class"`
 
 	// the cluster id of this volume
 	// Required: true
-	Clusterid *string `json:"clusterid"`
+	Clusterid *string `json:"clusterid" yaml:"clusterid"`
 
 	// the cluster name of this volume
 	// Required: true
-	Clustername *string `json:"clustername"`
+	Clustername *string `json:"clustername" yaml:"clustername"`
 
 	// the contract number attached to this entity
 	// Required: true
-	Contract *string `json:"contract"`
+	Contract *string `json:"contract" yaml:"contract"`
 
 	// the debtor id attached to this entity
 	// Required: true
-	Debtorid *string `json:"debtorid"`
+	Debtorid *string `json:"debtorid" yaml:"debtorid"`
 
 	// the end time of this volume
 	// Required: true
 	// Format: date-time
-	End *strfmt.DateTime `json:"end"`
+	End *strfmt.DateTime `json:"end" yaml:"end"`
 
 	// the duration that this volume is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the name of this volume
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// the partition of this volume
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// the project id of this entity
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the project name of this entity
 	// Required: true
-	Projectname *string `json:"projectname"`
+	Projectname *string `json:"projectname" yaml:"projectname"`
 
 	// the start time of this volume
 	// Required: true
 	// Format: date-time
-	Start *strfmt.DateTime `json:"start"`
+	Start *strfmt.DateTime `json:"start" yaml:"start"`
 
 	// the tenant of this entity
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 
 	// the tenant name of this entity
 	// Required: true
-	Tenantname *string `json:"tenantname"`
+	Tenantname *string `json:"tenantname" yaml:"tenantname"`
 
 	// the type of this volume
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" yaml:"type"`
 
 	// the uuid of this volume
 	// Required: true
-	UUID *string `json:"uuid"`
+	UUID *string `json:"uuid" yaml:"uuid"`
 }
 
 // Validate validates this v1 volume usage

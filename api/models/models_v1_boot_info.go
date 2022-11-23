@@ -21,31 +21,31 @@ type ModelsV1BootInfo struct {
 
 	// bootloaderid
 	// Required: true
-	Bootloaderid *string `json:"bootloaderid"`
+	Bootloaderid *string `json:"bootloaderid" yaml:"bootloaderid"`
 
 	// cmdline
 	// Required: true
-	Cmdline *string `json:"cmdline"`
+	Cmdline *string `json:"cmdline" yaml:"cmdline"`
 
 	// image id
 	// Required: true
-	ImageID *string `json:"image_id"`
+	ImageID *string `json:"image_id" yaml:"image_id"`
 
 	// initrd
 	// Required: true
-	Initrd *string `json:"initrd"`
+	Initrd *string `json:"initrd" yaml:"initrd"`
 
 	// kernel
 	// Required: true
-	Kernel *string `json:"kernel"`
+	Kernel *string `json:"kernel" yaml:"kernel"`
 
 	// os partition
 	// Required: true
-	OsPartition *string `json:"os_partition"`
+	OsPartition *string `json:"os_partition" yaml:"os_partition"`
 
 	// primary disk
 	// Required: true
-	PrimaryDisk *string `json:"primary_disk"`
+	PrimaryDisk *string `json:"primary_disk" yaml:"primary_disk"`
 }
 
 // Validate validates this models v1 boot info

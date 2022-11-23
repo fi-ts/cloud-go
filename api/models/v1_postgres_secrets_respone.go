@@ -20,7 +20,7 @@ import (
 type V1PostgresSecretsRespone struct {
 
 	// user secret
-	UserSecret []*V1UserSecret `json:"userSecret"`
+	UserSecret []*V1UserSecret `json:"userSecret" yaml:"userSecret"`
 }
 
 // Validate validates this v1 postgres secrets respone

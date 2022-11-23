@@ -21,19 +21,19 @@ type V1SnapshotFindRequest struct {
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 
 	// partition ID
 	// Required: true
-	PartitionID *string `json:"PartitionID"`
+	PartitionID *string `json:"PartitionID" yaml:"PartitionID"`
 
 	// project ID
 	// Required: true
-	ProjectID *string `json:"ProjectID"`
+	ProjectID *string `json:"ProjectID" yaml:"ProjectID"`
 
 	// snapshot ID
 	// Required: true
-	SnapshotID *string `json:"SnapshotID"`
+	SnapshotID *string `json:"SnapshotID" yaml:"SnapshotID"`
 }
 
 // Validate validates this v1 snapshot find request

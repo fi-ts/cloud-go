@@ -21,11 +21,11 @@ type V1SSHKeyPair struct {
 
 	// private key
 	// Required: true
-	PrivateKey *string `json:"PrivateKey"`
+	PrivateKey *string `json:"PrivateKey" yaml:"PrivateKey"`
 
 	// public key
 	// Required: true
-	PublicKey *string `json:"PublicKey"`
+	PublicKey *string `json:"PublicKey" yaml:"PublicKey"`
 }
 
 // Validate validates this v1 SSH key pair

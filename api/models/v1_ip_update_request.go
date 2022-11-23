@@ -20,22 +20,22 @@ import (
 type V1IPUpdateRequest struct {
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// ipaddress
 	// Required: true
-	Ipaddress *string `json:"ipaddress"`
+	Ipaddress *string `json:"ipaddress" yaml:"ipaddress"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// tags
 	// Required: true
-	Tags []string `json:"tags"`
+	Tags []string `json:"tags" yaml:"tags"`
 
 	// type
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" yaml:"type"`
 }
 
 // Validate validates this v1 IP update request

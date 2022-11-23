@@ -21,10 +21,10 @@ type V1PostgresVersion struct {
 
 	// expiration date
 	// Format: date-time
-	ExpirationDate strfmt.DateTime `json:"expirationDate,omitempty"`
+	ExpirationDate strfmt.DateTime `json:"expirationDate,omitempty" yaml:"expirationDate,omitempty"`
 
 	// version
-	Version string `json:"version,omitempty"`
+	Version string `json:"version,omitempty" yaml:"version,omitempty"`
 }
 
 // Validate validates this v1 postgres version

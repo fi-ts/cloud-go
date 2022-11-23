@@ -18,10 +18,10 @@ import (
 type V1UserSecret struct {
 
 	// password
-	Password string `json:"password,omitempty"`
+	Password string `json:"password,omitempty" yaml:"password,omitempty"`
 
 	// username
-	Username string `json:"username,omitempty"`
+	Username string `json:"username,omitempty" yaml:"username,omitempty"`
 }
 
 // Validate validates this v1 user secret

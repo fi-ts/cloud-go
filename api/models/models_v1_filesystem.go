@@ -21,25 +21,25 @@ type ModelsV1Filesystem struct {
 
 	// createoptions
 	// Required: true
-	Createoptions []string `json:"createoptions"`
+	Createoptions []string `json:"createoptions" yaml:"createoptions"`
 
 	// device
 	// Required: true
-	Device *string `json:"device"`
+	Device *string `json:"device" yaml:"device"`
 
 	// format
 	// Required: true
-	Format *string `json:"format"`
+	Format *string `json:"format" yaml:"format"`
 
 	// label
-	Label string `json:"label,omitempty"`
+	Label string `json:"label,omitempty" yaml:"label,omitempty"`
 
 	// mountoptions
 	// Required: true
-	Mountoptions []string `json:"mountoptions"`
+	Mountoptions []string `json:"mountoptions" yaml:"mountoptions"`
 
 	// path
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" yaml:"path,omitempty"`
 }
 
 // Validate validates this models v1 filesystem

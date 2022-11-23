@@ -21,15 +21,15 @@ type ModelsV1MachineVPN struct {
 
 	// address
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address" yaml:"address"`
 
 	// auth key
 	// Required: true
-	AuthKey *string `json:"auth_key"`
+	AuthKey *string `json:"auth_key" yaml:"auth_key"`
 
 	// connected
 	// Required: true
-	Connected *bool `json:"connected"`
+	Connected *bool `json:"connected" yaml:"connected"`
 }
 
 // Validate validates this models v1 machine v p n

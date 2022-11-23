@@ -21,49 +21,49 @@ type V1Worker struct {
 
 	// annotations
 	// Required: true
-	Annotations map[string]string `json:"Annotations"`
+	Annotations map[string]string `json:"Annotations" yaml:"Annotations"`
 
 	// c r i
 	// Required: true
-	CRI *string `json:"CRI"`
+	CRI *string `json:"CRI" yaml:"CRI"`
 
 	// drain timeout
-	DrainTimeout int64 `json:"DrainTimeout,omitempty"`
+	DrainTimeout int64 `json:"DrainTimeout,omitempty" yaml:"DrainTimeout,omitempty"`
 
 	// health timeout
-	HealthTimeout int64 `json:"HealthTimeout,omitempty"`
+	HealthTimeout int64 `json:"HealthTimeout,omitempty" yaml:"HealthTimeout,omitempty"`
 
 	// labels
 	// Required: true
-	Labels map[string]string `json:"Labels"`
+	Labels map[string]string `json:"Labels" yaml:"Labels"`
 
 	// machine image
 	// Required: true
-	MachineImage *V1MachineImage `json:"MachineImage"`
+	MachineImage *V1MachineImage `json:"MachineImage" yaml:"MachineImage"`
 
 	// machine type
 	// Required: true
-	MachineType *string `json:"MachineType"`
+	MachineType *string `json:"MachineType" yaml:"MachineType"`
 
 	// max surge
 	// Required: true
-	MaxSurge *string `json:"MaxSurge"`
+	MaxSurge *string `json:"MaxSurge" yaml:"MaxSurge"`
 
 	// max unavailable
 	// Required: true
-	MaxUnavailable *string `json:"MaxUnavailable"`
+	MaxUnavailable *string `json:"MaxUnavailable" yaml:"MaxUnavailable"`
 
 	// maximum
 	// Required: true
-	Maximum *int32 `json:"Maximum"`
+	Maximum *int32 `json:"Maximum" yaml:"Maximum"`
 
 	// minimum
 	// Required: true
-	Minimum *int32 `json:"Minimum"`
+	Minimum *int32 `json:"Minimum" yaml:"Minimum"`
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 }
 
 // Validate validates this v1 worker

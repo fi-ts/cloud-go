@@ -21,15 +21,15 @@ type V1ClusterMonitoringSecretResponse struct {
 
 	// endpoint
 	// Required: true
-	Endpoint *string `json:"Endpoint"`
+	Endpoint *string `json:"Endpoint" yaml:"Endpoint"`
 
 	// password
 	// Required: true
-	Password *string `json:"Password"`
+	Password *string `json:"Password" yaml:"Password"`
 
 	// user
 	// Required: true
-	User *string `json:"User"`
+	User *string `json:"User" yaml:"User"`
 }
 
 // Validate validates this v1 cluster monitoring secret response

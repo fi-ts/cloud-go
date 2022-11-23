@@ -21,47 +21,47 @@ type V1ClusterStatisticsAPI struct {
 
 	// compression ratio
 	// Required: true
-	CompressionRatio *float64 `json:"CompressionRatio"`
+	CompressionRatio *float64 `json:"CompressionRatio" yaml:"CompressionRatio"`
 
 	// effective physical storage
 	// Required: true
-	EffectivePhysicalStorage *int64 `json:"EffectivePhysicalStorage"`
+	EffectivePhysicalStorage *int64 `json:"EffectivePhysicalStorage" yaml:"EffectivePhysicalStorage"`
 
 	// estimated free logical storage
 	// Required: true
-	EstimatedFreeLogicalStorage *int64 `json:"EstimatedFreeLogicalStorage"`
+	EstimatedFreeLogicalStorage *int64 `json:"EstimatedFreeLogicalStorage" yaml:"EstimatedFreeLogicalStorage"`
 
 	// estimated logical storage
 	// Required: true
-	EstimatedLogicalStorage *int64 `json:"EstimatedLogicalStorage"`
+	EstimatedLogicalStorage *int64 `json:"EstimatedLogicalStorage" yaml:"EstimatedLogicalStorage"`
 
 	// free physical storage
 	// Required: true
-	FreePhysicalStorage *int64 `json:"FreePhysicalStorage"`
+	FreePhysicalStorage *int64 `json:"FreePhysicalStorage" yaml:"FreePhysicalStorage"`
 
 	// installed physical storage
 	// Required: true
-	InstalledPhysicalStorage *int64 `json:"InstalledPhysicalStorage"`
+	InstalledPhysicalStorage *int64 `json:"InstalledPhysicalStorage" yaml:"InstalledPhysicalStorage"`
 
 	// logical storage
 	// Required: true
-	LogicalStorage *int64 `json:"LogicalStorage"`
+	LogicalStorage *int64 `json:"LogicalStorage" yaml:"LogicalStorage"`
 
 	// logical used storage
 	// Required: true
-	LogicalUsedStorage *int64 `json:"LogicalUsedStorage"`
+	LogicalUsedStorage *int64 `json:"LogicalUsedStorage" yaml:"LogicalUsedStorage"`
 
 	// managed physical storage
 	// Required: true
-	ManagedPhysicalStorage *int64 `json:"ManagedPhysicalStorage"`
+	ManagedPhysicalStorage *int64 `json:"ManagedPhysicalStorage" yaml:"ManagedPhysicalStorage"`
 
 	// physical used storage
 	// Required: true
-	PhysicalUsedStorage *int64 `json:"PhysicalUsedStorage"`
+	PhysicalUsedStorage *int64 `json:"PhysicalUsedStorage" yaml:"PhysicalUsedStorage"`
 
 	// physical used storage including parity
 	// Required: true
-	PhysicalUsedStorageIncludingParity *int64 `json:"PhysicalUsedStorageIncludingParity"`
+	PhysicalUsedStorageIncludingParity *int64 `json:"PhysicalUsedStorageIncludingParity" yaml:"PhysicalUsedStorageIncludingParity"`
 }
 
 // Validate validates this v1 cluster statistics Api

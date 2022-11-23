@@ -21,23 +21,23 @@ type V1beta1LastOperation struct {
 
 	// description
 	// Required: true
-	Description *string `json:"description"`
+	Description *string `json:"description" yaml:"description"`
 
 	// last update time
 	// Required: true
-	LastUpdateTime *string `json:"lastUpdateTime"`
+	LastUpdateTime *string `json:"lastUpdateTime" yaml:"lastUpdateTime"`
 
 	// progress
 	// Required: true
-	Progress *int32 `json:"progress"`
+	Progress *int32 `json:"progress" yaml:"progress"`
 
 	// state
 	// Required: true
-	State *string `json:"state"`
+	State *string `json:"state" yaml:"state"`
 
 	// type
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type" yaml:"type"`
 }
 
 // Validate validates this v1beta1 last operation

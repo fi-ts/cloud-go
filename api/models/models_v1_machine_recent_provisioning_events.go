@@ -22,21 +22,21 @@ type ModelsV1MachineRecentProvisioningEvents struct {
 
 	// crash loop
 	// Required: true
-	CrashLoop *bool `json:"crash_loop"`
+	CrashLoop *bool `json:"crash_loop" yaml:"crash_loop"`
 
 	// failed machine reclaim
 	// Required: true
-	FailedMachineReclaim *bool `json:"failed_machine_reclaim"`
+	FailedMachineReclaim *bool `json:"failed_machine_reclaim" yaml:"failed_machine_reclaim"`
 
 	// last error event
-	LastErrorEvent *ModelsV1MachineProvisioningEvent `json:"last_error_event,omitempty"`
+	LastErrorEvent *ModelsV1MachineProvisioningEvent `json:"last_error_event,omitempty" yaml:"last_error_event,omitempty"`
 
 	// last event time
-	LastEventTime string `json:"last_event_time,omitempty"`
+	LastEventTime string `json:"last_event_time,omitempty" yaml:"last_event_time,omitempty"`
 
 	// log
 	// Required: true
-	Log []*ModelsV1MachineProvisioningEvent `json:"log"`
+	Log []*ModelsV1MachineProvisioningEvent `json:"log" yaml:"log"`
 }
 
 // Validate validates this models v1 machine recent provisioning events

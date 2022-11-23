@@ -21,11 +21,11 @@ type V1VolumeUsageAccumuluated struct {
 
 	// the accumulated capacity seconds of the volumes in this response (byte*s)
 	// Required: true
-	Capacityseconds *string `json:"capacityseconds"`
+	Capacityseconds *string `json:"capacityseconds" yaml:"capacityseconds"`
 
 	// the duration that this volume is running
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 }
 
 // Validate validates this v1 volume usage accumuluated

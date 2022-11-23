@@ -21,43 +21,43 @@ type ModelsV1MachineNetwork struct {
 
 	// asn
 	// Required: true
-	Asn *int64 `json:"asn"`
+	Asn *int64 `json:"asn" yaml:"asn"`
 
 	// destinationprefixes
 	// Required: true
-	Destinationprefixes []string `json:"destinationprefixes"`
+	Destinationprefixes []string `json:"destinationprefixes" yaml:"destinationprefixes"`
 
 	// ips
 	// Required: true
-	Ips []string `json:"ips"`
+	Ips []string `json:"ips" yaml:"ips"`
 
 	// nat
 	// Required: true
-	Nat *bool `json:"nat"`
+	Nat *bool `json:"nat" yaml:"nat"`
 
 	// networkid
 	// Required: true
-	Networkid *string `json:"networkid"`
+	Networkid *string `json:"networkid" yaml:"networkid"`
 
 	// networktype
 	// Required: true
-	Networktype *string `json:"networktype"`
+	Networktype *string `json:"networktype" yaml:"networktype"`
 
 	// prefixes
 	// Required: true
-	Prefixes []string `json:"prefixes"`
+	Prefixes []string `json:"prefixes" yaml:"prefixes"`
 
 	// private
 	// Required: true
-	Private *bool `json:"private"`
+	Private *bool `json:"private" yaml:"private"`
 
 	// underlay
 	// Required: true
-	Underlay *bool `json:"underlay"`
+	Underlay *bool `json:"underlay" yaml:"underlay"`
 
 	// vrf
 	// Required: true
-	Vrf *int64 `json:"vrf"`
+	Vrf *int64 `json:"vrf" yaml:"vrf"`
 }
 
 // Validate validates this models v1 machine network

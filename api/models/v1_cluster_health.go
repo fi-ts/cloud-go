@@ -21,23 +21,23 @@ type V1ClusterHealth struct {
 
 	// num degraded volumes
 	// Required: true
-	NumDegradedVolumes *int64 `json:"NumDegradedVolumes"`
+	NumDegradedVolumes *int64 `json:"NumDegradedVolumes" yaml:"NumDegradedVolumes"`
 
 	// num inactive nodes
 	// Required: true
-	NumInactiveNodes *int64 `json:"NumInactiveNodes"`
+	NumInactiveNodes *int64 `json:"NumInactiveNodes" yaml:"NumInactiveNodes"`
 
 	// num not available volumes
 	// Required: true
-	NumNotAvailableVolumes *int64 `json:"NumNotAvailableVolumes"`
+	NumNotAvailableVolumes *int64 `json:"NumNotAvailableVolumes" yaml:"NumNotAvailableVolumes"`
 
 	// num read only volumes
 	// Required: true
-	NumReadOnlyVolumes *int64 `json:"NumReadOnlyVolumes"`
+	NumReadOnlyVolumes *int64 `json:"NumReadOnlyVolumes" yaml:"NumReadOnlyVolumes"`
 
 	// state
 	// Required: true
-	State *string `json:"State"`
+	State *string `json:"State" yaml:"State"`
 }
 
 // Validate validates this v1 cluster health

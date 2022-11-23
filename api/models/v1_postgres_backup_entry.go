@@ -21,16 +21,16 @@ type V1PostgresBackupEntry struct {
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// size
 	// Required: true
-	Size *int64 `json:"size"`
+	Size *int64 `json:"size" yaml:"size"`
 
 	// timestamp
 	// Required: true
 	// Format: date-time
-	Timestamp *strfmt.DateTime `json:"timestamp"`
+	Timestamp *strfmt.DateTime `json:"timestamp" yaml:"timestamp"`
 }
 
 // Validate validates this v1 postgres backup entry

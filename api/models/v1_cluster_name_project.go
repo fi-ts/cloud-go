@@ -18,10 +18,10 @@ import (
 type V1ClusterNameProject struct {
 
 	// cluster name
-	ClusterName string `json:"cluster_name,omitempty"`
+	ClusterName string `json:"cluster_name,omitempty" yaml:"cluster_name,omitempty"`
 
 	// generated middle-part of gardener shoot namespace, e.g. 'ps5d42'
-	Project string `json:"project,omitempty"`
+	Project string `json:"project,omitempty" yaml:"project,omitempty"`
 }
 
 // Validate validates this v1 cluster name project

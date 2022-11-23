@@ -20,38 +20,38 @@ import (
 type ModelsV1ImageResponse struct {
 
 	// changed
-	Changed string `json:"changed,omitempty"`
+	Changed string `json:"changed,omitempty" yaml:"changed,omitempty"`
 
 	// classification
-	Classification string `json:"classification,omitempty"`
+	Classification string `json:"classification,omitempty" yaml:"classification,omitempty"`
 
 	// created
-	Created string `json:"created,omitempty"`
+	Created string `json:"created,omitempty" yaml:"created,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// expiration date
 	// Required: true
-	ExpirationDate *string `json:"expirationDate"`
+	ExpirationDate *string `json:"expirationDate" yaml:"expirationDate"`
 
 	// features
 	// Required: true
-	Features []string `json:"features"`
+	Features []string `json:"features" yaml:"features"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// url
-	URL string `json:"url,omitempty"`
+	URL string `json:"url,omitempty" yaml:"url,omitempty"`
 
 	// usedby
 	// Required: true
-	Usedby []string `json:"usedby"`
+	Usedby []string `json:"usedby" yaml:"usedby"`
 }
 
 // Validate validates this models v1 image response

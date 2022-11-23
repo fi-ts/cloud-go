@@ -21,31 +21,31 @@ type V1S3CreateRequest struct {
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// key
 	// Required: true
-	Key *V1S3Key `json:"key"`
+	Key *V1S3Key `json:"key" yaml:"key"`
 
 	// max buckets
 	// Required: true
-	MaxBuckets *int64 `json:"max_buckets"`
+	MaxBuckets *int64 `json:"max_buckets" yaml:"max_buckets"`
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// partition
 	// Required: true
-	Partition *string `json:"partition"`
+	Partition *string `json:"partition" yaml:"partition"`
 
 	// project
 	// Required: true
-	Project *string `json:"project"`
+	Project *string `json:"project" yaml:"project"`
 
 	// tenant
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 }
 
 // Validate validates this v1 s3 create request

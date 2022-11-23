@@ -21,11 +21,11 @@ type V1EgressRule struct {
 
 	// i ps
 	// Required: true
-	IPs []string `json:"IPs"`
+	IPs []string `json:"IPs" yaml:"IPs"`
 
 	// network ID
 	// Required: true
-	NetworkID *string `json:"NetworkID"`
+	NetworkID *string `json:"NetworkID" yaml:"NetworkID"`
 }
 
 // Validate validates this v1 egress rule

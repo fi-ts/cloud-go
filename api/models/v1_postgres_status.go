@@ -19,13 +19,13 @@ import (
 type V1PostgresStatus struct {
 
 	// child reference
-	ChildReference string `json:"childReference,omitempty"`
+	ChildReference string `json:"childReference,omitempty" yaml:"childReference,omitempty"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// socket
-	Socket *V1PostgresSocket `json:"socket,omitempty"`
+	Socket *V1PostgresSocket `json:"socket,omitempty" yaml:"socket,omitempty"`
 }
 
 // Validate validates this v1 postgres status

@@ -18,13 +18,13 @@ import (
 type V1PostgresBackupSecret struct {
 
 	// accesskey
-	Accesskey string `json:"accesskey,omitempty"`
+	Accesskey string `json:"accesskey,omitempty" yaml:"accesskey,omitempty"`
 
 	// s3encryptionkey
-	S3encryptionkey string `json:"s3encryptionkey,omitempty"`
+	S3encryptionkey string `json:"s3encryptionkey,omitempty" yaml:"s3encryptionkey,omitempty"`
 
 	// secretkey
-	Secretkey string `json:"secretkey,omitempty"`
+	Secretkey string `json:"secretkey,omitempty" yaml:"secretkey,omitempty"`
 }
 
 // Validate validates this v1 postgres backup secret

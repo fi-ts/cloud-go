@@ -19,10 +19,10 @@ import (
 type V1MasterdataLookupResponse struct {
 
 	// project
-	Project *V1Project `json:"project,omitempty"`
+	Project *V1Project `json:"project,omitempty" yaml:"project,omitempty"`
 
 	// tenant to which the project belongs
-	Tenant *V1Tenant `json:"tenant,omitempty"`
+	Tenant *V1Tenant `json:"tenant,omitempty" yaml:"tenant,omitempty"`
 }
 
 // Validate validates this v1 masterdata lookup response

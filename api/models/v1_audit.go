@@ -21,11 +21,11 @@ type V1Audit struct {
 
 	// audit to splunk
 	// Required: true
-	AuditToSplunk *bool `json:"AuditToSplunk"`
+	AuditToSplunk *bool `json:"AuditToSplunk" yaml:"AuditToSplunk"`
 
 	// cluster audit
 	// Required: true
-	ClusterAudit *bool `json:"ClusterAudit"`
+	ClusterAudit *bool `json:"ClusterAudit" yaml:"ClusterAudit"`
 }
 
 // Validate validates this v1 audit

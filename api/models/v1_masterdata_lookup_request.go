@@ -19,13 +19,13 @@ import (
 type V1MasterdataLookupRequest struct {
 
 	// lookup by clusterID as returned by cloud-api (e.g. 345abc12-3321-4dbc-8d17-55c6ea4fcb38)
-	ClusterID string `json:"cluster_id,omitempty"`
+	ClusterID string `json:"cluster_id,omitempty" yaml:"cluster_id,omitempty"`
 
 	// lookup by clustername and shoot-project
-	ClusterNameProject *V1ClusterNameProject `json:"cluster_name_project,omitempty"`
+	ClusterNameProject *V1ClusterNameProject `json:"cluster_name_project,omitempty" yaml:"cluster_name_project,omitempty"`
 
 	// lookup at some point in time by projectID as returned by cloud-api (e.g. 10241dd7-a8de-4856-8ac0-b55830b22036)
-	ProjectIDTime *V1ProjectIDTime `json:"project_id_time,omitempty"`
+	ProjectIDTime *V1ProjectIDTime `json:"project_id_time,omitempty" yaml:"project_id_time,omitempty"`
 }
 
 // Validate validates this v1 masterdata lookup request

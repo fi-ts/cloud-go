@@ -21,62 +21,62 @@ import (
 type ModelsV1MachineAllocation struct {
 
 	// boot info
-	BootInfo *ModelsV1BootInfo `json:"boot_info,omitempty"`
+	BootInfo *ModelsV1BootInfo `json:"boot_info,omitempty" yaml:"boot_info,omitempty"`
 
 	// created
 	// Required: true
-	Created *string `json:"created"`
+	Created *string `json:"created" yaml:"created"`
 
 	// creator
 	// Required: true
-	Creator *string `json:"creator"`
+	Creator *string `json:"creator" yaml:"creator"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// filesystemlayout
-	Filesystemlayout *ModelsV1FilesystemLayoutResponse `json:"filesystemlayout,omitempty"`
+	Filesystemlayout *ModelsV1FilesystemLayoutResponse `json:"filesystemlayout,omitempty" yaml:"filesystemlayout,omitempty"`
 
 	// hostname
 	// Required: true
-	Hostname *string `json:"hostname"`
+	Hostname *string `json:"hostname" yaml:"hostname"`
 
 	// image
-	Image *ModelsV1ImageResponse `json:"image,omitempty"`
+	Image *ModelsV1ImageResponse `json:"image,omitempty" yaml:"image,omitempty"`
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// networks
 	// Required: true
-	Networks []*ModelsV1MachineNetwork `json:"networks"`
+	Networks []*ModelsV1MachineNetwork `json:"networks" yaml:"networks"`
 
 	// project
 	// Required: true
-	Project *string `json:"project"`
+	Project *string `json:"project" yaml:"project"`
 
 	// reinstall
 	// Required: true
-	Reinstall *bool `json:"reinstall"`
+	Reinstall *bool `json:"reinstall" yaml:"reinstall"`
 
 	// role
 	// Required: true
-	Role *string `json:"role"`
+	Role *string `json:"role" yaml:"role"`
 
 	// ssh pub keys
 	// Required: true
-	SSHPubKeys []string `json:"ssh_pub_keys"`
+	SSHPubKeys []string `json:"ssh_pub_keys" yaml:"ssh_pub_keys"`
 
 	// succeeded
 	// Required: true
-	Succeeded *bool `json:"succeeded"`
+	Succeeded *bool `json:"succeeded" yaml:"succeeded"`
 
 	// user data
-	UserData string `json:"user_data,omitempty"`
+	UserData string `json:"user_data,omitempty" yaml:"user_data,omitempty"`
 
 	// vpn
-	Vpn *ModelsV1MachineVPN `json:"vpn,omitempty"`
+	Vpn *ModelsV1MachineVPN `json:"vpn,omitempty" yaml:"vpn,omitempty"`
 }
 
 // Validate validates this models v1 machine allocation

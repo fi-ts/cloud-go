@@ -21,11 +21,11 @@ type V1MaintenanceTimeWindow struct {
 
 	// begin
 	// Required: true
-	Begin *string `json:"Begin"`
+	Begin *string `json:"Begin" yaml:"Begin"`
 
 	// end
 	// Required: true
-	End *string `json:"End"`
+	End *string `json:"End" yaml:"End"`
 }
 
 // Validate validates this v1 maintenance time window

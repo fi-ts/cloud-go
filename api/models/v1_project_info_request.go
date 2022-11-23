@@ -22,11 +22,11 @@ type V1ProjectInfoRequest struct {
 	// the start time in the accounting window to look at
 	// Required: true
 	// Format: date-time
-	From *strfmt.DateTime `json:"from"`
+	From *strfmt.DateTime `json:"from" yaml:"from"`
 
 	// the end time in the accounting window to look at (defaults to current system time)
 	// Format: date-time
-	To strfmt.DateTime `json:"to,omitempty"`
+	To strfmt.DateTime `json:"to,omitempty" yaml:"to,omitempty"`
 }
 
 // Validate validates this v1 project info request

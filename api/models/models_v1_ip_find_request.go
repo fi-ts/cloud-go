@@ -20,32 +20,32 @@ import (
 type ModelsV1IPFindRequest struct {
 
 	// allocationuuid
-	Allocationuuid string `json:"allocationuuid,omitempty"`
+	Allocationuuid string `json:"allocationuuid,omitempty" yaml:"allocationuuid,omitempty"`
 
 	// ipaddress
-	Ipaddress string `json:"ipaddress,omitempty"`
+	Ipaddress string `json:"ipaddress,omitempty" yaml:"ipaddress,omitempty"`
 
 	// machineid
-	Machineid string `json:"machineid,omitempty"`
+	Machineid string `json:"machineid,omitempty" yaml:"machineid,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// networkid
-	Networkid string `json:"networkid,omitempty"`
+	Networkid string `json:"networkid,omitempty" yaml:"networkid,omitempty"`
 
 	// networkprefix
-	Networkprefix string `json:"networkprefix,omitempty"`
+	Networkprefix string `json:"networkprefix,omitempty" yaml:"networkprefix,omitempty"`
 
 	// projectid
-	Projectid string `json:"projectid,omitempty"`
+	Projectid string `json:"projectid,omitempty" yaml:"projectid,omitempty"`
 
 	// tags
 	// Required: true
-	Tags []string `json:"tags"`
+	Tags []string `json:"tags" yaml:"tags"`
 
 	// type
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" yaml:"type,omitempty"`
 }
 
 // Validate validates this models v1 IP find request

@@ -21,35 +21,35 @@ type V1ClusterFindRequest struct {
 
 	// ID
 	// Required: true
-	ID *string `json:"ID"`
+	ID *string `json:"ID" yaml:"ID"`
 
 	// labels
 	// Required: true
-	Labels map[string]string `json:"Labels"`
+	Labels map[string]string `json:"Labels" yaml:"Labels"`
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 
 	// partition ID
 	// Required: true
-	PartitionID *string `json:"PartitionID"`
+	PartitionID *string `json:"PartitionID" yaml:"PartitionID"`
 
 	// project ID
 	// Required: true
-	ProjectID *string `json:"ProjectID"`
+	ProjectID *string `json:"ProjectID" yaml:"ProjectID"`
 
 	// purpose
 	// Required: true
-	Purpose *string `json:"Purpose"`
+	Purpose *string `json:"Purpose" yaml:"Purpose"`
 
 	// seed name
 	// Required: true
-	SeedName *string `json:"SeedName"`
+	SeedName *string `json:"SeedName" yaml:"SeedName"`
 
 	// tenant
 	// Required: true
-	Tenant *string `json:"Tenant"`
+	Tenant *string `json:"Tenant" yaml:"Tenant"`
 }
 
 // Validate validates this v1 cluster find request

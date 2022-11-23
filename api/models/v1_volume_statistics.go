@@ -21,15 +21,15 @@ type V1VolumeStatistics struct {
 
 	// compression ratio
 	// Required: true
-	CompressionRatio *float64 `json:"CompressionRatio"`
+	CompressionRatio *float64 `json:"CompressionRatio" yaml:"CompressionRatio"`
 
 	// logical used storage
 	// Required: true
-	LogicalUsedStorage *int64 `json:"LogicalUsedStorage"`
+	LogicalUsedStorage *int64 `json:"LogicalUsedStorage" yaml:"LogicalUsedStorage"`
 
 	// physical used storage
 	// Required: true
-	PhysicalUsedStorage *int64 `json:"PhysicalUsedStorage"`
+	PhysicalUsedStorage *int64 `json:"PhysicalUsedStorage" yaml:"PhysicalUsedStorage"`
 }
 
 // Validate validates this v1 volume statistics

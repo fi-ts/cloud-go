@@ -21,11 +21,11 @@ type V1MachineImage struct {
 
 	// name
 	// Required: true
-	Name *string `json:"Name"`
+	Name *string `json:"Name" yaml:"Name"`
 
 	// version
 	// Required: true
-	Version *string `json:"Version"`
+	Version *string `json:"Version" yaml:"Version"`
 }
 
 // Validate validates this v1 machine image

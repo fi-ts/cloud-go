@@ -21,11 +21,11 @@ type V1MaintenanceAutoUpdate struct {
 
 	// kubernetes version
 	// Required: true
-	KubernetesVersion *bool `json:"KubernetesVersion"`
+	KubernetesVersion *bool `json:"KubernetesVersion" yaml:"KubernetesVersion"`
 
 	// machine image
 	// Required: true
-	MachineImage *bool `json:"MachineImage"`
+	MachineImage *bool `json:"MachineImage" yaml:"MachineImage"`
 }
 
 // Validate validates this v1 maintenance auto update

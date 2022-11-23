@@ -21,15 +21,15 @@ type V1ClusterWorker struct {
 
 	// the machine count of this worker group
 	// Required: true
-	Machinecount *int64 `json:"machinecount"`
+	Machinecount *int64 `json:"machinecount" yaml:"machinecount"`
 
 	// the machine type
 	// Required: true
-	Machinetype *string `json:"machinetype"`
+	Machinetype *string `json:"machinetype" yaml:"machinetype"`
 
 	// name of the worker group
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 }
 
 // Validate validates this v1 cluster worker

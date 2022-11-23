@@ -21,53 +21,53 @@ type V1IPUsage struct {
 
 	// accounting annotations present on the last accounting report of this ip
 	// Required: true
-	Annotations []string `json:"annotations"`
+	Annotations []string `json:"annotations" yaml:"annotations"`
 
 	// the contract number attached to this entity
 	// Required: true
-	Contract *string `json:"contract"`
+	Contract *string `json:"contract" yaml:"contract"`
 
 	// the debtor id attached to this entity
 	// Required: true
-	Debtorid *string `json:"debtorid"`
+	Debtorid *string `json:"debtorid" yaml:"debtorid"`
 
 	// the end time of this ip
 	// Required: true
 	// Format: date-time
-	End *strfmt.DateTime `json:"end"`
+	End *strfmt.DateTime `json:"end" yaml:"end"`
 
 	// the address of this ip
 	// Required: true
-	IP *string `json:"ip"`
+	IP *string `json:"ip" yaml:"ip"`
 
 	// the duration that this ip is allocated
 	// Required: true
-	Lifetime *int64 `json:"lifetime"`
+	Lifetime *int64 `json:"lifetime" yaml:"lifetime"`
 
 	// the project id of this entity
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the project name of this entity
 	// Required: true
-	Projectname *string `json:"projectname"`
+	Projectname *string `json:"projectname" yaml:"projectname"`
 
 	// the start time of this ip
 	// Required: true
 	// Format: date-time
-	Start *strfmt.DateTime `json:"start"`
+	Start *strfmt.DateTime `json:"start" yaml:"start"`
 
 	// the tenant of this entity
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 
 	// the tenant name of this entity
 	// Required: true
-	Tenantname *string `json:"tenantname"`
+	Tenantname *string `json:"tenantname" yaml:"tenantname"`
 
 	// the allocation uuid of this ip
 	// Required: true
-	UUID *string `json:"uuid"`
+	UUID *string `json:"uuid" yaml:"uuid"`
 }
 
 // Validate validates this v1 IP usage

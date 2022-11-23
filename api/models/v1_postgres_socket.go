@@ -18,10 +18,10 @@ import (
 type V1PostgresSocket struct {
 
 	// ip
-	IP string `json:"ip,omitempty"`
+	IP string `json:"ip,omitempty" yaml:"ip,omitempty"`
 
 	// port
-	Port int32 `json:"port,omitempty"`
+	Port int32 `json:"port,omitempty" yaml:"port,omitempty"`
 }
 
 // Validate validates this v1 postgres socket

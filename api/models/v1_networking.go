@@ -21,19 +21,19 @@ type V1Networking struct {
 
 	// nodes
 	// Required: true
-	Nodes *string `json:"Nodes"`
+	Nodes *string `json:"Nodes" yaml:"Nodes"`
 
 	// pods
 	// Required: true
-	Pods *string `json:"Pods"`
+	Pods *string `json:"Pods" yaml:"Pods"`
 
 	// services
 	// Required: true
-	Services *string `json:"Services"`
+	Services *string `json:"Services" yaml:"Services"`
 
 	// type
 	// Required: true
-	Type *string `json:"Type"`
+	Type *string `json:"Type" yaml:"Type"`
 }
 
 // Validate validates this v1 networking

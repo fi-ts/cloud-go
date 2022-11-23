@@ -18,7 +18,7 @@ import (
 type V1AccessList struct {
 
 	// source ranges
-	SourceRanges []string `json:"sourceRanges"`
+	SourceRanges []string `json:"sourceRanges" yaml:"sourceRanges"`
 }
 
 // Validate validates this v1 access list

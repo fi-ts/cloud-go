@@ -20,17 +20,17 @@ import (
 type V1beta1LastError struct {
 
 	// codes
-	Codes []string `json:"codes"`
+	Codes []string `json:"codes" yaml:"codes"`
 
 	// description
 	// Required: true
-	Description *string `json:"description"`
+	Description *string `json:"description" yaml:"description"`
 
 	// last update time
-	LastUpdateTime string `json:"lastUpdateTime,omitempty"`
+	LastUpdateTime string `json:"lastUpdateTime,omitempty" yaml:"lastUpdateTime,omitempty"`
 
 	// task ID
-	TaskID string `json:"taskID,omitempty"`
+	TaskID string `json:"taskID,omitempty" yaml:"taskID,omitempty"`
 }
 
 // Validate validates this v1beta1 last error

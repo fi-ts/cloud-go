@@ -21,27 +21,27 @@ type V1UsageCommon struct {
 
 	// the contract number attached to this entity
 	// Required: true
-	Contract *string `json:"contract"`
+	Contract *string `json:"contract" yaml:"contract"`
 
 	// the debtor id attached to this entity
 	// Required: true
-	Debtorid *string `json:"debtorid"`
+	Debtorid *string `json:"debtorid" yaml:"debtorid"`
 
 	// the project id of this entity
 	// Required: true
-	Projectid *string `json:"projectid"`
+	Projectid *string `json:"projectid" yaml:"projectid"`
 
 	// the project name of this entity
 	// Required: true
-	Projectname *string `json:"projectname"`
+	Projectname *string `json:"projectname" yaml:"projectname"`
 
 	// the tenant of this entity
 	// Required: true
-	Tenant *string `json:"tenant"`
+	Tenant *string `json:"tenant" yaml:"tenant"`
 
 	// the tenant name of this entity
 	// Required: true
-	Tenantname *string `json:"tenantname"`
+	Tenantname *string `json:"tenantname" yaml:"tenantname"`
 }
 
 // Validate validates this v1 usage common

@@ -21,38 +21,38 @@ type V1PostgresBackupConfigResponse struct {
 
 	// created by
 	// Required: true
-	CreatedBy *string `json:"createdBy"`
+	CreatedBy *string `json:"createdBy" yaml:"createdBy"`
 
 	// id
 	// Required: true
-	ID *string `json:"id"`
+	ID *string `json:"id" yaml:"id"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// project ID
-	ProjectID string `json:"projectID,omitempty"`
+	ProjectID string `json:"projectID,omitempty" yaml:"projectID,omitempty"`
 
 	// retention
-	Retention int32 `json:"retention,omitempty"`
+	Retention int32 `json:"retention,omitempty" yaml:"retention,omitempty"`
 
 	// s3 bucket name
-	S3BucketName string `json:"s3BucketName,omitempty"`
+	S3BucketName string `json:"s3BucketName,omitempty" yaml:"s3BucketName,omitempty"`
 
 	// s3 endpoint
-	S3Endpoint string `json:"s3Endpoint,omitempty"`
+	S3Endpoint string `json:"s3Endpoint,omitempty" yaml:"s3Endpoint,omitempty"`
 
 	// s3 region
-	S3Region string `json:"s3Region,omitempty"`
+	S3Region string `json:"s3Region,omitempty" yaml:"s3Region,omitempty"`
 
 	// schedule
-	Schedule string `json:"schedule,omitempty"`
+	Schedule string `json:"schedule,omitempty" yaml:"schedule,omitempty"`
 
 	// secret
-	Secret *V1PostgresBackupSecret `json:"secret,omitempty"`
+	Secret *V1PostgresBackupSecret `json:"secret,omitempty" yaml:"secret,omitempty"`
 
 	// tenant
-	Tenant string `json:"tenant,omitempty"`
+	Tenant string `json:"tenant,omitempty" yaml:"tenant,omitempty"`
 }
 
 // Validate validates this v1 postgres backup config response

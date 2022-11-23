@@ -21,11 +21,11 @@ type ModelsV1MachineBlockDevice struct {
 
 	// name
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name" yaml:"name"`
 
 	// size
 	// Required: true
-	Size *int64 `json:"size"`
+	Size *int64 `json:"size" yaml:"size"`
 }
 
 // Validate validates this models v1 machine block device

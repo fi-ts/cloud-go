@@ -20,7 +20,7 @@ import (
 type V1ProjectListResponse struct {
 
 	// projects
-	Projects []*V1ProjectResponse `json:"projects"`
+	Projects []*V1ProjectResponse `json:"projects" yaml:"projects"`
 }
 
 // Validate validates this v1 project list response

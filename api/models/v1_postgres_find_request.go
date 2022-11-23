@@ -18,22 +18,22 @@ import (
 type V1PostgresFindRequest struct {
 
 	// description
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// id
-	ID string `json:"id,omitempty"`
+	ID string `json:"id,omitempty" yaml:"id,omitempty"`
 
 	// labels
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" yaml:"labels,omitempty"`
 
 	// partition ID
-	PartitionID string `json:"partitionID,omitempty"`
+	PartitionID string `json:"partitionID,omitempty" yaml:"partitionID,omitempty"`
 
 	// project ID
-	ProjectID string `json:"projectID,omitempty"`
+	ProjectID string `json:"projectID,omitempty" yaml:"projectID,omitempty"`
 
 	// tenant
-	Tenant string `json:"tenant,omitempty"`
+	Tenant string `json:"tenant,omitempty" yaml:"tenant,omitempty"`
 }
 
 // Validate validates this v1 postgres find request

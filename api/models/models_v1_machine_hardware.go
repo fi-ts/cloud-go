@@ -22,19 +22,19 @@ type ModelsV1MachineHardware struct {
 
 	// cpu cores
 	// Required: true
-	CPUCores *int32 `json:"cpu_cores"`
+	CPUCores *int32 `json:"cpu_cores" yaml:"cpu_cores"`
 
 	// disks
 	// Required: true
-	Disks []*ModelsV1MachineBlockDevice `json:"disks"`
+	Disks []*ModelsV1MachineBlockDevice `json:"disks" yaml:"disks"`
 
 	// memory
 	// Required: true
-	Memory *int64 `json:"memory"`
+	Memory *int64 `json:"memory" yaml:"memory"`
 
 	// nics
 	// Required: true
-	Nics []*ModelsV1MachineNic `json:"nics"`
+	Nics []*ModelsV1MachineNic `json:"nics" yaml:"nics"`
 }
 
 // Validate validates this models v1 machine hardware
