@@ -2458,6 +2458,31 @@
         }
       }
     },
+    "v1.Network": {
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "ID": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Prefixes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "Description",
+        "ID",
+        "Name",
+        "Prefixes"
+      ]
+    },
     "v1.NetworkUsage": {
       "properties": {
         "annotations": {
@@ -3981,7 +4006,7 @@
         "networks": {
           "description": "the list of available networks for cluster creation",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/v1.Network"
           },
           "type": "array"
         },
