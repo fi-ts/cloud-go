@@ -4272,6 +4272,31 @@
         "UUID"
       ]
     },
+    "v1.Taint": {
+      "description": "The node this Taint is attached to has the \"effect\" on any pod that does not tolerate the Taint.",
+      "properties": {
+        "effect": {
+          "description": "Required. The effect of the taint on pods that do not tolerate the taint. Valid effects are NoSchedule, PreferNoSchedule and NoExecute.",
+          "type": "string"
+        },
+        "key": {
+          "description": "Required. The taint key to be applied to a node.",
+          "type": "string"
+        },
+        "timeAdded": {
+          "description": "TimeAdded represents the time at which the taint was added. It is only written for NoExecute taints.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The taint value corresponding to the taint key.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "effect",
+        "key"
+      ]
+    },
     "v1.Tenant": {
       "properties": {
         "default_quotas": {
@@ -4792,6 +4817,12 @@
         },
         "Name": {
           "type": "string"
+        },
+        "Taints": {
+          "items": {
+            "$ref": "#/definitions/v1.Taint"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -4804,7 +4835,8 @@
         "MaxUnavailable",
         "Maximum",
         "Minimum",
-        "Name"
+        "Name",
+        "Taints"
       ]
     },
     "v1beta1.Condition": {
