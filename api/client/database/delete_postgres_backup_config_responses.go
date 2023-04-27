@@ -81,6 +81,11 @@ func (o *DeletePostgresBackupConfigOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete postgres backup config o k response
+func (o *DeletePostgresBackupConfigOK) Code() int {
+	return 200
+}
+
 func (o *DeletePostgresBackupConfigOK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfigOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type DeletePostgresBackupConfigDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the delete postgres backup config default response
-func (o *DeletePostgresBackupConfigDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete postgres backup config default response has a 2xx status code
 func (o *DeletePostgresBackupConfigDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *DeletePostgresBackupConfigDefault) IsServerError() bool {
 // IsCode returns true when this delete postgres backup config default response a status code equal to that given
 func (o *DeletePostgresBackupConfigDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete postgres backup config default response
+func (o *DeletePostgresBackupConfigDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeletePostgresBackupConfigDefault) Error() string {

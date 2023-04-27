@@ -81,6 +81,11 @@ func (o *ClusterUsageOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the cluster usage o k response
+func (o *ClusterUsageOK) Code() int {
+	return 200
+}
+
 func (o *ClusterUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ClusterUsageDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the cluster usage default response
-func (o *ClusterUsageDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this cluster usage default response has a 2xx status code
 func (o *ClusterUsageDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ClusterUsageDefault) IsServerError() bool {
 // IsCode returns true when this cluster usage default response a status code equal to that given
 func (o *ClusterUsageDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the cluster usage default response
+func (o *ClusterUsageDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ClusterUsageDefault) Error() string {

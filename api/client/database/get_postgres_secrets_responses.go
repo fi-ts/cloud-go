@@ -81,6 +81,11 @@ func (o *GetPostgresSecretsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get postgres secrets o k response
+func (o *GetPostgresSecretsOK) Code() int {
+	return 200
+}
+
 func (o *GetPostgresSecretsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecretsOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetPostgresSecretsDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the get postgres secrets default response
-func (o *GetPostgresSecretsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get postgres secrets default response has a 2xx status code
 func (o *GetPostgresSecretsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetPostgresSecretsDefault) IsServerError() bool {
 // IsCode returns true when this get postgres secrets default response a status code equal to that given
 func (o *GetPostgresSecretsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get postgres secrets default response
+func (o *GetPostgresSecretsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetPostgresSecretsDefault) Error() string {

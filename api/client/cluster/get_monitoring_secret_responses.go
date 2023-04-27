@@ -81,6 +81,11 @@ func (o *GetMonitoringSecretOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get monitoring secret o k response
+func (o *GetMonitoringSecretOK) Code() int {
+	return 200
+}
+
 func (o *GetMonitoringSecretOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecretOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetMonitoringSecretDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the get monitoring secret default response
-func (o *GetMonitoringSecretDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get monitoring secret default response has a 2xx status code
 func (o *GetMonitoringSecretDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetMonitoringSecretDefault) IsServerError() bool {
 // IsCode returns true when this get monitoring secret default response a status code equal to that given
 func (o *GetMonitoringSecretDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get monitoring secret default response
+func (o *GetMonitoringSecretDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetMonitoringSecretDefault) Error() string {

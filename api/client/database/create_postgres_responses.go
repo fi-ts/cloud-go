@@ -81,6 +81,11 @@ func (o *CreatePostgresCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create postgres created response
+func (o *CreatePostgresCreated) Code() int {
+	return 201
+}
+
 func (o *CreatePostgresCreated) Error() string {
 	return fmt.Sprintf("[PUT /v1/database/postgres][%d] createPostgresCreated  %+v", 201, o.Payload)
 }
@@ -123,11 +128,6 @@ type CreatePostgresDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the create postgres default response
-func (o *CreatePostgresDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create postgres default response has a 2xx status code
 func (o *CreatePostgresDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *CreatePostgresDefault) IsServerError() bool {
 // IsCode returns true when this create postgres default response a status code equal to that given
 func (o *CreatePostgresDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create postgres default response
+func (o *CreatePostgresDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreatePostgresDefault) Error() string {

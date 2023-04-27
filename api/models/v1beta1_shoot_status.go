@@ -32,6 +32,9 @@ type V1beta1ShootStatus struct {
 	// constraints
 	Constraints []*V1beta1Condition `json:"constraints"`
 
+	// credentials
+	Credentials *V1beta1ShootCredentials `json:"credentials,omitempty"`
+
 	// gardener
 	// Required: true
 	Gardener *V1beta1Gardener `json:"gardener"`
@@ -45,6 +48,9 @@ type V1beta1ShootStatus struct {
 
 	// last operation
 	LastOperation *V1beta1LastOperation `json:"lastOperation,omitempty"`
+
+	// migration start time
+	MigrationStartTime string `json:"migrationStartTime,omitempty"`
 
 	// observed generation
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
@@ -77,6 +83,10 @@ func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateConstraints(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCredentials(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -183,6 +193,25 @@ func (m *V1beta1ShootStatus) validateConstraints(formats strfmt.Registry) error 
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) validateCredentials(formats strfmt.Registry) error {
+	if swag.IsZero(m.Credentials) { // not required
+		return nil
+	}
+
+	if m.Credentials != nil {
+		if err := m.Credentials.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credentials")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -296,6 +325,10 @@ func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCredentials(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGardener(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -369,6 +402,22 @@ func (m *V1beta1ShootStatus) contextValidateConstraints(ctx context.Context, for
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateCredentials(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Credentials != nil {
+		if err := m.Credentials.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credentials")
+			}
+			return err
+		}
 	}
 
 	return nil

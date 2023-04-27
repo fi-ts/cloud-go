@@ -80,6 +80,11 @@ func (o *VolumeUsageCSVOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the volume usage c s v o k response
+func (o *VolumeUsageCSVOK) Code() int {
+	return 200
+}
+
 func (o *VolumeUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSVOK  %+v", 200, o.Payload)
 }
@@ -120,11 +125,6 @@ type VolumeUsageCSVDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the volume usage c s v default response
-func (o *VolumeUsageCSVDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this volume usage c s v default response has a 2xx status code
 func (o *VolumeUsageCSVDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -148,6 +148,11 @@ func (o *VolumeUsageCSVDefault) IsServerError() bool {
 // IsCode returns true when this volume usage c s v default response a status code equal to that given
 func (o *VolumeUsageCSVDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the volume usage c s v default response
+func (o *VolumeUsageCSVDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *VolumeUsageCSVDefault) Error() string {

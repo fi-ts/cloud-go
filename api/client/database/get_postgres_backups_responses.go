@@ -81,6 +81,11 @@ func (o *GetPostgresBackupsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get postgres backups o k response
+func (o *GetPostgresBackupsOK) Code() int {
+	return 200
+}
+
 func (o *GetPostgresBackupsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/{id}/backups][%d] getPostgresBackupsOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type GetPostgresBackupsDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the get postgres backups default response
-func (o *GetPostgresBackupsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get postgres backups default response has a 2xx status code
 func (o *GetPostgresBackupsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *GetPostgresBackupsDefault) IsServerError() bool {
 // IsCode returns true when this get postgres backups default response a status code equal to that given
 func (o *GetPostgresBackupsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get postgres backups default response
+func (o *GetPostgresBackupsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetPostgresBackupsDefault) Error() string {

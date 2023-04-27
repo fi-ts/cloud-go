@@ -81,6 +81,11 @@ func (o *FindVolumesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the find volumes o k response
+func (o *FindVolumesOK) Code() int {
+	return 200
+}
+
 func (o *FindVolumesOK) Error() string {
 	return fmt.Sprintf("[POST /v1/volume/find][%d] findVolumesOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type FindVolumesDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the find volumes default response
-func (o *FindVolumesDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this find volumes default response has a 2xx status code
 func (o *FindVolumesDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *FindVolumesDefault) IsServerError() bool {
 // IsCode returns true when this find volumes default response a status code equal to that given
 func (o *FindVolumesDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the find volumes default response
+func (o *FindVolumesDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *FindVolumesDefault) Error() string {

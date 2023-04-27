@@ -20,6 +20,10 @@ import (
 // swagger:model models.V1MachineNic
 type ModelsV1MachineNic struct {
 
+	// identifier
+	// Required: true
+	Identifier *string `json:"identifier"`
+
 	// mac
 	// Required: true
 	Mac *string `json:"mac"`
@@ -37,6 +41,10 @@ type ModelsV1MachineNic struct {
 func (m *ModelsV1MachineNic) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateIdentifier(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMac(formats); err != nil {
 		res = append(res, err)
 	}
@@ -52,6 +60,15 @@ func (m *ModelsV1MachineNic) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ModelsV1MachineNic) validateIdentifier(formats strfmt.Registry) error {
+
+	if err := validate.Required("identifier", "body", m.Identifier); err != nil {
+		return err
+	}
+
 	return nil
 }
 

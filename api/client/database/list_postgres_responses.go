@@ -81,6 +81,11 @@ func (o *ListPostgresOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list postgres o k response
+func (o *ListPostgresOK) Code() int {
+	return 200
+}
+
 func (o *ListPostgresOK) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres][%d] listPostgresOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type ListPostgresDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the list postgres default response
-func (o *ListPostgresDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list postgres default response has a 2xx status code
 func (o *ListPostgresDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *ListPostgresDefault) IsServerError() bool {
 // IsCode returns true when this list postgres default response a status code equal to that given
 func (o *ListPostgresDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the list postgres default response
+func (o *ListPostgresDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ListPostgresDefault) Error() string {

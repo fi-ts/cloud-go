@@ -81,6 +81,11 @@ func (o *CreatePostgresBackupConfigCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create postgres backup config created response
+func (o *CreatePostgresBackupConfigCreated) Code() int {
+	return 201
+}
+
 func (o *CreatePostgresBackupConfigCreated) Error() string {
 	return fmt.Sprintf("[PUT /v1/database/postgres/backup-config][%d] createPostgresBackupConfigCreated  %+v", 201, o.Payload)
 }
@@ -123,11 +128,6 @@ type CreatePostgresBackupConfigDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the create postgres backup config default response
-func (o *CreatePostgresBackupConfigDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create postgres backup config default response has a 2xx status code
 func (o *CreatePostgresBackupConfigDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *CreatePostgresBackupConfigDefault) IsServerError() bool {
 // IsCode returns true when this create postgres backup config default response a status code equal to that given
 func (o *CreatePostgresBackupConfigDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create postgres backup config default response
+func (o *CreatePostgresBackupConfigDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreatePostgresBackupConfigDefault) Error() string {

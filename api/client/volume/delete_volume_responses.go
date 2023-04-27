@@ -81,6 +81,11 @@ func (o *DeleteVolumeOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete volume o k response
+func (o *DeleteVolumeOK) Code() int {
+	return 200
+}
+
 func (o *DeleteVolumeOK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/volume/{id}][%d] deleteVolumeOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type DeleteVolumeDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the delete volume default response
-func (o *DeleteVolumeDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete volume default response has a 2xx status code
 func (o *DeleteVolumeDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *DeleteVolumeDefault) IsServerError() bool {
 // IsCode returns true when this delete volume default response a status code equal to that given
 func (o *DeleteVolumeDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete volume default response
+func (o *DeleteVolumeDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeleteVolumeDefault) Error() string {

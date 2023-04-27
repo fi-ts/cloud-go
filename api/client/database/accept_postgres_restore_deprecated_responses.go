@@ -81,6 +81,11 @@ func (o *AcceptPostgresRestoreDeprecatedOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the accept postgres restore deprecated o k response
+func (o *AcceptPostgresRestoreDeprecatedOK) Code() int {
+	return 200
+}
+
 func (o *AcceptPostgresRestoreDeprecatedOK) Error() string {
 	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecatedOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type AcceptPostgresRestoreDeprecatedDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the accept postgres restore deprecated default response
-func (o *AcceptPostgresRestoreDeprecatedDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this accept postgres restore deprecated default response has a 2xx status code
 func (o *AcceptPostgresRestoreDeprecatedDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *AcceptPostgresRestoreDeprecatedDefault) IsServerError() bool {
 // IsCode returns true when this accept postgres restore deprecated default response a status code equal to that given
 func (o *AcceptPostgresRestoreDeprecatedDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the accept postgres restore deprecated default response
+func (o *AcceptPostgresRestoreDeprecatedDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *AcceptPostgresRestoreDeprecatedDefault) Error() string {

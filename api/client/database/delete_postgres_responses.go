@@ -81,6 +81,11 @@ func (o *DeletePostgresOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete postgres o k response
+func (o *DeletePostgresOK) Code() int {
+	return 200
+}
+
 func (o *DeletePostgresOK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgresOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type DeletePostgresDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the delete postgres default response
-func (o *DeletePostgresDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this delete postgres default response has a 2xx status code
 func (o *DeletePostgresDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *DeletePostgresDefault) IsServerError() bool {
 // IsCode returns true when this delete postgres default response a status code equal to that given
 func (o *DeletePostgresDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the delete postgres default response
+func (o *DeletePostgresDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *DeletePostgresDefault) Error() string {

@@ -81,6 +81,11 @@ func (o *ProjectsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the projects o k response
+func (o *ProjectsOK) Code() int {
+	return 200
+}
+
 func (o *ProjectsOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/projects][%d] projectsOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type ProjectsDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the projects default response
-func (o *ProjectsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this projects default response has a 2xx status code
 func (o *ProjectsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *ProjectsDefault) IsServerError() bool {
 // IsCode returns true when this projects default response a status code equal to that given
 func (o *ProjectsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the projects default response
+func (o *ProjectsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ProjectsDefault) Error() string {

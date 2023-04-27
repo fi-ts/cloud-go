@@ -34,6 +34,10 @@ type V1Worker struct {
 	// health timeout
 	HealthTimeout int64 `json:"HealthTimeout,omitempty"`
 
+	// kubernetes version
+	// Required: true
+	KubernetesVersion *string `json:"KubernetesVersion"`
+
 	// labels
 	// Required: true
 	Labels map[string]string `json:"Labels"`
@@ -80,6 +84,10 @@ func (m *V1Worker) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCRI(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKubernetesVersion(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -137,6 +145,15 @@ func (m *V1Worker) validateAnnotations(formats strfmt.Registry) error {
 func (m *V1Worker) validateCRI(formats strfmt.Registry) error {
 
 	if err := validate.Required("CRI", "body", m.CRI); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1Worker) validateKubernetesVersion(formats strfmt.Registry) error {
+
+	if err := validate.Required("KubernetesVersion", "body", m.KubernetesVersion); err != nil {
 		return err
 	}
 

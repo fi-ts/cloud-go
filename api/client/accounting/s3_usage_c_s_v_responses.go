@@ -80,6 +80,11 @@ func (o *S3UsageCSVOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the s3 usage c s v o k response
+func (o *S3UsageCSVOK) Code() int {
+	return 200
+}
+
 func (o *S3UsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK  %+v", 200, o.Payload)
 }
@@ -120,11 +125,6 @@ type S3UsageCSVDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the s3 usage c s v default response
-func (o *S3UsageCSVDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this s3 usage c s v default response has a 2xx status code
 func (o *S3UsageCSVDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -148,6 +148,11 @@ func (o *S3UsageCSVDefault) IsServerError() bool {
 // IsCode returns true when this s3 usage c s v default response a status code equal to that given
 func (o *S3UsageCSVDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the s3 usage c s v default response
+func (o *S3UsageCSVDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *S3UsageCSVDefault) Error() string {
