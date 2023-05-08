@@ -81,6 +81,11 @@ func (o *ReinstallMachineOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the reinstall machine o k response
+func (o *ReinstallMachineOK) Code() int {
+	return 200
+}
+
 func (o *ReinstallMachineOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/{id}/reinstallmachine][%d] reinstallMachineOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ReinstallMachineDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the reinstall machine default response
-func (o *ReinstallMachineDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this reinstall machine default response has a 2xx status code
 func (o *ReinstallMachineDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ReinstallMachineDefault) IsServerError() bool {
 // IsCode returns true when this reinstall machine default response a status code equal to that given
 func (o *ReinstallMachineDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the reinstall machine default response
+func (o *ReinstallMachineDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ReinstallMachineDefault) Error() string {

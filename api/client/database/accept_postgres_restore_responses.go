@@ -81,6 +81,11 @@ func (o *AcceptPostgresRestoreOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the accept postgres restore o k response
+func (o *AcceptPostgresRestoreOK) Code() int {
+	return 200
+}
+
 func (o *AcceptPostgresRestoreOK) Error() string {
 	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type AcceptPostgresRestoreDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the accept postgres restore default response
-func (o *AcceptPostgresRestoreDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this accept postgres restore default response has a 2xx status code
 func (o *AcceptPostgresRestoreDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *AcceptPostgresRestoreDefault) IsServerError() bool {
 // IsCode returns true when this accept postgres restore default response a status code equal to that given
 func (o *AcceptPostgresRestoreDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the accept postgres restore default response
+func (o *AcceptPostgresRestoreDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *AcceptPostgresRestoreDefault) Error() string {

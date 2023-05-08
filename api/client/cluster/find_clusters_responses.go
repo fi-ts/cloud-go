@@ -81,6 +81,11 @@ func (o *FindClustersOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the find clusters o k response
+func (o *FindClustersOK) Code() int {
+	return 200
+}
+
 func (o *FindClustersOK) Error() string {
 	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClustersOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type FindClustersDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the find clusters default response
-func (o *FindClustersDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this find clusters default response has a 2xx status code
 func (o *FindClustersDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *FindClustersDefault) IsServerError() bool {
 // IsCode returns true when this find clusters default response a status code equal to that given
 func (o *FindClustersDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the find clusters default response
+func (o *FindClustersDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *FindClustersDefault) Error() string {

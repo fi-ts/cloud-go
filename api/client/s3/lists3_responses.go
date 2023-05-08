@@ -81,6 +81,11 @@ func (o *Lists3OK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the lists3 o k response
+func (o *Lists3OK) Code() int {
+	return 200
+}
+
 func (o *Lists3OK) Error() string {
 	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3OK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type Lists3Default struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the lists3 default response
-func (o *Lists3Default) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this lists3 default response has a 2xx status code
 func (o *Lists3Default) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *Lists3Default) IsServerError() bool {
 // IsCode returns true when this lists3 default response a status code equal to that given
 func (o *Lists3Default) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the lists3 default response
+func (o *Lists3Default) Code() int {
+	return o._statusCode
 }
 
 func (o *Lists3Default) Error() string {

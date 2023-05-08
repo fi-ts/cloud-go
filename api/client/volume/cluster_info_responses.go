@@ -81,6 +81,11 @@ func (o *ClusterInfoOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the cluster info o k response
+func (o *ClusterInfoOK) Code() int {
+	return 200
+}
+
 func (o *ClusterInfoOK) Error() string {
 	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfoOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type ClusterInfoDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the cluster info default response
-func (o *ClusterInfoDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this cluster info default response has a 2xx status code
 func (o *ClusterInfoDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *ClusterInfoDefault) IsServerError() bool {
 // IsCode returns true when this cluster info default response a status code equal to that given
 func (o *ClusterInfoDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the cluster info default response
+func (o *ClusterInfoDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ClusterInfoDefault) Error() string {

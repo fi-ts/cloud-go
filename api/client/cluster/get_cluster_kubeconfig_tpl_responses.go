@@ -81,6 +81,11 @@ func (o *GetClusterKubeconfigTplOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get cluster kubeconfig tpl o k response
+func (o *GetClusterKubeconfigTplOK) Code() int {
+	return 200
+}
+
 func (o *GetClusterKubeconfigTplOK) Error() string {
 	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTplOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type GetClusterKubeconfigTplDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the get cluster kubeconfig tpl default response
-func (o *GetClusterKubeconfigTplDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get cluster kubeconfig tpl default response has a 2xx status code
 func (o *GetClusterKubeconfigTplDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *GetClusterKubeconfigTplDefault) IsServerError() bool {
 // IsCode returns true when this get cluster kubeconfig tpl default response a status code equal to that given
 func (o *GetClusterKubeconfigTplDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get cluster kubeconfig tpl default response
+func (o *GetClusterKubeconfigTplDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetClusterKubeconfigTplDefault) Error() string {

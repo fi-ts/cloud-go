@@ -81,6 +81,11 @@ func (o *GetPostgresPartitionsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get postgres partitions o k response
+func (o *GetPostgresPartitionsOK) Code() int {
+	return 200
+}
+
 func (o *GetPostgresPartitionsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitionsOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type GetPostgresPartitionsDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the get postgres partitions default response
-func (o *GetPostgresPartitionsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get postgres partitions default response has a 2xx status code
 func (o *GetPostgresPartitionsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *GetPostgresPartitionsDefault) IsServerError() bool {
 // IsCode returns true when this get postgres partitions default response a status code equal to that given
 func (o *GetPostgresPartitionsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get postgres partitions default response
+func (o *GetPostgresPartitionsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetPostgresPartitionsDefault) Error() string {

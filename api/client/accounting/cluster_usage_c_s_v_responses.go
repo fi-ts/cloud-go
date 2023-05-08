@@ -80,6 +80,11 @@ func (o *ClusterUsageCSVOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the cluster usage c s v o k response
+func (o *ClusterUsageCSVOK) Code() int {
+	return 200
+}
+
 func (o *ClusterUsageCSVOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK  %+v", 200, o.Payload)
 }
@@ -120,11 +125,6 @@ type ClusterUsageCSVDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the cluster usage c s v default response
-func (o *ClusterUsageCSVDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this cluster usage c s v default response has a 2xx status code
 func (o *ClusterUsageCSVDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -148,6 +148,11 @@ func (o *ClusterUsageCSVDefault) IsServerError() bool {
 // IsCode returns true when this cluster usage c s v default response a status code equal to that given
 func (o *ClusterUsageCSVDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the cluster usage c s v default response
+func (o *ClusterUsageCSVDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ClusterUsageCSVDefault) Error() string {

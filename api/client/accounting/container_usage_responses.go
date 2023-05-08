@@ -81,6 +81,11 @@ func (o *ContainerUsageOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the container usage o k response
+func (o *ContainerUsageOK) Code() int {
+	return 200
+}
+
 func (o *ContainerUsageOK) Error() string {
 	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
 }
@@ -123,11 +128,6 @@ type ContainerUsageDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the container usage default response
-func (o *ContainerUsageDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this container usage default response has a 2xx status code
 func (o *ContainerUsageDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -151,6 +151,11 @@ func (o *ContainerUsageDefault) IsServerError() bool {
 // IsCode returns true when this container usage default response a status code equal to that given
 func (o *ContainerUsageDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the container usage default response
+func (o *ContainerUsageDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *ContainerUsageDefault) Error() string {

@@ -629,6 +629,9 @@
     },
     "models.V1MachineNic": {
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "mac": {
           "type": "string"
         },
@@ -643,6 +646,7 @@
         }
       },
       "required": [
+        "identifier",
         "mac",
         "name",
         "neighbors"
@@ -4789,6 +4793,9 @@
           "format": "int64",
           "type": "integer"
         },
+        "KubernetesVersion": {
+          "type": "string"
+        },
         "Labels": {
           "additionalProperties": {
             "type": "string"
@@ -4828,6 +4835,7 @@
       "required": [
         "Annotations",
         "CRI",
+        "KubernetesVersion",
         "Labels",
         "MachineImage",
         "MachineType",
@@ -4956,6 +4964,62 @@
         "url"
       ]
     },
+    "v1beta1.ShootCARotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        },
+        "phase": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "phase"
+      ]
+    },
+    "v1beta1.ShootCredentials": {
+      "properties": {
+        "rotation": {
+          "$ref": "#/definitions/v1beta1.ShootCredentialsRotation"
+        }
+      }
+    },
+    "v1beta1.ShootCredentialsRotation": {
+      "properties": {
+        "certificateAuthorities": {
+          "$ref": "#/definitions/v1beta1.ShootCARotation"
+        },
+        "kubeconfig": {
+          "$ref": "#/definitions/v1beta1.ShootKubeconfigRotation"
+        },
+        "sshKeypair": {
+          "$ref": "#/definitions/v1beta1.ShootSSHKeypairRotation"
+        }
+      }
+    },
+    "v1beta1.ShootKubeconfigRotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        }
+      }
+    },
+    "v1beta1.ShootSSHKeypairRotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        }
+      }
+    },
     "v1beta1.ShootStatus": {
       "properties": {
         "advertisedAddresses": {
@@ -4979,6 +5043,9 @@
           },
           "type": "array"
         },
+        "credentials": {
+          "$ref": "#/definitions/v1beta1.ShootCredentials"
+        },
         "gardener": {
           "$ref": "#/definitions/v1beta1.Gardener"
         },
@@ -4993,6 +5060,9 @@
         },
         "lastOperation": {
           "$ref": "#/definitions/v1beta1.LastOperation"
+        },
+        "migrationStartTime": {
+          "type": "string"
         },
         "observedGeneration": {
           "format": "int64",

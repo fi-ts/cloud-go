@@ -87,6 +87,11 @@ func (o *GetMasterdataOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get masterdata o k response
+func (o *GetMasterdataOK) Code() int {
+	return 200
+}
+
 func (o *GetMasterdataOK) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK  %+v", 200, o.Payload)
 }
@@ -150,6 +155,11 @@ func (o *GetMasterdataNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get masterdata not found response
+func (o *GetMasterdataNotFound) Code() int {
+	return 404
+}
+
 func (o *GetMasterdataNotFound) Error() string {
 	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound  %+v", 404, o.Payload)
 }
@@ -192,11 +202,6 @@ type GetMasterdataDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the get masterdata default response
-func (o *GetMasterdataDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get masterdata default response has a 2xx status code
 func (o *GetMasterdataDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -220,6 +225,11 @@ func (o *GetMasterdataDefault) IsServerError() bool {
 // IsCode returns true when this get masterdata default response a status code equal to that given
 func (o *GetMasterdataDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get masterdata default response
+func (o *GetMasterdataDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetMasterdataDefault) Error() string {

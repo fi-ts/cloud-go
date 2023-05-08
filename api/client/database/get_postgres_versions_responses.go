@@ -81,6 +81,11 @@ func (o *GetPostgresVersionsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get postgres versions o k response
+func (o *GetPostgresVersionsOK) Code() int {
+	return 200
+}
+
 func (o *GetPostgresVersionsOK) Error() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersionsOK  %+v", 200, o.Payload)
 }
@@ -121,11 +126,6 @@ type GetPostgresVersionsDefault struct {
 	Payload *httperrors.HTTPErrorResponse
 }
 
-// Code gets the status code for the get postgres versions default response
-func (o *GetPostgresVersionsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get postgres versions default response has a 2xx status code
 func (o *GetPostgresVersionsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -149,6 +149,11 @@ func (o *GetPostgresVersionsDefault) IsServerError() bool {
 // IsCode returns true when this get postgres versions default response a status code equal to that given
 func (o *GetPostgresVersionsDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the get postgres versions default response
+func (o *GetPostgresVersionsDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *GetPostgresVersionsDefault) Error() string {
