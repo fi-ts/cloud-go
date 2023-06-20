@@ -102,6 +102,11 @@ func (m *V1MasterdataLookupResponse) ContextValidate(ctx context.Context, format
 func (m *V1MasterdataLookupResponse) contextValidateProject(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Project != nil {
+
+		if swag.IsZero(m.Project) { // not required
+			return nil
+		}
+
 		if err := m.Project.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("project")
@@ -118,6 +123,11 @@ func (m *V1MasterdataLookupResponse) contextValidateProject(ctx context.Context,
 func (m *V1MasterdataLookupResponse) contextValidateTenant(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tenant != nil {
+
+		if swag.IsZero(m.Tenant) { // not required
+			return nil
+		}
+
 		if err := m.Tenant.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tenant")

@@ -82,6 +82,11 @@ func (m *V1PostgresSecretsRespone) contextValidateUserSecret(ctx context.Context
 	for i := 0; i < len(m.UserSecret); i++ {
 
 		if m.UserSecret[i] != nil {
+
+			if swag.IsZero(m.UserSecret[i]) { // not required
+				return nil
+			}
+
 			if err := m.UserSecret[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("userSecret" + "." + strconv.Itoa(i))

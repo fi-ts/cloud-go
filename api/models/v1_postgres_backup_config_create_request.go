@@ -117,6 +117,11 @@ func (m *V1PostgresBackupConfigCreateRequest) ContextValidate(ctx context.Contex
 func (m *V1PostgresBackupConfigCreateRequest) contextValidateSecret(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Secret != nil {
+
+		if swag.IsZero(m.Secret) { // not required
+			return nil
+		}
+
 		if err := m.Secret.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secret")

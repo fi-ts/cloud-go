@@ -335,6 +335,7 @@ func (m *V1SnapshotResponse) ContextValidate(ctx context.Context, formats strfmt
 func (m *V1SnapshotResponse) contextValidateStatistics(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Statistics != nil {
+
 		if err := m.Statistics.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Statistics")

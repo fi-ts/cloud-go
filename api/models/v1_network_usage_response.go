@@ -157,6 +157,7 @@ func (m *V1NetworkUsageResponse) ContextValidate(ctx context.Context, formats st
 func (m *V1NetworkUsageResponse) contextValidateAccumulatedusage(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Accumulatedusage != nil {
+
 		if err := m.Accumulatedusage.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accumulatedusage")
@@ -175,6 +176,11 @@ func (m *V1NetworkUsageResponse) contextValidateUsage(ctx context.Context, forma
 	for i := 0; i < len(m.Usage); i++ {
 
 		if m.Usage[i] != nil {
+
+			if swag.IsZero(m.Usage[i]) { // not required
+				return nil
+			}
+
 			if err := m.Usage[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("usage" + "." + strconv.Itoa(i))

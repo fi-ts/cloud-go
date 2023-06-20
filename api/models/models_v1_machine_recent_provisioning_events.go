@@ -150,6 +150,11 @@ func (m *ModelsV1MachineRecentProvisioningEvents) ContextValidate(ctx context.Co
 func (m *ModelsV1MachineRecentProvisioningEvents) contextValidateLastErrorEvent(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LastErrorEvent != nil {
+
+		if swag.IsZero(m.LastErrorEvent) { // not required
+			return nil
+		}
+
 		if err := m.LastErrorEvent.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("last_error_event")
@@ -168,6 +173,11 @@ func (m *ModelsV1MachineRecentProvisioningEvents) contextValidateLog(ctx context
 	for i := 0; i < len(m.Log); i++ {
 
 		if m.Log[i] != nil {
+
+			if swag.IsZero(m.Log[i]) { // not required
+				return nil
+			}
+
 			if err := m.Log[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("log" + "." + strconv.Itoa(i))

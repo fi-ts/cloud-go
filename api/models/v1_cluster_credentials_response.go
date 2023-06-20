@@ -124,6 +124,7 @@ func (m *V1ClusterCredentialsResponse) ContextValidate(ctx context.Context, form
 func (m *V1ClusterCredentialsResponse) contextValidateSSHKeyPair(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SSHKeyPair != nil {
+
 		if err := m.SSHKeyPair.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("SSHKeyPair")
@@ -140,6 +141,7 @@ func (m *V1ClusterCredentialsResponse) contextValidateSSHKeyPair(ctx context.Con
 func (m *V1ClusterCredentialsResponse) contextValidateVPN(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.VPN != nil {
+
 		if err := m.VPN.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("VPN")

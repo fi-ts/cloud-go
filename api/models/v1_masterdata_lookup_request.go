@@ -105,6 +105,11 @@ func (m *V1MasterdataLookupRequest) ContextValidate(ctx context.Context, formats
 func (m *V1MasterdataLookupRequest) contextValidateClusterNameProject(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ClusterNameProject != nil {
+
+		if swag.IsZero(m.ClusterNameProject) { // not required
+			return nil
+		}
+
 		if err := m.ClusterNameProject.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cluster_name_project")
@@ -121,6 +126,11 @@ func (m *V1MasterdataLookupRequest) contextValidateClusterNameProject(ctx contex
 func (m *V1MasterdataLookupRequest) contextValidateProjectIDTime(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ProjectIDTime != nil {
+
+		if swag.IsZero(m.ProjectIDTime) { // not required
+			return nil
+		}
+
 		if err := m.ProjectIDTime.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("project_id_time")

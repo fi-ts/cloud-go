@@ -207,6 +207,11 @@ func (m *V1PostgresUpdateRequest) ContextValidate(ctx context.Context, formats s
 func (m *V1PostgresUpdateRequest) contextValidateAccessList(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AccessList != nil {
+
+		if swag.IsZero(m.AccessList) { // not required
+			return nil
+		}
+
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
@@ -223,6 +228,11 @@ func (m *V1PostgresUpdateRequest) contextValidateAccessList(ctx context.Context,
 func (m *V1PostgresUpdateRequest) contextValidateConnection(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Connection != nil {
+
+		if swag.IsZero(m.Connection) { // not required
+			return nil
+		}
+
 		if err := m.Connection.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("connection")
@@ -237,6 +247,10 @@ func (m *V1PostgresUpdateRequest) contextValidateConnection(ctx context.Context,
 }
 
 func (m *V1PostgresUpdateRequest) contextValidateLabels(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Labels) { // not required
+		return nil
+	}
 
 	if err := m.Labels.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
@@ -253,6 +267,11 @@ func (m *V1PostgresUpdateRequest) contextValidateLabels(ctx context.Context, for
 func (m *V1PostgresUpdateRequest) contextValidateSize(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Size != nil {
+
+		if swag.IsZero(m.Size) { // not required
+			return nil
+		}
+
 		if err := m.Size.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("size")

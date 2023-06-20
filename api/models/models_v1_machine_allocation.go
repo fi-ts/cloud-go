@@ -362,6 +362,11 @@ func (m *ModelsV1MachineAllocation) ContextValidate(ctx context.Context, formats
 func (m *ModelsV1MachineAllocation) contextValidateBootInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.BootInfo != nil {
+
+		if swag.IsZero(m.BootInfo) { // not required
+			return nil
+		}
+
 		if err := m.BootInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("boot_info")
@@ -378,6 +383,11 @@ func (m *ModelsV1MachineAllocation) contextValidateBootInfo(ctx context.Context,
 func (m *ModelsV1MachineAllocation) contextValidateFilesystemlayout(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Filesystemlayout != nil {
+
+		if swag.IsZero(m.Filesystemlayout) { // not required
+			return nil
+		}
+
 		if err := m.Filesystemlayout.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("filesystemlayout")
@@ -394,6 +404,11 @@ func (m *ModelsV1MachineAllocation) contextValidateFilesystemlayout(ctx context.
 func (m *ModelsV1MachineAllocation) contextValidateImage(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Image != nil {
+
+		if swag.IsZero(m.Image) { // not required
+			return nil
+		}
+
 		if err := m.Image.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("image")
@@ -412,6 +427,11 @@ func (m *ModelsV1MachineAllocation) contextValidateNetworks(ctx context.Context,
 	for i := 0; i < len(m.Networks); i++ {
 
 		if m.Networks[i] != nil {
+
+			if swag.IsZero(m.Networks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Networks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("networks" + "." + strconv.Itoa(i))
@@ -430,6 +450,11 @@ func (m *ModelsV1MachineAllocation) contextValidateNetworks(ctx context.Context,
 func (m *ModelsV1MachineAllocation) contextValidateVpn(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Vpn != nil {
+
+		if swag.IsZero(m.Vpn) { // not required
+			return nil
+		}
+
 		if err := m.Vpn.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("vpn")

@@ -316,6 +316,11 @@ func (m *V1ClusterUsage) contextValidateWorkergroups(ctx context.Context, format
 	for i := 0; i < len(m.Workergroups); i++ {
 
 		if m.Workergroups[i] != nil {
+
+			if swag.IsZero(m.Workergroups[i]) { // not required
+				return nil
+			}
+
 			if err := m.Workergroups[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("workergroups" + "." + strconv.Itoa(i))

@@ -268,6 +268,11 @@ func (m *V1PostgresResponse) ContextValidate(ctx context.Context, formats strfmt
 func (m *V1PostgresResponse) contextValidateAccessList(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AccessList != nil {
+
+		if swag.IsZero(m.AccessList) { // not required
+			return nil
+		}
+
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("accessList")
@@ -284,6 +289,11 @@ func (m *V1PostgresResponse) contextValidateAccessList(ctx context.Context, form
 func (m *V1PostgresResponse) contextValidateConnection(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Connection != nil {
+
+		if swag.IsZero(m.Connection) { // not required
+			return nil
+		}
+
 		if err := m.Connection.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("connection")
@@ -300,6 +310,11 @@ func (m *V1PostgresResponse) contextValidateConnection(ctx context.Context, form
 func (m *V1PostgresResponse) contextValidateRestore(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Restore != nil {
+
+		if swag.IsZero(m.Restore) { // not required
+			return nil
+		}
+
 		if err := m.Restore.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("restore")
@@ -316,6 +331,11 @@ func (m *V1PostgresResponse) contextValidateRestore(ctx context.Context, formats
 func (m *V1PostgresResponse) contextValidateSize(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Size != nil {
+
+		if swag.IsZero(m.Size) { // not required
+			return nil
+		}
+
 		if err := m.Size.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("size")
@@ -332,6 +352,7 @@ func (m *V1PostgresResponse) contextValidateSize(ctx context.Context, formats st
 func (m *V1PostgresResponse) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")
