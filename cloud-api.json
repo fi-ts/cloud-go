@@ -1321,6 +1321,13 @@
       "properties": {
         "operation": {
           "description": "the gardener shoot operation annotation to annotate the shoot with",
+          "enum": [
+            "maintain",
+            "reconcile",
+            "retry",
+            "rotate-kubeconfig-credentials",
+            "rotate-ssh-keypair"
+          ],
           "type": "string"
         }
       },
@@ -4992,15 +4999,50 @@
         "certificateAuthorities": {
           "$ref": "#/definitions/v1beta1.ShootCARotation"
         },
+        "etcdEncryptionKey": {
+          "$ref": "#/definitions/v1beta1.ShootETCDEncryptionKeyRotation"
+        },
         "kubeconfig": {
           "$ref": "#/definitions/v1beta1.ShootKubeconfigRotation"
+        },
+        "observability": {
+          "$ref": "#/definitions/v1beta1.ShootObservabilityRotation"
+        },
+        "serviceAccountKey": {
+          "$ref": "#/definitions/v1beta1.ShootServiceAccountKeyRotation"
         },
         "sshKeypair": {
           "$ref": "#/definitions/v1beta1.ShootSSHKeypairRotation"
         }
       }
     },
+    "v1beta1.ShootETCDEncryptionKeyRotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        },
+        "phase": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "phase"
+      ]
+    },
     "v1beta1.ShootKubeconfigRotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        }
+      }
+    },
+    "v1beta1.ShootObservabilityRotation": {
       "properties": {
         "lastCompletionTime": {
           "type": "string"
@@ -5019,6 +5061,22 @@
           "type": "string"
         }
       }
+    },
+    "v1beta1.ShootServiceAccountKeyRotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        },
+        "phase": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "phase"
+      ]
     },
     "v1beta1.ShootStatus": {
       "properties": {
@@ -5057,6 +5115,9 @@
             "$ref": "#/definitions/v1beta1.LastError"
           },
           "type": "array"
+        },
+        "lastHibernationTriggerTime": {
+          "type": "string"
         },
         "lastOperation": {
           "$ref": "#/definitions/v1beta1.LastOperation"

@@ -21,8 +21,17 @@ type V1beta1ShootCredentialsRotation struct {
 	// certificate authorities
 	CertificateAuthorities *V1beta1ShootCARotation `json:"certificateAuthorities,omitempty"`
 
+	// etcd encryption key
+	EtcdEncryptionKey *V1beta1ShootETCDEncryptionKeyRotation `json:"etcdEncryptionKey,omitempty"`
+
 	// kubeconfig
 	Kubeconfig *V1beta1ShootKubeconfigRotation `json:"kubeconfig,omitempty"`
+
+	// observability
+	Observability *V1beta1ShootObservabilityRotation `json:"observability,omitempty"`
+
+	// service account key
+	ServiceAccountKey *V1beta1ShootServiceAccountKeyRotation `json:"serviceAccountKey,omitempty"`
 
 	// ssh keypair
 	SSHKeypair *V1beta1ShootSSHKeypairRotation `json:"sshKeypair,omitempty"`
@@ -36,7 +45,19 @@ func (m *V1beta1ShootCredentialsRotation) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.validateEtcdEncryptionKey(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateKubeconfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateObservability(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateServiceAccountKey(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -69,6 +90,25 @@ func (m *V1beta1ShootCredentialsRotation) validateCertificateAuthorities(formats
 	return nil
 }
 
+func (m *V1beta1ShootCredentialsRotation) validateEtcdEncryptionKey(formats strfmt.Registry) error {
+	if swag.IsZero(m.EtcdEncryptionKey) { // not required
+		return nil
+	}
+
+	if m.EtcdEncryptionKey != nil {
+		if err := m.EtcdEncryptionKey.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("etcdEncryptionKey")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("etcdEncryptionKey")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1beta1ShootCredentialsRotation) validateKubeconfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.Kubeconfig) { // not required
 		return nil
@@ -80,6 +120,44 @@ func (m *V1beta1ShootCredentialsRotation) validateKubeconfig(formats strfmt.Regi
 				return ve.ValidateName("kubeconfig")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("kubeconfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootCredentialsRotation) validateObservability(formats strfmt.Registry) error {
+	if swag.IsZero(m.Observability) { // not required
+		return nil
+	}
+
+	if m.Observability != nil {
+		if err := m.Observability.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("observability")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("observability")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootCredentialsRotation) validateServiceAccountKey(formats strfmt.Registry) error {
+	if swag.IsZero(m.ServiceAccountKey) { // not required
+		return nil
+	}
+
+	if m.ServiceAccountKey != nil {
+		if err := m.ServiceAccountKey.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("serviceAccountKey")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("serviceAccountKey")
 			}
 			return err
 		}
@@ -115,7 +193,19 @@ func (m *V1beta1ShootCredentialsRotation) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateEtcdEncryptionKey(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateKubeconfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateObservability(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateServiceAccountKey(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -145,6 +235,22 @@ func (m *V1beta1ShootCredentialsRotation) contextValidateCertificateAuthorities(
 	return nil
 }
 
+func (m *V1beta1ShootCredentialsRotation) contextValidateEtcdEncryptionKey(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.EtcdEncryptionKey != nil {
+		if err := m.EtcdEncryptionKey.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("etcdEncryptionKey")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("etcdEncryptionKey")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1beta1ShootCredentialsRotation) contextValidateKubeconfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Kubeconfig != nil {
@@ -153,6 +259,38 @@ func (m *V1beta1ShootCredentialsRotation) contextValidateKubeconfig(ctx context.
 				return ve.ValidateName("kubeconfig")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("kubeconfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootCredentialsRotation) contextValidateObservability(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Observability != nil {
+		if err := m.Observability.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("observability")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("observability")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootCredentialsRotation) contextValidateServiceAccountKey(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ServiceAccountKey != nil {
+		if err := m.ServiceAccountKey.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("serviceAccountKey")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("serviceAccountKey")
 			}
 			return err
 		}

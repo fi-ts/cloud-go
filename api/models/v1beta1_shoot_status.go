@@ -46,6 +46,9 @@ type V1beta1ShootStatus struct {
 	// last errors
 	LastErrors []*V1beta1LastError `json:"lastErrors"`
 
+	// last hibernation trigger time
+	LastHibernationTriggerTime string `json:"lastHibernationTriggerTime,omitempty"`
+
 	// last operation
 	LastOperation *V1beta1LastOperation `json:"lastOperation,omitempty"`
 
