@@ -78,6 +78,11 @@ func (m *V1PostgresStatus) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *V1PostgresStatus) contextValidateSocket(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Socket != nil {
+
+		if swag.IsZero(m.Socket) { // not required
+			return nil
+		}
+
 		if err := m.Socket.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("socket")

@@ -291,6 +291,7 @@ func (m *V1Worker) ContextValidate(ctx context.Context, formats strfmt.Registry)
 func (m *V1Worker) contextValidateMachineImage(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MachineImage != nil {
+
 		if err := m.MachineImage.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("MachineImage")
@@ -309,6 +310,11 @@ func (m *V1Worker) contextValidateTaints(ctx context.Context, formats strfmt.Reg
 	for i := 0; i < len(m.Taints); i++ {
 
 		if m.Taints[i] != nil {
+
+			if swag.IsZero(m.Taints[i]) { // not required
+				return nil
+			}
+
 			if err := m.Taints[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Taints" + "." + strconv.Itoa(i))

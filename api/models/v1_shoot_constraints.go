@@ -265,6 +265,11 @@ func (m *V1ShootConstraints) contextValidateFirewallControllerVersions(ctx conte
 	for i := 0; i < len(m.FirewallControllerVersions); i++ {
 
 		if m.FirewallControllerVersions[i] != nil {
+
+			if swag.IsZero(m.FirewallControllerVersions[i]) { // not required
+				return nil
+			}
+
 			if err := m.FirewallControllerVersions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("firewall_controller_versions" + "." + strconv.Itoa(i))
@@ -285,6 +290,11 @@ func (m *V1ShootConstraints) contextValidateMachineImages(ctx context.Context, f
 	for i := 0; i < len(m.MachineImages); i++ {
 
 		if m.MachineImages[i] != nil {
+
+			if swag.IsZero(m.MachineImages[i]) { // not required
+				return nil
+			}
+
 			if err := m.MachineImages[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("machine_images" + "." + strconv.Itoa(i))
@@ -305,6 +315,11 @@ func (m *V1ShootConstraints) contextValidateNetworks(ctx context.Context, format
 	for i := 0; i < len(m.Networks); i++ {
 
 		if m.Networks[i] != nil {
+
+			if swag.IsZero(m.Networks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Networks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("networks" + "." + strconv.Itoa(i))

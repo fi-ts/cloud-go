@@ -72,6 +72,11 @@ func (m *V1TenantUpdateRequest) ContextValidate(ctx context.Context, formats str
 func (m *V1TenantUpdateRequest) contextValidateTenant(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Tenant != nil {
+
+		if swag.IsZero(m.Tenant) { // not required
+			return nil
+		}
+
 		if err := m.Tenant.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tenant")

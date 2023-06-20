@@ -1325,7 +1325,6 @@
             "maintain",
             "reconcile",
             "retry",
-            "rotate-kubeconfig-credentials",
             "rotate-ssh-keypair"
           ],
           "type": "string"

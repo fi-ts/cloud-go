@@ -72,6 +72,11 @@ func (m *V1beta1ShootCredentials) ContextValidate(ctx context.Context, formats s
 func (m *V1beta1ShootCredentials) contextValidateRotation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Rotation != nil {
+
+		if swag.IsZero(m.Rotation) { // not required
+			return nil
+		}
+
 		if err := m.Rotation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("rotation")

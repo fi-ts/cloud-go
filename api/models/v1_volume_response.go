@@ -381,6 +381,7 @@ func (m *V1VolumeResponse) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *V1VolumeResponse) contextValidateStatistics(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Statistics != nil {
+
 		if err := m.Statistics.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Statistics")

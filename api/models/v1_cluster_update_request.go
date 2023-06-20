@@ -418,6 +418,7 @@ func (m *V1ClusterUpdateRequest) ContextValidate(ctx context.Context, formats st
 func (m *V1ClusterUpdateRequest) contextValidateAudit(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Audit != nil {
+
 		if err := m.Audit.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Audit")
@@ -434,6 +435,7 @@ func (m *V1ClusterUpdateRequest) contextValidateAudit(ctx context.Context, forma
 func (m *V1ClusterUpdateRequest) contextValidateClusterFeatures(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ClusterFeatures != nil {
+
 		if err := m.ClusterFeatures.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ClusterFeatures")
@@ -450,6 +452,7 @@ func (m *V1ClusterUpdateRequest) contextValidateClusterFeatures(ctx context.Cont
 func (m *V1ClusterUpdateRequest) contextValidateCustomDefaultStorageClass(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CustomDefaultStorageClass != nil {
+
 		if err := m.CustomDefaultStorageClass.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("CustomDefaultStorageClass")
@@ -468,6 +471,11 @@ func (m *V1ClusterUpdateRequest) contextValidateEgressRules(ctx context.Context,
 	for i := 0; i < len(m.EgressRules); i++ {
 
 		if m.EgressRules[i] != nil {
+
+			if swag.IsZero(m.EgressRules[i]) { // not required
+				return nil
+			}
+
 			if err := m.EgressRules[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("EgressRules" + "." + strconv.Itoa(i))
@@ -486,6 +494,7 @@ func (m *V1ClusterUpdateRequest) contextValidateEgressRules(ctx context.Context,
 func (m *V1ClusterUpdateRequest) contextValidateKubernetes(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Kubernetes != nil {
+
 		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Kubernetes")
@@ -502,6 +511,7 @@ func (m *V1ClusterUpdateRequest) contextValidateKubernetes(ctx context.Context, 
 func (m *V1ClusterUpdateRequest) contextValidateMaintenance(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Maintenance != nil {
+
 		if err := m.Maintenance.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Maintenance")
@@ -520,6 +530,11 @@ func (m *V1ClusterUpdateRequest) contextValidateWorkers(ctx context.Context, for
 	for i := 0; i < len(m.Workers); i++ {
 
 		if m.Workers[i] != nil {
+
+			if swag.IsZero(m.Workers[i]) { // not required
+				return nil
+			}
+
 			if err := m.Workers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Workers" + "." + strconv.Itoa(i))

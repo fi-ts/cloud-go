@@ -22,7 +22,7 @@ type V1ClusterReconcileRequest struct {
 
 	// the gardener shoot operation annotation to annotate the shoot with
 	// Required: true
-	// Enum: [maintain reconcile retry rotate-kubeconfig-credentials rotate-ssh-keypair]
+	// Enum: [maintain reconcile retry rotate-ssh-keypair]
 	Operation *string `json:"operation"`
 }
 
@@ -44,7 +44,7 @@ var v1ClusterReconcileRequestTypeOperationPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["maintain","reconcile","retry","rotate-kubeconfig-credentials","rotate-ssh-keypair"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["maintain","reconcile","retry","rotate-ssh-keypair"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -62,9 +62,6 @@ const (
 
 	// V1ClusterReconcileRequestOperationRetry captures enum value "retry"
 	V1ClusterReconcileRequestOperationRetry string = "retry"
-
-	// V1ClusterReconcileRequestOperationRotateDashKubeconfigDashCredentials captures enum value "rotate-kubeconfig-credentials"
-	V1ClusterReconcileRequestOperationRotateDashKubeconfigDashCredentials string = "rotate-kubeconfig-credentials"
 
 	// V1ClusterReconcileRequestOperationRotateDashSSHDashKeypair captures enum value "rotate-ssh-keypair"
 	V1ClusterReconcileRequestOperationRotateDashSSHDashKeypair string = "rotate-ssh-keypair"

@@ -107,6 +107,7 @@ func (m *V1Maintenance) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (m *V1Maintenance) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AutoUpdate != nil {
+
 		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("AutoUpdate")
@@ -123,6 +124,7 @@ func (m *V1Maintenance) contextValidateAutoUpdate(ctx context.Context, formats s
 func (m *V1Maintenance) contextValidateTimeWindow(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TimeWindow != nil {
+
 		if err := m.TimeWindow.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("TimeWindow")

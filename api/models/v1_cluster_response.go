@@ -682,6 +682,7 @@ func (m *V1ClusterResponse) ContextValidate(ctx context.Context, formats strfmt.
 func (m *V1ClusterResponse) contextValidateClusterFeatures(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ClusterFeatures != nil {
+
 		if err := m.ClusterFeatures.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ClusterFeatures")
@@ -698,6 +699,7 @@ func (m *V1ClusterResponse) contextValidateClusterFeatures(ctx context.Context, 
 func (m *V1ClusterResponse) contextValidateCustomDefaultStorageClass(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CustomDefaultStorageClass != nil {
+
 		if err := m.CustomDefaultStorageClass.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("CustomDefaultStorageClass")
@@ -716,6 +718,11 @@ func (m *V1ClusterResponse) contextValidateEgressRules(ctx context.Context, form
 	for i := 0; i < len(m.EgressRules); i++ {
 
 		if m.EgressRules[i] != nil {
+
+			if swag.IsZero(m.EgressRules[i]) { // not required
+				return nil
+			}
+
 			if err := m.EgressRules[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("EgressRules" + "." + strconv.Itoa(i))
@@ -734,6 +741,7 @@ func (m *V1ClusterResponse) contextValidateEgressRules(ctx context.Context, form
 func (m *V1ClusterResponse) contextValidateKubernetes(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Kubernetes != nil {
+
 		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Kubernetes")
@@ -750,6 +758,7 @@ func (m *V1ClusterResponse) contextValidateKubernetes(ctx context.Context, forma
 func (m *V1ClusterResponse) contextValidateMaintenance(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Maintenance != nil {
+
 		if err := m.Maintenance.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Maintenance")
@@ -766,6 +775,7 @@ func (m *V1ClusterResponse) contextValidateMaintenance(ctx context.Context, form
 func (m *V1ClusterResponse) contextValidateNetworking(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Networking != nil {
+
 		if err := m.Networking.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Networking")
@@ -782,6 +792,7 @@ func (m *V1ClusterResponse) contextValidateNetworking(ctx context.Context, forma
 func (m *V1ClusterResponse) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Status")
@@ -800,6 +811,11 @@ func (m *V1ClusterResponse) contextValidateWorkers(ctx context.Context, formats 
 	for i := 0; i < len(m.Workers); i++ {
 
 		if m.Workers[i] != nil {
+
+			if swag.IsZero(m.Workers[i]) { // not required
+				return nil
+			}
+
 			if err := m.Workers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Workers" + "." + strconv.Itoa(i))
@@ -820,6 +836,11 @@ func (m *V1ClusterResponse) contextValidateFirewalls(ctx context.Context, format
 	for i := 0; i < len(m.Firewalls); i++ {
 
 		if m.Firewalls[i] != nil {
+
+			if swag.IsZero(m.Firewalls[i]) { // not required
+				return nil
+			}
+
 			if err := m.Firewalls[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("firewalls" + "." + strconv.Itoa(i))
@@ -840,6 +861,11 @@ func (m *V1ClusterResponse) contextValidateMachines(ctx context.Context, formats
 	for i := 0; i < len(m.Machines); i++ {
 
 		if m.Machines[i] != nil {
+
+			if swag.IsZero(m.Machines[i]) { // not required
+				return nil
+			}
+
 			if err := m.Machines[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("machines" + "." + strconv.Itoa(i))

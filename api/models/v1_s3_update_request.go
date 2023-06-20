@@ -170,6 +170,11 @@ func (m *V1S3UpdateRequest) contextValidateAddKeys(ctx context.Context, formats 
 	for i := 0; i < len(m.AddKeys); i++ {
 
 		if m.AddKeys[i] != nil {
+
+			if swag.IsZero(m.AddKeys[i]) { // not required
+				return nil
+			}
+
 			if err := m.AddKeys[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("add_keys" + "." + strconv.Itoa(i))

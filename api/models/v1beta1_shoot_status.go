@@ -355,6 +355,11 @@ func (m *V1beta1ShootStatus) contextValidateAdvertisedAddresses(ctx context.Cont
 	for i := 0; i < len(m.AdvertisedAddresses); i++ {
 
 		if m.AdvertisedAddresses[i] != nil {
+
+			if swag.IsZero(m.AdvertisedAddresses[i]) { // not required
+				return nil
+			}
+
 			if err := m.AdvertisedAddresses[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("advertisedAddresses" + "." + strconv.Itoa(i))
@@ -375,6 +380,11 @@ func (m *V1beta1ShootStatus) contextValidateConditions(ctx context.Context, form
 	for i := 0; i < len(m.Conditions); i++ {
 
 		if m.Conditions[i] != nil {
+
+			if swag.IsZero(m.Conditions[i]) { // not required
+				return nil
+			}
+
 			if err := m.Conditions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
@@ -395,6 +405,11 @@ func (m *V1beta1ShootStatus) contextValidateConstraints(ctx context.Context, for
 	for i := 0; i < len(m.Constraints); i++ {
 
 		if m.Constraints[i] != nil {
+
+			if swag.IsZero(m.Constraints[i]) { // not required
+				return nil
+			}
+
 			if err := m.Constraints[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("constraints" + "." + strconv.Itoa(i))
@@ -413,6 +428,11 @@ func (m *V1beta1ShootStatus) contextValidateConstraints(ctx context.Context, for
 func (m *V1beta1ShootStatus) contextValidateCredentials(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Credentials != nil {
+
+		if swag.IsZero(m.Credentials) { // not required
+			return nil
+		}
+
 		if err := m.Credentials.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credentials")
@@ -429,6 +449,7 @@ func (m *V1beta1ShootStatus) contextValidateCredentials(ctx context.Context, for
 func (m *V1beta1ShootStatus) contextValidateGardener(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Gardener != nil {
+
 		if err := m.Gardener.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gardener")
@@ -447,6 +468,11 @@ func (m *V1beta1ShootStatus) contextValidateLastErrors(ctx context.Context, form
 	for i := 0; i < len(m.LastErrors); i++ {
 
 		if m.LastErrors[i] != nil {
+
+			if swag.IsZero(m.LastErrors[i]) { // not required
+				return nil
+			}
+
 			if err := m.LastErrors[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("lastErrors" + "." + strconv.Itoa(i))
@@ -465,6 +491,11 @@ func (m *V1beta1ShootStatus) contextValidateLastErrors(ctx context.Context, form
 func (m *V1beta1ShootStatus) contextValidateLastOperation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LastOperation != nil {
+
+		if swag.IsZero(m.LastOperation) { // not required
+			return nil
+		}
+
 		if err := m.LastOperation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("lastOperation")
