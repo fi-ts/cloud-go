@@ -23,6 +23,10 @@ type V1Kubernetes struct {
 	// Required: true
 	AllowPrivilegedContainers *bool `json:"AllowPrivilegedContainers"`
 
+	// default pod security standard
+	// Required: true
+	DefaultPodSecurityStandard *string `json:"DefaultPodSecurityStandard"`
+
 	// expiration date
 	// Required: true
 	// Format: date-time
@@ -44,6 +48,10 @@ func (m *V1Kubernetes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDefaultPodSecurityStandard(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateExpirationDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -61,6 +69,15 @@ func (m *V1Kubernetes) Validate(formats strfmt.Registry) error {
 func (m *V1Kubernetes) validateAllowPrivilegedContainers(formats strfmt.Registry) error {
 
 	if err := validate.Required("AllowPrivilegedContainers", "body", m.AllowPrivilegedContainers); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1Kubernetes) validateDefaultPodSecurityStandard(formats strfmt.Registry) error {
+
+	if err := validate.Required("DefaultPodSecurityStandard", "body", m.DefaultPodSecurityStandard); err != nil {
 		return err
 	}
 

@@ -2329,6 +2329,9 @@
         "AllowPrivilegedContainers": {
           "type": "boolean"
         },
+        "DefaultPodSecurityStandard": {
+          "type": "string"
+        },
         "ExpirationDate": {
           "format": "date-time",
           "type": "string"
@@ -2343,6 +2346,7 @@
       },
       "required": [
         "AllowPrivilegedContainers",
+        "DefaultPodSecurityStandard",
         "ExpirationDate",
         "Version"
       ]
