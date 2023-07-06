@@ -37,11 +37,13 @@ type V1Kubernetes struct {
 	Version *string `json:"Version"`
 
 	// default pod security standard
+	// Required: true
 	// Enum: [ baseline privileged restricted]
-	DefaultPodSecurityStandard string `json:"defaultPodSecurityStandard,omitempty"`
+	DefaultPodSecurityStandard *string `json:"defaultPodSecurityStandard"`
 
 	// disable pod security policies
-	DisablePodSecurityPolicies bool `json:"disablePodSecurityPolicies,omitempty"`
+	// Required: true
+	DisablePodSecurityPolicies *bool `json:"disablePodSecurityPolicies"`
 }
 
 // Validate validates this v1 kubernetes
@@ -61,6 +63,10 @@ func (m *V1Kubernetes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDefaultPodSecurityStandard(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDisablePodSecurityPolicies(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -137,12 +143,22 @@ func (m *V1Kubernetes) validateDefaultPodSecurityStandardEnum(path, location str
 }
 
 func (m *V1Kubernetes) validateDefaultPodSecurityStandard(formats strfmt.Registry) error {
-	if swag.IsZero(m.DefaultPodSecurityStandard) { // not required
-		return nil
+
+	if err := validate.Required("defaultPodSecurityStandard", "body", m.DefaultPodSecurityStandard); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateDefaultPodSecurityStandardEnum("defaultPodSecurityStandard", "body", m.DefaultPodSecurityStandard); err != nil {
+	if err := m.validateDefaultPodSecurityStandardEnum("defaultPodSecurityStandard", "body", *m.DefaultPodSecurityStandard); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1Kubernetes) validateDisablePodSecurityPolicies(formats strfmt.Registry) error {
+
+	if err := validate.Required("disablePodSecurityPolicies", "body", m.DisablePodSecurityPolicies); err != nil {
 		return err
 	}
 

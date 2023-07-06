@@ -2356,7 +2356,9 @@
       "required": [
         "AllowPrivilegedContainers",
         "ExpirationDate",
-        "Version"
+        "Version",
+        "defaultPodSecurityStandard",
+        "disablePodSecurityPolicies"
       ]
     },
     "v1.MachineImage": {
