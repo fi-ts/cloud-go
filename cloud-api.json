@@ -2329,9 +2329,6 @@
         "AllowPrivilegedContainers": {
           "type": "boolean"
         },
-        "DefaultPodSecurityStandard": {
-          "type": "string"
-        },
         "ExpirationDate": {
           "format": "date-time",
           "type": "string"
@@ -2342,11 +2339,22 @@
         },
         "Version": {
           "type": "string"
+        },
+        "defaultPodSecurityStandard": {
+          "enum": [
+            "",
+            "baseline",
+            "privileged",
+            "restricted"
+          ],
+          "type": "string"
+        },
+        "disablePodSecurityPolicies": {
+          "type": "boolean"
         }
       },
       "required": [
         "AllowPrivilegedContainers",
-        "DefaultPodSecurityStandard",
         "ExpirationDate",
         "Version"
       ]
