@@ -2339,12 +2339,22 @@
         },
         "Version": {
           "type": "string"
+        },
+        "defaultPodSecurityStandard": {
+          "enum": [
+            "",
+            "baseline",
+            "privileged",
+            "restricted"
+          ],
+          "type": "string"
         }
       },
       "required": [
         "AllowPrivilegedContainers",
         "ExpirationDate",
-        "Version"
+        "Version",
+        "defaultPodSecurityStandard"
       ]
     },
     "v1.MachineImage": {
