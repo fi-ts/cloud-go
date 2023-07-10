@@ -40,10 +40,6 @@ type V1Kubernetes struct {
 	// Required: true
 	// Enum: [ baseline privileged restricted]
 	DefaultPodSecurityStandard *string `json:"defaultPodSecurityStandard"`
-
-	// disable pod security policies
-	// Required: true
-	DisablePodSecurityPolicies *bool `json:"disablePodSecurityPolicies"`
 }
 
 // Validate validates this v1 kubernetes
@@ -63,10 +59,6 @@ func (m *V1Kubernetes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDefaultPodSecurityStandard(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateDisablePodSecurityPolicies(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -150,15 +142,6 @@ func (m *V1Kubernetes) validateDefaultPodSecurityStandard(formats strfmt.Registr
 
 	// value enum
 	if err := m.validateDefaultPodSecurityStandardEnum("defaultPodSecurityStandard", "body", *m.DefaultPodSecurityStandard); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1Kubernetes) validateDisablePodSecurityPolicies(formats strfmt.Registry) error {
-
-	if err := validate.Required("disablePodSecurityPolicies", "body", m.DisablePodSecurityPolicies); err != nil {
 		return err
 	}
 
