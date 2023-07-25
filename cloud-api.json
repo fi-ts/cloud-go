@@ -2494,6 +2494,15 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "defaultExternal": {
+          "type": "boolean"
+        },
+        "defaultPartitionStorage": {
+          "type": "boolean"
         }
       },
       "required": [

@@ -34,6 +34,15 @@ type V1Network struct {
 	// prefixes
 	// Required: true
 	Prefixes []string `json:"Prefixes"`
+
+	// default
+	Default bool `json:"default,omitempty"`
+
+	// default external
+	DefaultExternal bool `json:"defaultExternal,omitempty"`
+
+	// default partition storage
+	DefaultPartitionStorage bool `json:"defaultPartitionStorage,omitempty"`
 }
 
 // Validate validates this v1 network
