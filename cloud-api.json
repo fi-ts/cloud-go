@@ -2348,13 +2348,17 @@
             "restricted"
           ],
           "type": "string"
+        },
+        "disablePodSecurityPolicies": {
+          "type": "boolean"
         }
       },
       "required": [
         "AllowPrivilegedContainers",
         "ExpirationDate",
         "Version",
-        "defaultPodSecurityStandard"
+        "defaultPodSecurityStandard",
+        "disablePodSecurityPolicies"
       ]
     },
     "v1.MachineImage": {
