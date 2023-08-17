@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/fi-ts/cloud-go/api/client/accounting"
+	"github.com/fi-ts/cloud-go/api/client/audit"
 	"github.com/fi-ts/cloud-go/api/client/cluster"
 	"github.com/fi-ts/cloud-go/api/client/database"
 	"github.com/fi-ts/cloud-go/api/client/health"
@@ -66,6 +67,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudAPI {
 	cli := new(CloudAPI)
 	cli.Transport = transport
 	cli.Accounting = accounting.New(transport, formats)
+	cli.Audit = audit.New(transport, formats)
 	cli.Cluster = cluster.New(transport, formats)
 	cli.Database = database.New(transport, formats)
 	cli.Health = health.New(transport, formats)
@@ -122,6 +124,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type CloudAPI struct {
 	Accounting accounting.ClientService
 
+	Audit audit.ClientService
+
 	Cluster cluster.ClientService
 
 	Database database.ClientService
@@ -149,6 +153,7 @@ type CloudAPI struct {
 func (c *CloudAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Accounting.SetTransport(transport)
+	c.Audit.SetTransport(transport)
 	c.Cluster.SetTransport(transport)
 	c.Database.SetTransport(transport)
 	c.Health.SetTransport(transport)
