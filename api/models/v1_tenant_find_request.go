@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -17,20 +18,84 @@ import (
 // swagger:model v1.TenantFindRequest
 type V1TenantFindRequest struct {
 
+	// annotations
+	Annotations map[string]string `json:"annotations,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// paging
+	Paging *V1Paging `json:"paging,omitempty"`
 }
 
 // Validate validates this v1 tenant find request
 func (m *V1TenantFindRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validatePaging(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this v1 tenant find request based on context it is used
+func (m *V1TenantFindRequest) validatePaging(formats strfmt.Registry) error {
+	if swag.IsZero(m.Paging) { // not required
+		return nil
+	}
+
+	if m.Paging != nil {
+		if err := m.Paging.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("paging")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paging")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 tenant find request based on the context it is used
 func (m *V1TenantFindRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePaging(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1TenantFindRequest) contextValidatePaging(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Paging != nil {
+
+		if swag.IsZero(m.Paging) { // not required
+			return nil
+		}
+
+		if err := m.Paging.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("paging")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paging")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

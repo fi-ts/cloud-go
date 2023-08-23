@@ -2817,6 +2817,18 @@
         "Type"
       ]
     },
+    "v1.Paging": {
+      "properties": {
+        "count": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "page": {
+          "format": "integer",
+          "type": "integer"
+        }
+      }
+    },
     "v1.PostgresBackupConfigCreateRequest": {
       "properties": {
         "autocreate": {
@@ -4458,11 +4470,20 @@
     },
     "v1.TenantFindRequest": {
       "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "id": {
           "type": "string"
         },
         "name": {
           "type": "string"
+        },
+        "paging": {
+          "$ref": "#/definitions/v1.Paging"
         }
       }
     },
@@ -4490,8 +4511,23 @@
     },
     "v1.TenantUpdateRequest": {
       "properties": {
-        "tenant": {
-          "$ref": "#/definitions/v1.Tenant"
+        "default_quotas": {
+          "$ref": "#/definitions/v1.QuotaSet"
+        },
+        "description": {
+          "type": "string"
+        },
+        "iam_config": {
+          "$ref": "#/definitions/v1.IAMConfig"
+        },
+        "meta": {
+          "$ref": "#/definitions/v1.Meta"
+        },
+        "name": {
+          "type": "string"
+        },
+        "quotas": {
+          "$ref": "#/definitions/v1.QuotaSet"
         }
       }
     },
