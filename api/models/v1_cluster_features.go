@@ -19,9 +19,17 @@ import (
 // swagger:model v1.ClusterFeatures
 type V1ClusterFeatures struct {
 
+	// disable forward to upstream DNS
+	// Required: true
+	DisableForwardToUpstreamDNS *string `json:"DisableForwardToUpstreamDNS"`
+
 	// duros storage encryption
 	// Required: true
 	DurosStorageEncryption *string `json:"DurosStorageEncryption"`
+
+	// enable node local DNS
+	// Required: true
+	EnableNodeLocalDNS *string `json:"EnableNodeLocalDNS"`
 
 	// log accepted connections
 	// Required: true
@@ -36,7 +44,15 @@ type V1ClusterFeatures struct {
 func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDisableForwardToUpstreamDNS(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDurosStorageEncryption(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEnableNodeLocalDNS(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -54,9 +70,27 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1ClusterFeatures) validateDisableForwardToUpstreamDNS(formats strfmt.Registry) error {
+
+	if err := validate.Required("DisableForwardToUpstreamDNS", "body", m.DisableForwardToUpstreamDNS); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1ClusterFeatures) validateDurosStorageEncryption(formats strfmt.Registry) error {
 
 	if err := validate.Required("DurosStorageEncryption", "body", m.DurosStorageEncryption); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterFeatures) validateEnableNodeLocalDNS(formats strfmt.Registry) error {
+
+	if err := validate.Required("EnableNodeLocalDNS", "body", m.EnableNodeLocalDNS); err != nil {
 		return err
 	}
 

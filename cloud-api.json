@@ -1257,7 +1257,13 @@
     },
     "v1.ClusterFeatures": {
       "properties": {
+        "DisableForwardToUpstreamDNS": {
+          "type": "string"
+        },
         "DurosStorageEncryption": {
+          "type": "string"
+        },
+        "EnableNodeLocalDNS": {
           "type": "string"
         },
         "LogAcceptedConnections": {
@@ -1268,7 +1274,9 @@
         }
       },
       "required": [
+        "DisableForwardToUpstreamDNS",
         "DurosStorageEncryption",
+        "EnableNodeLocalDNS",
         "LogAcceptedConnections",
         "ReversedVPN"
       ]
