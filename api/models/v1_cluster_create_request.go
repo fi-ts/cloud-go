@@ -84,6 +84,10 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	Purpose *string `json:"Purpose"`
 
+	// system components
+	// Required: true
+	SystemComponents *V1SystemComponents `json:"SystemComponents"`
+
 	// tenant
 	// Required: true
 	Tenant *string `json:"Tenant"`
@@ -164,6 +168,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePurpose(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSystemComponents(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -398,6 +406,26 @@ func (m *V1ClusterCreateRequest) validatePurpose(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *V1ClusterCreateRequest) validateSystemComponents(formats strfmt.Registry) error {
+
+	if err := validate.Required("SystemComponents", "body", m.SystemComponents); err != nil {
+		return err
+	}
+
+	if m.SystemComponents != nil {
+		if err := m.SystemComponents.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SystemComponents")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SystemComponents")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1ClusterCreateRequest) validateTenant(formats strfmt.Registry) error {
 
 	if err := validate.Required("Tenant", "body", m.Tenant); err != nil {
@@ -459,6 +487,10 @@ func (m *V1ClusterCreateRequest) ContextValidate(ctx context.Context, formats st
 	}
 
 	if err := m.contextValidateMaintenance(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSystemComponents(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -574,6 +606,23 @@ func (m *V1ClusterCreateRequest) contextValidateMaintenance(ctx context.Context,
 				return ve.ValidateName("Maintenance")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Maintenance")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) contextValidateSystemComponents(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SystemComponents != nil {
+
+		if err := m.SystemComponents.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("SystemComponents")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("SystemComponents")
 			}
 			return err
 		}
