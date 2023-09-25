@@ -1199,6 +1199,9 @@
         "Purpose": {
           "type": "string"
         },
+        "SystemComponents": {
+          "$ref": "#/definitions/v1.SystemComponents"
+        },
         "Tenant": {
           "type": "string"
         },
@@ -1233,6 +1236,7 @@
         "PartitionID",
         "ProjectID",
         "Purpose",
+        "SystemComponents",
         "Tenant",
         "Workers"
       ]
@@ -1519,6 +1523,9 @@
         "Status": {
           "$ref": "#/definitions/v1beta1.ShootStatus"
         },
+        "SystemComponents": {
+          "$ref": "#/definitions/v1.SystemComponents"
+        },
         "Tenant": {
           "type": "string"
         },
@@ -1569,6 +1576,7 @@
         "ProjectID",
         "Purpose",
         "Status",
+        "SystemComponents",
         "Tenant",
         "Workers",
         "cni"
@@ -1685,6 +1693,9 @@
         "Purpose": {
           "type": "string"
         },
+        "SystemComponents": {
+          "$ref": "#/definitions/v1.SystemComponents"
+        },
         "Workers": {
           "items": {
             "$ref": "#/definitions/v1.Worker"
@@ -1710,6 +1721,7 @@
         "Labels",
         "Maintenance",
         "Purpose",
+        "SystemComponents",
         "Workers",
         "seedName"
       ]
@@ -2815,6 +2827,20 @@
         "Pods",
         "Services",
         "Type"
+      ]
+    },
+    "v1.NodeLocalDNS": {
+      "properties": {
+        "DisableForwardToUpstreamDNS": {
+          "type": "boolean"
+        },
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "DisableForwardToUpstreamDNS",
+        "Enabled"
       ]
     },
     "v1.Paging": {
@@ -4419,6 +4445,16 @@
         "ServerEndpoints",
         "State",
         "UUID"
+      ]
+    },
+    "v1.SystemComponents": {
+      "properties": {
+        "NodeLocalDNS": {
+          "$ref": "#/definitions/v1.NodeLocalDNS"
+        }
+      },
+      "required": [
+        "NodeLocalDNS"
       ]
     },
     "v1.Taint": {
