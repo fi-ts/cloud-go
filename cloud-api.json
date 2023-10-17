@@ -2996,7 +2996,7 @@
         "backup": {
           "type": "string"
         },
-        "dedicatedLoadBalancerIP": {
+        "dedicatedloadbalancerip": {
           "type": "string"
         },
         "description": {
@@ -3038,7 +3038,7 @@
         }
       },
       "required": [
-        "dedicatedLoadBalancerIP"
+        "dedicatedloadbalancerip"
       ]
     },
     "v1.PostgresCreateStandbyRequest": {
@@ -3046,7 +3046,7 @@
         "backup": {
           "type": "string"
         },
-        "dedicatedLoadBalancerIP": {
+        "dedicatedloadbalancerip": {
           "type": "string"
         },
         "description": {
@@ -3076,7 +3076,7 @@
         }
       },
       "required": [
-        "dedicatedLoadBalancerIP",
+        "dedicatedloadbalancerip",
         "primaryId"
       ]
     },
@@ -3145,7 +3145,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "dedicatedLoadBalancerIP": {
+        "dedicatedloadbalancerip": {
           "type": "string"
         },
         "description": {
@@ -3199,7 +3199,7 @@
         }
       },
       "required": [
-        "dedicatedLoadBalancerIP",
+        "dedicatedloadbalancerip",
         "id",
         "status"
       ]
@@ -3299,7 +3299,7 @@
         "connection": {
           "$ref": "#/definitions/v1.Connection"
         },
-        "dedicatedLoadBalancerIP": {
+        "dedicatedloadbalancerip": {
           "type": "string"
         },
         "description": {
@@ -3341,7 +3341,7 @@
         }
       },
       "required": [
-        "dedicatedLoadBalancerIP",
+        "dedicatedloadbalancerip",
         "id"
       ]
     },

@@ -28,9 +28,9 @@ type V1PostgresCreateRequest struct {
 	// backup
 	Backup string `json:"backup,omitempty"`
 
-	// dedicated load balancer IP
+	// dedicatedloadbalancerip
 	// Required: true
-	DedicatedLoadBalancerIP *string `json:"dedicatedLoadBalancerIP"`
+	Dedicatedloadbalancerip *string `json:"dedicatedloadbalancerip"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -68,7 +68,7 @@ func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateDedicatedLoadBalancerIP(formats); err != nil {
+	if err := m.validateDedicatedloadbalancerip(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -101,9 +101,9 @@ func (m *V1PostgresCreateRequest) validateAccessList(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *V1PostgresCreateRequest) validateDedicatedLoadBalancerIP(formats strfmt.Registry) error {
+func (m *V1PostgresCreateRequest) validateDedicatedloadbalancerip(formats strfmt.Registry) error {
 
-	if err := validate.Required("dedicatedLoadBalancerIP", "body", m.DedicatedLoadBalancerIP); err != nil {
+	if err := validate.Required("dedicatedloadbalancerip", "body", m.Dedicatedloadbalancerip); err != nil {
 		return err
 	}
 

@@ -22,9 +22,9 @@ type V1PostgresCreateStandbyRequest struct {
 	// backup
 	Backup string `json:"backup,omitempty"`
 
-	// dedicated load balancer IP
+	// dedicatedloadbalancerip
 	// Required: true
-	DedicatedLoadBalancerIP *string `json:"dedicatedLoadBalancerIP"`
+	Dedicatedloadbalancerip *string `json:"dedicatedloadbalancerip"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -50,7 +50,7 @@ type V1PostgresCreateStandbyRequest struct {
 func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateDedicatedLoadBalancerIP(formats); err != nil {
+	if err := m.validateDedicatedloadbalancerip(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,9 +64,9 @@ func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *V1PostgresCreateStandbyRequest) validateDedicatedLoadBalancerIP(formats strfmt.Registry) error {
+func (m *V1PostgresCreateStandbyRequest) validateDedicatedloadbalancerip(formats strfmt.Registry) error {
 
-	if err := validate.Required("dedicatedLoadBalancerIP", "body", m.DedicatedLoadBalancerIP); err != nil {
+	if err := validate.Required("dedicatedloadbalancerip", "body", m.Dedicatedloadbalancerip); err != nil {
 		return err
 	}
 

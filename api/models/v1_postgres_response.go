@@ -38,9 +38,9 @@ type V1PostgresResponse struct {
 	// Format: date-time
 	CreationTimestamp strfmt.DateTime `json:"creationTimestamp,omitempty"`
 
-	// dedicated load balancer IP
+	// dedicatedloadbalancerip
 	// Required: true
-	DedicatedLoadBalancerIP *string `json:"dedicatedLoadBalancerIP"`
+	Dedicatedloadbalancerip *string `json:"dedicatedloadbalancerip"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -100,7 +100,7 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateDedicatedLoadBalancerIP(formats); err != nil {
+	if err := m.validateDedicatedloadbalancerip(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -176,9 +176,9 @@ func (m *V1PostgresResponse) validateCreationTimestamp(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *V1PostgresResponse) validateDedicatedLoadBalancerIP(formats strfmt.Registry) error {
+func (m *V1PostgresResponse) validateDedicatedloadbalancerip(formats strfmt.Registry) error {
 
-	if err := validate.Required("dedicatedLoadBalancerIP", "body", m.DedicatedLoadBalancerIP); err != nil {
+	if err := validate.Required("dedicatedloadbalancerip", "body", m.Dedicatedloadbalancerip); err != nil {
 		return err
 	}
 
