@@ -22,6 +22,10 @@ type V1PostgresCreateStandbyRequest struct {
 	// backup
 	Backup string `json:"backup,omitempty"`
 
+	// dedicated load balancer IP
+	// Required: true
+	DedicatedLoadBalancerIP *string `json:"dedicatedLoadBalancerIP"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
@@ -46,6 +50,10 @@ type V1PostgresCreateStandbyRequest struct {
 func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDedicatedLoadBalancerIP(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePrimaryID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -53,6 +61,15 @@ func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1PostgresCreateStandbyRequest) validateDedicatedLoadBalancerIP(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedLoadBalancerIP", "body", m.DedicatedLoadBalancerIP); err != nil {
+		return err
+	}
+
 	return nil
 }
 

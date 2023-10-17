@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // V1PostgresCreateRequest v1 postgres create request
@@ -26,6 +27,10 @@ type V1PostgresCreateRequest struct {
 
 	// backup
 	Backup string `json:"backup,omitempty"`
+
+	// dedicated load balancer IP
+	// Required: true
+	DedicatedLoadBalancerIP *string `json:"dedicatedLoadBalancerIP"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -63,6 +68,10 @@ func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDedicatedLoadBalancerIP(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSize(formats); err != nil {
 		res = append(res, err)
 	}
@@ -87,6 +96,15 @@ func (m *V1PostgresCreateRequest) validateAccessList(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresCreateRequest) validateDedicatedLoadBalancerIP(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedLoadBalancerIP", "body", m.DedicatedLoadBalancerIP); err != nil {
+		return err
 	}
 
 	return nil
