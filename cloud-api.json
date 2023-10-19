@@ -3290,6 +3290,12 @@
     },
     "v1.PostgresStatus": {
       "properties": {
+        "additionalsockets": {
+          "items": {
+            "$ref": "#/definitions/v1.PostgresSocket"
+          },
+          "type": "array"
+        },
         "childReference": {
           "type": "string"
         },
