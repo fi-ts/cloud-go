@@ -2993,6 +2993,9 @@
         "auditLogs": {
           "type": "boolean"
         },
+        "autoassigndedicatedlbipfrom": {
+          "type": "string"
+        },
         "backup": {
           "type": "string"
         },
@@ -3292,6 +3295,9 @@
         },
         "auditLogs": {
           "type": "boolean"
+        },
+        "autoassigndedicatedlbipfrom": {
+          "type": "string"
         },
         "backup": {
           "type": "string"

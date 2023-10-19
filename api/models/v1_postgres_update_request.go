@@ -25,6 +25,9 @@ type V1PostgresUpdateRequest struct {
 	// audit logs
 	AuditLogs bool `json:"auditLogs,omitempty"`
 
+	// autoassigndedicatedlbipfrom
+	Autoassigndedicatedlbipfrom string `json:"autoassigndedicatedlbipfrom,omitempty"`
+
 	// backup
 	Backup string `json:"backup,omitempty"`
 
