@@ -31,6 +31,9 @@ type V1PostgresRestoreRequest struct {
 	// partition ID
 	PartitionID string `json:"partitionID,omitempty"`
 
+	// size
+	Size *V1PostgresSize `json:"size,omitempty"`
+
 	// source Id
 	// Required: true
 	SourceID *string `json:"sourceId"`
@@ -46,6 +49,10 @@ type V1PostgresRestoreRequest struct {
 func (m *V1PostgresRestoreRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateSize(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSourceID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -53,6 +60,25 @@ func (m *V1PostgresRestoreRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1PostgresRestoreRequest) validateSize(formats strfmt.Registry) error {
+	if swag.IsZero(m.Size) { // not required
+		return nil
+	}
+
+	if m.Size != nil {
+		if err := m.Size.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("size")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("size")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -65,8 +91,38 @@ func (m *V1PostgresRestoreRequest) validateSourceID(formats strfmt.Registry) err
 	return nil
 }
 
-// ContextValidate validates this v1 postgres restore request based on context it is used
+// ContextValidate validate this v1 postgres restore request based on the context it is used
 func (m *V1PostgresRestoreRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSize(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1PostgresRestoreRequest) contextValidateSize(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Size != nil {
+
+		if swag.IsZero(m.Size) { // not required
+			return nil
+		}
+
+		if err := m.Size.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("size")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("size")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

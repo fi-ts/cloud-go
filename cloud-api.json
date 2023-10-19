@@ -3002,6 +3002,10 @@
         "dedicatedloadbalancerip": {
           "type": "string"
         },
+        "dedicatedloadbalancerport": {
+          "format": "int32",
+          "type": "integer"
+        },
         "description": {
           "type": "string"
         },
@@ -3151,6 +3155,10 @@
         "dedicatedloadbalancerip": {
           "type": "string"
         },
+        "dedicatedloadbalancerport": {
+          "format": "int32",
+          "type": "integer"
+        },
         "description": {
           "type": "string"
         },
@@ -3226,6 +3234,9 @@
         },
         "partitionID": {
           "type": "string"
+        },
+        "size": {
+          "$ref": "#/definitions/v1.PostgresSize"
         },
         "sourceId": {
           "type": "string"
@@ -3307,6 +3318,10 @@
         },
         "dedicatedloadbalancerip": {
           "type": "string"
+        },
+        "dedicatedloadbalancerport": {
+          "format": "int32",
+          "type": "integer"
         },
         "description": {
           "type": "string"

@@ -42,6 +42,9 @@ type V1PostgresResponse struct {
 	// Required: true
 	Dedicatedloadbalancerip *string `json:"dedicatedloadbalancerip"`
 
+	// dedicatedloadbalancerport
+	Dedicatedloadbalancerport int32 `json:"dedicatedloadbalancerport,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
