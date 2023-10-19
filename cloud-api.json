@@ -3045,7 +3045,8 @@
         }
       },
       "required": [
-        "dedicatedloadbalancerip"
+        "dedicatedloadbalancerip",
+        "dedicatedloadbalancerport"
       ]
     },
     "v1.PostgresCreateStandbyRequest": {
@@ -3211,6 +3212,7 @@
       },
       "required": [
         "dedicatedloadbalancerip",
+        "dedicatedloadbalancerport",
         "id",
         "status"
       ]
@@ -3363,6 +3365,7 @@
       },
       "required": [
         "dedicatedloadbalancerip",
+        "dedicatedloadbalancerport",
         "id"
       ]
     },
