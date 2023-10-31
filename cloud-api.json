@@ -3051,11 +3051,18 @@
     },
     "v1.PostgresCreateStandbyRequest": {
       "properties": {
+        "autoassigndedicatedlbipfrom": {
+          "type": "string"
+        },
         "backup": {
           "type": "string"
         },
         "dedicatedloadbalancerip": {
           "type": "string"
+        },
+        "dedicatedloadbalancerport": {
+          "format": "int32",
+          "type": "integer"
         },
         "description": {
           "type": "string"
@@ -3085,6 +3092,7 @@
       },
       "required": [
         "dedicatedloadbalancerip",
+        "dedicatedloadbalancerport",
         "primaryId"
       ]
     },
@@ -3236,9 +3244,6 @@
         },
         "partitionID": {
           "type": "string"
-        },
-        "size": {
-          "$ref": "#/definitions/v1.PostgresSize"
         },
         "sourceId": {
           "type": "string"
