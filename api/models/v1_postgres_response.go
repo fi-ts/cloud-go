@@ -38,6 +38,14 @@ type V1PostgresResponse struct {
 	// Format: date-time
 	CreationTimestamp strfmt.DateTime `json:"creationTimestamp,omitempty"`
 
+	// dedicatedloadbalancerip
+	// Required: true
+	Dedicatedloadbalancerip *string `json:"dedicatedloadbalancerip"`
+
+	// dedicatedloadbalancerport
+	// Required: true
+	Dedicatedloadbalancerport *int32 `json:"dedicatedloadbalancerport"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
@@ -93,6 +101,14 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDedicatedloadbalancerip(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDedicatedloadbalancerport(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -162,6 +178,24 @@ func (m *V1PostgresResponse) validateCreationTimestamp(formats strfmt.Registry) 
 	}
 
 	if err := validate.FormatOf("creationTimestamp", "body", "date-time", m.CreationTimestamp.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) validateDedicatedloadbalancerip(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedloadbalancerip", "body", m.Dedicatedloadbalancerip); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) validateDedicatedloadbalancerport(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedloadbalancerport", "body", m.Dedicatedloadbalancerport); err != nil {
 		return err
 	}
 

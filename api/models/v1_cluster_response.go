@@ -73,6 +73,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	ID *string `json:"ID"`
 
+	// kube API server ACL
+	// Required: true
+	KubeAPIServerACL *V1KubeAPIServerACL `json:"KubeAPIServerACL"`
+
 	// kubernetes
 	// Required: true
 	Kubernetes *V1Kubernetes `json:"Kubernetes"`
@@ -185,6 +189,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKubeAPIServerACL(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -410,6 +418,26 @@ func (m *V1ClusterResponse) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("ID", "body", m.ID); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateKubeAPIServerACL(formats strfmt.Registry) error {
+
+	if err := validate.Required("KubeAPIServerACL", "body", m.KubeAPIServerACL); err != nil {
+		return err
+	}
+
+	if m.KubeAPIServerACL != nil {
+		if err := m.KubeAPIServerACL.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("KubeAPIServerACL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("KubeAPIServerACL")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -673,6 +701,10 @@ func (m *V1ClusterResponse) ContextValidate(ctx context.Context, formats strfmt.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateKubeAPIServerACL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateKubernetes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -765,6 +797,23 @@ func (m *V1ClusterResponse) contextValidateEgressRules(ctx context.Context, form
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateKubeAPIServerACL(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.KubeAPIServerACL != nil {
+
+		if err := m.KubeAPIServerACL.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("KubeAPIServerACL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("KubeAPIServerACL")
+			}
+			return err
+		}
 	}
 
 	return nil

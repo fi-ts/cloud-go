@@ -1175,6 +1175,9 @@
         "FirewallSize": {
           "type": "string"
         },
+        "KubeAPIServerACL": {
+          "$ref": "#/definitions/v1.KubeAPIServerACL"
+        },
         "Kubernetes": {
           "$ref": "#/definitions/v1.Kubernetes"
         },
@@ -1229,6 +1232,7 @@
         "FirewallControllerVersion",
         "FirewallImage",
         "FirewallSize",
+        "KubeAPIServerACL",
         "Kubernetes",
         "Labels",
         "Maintenance",
@@ -1493,6 +1497,9 @@
         "ID": {
           "type": "string"
         },
+        "KubeAPIServerACL": {
+          "$ref": "#/definitions/v1.KubeAPIServerACL"
+        },
         "Kubernetes": {
           "$ref": "#/definitions/v1.Kubernetes"
         },
@@ -1567,6 +1574,7 @@
         "FirewallImage",
         "FirewallSize",
         "ID",
+        "KubeAPIServerACL",
         "Kubernetes",
         "Labels",
         "Maintenance",
@@ -1678,6 +1686,9 @@
         "ID": {
           "type": "string"
         },
+        "KubeAPIServerACL": {
+          "$ref": "#/definitions/v1.KubeAPIServerACL"
+        },
         "Kubernetes": {
           "$ref": "#/definitions/v1.Kubernetes"
         },
@@ -1717,6 +1728,7 @@
         "FirewallImage",
         "FirewallSize",
         "ID",
+        "KubeAPIServerACL",
         "Kubernetes",
         "Labels",
         "Maintenance",
@@ -2440,6 +2452,23 @@
         }
       }
     },
+    "v1.KubeAPIServerACL": {
+      "properties": {
+        "CIDRs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Disabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "CIDRs",
+        "Disabled"
+      ]
+    },
     "v1.Kubernetes": {
       "properties": {
         "AllowPrivilegedContainers": {
@@ -2993,8 +3022,18 @@
         "auditLogs": {
           "type": "boolean"
         },
+        "autoassigndedicatedlbipfrom": {
+          "type": "string"
+        },
         "backup": {
           "type": "string"
+        },
+        "dedicatedloadbalancerip": {
+          "type": "string"
+        },
+        "dedicatedloadbalancerport": {
+          "format": "int32",
+          "type": "integer"
         },
         "description": {
           "type": "string"
@@ -3033,12 +3072,26 @@
         "version": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "dedicatedloadbalancerip",
+        "dedicatedloadbalancerport"
+      ]
     },
     "v1.PostgresCreateStandbyRequest": {
       "properties": {
+        "autoassigndedicatedlbipfrom": {
+          "type": "string"
+        },
         "backup": {
           "type": "string"
+        },
+        "dedicatedloadbalancerip": {
+          "type": "string"
+        },
+        "dedicatedloadbalancerport": {
+          "format": "int32",
+          "type": "integer"
         },
         "description": {
           "type": "string"
@@ -3067,6 +3120,8 @@
         }
       },
       "required": [
+        "dedicatedloadbalancerip",
+        "dedicatedloadbalancerport",
         "primaryId"
       ]
     },
@@ -3135,6 +3190,13 @@
           "format": "date-time",
           "type": "string"
         },
+        "dedicatedloadbalancerip": {
+          "type": "string"
+        },
+        "dedicatedloadbalancerport": {
+          "format": "int32",
+          "type": "integer"
+        },
         "description": {
           "type": "string"
         },
@@ -3186,6 +3248,8 @@
         }
       },
       "required": [
+        "dedicatedloadbalancerip",
+        "dedicatedloadbalancerport",
         "id",
         "status"
       ]
@@ -3260,6 +3324,12 @@
     },
     "v1.PostgresStatus": {
       "properties": {
+        "additionalsockets": {
+          "items": {
+            "$ref": "#/definitions/v1.PostgresSocket"
+          },
+          "type": "array"
+        },
         "childReference": {
           "type": "string"
         },
@@ -3279,11 +3349,21 @@
         "auditLogs": {
           "type": "boolean"
         },
+        "autoassigndedicatedlbipfrom": {
+          "type": "string"
+        },
         "backup": {
           "type": "string"
         },
         "connection": {
           "$ref": "#/definitions/v1.Connection"
+        },
+        "dedicatedloadbalancerip": {
+          "type": "string"
+        },
+        "dedicatedloadbalancerport": {
+          "format": "int32",
+          "type": "integer"
         },
         "description": {
           "type": "string"
@@ -3324,6 +3404,8 @@
         }
       },
       "required": [
+        "dedicatedloadbalancerip",
+        "dedicatedloadbalancerport",
         "id"
       ]
     },

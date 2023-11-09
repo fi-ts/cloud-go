@@ -25,11 +25,22 @@ type V1PostgresUpdateRequest struct {
 	// audit logs
 	AuditLogs bool `json:"auditLogs,omitempty"`
 
+	// autoassigndedicatedlbipfrom
+	Autoassigndedicatedlbipfrom string `json:"autoassigndedicatedlbipfrom,omitempty"`
+
 	// backup
 	Backup string `json:"backup,omitempty"`
 
 	// connection
 	Connection *V1Connection `json:"connection,omitempty"`
+
+	// dedicatedloadbalancerip
+	// Required: true
+	Dedicatedloadbalancerip *string `json:"dedicatedloadbalancerip"`
+
+	// dedicatedloadbalancerport
+	// Required: true
+	Dedicatedloadbalancerport *int32 `json:"dedicatedloadbalancerport"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -72,6 +83,14 @@ func (m *V1PostgresUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateConnection(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDedicatedloadbalancerip(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDedicatedloadbalancerport(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -126,6 +145,24 @@ func (m *V1PostgresUpdateRequest) validateConnection(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUpdateRequest) validateDedicatedloadbalancerip(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedloadbalancerip", "body", m.Dedicatedloadbalancerip); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUpdateRequest) validateDedicatedloadbalancerport(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedloadbalancerport", "body", m.Dedicatedloadbalancerport); err != nil {
+		return err
 	}
 
 	return nil

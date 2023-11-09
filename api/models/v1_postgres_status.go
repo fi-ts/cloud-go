@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -17,6 +18,9 @@ import (
 //
 // swagger:model v1.PostgresStatus
 type V1PostgresStatus struct {
+
+	// additionalsockets
+	Additionalsockets []*V1PostgresSocket `json:"additionalsockets"`
 
 	// child reference
 	ChildReference string `json:"childReference,omitempty"`
@@ -32,6 +36,10 @@ type V1PostgresStatus struct {
 func (m *V1PostgresStatus) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAdditionalsockets(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSocket(formats); err != nil {
 		res = append(res, err)
 	}
@@ -39,6 +47,32 @@ func (m *V1PostgresStatus) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1PostgresStatus) validateAdditionalsockets(formats strfmt.Registry) error {
+	if swag.IsZero(m.Additionalsockets) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Additionalsockets); i++ {
+		if swag.IsZero(m.Additionalsockets[i]) { // not required
+			continue
+		}
+
+		if m.Additionalsockets[i] != nil {
+			if err := m.Additionalsockets[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("additionalsockets" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("additionalsockets" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -65,6 +99,10 @@ func (m *V1PostgresStatus) validateSocket(formats strfmt.Registry) error {
 func (m *V1PostgresStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAdditionalsockets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSocket(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -72,6 +110,31 @@ func (m *V1PostgresStatus) ContextValidate(ctx context.Context, formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1PostgresStatus) contextValidateAdditionalsockets(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Additionalsockets); i++ {
+
+		if m.Additionalsockets[i] != nil {
+
+			if swag.IsZero(m.Additionalsockets[i]) { // not required
+				return nil
+			}
+
+			if err := m.Additionalsockets[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("additionalsockets" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("additionalsockets" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

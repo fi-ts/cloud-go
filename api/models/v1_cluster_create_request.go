@@ -56,6 +56,10 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	FirewallSize *string `json:"FirewallSize"`
 
+	// kube API server ACL
+	// Required: true
+	KubeAPIServerACL *V1KubeAPIServerACL `json:"KubeAPIServerACL"`
+
 	// kubernetes
 	// Required: true
 	Kubernetes *V1Kubernetes `json:"Kubernetes"`
@@ -140,6 +144,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFirewallSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKubeAPIServerACL(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -321,6 +329,26 @@ func (m *V1ClusterCreateRequest) validateFirewallSize(formats strfmt.Registry) e
 	return nil
 }
 
+func (m *V1ClusterCreateRequest) validateKubeAPIServerACL(formats strfmt.Registry) error {
+
+	if err := validate.Required("KubeAPIServerACL", "body", m.KubeAPIServerACL); err != nil {
+		return err
+	}
+
+	if m.KubeAPIServerACL != nil {
+		if err := m.KubeAPIServerACL.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("KubeAPIServerACL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("KubeAPIServerACL")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1ClusterCreateRequest) validateKubernetes(formats strfmt.Registry) error {
 
 	if err := validate.Required("Kubernetes", "body", m.Kubernetes); err != nil {
@@ -482,6 +510,10 @@ func (m *V1ClusterCreateRequest) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateKubeAPIServerACL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateKubernetes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -575,6 +607,23 @@ func (m *V1ClusterCreateRequest) contextValidateEgressRules(ctx context.Context,
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) contextValidateKubeAPIServerACL(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.KubeAPIServerACL != nil {
+
+		if err := m.KubeAPIServerACL.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("KubeAPIServerACL")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("KubeAPIServerACL")
+			}
+			return err
+		}
 	}
 
 	return nil
