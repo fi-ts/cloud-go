@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // V1PostgresCreateRequest v1 postgres create request
@@ -24,8 +25,19 @@ type V1PostgresCreateRequest struct {
 	// audit logs
 	AuditLogs bool `json:"auditLogs,omitempty"`
 
+	// autoassigndedicatedlbipfrom
+	Autoassigndedicatedlbipfrom string `json:"autoassigndedicatedlbipfrom,omitempty"`
+
 	// backup
 	Backup string `json:"backup,omitempty"`
+
+	// dedicatedloadbalancerip
+	// Required: true
+	Dedicatedloadbalancerip *string `json:"dedicatedloadbalancerip"`
+
+	// dedicatedloadbalancerport
+	// Required: true
+	Dedicatedloadbalancerport *int32 `json:"dedicatedloadbalancerport"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -63,6 +75,14 @@ func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDedicatedloadbalancerip(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDedicatedloadbalancerport(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSize(formats); err != nil {
 		res = append(res, err)
 	}
@@ -87,6 +107,24 @@ func (m *V1PostgresCreateRequest) validateAccessList(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresCreateRequest) validateDedicatedloadbalancerip(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedloadbalancerip", "body", m.Dedicatedloadbalancerip); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresCreateRequest) validateDedicatedloadbalancerport(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedloadbalancerport", "body", m.Dedicatedloadbalancerport); err != nil {
+		return err
 	}
 
 	return nil

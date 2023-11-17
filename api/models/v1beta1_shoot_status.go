@@ -49,6 +49,9 @@ type V1beta1ShootStatus struct {
 	// last hibernation trigger time
 	LastHibernationTriggerTime string `json:"lastHibernationTriggerTime,omitempty"`
 
+	// last maintenance
+	LastMaintenance *V1beta1LastMaintenance `json:"lastMaintenance,omitempty"`
+
 	// last operation
 	LastOperation *V1beta1LastOperation `json:"lastOperation,omitempty"`
 
@@ -102,6 +105,10 @@ func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastErrors(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLastMaintenance(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -275,6 +282,25 @@ func (m *V1beta1ShootStatus) validateLastErrors(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1beta1ShootStatus) validateLastMaintenance(formats strfmt.Registry) error {
+	if swag.IsZero(m.LastMaintenance) { // not required
+		return nil
+	}
+
+	if m.LastMaintenance != nil {
+		if err := m.LastMaintenance.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("lastMaintenance")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("lastMaintenance")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1beta1ShootStatus) validateLastOperation(formats strfmt.Registry) error {
 	if swag.IsZero(m.LastOperation) { // not required
 		return nil
@@ -337,6 +363,10 @@ func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt
 	}
 
 	if err := m.contextValidateLastErrors(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLastMaintenance(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -483,6 +513,27 @@ func (m *V1beta1ShootStatus) contextValidateLastErrors(ctx context.Context, form
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateLastMaintenance(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LastMaintenance != nil {
+
+		if swag.IsZero(m.LastMaintenance) { // not required
+			return nil
+		}
+
+		if err := m.LastMaintenance.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("lastMaintenance")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("lastMaintenance")
+			}
+			return err
+		}
 	}
 
 	return nil
