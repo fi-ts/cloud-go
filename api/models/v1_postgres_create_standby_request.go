@@ -19,8 +19,19 @@ import (
 // swagger:model v1.PostgresCreateStandbyRequest
 type V1PostgresCreateStandbyRequest struct {
 
+	// autoassigndedicatedlbipfrom
+	Autoassigndedicatedlbipfrom string `json:"autoassigndedicatedlbipfrom,omitempty"`
+
 	// backup
 	Backup string `json:"backup,omitempty"`
+
+	// dedicatedloadbalancerip
+	// Required: true
+	Dedicatedloadbalancerip *string `json:"dedicatedloadbalancerip"`
+
+	// dedicatedloadbalancerport
+	// Required: true
+	Dedicatedloadbalancerport *int32 `json:"dedicatedloadbalancerport"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -46,6 +57,14 @@ type V1PostgresCreateStandbyRequest struct {
 func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDedicatedloadbalancerip(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDedicatedloadbalancerport(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePrimaryID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -53,6 +72,24 @@ func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1PostgresCreateStandbyRequest) validateDedicatedloadbalancerip(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedloadbalancerip", "body", m.Dedicatedloadbalancerip); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresCreateStandbyRequest) validateDedicatedloadbalancerport(formats strfmt.Registry) error {
+
+	if err := validate.Required("dedicatedloadbalancerport", "body", m.Dedicatedloadbalancerport); err != nil {
+		return err
+	}
+
 	return nil
 }
 
