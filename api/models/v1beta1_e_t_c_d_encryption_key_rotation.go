@@ -14,13 +14,19 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1beta1ShootCARotation v1beta1 shoot c a rotation
+// V1beta1ETCDEncryptionKeyRotation v1beta1 e t c d encryption key rotation
 //
-// swagger:model v1beta1.ShootCARotation
-type V1beta1ShootCARotation struct {
+// swagger:model v1beta1.ETCDEncryptionKeyRotation
+type V1beta1ETCDEncryptionKeyRotation struct {
 
 	// last completion time
 	LastCompletionTime string `json:"lastCompletionTime,omitempty"`
+
+	// last completion triggered time
+	LastCompletionTriggeredTime string `json:"lastCompletionTriggeredTime,omitempty"`
+
+	// last initiation finished time
+	LastInitiationFinishedTime string `json:"lastInitiationFinishedTime,omitempty"`
 
 	// last initiation time
 	LastInitiationTime string `json:"lastInitiationTime,omitempty"`
@@ -30,8 +36,8 @@ type V1beta1ShootCARotation struct {
 	Phase *string `json:"phase"`
 }
 
-// Validate validates this v1beta1 shoot c a rotation
-func (m *V1beta1ShootCARotation) Validate(formats strfmt.Registry) error {
+// Validate validates this v1beta1 e t c d encryption key rotation
+func (m *V1beta1ETCDEncryptionKeyRotation) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validatePhase(formats); err != nil {
@@ -44,7 +50,7 @@ func (m *V1beta1ShootCARotation) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1beta1ShootCARotation) validatePhase(formats strfmt.Registry) error {
+func (m *V1beta1ETCDEncryptionKeyRotation) validatePhase(formats strfmt.Registry) error {
 
 	if err := validate.Required("phase", "body", m.Phase); err != nil {
 		return err
@@ -53,13 +59,13 @@ func (m *V1beta1ShootCARotation) validatePhase(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1beta1 shoot c a rotation based on context it is used
-func (m *V1beta1ShootCARotation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1beta1 e t c d encryption key rotation based on context it is used
+func (m *V1beta1ETCDEncryptionKeyRotation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1beta1ShootCARotation) MarshalBinary() ([]byte, error) {
+func (m *V1beta1ETCDEncryptionKeyRotation) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -67,8 +73,8 @@ func (m *V1beta1ShootCARotation) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1beta1ShootCARotation) UnmarshalBinary(b []byte) error {
-	var res V1beta1ShootCARotation
+func (m *V1beta1ETCDEncryptionKeyRotation) UnmarshalBinary(b []byte) error {
+	var res V1beta1ETCDEncryptionKeyRotation
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

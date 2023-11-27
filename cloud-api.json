@@ -1270,15 +1270,11 @@
         },
         "LogAcceptedConnections": {
           "type": "string"
-        },
-        "ReversedVPN": {
-          "type": "string"
         }
       },
       "required": [
         "DurosStorageEncryption",
-        "LogAcceptedConnections",
-        "ReversedVPN"
+        "LogAcceptedConnections"
       ]
     },
     "v1.ClusterFindRequest": {
@@ -5134,6 +5130,28 @@
         "Taints"
       ]
     },
+    "v1beta1.CARotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastCompletionTriggeredTime": {
+          "type": "string"
+        },
+        "lastInitiationFinishedTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        },
+        "phase": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "phase"
+      ]
+    },
     "v1beta1.Condition": {
       "properties": {
         "codes": {
@@ -5168,6 +5186,28 @@
         "reason",
         "status",
         "type"
+      ]
+    },
+    "v1beta1.ETCDEncryptionKeyRotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastCompletionTriggeredTime": {
+          "type": "string"
+        },
+        "lastInitiationFinishedTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        },
+        "phase": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "phase"
       ]
     },
     "v1beta1.Gardener": {
@@ -5210,6 +5250,27 @@
         "description"
       ]
     },
+    "v1beta1.LastMaintenance": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "failureReason": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "triggeredTime": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "state",
+        "triggeredTime"
+      ]
+    },
     "v1beta1.LastOperation": {
       "properties": {
         "description": {
@@ -5237,6 +5298,28 @@
         "type"
       ]
     },
+    "v1beta1.ServiceAccountKeyRotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastCompletionTriggeredTime": {
+          "type": "string"
+        },
+        "lastInitiationFinishedTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        },
+        "phase": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "phase"
+      ]
+    },
     "v1beta1.ShootAdvertisedAddress": {
       "properties": {
         "name": {
@@ -5251,22 +5334,6 @@
         "url"
       ]
     },
-    "v1beta1.ShootCARotation": {
-      "properties": {
-        "lastCompletionTime": {
-          "type": "string"
-        },
-        "lastInitiationTime": {
-          "type": "string"
-        },
-        "phase": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "phase"
-      ]
-    },
     "v1beta1.ShootCredentials": {
       "properties": {
         "rotation": {
@@ -5277,10 +5344,10 @@
     "v1beta1.ShootCredentialsRotation": {
       "properties": {
         "certificateAuthorities": {
-          "$ref": "#/definitions/v1beta1.ShootCARotation"
+          "$ref": "#/definitions/v1beta1.CARotation"
         },
         "etcdEncryptionKey": {
-          "$ref": "#/definitions/v1beta1.ShootETCDEncryptionKeyRotation"
+          "$ref": "#/definitions/v1beta1.ETCDEncryptionKeyRotation"
         },
         "kubeconfig": {
           "$ref": "#/definitions/v1beta1.ShootKubeconfigRotation"
@@ -5289,28 +5356,12 @@
           "$ref": "#/definitions/v1beta1.ShootObservabilityRotation"
         },
         "serviceAccountKey": {
-          "$ref": "#/definitions/v1beta1.ShootServiceAccountKeyRotation"
+          "$ref": "#/definitions/v1beta1.ServiceAccountKeyRotation"
         },
         "sshKeypair": {
           "$ref": "#/definitions/v1beta1.ShootSSHKeypairRotation"
         }
       }
-    },
-    "v1beta1.ShootETCDEncryptionKeyRotation": {
-      "properties": {
-        "lastCompletionTime": {
-          "type": "string"
-        },
-        "lastInitiationTime": {
-          "type": "string"
-        },
-        "phase": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "phase"
-      ]
     },
     "v1beta1.ShootKubeconfigRotation": {
       "properties": {
@@ -5341,22 +5392,6 @@
           "type": "string"
         }
       }
-    },
-    "v1beta1.ShootServiceAccountKeyRotation": {
-      "properties": {
-        "lastCompletionTime": {
-          "type": "string"
-        },
-        "lastInitiationTime": {
-          "type": "string"
-        },
-        "phase": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "phase"
-      ]
     },
     "v1beta1.ShootStatus": {
       "properties": {
@@ -5398,6 +5433,9 @@
         },
         "lastHibernationTriggerTime": {
           "type": "string"
+        },
+        "lastMaintenance": {
+          "$ref": "#/definitions/v1beta1.LastMaintenance"
         },
         "lastOperation": {
           "$ref": "#/definitions/v1beta1.LastOperation"

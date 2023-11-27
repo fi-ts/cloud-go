@@ -26,10 +26,6 @@ type V1ClusterFeatures struct {
 	// log accepted connections
 	// Required: true
 	LogAcceptedConnections *string `json:"LogAcceptedConnections"`
-
-	// reversed v p n
-	// Required: true
-	ReversedVPN *string `json:"ReversedVPN"`
 }
 
 // Validate validates this v1 cluster features
@@ -41,10 +37,6 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLogAcceptedConnections(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateReversedVPN(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -66,15 +58,6 @@ func (m *V1ClusterFeatures) validateDurosStorageEncryption(formats strfmt.Regist
 func (m *V1ClusterFeatures) validateLogAcceptedConnections(formats strfmt.Registry) error {
 
 	if err := validate.Required("LogAcceptedConnections", "body", m.LogAcceptedConnections); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1ClusterFeatures) validateReversedVPN(formats strfmt.Registry) error {
-
-	if err := validate.Required("ReversedVPN", "body", m.ReversedVPN); err != nil {
 		return err
 	}
 

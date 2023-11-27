@@ -19,10 +19,10 @@ import (
 type V1beta1ShootCredentialsRotation struct {
 
 	// certificate authorities
-	CertificateAuthorities *V1beta1ShootCARotation `json:"certificateAuthorities,omitempty"`
+	CertificateAuthorities *V1beta1CARotation `json:"certificateAuthorities,omitempty"`
 
 	// etcd encryption key
-	EtcdEncryptionKey *V1beta1ShootETCDEncryptionKeyRotation `json:"etcdEncryptionKey,omitempty"`
+	EtcdEncryptionKey *V1beta1ETCDEncryptionKeyRotation `json:"etcdEncryptionKey,omitempty"`
 
 	// kubeconfig
 	Kubeconfig *V1beta1ShootKubeconfigRotation `json:"kubeconfig,omitempty"`
@@ -31,7 +31,7 @@ type V1beta1ShootCredentialsRotation struct {
 	Observability *V1beta1ShootObservabilityRotation `json:"observability,omitempty"`
 
 	// service account key
-	ServiceAccountKey *V1beta1ShootServiceAccountKeyRotation `json:"serviceAccountKey,omitempty"`
+	ServiceAccountKey *V1beta1ServiceAccountKeyRotation `json:"serviceAccountKey,omitempty"`
 
 	// ssh keypair
 	SSHKeypair *V1beta1ShootSSHKeypairRotation `json:"sshKeypair,omitempty"`

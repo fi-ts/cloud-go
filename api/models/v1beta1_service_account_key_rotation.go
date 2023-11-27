@@ -14,13 +14,19 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1beta1ShootServiceAccountKeyRotation v1beta1 shoot service account key rotation
+// V1beta1ServiceAccountKeyRotation v1beta1 service account key rotation
 //
-// swagger:model v1beta1.ShootServiceAccountKeyRotation
-type V1beta1ShootServiceAccountKeyRotation struct {
+// swagger:model v1beta1.ServiceAccountKeyRotation
+type V1beta1ServiceAccountKeyRotation struct {
 
 	// last completion time
 	LastCompletionTime string `json:"lastCompletionTime,omitempty"`
+
+	// last completion triggered time
+	LastCompletionTriggeredTime string `json:"lastCompletionTriggeredTime,omitempty"`
+
+	// last initiation finished time
+	LastInitiationFinishedTime string `json:"lastInitiationFinishedTime,omitempty"`
 
 	// last initiation time
 	LastInitiationTime string `json:"lastInitiationTime,omitempty"`
@@ -30,8 +36,8 @@ type V1beta1ShootServiceAccountKeyRotation struct {
 	Phase *string `json:"phase"`
 }
 
-// Validate validates this v1beta1 shoot service account key rotation
-func (m *V1beta1ShootServiceAccountKeyRotation) Validate(formats strfmt.Registry) error {
+// Validate validates this v1beta1 service account key rotation
+func (m *V1beta1ServiceAccountKeyRotation) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validatePhase(formats); err != nil {
@@ -44,7 +50,7 @@ func (m *V1beta1ShootServiceAccountKeyRotation) Validate(formats strfmt.Registry
 	return nil
 }
 
-func (m *V1beta1ShootServiceAccountKeyRotation) validatePhase(formats strfmt.Registry) error {
+func (m *V1beta1ServiceAccountKeyRotation) validatePhase(formats strfmt.Registry) error {
 
 	if err := validate.Required("phase", "body", m.Phase); err != nil {
 		return err
@@ -53,13 +59,13 @@ func (m *V1beta1ShootServiceAccountKeyRotation) validatePhase(formats strfmt.Reg
 	return nil
 }
 
-// ContextValidate validates this v1beta1 shoot service account key rotation based on context it is used
-func (m *V1beta1ShootServiceAccountKeyRotation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1beta1 service account key rotation based on context it is used
+func (m *V1beta1ServiceAccountKeyRotation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1beta1ShootServiceAccountKeyRotation) MarshalBinary() ([]byte, error) {
+func (m *V1beta1ServiceAccountKeyRotation) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -67,8 +73,8 @@ func (m *V1beta1ShootServiceAccountKeyRotation) MarshalBinary() ([]byte, error) 
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1beta1ShootServiceAccountKeyRotation) UnmarshalBinary(b []byte) error {
-	var res V1beta1ShootServiceAccountKeyRotation
+func (m *V1beta1ServiceAccountKeyRotation) UnmarshalBinary(b []byte) error {
+	var res V1beta1ServiceAccountKeyRotation
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
