@@ -994,6 +994,9 @@
         "gitsha1": {
           "type": "string"
         },
+        "min_client_version": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -1007,6 +1010,7 @@
       "required": [
         "builddate",
         "gitsha1",
+        "min_client_version",
         "name",
         "revision",
         "version"
