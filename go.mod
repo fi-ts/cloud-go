@@ -8,7 +8,7 @@ require (
 	github.com/go-openapi/strfmt v0.21.7
 	github.com/go-openapi/swag v0.22.4
 	github.com/go-openapi/validate v0.22.2
-	github.com/metal-stack/metal-lib v0.14.0
+	github.com/metal-stack/metal-lib v0.14.1
 	github.com/metal-stack/security v0.7.1
 	github.com/stretchr/testify v1.8.4
 )
