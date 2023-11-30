@@ -994,6 +994,9 @@
         "gitsha1": {
           "type": "string"
         },
+        "min_client_version": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -1007,6 +1010,7 @@
       "required": [
         "builddate",
         "gitsha1",
+        "min_client_version",
         "name",
         "revision",
         "version"
@@ -1136,13 +1140,6 @@
           "type": "string"
         },
         "user": {
-          "type": "string"
-        }
-      }
-    },
-    "v1.ClientVersion": {
-      "properties": {
-        "min_version": {
           "type": "string"
         }
       }
@@ -6123,35 +6120,6 @@
         "summary": "find all audit traces that match given properties",
         "tags": [
           "audit"
-        ]
-      }
-    },
-    "/v1/cli": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "minVersion",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/v1.ClientVersion"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
-            }
-          }
-        },
-        "summary": "get the minimum client version",
-        "tags": [
-          "cloudctl"
         ]
       }
     },
