@@ -6151,7 +6151,7 @@
         },
         "summary": "get the minimum client version",
         "tags": [
-          "cli"
+          "cloudctl"
         ]
       }
     },

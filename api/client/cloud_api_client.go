@@ -12,7 +12,7 @@ import (
 
 	"github.com/fi-ts/cloud-go/api/client/accounting"
 	"github.com/fi-ts/cloud-go/api/client/audit"
-	"github.com/fi-ts/cloud-go/api/client/cli"
+	"github.com/fi-ts/cloud-go/api/client/cloudctl"
 	"github.com/fi-ts/cloud-go/api/client/cluster"
 	"github.com/fi-ts/cloud-go/api/client/database"
 	"github.com/fi-ts/cloud-go/api/client/health"
@@ -69,7 +69,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *CloudAPI {
 	cli.Transport = transport
 	cli.Accounting = accounting.New(transport, formats)
 	cli.Audit = audit.New(transport, formats)
-	cli.Cli = cli.New(transport, formats)
+	cli.Cloudctl = cloudctl.New(transport, formats)
 	cli.Cluster = cluster.New(transport, formats)
 	cli.Database = database.New(transport, formats)
 	cli.Health = health.New(transport, formats)
@@ -128,7 +128,7 @@ type CloudAPI struct {
 
 	Audit audit.ClientService
 
-	Cli cli.ClientService
+	Cloudctl cloudctl.ClientService
 
 	Cluster cluster.ClientService
 
@@ -158,7 +158,7 @@ func (c *CloudAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Accounting.SetTransport(transport)
 	c.Audit.SetTransport(transport)
-	c.Cli.SetTransport(transport)
+	c.Cloudctl.SetTransport(transport)
 	c.Cluster.SetTransport(transport)
 	c.Database.SetTransport(transport)
 	c.Health.SetTransport(transport)
