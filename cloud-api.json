@@ -1028,16 +1028,87 @@
     },
     "v1.Audit": {
       "properties": {
-        "AuditToSplunk": {
+        "auditPolicy": {
+          "type": "string"
+        },
+        "backends": {
+          "$ref": "#/definitions/v1.AuditBackends"
+        },
+        "disabled": {
           "type": "boolean"
         },
-        "ClusterAudit": {
+        "webhookMode": {
+          "enum": [
+            "batch",
+            "blocking",
+            "blocking-strict"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "auditPolicy",
+        "backends",
+        "disabled",
+        "webhookMode"
+      ]
+    },
+    "v1.AuditBackendClusterForwarding": {
+      "properties": {
+        "enabled": {
           "type": "boolean"
         }
       },
       "required": [
-        "AuditToSplunk",
-        "ClusterAudit"
+        "enabled"
+      ]
+    },
+    "v1.AuditBackendSplunk": {
+      "properties": {
+        "CaFile": {
+          "type": "string"
+        },
+        "Enabled": {
+          "type": "boolean"
+        },
+        "Host": {
+          "type": "string"
+        },
+        "Index": {
+          "type": "string"
+        },
+        "Port": {
+          "type": "string"
+        },
+        "TlsEnabled": {
+          "type": "boolean"
+        },
+        "Token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CaFile",
+        "Enabled",
+        "Host",
+        "Index",
+        "Port",
+        "TlsEnabled",
+        "Token"
+      ]
+    },
+    "v1.AuditBackends": {
+      "properties": {
+        "clusterForwarding": {
+          "$ref": "#/definitions/v1.AuditBackendClusterForwarding"
+        },
+        "splunk": {
+          "$ref": "#/definitions/v1.AuditBackendSplunk"
+        }
+      },
+      "required": [
+        "clusterForwarding",
+        "splunk"
       ]
     },
     "v1.AuditFindRequest": {
@@ -1454,6 +1525,9 @@
           },
           "type": "array"
         },
+        "Audit": {
+          "$ref": "#/definitions/v1.Audit"
+        },
         "ClusterFeatures": {
           "$ref": "#/definitions/v1.ClusterFeatures"
         },
@@ -1562,6 +1636,7 @@
       },
       "required": [
         "AdditionalNetworks",
+        "Audit",
         "ClusterFeatures",
         "ControlPlaneFeatureGates",
         "CreationTimestamp",
