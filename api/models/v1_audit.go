@@ -25,8 +25,7 @@ type V1Audit struct {
 	AuditPolicy *string `json:"auditPolicy"`
 
 	// backends
-	// Required: true
-	Backends *V1AuditBackends `json:"backends"`
+	Backends *V1AuditBackends `json:"backends,omitempty"`
 
 	// disabled
 	// Required: true
@@ -74,9 +73,8 @@ func (m *V1Audit) validateAuditPolicy(formats strfmt.Registry) error {
 }
 
 func (m *V1Audit) validateBackends(formats strfmt.Registry) error {
-
-	if err := validate.Required("backends", "body", m.Backends); err != nil {
-		return err
+	if swag.IsZero(m.Backends) { // not required
+		return nil
 	}
 
 	if m.Backends != nil {
@@ -165,6 +163,10 @@ func (m *V1Audit) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *V1Audit) contextValidateBackends(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Backends != nil {
+
+		if swag.IsZero(m.Backends) { // not required
+			return nil
+		}
 
 		if err := m.Backends.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

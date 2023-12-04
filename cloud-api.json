@@ -1048,7 +1048,6 @@
       },
       "required": [
         "auditPolicy",
-        "backends",
         "disabled",
         "webhookMode"
       ]
@@ -1105,11 +1104,7 @@
         "splunk": {
           "$ref": "#/definitions/v1.AuditBackendSplunk"
         }
-      },
-      "required": [
-        "clusterForwarding",
-        "splunk"
-      ]
+      }
     },
     "v1.AuditFindRequest": {
       "properties": {

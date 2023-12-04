@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // V1AuditBackends v1 audit backends
@@ -20,12 +19,10 @@ import (
 type V1AuditBackends struct {
 
 	// cluster forwarding
-	// Required: true
-	ClusterForwarding *V1AuditBackendClusterForwarding `json:"clusterForwarding"`
+	ClusterForwarding *V1AuditBackendClusterForwarding `json:"clusterForwarding,omitempty"`
 
 	// splunk
-	// Required: true
-	Splunk *V1AuditBackendSplunk `json:"splunk"`
+	Splunk *V1AuditBackendSplunk `json:"splunk,omitempty"`
 }
 
 // Validate validates this v1 audit backends
@@ -47,9 +44,8 @@ func (m *V1AuditBackends) Validate(formats strfmt.Registry) error {
 }
 
 func (m *V1AuditBackends) validateClusterForwarding(formats strfmt.Registry) error {
-
-	if err := validate.Required("clusterForwarding", "body", m.ClusterForwarding); err != nil {
-		return err
+	if swag.IsZero(m.ClusterForwarding) { // not required
+		return nil
 	}
 
 	if m.ClusterForwarding != nil {
@@ -67,9 +63,8 @@ func (m *V1AuditBackends) validateClusterForwarding(formats strfmt.Registry) err
 }
 
 func (m *V1AuditBackends) validateSplunk(formats strfmt.Registry) error {
-
-	if err := validate.Required("splunk", "body", m.Splunk); err != nil {
-		return err
+	if swag.IsZero(m.Splunk) { // not required
+		return nil
 	}
 
 	if m.Splunk != nil {
@@ -108,6 +103,10 @@ func (m *V1AuditBackends) contextValidateClusterForwarding(ctx context.Context, 
 
 	if m.ClusterForwarding != nil {
 
+		if swag.IsZero(m.ClusterForwarding) { // not required
+			return nil
+		}
+
 		if err := m.ClusterForwarding.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("clusterForwarding")
@@ -124,6 +123,10 @@ func (m *V1AuditBackends) contextValidateClusterForwarding(ctx context.Context, 
 func (m *V1AuditBackends) contextValidateSplunk(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Splunk != nil {
+
+		if swag.IsZero(m.Splunk) { // not required
+			return nil
+		}
 
 		if err := m.Splunk.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
