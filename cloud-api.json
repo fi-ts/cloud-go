@@ -1167,6 +1167,16 @@
         }
       }
     },
+    "v1.AuditPolicyResponse": {
+      "properties": {
+        "raw": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "raw"
+      ]
+    },
     "v1.AuditResponse": {
       "properties": {
         "body": {
@@ -6487,6 +6497,44 @@
           }
         },
         "summary": "get cluster by id",
+        "tags": [
+          "cluster"
+        ]
+      }
+    },
+    "/v1/cluster/{id}/audit-policy": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getAuditPolicy",
+        "parameters": [
+          {
+            "description": "identifier of the cluster",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.AuditPolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get the current content of the audit policy config map for a given cluster",
         "tags": [
           "cluster"
         ]

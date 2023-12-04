@@ -199,6 +199,43 @@ func (_m *ClientService) FindClusters(params *clientcluster.FindClustersParams, 
 	return r0, r1
 }
 
+// GetAuditPolicy provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) GetAuditPolicy(params *clientcluster.GetAuditPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientcluster.ClientOption) (*clientcluster.GetAuditPolicyOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetAuditPolicy")
+	}
+
+	var r0 *clientcluster.GetAuditPolicyOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientcluster.GetAuditPolicyParams, runtime.ClientAuthInfoWriter, ...clientcluster.ClientOption) (*clientcluster.GetAuditPolicyOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientcluster.GetAuditPolicyParams, runtime.ClientAuthInfoWriter, ...clientcluster.ClientOption) *clientcluster.GetAuditPolicyOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientcluster.GetAuditPolicyOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientcluster.GetAuditPolicyParams, runtime.ClientAuthInfoWriter, ...clientcluster.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // GetClusterKubeconfigTpl provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) GetClusterKubeconfigTpl(params *clientcluster.GetClusterKubeconfigTplParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientcluster.ClientOption) (*clientcluster.GetClusterKubeconfigTplOK, error) {
 	_va := make([]interface{}, len(opts))
