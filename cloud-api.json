@@ -1065,36 +1065,36 @@
     },
     "v1.AuditBackendSplunk": {
       "properties": {
-        "CaFile": {
+        "ca": {
           "type": "string"
         },
-        "Enabled": {
+        "enabled": {
           "type": "boolean"
         },
-        "Host": {
+        "host": {
           "type": "string"
         },
-        "Index": {
+        "index": {
           "type": "string"
         },
-        "Port": {
+        "port": {
           "type": "string"
         },
-        "TlsEnabled": {
+        "tls": {
           "type": "boolean"
         },
-        "Token": {
+        "token": {
           "type": "string"
         }
       },
       "required": [
-        "CaFile",
-        "Enabled",
-        "Host",
-        "Index",
-        "Port",
-        "TlsEnabled",
-        "Token"
+        "ca",
+        "enabled",
+        "host",
+        "index",
+        "port",
+        "tls",
+        "token"
       ]
     },
     "v1.AuditBackends": {

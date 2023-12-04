@@ -19,40 +19,40 @@ import (
 // swagger:model v1.AuditBackendSplunk
 type V1AuditBackendSplunk struct {
 
-	// ca file
+	// ca
 	// Required: true
-	CaFile *string `json:"CaFile"`
+	Ca *string `json:"ca"`
 
 	// enabled
 	// Required: true
-	Enabled *bool `json:"Enabled"`
+	Enabled *bool `json:"enabled"`
 
 	// host
 	// Required: true
-	Host *string `json:"Host"`
+	Host *string `json:"host"`
 
 	// index
 	// Required: true
-	Index *string `json:"Index"`
+	Index *string `json:"index"`
 
 	// port
 	// Required: true
-	Port *string `json:"Port"`
+	Port *string `json:"port"`
 
-	// Tls enabled
+	// tls
 	// Required: true
-	TLSEnabled *bool `json:"TlsEnabled"`
+	TLS *bool `json:"tls"`
 
 	// token
 	// Required: true
-	Token *string `json:"Token"`
+	Token *string `json:"token"`
 }
 
 // Validate validates this v1 audit backend splunk
 func (m *V1AuditBackendSplunk) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCaFile(formats); err != nil {
+	if err := m.validateCa(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -72,7 +72,7 @@ func (m *V1AuditBackendSplunk) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateTLSEnabled(formats); err != nil {
+	if err := m.validateTLS(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -86,9 +86,9 @@ func (m *V1AuditBackendSplunk) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1AuditBackendSplunk) validateCaFile(formats strfmt.Registry) error {
+func (m *V1AuditBackendSplunk) validateCa(formats strfmt.Registry) error {
 
-	if err := validate.Required("CaFile", "body", m.CaFile); err != nil {
+	if err := validate.Required("ca", "body", m.Ca); err != nil {
 		return err
 	}
 
@@ -97,7 +97,7 @@ func (m *V1AuditBackendSplunk) validateCaFile(formats strfmt.Registry) error {
 
 func (m *V1AuditBackendSplunk) validateEnabled(formats strfmt.Registry) error {
 
-	if err := validate.Required("Enabled", "body", m.Enabled); err != nil {
+	if err := validate.Required("enabled", "body", m.Enabled); err != nil {
 		return err
 	}
 
@@ -106,7 +106,7 @@ func (m *V1AuditBackendSplunk) validateEnabled(formats strfmt.Registry) error {
 
 func (m *V1AuditBackendSplunk) validateHost(formats strfmt.Registry) error {
 
-	if err := validate.Required("Host", "body", m.Host); err != nil {
+	if err := validate.Required("host", "body", m.Host); err != nil {
 		return err
 	}
 
@@ -115,7 +115,7 @@ func (m *V1AuditBackendSplunk) validateHost(formats strfmt.Registry) error {
 
 func (m *V1AuditBackendSplunk) validateIndex(formats strfmt.Registry) error {
 
-	if err := validate.Required("Index", "body", m.Index); err != nil {
+	if err := validate.Required("index", "body", m.Index); err != nil {
 		return err
 	}
 
@@ -124,16 +124,16 @@ func (m *V1AuditBackendSplunk) validateIndex(formats strfmt.Registry) error {
 
 func (m *V1AuditBackendSplunk) validatePort(formats strfmt.Registry) error {
 
-	if err := validate.Required("Port", "body", m.Port); err != nil {
+	if err := validate.Required("port", "body", m.Port); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *V1AuditBackendSplunk) validateTLSEnabled(formats strfmt.Registry) error {
+func (m *V1AuditBackendSplunk) validateTLS(formats strfmt.Registry) error {
 
-	if err := validate.Required("TlsEnabled", "body", m.TLSEnabled); err != nil {
+	if err := validate.Required("tls", "body", m.TLS); err != nil {
 		return err
 	}
 
@@ -142,7 +142,7 @@ func (m *V1AuditBackendSplunk) validateTLSEnabled(formats strfmt.Registry) error
 
 func (m *V1AuditBackendSplunk) validateToken(formats strfmt.Registry) error {
 
-	if err := validate.Required("Token", "body", m.Token); err != nil {
+	if err := validate.Required("token", "body", m.Token); err != nil {
 		return err
 	}
 
