@@ -24,6 +24,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	AdditionalNetworks []string `json:"AdditionalNetworks"`
 
+	// audit
+	// Required: true
+	Audit *V1Audit `json:"Audit"`
+
 	// cluster features
 	// Required: true
 	ClusterFeatures *V1ClusterFeatures `json:"ClusterFeatures"`
@@ -141,6 +145,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdditionalNetworks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAudit(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -266,6 +274,26 @@ func (m *V1ClusterResponse) validateAdditionalNetworks(formats strfmt.Registry) 
 
 	if err := validate.Required("AdditionalNetworks", "body", m.AdditionalNetworks); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateAudit(formats strfmt.Registry) error {
+
+	if err := validate.Required("Audit", "body", m.Audit); err != nil {
+		return err
+	}
+
+	if m.Audit != nil {
+		if err := m.Audit.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Audit")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Audit")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -689,6 +717,10 @@ func (m *V1ClusterResponse) validateMachines(formats strfmt.Registry) error {
 func (m *V1ClusterResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAudit(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateClusterFeatures(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -740,6 +772,23 @@ func (m *V1ClusterResponse) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateAudit(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Audit != nil {
+
+		if err := m.Audit.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Audit")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Audit")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

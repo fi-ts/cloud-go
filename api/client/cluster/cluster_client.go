@@ -38,6 +38,8 @@ type ClientService interface {
 
 	FindClusters(params *FindClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindClustersOK, error)
 
+	GetAuditPolicy(params *GetAuditPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditPolicyOK, error)
+
 	GetClusterKubeconfigTpl(params *GetClusterKubeconfigTplParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterKubeconfigTplOK, error)
 
 	GetMonitoringSecret(params *GetMonitoringSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMonitoringSecretOK, error)
@@ -246,6 +248,44 @@ func (a *Client) FindClusters(params *FindClustersParams, authInfo runtime.Clien
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*FindClustersDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetAuditPolicy gets the current content of the audit policy config map for a given cluster
+*/
+func (a *Client) GetAuditPolicy(params *GetAuditPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditPolicyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAuditPolicyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAuditPolicy",
+		Method:             "GET",
+		PathPattern:        "/v1/cluster/{id}/audit-policy",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAuditPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAuditPolicyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetAuditPolicyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

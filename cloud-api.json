@@ -1028,17 +1028,83 @@
     },
     "v1.Audit": {
       "properties": {
-        "AuditToSplunk": {
+        "auditPolicy": {
+          "type": "string"
+        },
+        "backends": {
+          "$ref": "#/definitions/v1.AuditBackends"
+        },
+        "disabled": {
           "type": "boolean"
         },
-        "ClusterAudit": {
+        "webhookMode": {
+          "enum": [
+            "batch",
+            "blocking",
+            "blocking-strict"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "auditPolicy",
+        "disabled",
+        "webhookMode"
+      ]
+    },
+    "v1.AuditBackendClusterForwarding": {
+      "properties": {
+        "enabled": {
           "type": "boolean"
         }
       },
       "required": [
-        "AuditToSplunk",
-        "ClusterAudit"
+        "enabled"
       ]
+    },
+    "v1.AuditBackendSplunk": {
+      "properties": {
+        "ca": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "host": {
+          "type": "string"
+        },
+        "index": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "tls": {
+          "type": "boolean"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ca",
+        "enabled",
+        "host",
+        "index",
+        "port",
+        "tls",
+        "token"
+      ]
+    },
+    "v1.AuditBackends": {
+      "properties": {
+        "clusterForwarding": {
+          "$ref": "#/definitions/v1.AuditBackendClusterForwarding"
+        },
+        "splunk": {
+          "$ref": "#/definitions/v1.AuditBackendSplunk"
+        }
+      }
     },
     "v1.AuditFindRequest": {
       "properties": {
@@ -1095,6 +1161,16 @@
           "type": "string"
         }
       }
+    },
+    "v1.AuditPolicyResponse": {
+      "properties": {
+        "raw": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "raw"
+      ]
     },
     "v1.AuditResponse": {
       "properties": {
@@ -1454,6 +1530,9 @@
           },
           "type": "array"
         },
+        "Audit": {
+          "$ref": "#/definitions/v1.Audit"
+        },
         "ClusterFeatures": {
           "$ref": "#/definitions/v1.ClusterFeatures"
         },
@@ -1562,6 +1641,7 @@
       },
       "required": [
         "AdditionalNetworks",
+        "Audit",
         "ClusterFeatures",
         "ControlPlaneFeatureGates",
         "CreationTimestamp",
@@ -6412,6 +6492,44 @@
           }
         },
         "summary": "get cluster by id",
+        "tags": [
+          "cluster"
+        ]
+      }
+    },
+    "/v1/cluster/{id}/audit-policy": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getAuditPolicy",
+        "parameters": [
+          {
+            "description": "identifier of the cluster",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.AuditPolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get the current content of the audit policy config map for a given cluster",
         "tags": [
           "cluster"
         ]

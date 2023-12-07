@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -19,24 +20,40 @@ import (
 // swagger:model v1.Audit
 type V1Audit struct {
 
-	// audit to splunk
+	// audit policy
 	// Required: true
-	AuditToSplunk *bool `json:"AuditToSplunk"`
+	AuditPolicy *string `json:"auditPolicy"`
 
-	// cluster audit
+	// backends
+	Backends *V1AuditBackends `json:"backends,omitempty"`
+
+	// disabled
 	// Required: true
-	ClusterAudit *bool `json:"ClusterAudit"`
+	Disabled *bool `json:"disabled"`
+
+	// webhook mode
+	// Required: true
+	// Enum: [batch blocking blocking-strict]
+	WebhookMode *string `json:"webhookMode"`
 }
 
 // Validate validates this v1 audit
 func (m *V1Audit) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAuditToSplunk(formats); err != nil {
+	if err := m.validateAuditPolicy(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateClusterAudit(formats); err != nil {
+	if err := m.validateBackends(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDisabled(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWebhookMode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -46,26 +63,121 @@ func (m *V1Audit) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1Audit) validateAuditToSplunk(formats strfmt.Registry) error {
+func (m *V1Audit) validateAuditPolicy(formats strfmt.Registry) error {
 
-	if err := validate.Required("AuditToSplunk", "body", m.AuditToSplunk); err != nil {
+	if err := validate.Required("auditPolicy", "body", m.AuditPolicy); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *V1Audit) validateClusterAudit(formats strfmt.Registry) error {
+func (m *V1Audit) validateBackends(formats strfmt.Registry) error {
+	if swag.IsZero(m.Backends) { // not required
+		return nil
+	}
 
-	if err := validate.Required("ClusterAudit", "body", m.ClusterAudit); err != nil {
+	if m.Backends != nil {
+		if err := m.Backends.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("backends")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("backends")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1Audit) validateDisabled(formats strfmt.Registry) error {
+
+	if err := validate.Required("disabled", "body", m.Disabled); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-// ContextValidate validates this v1 audit based on context it is used
+var v1AuditTypeWebhookModePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["batch","blocking","blocking-strict"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		v1AuditTypeWebhookModePropEnum = append(v1AuditTypeWebhookModePropEnum, v)
+	}
+}
+
+const (
+
+	// V1AuditWebhookModeBatch captures enum value "batch"
+	V1AuditWebhookModeBatch string = "batch"
+
+	// V1AuditWebhookModeBlocking captures enum value "blocking"
+	V1AuditWebhookModeBlocking string = "blocking"
+
+	// V1AuditWebhookModeBlockingDashStrict captures enum value "blocking-strict"
+	V1AuditWebhookModeBlockingDashStrict string = "blocking-strict"
+)
+
+// prop value enum
+func (m *V1Audit) validateWebhookModeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, v1AuditTypeWebhookModePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *V1Audit) validateWebhookMode(formats strfmt.Registry) error {
+
+	if err := validate.Required("webhookMode", "body", m.WebhookMode); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateWebhookModeEnum("webhookMode", "body", *m.WebhookMode); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 audit based on the context it is used
 func (m *V1Audit) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateBackends(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1Audit) contextValidateBackends(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Backends != nil {
+
+		if swag.IsZero(m.Backends) { // not required
+			return nil
+		}
+
+		if err := m.Backends.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("backends")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("backends")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
