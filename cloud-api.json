@@ -3354,6 +3354,9 @@
         "partitionID": {
           "type": "string"
         },
+        "size": {
+          "$ref": "#/definitions/v1.PostgresSize"
+        },
         "sourceId": {
           "type": "string"
         },
