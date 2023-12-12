@@ -35,6 +35,10 @@ type V1MachineUsage struct {
 	// Required: true
 	Debtorid *string `json:"debtorid"`
 
+	// the image id of this machine
+	// Required: true
+	Imageid *string `json:"imageid"`
+
 	// the duration that this machine is running
 	// Required: true
 	Lifetime *int64 `json:"lifetime"`
@@ -43,6 +47,14 @@ type V1MachineUsage struct {
 	// Required: true
 	// Format: date-time
 	Machineend *strfmt.DateTime `json:"machineend"`
+
+	// the id of this machine
+	// Required: true
+	Machineid *string `json:"machineid"`
+
+	// the name of this machine
+	// Required: true
+	Machinename *string `json:"machinename"`
 
 	// the start time of this machine
 	// Required: true
@@ -60,6 +72,10 @@ type V1MachineUsage struct {
 	// the project name of this entity
 	// Required: true
 	Projectname *string `json:"projectname"`
+
+	// the size id of this machine
+	// Required: true
+	Sizeid *string `json:"sizeid"`
 
 	// the tenant of this entity
 	// Required: true
@@ -90,11 +106,23 @@ func (m *V1MachineUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateImageid(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLifetime(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateMachineend(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMachineid(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMachinename(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -111,6 +139,10 @@ func (m *V1MachineUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProjectname(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSizeid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -164,6 +196,15 @@ func (m *V1MachineUsage) validateDebtorid(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1MachineUsage) validateImageid(formats strfmt.Registry) error {
+
+	if err := validate.Required("imageid", "body", m.Imageid); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *V1MachineUsage) validateLifetime(formats strfmt.Registry) error {
 
 	if err := validate.Required("lifetime", "body", m.Lifetime); err != nil {
@@ -180,6 +221,24 @@ func (m *V1MachineUsage) validateMachineend(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("machineend", "body", "date-time", m.Machineend.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineUsage) validateMachineid(formats strfmt.Registry) error {
+
+	if err := validate.Required("machineid", "body", m.Machineid); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineUsage) validateMachinename(formats strfmt.Registry) error {
+
+	if err := validate.Required("machinename", "body", m.Machinename); err != nil {
 		return err
 	}
 
@@ -220,6 +279,15 @@ func (m *V1MachineUsage) validateProjectid(formats strfmt.Registry) error {
 func (m *V1MachineUsage) validateProjectname(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectname", "body", m.Projectname); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineUsage) validateSizeid(formats strfmt.Registry) error {
+
+	if err := validate.Required("sizeid", "body", m.Sizeid); err != nil {
 		return err
 	}
 

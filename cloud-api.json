@@ -2618,6 +2618,10 @@
           "description": "the debtor id attached to this entity",
           "type": "string"
         },
+        "imageid": {
+          "description": "the image id of this machine",
+          "type": "string"
+        },
         "lifetime": {
           "description": "the duration that this machine is running",
           "format": "int64",
@@ -2626,6 +2630,14 @@
         "machineend": {
           "description": "the end time of this machine",
           "format": "date-time",
+          "type": "string"
+        },
+        "machineid": {
+          "description": "the id of this machine",
+          "type": "string"
+        },
+        "machinename": {
+          "description": "the name of this machine",
           "type": "string"
         },
         "machinestart": {
@@ -2645,6 +2657,10 @@
           "description": "the project name of this entity",
           "type": "string"
         },
+        "sizeid": {
+          "description": "the size id of this machine",
+          "type": "string"
+        },
         "tenant": {
           "description": "the tenant of this entity",
           "type": "string"
@@ -2659,12 +2675,16 @@
         "clustername",
         "contract",
         "debtorid",
+        "imageid",
         "lifetime",
         "machineend",
+        "machineid",
+        "machinename",
         "machinestart",
         "partition",
         "projectid",
         "projectname",
+        "sizeid",
         "tenant",
         "tenantname"
       ]
