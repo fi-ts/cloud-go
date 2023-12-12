@@ -3912,6 +3912,39 @@
         "lifetime"
       ]
     },
+    "v1.ProductOptionUsageRequest": {
+      "properties": {
+        "clusterid": {
+          "description": "the cluster id to account for",
+          "type": "string"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "the id of the product option",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
     "v1.ProductOptionUsageResponse": {
       "properties": {
         "accumulatedusage": {
@@ -6258,7 +6291,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.ProductOptionUsage"
+              "$ref": "#/definitions/v1.ProductOptionUsageRequest"
             }
           }
         ],

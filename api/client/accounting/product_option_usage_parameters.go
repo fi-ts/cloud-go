@@ -64,7 +64,7 @@ ProductOptionUsageParams contains all the parameters to send to the API endpoint
 type ProductOptionUsageParams struct {
 
 	// Body.
-	Body *models.V1ProductOptionUsage
+	Body *models.V1ProductOptionUsageRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,13 +120,13 @@ func (o *ProductOptionUsageParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the product option usage params
-func (o *ProductOptionUsageParams) WithBody(body *models.V1ProductOptionUsage) *ProductOptionUsageParams {
+func (o *ProductOptionUsageParams) WithBody(body *models.V1ProductOptionUsageRequest) *ProductOptionUsageParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the product option usage params
-func (o *ProductOptionUsageParams) SetBody(body *models.V1ProductOptionUsage) {
+func (o *ProductOptionUsageParams) SetBody(body *models.V1ProductOptionUsageRequest) {
 	o.Body = body
 }
 
