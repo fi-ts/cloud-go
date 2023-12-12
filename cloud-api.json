@@ -2600,6 +2600,158 @@
         "Version"
       ]
     },
+    "v1.MachineUsage": {
+      "properties": {
+        "clusterend": {
+          "description": "the end time of this machine",
+          "format": "date-time",
+          "type": "string"
+        },
+        "clusterid": {
+          "description": "the cluster id of this machine",
+          "type": "string"
+        },
+        "clustername": {
+          "description": "the cluster name of this machine",
+          "type": "string"
+        },
+        "clusterstart": {
+          "description": "the start time of this machine",
+          "format": "date-time",
+          "type": "string"
+        },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "the duration that this machine is running",
+          "format": "int64",
+          "type": "integer"
+        },
+        "partition": {
+          "description": "the partition of this machine",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id of this entity",
+          "type": "string"
+        },
+        "projectname": {
+          "description": "the project name of this entity",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this entity",
+          "type": "string"
+        },
+        "tenantname": {
+          "description": "the tenant name of this entity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clusterend",
+        "clusterid",
+        "clustername",
+        "clusterstart",
+        "contract",
+        "debtorid",
+        "lifetime",
+        "partition",
+        "projectid",
+        "projectname",
+        "tenant",
+        "tenantname"
+      ]
+    },
+    "v1.MachineUsageAccumuluated": {
+      "properties": {
+        "lifetime": {
+          "description": "the duration that the machines is running",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "lifetime"
+      ]
+    },
+    "v1.MachineUsageRequest": {
+      "properties": {
+        "clusterid": {
+          "description": "the cluster id to account for",
+          "type": "string"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "the id of the machine",
+          "type": "string"
+        },
+        "partition": {
+          "description": "the partition of the machines",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "sizeid": {
+          "description": "the size of the machines",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "v1.MachineUsageResponse": {
+      "properties": {
+        "accumulatedusage": {
+          "$ref": "#/definitions/v1.MachineUsageAccumuluated",
+          "description": "just the usage data of the individual machines summed up"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        },
+        "usage": {
+          "description": "the usage data of the individual machines",
+          "items": {
+            "$ref": "#/definitions/v1.MachineUsage"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "accumulatedusage",
+        "from",
+        "usage"
+      ]
+    },
     "v1.Maintenance": {
       "properties": {
         "AutoUpdate": {
@@ -3695,6 +3847,100 @@
           "type": "string"
         }
       }
+    },
+    "v1.ProductOptionUsage": {
+      "properties": {
+        "clusterid": {
+          "description": "the cluster id related to this product option",
+          "type": "string"
+        },
+        "clustername": {
+          "description": "the cluster name related to this product option",
+          "type": "string"
+        },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "the duration that this product option is running",
+          "format": "int64",
+          "type": "integer"
+        },
+        "projectid": {
+          "description": "the project id of this entity",
+          "type": "string"
+        },
+        "projectname": {
+          "description": "the project name of this entity",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this entity",
+          "type": "string"
+        },
+        "tenantname": {
+          "description": "the tenant name of this entity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clusterid",
+        "clustername",
+        "contract",
+        "debtorid",
+        "lifetime",
+        "projectid",
+        "projectname",
+        "tenant",
+        "tenantname"
+      ]
+    },
+    "v1.ProductOptionUsageAccumuluated": {
+      "properties": {
+        "lifetime": {
+          "description": "the duration that the product options are active",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "lifetime"
+      ]
+    },
+    "v1.ProductOptionUsageResponse": {
+      "properties": {
+        "accumulatedusage": {
+          "$ref": "#/definitions/v1.ProductOptionUsageAccumuluated",
+          "description": "just the usage data of the individual product options summed up"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        },
+        "usage": {
+          "description": "the usage data of the individual product options",
+          "items": {
+            "$ref": "#/definitions/v1.ProductOptionUsage"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "accumulatedusage",
+        "from",
+        "usage"
+      ]
     },
     "v1.Project": {
       "properties": {
@@ -5803,6 +6049,45 @@
         ]
       }
     },
+    "/v1/accounting/machine-usage": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "machineUsage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.MachineUsageRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.MachineUsageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find machine usage for given accounting query",
+        "tags": [
+          "accounting"
+        ]
+      }
+    },
     "/v1/accounting/network-usage": {
       "post": {
         "consumes": [
@@ -5956,6 +6241,45 @@
           }
         },
         "summary": "find postgres usage for given accounting query",
+        "tags": [
+          "accounting"
+        ]
+      }
+    },
+    "/v1/accounting/product-option-usage": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "productOptionUsage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ProductOptionUsage"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.ProductOptionUsageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find product option usage for given accounting query",
         "tags": [
           "accounting"
         ]
