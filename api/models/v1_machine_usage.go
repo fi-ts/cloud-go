@@ -19,11 +19,6 @@ import (
 // swagger:model v1.MachineUsage
 type V1MachineUsage struct {
 
-	// the end time of this machine
-	// Required: true
-	// Format: date-time
-	Clusterend *strfmt.DateTime `json:"clusterend"`
-
 	// the cluster id of this machine
 	// Required: true
 	Clusterid *string `json:"clusterid"`
@@ -31,11 +26,6 @@ type V1MachineUsage struct {
 	// the cluster name of this machine
 	// Required: true
 	Clustername *string `json:"clustername"`
-
-	// the start time of this machine
-	// Required: true
-	// Format: date-time
-	Clusterstart *strfmt.DateTime `json:"clusterstart"`
 
 	// the contract number attached to this entity
 	// Required: true
@@ -48,6 +38,16 @@ type V1MachineUsage struct {
 	// the duration that this machine is running
 	// Required: true
 	Lifetime *int64 `json:"lifetime"`
+
+	// the end time of this machine
+	// Required: true
+	// Format: date-time
+	Machineend *strfmt.DateTime `json:"machineend"`
+
+	// the start time of this machine
+	// Required: true
+	// Format: date-time
+	Machinestart *strfmt.DateTime `json:"machinestart"`
 
 	// the partition of this machine
 	// Required: true
@@ -74,19 +74,11 @@ type V1MachineUsage struct {
 func (m *V1MachineUsage) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateClusterend(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateClusterid(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateClustername(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateClusterstart(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -99,6 +91,14 @@ func (m *V1MachineUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLifetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMachineend(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMachinestart(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -128,19 +128,6 @@ func (m *V1MachineUsage) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1MachineUsage) validateClusterend(formats strfmt.Registry) error {
-
-	if err := validate.Required("clusterend", "body", m.Clusterend); err != nil {
-		return err
-	}
-
-	if err := validate.FormatOf("clusterend", "body", "date-time", m.Clusterend.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1MachineUsage) validateClusterid(formats strfmt.Registry) error {
 
 	if err := validate.Required("clusterid", "body", m.Clusterid); err != nil {
@@ -153,19 +140,6 @@ func (m *V1MachineUsage) validateClusterid(formats strfmt.Registry) error {
 func (m *V1MachineUsage) validateClustername(formats strfmt.Registry) error {
 
 	if err := validate.Required("clustername", "body", m.Clustername); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1MachineUsage) validateClusterstart(formats strfmt.Registry) error {
-
-	if err := validate.Required("clusterstart", "body", m.Clusterstart); err != nil {
-		return err
-	}
-
-	if err := validate.FormatOf("clusterstart", "body", "date-time", m.Clusterstart.String(), formats); err != nil {
 		return err
 	}
 
@@ -193,6 +167,32 @@ func (m *V1MachineUsage) validateDebtorid(formats strfmt.Registry) error {
 func (m *V1MachineUsage) validateLifetime(formats strfmt.Registry) error {
 
 	if err := validate.Required("lifetime", "body", m.Lifetime); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineUsage) validateMachineend(formats strfmt.Registry) error {
+
+	if err := validate.Required("machineend", "body", m.Machineend); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("machineend", "body", "date-time", m.Machineend.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineUsage) validateMachinestart(formats strfmt.Registry) error {
+
+	if err := validate.Required("machinestart", "body", m.Machinestart); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("machinestart", "body", "date-time", m.Machinestart.String(), formats); err != nil {
 		return err
 	}
 

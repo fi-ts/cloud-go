@@ -2602,22 +2602,12 @@
     },
     "v1.MachineUsage": {
       "properties": {
-        "clusterend": {
-          "description": "the end time of this machine",
-          "format": "date-time",
-          "type": "string"
-        },
         "clusterid": {
           "description": "the cluster id of this machine",
           "type": "string"
         },
         "clustername": {
           "description": "the cluster name of this machine",
-          "type": "string"
-        },
-        "clusterstart": {
-          "description": "the start time of this machine",
-          "format": "date-time",
           "type": "string"
         },
         "contract": {
@@ -2632,6 +2622,16 @@
           "description": "the duration that this machine is running",
           "format": "int64",
           "type": "integer"
+        },
+        "machineend": {
+          "description": "the end time of this machine",
+          "format": "date-time",
+          "type": "string"
+        },
+        "machinestart": {
+          "description": "the start time of this machine",
+          "format": "date-time",
+          "type": "string"
         },
         "partition": {
           "description": "the partition of this machine",
@@ -2655,13 +2655,13 @@
         }
       },
       "required": [
-        "clusterend",
         "clusterid",
         "clustername",
-        "clusterstart",
         "contract",
         "debtorid",
         "lifetime",
+        "machineend",
+        "machinestart",
         "partition",
         "projectid",
         "projectname",
