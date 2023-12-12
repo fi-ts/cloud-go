@@ -35,6 +35,10 @@ type V1ProductOptionUsage struct {
 	// Required: true
 	Debtorid *string `json:"debtorid"`
 
+	// the id of this product option
+	// Required: true
+	ID *string `json:"id"`
+
 	// the duration that this product option is running
 	// Required: true
 	Lifetime *int64 `json:"lifetime"`
@@ -73,6 +77,10 @@ func (m *V1ProductOptionUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDebtorid(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -132,6 +140,15 @@ func (m *V1ProductOptionUsage) validateContract(formats strfmt.Registry) error {
 func (m *V1ProductOptionUsage) validateDebtorid(formats strfmt.Registry) error {
 
 	if err := validate.Required("debtorid", "body", m.Debtorid); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ProductOptionUsage) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 

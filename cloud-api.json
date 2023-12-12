@@ -3886,6 +3886,10 @@
           "description": "the debtor id attached to this entity",
           "type": "string"
         },
+        "id": {
+          "description": "the id of this product option",
+          "type": "string"
+        },
         "lifetime": {
           "description": "the duration that this product option is running",
           "format": "int64",
@@ -3913,6 +3917,7 @@
         "clustername",
         "contract",
         "debtorid",
+        "id",
         "lifetime",
         "projectid",
         "projectname",
