@@ -2606,10 +2606,6 @@
           "description": "the cluster id of this machine",
           "type": "string"
         },
-        "clustername": {
-          "description": "the cluster name of this machine",
-          "type": "string"
-        },
         "contract": {
           "description": "the contract number attached to this entity",
           "type": "string"
@@ -2672,7 +2668,6 @@
       },
       "required": [
         "clusterid",
-        "clustername",
         "contract",
         "debtorid",
         "imageid",
