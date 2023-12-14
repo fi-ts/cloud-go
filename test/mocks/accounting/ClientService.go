@@ -236,6 +236,43 @@ func (_m *ClientService) IPUsageCSV(params *clientaccounting.IPUsageCSVParams, a
 	return r0, r1
 }
 
+// MachineUsage provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) MachineUsage(params *clientaccounting.MachineUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientaccounting.ClientOption) (*clientaccounting.MachineUsageOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for MachineUsage")
+	}
+
+	var r0 *clientaccounting.MachineUsageOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientaccounting.MachineUsageParams, runtime.ClientAuthInfoWriter, ...clientaccounting.ClientOption) (*clientaccounting.MachineUsageOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientaccounting.MachineUsageParams, runtime.ClientAuthInfoWriter, ...clientaccounting.ClientOption) *clientaccounting.MachineUsageOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientaccounting.MachineUsageOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientaccounting.MachineUsageParams, runtime.ClientAuthInfoWriter, ...clientaccounting.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // NetworkUsage provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) NetworkUsage(params *clientaccounting.NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientaccounting.ClientOption) (*clientaccounting.NetworkUsageOK, error) {
 	_va := make([]interface{}, len(opts))
@@ -376,6 +413,43 @@ func (_m *ClientService) PostgresUsageCSV(params *clientaccounting.PostgresUsage
 	}
 
 	if rf, ok := ret.Get(1).(func(*clientaccounting.PostgresUsageCSVParams, runtime.ClientAuthInfoWriter, ...clientaccounting.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ProductOptionUsage provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) ProductOptionUsage(params *clientaccounting.ProductOptionUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientaccounting.ClientOption) (*clientaccounting.ProductOptionUsageOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for ProductOptionUsage")
+	}
+
+	var r0 *clientaccounting.ProductOptionUsageOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientaccounting.ProductOptionUsageParams, runtime.ClientAuthInfoWriter, ...clientaccounting.ClientOption) (*clientaccounting.ProductOptionUsageOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientaccounting.ProductOptionUsageParams, runtime.ClientAuthInfoWriter, ...clientaccounting.ClientOption) *clientaccounting.ProductOptionUsageOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientaccounting.ProductOptionUsageOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientaccounting.ProductOptionUsageParams, runtime.ClientAuthInfoWriter, ...clientaccounting.ClientOption) error); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
 		r1 = ret.Error(1)

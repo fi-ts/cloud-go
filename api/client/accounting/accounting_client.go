@@ -40,6 +40,8 @@ type ClientService interface {
 
 	IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPUsageCSVOK, error)
 
+	MachineUsage(params *MachineUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MachineUsageOK, error)
+
 	NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageOK, error)
 
 	NetworkUsageCSV(params *NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageCSVOK, error)
@@ -47,6 +49,8 @@ type ClientService interface {
 	PostgresUsage(params *PostgresUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageOK, error)
 
 	PostgresUsageCSV(params *PostgresUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostgresUsageCSVOK, error)
+
+	ProductOptionUsage(params *ProductOptionUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProductOptionUsageOK, error)
 
 	Projects(params *ProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProjectsOK, error)
 
@@ -290,6 +294,44 @@ func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAut
 }
 
 /*
+MachineUsage finds machine usage for given accounting query
+*/
+func (a *Client) MachineUsage(params *MachineUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MachineUsageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMachineUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "machineUsage",
+		Method:             "POST",
+		PathPattern:        "/v1/accounting/machine-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &MachineUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*MachineUsageOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*MachineUsageDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 NetworkUsage finds network usage for given accounting query
 */
 func (a *Client) NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageOK, error) {
@@ -438,6 +480,44 @@ func (a *Client) PostgresUsageCSV(params *PostgresUsageCSVParams, authInfo runti
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PostgresUsageCSVDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ProductOptionUsage finds product option usage for given accounting query
+*/
+func (a *Client) ProductOptionUsage(params *ProductOptionUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProductOptionUsageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewProductOptionUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "productOptionUsage",
+		Method:             "POST",
+		PathPattern:        "/v1/accounting/product-option-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ProductOptionUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ProductOptionUsageOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ProductOptionUsageDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
