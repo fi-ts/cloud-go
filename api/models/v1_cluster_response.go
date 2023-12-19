@@ -97,6 +97,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	Name *string `json:"Name"`
 
+	// network access type
+	// Required: true
+	NetworkAccessType *string `json:"NetworkAccessType"`
+
 	// networking
 	// Required: true
 	Networking *V1Networking `json:"Networking"`
@@ -217,6 +221,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNetworkAccessType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -523,6 +531,15 @@ func (m *V1ClusterResponse) validateMaintenance(formats strfmt.Registry) error {
 func (m *V1ClusterResponse) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("Name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) validateNetworkAccessType(formats strfmt.Registry) error {
+
+	if err := validate.Required("NetworkAccessType", "body", m.NetworkAccessType); err != nil {
 		return err
 	}
 

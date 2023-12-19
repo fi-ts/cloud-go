@@ -1604,6 +1604,9 @@
         "Name": {
           "type": "string"
         },
+        "NetworkAccessType": {
+          "type": "string"
+        },
         "Networking": {
           "$ref": "#/definitions/v1.Networking"
         },
@@ -1669,6 +1672,7 @@
         "Labels",
         "Maintenance",
         "Name",
+        "NetworkAccessType",
         "Networking",
         "PartitionID",
         "ProjectID",
