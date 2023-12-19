@@ -1297,6 +1297,15 @@
         "cni": {
           "type": "string"
         },
+        "networkAccessType": {
+          "description": "defines how a cluster can access outside networks",
+          "enum": [
+            "baseline",
+            "forbidden",
+            "restricted"
+          ],
+          "type": "string"
+        },
         "seedName": {
           "description": "seed name on which the cluster will be scheduled",
           "type": "string"
@@ -1322,7 +1331,8 @@
         "Purpose",
         "SystemComponents",
         "Tenant",
-        "Workers"
+        "Workers",
+        "networkAccessType"
       ]
     },
     "v1.ClusterCredentialsResponse": {
