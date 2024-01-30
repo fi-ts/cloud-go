@@ -829,6 +829,12 @@
         "id": {
           "type": "string"
         },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "mgmtserviceaddress": {
           "type": "string"
         },
@@ -898,6 +904,31 @@
         "type"
       ]
     },
+    "models.V1SizeReservation": {
+      "properties": {
+        "amount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "partitionids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "projectid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "partitionids",
+        "projectid"
+      ]
+    },
     "models.V1SizeResponse": {
       "properties": {
         "changed": {
@@ -918,13 +949,27 @@
         "id": {
           "type": "string"
         },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "name": {
           "type": "string"
+        },
+        "reservations": {
+          "items": {
+            "$ref": "#/definitions/models.V1SizeReservation"
+          },
+          "type": "array"
         }
       },
       "required": [
         "constraints",
-        "id"
+        "id",
+        "labels",
+        "reservations"
       ]
     },
     "models.V1VolumeGroup": {
@@ -3879,6 +3924,13 @@
     },
     "v1.ProductOptionUsage": {
       "properties": {
+        "annotations": {
+          "description": "annotations associated with this product option",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id related to this product option",
           "type": "string"
@@ -3922,6 +3974,7 @@
         }
       },
       "required": [
+        "annotations",
         "clusterid",
         "clustername",
         "contract",

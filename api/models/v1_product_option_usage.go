@@ -19,6 +19,10 @@ import (
 // swagger:model v1.ProductOptionUsage
 type V1ProductOptionUsage struct {
 
+	// annotations associated with this product option
+	// Required: true
+	Annotations []string `json:"annotations"`
+
 	// the cluster id related to this product option
 	// Required: true
 	Clusterid *string `json:"clusterid"`
@@ -64,6 +68,10 @@ type V1ProductOptionUsage struct {
 func (m *V1ProductOptionUsage) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateClusterid(formats); err != nil {
 		res = append(res, err)
 	}
@@ -107,6 +115,15 @@ func (m *V1ProductOptionUsage) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ProductOptionUsage) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
 	return nil
 }
 

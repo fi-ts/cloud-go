@@ -36,6 +36,9 @@ type ModelsV1PartitionResponse struct {
 	// Required: true
 	ID *string `json:"id"`
 
+	// labels
+	Labels map[string]string `json:"labels,omitempty"`
+
 	// mgmtserviceaddress
 	Mgmtserviceaddress string `json:"mgmtserviceaddress,omitempty"`
 
