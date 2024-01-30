@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -103,6 +104,11 @@ type V1ClusterCreateRequest struct {
 	// cni
 	Cni string `json:"cni,omitempty"`
 
+	// defines how a cluster can access outside networks
+	// Required: true
+	// Enum: [baseline forbidden restricted]
+	NetworkAccessType *string `json:"networkAccessType"`
+
 	// seed name on which the cluster will be scheduled
 	SeedName string `json:"seedName,omitempty"`
 }
@@ -188,6 +194,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateWorkers(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNetworkAccessType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -485,6 +495,52 @@ func (m *V1ClusterCreateRequest) validateWorkers(formats strfmt.Registry) error 
 			}
 		}
 
+	}
+
+	return nil
+}
+
+var v1ClusterCreateRequestTypeNetworkAccessTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["baseline","forbidden","restricted"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		v1ClusterCreateRequestTypeNetworkAccessTypePropEnum = append(v1ClusterCreateRequestTypeNetworkAccessTypePropEnum, v)
+	}
+}
+
+const (
+
+	// V1ClusterCreateRequestNetworkAccessTypeBaseline captures enum value "baseline"
+	V1ClusterCreateRequestNetworkAccessTypeBaseline string = "baseline"
+
+	// V1ClusterCreateRequestNetworkAccessTypeForbidden captures enum value "forbidden"
+	V1ClusterCreateRequestNetworkAccessTypeForbidden string = "forbidden"
+
+	// V1ClusterCreateRequestNetworkAccessTypeRestricted captures enum value "restricted"
+	V1ClusterCreateRequestNetworkAccessTypeRestricted string = "restricted"
+)
+
+// prop value enum
+func (m *V1ClusterCreateRequest) validateNetworkAccessTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, v1ClusterCreateRequestTypeNetworkAccessTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) validateNetworkAccessType(formats strfmt.Registry) error {
+
+	if err := validate.Required("networkAccessType", "body", m.NetworkAccessType); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateNetworkAccessTypeEnum("networkAccessType", "body", *m.NetworkAccessType); err != nil {
+		return err
 	}
 
 	return nil

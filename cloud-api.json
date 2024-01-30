@@ -829,6 +829,12 @@
         "id": {
           "type": "string"
         },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "mgmtserviceaddress": {
           "type": "string"
         },
@@ -898,6 +904,31 @@
         "type"
       ]
     },
+    "models.V1SizeReservation": {
+      "properties": {
+        "amount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "partitionids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "projectid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "partitionids",
+        "projectid"
+      ]
+    },
     "models.V1SizeResponse": {
       "properties": {
         "changed": {
@@ -918,13 +949,27 @@
         "id": {
           "type": "string"
         },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "name": {
           "type": "string"
+        },
+        "reservations": {
+          "items": {
+            "$ref": "#/definitions/models.V1SizeReservation"
+          },
+          "type": "array"
         }
       },
       "required": [
         "constraints",
-        "id"
+        "id",
+        "labels",
+        "reservations"
       ]
     },
     "models.V1VolumeGroup": {
@@ -1297,6 +1342,15 @@
         "cni": {
           "type": "string"
         },
+        "networkAccessType": {
+          "description": "defines how a cluster can access outside networks",
+          "enum": [
+            "baseline",
+            "forbidden",
+            "restricted"
+          ],
+          "type": "string"
+        },
         "seedName": {
           "description": "seed name on which the cluster will be scheduled",
           "type": "string"
@@ -1322,7 +1376,8 @@
         "Purpose",
         "SystemComponents",
         "Tenant",
-        "Workers"
+        "Workers",
+        "networkAccessType"
       ]
     },
     "v1.ClusterCredentialsResponse": {
@@ -1594,6 +1649,9 @@
         "Name": {
           "type": "string"
         },
+        "NetworkAccessType": {
+          "type": "string"
+        },
         "Networking": {
           "$ref": "#/definitions/v1.Networking"
         },
@@ -1659,6 +1717,7 @@
         "Labels",
         "Maintenance",
         "Name",
+        "NetworkAccessType",
         "Networking",
         "PartitionID",
         "ProjectID",
@@ -3865,6 +3924,13 @@
     },
     "v1.ProductOptionUsage": {
       "properties": {
+        "annotations": {
+          "description": "annotations associated with this product option",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "clusterid": {
           "description": "the cluster id related to this product option",
           "type": "string"
@@ -3908,6 +3974,7 @@
         }
       },
       "required": [
+        "annotations",
         "clusterid",
         "clustername",
         "contract",
