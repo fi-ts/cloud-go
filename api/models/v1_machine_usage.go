@@ -19,6 +19,10 @@ import (
 // swagger:model v1.MachineUsage
 type V1MachineUsage struct {
 
+	// the allocation id of this machine
+	// Required: true
+	Allocationid *string `json:"allocationid"`
+
 	// the cluster id of this machine
 	// Required: true
 	Clusterid *string `json:"clusterid"`
@@ -86,6 +90,10 @@ type V1MachineUsage struct {
 func (m *V1MachineUsage) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAllocationid(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateClusterid(formats); err != nil {
 		res = append(res, err)
 	}
@@ -149,6 +157,15 @@ func (m *V1MachineUsage) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1MachineUsage) validateAllocationid(formats strfmt.Registry) error {
+
+	if err := validate.Required("allocationid", "body", m.Allocationid); err != nil {
+		return err
+	}
+
 	return nil
 }
 
