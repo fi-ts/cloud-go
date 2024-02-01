@@ -20,6 +20,10 @@ import (
 // swagger:model models.V1MachineAllocation
 type ModelsV1MachineAllocation struct {
 
+	// allocationuuid
+	// Required: true
+	Allocationuuid *string `json:"allocationuuid"`
+
 	// boot info
 	BootInfo *ModelsV1BootInfo `json:"boot_info,omitempty"`
 
@@ -83,6 +87,10 @@ type ModelsV1MachineAllocation struct {
 func (m *ModelsV1MachineAllocation) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAllocationuuid(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateBootInfo(formats); err != nil {
 		res = append(res, err)
 	}
@@ -142,6 +150,15 @@ func (m *ModelsV1MachineAllocation) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ModelsV1MachineAllocation) validateAllocationuuid(formats strfmt.Registry) error {
+
+	if err := validate.Required("allocationuuid", "body", m.Allocationuuid); err != nil {
+		return err
+	}
+
 	return nil
 }
 

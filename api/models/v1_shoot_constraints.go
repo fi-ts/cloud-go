@@ -44,6 +44,10 @@ type V1ShootConstraints struct {
 	// Required: true
 	MachineTypes []string `json:"machine_types"`
 
+	// network restrictions by partition
+	// Required: true
+	NetworkAccessRestrictions map[string]V1NetworkAccessRestrictions `json:"network_access_restrictions"`
+
 	// the list of available networks for cluster creation
 	// Required: true
 	Networks []*V1Network `json:"networks"`
@@ -82,6 +86,10 @@ func (m *V1ShootConstraints) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateMachineTypes(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNetworkAccessRestrictions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -193,6 +201,33 @@ func (m *V1ShootConstraints) validateMachineTypes(formats strfmt.Registry) error
 	return nil
 }
 
+func (m *V1ShootConstraints) validateNetworkAccessRestrictions(formats strfmt.Registry) error {
+
+	if err := validate.Required("network_access_restrictions", "body", m.NetworkAccessRestrictions); err != nil {
+		return err
+	}
+
+	for k := range m.NetworkAccessRestrictions {
+
+		if err := validate.Required("network_access_restrictions"+"."+k, "body", m.NetworkAccessRestrictions[k]); err != nil {
+			return err
+		}
+		if val, ok := m.NetworkAccessRestrictions[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("network_access_restrictions" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("network_access_restrictions" + "." + k)
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *V1ShootConstraints) validateNetworks(formats strfmt.Registry) error {
 
 	if err := validate.Required("networks", "body", m.Networks); err != nil {
@@ -250,6 +285,10 @@ func (m *V1ShootConstraints) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateNetworkAccessRestrictions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNetworks(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -301,6 +340,25 @@ func (m *V1ShootConstraints) contextValidateMachineImages(ctx context.Context, f
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("machine_images" + "." + strconv.Itoa(i))
 				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *V1ShootConstraints) contextValidateNetworkAccessRestrictions(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.Required("network_access_restrictions", "body", m.NetworkAccessRestrictions); err != nil {
+		return err
+	}
+
+	for k := range m.NetworkAccessRestrictions {
+
+		if val, ok := m.NetworkAccessRestrictions[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
 				return err
 			}
 		}

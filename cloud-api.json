@@ -439,6 +439,9 @@
     },
     "models.V1MachineAllocation": {
       "properties": {
+        "allocationuuid": {
+          "type": "string"
+        },
         "boot_info": {
           "$ref": "#/definitions/models.V1BootInfo"
         },
@@ -495,6 +498,7 @@
         }
       },
       "required": [
+        "allocationuuid",
         "created",
         "creator",
         "hostname",
@@ -2661,6 +2665,10 @@
     },
     "v1.MachineUsage": {
       "properties": {
+        "allocationid": {
+          "description": "the allocation id of this machine",
+          "type": "string"
+        },
         "clusterid": {
           "description": "the cluster id of this machine",
           "type": "string"
@@ -2726,6 +2734,7 @@
         }
       },
       "required": [
+        "allocationid",
         "clusterid",
         "contract",
         "debtorid",
@@ -2965,6 +2974,28 @@
         "ID",
         "Name",
         "Prefixes"
+      ]
+    },
+    "v1.NetworkAccessRestrictions": {
+      "properties": {
+        "allowed_networks": {
+          "description": "the list of networks which are allowed to configure if networkAccessTypeForbidden is specified",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "masked_registries": {
+          "description": "list of registries which are configured to pull only strictly required container images",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "allowed_networks",
+        "masked_registries"
       ]
     },
     "v1.NetworkUsage": {
@@ -4706,6 +4737,13 @@
           },
           "type": "array"
         },
+        "network_access_restrictions": {
+          "additionalProperties": {
+            "$ref": "#/definitions/v1.NetworkAccessRestrictions"
+          },
+          "description": "network restrictions by partition",
+          "type": "object"
+        },
         "networks": {
           "description": "the list of available networks for cluster creation",
           "items": {
@@ -4738,6 +4776,7 @@
         "kubernetes_versions",
         "machine_images",
         "machine_types",
+        "network_access_restrictions",
         "networks",
         "partitions",
         "seeds"
