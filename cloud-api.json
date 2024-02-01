@@ -1075,6 +1075,26 @@
         }
       }
     },
+    "v1.AllowedNetworks": {
+      "properties": {
+        "egress": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ingress": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "egress",
+        "ingress"
+      ]
+    },
     "v1.Audit": {
       "properties": {
         "auditPolicy": {
@@ -2979,11 +2999,8 @@
     "v1.NetworkAccessRestrictions": {
       "properties": {
         "allowed_networks": {
-          "description": "the list of networks which are allowed to configure if networkAccessTypeForbidden is specified",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
+          "$ref": "#/definitions/v1.AllowedNetworks",
+          "description": "the list of networks which are allowed to configure if networkAccessTypeForbidden is specified"
         },
         "masked_registries": {
           "description": "list of registries which are configured to pull only strictly required container images",
