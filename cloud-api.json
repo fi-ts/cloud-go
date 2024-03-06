@@ -225,6 +225,87 @@
         "volumegroups"
       ]
     },
+    "models.V1FirewallEgressRule": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "ports": {
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "to": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "ports",
+        "to"
+      ]
+    },
+    "models.V1FirewallIngressRule": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "from": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ports": {
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "to": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "from",
+        "ports",
+        "to"
+      ]
+    },
+    "models.V1FirewallRules": {
+      "properties": {
+        "egress": {
+          "items": {
+            "$ref": "#/definitions/models.V1FirewallEgressRule"
+          },
+          "type": "array"
+        },
+        "ingress": {
+          "items": {
+            "$ref": "#/definitions/models.V1FirewallIngressRule"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "egress",
+        "ingress"
+      ]
+    },
     "models.V1IPAllocateRequest": {
       "properties": {
         "description": {
@@ -456,6 +537,9 @@
         },
         "filesystemlayout": {
           "$ref": "#/definitions/models.V1FilesystemLayoutResponse"
+        },
+        "firewall_rules": {
+          "$ref": "#/definitions/models.V1FirewallRules"
         },
         "hostname": {
           "type": "string"
@@ -1026,12 +1110,19 @@
         "message": {
           "type": "string"
         },
+        "services": {
+          "additionalProperties": {
+            "$ref": "#/definitions/rest.HealthResult"
+          },
+          "type": "object"
+        },
         "status": {
           "type": "string"
         }
       },
       "required": [
         "message",
+        "services",
         "status"
       ]
     },
@@ -2693,6 +2784,10 @@
           "description": "the cluster id of this machine",
           "type": "string"
         },
+        "clustername": {
+          "description": "the cluster name of this machine",
+          "type": "string"
+        },
         "contract": {
           "description": "the contract number attached to this entity",
           "type": "string"
@@ -2756,6 +2851,7 @@
       "required": [
         "allocationid",
         "clusterid",
+        "clustername",
         "contract",
         "debtorid",
         "imageid",
