@@ -27,6 +27,10 @@ type V1MachineUsage struct {
 	// Required: true
 	Clusterid *string `json:"clusterid"`
 
+	// the cluster name of this machine
+	// Required: true
+	Clustername *string `json:"clustername"`
+
 	// the contract number attached to this entity
 	// Required: true
 	Contract *string `json:"contract"`
@@ -95,6 +99,10 @@ func (m *V1MachineUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateClusterid(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClustername(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -172,6 +180,15 @@ func (m *V1MachineUsage) validateAllocationid(formats strfmt.Registry) error {
 func (m *V1MachineUsage) validateClusterid(formats strfmt.Registry) error {
 
 	if err := validate.Required("clusterid", "body", m.Clusterid); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineUsage) validateClustername(formats strfmt.Registry) error {
+
+	if err := validate.Required("clustername", "body", m.Clustername); err != nil {
 		return err
 	}
 
