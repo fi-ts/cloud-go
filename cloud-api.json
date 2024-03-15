@@ -4354,6 +4354,94 @@
         }
       }
     },
+    "v1.QoSPolicyLimit": {
+      "properties": {
+        "Bandwidth": {
+          "$ref": "#/definitions/v1.QoSPolicyLimitBandwidth"
+        },
+        "IOPS": {
+          "$ref": "#/definitions/v1.QoSPolicyLimitIOPS"
+        },
+        "IOPSPerGB": {
+          "$ref": "#/definitions/v1.QoSPolicyLimitIOPSPerGB"
+        }
+      },
+      "required": [
+        "Bandwidth",
+        "IOPS",
+        "IOPSPerGB"
+      ]
+    },
+    "v1.QoSPolicyLimitBandwidth": {
+      "properties": {
+        "Read": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Write": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Read",
+        "Write"
+      ]
+    },
+    "v1.QoSPolicyLimitIOPS": {
+      "properties": {
+        "Read": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Write": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Read",
+        "Write"
+      ]
+    },
+    "v1.QoSPolicyLimitIOPSPerGB": {
+      "properties": {
+        "Read": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Write": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Read",
+        "Write"
+      ]
+    },
+    "v1.QoSPolicyResponse": {
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "Limit": {
+          "$ref": "#/definitions/v1.QoSPolicyLimit"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "QoSPolicyID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Description",
+        "Limit",
+        "Name",
+        "QoSPolicyID"
+      ]
+    },
     "v1.Quota": {
       "properties": {
         "quota": {
@@ -9182,6 +9270,38 @@
           }
         },
         "summary": "find volumes by multiple criteria",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/qos": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "listPolicies",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.QoSPolicyResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get all policies",
         "tags": [
           "volume"
         ]
