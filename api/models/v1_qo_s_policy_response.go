@@ -34,6 +34,10 @@ type V1QoSPolicyResponse struct {
 	// qo s policy ID
 	// Required: true
 	QoSPolicyID *string `json:"QoSPolicyID"`
+
+	// state
+	// Required: true
+	State *string `json:"State"`
 }
 
 // Validate validates this v1 qo s policy response
@@ -53,6 +57,10 @@ func (m *V1QoSPolicyResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateQoSPolicyID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,6 +111,15 @@ func (m *V1QoSPolicyResponse) validateName(formats strfmt.Registry) error {
 func (m *V1QoSPolicyResponse) validateQoSPolicyID(formats strfmt.Registry) error {
 
 	if err := validate.Required("QoSPolicyID", "body", m.QoSPolicyID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1QoSPolicyResponse) validateState(formats strfmt.Registry) error {
+
+	if err := validate.Required("State", "body", m.State); err != nil {
 		return err
 	}
 

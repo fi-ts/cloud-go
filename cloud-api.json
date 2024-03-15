@@ -4433,13 +4433,17 @@
         },
         "QoSPolicyID": {
           "type": "string"
+        },
+        "State": {
+          "type": "string"
         }
       },
       "required": [
         "Description",
         "Limit",
         "Name",
-        "QoSPolicyID"
+        "QoSPolicyID",
+        "State"
       ]
     },
     "v1.Quota": {
