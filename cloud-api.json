@@ -9553,10 +9553,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "items": {
-                "$ref": "#/definitions/v1.VolumeResponse"
-              },
-              "type": "array"
+              "$ref": "#/definitions/v1.VolumeResponse"
             }
           },
           "default": {

@@ -53,7 +53,7 @@ SetVolumeQoSPolicyOK describes a response with status code 200, with default hea
 OK
 */
 type SetVolumeQoSPolicyOK struct {
-	Payload []*models.V1VolumeResponse
+	Payload *models.V1VolumeResponse
 }
 
 // IsSuccess returns true when this set volume qo s policy o k response has a 2xx status code
@@ -94,14 +94,16 @@ func (o *SetVolumeQoSPolicyOK) String() string {
 	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicyOK  %+v", 200, o.Payload)
 }
 
-func (o *SetVolumeQoSPolicyOK) GetPayload() []*models.V1VolumeResponse {
+func (o *SetVolumeQoSPolicyOK) GetPayload() *models.V1VolumeResponse {
 	return o.Payload
 }
 
 func (o *SetVolumeQoSPolicyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.V1VolumeResponse)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
