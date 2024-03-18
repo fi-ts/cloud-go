@@ -66,6 +66,12 @@ type SetVolumeQoSPolicyParams struct {
 	// Body.
 	Body *models.V1VolumeSetQoSPolicyRequest
 
+	/* ID.
+
+	   identifier of the volume
+	*/
+	ID string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -130,6 +136,17 @@ func (o *SetVolumeQoSPolicyParams) SetBody(body *models.V1VolumeSetQoSPolicyRequ
 	o.Body = body
 }
 
+// WithID adds the id to the set volume qo s policy params
+func (o *SetVolumeQoSPolicyParams) WithID(id string) *SetVolumeQoSPolicyParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the set volume qo s policy params
+func (o *SetVolumeQoSPolicyParams) SetID(id string) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *SetVolumeQoSPolicyParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -141,6 +158,11 @@ func (o *SetVolumeQoSPolicyParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
 		}
+	}
+
+	// path param id
+	if err := r.SetPathParam("id", o.ID); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

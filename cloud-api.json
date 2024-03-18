@@ -9531,6 +9531,13 @@
         "operationId": "setVolumeQoSPolicy",
         "parameters": [
           {
+            "description": "identifier of the volume",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
