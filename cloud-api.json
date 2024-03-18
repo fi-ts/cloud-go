@@ -5540,6 +5540,16 @@
         "VolumeName"
       ]
     },
+    "v1.VolumeSetQoSPolicyRequest": {
+      "properties": {
+        "QoSPolicyID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "QoSPolicyID"
+      ]
+    },
     "v1.VolumeStatistics": {
       "properties": {
         "CompressionRatio": {
@@ -9508,6 +9518,48 @@
           }
         },
         "summary": "get a volume",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/{id}/qos": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "setVolumeQoSPolicy",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.VolumeSetQoSPolicyRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.VolumeResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "update volume qos policy",
         "tags": [
           "volume"
         ]

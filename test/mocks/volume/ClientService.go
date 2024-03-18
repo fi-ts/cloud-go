@@ -352,6 +352,43 @@ func (_m *ClientService) SetTransport(transport runtime.ClientTransport) {
 	_m.Called(transport)
 }
 
+// SetVolumeQoSPolicy provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SetVolumeQoSPolicy(params *clientvolume.SetVolumeQoSPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientvolume.ClientOption) (*clientvolume.SetVolumeQoSPolicyOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SetVolumeQoSPolicy")
+	}
+
+	var r0 *clientvolume.SetVolumeQoSPolicyOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientvolume.SetVolumeQoSPolicyParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) (*clientvolume.SetVolumeQoSPolicyOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientvolume.SetVolumeQoSPolicyParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) *clientvolume.SetVolumeQoSPolicyOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientvolume.SetVolumeQoSPolicyOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientvolume.SetVolumeQoSPolicyParams, runtime.ClientAuthInfoWriter, ...clientvolume.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // NewClientService creates a new instance of ClientService. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewClientService(t interface {
