@@ -43,6 +43,9 @@ type V1AuditBackendSplunk struct {
 	// Required: true
 	TLS *bool `json:"tls"`
 
+	// tlshost
+	Tlshost string `json:"tlshost,omitempty"`
+
 	// token
 	// Required: true
 	Token *string `json:"token"`
