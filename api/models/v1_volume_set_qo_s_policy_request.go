@@ -22,6 +22,10 @@ type V1VolumeSetQoSPolicyRequest struct {
 	// qo s policy ID
 	// Required: true
 	QoSPolicyID *string `json:"QoSPolicyID"`
+
+	// qo s policy name
+	// Required: true
+	QoSPolicyName *string `json:"QoSPolicyName"`
 }
 
 // Validate validates this v1 volume set qo s policy request
@@ -29,6 +33,10 @@ func (m *V1VolumeSetQoSPolicyRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateQoSPolicyID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQoSPolicyName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -41,6 +49,15 @@ func (m *V1VolumeSetQoSPolicyRequest) Validate(formats strfmt.Registry) error {
 func (m *V1VolumeSetQoSPolicyRequest) validateQoSPolicyID(formats strfmt.Registry) error {
 
 	if err := validate.Required("QoSPolicyID", "body", m.QoSPolicyID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1VolumeSetQoSPolicyRequest) validateQoSPolicyName(formats strfmt.Registry) error {
+
+	if err := validate.Required("QoSPolicyName", "body", m.QoSPolicyName); err != nil {
 		return err
 	}
 

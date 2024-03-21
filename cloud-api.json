@@ -5544,10 +5544,14 @@
       "properties": {
         "QoSPolicyID": {
           "type": "string"
+        },
+        "QoSPolicyName": {
+          "type": "string"
         }
       },
       "required": [
-        "QoSPolicyID"
+        "QoSPolicyID",
+        "QoSPolicyName"
       ]
     },
     "v1.VolumeStatistics": {
