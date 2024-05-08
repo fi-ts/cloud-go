@@ -28,7 +28,7 @@ type V1beta1ShootCredentialsRotation struct {
 	Kubeconfig *V1beta1ShootKubeconfigRotation `json:"kubeconfig,omitempty"`
 
 	// observability
-	Observability *V1beta1ShootObservabilityRotation `json:"observability,omitempty"`
+	Observability *V1beta1ObservabilityRotation `json:"observability,omitempty"`
 
 	// service account key
 	ServiceAccountKey *V1beta1ServiceAccountKeyRotation `json:"serviceAccountKey,omitempty"`

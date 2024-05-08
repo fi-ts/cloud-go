@@ -24,8 +24,7 @@ type RestHealthResponse struct {
 	Message *string `json:"message"`
 
 	// services
-	// Required: true
-	Services map[string]RestHealthResult `json:"services"`
+	Services map[string]RestHealthResult `json:"services,omitempty"`
 
 	// status
 	// Required: true
@@ -64,9 +63,8 @@ func (m *RestHealthResponse) validateMessage(formats strfmt.Registry) error {
 }
 
 func (m *RestHealthResponse) validateServices(formats strfmt.Registry) error {
-
-	if err := validate.Required("services", "body", m.Services); err != nil {
-		return err
+	if swag.IsZero(m.Services) { // not required
+		return nil
 	}
 
 	for k := range m.Services {
@@ -114,10 +112,6 @@ func (m *RestHealthResponse) ContextValidate(ctx context.Context, formats strfmt
 }
 
 func (m *RestHealthResponse) contextValidateServices(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.Required("services", "body", m.Services); err != nil {
-		return err
-	}
 
 	for k := range m.Services {
 

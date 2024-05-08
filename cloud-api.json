@@ -1101,7 +1101,6 @@
       },
       "required": [
         "message",
-        "services",
         "status"
       ]
     },
@@ -1122,7 +1121,6 @@
       },
       "required": [
         "message",
-        "services",
         "status"
       ]
     },
@@ -2967,6 +2965,9 @@
     },
     "v1.MaintenanceAutoUpdate": {
       "properties": {
+        "FirewallImage": {
+          "type": "boolean"
+        },
         "KubernetesVersion": {
           "type": "boolean"
         },
@@ -2975,6 +2976,7 @@
         }
       },
       "required": [
+        "FirewallImage",
         "KubernetesVersion",
         "MachineImage"
       ]
@@ -3738,7 +3740,7 @@
         "sourceId"
       ]
     },
-    "v1.PostgresSecretsRespone": {
+    "v1.PostgresSecretsResponse": {
       "properties": {
         "userSecret": {
           "items": {
@@ -5900,6 +5902,16 @@
         "type"
       ]
     },
+    "v1beta1.ObservabilityRotation": {
+      "properties": {
+        "lastCompletionTime": {
+          "type": "string"
+        },
+        "lastInitiationTime": {
+          "type": "string"
+        }
+      }
+    },
     "v1beta1.ServiceAccountKeyRotation": {
       "properties": {
         "lastCompletionTime": {
@@ -5955,7 +5967,7 @@
           "$ref": "#/definitions/v1beta1.ShootKubeconfigRotation"
         },
         "observability": {
-          "$ref": "#/definitions/v1beta1.ShootObservabilityRotation"
+          "$ref": "#/definitions/v1beta1.ObservabilityRotation"
         },
         "serviceAccountKey": {
           "$ref": "#/definitions/v1beta1.ServiceAccountKeyRotation"
@@ -5966,16 +5978,6 @@
       }
     },
     "v1beta1.ShootKubeconfigRotation": {
-      "properties": {
-        "lastCompletionTime": {
-          "type": "string"
-        },
-        "lastInitiationTime": {
-          "type": "string"
-        }
-      }
-    },
-    "v1beta1.ShootObservabilityRotation": {
       "properties": {
         "lastCompletionTime": {
           "type": "string"
@@ -7293,7 +7295,7 @@
             }
           }
         },
-        "summary": "trigger cluster reconcilation ",
+        "summary": "trigger cluster reconciliation ",
         "tags": [
           "cluster"
         ]
@@ -8109,7 +8111,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.PostgresSecretsRespone"
+              "$ref": "#/definitions/v1.PostgresSecretsResponse"
             }
           },
           "default": {
