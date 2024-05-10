@@ -480,7 +480,7 @@ func (a *Client) ListConstraints(params *ListConstraintsParams, authInfo runtime
 }
 
 /*
-ReconcileCluster triggers cluster reconcilation
+ReconcileCluster triggers cluster reconciliation
 */
 func (a *Client) ReconcileCluster(params *ReconcileClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReconcileClusterOK, error) {
 	// TODO: Validate the params before sending

@@ -1101,7 +1101,6 @@
       },
       "required": [
         "message",
-        "services",
         "status"
       ]
     },
@@ -1122,7 +1121,6 @@
       },
       "required": [
         "message",
-        "services",
         "status"
       ]
     },
@@ -3738,7 +3736,7 @@
         "sourceId"
       ]
     },
-    "v1.PostgresSecretsRespone": {
+    "v1.PostgresSecretsResponse": {
       "properties": {
         "userSecret": {
           "items": {
@@ -4431,6 +4429,9 @@
         "Name": {
           "type": "string"
         },
+        "Partition": {
+          "type": "string"
+        },
         "QoSPolicyID": {
           "type": "string"
         },
@@ -4442,6 +4443,7 @@
         "Description",
         "Limit",
         "Name",
+        "Partition",
         "QoSPolicyID",
         "State"
       ]
@@ -7399,7 +7401,7 @@
             }
           }
         },
-        "summary": "trigger cluster reconcilation ",
+        "summary": "trigger cluster reconciliation ",
         "tags": [
           "cluster"
         ]
@@ -8215,7 +8217,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/v1.PostgresSecretsRespone"
+              "$ref": "#/definitions/v1.PostgresSecretsResponse"
             }
           },
           "default": {

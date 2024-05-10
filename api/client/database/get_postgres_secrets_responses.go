@@ -53,7 +53,7 @@ GetPostgresSecretsOK describes a response with status code 200, with default hea
 OK
 */
 type GetPostgresSecretsOK struct {
-	Payload *models.V1PostgresSecretsRespone
+	Payload *models.V1PostgresSecretsResponse
 }
 
 // IsSuccess returns true when this get postgres secrets o k response has a 2xx status code
@@ -94,13 +94,13 @@ func (o *GetPostgresSecretsOK) String() string {
 	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecretsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetPostgresSecretsOK) GetPayload() *models.V1PostgresSecretsRespone {
+func (o *GetPostgresSecretsOK) GetPayload() *models.V1PostgresSecretsResponse {
 	return o.Payload
 }
 
 func (o *GetPostgresSecretsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.V1PostgresSecretsRespone)
+	o.Payload = new(models.V1PostgresSecretsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -31,6 +31,10 @@ type V1QoSPolicyResponse struct {
 	// Required: true
 	Name *string `json:"Name"`
 
+	// partition
+	// Required: true
+	Partition *string `json:"Partition"`
+
 	// qo s policy ID
 	// Required: true
 	QoSPolicyID *string `json:"QoSPolicyID"`
@@ -53,6 +57,10 @@ func (m *V1QoSPolicyResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePartition(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -102,6 +110,15 @@ func (m *V1QoSPolicyResponse) validateLimit(formats strfmt.Registry) error {
 func (m *V1QoSPolicyResponse) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("Name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1QoSPolicyResponse) validatePartition(formats strfmt.Registry) error {
+
+	if err := validate.Required("Partition", "body", m.Partition); err != nil {
 		return err
 	}
 
