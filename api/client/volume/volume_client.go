@@ -42,7 +42,11 @@ type ClientService interface {
 
 	GetVolume(params *GetVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVolumeOK, error)
 
+	ListPolicies(params *ListPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPoliciesOK, error)
+
 	ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVolumesOK, error)
+
+	SetVolumeQoSPolicy(params *SetVolumeQoSPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetVolumeQoSPolicyOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -314,6 +318,44 @@ func (a *Client) GetVolume(params *GetVolumeParams, authInfo runtime.ClientAuthI
 }
 
 /*
+ListPolicies gets all policies
+*/
+func (a *Client) ListPolicies(params *ListPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPoliciesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListPoliciesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listPolicies",
+		Method:             "GET",
+		PathPattern:        "/v1/volume/qos",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListPoliciesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListPoliciesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListPoliciesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 ListVolumes gets all volumes
 */
 func (a *Client) ListVolumes(params *ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVolumesOK, error) {
@@ -348,6 +390,44 @@ func (a *Client) ListVolumes(params *ListVolumesParams, authInfo runtime.ClientA
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListVolumesDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+SetVolumeQoSPolicy updates volume qos policy
+*/
+func (a *Client) SetVolumeQoSPolicy(params *SetVolumeQoSPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetVolumeQoSPolicyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSetVolumeQoSPolicyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "setVolumeQoSPolicy",
+		Method:             "POST",
+		PathPattern:        "/v1/volume/{id}/qos",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &SetVolumeQoSPolicyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SetVolumeQoSPolicyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SetVolumeQoSPolicyDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

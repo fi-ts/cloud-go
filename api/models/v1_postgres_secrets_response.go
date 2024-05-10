@@ -14,17 +14,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// V1PostgresSecretsRespone v1 postgres secrets respone
+// V1PostgresSecretsResponse v1 postgres secrets response
 //
-// swagger:model v1.PostgresSecretsRespone
-type V1PostgresSecretsRespone struct {
+// swagger:model v1.PostgresSecretsResponse
+type V1PostgresSecretsResponse struct {
 
 	// user secret
 	UserSecret []*V1UserSecret `json:"userSecret"`
 }
 
-// Validate validates this v1 postgres secrets respone
-func (m *V1PostgresSecretsRespone) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 postgres secrets response
+func (m *V1PostgresSecretsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateUserSecret(formats); err != nil {
@@ -37,7 +37,7 @@ func (m *V1PostgresSecretsRespone) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1PostgresSecretsRespone) validateUserSecret(formats strfmt.Registry) error {
+func (m *V1PostgresSecretsResponse) validateUserSecret(formats strfmt.Registry) error {
 	if swag.IsZero(m.UserSecret) { // not required
 		return nil
 	}
@@ -63,8 +63,8 @@ func (m *V1PostgresSecretsRespone) validateUserSecret(formats strfmt.Registry) e
 	return nil
 }
 
-// ContextValidate validate this v1 postgres secrets respone based on the context it is used
-func (m *V1PostgresSecretsRespone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this v1 postgres secrets response based on the context it is used
+func (m *V1PostgresSecretsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateUserSecret(ctx, formats); err != nil {
@@ -77,7 +77,7 @@ func (m *V1PostgresSecretsRespone) ContextValidate(ctx context.Context, formats 
 	return nil
 }
 
-func (m *V1PostgresSecretsRespone) contextValidateUserSecret(ctx context.Context, formats strfmt.Registry) error {
+func (m *V1PostgresSecretsResponse) contextValidateUserSecret(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.UserSecret); i++ {
 
@@ -103,7 +103,7 @@ func (m *V1PostgresSecretsRespone) contextValidateUserSecret(ctx context.Context
 }
 
 // MarshalBinary interface implementation
-func (m *V1PostgresSecretsRespone) MarshalBinary() ([]byte, error) {
+func (m *V1PostgresSecretsResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -111,8 +111,8 @@ func (m *V1PostgresSecretsRespone) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1PostgresSecretsRespone) UnmarshalBinary(b []byte) error {
-	var res V1PostgresSecretsRespone
+func (m *V1PostgresSecretsResponse) UnmarshalBinary(b []byte) error {
+	var res V1PostgresSecretsResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
