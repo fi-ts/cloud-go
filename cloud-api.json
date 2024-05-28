@@ -4356,6 +4356,102 @@
         }
       }
     },
+    "v1.QoSPolicyLimit": {
+      "properties": {
+        "Bandwidth": {
+          "$ref": "#/definitions/v1.QoSPolicyLimitBandwidth"
+        },
+        "IOPS": {
+          "$ref": "#/definitions/v1.QoSPolicyLimitIOPS"
+        },
+        "IOPSPerGB": {
+          "$ref": "#/definitions/v1.QoSPolicyLimitIOPSPerGB"
+        }
+      },
+      "required": [
+        "Bandwidth",
+        "IOPS",
+        "IOPSPerGB"
+      ]
+    },
+    "v1.QoSPolicyLimitBandwidth": {
+      "properties": {
+        "Read": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Write": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Read",
+        "Write"
+      ]
+    },
+    "v1.QoSPolicyLimitIOPS": {
+      "properties": {
+        "Read": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Write": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Read",
+        "Write"
+      ]
+    },
+    "v1.QoSPolicyLimitIOPSPerGB": {
+      "properties": {
+        "Read": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "Write": {
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Read",
+        "Write"
+      ]
+    },
+    "v1.QoSPolicyResponse": {
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "Limit": {
+          "$ref": "#/definitions/v1.QoSPolicyLimit"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Partition": {
+          "type": "string"
+        },
+        "QoSPolicyID": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Description",
+        "Limit",
+        "Name",
+        "Partition",
+        "QoSPolicyID",
+        "State"
+      ]
+    },
     "v1.Quota": {
       "properties": {
         "quota": {
@@ -5448,6 +5544,20 @@
         "VolumeHandle",
         "VolumeID",
         "VolumeName"
+      ]
+    },
+    "v1.VolumeSetQoSPolicyRequest": {
+      "properties": {
+        "QoSPolicyID": {
+          "type": "string"
+        },
+        "QoSPolicyName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "QoSPolicyID",
+        "QoSPolicyName"
       ]
     },
     "v1.VolumeStatistics": {
@@ -9189,6 +9299,38 @@
         ]
       }
     },
+    "/v1/volume/qos": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "listPolicies",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.QoSPolicyResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get all policies",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
     "/v1/volume/snapshot/find": {
       "post": {
         "consumes": [
@@ -9386,6 +9528,52 @@
           }
         },
         "summary": "get a volume",
+        "tags": [
+          "volume"
+        ]
+      }
+    },
+    "/v1/volume/{id}/qos": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "setVolumeQoSPolicy",
+        "parameters": [
+          {
+            "description": "identifier of the volume",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.VolumeSetQoSPolicyRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.VolumeResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "update volume qos policy",
         "tags": [
           "volume"
         ]
