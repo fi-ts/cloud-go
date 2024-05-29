@@ -19,13 +19,14 @@ import (
 // swagger:model models.V1SizeConstraint
 type ModelsV1SizeConstraint struct {
 
+	// identifier
+	Identifier string `json:"identifier,omitempty"`
+
 	// max
-	// Required: true
-	Max *int64 `json:"max"`
+	Max int64 `json:"max,omitempty"`
 
 	// min
-	// Required: true
-	Min *int64 `json:"min"`
+	Min int64 `json:"min,omitempty"`
 
 	// type
 	// Required: true
@@ -36,14 +37,6 @@ type ModelsV1SizeConstraint struct {
 func (m *ModelsV1SizeConstraint) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateMax(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateMin(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -51,24 +44,6 @@ func (m *ModelsV1SizeConstraint) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *ModelsV1SizeConstraint) validateMax(formats strfmt.Registry) error {
-
-	if err := validate.Required("max", "body", m.Max); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *ModelsV1SizeConstraint) validateMin(formats strfmt.Registry) error {
-
-	if err := validate.Required("min", "body", m.Min); err != nil {
-		return err
-	}
-
 	return nil
 }
 

@@ -634,9 +634,21 @@
           "format": "int32",
           "type": "integer"
         },
+        "cpus": {
+          "items": {
+            "$ref": "#/definitions/models.V1MetalCPU"
+          },
+          "type": "array"
+        },
         "disks": {
           "items": {
             "$ref": "#/definitions/models.V1MachineBlockDevice"
+          },
+          "type": "array"
+        },
+        "gpus": {
+          "items": {
+            "$ref": "#/definitions/models.V1MetalGPU"
           },
           "type": "array"
         },
@@ -653,7 +665,9 @@
       },
       "required": [
         "cpu_cores",
+        "cpus",
         "disks",
+        "gpus",
         "memory",
         "nics"
       ]
@@ -887,6 +901,44 @@
         "connected"
       ]
     },
+    "models.V1MetalCPU": {
+      "properties": {
+        "cores": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "model": {
+          "type": "string"
+        },
+        "threads": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "vendor": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "cores",
+        "model",
+        "threads",
+        "vendor"
+      ]
+    },
+    "models.V1MetalGPU": {
+      "properties": {
+        "model": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "model",
+        "vendor"
+      ]
+    },
     "models.V1PartitionBootConfiguration": {
       "properties": {
         "commandline": {
@@ -974,6 +1026,9 @@
     },
     "models.V1SizeConstraint": {
       "properties": {
+        "identifier": {
+          "type": "string"
+        },
         "max": {
           "format": "int64",
           "type": "integer"
@@ -987,8 +1042,6 @@
         }
       },
       "required": [
-        "max",
-        "min",
         "type"
       ]
     },
