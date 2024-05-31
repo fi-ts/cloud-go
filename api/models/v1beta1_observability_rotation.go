@@ -12,10 +12,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// V1beta1ShootObservabilityRotation v1beta1 shoot observability rotation
+// V1beta1ObservabilityRotation v1beta1 observability rotation
 //
-// swagger:model v1beta1.ShootObservabilityRotation
-type V1beta1ShootObservabilityRotation struct {
+// swagger:model v1beta1.ObservabilityRotation
+type V1beta1ObservabilityRotation struct {
 
 	// last completion time
 	LastCompletionTime string `json:"lastCompletionTime,omitempty"`
@@ -24,18 +24,18 @@ type V1beta1ShootObservabilityRotation struct {
 	LastInitiationTime string `json:"lastInitiationTime,omitempty"`
 }
 
-// Validate validates this v1beta1 shoot observability rotation
-func (m *V1beta1ShootObservabilityRotation) Validate(formats strfmt.Registry) error {
+// Validate validates this v1beta1 observability rotation
+func (m *V1beta1ObservabilityRotation) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1beta1 shoot observability rotation based on context it is used
-func (m *V1beta1ShootObservabilityRotation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1beta1 observability rotation based on context it is used
+func (m *V1beta1ObservabilityRotation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1beta1ShootObservabilityRotation) MarshalBinary() ([]byte, error) {
+func (m *V1beta1ObservabilityRotation) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -43,8 +43,8 @@ func (m *V1beta1ShootObservabilityRotation) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1beta1ShootObservabilityRotation) UnmarshalBinary(b []byte) error {
-	var res V1beta1ShootObservabilityRotation
+func (m *V1beta1ObservabilityRotation) UnmarshalBinary(b []byte) error {
+	var res V1beta1ObservabilityRotation
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

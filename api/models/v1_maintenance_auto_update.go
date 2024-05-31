@@ -19,6 +19,10 @@ import (
 // swagger:model v1.MaintenanceAutoUpdate
 type V1MaintenanceAutoUpdate struct {
 
+	// firewall image
+	// Required: true
+	FirewallImage *bool `json:"FirewallImage"`
+
 	// kubernetes version
 	// Required: true
 	KubernetesVersion *bool `json:"KubernetesVersion"`
@@ -32,6 +36,10 @@ type V1MaintenanceAutoUpdate struct {
 func (m *V1MaintenanceAutoUpdate) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFirewallImage(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateKubernetesVersion(formats); err != nil {
 		res = append(res, err)
 	}
@@ -43,6 +51,15 @@ func (m *V1MaintenanceAutoUpdate) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1MaintenanceAutoUpdate) validateFirewallImage(formats strfmt.Registry) error {
+
+	if err := validate.Required("FirewallImage", "body", m.FirewallImage); err != nil {
+		return err
+	}
+
 	return nil
 }
 
