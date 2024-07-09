@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ReconcileClusterOK) Code() int {
 }
 
 func (o *ReconcileClusterOK) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileClusterOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileClusterOK %s", 200, payload)
 }
 
 func (o *ReconcileClusterOK) String() string {
-	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileClusterOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileClusterOK %s", 200, payload)
 }
 
 func (o *ReconcileClusterOK) GetPayload() *models.V1ClusterResponse {
@@ -159,11 +162,13 @@ func (o *ReconcileClusterDefault) Code() int {
 }
 
 func (o *ReconcileClusterDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileCluster default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileCluster default %s", o._statusCode, payload)
 }
 
 func (o *ReconcileClusterDefault) String() string {
-	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileCluster default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/{id}/reconcile][%d] reconcileCluster default %s", o._statusCode, payload)
 }
 
 func (o *ReconcileClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {

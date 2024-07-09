@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ContainerUsageOK) Code() int {
 }
 
 func (o *ContainerUsageOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK %s", 200, payload)
 }
 
 func (o *ContainerUsageOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsageOK %s", 200, payload)
 }
 
 func (o *ContainerUsageOK) GetPayload() *models.V1ContainerUsageResponse {
@@ -159,11 +162,13 @@ func (o *ContainerUsageDefault) Code() int {
 }
 
 func (o *ContainerUsageDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default %s", o._statusCode, payload)
 }
 
 func (o *ContainerUsageDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/container-usage][%d] containerUsage default %s", o._statusCode, payload)
 }
 
 func (o *ContainerUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {

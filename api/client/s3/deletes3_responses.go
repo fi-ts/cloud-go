@@ -6,6 +6,7 @@ package s3
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *Deletes3OK) Code() int {
 }
 
 func (o *Deletes3OK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3OK %s", 200, payload)
 }
 
 func (o *Deletes3OK) String() string {
-	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3OK %s", 200, payload)
 }
 
 func (o *Deletes3OK) GetPayload() *models.V1S3Response {
@@ -159,11 +162,13 @@ func (o *Deletes3Default) Code() int {
 }
 
 func (o *Deletes3Default) Error() string {
-	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3 default %s", o._statusCode, payload)
 }
 
 func (o *Deletes3Default) String() string {
-	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/s3][%d] deletes3 default %s", o._statusCode, payload)
 }
 
 func (o *Deletes3Default) GetPayload() *httperrors.HTTPErrorResponse {

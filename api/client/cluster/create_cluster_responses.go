@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -93,11 +94,13 @@ func (o *CreateClusterCreated) Code() int {
 }
 
 func (o *CreateClusterCreated) Error() string {
-	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterCreated %s", 201, payload)
 }
 
 func (o *CreateClusterCreated) String() string {
-	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterCreated %s", 201, payload)
 }
 
 func (o *CreateClusterCreated) GetPayload() *models.V1ClusterResponse {
@@ -161,11 +164,13 @@ func (o *CreateClusterConflict) Code() int {
 }
 
 func (o *CreateClusterConflict) Error() string {
-	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict  %+v", 409, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict %s", 409, payload)
 }
 
 func (o *CreateClusterConflict) String() string {
-	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict  %+v", 409, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createClusterConflict %s", 409, payload)
 }
 
 func (o *CreateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
@@ -233,11 +238,13 @@ func (o *CreateClusterDefault) Code() int {
 }
 
 func (o *CreateClusterDefault) Error() string {
-	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default %s", o._statusCode, payload)
 }
 
 func (o *CreateClusterDefault) String() string {
-	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/cluster][%d] createCluster default %s", o._statusCode, payload)
 }
 
 func (o *CreateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {

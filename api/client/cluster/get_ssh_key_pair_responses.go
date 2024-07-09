@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetSSHKeyPairOK) Code() int {
 }
 
 func (o *GetSSHKeyPairOK) Error() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSshKeyPairOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSshKeyPairOK %s", 200, payload)
 }
 
 func (o *GetSSHKeyPairOK) String() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSshKeyPairOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSshKeyPairOK %s", 200, payload)
 }
 
 func (o *GetSSHKeyPairOK) GetPayload() *models.V1ClusterCredentialsResponse {
@@ -159,11 +162,13 @@ func (o *GetSSHKeyPairDefault) Code() int {
 }
 
 func (o *GetSSHKeyPairDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSSHKeyPair default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSSHKeyPair default %s", o._statusCode, payload)
 }
 
 func (o *GetSSHKeyPairDefault) String() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSSHKeyPair default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/sshkeypair][%d] getSSHKeyPair default %s", o._statusCode, payload)
 }
 
 func (o *GetSSHKeyPairDefault) GetPayload() *httperrors.HTTPErrorResponse {

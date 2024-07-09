@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *PostgresUsageCSVOK) Code() int {
 }
 
 func (o *PostgresUsageCSVOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/postgres-usage-csv][%d] postgresUsageCSVOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage-csv][%d] postgresUsageCSVOK %s", 200, payload)
 }
 
 func (o *PostgresUsageCSVOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/postgres-usage-csv][%d] postgresUsageCSVOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage-csv][%d] postgresUsageCSVOK %s", 200, payload)
 }
 
 func (o *PostgresUsageCSVOK) GetPayload() string {
@@ -156,11 +159,13 @@ func (o *PostgresUsageCSVDefault) Code() int {
 }
 
 func (o *PostgresUsageCSVDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/postgres-usage-csv][%d] postgresUsageCSV default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage-csv][%d] postgresUsageCSV default %s", o._statusCode, payload)
 }
 
 func (o *PostgresUsageCSVDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/postgres-usage-csv][%d] postgresUsageCSV default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage-csv][%d] postgresUsageCSV default %s", o._statusCode, payload)
 }
 
 func (o *PostgresUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {

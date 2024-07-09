@@ -6,6 +6,7 @@ package volume
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *FindSnapshotsOK) Code() int {
 }
 
 func (o *FindSnapshotsOK) Error() string {
-	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshotsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshotsOK %s", 200, payload)
 }
 
 func (o *FindSnapshotsOK) String() string {
-	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshotsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshotsOK %s", 200, payload)
 }
 
 func (o *FindSnapshotsOK) GetPayload() []*models.V1SnapshotResponse {
@@ -157,11 +160,13 @@ func (o *FindSnapshotsDefault) Code() int {
 }
 
 func (o *FindSnapshotsDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshots default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshots default %s", o._statusCode, payload)
 }
 
 func (o *FindSnapshotsDefault) String() string {
-	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshots default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/snapshot/find][%d] findSnapshots default %s", o._statusCode, payload)
 }
 
 func (o *FindSnapshotsDefault) GetPayload() *httperrors.HTTPErrorResponse {

@@ -6,6 +6,7 @@ package volume
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ClusterInfoOK) Code() int {
 }
 
 func (o *ClusterInfoOK) Error() string {
-	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfoOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfoOK %s", 200, payload)
 }
 
 func (o *ClusterInfoOK) String() string {
-	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfoOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfoOK %s", 200, payload)
 }
 
 func (o *ClusterInfoOK) GetPayload() []*models.V1StorageClusterInfo {
@@ -157,11 +160,13 @@ func (o *ClusterInfoDefault) Code() int {
 }
 
 func (o *ClusterInfoDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfo default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfo default %s", o._statusCode, payload)
 }
 
 func (o *ClusterInfoDefault) String() string {
-	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfo default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/clusterinfo][%d] clusterInfo default %s", o._statusCode, payload)
 }
 
 func (o *ClusterInfoDefault) GetPayload() *httperrors.HTTPErrorResponse {

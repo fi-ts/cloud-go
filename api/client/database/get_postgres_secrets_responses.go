@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetPostgresSecretsOK) Code() int {
 }
 
 func (o *GetPostgresSecretsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecretsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecretsOK %s", 200, payload)
 }
 
 func (o *GetPostgresSecretsOK) String() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecretsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecretsOK %s", 200, payload)
 }
 
 func (o *GetPostgresSecretsOK) GetPayload() *models.V1PostgresSecretsResponse {
@@ -159,11 +162,13 @@ func (o *GetPostgresSecretsDefault) Code() int {
 }
 
 func (o *GetPostgresSecretsDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecrets default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecrets default %s", o._statusCode, payload)
 }
 
 func (o *GetPostgresSecretsDefault) String() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecrets default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/{id}/secrets][%d] getPostgresSecrets default %s", o._statusCode, payload)
 }
 
 func (o *GetPostgresSecretsDefault) GetPayload() *httperrors.HTTPErrorResponse {

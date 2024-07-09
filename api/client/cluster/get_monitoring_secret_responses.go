@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetMonitoringSecretOK) Code() int {
 }
 
 func (o *GetMonitoringSecretOK) Error() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecretOK %s", 200, payload)
 }
 
 func (o *GetMonitoringSecretOK) String() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecretOK %s", 200, payload)
 }
 
 func (o *GetMonitoringSecretOK) GetPayload() *models.V1ClusterMonitoringSecretResponse {
@@ -159,11 +162,13 @@ func (o *GetMonitoringSecretDefault) Code() int {
 }
 
 func (o *GetMonitoringSecretDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecret default %s", o._statusCode, payload)
 }
 
 func (o *GetMonitoringSecretDefault) String() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecret default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/monitoringsecret][%d] getMonitoringSecret default %s", o._statusCode, payload)
 }
 
 func (o *GetMonitoringSecretDefault) GetPayload() *httperrors.HTTPErrorResponse {

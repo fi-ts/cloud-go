@@ -22,7 +22,7 @@ type V1ClusterReconcileRequest struct {
 
 	// the gardener shoot operation annotation to annotate the shoot with
 	// Required: true
-	// Enum: [maintain reconcile retry rotate-ssh-keypair]
+	// Enum: ["maintain","reconcile","retry","rotate-ssh-keypair"]
 	Operation *string `json:"operation"`
 }
 

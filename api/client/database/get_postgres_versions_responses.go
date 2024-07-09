@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetPostgresVersionsOK) Code() int {
 }
 
 func (o *GetPostgresVersionsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersionsOK %s", 200, payload)
 }
 
 func (o *GetPostgresVersionsOK) String() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersionsOK %s", 200, payload)
 }
 
 func (o *GetPostgresVersionsOK) GetPayload() []*models.V1PostgresVersion {
@@ -157,11 +160,13 @@ func (o *GetPostgresVersionsDefault) Code() int {
 }
 
 func (o *GetPostgresVersionsDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersions default %s", o._statusCode, payload)
 }
 
 func (o *GetPostgresVersionsDefault) String() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/versions][%d] getPostgresVersions default %s", o._statusCode, payload)
 }
 
 func (o *GetPostgresVersionsDefault) GetPayload() *httperrors.HTTPErrorResponse {

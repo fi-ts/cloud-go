@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *VolumeUsageCSVOK) Code() int {
 }
 
 func (o *VolumeUsageCSVOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSVOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSVOK %s", 200, payload)
 }
 
 func (o *VolumeUsageCSVOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSVOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSVOK %s", 200, payload)
 }
 
 func (o *VolumeUsageCSVOK) GetPayload() string {
@@ -156,11 +159,13 @@ func (o *VolumeUsageCSVDefault) Code() int {
 }
 
 func (o *VolumeUsageCSVDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSV default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSV default %s", o._statusCode, payload)
 }
 
 func (o *VolumeUsageCSVDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSV default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage-csv][%d] volumeUsageCSV default %s", o._statusCode, payload)
 }
 
 func (o *VolumeUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {

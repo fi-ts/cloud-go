@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DeletePostgresOK) Code() int {
 }
 
 func (o *DeletePostgresOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgresOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgresOK %s", 200, payload)
 }
 
 func (o *DeletePostgresOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgresOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgresOK %s", 200, payload)
 }
 
 func (o *DeletePostgresOK) GetPayload() *models.V1PostgresResponse {
@@ -159,11 +162,13 @@ func (o *DeletePostgresDefault) Code() int {
 }
 
 func (o *DeletePostgresDefault) Error() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgres default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgres default %s", o._statusCode, payload)
 }
 
 func (o *DeletePostgresDefault) String() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgres default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/{id}][%d] deletePostgres default %s", o._statusCode, payload)
 }
 
 func (o *DeletePostgresDefault) GetPayload() *httperrors.HTTPErrorResponse {

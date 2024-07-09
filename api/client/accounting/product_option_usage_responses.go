@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ProductOptionUsageOK) Code() int {
 }
 
 func (o *ProductOptionUsageOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/product-option-usage][%d] productOptionUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/product-option-usage][%d] productOptionUsageOK %s", 200, payload)
 }
 
 func (o *ProductOptionUsageOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/product-option-usage][%d] productOptionUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/product-option-usage][%d] productOptionUsageOK %s", 200, payload)
 }
 
 func (o *ProductOptionUsageOK) GetPayload() *models.V1ProductOptionUsageResponse {
@@ -159,11 +162,13 @@ func (o *ProductOptionUsageDefault) Code() int {
 }
 
 func (o *ProductOptionUsageDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/product-option-usage][%d] productOptionUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/product-option-usage][%d] productOptionUsage default %s", o._statusCode, payload)
 }
 
 func (o *ProductOptionUsageDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/product-option-usage][%d] productOptionUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/product-option-usage][%d] productOptionUsage default %s", o._statusCode, payload)
 }
 
 func (o *ProductOptionUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {

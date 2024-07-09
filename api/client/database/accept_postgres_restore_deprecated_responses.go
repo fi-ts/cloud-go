@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *AcceptPostgresRestoreDeprecatedOK) Code() int {
 }
 
 func (o *AcceptPostgresRestoreDeprecatedOK) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecatedOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecatedOK %s", 200, payload)
 }
 
 func (o *AcceptPostgresRestoreDeprecatedOK) String() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecatedOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecatedOK %s", 200, payload)
 }
 
 func (o *AcceptPostgresRestoreDeprecatedOK) GetPayload() *models.V1PostgresResponse {
@@ -159,11 +162,13 @@ func (o *AcceptPostgresRestoreDeprecatedDefault) Code() int {
 }
 
 func (o *AcceptPostgresRestoreDeprecatedDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecated default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecated default %s", o._statusCode, payload)
 }
 
 func (o *AcceptPostgresRestoreDeprecatedDefault) String() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecated default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreDeprecated default %s", o._statusCode, payload)
 }
 
 func (o *AcceptPostgresRestoreDeprecatedDefault) GetPayload() *httperrors.HTTPErrorResponse {

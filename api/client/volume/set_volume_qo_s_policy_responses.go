@@ -6,6 +6,7 @@ package volume
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *SetVolumeQoSPolicyOK) Code() int {
 }
 
 func (o *SetVolumeQoSPolicyOK) Error() string {
-	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicyOK %s", 200, payload)
 }
 
 func (o *SetVolumeQoSPolicyOK) String() string {
-	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicyOK %s", 200, payload)
 }
 
 func (o *SetVolumeQoSPolicyOK) GetPayload() *models.V1VolumeResponse {
@@ -159,11 +162,13 @@ func (o *SetVolumeQoSPolicyDefault) Code() int {
 }
 
 func (o *SetVolumeQoSPolicyDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicy default %s", o._statusCode, payload)
 }
 
 func (o *SetVolumeQoSPolicyDefault) String() string {
-	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/volume/{id}/qos][%d] setVolumeQoSPolicy default %s", o._statusCode, payload)
 }
 
 func (o *SetVolumeQoSPolicyDefault) GetPayload() *httperrors.HTTPErrorResponse {

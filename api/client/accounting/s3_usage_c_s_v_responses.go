@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *S3UsageCSVOK) Code() int {
 }
 
 func (o *S3UsageCSVOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK %s", 200, payload)
 }
 
 func (o *S3UsageCSVOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSVOK %s", 200, payload)
 }
 
 func (o *S3UsageCSVOK) GetPayload() string {
@@ -156,11 +159,13 @@ func (o *S3UsageCSVDefault) Code() int {
 }
 
 func (o *S3UsageCSVDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSV default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSV default %s", o._statusCode, payload)
 }
 
 func (o *S3UsageCSVDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSV default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage-csv][%d] s3UsageCSV default %s", o._statusCode, payload)
 }
 
 func (o *S3UsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {

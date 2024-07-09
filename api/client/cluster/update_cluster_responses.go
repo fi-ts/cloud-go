@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -93,11 +94,13 @@ func (o *UpdateClusterOK) Code() int {
 }
 
 func (o *UpdateClusterOK) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterOK %s", 200, payload)
 }
 
 func (o *UpdateClusterOK) String() string {
-	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterOK %s", 200, payload)
 }
 
 func (o *UpdateClusterOK) GetPayload() *models.V1ClusterResponse {
@@ -161,11 +164,13 @@ func (o *UpdateClusterConflict) Code() int {
 }
 
 func (o *UpdateClusterConflict) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterConflict  %+v", 409, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterConflict %s", 409, payload)
 }
 
 func (o *UpdateClusterConflict) String() string {
-	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterConflict  %+v", 409, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateClusterConflict %s", 409, payload)
 }
 
 func (o *UpdateClusterConflict) GetPayload() *httperrors.HTTPErrorResponse {
@@ -233,11 +238,13 @@ func (o *UpdateClusterDefault) Code() int {
 }
 
 func (o *UpdateClusterDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster][%d] updateCluster default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateCluster default %s", o._statusCode, payload)
 }
 
 func (o *UpdateClusterDefault) String() string {
-	return fmt.Sprintf("[POST /v1/cluster][%d] updateCluster default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster][%d] updateCluster default %s", o._statusCode, payload)
 }
 
 func (o *UpdateClusterDefault) GetPayload() *httperrors.HTTPErrorResponse {
