@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *PostgresUsageOK) Code() int {
 }
 
 func (o *PostgresUsageOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsageOK %s", 200, payload)
 }
 
 func (o *PostgresUsageOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsageOK %s", 200, payload)
 }
 
 func (o *PostgresUsageOK) GetPayload() *models.V1PostgresUsageResponse {
@@ -159,11 +162,13 @@ func (o *PostgresUsageDefault) Code() int {
 }
 
 func (o *PostgresUsageDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsage default %s", o._statusCode, payload)
 }
 
 func (o *PostgresUsageDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/postgres-usage][%d] postgresUsage default %s", o._statusCode, payload)
 }
 
 func (o *PostgresUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {

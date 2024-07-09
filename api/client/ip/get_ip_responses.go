@@ -6,6 +6,7 @@ package ip
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetIPOK) Code() int {
 }
 
 func (o *GetIPOK) Error() string {
-	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIpOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIpOK %s", 200, payload)
 }
 
 func (o *GetIPOK) String() string {
-	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIpOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIpOK %s", 200, payload)
 }
 
 func (o *GetIPOK) GetPayload() *models.ModelsV1IPResponse {
@@ -159,11 +162,13 @@ func (o *GetIPDefault) Code() int {
 }
 
 func (o *GetIPDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIP default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIP default %s", o._statusCode, payload)
 }
 
 func (o *GetIPDefault) String() string {
-	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIP default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/ip/{ip}][%d] getIP default %s", o._statusCode, payload)
 }
 
 func (o *GetIPDefault) GetPayload() *httperrors.HTTPErrorResponse {

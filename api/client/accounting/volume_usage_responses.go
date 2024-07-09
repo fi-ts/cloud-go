@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *VolumeUsageOK) Code() int {
 }
 
 func (o *VolumeUsageOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsageOK %s", 200, payload)
 }
 
 func (o *VolumeUsageOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsageOK %s", 200, payload)
 }
 
 func (o *VolumeUsageOK) GetPayload() *models.V1VolumeUsageResponse {
@@ -159,11 +162,13 @@ func (o *VolumeUsageDefault) Code() int {
 }
 
 func (o *VolumeUsageDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsage default %s", o._statusCode, payload)
 }
 
 func (o *VolumeUsageDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/volume-usage][%d] volumeUsage default %s", o._statusCode, payload)
 }
 
 func (o *VolumeUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {

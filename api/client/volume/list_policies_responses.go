@@ -6,6 +6,7 @@ package volume
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ListPoliciesOK) Code() int {
 }
 
 func (o *ListPoliciesOK) Error() string {
-	return fmt.Sprintf("[GET /v1/volume/qos][%d] listPoliciesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/qos][%d] listPoliciesOK %s", 200, payload)
 }
 
 func (o *ListPoliciesOK) String() string {
-	return fmt.Sprintf("[GET /v1/volume/qos][%d] listPoliciesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/qos][%d] listPoliciesOK %s", 200, payload)
 }
 
 func (o *ListPoliciesOK) GetPayload() []*models.V1QoSPolicyResponse {
@@ -157,11 +160,13 @@ func (o *ListPoliciesDefault) Code() int {
 }
 
 func (o *ListPoliciesDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/volume/qos][%d] listPolicies default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/qos][%d] listPolicies default %s", o._statusCode, payload)
 }
 
 func (o *ListPoliciesDefault) String() string {
-	return fmt.Sprintf("[GET /v1/volume/qos][%d] listPolicies default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/qos][%d] listPolicies default %s", o._statusCode, payload)
 }
 
 func (o *ListPoliciesDefault) GetPayload() *httperrors.HTTPErrorResponse {

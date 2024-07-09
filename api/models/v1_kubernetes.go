@@ -38,7 +38,7 @@ type V1Kubernetes struct {
 
 	// default pod security standard
 	// Required: true
-	// Enum: [ baseline privileged restricted]
+	// Enum: ["","baseline","privileged","restricted"]
 	DefaultPodSecurityStandard *string `json:"defaultPodSecurityStandard"`
 
 	// disable pod security policies

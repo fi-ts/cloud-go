@@ -33,7 +33,7 @@ type V1Audit struct {
 
 	// webhook mode
 	// Required: true
-	// Enum: [batch blocking blocking-strict]
+	// Enum: ["batch","blocking","blocking-strict"]
 	WebhookMode *string `json:"webhookMode"`
 }
 

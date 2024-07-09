@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetBackupConfigOK) Code() int {
 }
 
 func (o *GetBackupConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/backup-config/{id}][%d] getBackupConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/backup-config/{id}][%d] getBackupConfigOK %s", 200, payload)
 }
 
 func (o *GetBackupConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/backup-config/{id}][%d] getBackupConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/backup-config/{id}][%d] getBackupConfigOK %s", 200, payload)
 }
 
 func (o *GetBackupConfigOK) GetPayload() *models.V1PostgresBackupConfigResponse {
@@ -159,11 +162,13 @@ func (o *GetBackupConfigDefault) Code() int {
 }
 
 func (o *GetBackupConfigDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/backup-config/{id}][%d] getBackupConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/backup-config/{id}][%d] getBackupConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetBackupConfigDefault) String() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/backup-config/{id}][%d] getBackupConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/backup-config/{id}][%d] getBackupConfig default %s", o._statusCode, payload)
 }
 
 func (o *GetBackupConfigDefault) GetPayload() *httperrors.HTTPErrorResponse {

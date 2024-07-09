@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *FindClustersOK) Code() int {
 }
 
 func (o *FindClustersOK) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClustersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClustersOK %s", 200, payload)
 }
 
 func (o *FindClustersOK) String() string {
-	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClustersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClustersOK %s", 200, payload)
 }
 
 func (o *FindClustersOK) GetPayload() []*models.V1ClusterResponse {
@@ -157,11 +160,13 @@ func (o *FindClustersDefault) Code() int {
 }
 
 func (o *FindClustersDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClusters default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClusters default %s", o._statusCode, payload)
 }
 
 func (o *FindClustersDefault) String() string {
-	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClusters default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/find][%d] findClusters default %s", o._statusCode, payload)
 }
 
 func (o *FindClustersDefault) GetPayload() *httperrors.HTTPErrorResponse {

@@ -6,6 +6,7 @@ package s3
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *Lists3OK) Code() int {
 }
 
 func (o *Lists3OK) Error() string {
-	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3OK %s", 200, payload)
 }
 
 func (o *Lists3OK) String() string {
-	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3OK %s", 200, payload)
 }
 
 func (o *Lists3OK) GetPayload() []*models.V1S3Response {
@@ -157,11 +160,13 @@ func (o *Lists3Default) Code() int {
 }
 
 func (o *Lists3Default) Error() string {
-	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3 default %s", o._statusCode, payload)
 }
 
 func (o *Lists3Default) String() string {
-	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3 default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/s3/list][%d] lists3 default %s", o._statusCode, payload)
 }
 
 func (o *Lists3Default) GetPayload() *httperrors.HTTPErrorResponse {

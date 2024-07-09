@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *S3UsageOK) Code() int {
 }
 
 func (o *S3UsageOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3UsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3UsageOK %s", 200, payload)
 }
 
 func (o *S3UsageOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3UsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3UsageOK %s", 200, payload)
 }
 
 func (o *S3UsageOK) GetPayload() *models.V1S3UsageResponse {
@@ -159,11 +162,13 @@ func (o *S3UsageDefault) Code() int {
 }
 
 func (o *S3UsageDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default %s", o._statusCode, payload)
 }
 
 func (o *S3UsageDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/s3-usage][%d] s3Usage default %s", o._statusCode, payload)
 }
 
 func (o *S3UsageDefault) GetPayload() *httperrors.HTTPErrorResponse {

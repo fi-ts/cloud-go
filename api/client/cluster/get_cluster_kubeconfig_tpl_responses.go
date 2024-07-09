@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetClusterKubeconfigTplOK) Code() int {
 }
 
 func (o *GetClusterKubeconfigTplOK) Error() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTplOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTplOK %s", 200, payload)
 }
 
 func (o *GetClusterKubeconfigTplOK) String() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTplOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTplOK %s", 200, payload)
 }
 
 func (o *GetClusterKubeconfigTplOK) GetPayload() *models.V1ClusterKubeconfigResponse {
@@ -159,11 +162,13 @@ func (o *GetClusterKubeconfigTplDefault) Code() int {
 }
 
 func (o *GetClusterKubeconfigTplDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTpl default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTpl default %s", o._statusCode, payload)
 }
 
 func (o *GetClusterKubeconfigTplDefault) String() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTpl default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/kubeconfigtpl][%d] getClusterKubeconfigTpl default %s", o._statusCode, payload)
 }
 
 func (o *GetClusterKubeconfigTplDefault) GetPayload() *httperrors.HTTPErrorResponse {

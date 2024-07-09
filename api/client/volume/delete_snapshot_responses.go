@@ -6,6 +6,7 @@ package volume
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DeleteSnapshotOK) Code() int {
 }
 
 func (o *DeleteSnapshotOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshotOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshotOK %s", 200, payload)
 }
 
 func (o *DeleteSnapshotOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshotOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshotOK %s", 200, payload)
 }
 
 func (o *DeleteSnapshotOK) GetPayload() *models.V1SnapshotResponse {
@@ -159,11 +162,13 @@ func (o *DeleteSnapshotDefault) Code() int {
 }
 
 func (o *DeleteSnapshotDefault) Error() string {
-	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshot default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshot default %s", o._statusCode, payload)
 }
 
 func (o *DeleteSnapshotDefault) String() string {
-	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshot default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/volume/snapshot/{id}][%d] deleteSnapshot default %s", o._statusCode, payload)
 }
 
 func (o *DeleteSnapshotDefault) GetPayload() *httperrors.HTTPErrorResponse {

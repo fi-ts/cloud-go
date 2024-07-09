@@ -6,6 +6,7 @@ package volume
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetSnapshotOK) Code() int {
 }
 
 func (o *GetSnapshotOK) Error() string {
-	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshotOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshotOK %s", 200, payload)
 }
 
 func (o *GetSnapshotOK) String() string {
-	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshotOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshotOK %s", 200, payload)
 }
 
 func (o *GetSnapshotOK) GetPayload() *models.V1SnapshotResponse {
@@ -159,11 +162,13 @@ func (o *GetSnapshotDefault) Code() int {
 }
 
 func (o *GetSnapshotDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshot default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshot default %s", o._statusCode, payload)
 }
 
 func (o *GetSnapshotDefault) String() string {
-	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshot default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/volume/snapshot/{id}][%d] getSnapshot default %s", o._statusCode, payload)
 }
 
 func (o *GetSnapshotDefault) GetPayload() *httperrors.HTTPErrorResponse {

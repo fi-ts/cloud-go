@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *DeletePostgresBackupConfigOK) Code() int {
 }
 
 func (o *DeletePostgresBackupConfigOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfigOK %s", 200, payload)
 }
 
 func (o *DeletePostgresBackupConfigOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfigOK %s", 200, payload)
 }
 
 func (o *DeletePostgresBackupConfigOK) GetPayload() *models.V1PostgresBackupConfigResponse {
@@ -159,11 +162,13 @@ func (o *DeletePostgresBackupConfigDefault) Code() int {
 }
 
 func (o *DeletePostgresBackupConfigDefault) Error() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfig default %s", o._statusCode, payload)
 }
 
 func (o *DeletePostgresBackupConfigDefault) String() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfig default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/backup-config/{id}][%d] deletePostgresBackupConfig default %s", o._statusCode, payload)
 }
 
 func (o *DeletePostgresBackupConfigDefault) GetPayload() *httperrors.HTTPErrorResponse {

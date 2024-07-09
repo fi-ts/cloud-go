@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *IPUsageOK) Code() int {
 }
 
 func (o *IPUsageOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsageOK %s", 200, payload)
 }
 
 func (o *IPUsageOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsageOK %s", 200, payload)
 }
 
 func (o *IPUsageOK) GetPayload() *models.V1IPUsageResponse {
@@ -159,11 +162,13 @@ func (o *IPUsageDefault) Code() int {
 }
 
 func (o *IPUsageDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsage default %s", o._statusCode, payload)
 }
 
 func (o *IPUsageDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/ip-usage][%d] ipUsage default %s", o._statusCode, payload)
 }
 
 func (o *IPUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {

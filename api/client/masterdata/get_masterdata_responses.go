@@ -6,6 +6,7 @@ package masterdata
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -93,11 +94,13 @@ func (o *GetMasterdataOK) Code() int {
 }
 
 func (o *GetMasterdataOK) Error() string {
-	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK %s", 200, payload)
 }
 
 func (o *GetMasterdataOK) String() string {
-	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataOK %s", 200, payload)
 }
 
 func (o *GetMasterdataOK) GetPayload() *models.V1MasterdataLookupResponse {
@@ -161,11 +164,13 @@ func (o *GetMasterdataNotFound) Code() int {
 }
 
 func (o *GetMasterdataNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound %s", 404, payload)
 }
 
 func (o *GetMasterdataNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdataNotFound %s", 404, payload)
 }
 
 func (o *GetMasterdataNotFound) GetPayload() *httperrors.HTTPErrorResponse {
@@ -233,11 +238,13 @@ func (o *GetMasterdataDefault) Code() int {
 }
 
 func (o *GetMasterdataDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default %s", o._statusCode, payload)
 }
 
 func (o *GetMasterdataDefault) String() string {
-	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/masterdata][%d] getMasterdata default %s", o._statusCode, payload)
 }
 
 func (o *GetMasterdataDefault) GetPayload() *httperrors.HTTPErrorResponse {

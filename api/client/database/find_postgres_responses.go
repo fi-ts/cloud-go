@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *FindPostgresOK) Code() int {
 }
 
 func (o *FindPostgresOK) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/find][%d] findPostgresOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres/find][%d] findPostgresOK %s", 200, payload)
 }
 
 func (o *FindPostgresOK) String() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/find][%d] findPostgresOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres/find][%d] findPostgresOK %s", 200, payload)
 }
 
 func (o *FindPostgresOK) GetPayload() []*models.V1PostgresResponse {
@@ -157,11 +160,13 @@ func (o *FindPostgresDefault) Code() int {
 }
 
 func (o *FindPostgresDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/find][%d] findPostgres default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres/find][%d] findPostgres default %s", o._statusCode, payload)
 }
 
 func (o *FindPostgresDefault) String() string {
-	return fmt.Sprintf("[POST /v1/database/postgres/find][%d] findPostgres default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres/find][%d] findPostgres default %s", o._statusCode, payload)
 }
 
 func (o *FindPostgresDefault) GetPayload() *httperrors.HTTPErrorResponse {

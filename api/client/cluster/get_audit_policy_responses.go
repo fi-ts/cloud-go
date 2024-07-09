@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetAuditPolicyOK) Code() int {
 }
 
 func (o *GetAuditPolicyOK) Error() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/audit-policy][%d] getAuditPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/audit-policy][%d] getAuditPolicyOK %s", 200, payload)
 }
 
 func (o *GetAuditPolicyOK) String() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/audit-policy][%d] getAuditPolicyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/audit-policy][%d] getAuditPolicyOK %s", 200, payload)
 }
 
 func (o *GetAuditPolicyOK) GetPayload() *models.V1AuditPolicyResponse {
@@ -159,11 +162,13 @@ func (o *GetAuditPolicyDefault) Code() int {
 }
 
 func (o *GetAuditPolicyDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/audit-policy][%d] getAuditPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/audit-policy][%d] getAuditPolicy default %s", o._statusCode, payload)
 }
 
 func (o *GetAuditPolicyDefault) String() string {
-	return fmt.Sprintf("[GET /v1/cluster/{id}/audit-policy][%d] getAuditPolicy default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/cluster/{id}/audit-policy][%d] getAuditPolicy default %s", o._statusCode, payload)
 }
 
 func (o *GetAuditPolicyDefault) GetPayload() *httperrors.HTTPErrorResponse {

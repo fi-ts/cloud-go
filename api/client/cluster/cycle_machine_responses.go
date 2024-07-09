@@ -6,6 +6,7 @@ package cluster
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *CycleMachineOK) Code() int {
 }
 
 func (o *CycleMachineOK) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster/{id}/cyclemachine][%d] cycleMachineOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/{id}/cyclemachine][%d] cycleMachineOK %s", 200, payload)
 }
 
 func (o *CycleMachineOK) String() string {
-	return fmt.Sprintf("[POST /v1/cluster/{id}/cyclemachine][%d] cycleMachineOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/{id}/cyclemachine][%d] cycleMachineOK %s", 200, payload)
 }
 
 func (o *CycleMachineOK) GetPayload() *models.V1ClusterResponse {
@@ -159,11 +162,13 @@ func (o *CycleMachineDefault) Code() int {
 }
 
 func (o *CycleMachineDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/cluster/{id}/cyclemachine][%d] cycleMachine default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/{id}/cyclemachine][%d] cycleMachine default %s", o._statusCode, payload)
 }
 
 func (o *CycleMachineDefault) String() string {
-	return fmt.Sprintf("[POST /v1/cluster/{id}/cyclemachine][%d] cycleMachine default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/cluster/{id}/cyclemachine][%d] cycleMachine default %s", o._statusCode, payload)
 }
 
 func (o *CycleMachineDefault) GetPayload() *httperrors.HTTPErrorResponse {

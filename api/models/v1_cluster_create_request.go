@@ -106,7 +106,7 @@ type V1ClusterCreateRequest struct {
 
 	// defines how a cluster can access outside networks
 	// Required: true
-	// Enum: [baseline forbidden restricted]
+	// Enum: ["baseline","forbidden","restricted"]
 	NetworkAccessType *string `json:"networkAccessType"`
 
 	// seed name on which the cluster will be scheduled

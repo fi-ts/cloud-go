@@ -6,6 +6,7 @@ package ip
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *AllocateIPCreated) Code() int {
 }
 
 func (o *AllocateIPCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/ip/allocate][%d] allocateIpCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/ip/allocate][%d] allocateIpCreated %s", 201, payload)
 }
 
 func (o *AllocateIPCreated) String() string {
-	return fmt.Sprintf("[POST /v1/ip/allocate][%d] allocateIpCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/ip/allocate][%d] allocateIpCreated %s", 201, payload)
 }
 
 func (o *AllocateIPCreated) GetPayload() *models.ModelsV1IPResponse {
@@ -159,11 +162,13 @@ func (o *AllocateIPDefault) Code() int {
 }
 
 func (o *AllocateIPDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/ip/allocate][%d] allocateIP default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/ip/allocate][%d] allocateIP default %s", o._statusCode, payload)
 }
 
 func (o *AllocateIPDefault) String() string {
-	return fmt.Sprintf("[POST /v1/ip/allocate][%d] allocateIP default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/ip/allocate][%d] allocateIP default %s", o._statusCode, payload)
 }
 
 func (o *AllocateIPDefault) GetPayload() *httperrors.HTTPErrorResponse {

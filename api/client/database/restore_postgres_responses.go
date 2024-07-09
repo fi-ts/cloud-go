@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *RestorePostgresCreated) Code() int {
 }
 
 func (o *RestorePostgresCreated) Error() string {
-	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgresCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgresCreated %s", 201, payload)
 }
 
 func (o *RestorePostgresCreated) String() string {
-	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgresCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgresCreated %s", 201, payload)
 }
 
 func (o *RestorePostgresCreated) GetPayload() *models.V1PostgresResponse {
@@ -159,11 +162,13 @@ func (o *RestorePostgresDefault) Code() int {
 }
 
 func (o *RestorePostgresDefault) Error() string {
-	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgres default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgres default %s", o._statusCode, payload)
 }
 
 func (o *RestorePostgresDefault) String() string {
-	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgres default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/database/postgres/restore][%d] restorePostgres default %s", o._statusCode, payload)
 }
 
 func (o *RestorePostgresDefault) GetPayload() *httperrors.HTTPErrorResponse {

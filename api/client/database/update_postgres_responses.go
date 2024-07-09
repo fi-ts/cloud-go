@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *UpdatePostgresOK) Code() int {
 }
 
 func (o *UpdatePostgresOK) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgresOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgresOK %s", 200, payload)
 }
 
 func (o *UpdatePostgresOK) String() string {
-	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgresOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgresOK %s", 200, payload)
 }
 
 func (o *UpdatePostgresOK) GetPayload() *models.V1PostgresResponse {
@@ -159,11 +162,13 @@ func (o *UpdatePostgresDefault) Code() int {
 }
 
 func (o *UpdatePostgresDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgres default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgres default %s", o._statusCode, payload)
 }
 
 func (o *UpdatePostgresDefault) String() string {
-	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgres default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/database/postgres][%d] updatePostgres default %s", o._statusCode, payload)
 }
 
 func (o *UpdatePostgresDefault) GetPayload() *httperrors.HTTPErrorResponse {

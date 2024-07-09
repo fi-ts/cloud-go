@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *GetPostgresPartitionsOK) Code() int {
 }
 
 func (o *GetPostgresPartitionsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitionsOK %s", 200, payload)
 }
 
 func (o *GetPostgresPartitionsOK) String() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitionsOK %s", 200, payload)
 }
 
 func (o *GetPostgresPartitionsOK) GetPayload() models.V1PostgresPartitionsResponse {
@@ -157,11 +160,13 @@ func (o *GetPostgresPartitionsDefault) Code() int {
 }
 
 func (o *GetPostgresPartitionsDefault) Error() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitions default %s", o._statusCode, payload)
 }
 
 func (o *GetPostgresPartitionsDefault) String() string {
-	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/database/postgres/partitions][%d] getPostgresPartitions default %s", o._statusCode, payload)
 }
 
 func (o *GetPostgresPartitionsDefault) GetPayload() *httperrors.HTTPErrorResponse {

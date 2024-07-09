@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -86,11 +87,13 @@ func (o *ClusterUsageCSVOK) Code() int {
 }
 
 func (o *ClusterUsageCSVOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK %s", 200, payload)
 }
 
 func (o *ClusterUsageCSVOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSVOK %s", 200, payload)
 }
 
 func (o *ClusterUsageCSVOK) GetPayload() string {
@@ -156,11 +159,13 @@ func (o *ClusterUsageCSVDefault) Code() int {
 }
 
 func (o *ClusterUsageCSVDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSV default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSV default %s", o._statusCode, payload)
 }
 
 func (o *ClusterUsageCSVDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSV default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage-csv][%d] clusterUsageCSV default %s", o._statusCode, payload)
 }
 
 func (o *ClusterUsageCSVDefault) GetPayload() *httperrors.HTTPErrorResponse {

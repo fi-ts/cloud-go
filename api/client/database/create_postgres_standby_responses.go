@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *CreatePostgresStandbyCreated) Code() int {
 }
 
 func (o *CreatePostgresStandbyCreated) Error() string {
-	return fmt.Sprintf("[PUT /v1/database/postgres/standby][%d] createPostgresStandbyCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/database/postgres/standby][%d] createPostgresStandbyCreated %s", 201, payload)
 }
 
 func (o *CreatePostgresStandbyCreated) String() string {
-	return fmt.Sprintf("[PUT /v1/database/postgres/standby][%d] createPostgresStandbyCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/database/postgres/standby][%d] createPostgresStandbyCreated %s", 201, payload)
 }
 
 func (o *CreatePostgresStandbyCreated) GetPayload() *models.V1PostgresResponse {
@@ -159,11 +162,13 @@ func (o *CreatePostgresStandbyDefault) Code() int {
 }
 
 func (o *CreatePostgresStandbyDefault) Error() string {
-	return fmt.Sprintf("[PUT /v1/database/postgres/standby][%d] createPostgresStandby default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/database/postgres/standby][%d] createPostgresStandby default %s", o._statusCode, payload)
 }
 
 func (o *CreatePostgresStandbyDefault) String() string {
-	return fmt.Sprintf("[PUT /v1/database/postgres/standby][%d] createPostgresStandby default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /v1/database/postgres/standby][%d] createPostgresStandby default %s", o._statusCode, payload)
 }
 
 func (o *CreatePostgresStandbyDefault) GetPayload() *httperrors.HTTPErrorResponse {

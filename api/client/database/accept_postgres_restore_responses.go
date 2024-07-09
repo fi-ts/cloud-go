@@ -6,6 +6,7 @@ package database
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *AcceptPostgresRestoreOK) Code() int {
 }
 
 func (o *AcceptPostgresRestoreOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreOK %s", 200, payload)
 }
 
 func (o *AcceptPostgresRestoreOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestoreOK %s", 200, payload)
 }
 
 func (o *AcceptPostgresRestoreOK) GetPayload() *models.V1PostgresResponse {
@@ -159,11 +162,13 @@ func (o *AcceptPostgresRestoreDefault) Code() int {
 }
 
 func (o *AcceptPostgresRestoreDefault) Error() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestore default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestore default %s", o._statusCode, payload)
 }
 
 func (o *AcceptPostgresRestoreDefault) String() string {
-	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestore default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/database/postgres/restore/{id}][%d] acceptPostgresRestore default %s", o._statusCode, payload)
 }
 
 func (o *AcceptPostgresRestoreDefault) GetPayload() *httperrors.HTTPErrorResponse {

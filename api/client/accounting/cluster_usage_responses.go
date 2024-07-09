@@ -6,6 +6,7 @@ package accounting
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -87,11 +88,13 @@ func (o *ClusterUsageOK) Code() int {
 }
 
 func (o *ClusterUsageOK) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK %s", 200, payload)
 }
 
 func (o *ClusterUsageOK) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsageOK %s", 200, payload)
 }
 
 func (o *ClusterUsageOK) GetPayload() *models.V1ClusterUsageResponse {
@@ -159,11 +162,13 @@ func (o *ClusterUsageDefault) Code() int {
 }
 
 func (o *ClusterUsageDefault) Error() string {
-	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsage default %s", o._statusCode, payload)
 }
 
 func (o *ClusterUsageDefault) String() string {
-	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsage default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/accounting/cluster-usage][%d] clusterUsage default %s", o._statusCode, payload)
 }
 
 func (o *ClusterUsageDefault) GetPayload() *httperrors.HTTPErrorResponse {
