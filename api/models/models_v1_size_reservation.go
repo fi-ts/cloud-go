@@ -26,6 +26,9 @@ type ModelsV1SizeReservation struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// labels
+	Labels map[string]string `json:"labels,omitempty"`
+
 	// partitionids
 	// Required: true
 	Partitionids []string `json:"partitionids"`
