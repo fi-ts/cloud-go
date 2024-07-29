@@ -27,10 +27,6 @@ type V1VolumeUsage struct {
 	// Required: true
 	Capacityseconds *string `json:"capacityseconds"`
 
-	// the class of this volume
-	// Required: true
-	Class *string `json:"class"`
-
 	// the cluster id of this volume
 	// Required: true
 	Clusterid *string `json:"clusterid"`
@@ -103,10 +99,6 @@ func (m *V1VolumeUsage) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCapacityseconds(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateClass(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -188,15 +180,6 @@ func (m *V1VolumeUsage) validateAnnotations(formats strfmt.Registry) error {
 func (m *V1VolumeUsage) validateCapacityseconds(formats strfmt.Registry) error {
 
 	if err := validate.Required("capacityseconds", "body", m.Capacityseconds); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1VolumeUsage) validateClass(formats strfmt.Registry) error {
-
-	if err := validate.Required("class", "body", m.Class); err != nil {
 		return err
 	}
 

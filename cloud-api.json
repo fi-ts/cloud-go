@@ -1054,6 +1054,12 @@
         "description": {
           "type": "string"
         },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "partitionids": {
           "items": {
             "type": "string"
@@ -5564,9 +5570,6 @@
         "Statistics": {
           "$ref": "#/definitions/v1.VolumeStatistics"
         },
-        "StorageClass": {
-          "type": "string"
-        },
         "TenantID": {
           "type": "string"
         },
@@ -5595,7 +5598,6 @@
         "SourceSnapshotUUID",
         "State",
         "Statistics",
-        "StorageClass",
         "TenantID",
         "VolumeHandle",
         "VolumeID",
@@ -5648,10 +5650,6 @@
         },
         "capacityseconds": {
           "description": "the capacity seconds of this volume (byte*s)",
-          "type": "string"
-        },
-        "class": {
-          "description": "the class of this volume",
           "type": "string"
         },
         "clusterid": {
@@ -5721,7 +5719,6 @@
       "required": [
         "annotations",
         "capacityseconds",
-        "class",
         "clusterid",
         "clustername",
         "contract",
