@@ -1150,27 +1150,7 @@
         },
         "services": {
           "additionalProperties": {
-            "$ref": "#/definitions/rest.HealthResult"
-          },
-          "type": "object"
-        },
-        "status": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "message",
-        "status"
-      ]
-    },
-    "rest.HealthResult": {
-      "properties": {
-        "message": {
-          "type": "string"
-        },
-        "services": {
-          "additionalProperties": {
-            "$ref": "#/definitions/rest.HealthResult"
+            "$ref": "#/definitions/rest.HealthResponse"
           },
           "type": "object"
         },
@@ -2785,9 +2765,6 @@
     },
     "v1.Kubernetes": {
       "properties": {
-        "AllowPrivilegedContainers": {
-          "type": "boolean"
-        },
         "ExpirationDate": {
           "format": "date-time",
           "type": "string"
@@ -2807,17 +2784,12 @@
             "restricted"
           ],
           "type": "string"
-        },
-        "disablePodSecurityPolicies": {
-          "type": "boolean"
         }
       },
       "required": [
-        "AllowPrivilegedContainers",
         "ExpirationDate",
         "Version",
-        "defaultPodSecurityStandard",
-        "disablePodSecurityPolicies"
+        "defaultPodSecurityStandard"
       ]
     },
     "v1.MachineImage": {
@@ -3416,7 +3388,7 @@
           "type": "string"
         },
         "retention": {
-          "format": "int32",
+          "format": "int64",
           "type": "integer"
         },
         "s3BucketName": {
@@ -3454,7 +3426,7 @@
           "type": "string"
         },
         "retention": {
-          "format": "int32",
+          "format": "int64",
           "type": "integer"
         },
         "s3BucketName": {
@@ -5832,9 +5804,6 @@
           },
           "type": "object"
         },
-        "CRI": {
-          "type": "string"
-        },
         "DrainTimeout": {
           "format": "int64",
           "type": "integer"
@@ -5884,7 +5853,6 @@
       },
       "required": [
         "Annotations",
-        "CRI",
         "KubernetesVersion",
         "Labels",
         "MachineImage",
@@ -6185,6 +6153,12 @@
         },
         "credentials": {
           "$ref": "#/definitions/v1beta1.ShootCredentials"
+        },
+        "encryptedResources": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "gardener": {
           "$ref": "#/definitions/v1beta1.Gardener"

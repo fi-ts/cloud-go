@@ -24,10 +24,6 @@ type V1Worker struct {
 	// Required: true
 	Annotations map[string]string `json:"Annotations"`
 
-	// c r i
-	// Required: true
-	CRI *string `json:"CRI"`
-
 	// drain timeout
 	DrainTimeout int64 `json:"DrainTimeout,omitempty"`
 
@@ -83,10 +79,6 @@ func (m *V1Worker) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateCRI(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateKubernetesVersion(formats); err != nil {
 		res = append(res, err)
 	}
@@ -136,15 +128,6 @@ func (m *V1Worker) Validate(formats strfmt.Registry) error {
 func (m *V1Worker) validateAnnotations(formats strfmt.Registry) error {
 
 	if err := validate.Required("Annotations", "body", m.Annotations); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1Worker) validateCRI(formats strfmt.Registry) error {
-
-	if err := validate.Required("CRI", "body", m.CRI); err != nil {
 		return err
 	}
 
