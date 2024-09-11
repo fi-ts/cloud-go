@@ -36,7 +36,7 @@ type V1PostgresBackupConfigCreateRequest struct {
 	ProjectID string `json:"projectID,omitempty"`
 
 	// retention
-	Retention int32 `json:"retention,omitempty"`
+	Retention int64 `json:"retention,omitempty"`
 
 	// s3 bucket name
 	S3BucketName string `json:"s3BucketName,omitempty"`

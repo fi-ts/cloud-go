@@ -35,6 +35,9 @@ type V1beta1ShootStatus struct {
 	// credentials
 	Credentials *V1beta1ShootCredentials `json:"credentials,omitempty"`
 
+	// encrypted resources
+	EncryptedResources []string `json:"encryptedResources"`
+
 	// gardener
 	// Required: true
 	Gardener *V1beta1Gardener `json:"gardener"`
