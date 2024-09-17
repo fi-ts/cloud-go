@@ -2883,6 +2883,9 @@
         },
         "sizeid": {
           "type": "string"
+        },
+        "tenant": {
+          "type": "string"
         }
       },
       "required": [
@@ -2890,7 +2893,8 @@
         "labels",
         "partitionids",
         "projectid",
-        "sizeid"
+        "sizeid",
+        "tenant"
       ]
     },
     "v1.MachineReservationUpdateRequest": {

@@ -41,6 +41,10 @@ type V1MachineReservationResponse struct {
 	// sizeid
 	// Required: true
 	Sizeid *string `json:"sizeid"`
+
+	// tenant
+	// Required: true
+	Tenant *string `json:"tenant"`
 }
 
 // Validate validates this v1 machine reservation response
@@ -64,6 +68,10 @@ func (m *V1MachineReservationResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSizeid(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTenant(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -112,6 +120,15 @@ func (m *V1MachineReservationResponse) validateProjectid(formats strfmt.Registry
 func (m *V1MachineReservationResponse) validateSizeid(formats strfmt.Registry) error {
 
 	if err := validate.Required("sizeid", "body", m.Sizeid); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineReservationResponse) validateTenant(formats strfmt.Registry) error {
+
+	if err := validate.Required("tenant", "body", m.Tenant); err != nil {
 		return err
 	}
 
