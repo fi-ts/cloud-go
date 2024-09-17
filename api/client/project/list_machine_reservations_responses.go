@@ -54,7 +54,7 @@ ListMachineReservationsOK describes a response with status code 200, with defaul
 OK
 */
 type ListMachineReservationsOK struct {
-	Payload []*models.V1MachineReservationUsageResponse
+	Payload []*models.V1MachineReservationResponse
 }
 
 // IsSuccess returns true when this list machine reservations o k response has a 2xx status code
@@ -97,7 +97,7 @@ func (o *ListMachineReservationsOK) String() string {
 	return fmt.Sprintf("[POST /v1/project/reservation/machine/find][%d] listMachineReservationsOK %s", 200, payload)
 }
 
-func (o *ListMachineReservationsOK) GetPayload() []*models.V1MachineReservationUsageResponse {
+func (o *ListMachineReservationsOK) GetPayload() []*models.V1MachineReservationResponse {
 	return o.Payload
 }
 

@@ -64,7 +64,7 @@ ListMachineReservationsParams contains all the parameters to send to the API end
 type ListMachineReservationsParams struct {
 
 	// Body.
-	Body *models.V1MachineReservationUsageRequest
+	Body *models.V1MachineReservationFindRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,13 +120,13 @@ func (o *ListMachineReservationsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the list machine reservations params
-func (o *ListMachineReservationsParams) WithBody(body *models.V1MachineReservationUsageRequest) *ListMachineReservationsParams {
+func (o *ListMachineReservationsParams) WithBody(body *models.V1MachineReservationFindRequest) *ListMachineReservationsParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the list machine reservations params
-func (o *ListMachineReservationsParams) SetBody(body *models.V1MachineReservationUsageRequest) {
+func (o *ListMachineReservationsParams) SetBody(body *models.V1MachineReservationFindRequest) {
 	o.Body = body
 }
 

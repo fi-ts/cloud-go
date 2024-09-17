@@ -14,10 +14,10 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// V1MachineReservationUsageRequest v1 machine reservation usage request
+// V1MachineReservationFindRequest v1 machine reservation find request
 //
-// swagger:model v1.MachineReservationUsageRequest
-type V1MachineReservationUsageRequest struct {
+// swagger:model v1.MachineReservationFindRequest
+type V1MachineReservationFindRequest struct {
 
 	// the project id of this size reservation
 	// Required: true
@@ -32,8 +32,8 @@ type V1MachineReservationUsageRequest struct {
 	Tenant *string `json:"tenant"`
 }
 
-// Validate validates this v1 machine reservation usage request
-func (m *V1MachineReservationUsageRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this v1 machine reservation find request
+func (m *V1MachineReservationFindRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateProjectid(formats); err != nil {
@@ -54,7 +54,7 @@ func (m *V1MachineReservationUsageRequest) Validate(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *V1MachineReservationUsageRequest) validateProjectid(formats strfmt.Registry) error {
+func (m *V1MachineReservationFindRequest) validateProjectid(formats strfmt.Registry) error {
 
 	if err := validate.Required("projectid", "body", m.Projectid); err != nil {
 		return err
@@ -63,7 +63,7 @@ func (m *V1MachineReservationUsageRequest) validateProjectid(formats strfmt.Regi
 	return nil
 }
 
-func (m *V1MachineReservationUsageRequest) validateSizeid(formats strfmt.Registry) error {
+func (m *V1MachineReservationFindRequest) validateSizeid(formats strfmt.Registry) error {
 
 	if err := validate.Required("sizeid", "body", m.Sizeid); err != nil {
 		return err
@@ -72,7 +72,7 @@ func (m *V1MachineReservationUsageRequest) validateSizeid(formats strfmt.Registr
 	return nil
 }
 
-func (m *V1MachineReservationUsageRequest) validateTenant(formats strfmt.Registry) error {
+func (m *V1MachineReservationFindRequest) validateTenant(formats strfmt.Registry) error {
 
 	if err := validate.Required("tenant", "body", m.Tenant); err != nil {
 		return err
@@ -81,13 +81,13 @@ func (m *V1MachineReservationUsageRequest) validateTenant(formats strfmt.Registr
 	return nil
 }
 
-// ContextValidate validates this v1 machine reservation usage request based on context it is used
-func (m *V1MachineReservationUsageRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this v1 machine reservation find request based on context it is used
+func (m *V1MachineReservationFindRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *V1MachineReservationUsageRequest) MarshalBinary() ([]byte, error) {
+func (m *V1MachineReservationFindRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -95,8 +95,8 @@ func (m *V1MachineReservationUsageRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *V1MachineReservationUsageRequest) UnmarshalBinary(b []byte) error {
-	var res V1MachineReservationUsageRequest
+func (m *V1MachineReservationFindRequest) UnmarshalBinary(b []byte) error {
+	var res V1MachineReservationFindRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

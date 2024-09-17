@@ -310,6 +310,43 @@ func (_m *ClientService) ListProjects(params *clientproject.ListProjectsParams, 
 	return r0, r1
 }
 
+// MachineReservationsUsage provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) MachineReservationsUsage(params *clientproject.MachineReservationsUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientproject.ClientOption) (*clientproject.MachineReservationsUsageOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for MachineReservationsUsage")
+	}
+
+	var r0 *clientproject.MachineReservationsUsageOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientproject.MachineReservationsUsageParams, runtime.ClientAuthInfoWriter, ...clientproject.ClientOption) (*clientproject.MachineReservationsUsageOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientproject.MachineReservationsUsageParams, runtime.ClientAuthInfoWriter, ...clientproject.ClientOption) *clientproject.MachineReservationsUsageOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientproject.MachineReservationsUsageOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientproject.MachineReservationsUsageParams, runtime.ClientAuthInfoWriter, ...clientproject.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SetTransport provides a mock function with given fields: transport
 func (_m *ClientService) SetTransport(transport runtime.ClientTransport) {
 	_m.Called(transport)

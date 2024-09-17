@@ -2836,6 +2836,27 @@
         "sizeid"
       ]
     },
+    "v1.MachineReservationFindRequest": {
+      "properties": {
+        "projectid": {
+          "description": "the project id of this size reservation",
+          "type": "string"
+        },
+        "sizeid": {
+          "description": "the size id of this size reservation",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this size reservation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "projectid",
+        "sizeid",
+        "tenant"
+      ]
+    },
     "v1.MachineReservationResponse": {
       "properties": {
         "amount": {
@@ -2859,13 +2880,17 @@
         },
         "projectid": {
           "type": "string"
+        },
+        "sizeid": {
+          "type": "string"
         }
       },
       "required": [
         "amount",
         "labels",
         "partitionids",
-        "projectid"
+        "projectid",
+        "sizeid"
       ]
     },
     "v1.MachineReservationUpdateRequest": {
@@ -2896,27 +2921,6 @@
         "partitionids",
         "projectid",
         "sizeid"
-      ]
-    },
-    "v1.MachineReservationUsageRequest": {
-      "properties": {
-        "projectid": {
-          "description": "the project id of this size reservation",
-          "type": "string"
-        },
-        "sizeid": {
-          "description": "the size id of this size reservation",
-          "type": "string"
-        },
-        "tenant": {
-          "description": "the tenant of this size reservation",
-          "type": "string"
-        }
-      },
-      "required": [
-        "projectid",
-        "sizeid",
-        "tenant"
       ]
     },
     "v1.MachineReservationUsageResponse": {
@@ -8974,7 +8978,7 @@
             }
           }
         },
-        "summary": "update a machine reservation.",
+        "summary": "update a machine reservation",
         "tags": [
           "project"
         ]
@@ -9024,7 +9028,7 @@
             }
           }
         },
-        "summary": "create a machine reservation.",
+        "summary": "create a machine reservation",
         "tags": [
           "project"
         ]
@@ -9042,7 +9046,49 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1.MachineReservationUsageRequest"
+              "$ref": "#/definitions/v1.MachineReservationFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.MachineReservationResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get all machine reservations",
+        "tags": [
+          "project"
+        ]
+      }
+    },
+    "/v1/project/reservation/machine/usage": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "machineReservationsUsage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationFindRequest"
             }
           }
         ],
@@ -9066,7 +9112,7 @@
             }
           }
         },
-        "summary": "get all machine reservations for this project",
+        "summary": "get usage of machine reservations",
         "tags": [
           "project"
         ]
