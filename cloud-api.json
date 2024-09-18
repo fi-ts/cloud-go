@@ -8908,16 +8908,14 @@
         "parameters": [
           {
             "description": "identifier of the project",
-            "in": "path",
+            "in": "query",
             "name": "project",
-            "required": true,
             "type": "string"
           },
           {
             "description": "identifier of the size",
-            "in": "path",
+            "in": "query",
             "name": "size",
-            "required": true,
             "type": "string"
           }
         ],

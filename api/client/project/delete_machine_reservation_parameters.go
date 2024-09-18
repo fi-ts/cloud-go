@@ -65,13 +65,13 @@ type DeleteMachineReservationParams struct {
 
 	   identifier of the project
 	*/
-	Project string
+	Project *string
 
 	/* Size.
 
 	   identifier of the size
 	*/
-	Size string
+	Size *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -127,24 +127,24 @@ func (o *DeleteMachineReservationParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithProject adds the project to the delete machine reservation params
-func (o *DeleteMachineReservationParams) WithProject(project string) *DeleteMachineReservationParams {
+func (o *DeleteMachineReservationParams) WithProject(project *string) *DeleteMachineReservationParams {
 	o.SetProject(project)
 	return o
 }
 
 // SetProject adds the project to the delete machine reservation params
-func (o *DeleteMachineReservationParams) SetProject(project string) {
+func (o *DeleteMachineReservationParams) SetProject(project *string) {
 	o.Project = project
 }
 
 // WithSize adds the size to the delete machine reservation params
-func (o *DeleteMachineReservationParams) WithSize(size string) *DeleteMachineReservationParams {
+func (o *DeleteMachineReservationParams) WithSize(size *string) *DeleteMachineReservationParams {
 	o.SetSize(size)
 	return o
 }
 
 // SetSize adds the size to the delete machine reservation params
-func (o *DeleteMachineReservationParams) SetSize(size string) {
+func (o *DeleteMachineReservationParams) SetSize(size *string) {
 	o.Size = size
 }
 
@@ -156,14 +156,38 @@ func (o *DeleteMachineReservationParams) WriteToRequest(r runtime.ClientRequest,
 	}
 	var res []error
 
-	// path param project
-	if err := r.SetPathParam("project", o.Project); err != nil {
-		return err
+	if o.Project != nil {
+
+		// query param project
+		var qrProject string
+
+		if o.Project != nil {
+			qrProject = *o.Project
+		}
+		qProject := qrProject
+		if qProject != "" {
+
+			if err := r.SetQueryParam("project", qProject); err != nil {
+				return err
+			}
+		}
 	}
 
-	// path param size
-	if err := r.SetPathParam("size", o.Size); err != nil {
-		return err
+	if o.Size != nil {
+
+		// query param size
+		var qrSize string
+
+		if o.Size != nil {
+			qrSize = *o.Size
+		}
+		qSize := qrSize
+		if qSize != "" {
+
+			if err := r.SetQueryParam("size", qSize); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {
