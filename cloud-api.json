@@ -1558,12 +1558,16 @@
         "DurosStorageEncryption": {
           "type": "string"
         },
+        "HighAvailability": {
+          "type": "string"
+        },
         "LogAcceptedConnections": {
           "type": "string"
         }
       },
       "required": [
         "DurosStorageEncryption",
+        "HighAvailability",
         "LogAcceptedConnections"
       ]
     },
