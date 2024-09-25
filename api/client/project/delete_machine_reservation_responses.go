@@ -89,12 +89,12 @@ func (o *DeleteMachineReservationOK) Code() int {
 
 func (o *DeleteMachineReservationOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/project/reservation/machine][%d] deleteMachineReservationOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /v1/project/reservation/machine/{id}][%d] deleteMachineReservationOK %s", 200, payload)
 }
 
 func (o *DeleteMachineReservationOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/project/reservation/machine][%d] deleteMachineReservationOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /v1/project/reservation/machine/{id}][%d] deleteMachineReservationOK %s", 200, payload)
 }
 
 func (o *DeleteMachineReservationOK) GetPayload() *models.V1MachineReservationResponse {
@@ -163,12 +163,12 @@ func (o *DeleteMachineReservationDefault) Code() int {
 
 func (o *DeleteMachineReservationDefault) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/project/reservation/machine][%d] deleteMachineReservation default %s", o._statusCode, payload)
+	return fmt.Sprintf("[DELETE /v1/project/reservation/machine/{id}][%d] deleteMachineReservation default %s", o._statusCode, payload)
 }
 
 func (o *DeleteMachineReservationDefault) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/project/reservation/machine][%d] deleteMachineReservation default %s", o._statusCode, payload)
+	return fmt.Sprintf("[DELETE /v1/project/reservation/machine/{id}][%d] deleteMachineReservation default %s", o._statusCode, payload)
 }
 
 func (o *DeleteMachineReservationDefault) GetPayload() *httperrors.HTTPErrorResponse {

@@ -61,17 +61,11 @@ DeleteMachineReservationParams contains all the parameters to send to the API en
 */
 type DeleteMachineReservationParams struct {
 
-	/* Project.
+	/* ID.
 
-	   identifier of the project
+	   identifier of the machine reservation
 	*/
-	Project *string
-
-	/* Size.
-
-	   identifier of the size
-	*/
-	Size *string
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -126,26 +120,15 @@ func (o *DeleteMachineReservationParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithProject adds the project to the delete machine reservation params
-func (o *DeleteMachineReservationParams) WithProject(project *string) *DeleteMachineReservationParams {
-	o.SetProject(project)
+// WithID adds the id to the delete machine reservation params
+func (o *DeleteMachineReservationParams) WithID(id string) *DeleteMachineReservationParams {
+	o.SetID(id)
 	return o
 }
 
-// SetProject adds the project to the delete machine reservation params
-func (o *DeleteMachineReservationParams) SetProject(project *string) {
-	o.Project = project
-}
-
-// WithSize adds the size to the delete machine reservation params
-func (o *DeleteMachineReservationParams) WithSize(size *string) *DeleteMachineReservationParams {
-	o.SetSize(size)
-	return o
-}
-
-// SetSize adds the size to the delete machine reservation params
-func (o *DeleteMachineReservationParams) SetSize(size *string) {
-	o.Size = size
+// SetID adds the id to the delete machine reservation params
+func (o *DeleteMachineReservationParams) SetID(id string) {
+	o.ID = id
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -156,38 +139,9 @@ func (o *DeleteMachineReservationParams) WriteToRequest(r runtime.ClientRequest,
 	}
 	var res []error
 
-	if o.Project != nil {
-
-		// query param project
-		var qrProject string
-
-		if o.Project != nil {
-			qrProject = *o.Project
-		}
-		qProject := qrProject
-		if qProject != "" {
-
-			if err := r.SetQueryParam("project", qProject); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Size != nil {
-
-		// query param size
-		var qrSize string
-
-		if o.Size != nil {
-			qrSize = *o.Size
-		}
-		qSize := qrSize
-		if qSize != "" {
-
-			if err := r.SetQueryParam("size", qSize); err != nil {
-				return err
-			}
-		}
+	// path param id
+	if err := r.SetPathParam("id", o.ID); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

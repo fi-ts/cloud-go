@@ -26,6 +26,10 @@ type V1MachineReservationResponse struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// id
+	// Required: true
+	ID *string `json:"id"`
+
 	// labels
 	// Required: true
 	Labels map[string]string `json:"labels"`
@@ -52,6 +56,10 @@ func (m *V1MachineReservationResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAmount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -84,6 +92,15 @@ func (m *V1MachineReservationResponse) Validate(formats strfmt.Registry) error {
 func (m *V1MachineReservationResponse) validateAmount(formats strfmt.Registry) error {
 
 	if err := validate.Required("amount", "body", m.Amount); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineReservationResponse) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 

@@ -66,6 +66,8 @@ type ClientService interface {
 
 	FindProjects(params *FindProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindProjectsOK, error)
 
+	GetMachineReservation(params *GetMachineReservationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMachineReservationOK, error)
+
 	ListMachineReservations(params *ListMachineReservationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMachineReservationsOK, error)
 
 	ListProjects(params *ListProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProjectsOK, error)
@@ -166,7 +168,7 @@ func (a *Client) DeleteMachineReservation(params *DeleteMachineReservationParams
 	op := &runtime.ClientOperation{
 		ID:                 "deleteMachineReservation",
 		Method:             "DELETE",
-		PathPattern:        "/v1/project/reservation/machine",
+		PathPattern:        "/v1/project/reservation/machine/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -304,6 +306,44 @@ func (a *Client) FindProjects(params *FindProjectsParams, authInfo runtime.Clien
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*FindProjectsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+GetMachineReservation gets a machine reservation
+*/
+func (a *Client) GetMachineReservation(params *GetMachineReservationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMachineReservationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetMachineReservationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getMachineReservation",
+		Method:             "GET",
+		PathPattern:        "/v1/project/reservation/machine/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetMachineReservationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetMachineReservationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetMachineReservationDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

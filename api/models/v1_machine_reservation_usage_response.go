@@ -19,6 +19,10 @@ import (
 // swagger:model v1.MachineReservationUsageResponse
 type V1MachineReservationUsageResponse struct {
 
+	// id
+	// Required: true
+	ID *string `json:"id"`
+
 	// labels
 	// Required: true
 	Labels map[string]string `json:"labels"`
@@ -60,6 +64,10 @@ type V1MachineReservationUsageResponse struct {
 func (m *V1MachineReservationUsageResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLabels(formats); err != nil {
 		res = append(res, err)
 	}
@@ -99,6 +107,15 @@ func (m *V1MachineReservationUsageResponse) Validate(formats strfmt.Registry) er
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1MachineReservationUsageResponse) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

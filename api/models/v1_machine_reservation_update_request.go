@@ -27,6 +27,10 @@ type V1MachineReservationUpdateRequest struct {
 	// Required: true
 	Description *string `json:"description"`
 
+	// id
+	// Required: true
+	ID *string `json:"id"`
+
 	// partitionids
 	// Required: true
 	Partitionids []string `json:"partitionids"`
@@ -49,6 +53,10 @@ func (m *V1MachineReservationUpdateRequest) Validate(formats strfmt.Registry) er
 	}
 
 	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -82,6 +90,15 @@ func (m *V1MachineReservationUpdateRequest) validateAmount(formats strfmt.Regist
 func (m *V1MachineReservationUpdateRequest) validateDescription(formats strfmt.Registry) error {
 
 	if err := validate.Required("description", "body", m.Description); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1MachineReservationUpdateRequest) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 
