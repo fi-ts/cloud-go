@@ -2777,6 +2777,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "PodPIDsLimit": {
+          "format": "int64",
+          "type": "integer"
+        },
         "Version": {
           "type": "string"
         },
@@ -2792,6 +2796,7 @@
       },
       "required": [
         "ExpirationDate",
+        "PodPIDsLimit",
         "Version",
         "defaultPodSecurityStandard"
       ]
