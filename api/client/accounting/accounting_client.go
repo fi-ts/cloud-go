@@ -90,6 +90,8 @@ type ClientService interface {
 
 	IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPUsageCSVOK, error)
 
+	MachineReservationUsage(params *MachineReservationUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MachineReservationUsageOK, error)
+
 	MachineUsage(params *MachineUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MachineUsageOK, error)
 
 	NetworkUsage(params *NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkUsageOK, error)
@@ -340,6 +342,44 @@ func (a *Client) IPUsageCSV(params *IPUsageCSVParams, authInfo runtime.ClientAut
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*IPUsageCSVDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+MachineReservationUsage finds machine reservation usage for given accounting query
+*/
+func (a *Client) MachineReservationUsage(params *MachineReservationUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MachineReservationUsageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMachineReservationUsageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "machineReservationUsage",
+		Method:             "POST",
+		PathPattern:        "/v1/accounting/machine-reservation-usage",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &MachineReservationUsageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*MachineReservationUsageOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*MachineReservationUsageDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
