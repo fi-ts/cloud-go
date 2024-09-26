@@ -23,6 +23,10 @@ type V1ClusterFeatures struct {
 	// Required: true
 	DurosStorageEncryption *string `json:"DurosStorageEncryption"`
 
+	// high availability
+	// Required: true
+	HighAvailability *string `json:"HighAvailability"`
+
 	// log accepted connections
 	// Required: true
 	LogAcceptedConnections *string `json:"LogAcceptedConnections"`
@@ -33,6 +37,10 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDurosStorageEncryption(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHighAvailability(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -49,6 +57,15 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 func (m *V1ClusterFeatures) validateDurosStorageEncryption(formats strfmt.Registry) error {
 
 	if err := validate.Required("DurosStorageEncryption", "body", m.DurosStorageEncryption); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterFeatures) validateHighAvailability(formats strfmt.Registry) error {
+
+	if err := validate.Required("HighAvailability", "body", m.HighAvailability); err != nil {
 		return err
 	}
 
