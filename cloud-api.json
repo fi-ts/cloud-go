@@ -1520,12 +1520,16 @@
         "DurosStorageEncryption": {
           "type": "string"
         },
+        "HighAvailability": {
+          "type": "string"
+        },
         "LogAcceptedConnections": {
           "type": "string"
         }
       },
       "required": [
         "DurosStorageEncryption",
+        "HighAvailability",
         "LogAcceptedConnections"
       ]
     },
@@ -2800,20 +2804,25 @@
     },
     "v1.MachineReservationFindRequest": {
       "properties": {
+        "id": {
+          "description": "the id of this machine reservation",
+          "type": "string"
+        },
         "projectid": {
-          "description": "the project id of this size reservation",
+          "description": "the project id of this machine reservation",
           "type": "string"
         },
         "sizeid": {
-          "description": "the size id of this size reservation",
+          "description": "the size id of this machine reservation",
           "type": "string"
         },
         "tenant": {
-          "description": "the tenant of this size reservation",
+          "description": "the tenant of this machine reservation",
           "type": "string"
         }
       },
       "required": [
+        "id",
         "projectid",
         "sizeid",
         "tenant"
@@ -6364,7 +6373,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.28.1"
+    "version": "v0.28.2"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {

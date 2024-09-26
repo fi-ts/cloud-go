@@ -19,15 +19,19 @@ import (
 // swagger:model v1.MachineReservationFindRequest
 type V1MachineReservationFindRequest struct {
 
-	// the project id of this size reservation
+	// the id of this machine reservation
+	// Required: true
+	ID *string `json:"id"`
+
+	// the project id of this machine reservation
 	// Required: true
 	Projectid *string `json:"projectid"`
 
-	// the size id of this size reservation
+	// the size id of this machine reservation
 	// Required: true
 	Sizeid *string `json:"sizeid"`
 
-	// the tenant of this size reservation
+	// the tenant of this machine reservation
 	// Required: true
 	Tenant *string `json:"tenant"`
 }
@@ -35,6 +39,10 @@ type V1MachineReservationFindRequest struct {
 // Validate validates this v1 machine reservation find request
 func (m *V1MachineReservationFindRequest) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateProjectid(formats); err != nil {
 		res = append(res, err)
@@ -51,6 +59,15 @@ func (m *V1MachineReservationFindRequest) Validate(formats strfmt.Registry) erro
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1MachineReservationFindRequest) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
 	return nil
 }
 
