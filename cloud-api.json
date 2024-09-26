@@ -2950,7 +2950,7 @@
           "description": "the debtor id attached to this entity",
           "type": "string"
         },
-        "machineid": {
+        "id": {
           "description": "the id of this machine reservation",
           "type": "string"
         },
@@ -2987,7 +2987,7 @@
         "average",
         "contract",
         "debtorid",
-        "machineid",
+        "id",
         "partition",
         "projectid",
         "projectname",

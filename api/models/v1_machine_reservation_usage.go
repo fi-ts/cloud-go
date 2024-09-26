@@ -33,7 +33,7 @@ type V1MachineReservationUsage struct {
 
 	// the id of this machine reservation
 	// Required: true
-	Machineid *string `json:"machineid"`
+	ID *string `json:"id"`
 
 	// the partition of this machine reservation
 	// Required: true
@@ -80,7 +80,7 @@ func (m *V1MachineReservationUsage) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateMachineid(formats); err != nil {
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -145,9 +145,9 @@ func (m *V1MachineReservationUsage) validateDebtorid(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *V1MachineReservationUsage) validateMachineid(formats strfmt.Registry) error {
+func (m *V1MachineReservationUsage) validateID(formats strfmt.Registry) error {
 
-	if err := validate.Required("machineid", "body", m.Machineid); err != nil {
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 
