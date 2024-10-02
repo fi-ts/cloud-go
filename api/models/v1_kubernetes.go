@@ -28,6 +28,10 @@ type V1Kubernetes struct {
 	// max pods per node
 	MaxPodsPerNode int32 `json:"MaxPodsPerNode,omitempty"`
 
+	// pod p i ds limit
+	// Required: true
+	PodPIDsLimit *int64 `json:"PodPIDsLimit"`
+
 	// version
 	// Required: true
 	Version *string `json:"Version"`
@@ -43,6 +47,10 @@ func (m *V1Kubernetes) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateExpirationDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePodPIDsLimit(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -67,6 +75,15 @@ func (m *V1Kubernetes) validateExpirationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("ExpirationDate", "body", "date-time", m.ExpirationDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1Kubernetes) validatePodPIDsLimit(formats strfmt.Registry) error {
+
+	if err := validate.Required("PodPIDsLimit", "body", m.PodPIDsLimit); err != nil {
 		return err
 	}
 

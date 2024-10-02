@@ -1045,37 +1045,6 @@
         "type"
       ]
     },
-    "models.V1SizeReservation": {
-      "properties": {
-        "amount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "description": {
-          "type": "string"
-        },
-        "labels": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "type": "object"
-        },
-        "partitionids": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "projectid": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "amount",
-        "partitionids",
-        "projectid"
-      ]
-    },
     "models.V1SizeResponse": {
       "properties": {
         "changed": {
@@ -1104,19 +1073,12 @@
         },
         "name": {
           "type": "string"
-        },
-        "reservations": {
-          "items": {
-            "$ref": "#/definitions/models.V1SizeReservation"
-          },
-          "type": "array"
         }
       },
       "required": [
         "constraints",
         "id",
-        "labels",
-        "reservations"
+        "labels"
       ]
     },
     "models.V1VolumeGroup": {
@@ -2777,6 +2739,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "PodPIDsLimit": {
+          "format": "int64",
+          "type": "integer"
+        },
         "Version": {
           "type": "string"
         },
@@ -2792,6 +2758,7 @@
       },
       "required": [
         "ExpirationDate",
+        "PodPIDsLimit",
         "Version",
         "defaultPodSecurityStandard"
       ]
@@ -2808,6 +2775,340 @@
       "required": [
         "Name",
         "Version"
+      ]
+    },
+    "v1.MachineReservationBillingUsageResponse": {
+      "properties": {
+        "accumulatedusage": {
+          "$ref": "#/definitions/v1.MachineReservationUsageAccumuluated",
+          "description": "just the usage data of the individual machine reservations summed up"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        },
+        "usage": {
+          "description": "the usage data of the individual machine reservations",
+          "items": {
+            "$ref": "#/definitions/v1.MachineReservationUsage"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "accumulatedusage",
+        "from",
+        "usage"
+      ]
+    },
+    "v1.MachineReservationCreateRequest": {
+      "properties": {
+        "amount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "partitionids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "sizeid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "description",
+        "partitionids",
+        "projectid",
+        "sizeid"
+      ]
+    },
+    "v1.MachineReservationFindRequest": {
+      "properties": {
+        "id": {
+          "description": "the id of this machine reservation",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id of this machine reservation",
+          "type": "string"
+        },
+        "sizeid": {
+          "description": "the size id of this machine reservation",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this machine reservation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "projectid",
+        "sizeid",
+        "tenant"
+      ]
+    },
+    "v1.MachineReservationResponse": {
+      "properties": {
+        "amount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "partitionids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "sizeid": {
+          "type": "string"
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "id",
+        "labels",
+        "partitionids",
+        "projectid",
+        "sizeid",
+        "tenant"
+      ]
+    },
+    "v1.MachineReservationUpdateRequest": {
+      "properties": {
+        "amount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "partitionids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "sizeid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "description",
+        "id",
+        "partitionids",
+        "projectid",
+        "sizeid"
+      ]
+    },
+    "v1.MachineReservationUsage": {
+      "properties": {
+        "average": {
+          "description": "the average amount of unused machine reservations in the given time window",
+          "type": "string"
+        },
+        "contract": {
+          "description": "the contract number attached to this entity",
+          "type": "string"
+        },
+        "debtorid": {
+          "description": "the debtor id attached to this entity",
+          "type": "string"
+        },
+        "id": {
+          "description": "the id of this machine reservation",
+          "type": "string"
+        },
+        "partition": {
+          "description": "the partition of this machine reservation",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id of this entity",
+          "type": "string"
+        },
+        "projectname": {
+          "description": "the project name of this entity",
+          "type": "string"
+        },
+        "reservationseconds": {
+          "description": "the amount of the number of unused machine reservations multiplied by time",
+          "type": "string"
+        },
+        "sizeid": {
+          "description": "the size id of this machine reservation",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant of this entity",
+          "type": "string"
+        },
+        "tenantname": {
+          "description": "the tenant name of this entity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "average",
+        "contract",
+        "debtorid",
+        "id",
+        "partition",
+        "projectid",
+        "projectname",
+        "reservationseconds",
+        "sizeid",
+        "tenant",
+        "tenantname"
+      ]
+    },
+    "v1.MachineReservationUsageAccumuluated": {
+      "properties": {
+        "average": {
+          "description": "the average amount of unused machine reservations in the given time window",
+          "type": "string"
+        },
+        "reservationseconds": {
+          "description": "the amount of the number of unused machine reservations multiplied by time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "average",
+        "reservationseconds"
+      ]
+    },
+    "v1.MachineReservationUsageRequest": {
+      "properties": {
+        "clusterid": {
+          "description": "the cluster id to account for",
+          "type": "string"
+        },
+        "from": {
+          "description": "the start time in the accounting window to look at",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "the id of the machine reservation",
+          "type": "string"
+        },
+        "partition": {
+          "description": "the partition of the machine reservation",
+          "type": "string"
+        },
+        "projectid": {
+          "description": "the project id to account for",
+          "type": "string"
+        },
+        "sizeid": {
+          "description": "the size of the machine reservation",
+          "type": "string"
+        },
+        "tenant": {
+          "description": "the tenant to get the container usage for (defaults to all tenants)",
+          "type": "string"
+        },
+        "to": {
+          "description": "the end time in the accounting window to look at (defaults to current system time)",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "v1.MachineReservationUsageResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "partitionid": {
+          "type": "string"
+        },
+        "projectallocations": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "projectid": {
+          "type": "string"
+        },
+        "projectname": {
+          "type": "string"
+        },
+        "reservations": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sizeid": {
+          "type": "string"
+        },
+        "tenant": {
+          "type": "string"
+        },
+        "usedreservations": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "labels",
+        "partitionid",
+        "projectallocations",
+        "projectid",
+        "projectname",
+        "reservations",
+        "sizeid",
+        "tenant",
+        "usedreservations"
       ]
     },
     "v1.MachineUsage": {
@@ -6224,7 +6525,8 @@
       "name": "MIT",
       "url": "http://mit.org"
     },
-    "title": "cloud-api"
+    "title": "cloud-api",
+    "version": "v0.29.0"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
@@ -6459,6 +6761,45 @@
           }
         },
         "summary": "find ip usage for given accounting query",
+        "tags": [
+          "accounting"
+        ]
+      }
+    },
+    "/v1/accounting/machine-reservation-usage": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "machineReservationUsage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationUsageRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationBillingUsageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "find machine reservation usage for given accounting query",
         "tags": [
           "accounting"
         ]
@@ -8729,6 +9070,260 @@
           }
         },
         "summary": "find projects by multiple criteria",
+        "tags": [
+          "project"
+        ]
+      }
+    },
+    "/v1/project/reservation/machine": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "updateMachineReservation",
+        "parameters": [
+          {
+            "default": false,
+            "description": "if true, allows overbooking of a partition",
+            "in": "query",
+            "name": "force",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationUpdateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "update a machine reservation",
+        "tags": [
+          "project"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createMachineReservation",
+        "parameters": [
+          {
+            "default": false,
+            "description": "if true, allows overbooking of a partition",
+            "in": "query",
+            "name": "force",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationCreateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "create a machine reservation",
+        "tags": [
+          "project"
+        ]
+      }
+    },
+    "/v1/project/reservation/machine/find": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "listMachineReservations",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.MachineReservationResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get all machine reservations",
+        "tags": [
+          "project"
+        ]
+      }
+    },
+    "/v1/project/reservation/machine/usage": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "machineReservationsUsage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationFindRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/v1.MachineReservationUsageResponse"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get usage of machine reservations",
+        "tags": [
+          "project"
+        ]
+      }
+    },
+    "/v1/project/reservation/machine/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "deleteMachineReservation",
+        "parameters": [
+          {
+            "description": "identifier of the machine reservation",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "delete a machine reservation",
+        "tags": [
+          "project"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getMachineReservation",
+        "parameters": [
+          {
+            "description": "identifier of the machine reservation",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.MachineReservationResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "get a machine reservation",
         "tags": [
           "project"
         ]
