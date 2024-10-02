@@ -2739,6 +2739,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "PodPIDsLimit": {
+          "format": "int64",
+          "type": "integer"
+        },
         "Version": {
           "type": "string"
         },
@@ -2754,6 +2758,7 @@
       },
       "required": [
         "ExpirationDate",
+        "PodPIDsLimit",
         "Version",
         "defaultPodSecurityStandard"
       ]
@@ -6521,7 +6526,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.28.2"
+    "version": "v0.29.0"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
