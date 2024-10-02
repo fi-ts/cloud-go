@@ -17,7 +17,7 @@ generate-client:
 .PHONY: mocks
 mocks:
 	rm -rf test/mocks
-	docker run --user $$(id -u):$$(id -g) --rm -w /work -v ${PWD}:/work vektra/mockery:v2.45.1 -r --keeptree --inpackage --dir api/client --output test/mocks --all
+	docker run --user $$(id -u):$$(id -g) --rm -w /work -v ${PWD}:/work vektra/mockery:v2.46.1 -r --keeptree --inpackage --dir api/client --output test/mocks --all
 	go run ./test/client/generate/generate_mock_client.go
 
 .PHONY: gofmt
