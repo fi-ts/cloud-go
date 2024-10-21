@@ -1517,6 +1517,9 @@
     },
     "v1.ClusterFeatures": {
       "properties": {
+        "CalicoEbpfDataplane": {
+          "type": "string"
+        },
         "DurosStorageEncryption": {
           "type": "string"
         },
@@ -1528,6 +1531,7 @@
         }
       },
       "required": [
+        "CalicoEbpfDataplane",
         "DurosStorageEncryption",
         "HighAvailability",
         "LogAcceptedConnections"
@@ -6526,7 +6530,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.29.0"
+    "version": "v0.29.2"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {

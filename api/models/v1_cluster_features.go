@@ -19,6 +19,10 @@ import (
 // swagger:model v1.ClusterFeatures
 type V1ClusterFeatures struct {
 
+	// calico ebpf dataplane
+	// Required: true
+	CalicoEbpfDataplane *string `json:"CalicoEbpfDataplane"`
+
 	// duros storage encryption
 	// Required: true
 	DurosStorageEncryption *string `json:"DurosStorageEncryption"`
@@ -36,6 +40,10 @@ type V1ClusterFeatures struct {
 func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCalicoEbpfDataplane(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDurosStorageEncryption(formats); err != nil {
 		res = append(res, err)
 	}
@@ -51,6 +59,15 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterFeatures) validateCalicoEbpfDataplane(formats strfmt.Registry) error {
+
+	if err := validate.Required("CalicoEbpfDataplane", "body", m.CalicoEbpfDataplane); err != nil {
+		return err
+	}
+
 	return nil
 }
 
