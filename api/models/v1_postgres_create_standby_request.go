@@ -36,6 +36,9 @@ type V1PostgresCreateStandbyRequest struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// disable load balancers
+	DisableLoadBalancers bool `json:"disableLoadBalancers,omitempty"`
+
 	// labels
 	Labels map[string]string `json:"labels,omitempty"`
 

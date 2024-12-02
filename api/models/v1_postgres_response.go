@@ -49,6 +49,9 @@ type V1PostgresResponse struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// disable load balancers
+	DisableLoadBalancers bool `json:"disableLoadBalancers,omitempty"`
+
 	// id
 	// Required: true
 	ID *string `json:"id"`
