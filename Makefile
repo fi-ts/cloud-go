@@ -5,7 +5,7 @@ release:: generate-client mocks gofmt test;
 .PHONY: generate-client
 generate-client:
 ifeq ($(CI),true)
-	curl -v -LO -H 'Accept: application/vnd.github.v3.raw' -H 'authorization: Bearer $(GITHUB_TOKEN)' https://api.github.com/repos/fi-ts/cloud-api/spec/cloud-api.json
+	curl -v -LO -H 'Accept: application/vnd.github.v3.raw' -H 'authorization: Bearer $(GENERATE_TOKEN)' https://api.github.com/repos/fi-ts/cloud-api/spec/cloud-api.json
 	cat cloud-api.json
 else
 	rm -rf tmp

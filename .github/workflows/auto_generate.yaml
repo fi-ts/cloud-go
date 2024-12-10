@@ -23,7 +23,7 @@ jobs:
         go install github.com/mikefarah/yq/v4@latest
         make
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GENERATE_TOKEN: ${{ secrets.GENERATE_TOKEN }}
 
     - name: Push
       run: |
