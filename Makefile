@@ -1,23 +1,40 @@
-CLOUD_API_VERSION := $(or ${CLOUD_API_VERSION},$(shell curl -L "https://raw.githubusercontent.com/fi-ts/releases/develop/release.yaml" | yq e '.docker-images.metal-stack.extensions.cloud-api.tag' -))
+CLOUD_API_VERSION := $(or ${CLOUD_API_VERSION},$(shell cat VERSION))
 
 release:: generate-client mocks gofmt test;
 
 .PHONY: generate-client
 generate-client:
+ifeq ($(CI),true)
+	curl -LO -H 'Accept: application/vnd.github.v3.raw' -H 'authorization: Bearer $(GENERATE_TOKEN)' https://api.github.com/repos/fi-ts/cloud-api/contents/spec/cloud-api.json
+else
+	rm -rf tmp
+	git clone https://github.com/fi-ts/cloud-api.git tmp
+	cd tmp && git checkout $(CLOUD_API_VERSION) && cd -
+	mv tmp/spec/cloud-api.json .
+	rm -rf tmp
+endif
+	$(MAKE) generate-client-local
+
+.PHONY: generate-client-local
+generate-client-local:
+	yq e -i -o=json ".info.version=\"${CLOUD_API_VERSION}\"" cloud-api.json
+	yq e -o=json '.info.version' cloud-api.json
 	rm -rf api
 	mkdir -p api
-	yq e -ij ".info.version=\"${CLOUD_API_VERSION}\"" cloud-api.json
-	yq e '.info.version' cloud-api.json
-	docker pull metalstack/builder
+	docker pull ghcr.io/metal-stack/builder
 	docker run --rm \
 		--user $$(id -u):$$(id -g) \
 		-v ${PWD}:/work \
-		metalstack/builder swagger generate client -f cloud-api.json -t api
+		ghcr.io/metal-stack/builder swagger generate client -f cloud-api.json -t api --struct-tags json
 
 .PHONY: mocks
 mocks:
 	rm -rf test/mocks
-	docker run --user $$(id -u):$$(id -g) --rm -w /work -v ${PWD}:/work vektra/mockery:v2.46.1 -r --keeptree --inpackage --dir api/client --output test/mocks --all
+	docker run --rm \
+		--user $$(id -u):$$(id -g) \
+		-w /work \
+		-v ${PWD}:/work \
+		vektra/mockery:v2.50.0 -r --keeptree --inpackage --dir api/client --output test/mocks --all
 	go run ./test/client/generate/generate_mock_client.go
 
 .PHONY: gofmt

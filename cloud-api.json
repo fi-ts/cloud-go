@@ -72,6 +72,16 @@
         "value"
       ]
     },
+    "models.V1DNSServer": {
+      "properties": {
+        "ip": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ip"
+      ]
+    },
     "models.V1Disk": {
       "properties": {
         "device": {
@@ -535,6 +545,12 @@
         "description": {
           "type": "string"
         },
+        "dns_servers": {
+          "items": {
+            "$ref": "#/definitions/models.V1DNSServer"
+          },
+          "type": "array"
+        },
         "filesystemlayout": {
           "$ref": "#/definitions/models.V1FilesystemLayoutResponse"
         },
@@ -553,6 +569,12 @@
         "networks": {
           "items": {
             "$ref": "#/definitions/models.V1MachineNetwork"
+          },
+          "type": "array"
+        },
+        "ntp_servers": {
+          "items": {
+            "$ref": "#/definitions/models.V1NTPServer"
           },
           "type": "array"
         },
@@ -585,9 +607,11 @@
         "allocationuuid",
         "created",
         "creator",
+        "dns_servers",
         "hostname",
         "name",
         "networks",
+        "ntp_servers",
         "project",
         "reinstall",
         "role",
@@ -939,6 +963,16 @@
         "vendor"
       ]
     },
+    "models.V1NTPServer": {
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
     "models.V1PartitionBootConfiguration": {
       "properties": {
         "commandline": {
@@ -966,6 +1000,12 @@
         "description": {
           "type": "string"
         },
+        "dns_servers": {
+          "items": {
+            "$ref": "#/definitions/models.V1DNSServer"
+          },
+          "type": "array"
+        },
         "id": {
           "type": "string"
         },
@@ -981,6 +1021,12 @@
         "name": {
           "type": "string"
         },
+        "ntp_servers": {
+          "items": {
+            "$ref": "#/definitions/models.V1NTPServer"
+          },
+          "type": "array"
+        },
         "privatenetworkprefixlength": {
           "format": "int32",
           "type": "integer"
@@ -988,7 +1034,9 @@
       },
       "required": [
         "bootconfig",
-        "id"
+        "dns_servers",
+        "id",
+        "ntp_servers"
       ]
     },
     "models.V1Raid": {
@@ -6530,7 +6578,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.29.2"
+    "version": "v0.29.7"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
