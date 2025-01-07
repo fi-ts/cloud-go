@@ -61,6 +61,9 @@ type V1beta1ShootStatus struct {
 	// migration start time
 	MigrationStartTime string `json:"migrationStartTime,omitempty"`
 
+	// networking
+	Networking *V1beta1NetworkingStatus `json:"networking,omitempty"`
+
 	// observed generation
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
 
@@ -116,6 +119,10 @@ func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastOperation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNetworking(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -323,6 +330,25 @@ func (m *V1beta1ShootStatus) validateLastOperation(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *V1beta1ShootStatus) validateNetworking(formats strfmt.Registry) error {
+	if swag.IsZero(m.Networking) { // not required
+		return nil
+	}
+
+	if m.Networking != nil {
+		if err := m.Networking.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("networking")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("networking")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1beta1ShootStatus) validateTechnicalID(formats strfmt.Registry) error {
 
 	if err := validate.Required("technicalID", "body", m.TechnicalID); err != nil {
@@ -374,6 +400,10 @@ func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt
 	}
 
 	if err := m.contextValidateLastOperation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNetworking(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -555,6 +585,27 @@ func (m *V1beta1ShootStatus) contextValidateLastOperation(ctx context.Context, f
 				return ve.ValidateName("lastOperation")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("lastOperation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateNetworking(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Networking != nil {
+
+		if swag.IsZero(m.Networking) { // not required
+			return nil
+		}
+
+		if err := m.Networking.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("networking")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("networking")
 			}
 			return err
 		}
