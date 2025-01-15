@@ -19,6 +19,10 @@ import (
 // swagger:model v1.S3PartitionResponse
 type V1S3PartitionResponse struct {
 
+	// description
+	// Required: true
+	Description *string `json:"description"`
+
 	// endpoint
 	// Required: true
 	Endpoint *string `json:"endpoint"`
@@ -36,6 +40,10 @@ type V1S3PartitionResponse struct {
 func (m *V1S3PartitionResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEndpoint(formats); err != nil {
 		res = append(res, err)
 	}
@@ -51,6 +59,15 @@ func (m *V1S3PartitionResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1S3PartitionResponse) validateDescription(formats strfmt.Registry) error {
+
+	if err := validate.Required("description", "body", m.Description); err != nil {
+		return err
+	}
+
 	return nil
 }
 

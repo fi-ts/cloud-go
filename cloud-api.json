@@ -5032,6 +5032,9 @@
     },
     "v1.S3PartitionResponse": {
       "properties": {
+        "description": {
+          "type": "string"
+        },
         "endpoint": {
           "type": "string"
         },
@@ -5043,6 +5046,7 @@
         }
       },
       "required": [
+        "description",
         "endpoint",
         "id",
         "ready"
@@ -6603,7 +6607,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.29.9"
+    "version": "partition-description"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
