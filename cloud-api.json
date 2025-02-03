@@ -3881,6 +3881,9 @@
         "description": {
           "type": "string"
         },
+        "disableLoadBalancers": {
+          "type": "boolean"
+        },
         "labels": {
           "additionalProperties": {
             "type": "string"
@@ -3938,6 +3941,9 @@
         },
         "description": {
           "type": "string"
+        },
+        "disableLoadBalancers": {
+          "type": "boolean"
         },
         "labels": {
           "additionalProperties": {
@@ -4043,6 +4049,9 @@
         "description": {
           "type": "string"
         },
+        "disableLoadBalancers": {
+          "type": "boolean"
+        },
         "id": {
           "type": "string"
         },
@@ -4101,6 +4110,9 @@
       "properties": {
         "description": {
           "type": "string"
+        },
+        "disableLoadBalancers": {
+          "type": "boolean"
         },
         "labels": {
           "additionalProperties": {
@@ -4211,6 +4223,9 @@
         "description": {
           "type": "string"
         },
+        "disableLoadBalancers": {
+          "type": "boolean"
+        },
         "id": {
           "type": "string"
         },
@@ -4249,6 +4264,7 @@
       "required": [
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
+        "disableLoadBalancers",
         "id"
       ]
     },
@@ -6603,7 +6619,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.29.9"
+    "version": "v0.29.10"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
