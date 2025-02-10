@@ -23,6 +23,10 @@ type V1ClusterFeatures struct {
 	// Required: true
 	CalicoEbpfDataplane *string `json:"CalicoEbpfDataplane"`
 
+	// disable csi lvm
+	// Required: true
+	DisableCsiLvm *string `json:"DisableCsiLvm"`
+
 	// duros storage encryption
 	// Required: true
 	DurosStorageEncryption *string `json:"DurosStorageEncryption"`
@@ -41,6 +45,10 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCalicoEbpfDataplane(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDisableCsiLvm(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -65,6 +73,15 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 func (m *V1ClusterFeatures) validateCalicoEbpfDataplane(formats strfmt.Registry) error {
 
 	if err := validate.Required("CalicoEbpfDataplane", "body", m.CalicoEbpfDataplane); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterFeatures) validateDisableCsiLvm(formats strfmt.Registry) error {
+
+	if err := validate.Required("DisableCsiLvm", "body", m.DisableCsiLvm); err != nil {
 		return err
 	}
 
