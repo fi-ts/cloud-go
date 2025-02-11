@@ -1568,6 +1568,9 @@
         "CalicoEbpfDataplane": {
           "type": "string"
         },
+        "DisableCsiLvm": {
+          "type": "string"
+        },
         "DurosStorageEncryption": {
           "type": "string"
         },
@@ -1580,6 +1583,7 @@
       },
       "required": [
         "CalicoEbpfDataplane",
+        "DisableCsiLvm",
         "DurosStorageEncryption",
         "HighAvailability",
         "LogAcceptedConnections"
@@ -3881,6 +3885,9 @@
         "description": {
           "type": "string"
         },
+        "disableLoadBalancers": {
+          "type": "boolean"
+        },
         "labels": {
           "additionalProperties": {
             "type": "string"
@@ -3938,6 +3945,9 @@
         },
         "description": {
           "type": "string"
+        },
+        "disableLoadBalancers": {
+          "type": "boolean"
         },
         "labels": {
           "additionalProperties": {
@@ -4043,6 +4053,9 @@
         "description": {
           "type": "string"
         },
+        "disableLoadBalancers": {
+          "type": "boolean"
+        },
         "id": {
           "type": "string"
         },
@@ -4101,6 +4114,9 @@
       "properties": {
         "description": {
           "type": "string"
+        },
+        "disableLoadBalancers": {
+          "type": "boolean"
         },
         "labels": {
           "additionalProperties": {
@@ -4211,6 +4227,9 @@
         "description": {
           "type": "string"
         },
+        "disableLoadBalancers": {
+          "type": "boolean"
+        },
         "id": {
           "type": "string"
         },
@@ -4249,6 +4268,7 @@
       "required": [
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
+        "disableLoadBalancers",
         "id"
       ]
     },
@@ -6607,7 +6627,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "partition-description"
+    "version": "v0.29.9"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {

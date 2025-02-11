@@ -45,6 +45,10 @@ type V1PostgresUpdateRequest struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// disable load balancers
+	// Required: true
+	DisableLoadBalancers *bool `json:"disableLoadBalancers"`
+
 	// id
 	// Required: true
 	ID *string `json:"id"`
@@ -91,6 +95,10 @@ func (m *V1PostgresUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDedicatedloadbalancerport(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDisableLoadBalancers(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -162,6 +170,15 @@ func (m *V1PostgresUpdateRequest) validateDedicatedloadbalancerip(formats strfmt
 func (m *V1PostgresUpdateRequest) validateDedicatedloadbalancerport(formats strfmt.Registry) error {
 
 	if err := validate.Required("dedicatedloadbalancerport", "body", m.Dedicatedloadbalancerport); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresUpdateRequest) validateDisableLoadBalancers(formats strfmt.Registry) error {
+
+	if err := validate.Required("disableLoadBalancers", "body", m.DisableLoadBalancers); err != nil {
 		return err
 	}
 
