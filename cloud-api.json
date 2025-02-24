@@ -4162,6 +4162,10 @@
         "cpu": {
           "type": "string"
         },
+        "memoryfactor": {
+          "format": "byte",
+          "type": "integer"
+        },
         "sharedBuffer": {
           "type": "string"
         },
