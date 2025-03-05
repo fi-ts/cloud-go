@@ -19,6 +19,9 @@ import (
 // swagger:model models.V1IPAllocateRequest
 type ModelsV1IPAllocateRequest struct {
 
+	// addressfamily
+	Addressfamily string `json:"addressfamily,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
