@@ -53,9 +53,6 @@ type ModelsV1PartitionResponse struct {
 	// ntp servers
 	// Required: true
 	NtpServers []*ModelsV1NTPServer `json:"ntp_servers"`
-
-	// privatenetworkprefixlength
-	Privatenetworkprefixlength int32 `json:"privatenetworkprefixlength,omitempty"`
 }
 
 // Validate validates this models v1 partition response
