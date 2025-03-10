@@ -19,6 +19,9 @@ import (
 // swagger:model v1.IPFindRequest
 type V1IPFindRequest struct {
 
+	// addressfamily
+	Addressfamily string `json:"addressfamily,omitempty"`
+
 	// allocationuuid
 	Allocationuuid string `json:"allocationuuid,omitempty"`
 

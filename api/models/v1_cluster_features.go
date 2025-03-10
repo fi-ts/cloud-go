@@ -31,6 +31,10 @@ type V1ClusterFeatures struct {
 	// Required: true
 	DurosStorageEncryption *string `json:"DurosStorageEncryption"`
 
+	// enable csi driver lvm
+	// Required: true
+	EnableCsiDriverLvm *string `json:"EnableCsiDriverLvm"`
+
 	// high availability
 	// Required: true
 	HighAvailability *string `json:"HighAvailability"`
@@ -53,6 +57,10 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDurosStorageEncryption(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEnableCsiDriverLvm(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -91,6 +99,15 @@ func (m *V1ClusterFeatures) validateDisableCsiLvm(formats strfmt.Registry) error
 func (m *V1ClusterFeatures) validateDurosStorageEncryption(formats strfmt.Registry) error {
 
 	if err := validate.Required("DurosStorageEncryption", "body", m.DurosStorageEncryption); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterFeatures) validateEnableCsiDriverLvm(formats strfmt.Registry) error {
+
+	if err := validate.Required("EnableCsiDriverLvm", "body", m.EnableCsiDriverLvm); err != nil {
 		return err
 	}
 

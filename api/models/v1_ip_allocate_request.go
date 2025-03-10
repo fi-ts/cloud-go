@@ -23,6 +23,9 @@ type V1IPAllocateRequest struct {
 	// Required: true
 	SpecificIP *string `json:"SpecificIP"`
 
+	// addressfamily
+	Addressfamily string `json:"addressfamily,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
