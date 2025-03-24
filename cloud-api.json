@@ -4174,6 +4174,9 @@
         "cpu": {
           "type": "string"
         },
+        "memory": {
+          "type": "string"
+        },
         "memoryfactor": {
           "format": "byte",
           "type": "integer"

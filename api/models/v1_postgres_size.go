@@ -20,6 +20,9 @@ type V1PostgresSize struct {
 	// cpu
 	CPU string `json:"cpu,omitempty"`
 
+	// memory
+	Memory string `json:"memory,omitempty"`
+
 	// memoryfactor
 	Memoryfactor int64 `json:"memoryfactor,omitempty"`
 
