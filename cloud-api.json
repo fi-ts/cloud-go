@@ -318,6 +318,9 @@
     },
     "models.V1IPAllocateRequest": {
       "properties": {
+        "addressfamily": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -352,6 +355,9 @@
     },
     "models.V1IPFindRequest": {
       "properties": {
+        "addressfamily": {
+          "type": "string"
+        },
         "allocationuuid": {
           "type": "string"
         },
@@ -1026,10 +1032,6 @@
             "$ref": "#/definitions/models.V1NTPServer"
           },
           "type": "array"
-        },
-        "privatenetworkprefixlength": {
-          "format": "int32",
-          "type": "integer"
         }
       },
       "required": [
@@ -1574,6 +1576,9 @@
         "DurosStorageEncryption": {
           "type": "string"
         },
+        "EnableCsiDriverLvm": {
+          "type": "string"
+        },
         "HighAvailability": {
           "type": "string"
         },
@@ -1585,6 +1590,7 @@
         "CalicoEbpfDataplane",
         "DisableCsiLvm",
         "DurosStorageEncryption",
+        "EnableCsiDriverLvm",
         "HighAvailability",
         "LogAcceptedConnections"
       ]
@@ -2514,6 +2520,9 @@
         "SpecificIP": {
           "type": "string"
         },
+        "addressfamily": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -2549,6 +2558,9 @@
     },
     "v1.IPFindRequest": {
       "properties": {
+        "addressfamily": {
+          "type": "string"
+        },
         "allocationuuid": {
           "type": "string"
         },
@@ -6627,7 +6639,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.29.12"
+    "version": "v0.29.15"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
