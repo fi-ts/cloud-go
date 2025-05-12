@@ -1372,7 +1372,10 @@
         "user": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "status_code"
+      ]
     },
     "v1.AuditPolicyResponse": {
       "properties": {
@@ -1430,7 +1433,10 @@
         "user": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "status_code"
+      ]
     },
     "v1.ClusterCreateRequest": {
       "properties": {
@@ -6635,7 +6641,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.29.15"
+    "version": "v0.30.0"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {

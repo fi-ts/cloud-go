@@ -54,7 +54,8 @@ type V1AuditFindRequest struct {
 	Rqid string `json:"rqid,omitempty"`
 
 	// status code
-	StatusCode int32 `json:"status_code,omitempty"`
+	// Required: true
+	StatusCode *int32 `json:"status_code"`
 
 	// tenant
 	Tenant string `json:"tenant,omitempty"`
@@ -78,6 +79,10 @@ func (m *V1AuditFindRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateStatusCode(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTo(formats); err != nil {
 		res = append(res, err)
 	}
@@ -94,6 +99,15 @@ func (m *V1AuditFindRequest) validateFrom(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("from", "body", "date-time", m.From.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1AuditFindRequest) validateStatusCode(formats strfmt.Registry) error {
+
+	if err := validate.Required("status_code", "body", m.StatusCode); err != nil {
 		return err
 	}
 
