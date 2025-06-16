@@ -47,7 +47,8 @@ type V1AuditResponse struct {
 	Rqid string `json:"rqid,omitempty"`
 
 	// status code
-	StatusCode int32 `json:"status_code,omitempty"`
+	// Required: true
+	StatusCode *int32 `json:"status_code"`
 
 	// tenant
 	Tenant string `json:"tenant,omitempty"`
@@ -67,6 +68,10 @@ type V1AuditResponse struct {
 func (m *V1AuditResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateStatusCode(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTimestamp(formats); err != nil {
 		res = append(res, err)
 	}
@@ -74,6 +79,15 @@ func (m *V1AuditResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1AuditResponse) validateStatusCode(formats strfmt.Registry) error {
+
+	if err := validate.Required("status_code", "body", m.StatusCode); err != nil {
+		return err
+	}
+
 	return nil
 }
 
