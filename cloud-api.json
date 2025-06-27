@@ -3937,6 +3937,9 @@
         "size": {
           "$ref": "#/definitions/v1.PostgresSize"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "version": {
           "type": "string"
         }
@@ -3988,6 +3991,9 @@
         },
         "primaryId": {
           "type": "string"
+        },
+        "storageClass": {
+          "type": "string"
         }
       },
       "required": [
@@ -4023,6 +4029,12 @@
     },
     "v1.PostgresPartition": {
       "properties": {
+        "AllowedStorageClasses": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "type": "object"
+        },
         "AllowedTenants": {
           "additionalProperties": {
             "type": "boolean"
@@ -4031,6 +4043,7 @@
         }
       },
       "required": [
+        "AllowedStorageClasses",
         "AllowedTenants"
       ]
     },
@@ -4114,6 +4127,9 @@
         "status": {
           "$ref": "#/definitions/v1.PostgresStatus"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "tenant": {
           "type": "string"
         },
@@ -4152,6 +4168,9 @@
           "type": "string"
         },
         "sourceId": {
+          "type": "string"
+        },
+        "storageClass": {
           "type": "string"
         },
         "timestamp": {
@@ -4285,6 +4304,9 @@
         },
         "size": {
           "$ref": "#/definitions/v1.PostgresSize"
+        },
+        "storageClass": {
+          "type": "string"
         },
         "version": {
           "type": "string"
@@ -6648,7 +6670,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.3"
+    "version": "postgres-storage-class"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {

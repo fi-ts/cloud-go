@@ -54,6 +54,9 @@ type V1PostgresCreateStandbyRequest struct {
 	// primary Id
 	// Required: true
 	PrimaryID *string `json:"primaryId"`
+
+	// storage class
+	StorageClass string `json:"storageClass,omitempty"`
 }
 
 // Validate validates this v1 postgres create standby request

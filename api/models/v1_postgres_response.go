@@ -84,6 +84,9 @@ type V1PostgresResponse struct {
 	// Required: true
 	Status *V1PostgresStatus `json:"status"`
 
+	// storage class
+	StorageClass string `json:"storageClass,omitempty"`
+
 	// tenant
 	Tenant string `json:"tenant,omitempty"`
 

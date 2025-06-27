@@ -74,6 +74,9 @@ type V1PostgresUpdateRequest struct {
 	// size
 	Size *V1PostgresSize `json:"size,omitempty"`
 
+	// storage class
+	StorageClass string `json:"storageClass,omitempty"`
+
 	// version
 	Version string `json:"version,omitempty"`
 }

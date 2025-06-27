@@ -38,6 +38,9 @@ type V1PostgresRestoreRequest struct {
 	// Required: true
 	SourceID *string `json:"sourceId"`
 
+	// storage class
+	StorageClass string `json:"storageClass,omitempty"`
+
 	// timestamp
 	Timestamp string `json:"timestamp,omitempty"`
 
