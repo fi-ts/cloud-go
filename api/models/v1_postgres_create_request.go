@@ -67,7 +67,8 @@ type V1PostgresCreateRequest struct {
 	Size *V1PostgresSize `json:"size,omitempty"`
 
 	// storage class
-	StorageClass string `json:"storageClass,omitempty"`
+	// Required: true
+	StorageClass *string `json:"storageClass"`
 
 	// version
 	Version string `json:"version,omitempty"`
@@ -90,6 +91,10 @@ func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStorageClass(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -150,6 +155,15 @@ func (m *V1PostgresCreateRequest) validateSize(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresCreateRequest) validateStorageClass(formats strfmt.Registry) error {
+
+	if err := validate.Required("storageClass", "body", m.StorageClass); err != nil {
+		return err
 	}
 
 	return nil

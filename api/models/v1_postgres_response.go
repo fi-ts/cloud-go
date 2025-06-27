@@ -85,7 +85,8 @@ type V1PostgresResponse struct {
 	Status *V1PostgresStatus `json:"status"`
 
 	// storage class
-	StorageClass string `json:"storageClass,omitempty"`
+	// Required: true
+	StorageClass *string `json:"storageClass"`
 
 	// tenant
 	Tenant string `json:"tenant,omitempty"`
@@ -131,6 +132,10 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStorageClass(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -270,6 +275,15 @@ func (m *V1PostgresResponse) validateStatus(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) validateStorageClass(formats strfmt.Registry) error {
+
+	if err := validate.Required("storageClass", "body", m.StorageClass); err != nil {
+		return err
 	}
 
 	return nil

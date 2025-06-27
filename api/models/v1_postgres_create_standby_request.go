@@ -56,7 +56,8 @@ type V1PostgresCreateStandbyRequest struct {
 	PrimaryID *string `json:"primaryId"`
 
 	// storage class
-	StorageClass string `json:"storageClass,omitempty"`
+	// Required: true
+	StorageClass *string `json:"storageClass"`
 }
 
 // Validate validates this v1 postgres create standby request
@@ -72,6 +73,10 @@ func (m *V1PostgresCreateStandbyRequest) Validate(formats strfmt.Registry) error
 	}
 
 	if err := m.validatePrimaryID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStorageClass(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -102,6 +107,15 @@ func (m *V1PostgresCreateStandbyRequest) validateDedicatedloadbalancerport(forma
 func (m *V1PostgresCreateStandbyRequest) validatePrimaryID(formats strfmt.Registry) error {
 
 	if err := validate.Required("primaryId", "body", m.PrimaryID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresCreateStandbyRequest) validateStorageClass(formats strfmt.Registry) error {
+
+	if err := validate.Required("storageClass", "body", m.StorageClass); err != nil {
 		return err
 	}
 

@@ -3946,7 +3946,8 @@
       },
       "required": [
         "dedicatedloadbalancerip",
-        "dedicatedloadbalancerport"
+        "dedicatedloadbalancerport",
+        "storageClass"
       ]
     },
     "v1.PostgresCreateStandbyRequest": {
@@ -3999,7 +4000,8 @@
       "required": [
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
-        "primaryId"
+        "primaryId",
+        "storageClass"
       ]
     },
     "v1.PostgresFindRequest": {
@@ -4141,7 +4143,8 @@
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
         "id",
-        "status"
+        "status",
+        "storageClass"
       ]
     },
     "v1.PostgresRestoreRequest": {
@@ -4181,7 +4184,8 @@
         }
       },
       "required": [
-        "sourceId"
+        "sourceId",
+        "storageClass"
       ]
     },
     "v1.PostgresSecretsResponse": {
@@ -4316,7 +4320,8 @@
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
         "disableLoadBalancers",
-        "id"
+        "id",
+        "storageClass"
       ]
     },
     "v1.PostgresUpdateRequest.labels": {

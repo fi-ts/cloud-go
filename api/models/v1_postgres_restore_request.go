@@ -39,7 +39,8 @@ type V1PostgresRestoreRequest struct {
 	SourceID *string `json:"sourceId"`
 
 	// storage class
-	StorageClass string `json:"storageClass,omitempty"`
+	// Required: true
+	StorageClass *string `json:"storageClass"`
 
 	// timestamp
 	Timestamp string `json:"timestamp,omitempty"`
@@ -56,6 +57,10 @@ func (m *V1PostgresRestoreRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateStorageClass(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -65,6 +70,15 @@ func (m *V1PostgresRestoreRequest) Validate(formats strfmt.Registry) error {
 func (m *V1PostgresRestoreRequest) validateSourceID(formats strfmt.Registry) error {
 
 	if err := validate.Required("sourceId", "body", m.SourceID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1PostgresRestoreRequest) validateStorageClass(formats strfmt.Registry) error {
+
+	if err := validate.Required("storageClass", "body", m.StorageClass); err != nil {
 		return err
 	}
 
