@@ -3498,6 +3498,9 @@
         },
         "defaultPartitionStorage": {
           "type": "boolean"
+        },
+        "ontapStorage": {
+          "type": "boolean"
         }
       },
       "required": [
@@ -6281,6 +6284,12 @@
         "lastInitiationTime": {
           "type": "string"
         },
+        "pendingWorkersRollouts": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.PendingWorkersRollout"
+          },
+          "type": "array"
+        },
         "phase": {
           "type": "string"
         }
@@ -6437,6 +6446,12 @@
     },
     "v1beta1.NetworkingStatus": {
       "properties": {
+        "egressCIDRs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "nodes": {
           "items": {
             "type": "string"
@@ -6467,6 +6482,19 @@
         }
       }
     },
+    "v1beta1.PendingWorkersRollout": {
+      "properties": {
+        "lastInitiationTime": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "v1beta1.ServiceAccountKeyRotation": {
       "properties": {
         "lastCompletionTime": {
@@ -6480,6 +6508,12 @@
         },
         "lastInitiationTime": {
           "type": "string"
+        },
+        "pendingWorkersRollouts": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.PendingWorkersRollout"
+          },
+          "type": "array"
         },
         "phase": {
           "type": "string"
@@ -6648,7 +6682,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.4"
+    "version": "v0.30.5"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
