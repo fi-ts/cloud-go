@@ -43,6 +43,9 @@ type V1Network struct {
 
 	// default partition storage
 	DefaultPartitionStorage bool `json:"defaultPartitionStorage,omitempty"`
+
+	// ontap storage
+	OntapStorage bool `json:"ontapStorage,omitempty"`
 }
 
 // Validate validates this v1 network
