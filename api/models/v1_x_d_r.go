@@ -31,6 +31,10 @@ type V1XDR struct {
 	// Required: true
 	DistributionID *string `json:"distributionId"`
 
+	// no proxy
+	// Required: true
+	NoProxy *bool `json:"noProxy"`
+
 	// proxy list
 	// Required: true
 	ProxyList []string `json:"proxyList"`
@@ -49,6 +53,10 @@ func (m *V1XDR) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDistributionID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNoProxy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -83,6 +91,15 @@ func (m *V1XDR) validateDisabled(formats strfmt.Registry) error {
 func (m *V1XDR) validateDistributionID(formats strfmt.Registry) error {
 
 	if err := validate.Required("distributionId", "body", m.DistributionID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1XDR) validateNoProxy(formats strfmt.Registry) error {
+
+	if err := validate.Required("noProxy", "body", m.NoProxy); err != nil {
 		return err
 	}
 

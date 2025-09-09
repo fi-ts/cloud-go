@@ -6293,6 +6293,9 @@
         "distributionId": {
           "type": "string"
         },
+        "noProxy": {
+          "type": "boolean"
+        },
         "proxyList": {
           "items": {
             "type": "string"
@@ -6304,6 +6307,7 @@
         "customTag",
         "disabled",
         "distributionId",
+        "noProxy",
         "proxyList"
       ]
     },
