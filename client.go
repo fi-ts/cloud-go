@@ -8,11 +8,9 @@ import (
 
 	"github.com/fi-ts/cloud-go/api/client"
 	"github.com/go-openapi/runtime"
-	openclient "github.com/go-openapi/runtime/client"
+	openapiclient "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/metal-stack/security"
-
-	httptransport "github.com/go-openapi/runtime/client"
 )
 
 const (
@@ -45,7 +43,7 @@ func Timeout(timeout time.Duration) option {
 	// overriding the default timeout as otherwise all request need to be called with
 	// WithTimeout or WithContext
 	// still open issue: https://github.com/go-swagger/go-swagger/issues/2583
-	openclient.DefaultTimeout = timeout
+	openapiclient.DefaultTimeout = timeout
 
 	return func(c *clientSpec) {
 		c.timeout = timeout
@@ -83,14 +81,14 @@ func NewClient(rawurl, token, hmac string, options ...option) (*client.CloudAPI,
 	return c, nil
 }
 
-func newClientTransport(c *clientSpec) *httptransport.Runtime {
+func newClientTransport(c *clientSpec) *openapiclient.Runtime {
 	var hmacAuth *security.HMACAuth
 	if c.hmac != "" {
 		auth := security.NewHMACAuth(c.hmacAuthType, []byte(c.hmac))
 		hmacAuth = &auth
 	}
 
-	auther := runtime.ClientAuthInfoWriterFunc(func(rq runtime.ClientRequest, rg strfmt.Registry) error {
+	authenticator := runtime.ClientAuthInfoWriterFunc(func(rq runtime.ClientRequest, rg strfmt.Registry) error {
 		if hmacAuth != nil {
 			hmacAuth.AddAuthToClientRequest(rq, time.Now())
 		} else if c.token != "" {
@@ -104,8 +102,8 @@ func newClientTransport(c *clientSpec) *httptransport.Runtime {
 		Transport: http.DefaultTransport,
 	}
 
-	transport := httptransport.NewWithClient(c.host, c.basePath, c.schemes, client)
-	transport.DefaultAuthentication = auther
+	transport := openapiclient.NewWithClient(c.host, c.basePath, c.schemes, client)
+	transport.DefaultAuthentication = authenticator
 
 	return transport
 }
