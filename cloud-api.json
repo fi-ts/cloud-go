@@ -6301,6 +6301,9 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "tenant": {
+          "type": "string"
         }
       },
       "required": [
@@ -6308,7 +6311,8 @@
         "disabled",
         "distributionId",
         "noProxy",
-        "proxyList"
+        "proxyList",
+        "tenant"
       ]
     },
     "v1beta1.CARotation": {

@@ -38,6 +38,10 @@ type V1XDR struct {
 	// proxy list
 	// Required: true
 	ProxyList []string `json:"proxyList"`
+
+	// tenant
+	// Required: true
+	Tenant *string `json:"tenant"`
 }
 
 // Validate validates this v1 x d r
@@ -61,6 +65,10 @@ func (m *V1XDR) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProxyList(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTenant(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -109,6 +117,15 @@ func (m *V1XDR) validateNoProxy(formats strfmt.Registry) error {
 func (m *V1XDR) validateProxyList(formats strfmt.Registry) error {
 
 	if err := validate.Required("proxyList", "body", m.ProxyList); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1XDR) validateTenant(formats strfmt.Registry) error {
+
+	if err := validate.Required("tenant", "body", m.Tenant); err != nil {
 		return err
 	}
 
