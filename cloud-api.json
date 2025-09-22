@@ -2080,6 +2080,13 @@
     },
     "v1.ClusterUsage": {
       "properties": {
+        "annotations": {
+          "description": "accounting annotations present on the last accounting report of this cluster",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "averageworkergroups": {
           "description": "the average amount of worker groups during the time window",
           "type": "string"
@@ -2144,6 +2151,7 @@
         }
       },
       "required": [
+        "annotations",
         "averageworkergroups",
         "clusterend",
         "clusterid",
@@ -6419,6 +6427,13 @@
         "version"
       ]
     },
+    "v1beta1.InPlaceUpdatesStatus": {
+      "properties": {
+        "pendingWorkerUpdates": {
+          "$ref": "#/definitions/v1beta1.PendingWorkerUpdates"
+        }
+      }
+    },
     "v1beta1.LastError": {
       "properties": {
         "codes": {
@@ -6524,6 +6539,22 @@
         },
         "lastInitiationTime": {
           "type": "string"
+        }
+      }
+    },
+    "v1beta1.PendingWorkerUpdates": {
+      "properties": {
+        "autoInPlaceUpdate": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "manualInPlaceUpdate": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       }
     },
@@ -6668,6 +6699,9 @@
         },
         "hibernated": {
           "type": "boolean"
+        },
+        "inPlaceUpdates": {
+          "$ref": "#/definitions/v1beta1.InPlaceUpdatesStatus"
         },
         "lastErrors": {
           "items": {
