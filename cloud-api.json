@@ -6382,6 +6382,13 @@
         "version"
       ]
     },
+    "v1beta1.InPlaceUpdatesStatus": {
+      "properties": {
+        "pendingWorkerUpdates": {
+          "$ref": "#/definitions/v1beta1.PendingWorkerUpdates"
+        }
+      }
+    },
     "v1beta1.LastError": {
       "properties": {
         "codes": {
@@ -6487,6 +6494,22 @@
         },
         "lastInitiationTime": {
           "type": "string"
+        }
+      }
+    },
+    "v1beta1.PendingWorkerUpdates": {
+      "properties": {
+        "autoInPlaceUpdate": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "manualInPlaceUpdate": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       }
     },
@@ -6632,6 +6655,9 @@
         "hibernated": {
           "type": "boolean"
         },
+        "inPlaceUpdates": {
+          "$ref": "#/definitions/v1beta1.InPlaceUpdatesStatus"
+        },
         "lastErrors": {
           "items": {
             "$ref": "#/definitions/v1beta1.LastError"
@@ -6690,7 +6716,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.8"
+    "version": "v0.30.9"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
