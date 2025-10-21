@@ -2796,6 +2796,34 @@
         "usage"
       ]
     },
+    "v1.InstanceCreateRequest": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "v1.InstanceCreateResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "protocol"
+      ]
+    },
     "v1.IssuerConfig": {
       "properties": {
         "client_id": {
@@ -8884,6 +8912,45 @@
         "summary": "perform a healthcheck",
         "tags": [
           "health"
+        ]
+      }
+    },
+    "/v1/instance": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createInstance",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.InstanceCreateRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1.InstanceCreateResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
+            }
+          }
+        },
+        "summary": "Creates an VM Instance.",
+        "tags": [
+          "instance"
         ]
       }
     },
