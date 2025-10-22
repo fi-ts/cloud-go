@@ -1512,6 +1512,9 @@
           },
           "type": "array"
         },
+        "XDRConfig": {
+          "$ref": "#/definitions/v1.XDR"
+        },
         "cni": {
           "type": "string"
         },
@@ -1550,6 +1553,7 @@
         "SystemComponents",
         "Tenant",
         "Workers",
+        "XDRConfig",
         "networkAccessType"
       ]
     },
@@ -1868,6 +1872,9 @@
           },
           "type": "array"
         },
+        "XDRConfig": {
+          "$ref": "#/definitions/v1.XDR"
+        },
         "cni": {
           "type": "string"
         },
@@ -1915,6 +1922,7 @@
         "SystemComponents",
         "Tenant",
         "Workers",
+        "XDRConfig",
         "cni"
       ]
     },
@@ -2041,6 +2049,9 @@
           },
           "type": "array"
         },
+        "XDRConfig": {
+          "$ref": "#/definitions/v1.XDR"
+        },
         "seedName": {
           "description": "seed name on which the cluster will be scheduled",
           "type": "string"
@@ -2063,6 +2074,7 @@
         "Purpose",
         "SystemComponents",
         "Workers",
+        "XDRConfig",
         "seedName"
       ]
     },
@@ -6278,6 +6290,39 @@
         "Taints"
       ]
     },
+    "v1.XDR": {
+      "properties": {
+        "customTag": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "distributionId": {
+          "type": "string"
+        },
+        "noProxy": {
+          "type": "boolean"
+        },
+        "proxyList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customTag",
+        "disabled",
+        "distributionId",
+        "noProxy",
+        "proxyList",
+        "tenant"
+      ]
+    },
     "v1beta1.CARotation": {
       "properties": {
         "lastCompletionTime": {
@@ -6716,7 +6761,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.9"
+    "version": "v0.30.10"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {

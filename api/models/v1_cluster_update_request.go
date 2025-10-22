@@ -84,6 +84,10 @@ type V1ClusterUpdateRequest struct {
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
 
+	// x d r config
+	// Required: true
+	XDRConfig *V1XDR `json:"XDRConfig"`
+
 	// seed name on which the cluster will be scheduled
 	// Required: true
 	SeedName *string `json:"seedName"`
@@ -154,6 +158,10 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateWorkers(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateXDRConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -424,6 +432,26 @@ func (m *V1ClusterUpdateRequest) validateWorkers(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *V1ClusterUpdateRequest) validateXDRConfig(formats strfmt.Registry) error {
+
+	if err := validate.Required("XDRConfig", "body", m.XDRConfig); err != nil {
+		return err
+	}
+
+	if m.XDRConfig != nil {
+		if err := m.XDRConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("XDRConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("XDRConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1ClusterUpdateRequest) validateSeedName(formats strfmt.Registry) error {
 
 	if err := validate.Required("seedName", "body", m.SeedName); err != nil {
@@ -470,6 +498,10 @@ func (m *V1ClusterUpdateRequest) ContextValidate(ctx context.Context, formats st
 	}
 
 	if err := m.contextValidateWorkers(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateXDRConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -643,6 +675,23 @@ func (m *V1ClusterUpdateRequest) contextValidateWorkers(ctx context.Context, for
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) contextValidateXDRConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.XDRConfig != nil {
+
+		if err := m.XDRConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("XDRConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("XDRConfig")
+			}
+			return err
+		}
 	}
 
 	return nil
