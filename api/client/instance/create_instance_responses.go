@@ -25,8 +25,8 @@ type CreateInstanceReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *CreateInstanceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewCreateInstanceOK()
+	case 202:
+		result := NewCreateInstanceAccepted()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -43,65 +43,65 @@ func (o *CreateInstanceReader) ReadResponse(response runtime.ClientResponse, con
 	}
 }
 
-// NewCreateInstanceOK creates a CreateInstanceOK with default headers values
-func NewCreateInstanceOK() *CreateInstanceOK {
-	return &CreateInstanceOK{}
+// NewCreateInstanceAccepted creates a CreateInstanceAccepted with default headers values
+func NewCreateInstanceAccepted() *CreateInstanceAccepted {
+	return &CreateInstanceAccepted{}
 }
 
 /*
-CreateInstanceOK describes a response with status code 200, with default header values.
+CreateInstanceAccepted describes a response with status code 202, with default header values.
 
 OK
 */
-type CreateInstanceOK struct {
+type CreateInstanceAccepted struct {
 	Payload *models.V1InstanceCreateResponse
 }
 
-// IsSuccess returns true when this create instance o k response has a 2xx status code
-func (o *CreateInstanceOK) IsSuccess() bool {
+// IsSuccess returns true when this create instance accepted response has a 2xx status code
+func (o *CreateInstanceAccepted) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this create instance o k response has a 3xx status code
-func (o *CreateInstanceOK) IsRedirect() bool {
+// IsRedirect returns true when this create instance accepted response has a 3xx status code
+func (o *CreateInstanceAccepted) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this create instance o k response has a 4xx status code
-func (o *CreateInstanceOK) IsClientError() bool {
+// IsClientError returns true when this create instance accepted response has a 4xx status code
+func (o *CreateInstanceAccepted) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this create instance o k response has a 5xx status code
-func (o *CreateInstanceOK) IsServerError() bool {
+// IsServerError returns true when this create instance accepted response has a 5xx status code
+func (o *CreateInstanceAccepted) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this create instance o k response a status code equal to that given
-func (o *CreateInstanceOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this create instance accepted response a status code equal to that given
+func (o *CreateInstanceAccepted) IsCode(code int) bool {
+	return code == 202
 }
 
-// Code gets the status code for the create instance o k response
-func (o *CreateInstanceOK) Code() int {
-	return 200
+// Code gets the status code for the create instance accepted response
+func (o *CreateInstanceAccepted) Code() int {
+	return 202
 }
 
-func (o *CreateInstanceOK) Error() string {
+func (o *CreateInstanceAccepted) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/instance][%d] createInstanceOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/instance][%d] createInstanceAccepted %s", 202, payload)
 }
 
-func (o *CreateInstanceOK) String() string {
+func (o *CreateInstanceAccepted) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/instance][%d] createInstanceOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/instance][%d] createInstanceAccepted %s", 202, payload)
 }
 
-func (o *CreateInstanceOK) GetPayload() *models.V1InstanceCreateResponse {
+func (o *CreateInstanceAccepted) GetPayload() *models.V1InstanceCreateResponse {
 	return o.Payload
 }
 
-func (o *CreateInstanceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *CreateInstanceAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.V1InstanceCreateResponse)
 

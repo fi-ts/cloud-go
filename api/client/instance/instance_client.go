@@ -54,7 +54,7 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateInstance(params *CreateInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstanceOK, error)
+	CreateInstance(params *CreateInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstanceAccepted, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -62,7 +62,7 @@ type ClientService interface {
 /*
 CreateInstance creates an VM instance
 */
-func (a *Client) CreateInstance(params *CreateInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstanceOK, error) {
+func (a *Client) CreateInstance(params *CreateInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstanceAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateInstanceParams()
@@ -88,7 +88,7 @@ func (a *Client) CreateInstance(params *CreateInstanceParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateInstanceOK)
+	success, ok := result.(*CreateInstanceAccepted)
 	if ok {
 		return success, nil
 	}
