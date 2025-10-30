@@ -19,16 +19,40 @@ import (
 // swagger:model v1.InstanceCreateRequest
 type V1InstanceCreateRequest struct {
 
-	// name
+	// vm name
 	// Required: true
-	Name *string `json:"name"`
+	VMName *string `json:"vm_name"`
+
+	// vm num cpu per socket
+	// Required: true
+	VMNumCPUPerSocket *int32 `json:"vm_num_cpu_per_socket"`
+
+	// vm num sockets
+	// Required: true
+	VMNumSockets *int32 `json:"vm_num_sockets"`
+
+	// vm ram
+	// Required: true
+	VMRAM *string `json:"vm_ram"`
 }
 
 // Validate validates this v1 instance create request
 func (m *V1InstanceCreateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateName(formats); err != nil {
+	if err := m.validateVMName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVMNumCPUPerSocket(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVMNumSockets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVMRAM(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -38,9 +62,36 @@ func (m *V1InstanceCreateRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1InstanceCreateRequest) validateName(formats strfmt.Registry) error {
+func (m *V1InstanceCreateRequest) validateVMName(formats strfmt.Registry) error {
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
+	if err := validate.Required("vm_name", "body", m.VMName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1InstanceCreateRequest) validateVMNumCPUPerSocket(formats strfmt.Registry) error {
+
+	if err := validate.Required("vm_num_cpu_per_socket", "body", m.VMNumCPUPerSocket); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1InstanceCreateRequest) validateVMNumSockets(formats strfmt.Registry) error {
+
+	if err := validate.Required("vm_num_sockets", "body", m.VMNumSockets); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1InstanceCreateRequest) validateVMRAM(formats strfmt.Registry) error {
+
+	if err := validate.Required("vm_ram", "body", m.VMRAM); err != nil {
 		return err
 	}
 

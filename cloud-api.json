@@ -1512,9 +1512,6 @@
           },
           "type": "array"
         },
-        "XDRConfig": {
-          "$ref": "#/definitions/v1.XDR"
-        },
         "cni": {
           "type": "string"
         },
@@ -1553,7 +1550,6 @@
         "SystemComponents",
         "Tenant",
         "Workers",
-        "XDRConfig",
         "networkAccessType"
       ]
     },
@@ -1872,9 +1868,6 @@
           },
           "type": "array"
         },
-        "XDRConfig": {
-          "$ref": "#/definitions/v1.XDR"
-        },
         "cni": {
           "type": "string"
         },
@@ -1922,7 +1915,6 @@
         "SystemComponents",
         "Tenant",
         "Workers",
-        "XDRConfig",
         "cni"
       ]
     },
@@ -2049,9 +2041,6 @@
           },
           "type": "array"
         },
-        "XDRConfig": {
-          "$ref": "#/definitions/v1.XDR"
-        },
         "seedName": {
           "description": "seed name on which the cluster will be scheduled",
           "type": "string"
@@ -2074,7 +2063,6 @@
         "Purpose",
         "SystemComponents",
         "Workers",
-        "XDRConfig",
         "seedName"
       ]
     },
@@ -2798,12 +2786,26 @@
     },
     "v1.InstanceCreateRequest": {
       "properties": {
-        "name": {
+        "vm_name": {
+          "type": "string"
+        },
+        "vm_num_cpu_per_socket": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "vm_num_sockets": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "vm_ram": {
           "type": "string"
         }
       },
       "required": [
-        "name"
+        "vm_name",
+        "vm_num_cpu_per_socket",
+        "vm_num_sockets",
+        "vm_ram"
       ]
     },
     "v1.InstanceCreateResponse": {
@@ -6318,39 +6320,6 @@
         "Taints"
       ]
     },
-    "v1.XDR": {
-      "properties": {
-        "customTag": {
-          "type": "string"
-        },
-        "disabled": {
-          "type": "boolean"
-        },
-        "distributionId": {
-          "type": "string"
-        },
-        "noProxy": {
-          "type": "boolean"
-        },
-        "proxyList": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "tenant": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "customTag",
-        "disabled",
-        "distributionId",
-        "noProxy",
-        "proxyList",
-        "tenant"
-      ]
-    },
     "v1beta1.CARotation": {
       "properties": {
         "lastCompletionTime": {
@@ -6783,13 +6752,13 @@
       "name": "Devops Team",
       "url": "http://www.f-i-ts.de"
     },
+    "version": "v0.30.10",
     "description": "Resource for managing cloud entities",
     "license": {
       "name": "MIT",
       "url": "http://mit.org"
     },
-    "title": "cloud-api",
-    "version": "v0.30.10"
+    "title": "cloud-api"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
