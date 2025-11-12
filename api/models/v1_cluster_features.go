@@ -42,10 +42,6 @@ type V1ClusterFeatures struct {
 	// log accepted connections
 	// Required: true
 	LogAcceptedConnections *string `json:"LogAcceptedConnections"`
-
-	// service account extend token expiration
-	// Required: true
-	ServiceAccountExtendTokenExpiration *string `json:"ServiceAccountExtendTokenExpiration"`
 }
 
 // Validate validates this v1 cluster features
@@ -73,10 +69,6 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLogAcceptedConnections(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateServiceAccountExtendTokenExpiration(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -134,15 +126,6 @@ func (m *V1ClusterFeatures) validateHighAvailability(formats strfmt.Registry) er
 func (m *V1ClusterFeatures) validateLogAcceptedConnections(formats strfmt.Registry) error {
 
 	if err := validate.Required("LogAcceptedConnections", "body", m.LogAcceptedConnections); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1ClusterFeatures) validateServiceAccountExtendTokenExpiration(formats strfmt.Registry) error {
-
-	if err := validate.Required("ServiceAccountExtendTokenExpiration", "body", m.ServiceAccountExtendTokenExpiration); err != nil {
 		return err
 	}
 

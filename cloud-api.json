@@ -1594,9 +1594,6 @@
         },
         "LogAcceptedConnections": {
           "type": "string"
-        },
-        "ServiceAccountExtendTokenExpiration": {
-          "type": "string"
         }
       },
       "required": [
@@ -1605,8 +1602,7 @@
         "DurosStorageEncryption",
         "EnableCsiDriverLvm",
         "HighAvailability",
-        "LogAcceptedConnections",
-        "ServiceAccountExtendTokenExpiration"
+        "LogAcceptedConnections"
       ]
     },
     "v1.ClusterFindRequest": {
@@ -2841,6 +2837,9 @@
           "format": "int64",
           "type": "integer"
         },
+        "ServiceAccountExtendTokenExpiration": {
+          "type": "boolean"
+        },
         "Version": {
           "type": "string"
         },
@@ -2857,6 +2856,7 @@
       "required": [
         "ExpirationDate",
         "PodPIDsLimit",
+        "ServiceAccountExtendTokenExpiration",
         "Version",
         "defaultPodSecurityStandard"
       ]
