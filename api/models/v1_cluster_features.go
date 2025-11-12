@@ -35,10 +35,6 @@ type V1ClusterFeatures struct {
 	// Required: true
 	EnableCsiDriverLvm *string `json:"EnableCsiDriverLvm"`
 
-	// extend token expiration
-	// Required: true
-	ExtendTokenExpiration *string `json:"ExtendTokenExpiration"`
-
 	// high availability
 	// Required: true
 	HighAvailability *string `json:"HighAvailability"`
@@ -46,6 +42,10 @@ type V1ClusterFeatures struct {
 	// log accepted connections
 	// Required: true
 	LogAcceptedConnections *string `json:"LogAcceptedConnections"`
+
+	// service account extend token expiration
+	// Required: true
+	ServiceAccountExtendTokenExpiration *string `json:"ServiceAccountExtendTokenExpiration"`
 }
 
 // Validate validates this v1 cluster features
@@ -68,15 +68,15 @@ func (m *V1ClusterFeatures) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateExtendTokenExpiration(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateHighAvailability(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateLogAcceptedConnections(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateServiceAccountExtendTokenExpiration(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -122,15 +122,6 @@ func (m *V1ClusterFeatures) validateEnableCsiDriverLvm(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *V1ClusterFeatures) validateExtendTokenExpiration(formats strfmt.Registry) error {
-
-	if err := validate.Required("ExtendTokenExpiration", "body", m.ExtendTokenExpiration); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1ClusterFeatures) validateHighAvailability(formats strfmt.Registry) error {
 
 	if err := validate.Required("HighAvailability", "body", m.HighAvailability); err != nil {
@@ -143,6 +134,15 @@ func (m *V1ClusterFeatures) validateHighAvailability(formats strfmt.Registry) er
 func (m *V1ClusterFeatures) validateLogAcceptedConnections(formats strfmt.Registry) error {
 
 	if err := validate.Required("LogAcceptedConnections", "body", m.LogAcceptedConnections); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterFeatures) validateServiceAccountExtendTokenExpiration(formats strfmt.Registry) error {
+
+	if err := validate.Required("ServiceAccountExtendTokenExpiration", "body", m.ServiceAccountExtendTokenExpiration); err != nil {
 		return err
 	}
 

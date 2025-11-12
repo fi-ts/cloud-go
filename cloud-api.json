@@ -1589,13 +1589,13 @@
         "EnableCsiDriverLvm": {
           "type": "string"
         },
-        "ExtendTokenExpiration": {
-          "type": "string"
-        },
         "HighAvailability": {
           "type": "string"
         },
         "LogAcceptedConnections": {
+          "type": "string"
+        },
+        "ServiceAccountExtendTokenExpiration": {
           "type": "string"
         }
       },
@@ -1604,9 +1604,9 @@
         "DisableCsiLvm",
         "DurosStorageEncryption",
         "EnableCsiDriverLvm",
-        "ExtendTokenExpiration",
         "HighAvailability",
-        "LogAcceptedConnections"
+        "LogAcceptedConnections",
+        "ServiceAccountExtendTokenExpiration"
       ]
     },
     "v1.ClusterFindRequest": {
