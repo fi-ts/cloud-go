@@ -1589,6 +1589,9 @@
         "EnableCsiDriverLvm": {
           "type": "string"
         },
+        "ExtendTokenExpiration": {
+          "type": "string"
+        },
         "HighAvailability": {
           "type": "string"
         },
@@ -1601,6 +1604,7 @@
         "DisableCsiLvm",
         "DurosStorageEncryption",
         "EnableCsiDriverLvm",
+        "ExtendTokenExpiration",
         "HighAvailability",
         "LogAcceptedConnections"
       ]
