@@ -2837,6 +2837,9 @@
           "format": "int64",
           "type": "integer"
         },
+        "ServiceAccountExtendTokenExpiration": {
+          "type": "boolean"
+        },
         "Version": {
           "type": "string"
         },
@@ -2853,6 +2856,7 @@
       "required": [
         "ExpirationDate",
         "PodPIDsLimit",
+        "ServiceAccountExtendTokenExpiration",
         "Version",
         "defaultPodSecurityStandard"
       ]
@@ -6761,7 +6765,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.10"
+    "version": "v0.30.11"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
