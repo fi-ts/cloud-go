@@ -6765,7 +6765,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.11"
+    "version": "v0.30.12"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
