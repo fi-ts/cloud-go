@@ -21,11 +21,7 @@ type V1AuditBackendS3 struct {
 
 	// access key
 	// Required: true
-	AccessKey *string `json:"AccessKey"`
-
-	// secret key
-	// Required: true
-	SecretKey *string `json:"SecretKey"`
+	AccessKey *string `json:"accessKey"`
 
 	// bucket
 	// Required: true
@@ -40,8 +36,7 @@ type V1AuditBackendS3 struct {
 	Endpoint *string `json:"endpoint"`
 
 	// prefix
-	// Required: true
-	Prefix *string `json:"prefix"`
+	Prefix string `json:"prefix,omitempty"`
 
 	// region
 	// Required: true
@@ -50,6 +45,10 @@ type V1AuditBackendS3 struct {
 	// s3 key format
 	// Required: true
 	S3KeyFormat *string `json:"s3KeyFormat"`
+
+	// secret key
+	// Required: true
+	SecretKey *string `json:"secretKey"`
 
 	// tls enabled
 	// Required: true
@@ -76,10 +75,6 @@ func (m *V1AuditBackendS3) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateSecretKey(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateBucket(formats); err != nil {
 		res = append(res, err)
 	}
@@ -92,15 +87,15 @@ func (m *V1AuditBackendS3) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validatePrefix(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateRegion(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateS3KeyFormat(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSecretKey(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -128,16 +123,7 @@ func (m *V1AuditBackendS3) Validate(formats strfmt.Registry) error {
 
 func (m *V1AuditBackendS3) validateAccessKey(formats strfmt.Registry) error {
 
-	if err := validate.Required("AccessKey", "body", m.AccessKey); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1AuditBackendS3) validateSecretKey(formats strfmt.Registry) error {
-
-	if err := validate.Required("SecretKey", "body", m.SecretKey); err != nil {
+	if err := validate.Required("accessKey", "body", m.AccessKey); err != nil {
 		return err
 	}
 
@@ -171,15 +157,6 @@ func (m *V1AuditBackendS3) validateEndpoint(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1AuditBackendS3) validatePrefix(formats strfmt.Registry) error {
-
-	if err := validate.Required("prefix", "body", m.Prefix); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1AuditBackendS3) validateRegion(formats strfmt.Registry) error {
 
 	if err := validate.Required("region", "body", m.Region); err != nil {
@@ -192,6 +169,15 @@ func (m *V1AuditBackendS3) validateRegion(formats strfmt.Registry) error {
 func (m *V1AuditBackendS3) validateS3KeyFormat(formats strfmt.Registry) error {
 
 	if err := validate.Required("s3KeyFormat", "body", m.S3KeyFormat); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1AuditBackendS3) validateSecretKey(formats strfmt.Registry) error {
+
+	if err := validate.Required("secretKey", "body", m.SecretKey); err != nil {
 		return err
 	}
 

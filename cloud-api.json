@@ -1276,10 +1276,7 @@
     },
     "v1.AuditBackendS3": {
       "properties": {
-        "AccessKey": {
-          "type": "string"
-        },
-        "SecretKey": {
+        "accessKey": {
           "type": "string"
         },
         "bucket": {
@@ -1300,6 +1297,9 @@
         "s3KeyFormat": {
           "type": "string"
         },
+        "secretKey": {
+          "type": "string"
+        },
         "tlsEnabled": {
           "type": "boolean"
         },
@@ -1314,14 +1314,13 @@
         }
       },
       "required": [
-        "AccessKey",
-        "SecretKey",
+        "accessKey",
         "bucket",
         "enabled",
         "endpoint",
-        "prefix",
         "region",
         "s3KeyFormat",
+        "secretKey",
         "tlsEnabled",
         "totalFileSize",
         "uploadTimeout",
