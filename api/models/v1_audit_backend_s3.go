@@ -36,7 +36,8 @@ type V1AuditBackendS3 struct {
 	Endpoint *string `json:"endpoint"`
 
 	// prefix
-	Prefix string `json:"prefix,omitempty"`
+	// Required: true
+	Prefix *string `json:"prefix"`
 
 	// region
 	// Required: true
@@ -84,6 +85,10 @@ func (m *V1AuditBackendS3) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateEndpoint(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrefix(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -151,6 +156,15 @@ func (m *V1AuditBackendS3) validateEnabled(formats strfmt.Registry) error {
 func (m *V1AuditBackendS3) validateEndpoint(formats strfmt.Registry) error {
 
 	if err := validate.Required("endpoint", "body", m.Endpoint); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1AuditBackendS3) validatePrefix(formats strfmt.Registry) error {
+
+	if err := validate.Required("prefix", "body", m.Prefix); err != nil {
 		return err
 	}
 

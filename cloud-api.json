@@ -1318,6 +1318,7 @@
         "bucket",
         "enabled",
         "endpoint",
+        "prefix",
         "region",
         "s3KeyFormat",
         "secretKey",
