@@ -1557,6 +1557,17 @@
         "networkAccessType"
       ]
     },
+    "v1.ClusterCredentialsRequest": {
+      "properties": {
+        "reason": {
+          "description": "reason why the key is requested, typically an incident number with short description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
     "v1.ClusterCredentialsResponse": {
       "properties": {
         "Kubeconfig": {
@@ -8127,6 +8138,14 @@
             "name": "id",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterCredentialsRequest"
+            }
           }
         ],
         "produces": [
