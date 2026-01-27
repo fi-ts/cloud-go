@@ -21,6 +21,9 @@ type V1AuditBackends struct {
 	// cluster forwarding
 	ClusterForwarding *V1AuditBackendClusterForwarding `json:"clusterForwarding,omitempty"`
 
+	// s3
+	S3 *V1AuditBackendS3 `json:"s3,omitempty"`
+
 	// splunk
 	Splunk *V1AuditBackendSplunk `json:"splunk,omitempty"`
 }
@@ -30,6 +33,10 @@ func (m *V1AuditBackends) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateClusterForwarding(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateS3(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -54,6 +61,25 @@ func (m *V1AuditBackends) validateClusterForwarding(formats strfmt.Registry) err
 				return ve.ValidateName("clusterForwarding")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("clusterForwarding")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1AuditBackends) validateS3(formats strfmt.Registry) error {
+	if swag.IsZero(m.S3) { // not required
+		return nil
+	}
+
+	if m.S3 != nil {
+		if err := m.S3.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("s3")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("s3")
 			}
 			return err
 		}
@@ -89,6 +115,10 @@ func (m *V1AuditBackends) ContextValidate(ctx context.Context, formats strfmt.Re
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateS3(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSplunk(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -112,6 +142,27 @@ func (m *V1AuditBackends) contextValidateClusterForwarding(ctx context.Context, 
 				return ve.ValidateName("clusterForwarding")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("clusterForwarding")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1AuditBackends) contextValidateS3(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.S3 != nil {
+
+		if swag.IsZero(m.S3) { // not required
+			return nil
+		}
+
+		if err := m.S3.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("s3")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("s3")
 			}
 			return err
 		}

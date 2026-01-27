@@ -1274,6 +1274,60 @@
         "enabled"
       ]
     },
+    "v1.AuditBackendS3": {
+      "properties": {
+        "AccessKey": {
+          "type": "string"
+        },
+        "SecretKey": {
+          "type": "string"
+        },
+        "bucket": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "s3KeyFormat": {
+          "type": "string"
+        },
+        "tlsEnabled": {
+          "type": "boolean"
+        },
+        "totalFileSize": {
+          "type": "string"
+        },
+        "uploadTimeout": {
+          "type": "string"
+        },
+        "useCompression": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "AccessKey",
+        "SecretKey",
+        "bucket",
+        "enabled",
+        "endpoint",
+        "prefix",
+        "region",
+        "s3KeyFormat",
+        "tlsEnabled",
+        "totalFileSize",
+        "uploadTimeout",
+        "useCompression"
+      ]
+    },
     "v1.AuditBackendSplunk": {
       "properties": {
         "ca": {
@@ -1312,6 +1366,9 @@
       "properties": {
         "clusterForwarding": {
           "$ref": "#/definitions/v1.AuditBackendClusterForwarding"
+        },
+        "s3": {
+          "$ref": "#/definitions/v1.AuditBackendS3"
         },
         "splunk": {
           "$ref": "#/definitions/v1.AuditBackendSplunk"
