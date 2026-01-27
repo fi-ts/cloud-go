@@ -19,7 +19,10 @@ import (
 // swagger:model v1.ClusterCredentialsRequest
 type V1ClusterCredentialsRequest struct {
 
-	// reason why the key is requested, typically an incident number with short description
+	// if set to true, returning vpn credentials are omitted, a reason does not need to provided
+	Omitvpn bool `json:"omitvpn,omitempty"`
+
+	// reason why the vpn key is requested, typically an incident number with short description
 	// Required: true
 	Reason *string `json:"reason"`
 }

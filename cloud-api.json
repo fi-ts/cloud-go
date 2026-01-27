@@ -1559,8 +1559,12 @@
     },
     "v1.ClusterCredentialsRequest": {
       "properties": {
+        "omitvpn": {
+          "description": "if set to true, returning vpn credentials are omitted, a reason does not need to provided",
+          "type": "boolean"
+        },
         "reason": {
-          "description": "reason why the key is requested, typically an incident number with short description",
+          "description": "reason why the vpn key is requested, typically an incident number with short description",
           "type": "string"
         }
       },
