@@ -2837,6 +2837,9 @@
           "format": "int64",
           "type": "integer"
         },
+        "ServiceAccountExtendTokenExpiration": {
+          "type": "boolean"
+        },
         "Version": {
           "type": "string"
         },
@@ -2853,6 +2856,7 @@
       "required": [
         "ExpirationDate",
         "PodPIDsLimit",
+        "ServiceAccountExtendTokenExpiration",
         "Version",
         "defaultPodSecurityStandard"
       ]
@@ -5100,6 +5104,9 @@
     },
     "v1.S3PartitionResponse": {
       "properties": {
+        "classification": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
@@ -5114,6 +5121,7 @@
         }
       },
       "required": [
+        "classification",
         "description",
         "endpoint",
         "id",
