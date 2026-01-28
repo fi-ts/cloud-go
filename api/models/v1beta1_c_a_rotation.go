@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -31,6 +32,9 @@ type V1beta1CARotation struct {
 	// last initiation time
 	LastInitiationTime string `json:"lastInitiationTime,omitempty"`
 
+	// pending workers rollouts
+	PendingWorkersRollouts []*V1beta1PendingWorkersRollout `json:"pendingWorkersRollouts"`
+
 	// phase
 	// Required: true
 	Phase *string `json:"phase"`
@@ -40,6 +44,10 @@ type V1beta1CARotation struct {
 func (m *V1beta1CARotation) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validatePendingWorkersRollouts(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePhase(formats); err != nil {
 		res = append(res, err)
 	}
@@ -47,6 +55,32 @@ func (m *V1beta1CARotation) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1beta1CARotation) validatePendingWorkersRollouts(formats strfmt.Registry) error {
+	if swag.IsZero(m.PendingWorkersRollouts) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.PendingWorkersRollouts); i++ {
+		if swag.IsZero(m.PendingWorkersRollouts[i]) { // not required
+			continue
+		}
+
+		if m.PendingWorkersRollouts[i] != nil {
+			if err := m.PendingWorkersRollouts[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("pendingWorkersRollouts" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("pendingWorkersRollouts" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -59,8 +93,42 @@ func (m *V1beta1CARotation) validatePhase(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this v1beta1 c a rotation based on context it is used
+// ContextValidate validate this v1beta1 c a rotation based on the context it is used
 func (m *V1beta1CARotation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePendingWorkersRollouts(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1beta1CARotation) contextValidatePendingWorkersRollouts(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.PendingWorkersRollouts); i++ {
+
+		if m.PendingWorkersRollouts[i] != nil {
+
+			if swag.IsZero(m.PendingWorkersRollouts[i]) { // not required
+				return nil
+			}
+
+			if err := m.PendingWorkersRollouts[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("pendingWorkersRollouts" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("pendingWorkersRollouts" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

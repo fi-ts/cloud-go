@@ -46,6 +46,9 @@ type V1beta1ShootStatus struct {
 	// Required: true
 	Hibernated *bool `json:"hibernated"`
 
+	// in place updates
+	InPlaceUpdates *V1beta1InPlaceUpdatesStatus `json:"inPlaceUpdates,omitempty"`
+
 	// last errors
 	LastErrors []*V1beta1LastError `json:"lastErrors"`
 
@@ -107,6 +110,10 @@ func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateHibernated(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInPlaceUpdates(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -266,6 +273,25 @@ func (m *V1beta1ShootStatus) validateHibernated(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1beta1ShootStatus) validateInPlaceUpdates(formats strfmt.Registry) error {
+	if swag.IsZero(m.InPlaceUpdates) { // not required
+		return nil
+	}
+
+	if m.InPlaceUpdates != nil {
+		if err := m.InPlaceUpdates.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("inPlaceUpdates")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("inPlaceUpdates")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1beta1ShootStatus) validateLastErrors(formats strfmt.Registry) error {
 	if swag.IsZero(m.LastErrors) { // not required
 		return nil
@@ -388,6 +414,10 @@ func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt
 	}
 
 	if err := m.contextValidateGardener(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInPlaceUpdates(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -518,6 +548,27 @@ func (m *V1beta1ShootStatus) contextValidateGardener(ctx context.Context, format
 				return ve.ValidateName("gardener")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("gardener")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateInPlaceUpdates(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InPlaceUpdates != nil {
+
+		if swag.IsZero(m.InPlaceUpdates) { // not required
+			return nil
+		}
+
+		if err := m.InPlaceUpdates.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("inPlaceUpdates")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("inPlaceUpdates")
 			}
 			return err
 		}

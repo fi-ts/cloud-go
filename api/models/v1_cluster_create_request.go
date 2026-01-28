@@ -101,6 +101,10 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
 
+	// x d r config
+	// Required: true
+	XDRConfig *V1XDR `json:"XDRConfig"`
+
 	// cni
 	Cni string `json:"cni,omitempty"`
 
@@ -194,6 +198,10 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateWorkers(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateXDRConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -500,6 +508,26 @@ func (m *V1ClusterCreateRequest) validateWorkers(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *V1ClusterCreateRequest) validateXDRConfig(formats strfmt.Registry) error {
+
+	if err := validate.Required("XDRConfig", "body", m.XDRConfig); err != nil {
+		return err
+	}
+
+	if m.XDRConfig != nil {
+		if err := m.XDRConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("XDRConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("XDRConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 var v1ClusterCreateRequestTypeNetworkAccessTypePropEnum []interface{}
 
 func init() {
@@ -583,6 +611,10 @@ func (m *V1ClusterCreateRequest) ContextValidate(ctx context.Context, formats st
 	}
 
 	if err := m.contextValidateWorkers(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateXDRConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -756,6 +788,23 @@ func (m *V1ClusterCreateRequest) contextValidateWorkers(ctx context.Context, for
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterCreateRequest) contextValidateXDRConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.XDRConfig != nil {
+
+		if err := m.XDRConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("XDRConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("XDRConfig")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -17,6 +17,9 @@ import (
 // swagger:model v1beta1.NetworkingStatus
 type V1beta1NetworkingStatus struct {
 
+	// egress c ID rs
+	EgressCIDRs []string `json:"egressCIDRs"`
+
 	// nodes
 	Nodes []string `json:"nodes"`
 

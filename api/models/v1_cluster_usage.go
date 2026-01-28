@@ -20,6 +20,10 @@ import (
 // swagger:model v1.ClusterUsage
 type V1ClusterUsage struct {
 
+	// accounting annotations present on the last accounting report of this cluster
+	// Required: true
+	Annotations []string `json:"annotations"`
+
 	// the average amount of worker groups during the time window
 	// Required: true
 	Averageworkergroups *string `json:"averageworkergroups"`
@@ -83,6 +87,10 @@ type V1ClusterUsage struct {
 func (m *V1ClusterUsage) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAnnotations(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAverageworkergroups(formats); err != nil {
 		res = append(res, err)
 	}
@@ -142,6 +150,15 @@ func (m *V1ClusterUsage) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1ClusterUsage) validateAnnotations(formats strfmt.Registry) error {
+
+	if err := validate.Required("annotations", "body", m.Annotations); err != nil {
+		return err
+	}
+
 	return nil
 }
 
