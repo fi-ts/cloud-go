@@ -1557,6 +1557,21 @@
         "networkAccessType"
       ]
     },
+    "v1.ClusterCredentialsRequest": {
+      "properties": {
+        "omitvpn": {
+          "description": "if set to true, returning vpn credentials are omitted, the reason does not need to provided",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "reason why the vpn key is requested, typically an incident number with short description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
     "v1.ClusterCredentialsResponse": {
       "properties": {
         "Kubeconfig": {
@@ -6765,7 +6780,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.12"
+    "version": "v0.30.13"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
@@ -8127,6 +8142,14 @@
             "name": "id",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterCredentialsRequest"
+            }
           }
         ],
         "produces": [
