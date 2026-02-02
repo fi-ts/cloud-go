@@ -1512,6 +1512,9 @@
           },
           "type": "array"
         },
+        "XDRConfig": {
+          "$ref": "#/definitions/v1.XDR"
+        },
         "cni": {
           "type": "string"
         },
@@ -1550,22 +1553,8 @@
         "SystemComponents",
         "Tenant",
         "Workers",
+        "XDRConfig",
         "networkAccessType"
-      ]
-    },
-    "v1.ClusterCredentialsRequest": {
-      "properties": {
-        "omitvpn": {
-          "description": "if set to true, returning vpn credentials are omitted, the reason does not need to provided",
-          "type": "boolean"
-        },
-        "reason": {
-          "description": "reason why the vpn key is requested, typically an incident number with short description",
-          "type": "string"
-        }
-      },
-      "required": [
-        "reason"
       ]
     },
     "v1.ClusterCredentialsResponse": {
@@ -1883,6 +1872,9 @@
           },
           "type": "array"
         },
+        "XDRConfig": {
+          "$ref": "#/definitions/v1.XDR"
+        },
         "cni": {
           "type": "string"
         },
@@ -1930,6 +1922,7 @@
         "SystemComponents",
         "Tenant",
         "Workers",
+        "XDRConfig",
         "cni"
       ]
     },
@@ -2056,6 +2049,9 @@
           },
           "type": "array"
         },
+        "XDRConfig": {
+          "$ref": "#/definitions/v1.XDR"
+        },
         "seedName": {
           "description": "seed name on which the cluster will be scheduled",
           "type": "string"
@@ -2078,6 +2074,7 @@
         "Purpose",
         "SystemComponents",
         "Workers",
+        "XDRConfig",
         "seedName"
       ]
     },
@@ -2797,48 +2794,6 @@
         "accumulatedusage",
         "from",
         "usage"
-      ]
-    },
-    "v1.InstanceCreateRequest": {
-      "properties": {
-        "vm_name": {
-          "type": "string"
-        },
-        "vm_num_cpu_per_socket": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "vm_num_sockets": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "vm_ram": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "vm_name",
-        "vm_num_cpu_per_socket",
-        "vm_num_sockets",
-        "vm_ram"
-      ]
-    },
-    "v1.InstanceCreateResponse": {
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "protocol": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "protocol"
       ]
     },
     "v1.IssuerConfig": {
@@ -5149,12 +5104,6 @@
     },
     "v1.S3PartitionResponse": {
       "properties": {
-        "classification": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
         "endpoint": {
           "type": "string"
         },
@@ -5166,8 +5115,6 @@
         }
       },
       "required": [
-        "classification",
-        "description",
         "endpoint",
         "id",
         "ready"
@@ -6347,6 +6294,39 @@
         "Taints"
       ]
     },
+    "v1.XDR": {
+      "properties": {
+        "customTag": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "distributionId": {
+          "type": "string"
+        },
+        "noProxy": {
+          "type": "boolean"
+        },
+        "proxyList": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customTag",
+        "disabled",
+        "distributionId",
+        "noProxy",
+        "proxyList",
+        "tenant"
+      ]
+    },
     "v1beta1.CARotation": {
       "properties": {
         "lastCompletionTime": {
@@ -6779,7 +6759,6 @@
       "name": "Devops Team",
       "url": "http://www.f-i-ts.de"
     },
-    "version": "v0.30.10",
     "description": "Resource for managing cloud entities",
     "license": {
       "name": "MIT",
@@ -8148,14 +8127,6 @@
             "name": "id",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1.ClusterCredentialsRequest"
-            }
           }
         ],
         "produces": [
@@ -8917,45 +8888,6 @@
         "summary": "perform a healthcheck",
         "tags": [
           "health"
-        ]
-      }
-    },
-    "/v1/instance": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "createInstance",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1.InstanceCreateRequest"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "202": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/v1.InstanceCreateResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
-            }
-          }
-        },
-        "summary": "Creates an VM Instance.",
-        "tags": [
-          "instance"
         ]
       }
     },

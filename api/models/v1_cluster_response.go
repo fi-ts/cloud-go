@@ -133,6 +133,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	Workers []*V1Worker `json:"Workers"`
 
+	// x d r config
+	// Required: true
+	XDRConfig *V1XDR `json:"XDRConfig"`
+
 	// cni
 	// Required: true
 	Cni *string `json:"cni"`
@@ -257,6 +261,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateWorkers(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateXDRConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -669,6 +677,26 @@ func (m *V1ClusterResponse) validateWorkers(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1ClusterResponse) validateXDRConfig(formats strfmt.Registry) error {
+
+	if err := validate.Required("XDRConfig", "body", m.XDRConfig); err != nil {
+		return err
+	}
+
+	if m.XDRConfig != nil {
+		if err := m.XDRConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("XDRConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("XDRConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1ClusterResponse) validateCni(formats strfmt.Registry) error {
 
 	if err := validate.Required("cni", "body", m.Cni); err != nil {
@@ -775,6 +803,10 @@ func (m *V1ClusterResponse) ContextValidate(ctx context.Context, formats strfmt.
 	}
 
 	if err := m.contextValidateWorkers(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateXDRConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -990,6 +1022,23 @@ func (m *V1ClusterResponse) contextValidateWorkers(ctx context.Context, formats 
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateXDRConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.XDRConfig != nil {
+
+		if err := m.XDRConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("XDRConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("XDRConfig")
+			}
+			return err
+		}
 	}
 
 	return nil
