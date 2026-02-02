@@ -1553,6 +1553,21 @@
         "networkAccessType"
       ]
     },
+    "v1.ClusterCredentialsRequest": {
+      "properties": {
+        "omitvpn": {
+          "description": "if set to true, returning vpn credentials are omitted, the reason does not need to provided",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "reason why the vpn key is requested, typically an incident number with short description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
     "v1.ClusterCredentialsResponse": {
       "properties": {
         "Kubeconfig": {
@@ -2867,6 +2882,9 @@
           "format": "int64",
           "type": "integer"
         },
+        "ServiceAccountExtendTokenExpiration": {
+          "type": "boolean"
+        },
         "Version": {
           "type": "string"
         },
@@ -2883,6 +2901,7 @@
       "required": [
         "ExpirationDate",
         "PodPIDsLimit",
+        "ServiceAccountExtendTokenExpiration",
         "Version",
         "defaultPodSecurityStandard"
       ]
@@ -5130,6 +5149,12 @@
     },
     "v1.S3PartitionResponse": {
       "properties": {
+        "classification": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
         "endpoint": {
           "type": "string"
         },
@@ -5141,6 +5166,8 @@
         }
       },
       "required": [
+        "classification",
+        "description",
         "endpoint",
         "id",
         "ready"
@@ -6758,7 +6785,8 @@
       "name": "MIT",
       "url": "http://mit.org"
     },
-    "title": "cloud-api"
+    "title": "cloud-api",
+    "version": "v0.30.14"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
@@ -8120,6 +8148,14 @@
             "name": "id",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1.ClusterCredentialsRequest"
+            }
           }
         ],
         "produces": [
