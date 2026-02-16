@@ -1557,21 +1557,6 @@
         "networkAccessType"
       ]
     },
-    "v1.ClusterCredentialsRequest": {
-      "properties": {
-        "omitvpn": {
-          "description": "if set to true, returning vpn credentials are omitted, the reason does not need to provided",
-          "type": "boolean"
-        },
-        "reason": {
-          "description": "reason why the vpn key is requested, typically an incident number with short description",
-          "type": "string"
-        }
-      },
-      "required": [
-        "reason"
-      ]
-    },
     "v1.ClusterCredentialsResponse": {
       "properties": {
         "Kubeconfig": {
@@ -5119,12 +5104,6 @@
     },
     "v1.S3PartitionResponse": {
       "properties": {
-        "classification": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
         "endpoint": {
           "type": "string"
         },
@@ -5136,8 +5115,6 @@
         }
       },
       "required": [
-        "classification",
-        "description",
         "endpoint",
         "id",
         "ready"
@@ -8150,14 +8127,6 @@
             "name": "id",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1.ClusterCredentialsRequest"
-            }
           }
         ],
         "produces": [
