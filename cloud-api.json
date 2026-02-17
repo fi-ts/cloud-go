@@ -2855,6 +2855,10 @@
         "ServiceAccountExtendTokenExpiration": {
           "type": "boolean"
         },
+        "ServiceAccountMaxTokenExpiration": {
+          "format": "int64",
+          "type": "integer"
+        },
         "Version": {
           "type": "string"
         },
@@ -2872,6 +2876,7 @@
         "ExpirationDate",
         "PodPIDsLimit",
         "ServiceAccountExtendTokenExpiration",
+        "ServiceAccountMaxTokenExpiration",
         "Version",
         "defaultPodSecurityStandard"
       ]
