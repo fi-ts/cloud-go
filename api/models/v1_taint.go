@@ -27,7 +27,7 @@ type V1Taint struct {
 	// Required: true
 	Key *string `json:"key"`
 
-	// TimeAdded represents the time at which the taint was added. It is only written for NoExecute taints.
+	// TimeAdded represents the time at which the taint was added.
 	TimeAdded string `json:"timeAdded,omitempty"`
 
 	// The taint value corresponding to the taint key.
