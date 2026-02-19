@@ -36,6 +36,10 @@ type V1Kubernetes struct {
 	// Required: true
 	ServiceAccountExtendTokenExpiration *bool `json:"ServiceAccountExtendTokenExpiration"`
 
+	// service account max token expiration
+	// Required: true
+	ServiceAccountMaxTokenExpiration *int64 `json:"ServiceAccountMaxTokenExpiration"`
+
 	// version
 	// Required: true
 	Version *string `json:"Version"`
@@ -59,6 +63,10 @@ func (m *V1Kubernetes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateServiceAccountExtendTokenExpiration(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateServiceAccountMaxTokenExpiration(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -101,6 +109,15 @@ func (m *V1Kubernetes) validatePodPIDsLimit(formats strfmt.Registry) error {
 func (m *V1Kubernetes) validateServiceAccountExtendTokenExpiration(formats strfmt.Registry) error {
 
 	if err := validate.Required("ServiceAccountExtendTokenExpiration", "body", m.ServiceAccountExtendTokenExpiration); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1Kubernetes) validateServiceAccountMaxTokenExpiration(formats strfmt.Registry) error {
+
+	if err := validate.Required("ServiceAccountMaxTokenExpiration", "body", m.ServiceAccountMaxTokenExpiration); err != nil {
 		return err
 	}
 
