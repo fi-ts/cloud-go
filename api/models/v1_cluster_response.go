@@ -117,6 +117,10 @@ type V1ClusterResponse struct {
 	// Required: true
 	Purpose *string `json:"Purpose"`
 
+	// q c a config
+	// Required: true
+	QCAConfig *V1QualysCloudAgent `json:"QCAConfig"`
+
 	// status
 	// Required: true
 	Status *V1beta1ShootStatus `json:"Status"`
@@ -245,6 +249,10 @@ func (m *V1ClusterResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePurpose(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQCAConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -601,6 +609,26 @@ func (m *V1ClusterResponse) validatePurpose(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *V1ClusterResponse) validateQCAConfig(formats strfmt.Registry) error {
+
+	if err := validate.Required("QCAConfig", "body", m.QCAConfig); err != nil {
+		return err
+	}
+
+	if m.QCAConfig != nil {
+		if err := m.QCAConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QCAConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QCAConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1ClusterResponse) validateStatus(formats strfmt.Registry) error {
 
 	if err := validate.Required("Status", "body", m.Status); err != nil {
@@ -794,6 +822,10 @@ func (m *V1ClusterResponse) ContextValidate(ctx context.Context, formats strfmt.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateQCAConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -960,6 +992,23 @@ func (m *V1ClusterResponse) contextValidateNetworking(ctx context.Context, forma
 				return ve.ValidateName("Networking")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Networking")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterResponse) contextValidateQCAConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.QCAConfig != nil {
+
+		if err := m.QCAConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QCAConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QCAConfig")
 			}
 			return err
 		}
