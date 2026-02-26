@@ -1500,6 +1500,9 @@
         "Purpose": {
           "type": "string"
         },
+        "QCAConfig": {
+          "$ref": "#/definitions/v1.QualysCloudAgent"
+        },
         "SystemComponents": {
           "$ref": "#/definitions/v1.SystemComponents"
         },
@@ -1550,6 +1553,7 @@
         "PartitionID",
         "ProjectID",
         "Purpose",
+        "QCAConfig",
         "SystemComponents",
         "Tenant",
         "Workers",
@@ -4933,6 +4937,20 @@
         "Partition",
         "QoSPolicyID",
         "State"
+      ]
+    },
+    "v1.QualysCloudAgent": {
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "tenant": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "disabled",
+        "tenant"
       ]
     },
     "v1.Quota": {
