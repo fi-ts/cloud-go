@@ -1467,6 +1467,10 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallHealthTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -1540,6 +1544,7 @@
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "KubeAPIServerACL",
@@ -1830,6 +1835,10 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallHealthTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -1920,6 +1929,7 @@
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -2028,6 +2038,10 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallHealthTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -2079,6 +2093,7 @@
         "CustomDefaultStorageClass",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -6793,7 +6808,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.18"
+    "version": "v0.30.19"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
