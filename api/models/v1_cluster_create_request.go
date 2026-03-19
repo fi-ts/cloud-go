@@ -49,10 +49,6 @@ type V1ClusterCreateRequest struct {
 	// Required: true
 	FirewallControllerVersion *string `json:"FirewallControllerVersion"`
 
-	// firewall health timeout
-	// Required: true
-	FirewallHealthTimeout *int64 `json:"FirewallHealthTimeout"`
-
 	// firewall image
 	// Required: true
 	FirewallImage *string `json:"FirewallImage"`
@@ -150,10 +146,6 @@ func (m *V1ClusterCreateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFirewallControllerVersion(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateFirewallHealthTimeout(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -331,15 +323,6 @@ func (m *V1ClusterCreateRequest) validateEgressRules(formats strfmt.Registry) er
 func (m *V1ClusterCreateRequest) validateFirewallControllerVersion(formats strfmt.Registry) error {
 
 	if err := validate.Required("FirewallControllerVersion", "body", m.FirewallControllerVersion); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *V1ClusterCreateRequest) validateFirewallHealthTimeout(formats strfmt.Registry) error {
-
-	if err := validate.Required("FirewallHealthTimeout", "body", m.FirewallHealthTimeout); err != nil {
 		return err
 	}
 

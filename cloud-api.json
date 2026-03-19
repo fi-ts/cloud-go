@@ -1467,10 +1467,6 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
-        "FirewallHealthTimeout": {
-          "format": "int64",
-          "type": "integer"
-        },
         "FirewallImage": {
           "type": "string"
         },
@@ -1544,7 +1540,6 @@
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
-        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "KubeAPIServerACL",
@@ -1835,10 +1830,6 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
-        "FirewallHealthTimeout": {
-          "format": "int64",
-          "type": "integer"
-        },
         "FirewallImage": {
           "type": "string"
         },
@@ -1929,7 +1920,6 @@
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
-        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -2038,10 +2028,6 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
-        "FirewallHealthTimeout": {
-          "format": "int64",
-          "type": "integer"
-        },
         "FirewallImage": {
           "type": "string"
         },
@@ -2093,7 +2079,6 @@
         "CustomDefaultStorageClass",
         "EgressRules",
         "FirewallControllerVersion",
-        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -6014,6 +5999,9 @@
         "Statistics": {
           "$ref": "#/definitions/v1.VolumeStatistics"
         },
+        "StorageType": {
+          "type": "string"
+        },
         "TenantID": {
           "type": "string"
         },
@@ -6042,6 +6030,7 @@
         "SourceSnapshotUUID",
         "State",
         "Statistics",
+        "StorageType",
         "TenantID",
         "VolumeHandle",
         "VolumeID",
