@@ -723,10 +723,16 @@
         "nat": {
           "type": "boolean"
         },
+        "nattypev2": {
+          "type": "string"
+        },
         "networkid": {
           "type": "string"
         },
         "networktype": {
+          "type": "string"
+        },
+        "networktypev2": {
           "type": "string"
         },
         "prefixes": {
@@ -737,6 +743,9 @@
         },
         "private": {
           "type": "boolean"
+        },
+        "projectid": {
+          "type": "string"
         },
         "underlay": {
           "type": "boolean"
@@ -751,10 +760,13 @@
         "destinationprefixes",
         "ips",
         "nat",
+        "nattypev2",
         "networkid",
         "networktype",
+        "networktypev2",
         "prefixes",
         "private",
+        "projectid",
         "underlay",
         "vrf"
       ]
@@ -1710,21 +1722,6 @@
       "properties": {
         "machineid": {
           "description": "uuid of the machine to power cycle",
-          "type": "string"
-        }
-      },
-      "required": [
-        "machineid"
-      ]
-    },
-    "v1.ClusterMachineReinstallRequest": {
-      "properties": {
-        "imageid": {
-          "description": "id of the image to install",
-          "type": "string"
-        },
-        "machineid": {
-          "description": "uuid of the machine to reinstall",
           "type": "string"
         }
       },
@@ -3999,13 +3996,17 @@
         "size": {
           "$ref": "#/definitions/v1.PostgresSize"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "version": {
           "type": "string"
         }
       },
       "required": [
         "dedicatedloadbalancerip",
-        "dedicatedloadbalancerport"
+        "dedicatedloadbalancerport",
+        "storageClass"
       ]
     },
     "v1.PostgresCreateStandbyRequest": {
@@ -4050,12 +4051,16 @@
         },
         "primaryId": {
           "type": "string"
+        },
+        "storageClass": {
+          "type": "string"
         }
       },
       "required": [
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
-        "primaryId"
+        "primaryId",
+        "storageClass"
       ]
     },
     "v1.PostgresFindRequest": {
@@ -4085,6 +4090,12 @@
     },
     "v1.PostgresPartition": {
       "properties": {
+        "AllowedStorageClasses": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "type": "object"
+        },
         "AllowedTenants": {
           "additionalProperties": {
             "type": "boolean"
@@ -4093,6 +4104,7 @@
         }
       },
       "required": [
+        "AllowedStorageClasses",
         "AllowedTenants"
       ]
     },
@@ -4176,6 +4188,9 @@
         "status": {
           "$ref": "#/definitions/v1.PostgresStatus"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "tenant": {
           "type": "string"
         },
@@ -4187,7 +4202,8 @@
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
         "id",
-        "status"
+        "status",
+        "storageClass"
       ]
     },
     "v1.PostgresRestoreRequest": {
@@ -4216,6 +4232,9 @@
         "sourceId": {
           "type": "string"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "timestamp": {
           "type": "string"
         },
@@ -4224,7 +4243,8 @@
         }
       },
       "required": [
-        "sourceId"
+        "sourceId",
+        "storageClass"
       ]
     },
     "v1.PostgresSecretsResponse": {
@@ -4348,6 +4368,9 @@
         "size": {
           "$ref": "#/definitions/v1.PostgresSize"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "version": {
           "type": "string"
         }
@@ -4356,7 +4379,8 @@
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
         "disableLoadBalancers",
-        "id"
+        "id",
+        "storageClass"
       ]
     },
     "v1.PostgresUpdateRequest.labels": {
@@ -6808,7 +6832,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.19"
+    "version": "v0.30.20"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
@@ -8060,52 +8084,6 @@
           }
         },
         "summary": "trigger cluster reconciliation ",
-        "tags": [
-          "cluster"
-        ]
-      }
-    },
-    "/v1/cluster/{id}/reinstallmachine": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "reinstallMachine",
-        "parameters": [
-          {
-            "description": "identifier of the cluster",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1.ClusterMachineReinstallRequest"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/v1.ClusterResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
-            }
-          }
-        },
-        "summary": "trigger reinstall of a machine ",
         "tags": [
           "cluster"
         ]

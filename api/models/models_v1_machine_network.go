@@ -35,6 +35,10 @@ type ModelsV1MachineNetwork struct {
 	// Required: true
 	Nat *bool `json:"nat"`
 
+	// nattypev2
+	// Required: true
+	Nattypev2 *string `json:"nattypev2"`
+
 	// networkid
 	// Required: true
 	Networkid *string `json:"networkid"`
@@ -43,6 +47,10 @@ type ModelsV1MachineNetwork struct {
 	// Required: true
 	Networktype *string `json:"networktype"`
 
+	// networktypev2
+	// Required: true
+	Networktypev2 *string `json:"networktypev2"`
+
 	// prefixes
 	// Required: true
 	Prefixes []string `json:"prefixes"`
@@ -50,6 +58,10 @@ type ModelsV1MachineNetwork struct {
 	// private
 	// Required: true
 	Private *bool `json:"private"`
+
+	// projectid
+	// Required: true
+	Projectid *string `json:"projectid"`
 
 	// underlay
 	// Required: true
@@ -80,6 +92,10 @@ func (m *ModelsV1MachineNetwork) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateNattypev2(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNetworkid(formats); err != nil {
 		res = append(res, err)
 	}
@@ -88,11 +104,19 @@ func (m *ModelsV1MachineNetwork) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateNetworktypev2(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePrefixes(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePrivate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProjectid(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -146,6 +170,15 @@ func (m *ModelsV1MachineNetwork) validateNat(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ModelsV1MachineNetwork) validateNattypev2(formats strfmt.Registry) error {
+
+	if err := validate.Required("nattypev2", "body", m.Nattypev2); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ModelsV1MachineNetwork) validateNetworkid(formats strfmt.Registry) error {
 
 	if err := validate.Required("networkid", "body", m.Networkid); err != nil {
@@ -164,6 +197,15 @@ func (m *ModelsV1MachineNetwork) validateNetworktype(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *ModelsV1MachineNetwork) validateNetworktypev2(formats strfmt.Registry) error {
+
+	if err := validate.Required("networktypev2", "body", m.Networktypev2); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ModelsV1MachineNetwork) validatePrefixes(formats strfmt.Registry) error {
 
 	if err := validate.Required("prefixes", "body", m.Prefixes); err != nil {
@@ -176,6 +218,15 @@ func (m *ModelsV1MachineNetwork) validatePrefixes(formats strfmt.Registry) error
 func (m *ModelsV1MachineNetwork) validatePrivate(formats strfmt.Registry) error {
 
 	if err := validate.Required("private", "body", m.Private); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ModelsV1MachineNetwork) validateProjectid(formats strfmt.Registry) error {
+
+	if err := validate.Required("projectid", "body", m.Projectid); err != nil {
 		return err
 	}
 
