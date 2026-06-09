@@ -19,6 +19,9 @@ import (
 // swagger:model v1beta1.ETCDEncryptionKeyRotation
 type V1beta1ETCDEncryptionKeyRotation struct {
 
+	// auto complete after prepared
+	AutoCompleteAfterPrepared bool `json:"autoCompleteAfterPrepared,omitempty"`
+
 	// last completion time
 	LastCompletionTime string `json:"lastCompletionTime,omitempty"`
 
