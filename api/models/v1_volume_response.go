@@ -75,6 +75,10 @@ type V1VolumeResponse struct {
 	// Required: true
 	Statistics *V1VolumeStatistics `json:"Statistics"`
 
+	// storage type
+	// Required: true
+	StorageType *string `json:"StorageType"`
+
 	// tenant ID
 	// Required: true
 	TenantID *string `json:"TenantID"`
@@ -149,6 +153,10 @@ func (m *V1VolumeResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatistics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStorageType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -306,6 +314,15 @@ func (m *V1VolumeResponse) validateStatistics(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1VolumeResponse) validateStorageType(formats strfmt.Registry) error {
+
+	if err := validate.Required("StorageType", "body", m.StorageType); err != nil {
+		return err
 	}
 
 	return nil
