@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/fi-ts/cloud-go/api/models"
 )
 
 // NewGetSSHKeyPairParams creates a new GetSSHKeyPairParams object,
@@ -62,9 +60,6 @@ GetSSHKeyPairParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type GetSSHKeyPairParams struct {
-
-	// Body.
-	Body *models.V1ClusterCredentialsRequest
 
 	/* ID.
 
@@ -125,17 +120,6 @@ func (o *GetSSHKeyPairParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the get SSH key pair params
-func (o *GetSSHKeyPairParams) WithBody(body *models.V1ClusterCredentialsRequest) *GetSSHKeyPairParams {
-	o.SetBody(body)
-	return o
-}
-
-// SetBody adds the body to the get SSH key pair params
-func (o *GetSSHKeyPairParams) SetBody(body *models.V1ClusterCredentialsRequest) {
-	o.Body = body
-}
-
 // WithID adds the id to the get SSH key pair params
 func (o *GetSSHKeyPairParams) WithID(id string) *GetSSHKeyPairParams {
 	o.SetID(id)
@@ -154,11 +138,6 @@ func (o *GetSSHKeyPairParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
-	}
 
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {
