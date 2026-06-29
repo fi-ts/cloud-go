@@ -1479,6 +1479,10 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallCreateTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallHealthTimeout": {
           "format": "int64",
           "type": "integer"
@@ -1556,6 +1560,7 @@
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallCreateTimeout",
         "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
@@ -1832,6 +1837,10 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallCreateTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallHealthTimeout": {
           "format": "int64",
           "type": "integer"
@@ -1926,6 +1935,7 @@
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallCreateTimeout",
         "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
@@ -2035,6 +2045,10 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallCreateTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallHealthTimeout": {
           "format": "int64",
           "type": "integer"
@@ -2090,6 +2104,7 @@
         "CustomDefaultStorageClass",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallCreateTimeout",
         "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
@@ -6460,6 +6475,9 @@
     },
     "v1beta1.ETCDEncryptionKeyRotation": {
       "properties": {
+        "autoCompleteAfterPrepared": {
+          "type": "boolean"
+        },
         "lastCompletionTime": {
           "type": "string"
         },
@@ -6574,6 +6592,16 @@
         "state",
         "type"
       ]
+    },
+    "v1beta1.ManualWorkerPoolRollout": {
+      "properties": {
+        "pendingWorkersRollouts": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.PendingWorkersRollout"
+          },
+          "type": "array"
+        }
+      }
     },
     "v1beta1.NetworkingStatus": {
       "properties": {
@@ -6699,9 +6727,6 @@
         "etcdEncryptionKey": {
           "$ref": "#/definitions/v1beta1.ETCDEncryptionKeyRotation"
         },
-        "kubeconfig": {
-          "$ref": "#/definitions/v1beta1.ShootKubeconfigRotation"
-        },
         "observability": {
           "$ref": "#/definitions/v1beta1.ObservabilityRotation"
         },
@@ -6710,16 +6735,6 @@
         },
         "sshKeypair": {
           "$ref": "#/definitions/v1beta1.ShootSSHKeypairRotation"
-        }
-      }
-    },
-    "v1beta1.ShootKubeconfigRotation": {
-      "properties": {
-        "lastCompletionTime": {
-          "type": "string"
-        },
-        "lastInitiationTime": {
-          "type": "string"
         }
       }
     },
@@ -6789,6 +6804,9 @@
         "lastOperation": {
           "$ref": "#/definitions/v1beta1.LastOperation"
         },
+        "manualWorkerPoolRollout": {
+          "$ref": "#/definitions/v1beta1.ManualWorkerPoolRollout"
+        },
         "migrationStartTime": {
           "type": "string"
         },
@@ -6832,7 +6850,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.31.0"
+    "version": "v0.31.1"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {

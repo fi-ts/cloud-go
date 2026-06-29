@@ -61,6 +61,9 @@ type V1beta1ShootStatus struct {
 	// last operation
 	LastOperation *V1beta1LastOperation `json:"lastOperation,omitempty"`
 
+	// manual worker pool rollout
+	ManualWorkerPoolRollout *V1beta1ManualWorkerPoolRollout `json:"manualWorkerPoolRollout,omitempty"`
+
 	// migration start time
 	MigrationStartTime string `json:"migrationStartTime,omitempty"`
 
@@ -126,6 +129,10 @@ func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastOperation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateManualWorkerPoolRollout(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -356,6 +363,25 @@ func (m *V1beta1ShootStatus) validateLastOperation(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *V1beta1ShootStatus) validateManualWorkerPoolRollout(formats strfmt.Registry) error {
+	if swag.IsZero(m.ManualWorkerPoolRollout) { // not required
+		return nil
+	}
+
+	if m.ManualWorkerPoolRollout != nil {
+		if err := m.ManualWorkerPoolRollout.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("manualWorkerPoolRollout")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("manualWorkerPoolRollout")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1beta1ShootStatus) validateNetworking(formats strfmt.Registry) error {
 	if swag.IsZero(m.Networking) { // not required
 		return nil
@@ -430,6 +456,10 @@ func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt
 	}
 
 	if err := m.contextValidateLastOperation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateManualWorkerPoolRollout(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -636,6 +666,27 @@ func (m *V1beta1ShootStatus) contextValidateLastOperation(ctx context.Context, f
 				return ve.ValidateName("lastOperation")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("lastOperation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateManualWorkerPoolRollout(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ManualWorkerPoolRollout != nil {
+
+		if swag.IsZero(m.ManualWorkerPoolRollout) { // not required
+			return nil
+		}
+
+		if err := m.ManualWorkerPoolRollout.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("manualWorkerPoolRollout")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("manualWorkerPoolRollout")
 			}
 			return err
 		}
