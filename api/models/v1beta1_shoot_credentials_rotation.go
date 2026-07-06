@@ -24,9 +24,6 @@ type V1beta1ShootCredentialsRotation struct {
 	// etcd encryption key
 	EtcdEncryptionKey *V1beta1ETCDEncryptionKeyRotation `json:"etcdEncryptionKey,omitempty"`
 
-	// kubeconfig
-	Kubeconfig *V1beta1ShootKubeconfigRotation `json:"kubeconfig,omitempty"`
-
 	// observability
 	Observability *V1beta1ObservabilityRotation `json:"observability,omitempty"`
 
@@ -46,10 +43,6 @@ func (m *V1beta1ShootCredentialsRotation) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateEtcdEncryptionKey(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateKubeconfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -101,25 +94,6 @@ func (m *V1beta1ShootCredentialsRotation) validateEtcdEncryptionKey(formats strf
 				return ve.ValidateName("etcdEncryptionKey")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("etcdEncryptionKey")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1beta1ShootCredentialsRotation) validateKubeconfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.Kubeconfig) { // not required
-		return nil
-	}
-
-	if m.Kubeconfig != nil {
-		if err := m.Kubeconfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("kubeconfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("kubeconfig")
 			}
 			return err
 		}
@@ -197,10 +171,6 @@ func (m *V1beta1ShootCredentialsRotation) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateKubeconfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateObservability(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -253,27 +223,6 @@ func (m *V1beta1ShootCredentialsRotation) contextValidateEtcdEncryptionKey(ctx c
 				return ve.ValidateName("etcdEncryptionKey")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("etcdEncryptionKey")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *V1beta1ShootCredentialsRotation) contextValidateKubeconfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Kubeconfig != nil {
-
-		if swag.IsZero(m.Kubeconfig) { // not required
-			return nil
-		}
-
-		if err := m.Kubeconfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("kubeconfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("kubeconfig")
 			}
 			return err
 		}

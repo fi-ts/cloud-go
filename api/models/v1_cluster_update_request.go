@@ -44,6 +44,14 @@ type V1ClusterUpdateRequest struct {
 	// Required: true
 	FirewallControllerVersion *string `json:"FirewallControllerVersion"`
 
+	// firewall create timeout
+	// Required: true
+	FirewallCreateTimeout *int64 `json:"FirewallCreateTimeout"`
+
+	// firewall health timeout
+	// Required: true
+	FirewallHealthTimeout *int64 `json:"FirewallHealthTimeout"`
+
 	// firewall image
 	// Required: true
 	FirewallImage *string `json:"FirewallImage"`
@@ -122,6 +130,14 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFirewallControllerVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFirewallCreateTimeout(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFirewallHealthTimeout(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -282,6 +298,24 @@ func (m *V1ClusterUpdateRequest) validateEgressRules(formats strfmt.Registry) er
 func (m *V1ClusterUpdateRequest) validateFirewallControllerVersion(formats strfmt.Registry) error {
 
 	if err := validate.Required("FirewallControllerVersion", "body", m.FirewallControllerVersion); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateFirewallCreateTimeout(formats strfmt.Registry) error {
+
+	if err := validate.Required("FirewallCreateTimeout", "body", m.FirewallCreateTimeout); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) validateFirewallHealthTimeout(formats strfmt.Registry) error {
+
+	if err := validate.Required("FirewallHealthTimeout", "body", m.FirewallHealthTimeout); err != nil {
 		return err
 	}
 

@@ -723,10 +723,16 @@
         "nat": {
           "type": "boolean"
         },
+        "nattypev2": {
+          "type": "string"
+        },
         "networkid": {
           "type": "string"
         },
         "networktype": {
+          "type": "string"
+        },
+        "networktypev2": {
           "type": "string"
         },
         "prefixes": {
@@ -737,6 +743,9 @@
         },
         "private": {
           "type": "boolean"
+        },
+        "projectid": {
+          "type": "string"
         },
         "underlay": {
           "type": "boolean"
@@ -751,10 +760,13 @@
         "destinationprefixes",
         "ips",
         "nat",
+        "nattypev2",
         "networkid",
         "networktype",
+        "networktypev2",
         "prefixes",
         "private",
+        "projectid",
         "underlay",
         "vrf"
       ]
@@ -1467,6 +1479,14 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallCreateTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "FirewallHealthTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -1543,6 +1563,8 @@
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallCreateTimeout",
+        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "KubeAPIServerACL",
@@ -1716,21 +1738,6 @@
         "machineid"
       ]
     },
-    "v1.ClusterMachineReinstallRequest": {
-      "properties": {
-        "imageid": {
-          "description": "id of the image to install",
-          "type": "string"
-        },
-        "machineid": {
-          "description": "uuid of the machine to reinstall",
-          "type": "string"
-        }
-      },
-      "required": [
-        "machineid"
-      ]
-    },
     "v1.ClusterMachineResetRequest": {
       "properties": {
         "machineid": {
@@ -1834,6 +1841,14 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallCreateTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "FirewallHealthTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -1927,6 +1942,8 @@
         "Description",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallCreateTimeout",
+        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -2036,6 +2053,14 @@
         "FirewallControllerVersion": {
           "type": "string"
         },
+        "FirewallCreateTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "FirewallHealthTimeout": {
+          "format": "int64",
+          "type": "integer"
+        },
         "FirewallImage": {
           "type": "string"
         },
@@ -2090,6 +2115,8 @@
         "CustomDefaultStorageClass",
         "EgressRules",
         "FirewallControllerVersion",
+        "FirewallCreateTimeout",
+        "FirewallHealthTimeout",
         "FirewallImage",
         "FirewallSize",
         "ID",
@@ -3996,13 +4023,17 @@
         "size": {
           "$ref": "#/definitions/v1.PostgresSize"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "version": {
           "type": "string"
         }
       },
       "required": [
         "dedicatedloadbalancerip",
-        "dedicatedloadbalancerport"
+        "dedicatedloadbalancerport",
+        "storageClass"
       ]
     },
     "v1.PostgresCreateStandbyRequest": {
@@ -4047,12 +4078,16 @@
         },
         "primaryId": {
           "type": "string"
+        },
+        "storageClass": {
+          "type": "string"
         }
       },
       "required": [
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
-        "primaryId"
+        "primaryId",
+        "storageClass"
       ]
     },
     "v1.PostgresFindRequest": {
@@ -4082,6 +4117,12 @@
     },
     "v1.PostgresPartition": {
       "properties": {
+        "AllowedStorageClasses": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "type": "object"
+        },
         "AllowedTenants": {
           "additionalProperties": {
             "type": "boolean"
@@ -4090,6 +4131,7 @@
         }
       },
       "required": [
+        "AllowedStorageClasses",
         "AllowedTenants"
       ]
     },
@@ -4173,6 +4215,9 @@
         "status": {
           "$ref": "#/definitions/v1.PostgresStatus"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "tenant": {
           "type": "string"
         },
@@ -4184,7 +4229,8 @@
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
         "id",
-        "status"
+        "status",
+        "storageClass"
       ]
     },
     "v1.PostgresRestoreRequest": {
@@ -4213,6 +4259,9 @@
         "sourceId": {
           "type": "string"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "timestamp": {
           "type": "string"
         },
@@ -4221,7 +4270,8 @@
         }
       },
       "required": [
-        "sourceId"
+        "sourceId",
+        "storageClass"
       ]
     },
     "v1.PostgresSecretsResponse": {
@@ -4345,6 +4395,9 @@
         "size": {
           "$ref": "#/definitions/v1.PostgresSize"
         },
+        "storageClass": {
+          "type": "string"
+        },
         "version": {
           "type": "string"
         }
@@ -4353,7 +4406,8 @@
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
         "disableLoadBalancers",
-        "id"
+        "id",
+        "storageClass"
       ]
     },
     "v1.PostgresUpdateRequest.labels": {
@@ -6447,6 +6501,9 @@
     },
     "v1beta1.ETCDEncryptionKeyRotation": {
       "properties": {
+        "autoCompleteAfterPrepared": {
+          "type": "boolean"
+        },
         "lastCompletionTime": {
           "type": "string"
         },
@@ -6561,6 +6618,16 @@
         "state",
         "type"
       ]
+    },
+    "v1beta1.ManualWorkerPoolRollout": {
+      "properties": {
+        "pendingWorkersRollouts": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.PendingWorkersRollout"
+          },
+          "type": "array"
+        }
+      }
     },
     "v1beta1.NetworkingStatus": {
       "properties": {
@@ -6686,9 +6753,6 @@
         "etcdEncryptionKey": {
           "$ref": "#/definitions/v1beta1.ETCDEncryptionKeyRotation"
         },
-        "kubeconfig": {
-          "$ref": "#/definitions/v1beta1.ShootKubeconfigRotation"
-        },
         "observability": {
           "$ref": "#/definitions/v1beta1.ObservabilityRotation"
         },
@@ -6697,16 +6761,6 @@
         },
         "sshKeypair": {
           "$ref": "#/definitions/v1beta1.ShootSSHKeypairRotation"
-        }
-      }
-    },
-    "v1beta1.ShootKubeconfigRotation": {
-      "properties": {
-        "lastCompletionTime": {
-          "type": "string"
-        },
-        "lastInitiationTime": {
-          "type": "string"
         }
       }
     },
@@ -6776,6 +6830,9 @@
         "lastOperation": {
           "$ref": "#/definitions/v1beta1.LastOperation"
         },
+        "manualWorkerPoolRollout": {
+          "$ref": "#/definitions/v1beta1.ManualWorkerPoolRollout"
+        },
         "migrationStartTime": {
           "type": "string"
         },
@@ -6819,7 +6876,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.30.18"
+    "version": "v0.32.0"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
@@ -8071,52 +8128,6 @@
           }
         },
         "summary": "trigger cluster reconciliation ",
-        "tags": [
-          "cluster"
-        ]
-      }
-    },
-    "/v1/cluster/{id}/reinstallmachine": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "reinstallMachine",
-        "parameters": [
-          {
-            "description": "identifier of the cluster",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1.ClusterMachineReinstallRequest"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/v1.ClusterResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/httperrors.HTTPErrorResponse"
-            }
-          }
-        },
-        "summary": "trigger reinstall of a machine ",
         "tags": [
           "cluster"
         ]
