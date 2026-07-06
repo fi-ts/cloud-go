@@ -4103,6 +4103,43 @@
         }
       }
     },
+    "v1.PostgresLimits": {
+      "properties": {
+        "cpumax": {
+          "type": "string"
+        },
+        "cpumin": {
+          "type": "string"
+        },
+        "instancesmax": {
+          "format": "byte",
+          "type": "integer"
+        },
+        "memoryfactormax": {
+          "format": "byte",
+          "type": "integer"
+        },
+        "memoryfactormin": {
+          "format": "byte",
+          "type": "integer"
+        },
+        "storagesizemax": {
+          "type": "string"
+        },
+        "storagesizemin": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "cpumax",
+        "cpumin",
+        "instancesmax",
+        "memoryfactormax",
+        "memoryfactormin",
+        "storagesizemax",
+        "storagesizemin"
+      ]
+    },
     "v1.PostgresPartition": {
       "properties": {
         "AllowedStorageClasses": {
@@ -4116,11 +4153,15 @@
             "type": "boolean"
           },
           "type": "object"
+        },
+        "limits": {
+          "$ref": "#/definitions/v1.PostgresLimits"
         }
       },
       "required": [
         "AllowedStorageClasses",
-        "AllowedTenants"
+        "AllowedTenants",
+        "limits"
       ]
     },
     "v1.PostgresPartitionsResponse": {
@@ -6498,6 +6539,32 @@
         "phase"
       ]
     },
+    "v1beta1.EncryptionAtRest": {
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/v1beta1.EncryptionProviderStatus"
+        },
+        "resources": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "provider"
+      ]
+    },
+    "v1beta1.EncryptionProviderStatus": {
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "v1beta1.Gardener": {
       "properties": {
         "id": {
@@ -6714,6 +6781,9 @@
     },
     "v1beta1.ShootCredentials": {
       "properties": {
+        "encryptionAtRest": {
+          "$ref": "#/definitions/v1beta1.EncryptionAtRest"
+        },
         "rotation": {
           "$ref": "#/definitions/v1beta1.ShootCredentialsRotation"
         }

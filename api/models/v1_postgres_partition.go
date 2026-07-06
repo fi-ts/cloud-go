@@ -26,6 +26,10 @@ type V1PostgresPartition struct {
 	// allowed tenants
 	// Required: true
 	AllowedTenants map[string]bool `json:"AllowedTenants"`
+
+	// limits
+	// Required: true
+	Limits *V1PostgresLimits `json:"limits"`
 }
 
 // Validate validates this v1 postgres partition
@@ -37,6 +41,10 @@ func (m *V1PostgresPartition) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAllowedTenants(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLimits(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,8 +72,54 @@ func (m *V1PostgresPartition) validateAllowedTenants(formats strfmt.Registry) er
 	return nil
 }
 
-// ContextValidate validates this v1 postgres partition based on context it is used
+func (m *V1PostgresPartition) validateLimits(formats strfmt.Registry) error {
+
+	if err := validate.Required("limits", "body", m.Limits); err != nil {
+		return err
+	}
+
+	if m.Limits != nil {
+		if err := m.Limits.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("limits")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("limits")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this v1 postgres partition based on the context it is used
 func (m *V1PostgresPartition) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLimits(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *V1PostgresPartition) contextValidateLimits(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Limits != nil {
+
+		if err := m.Limits.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("limits")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("limits")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
