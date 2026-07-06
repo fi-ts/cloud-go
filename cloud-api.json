@@ -6524,6 +6524,32 @@
         "phase"
       ]
     },
+    "v1beta1.EncryptionAtRest": {
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/v1beta1.EncryptionProviderStatus"
+        },
+        "resources": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "provider"
+      ]
+    },
+    "v1beta1.EncryptionProviderStatus": {
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "v1beta1.Gardener": {
       "properties": {
         "id": {
@@ -6740,6 +6766,9 @@
     },
     "v1beta1.ShootCredentials": {
       "properties": {
+        "encryptionAtRest": {
+          "$ref": "#/definitions/v1beta1.EncryptionAtRest"
+        },
         "rotation": {
           "$ref": "#/definitions/v1beta1.ShootCredentialsRotation"
         }
