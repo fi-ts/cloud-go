@@ -18,6 +18,9 @@ import (
 // swagger:model v1beta1.ShootCredentials
 type V1beta1ShootCredentials struct {
 
+	// encryption at rest
+	EncryptionAtRest *V1beta1EncryptionAtRest `json:"encryptionAtRest,omitempty"`
+
 	// rotation
 	Rotation *V1beta1ShootCredentialsRotation `json:"rotation,omitempty"`
 }
@@ -26,6 +29,10 @@ type V1beta1ShootCredentials struct {
 func (m *V1beta1ShootCredentials) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateEncryptionAtRest(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRotation(formats); err != nil {
 		res = append(res, err)
 	}
@@ -33,6 +40,25 @@ func (m *V1beta1ShootCredentials) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1beta1ShootCredentials) validateEncryptionAtRest(formats strfmt.Registry) error {
+	if swag.IsZero(m.EncryptionAtRest) { // not required
+		return nil
+	}
+
+	if m.EncryptionAtRest != nil {
+		if err := m.EncryptionAtRest.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("encryptionAtRest")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("encryptionAtRest")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -59,6 +85,10 @@ func (m *V1beta1ShootCredentials) validateRotation(formats strfmt.Registry) erro
 func (m *V1beta1ShootCredentials) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateEncryptionAtRest(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRotation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -66,6 +96,27 @@ func (m *V1beta1ShootCredentials) ContextValidate(ctx context.Context, formats s
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1beta1ShootCredentials) contextValidateEncryptionAtRest(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.EncryptionAtRest != nil {
+
+		if swag.IsZero(m.EncryptionAtRest) { // not required
+			return nil
+		}
+
+		if err := m.EncryptionAtRest.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("encryptionAtRest")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("encryptionAtRest")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

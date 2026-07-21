@@ -6498,6 +6498,32 @@
         "phase"
       ]
     },
+    "v1beta1.EncryptionAtRest": {
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/v1beta1.EncryptionProviderStatus"
+        },
+        "resources": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "provider"
+      ]
+    },
+    "v1beta1.EncryptionProviderStatus": {
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "v1beta1.Gardener": {
       "properties": {
         "id": {
@@ -6714,6 +6740,9 @@
     },
     "v1beta1.ShootCredentials": {
       "properties": {
+        "encryptionAtRest": {
+          "$ref": "#/definitions/v1beta1.EncryptionAtRest"
+        },
         "rotation": {
           "$ref": "#/definitions/v1beta1.ShootCredentialsRotation"
         }
@@ -6850,7 +6879,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.32.1"
+    "version": "v0.32.2"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
