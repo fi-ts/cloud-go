@@ -19,6 +19,10 @@ import (
 // swagger:model v1.PostgresPartition
 type V1PostgresPartition struct {
 
+	// allowed storage classes
+	// Required: true
+	AllowedStorageClasses map[string]bool `json:"AllowedStorageClasses"`
+
 	// allowed tenants
 	// Required: true
 	AllowedTenants map[string]bool `json:"AllowedTenants"`
@@ -28,6 +32,10 @@ type V1PostgresPartition struct {
 func (m *V1PostgresPartition) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAllowedStorageClasses(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAllowedTenants(formats); err != nil {
 		res = append(res, err)
 	}
@@ -35,6 +43,15 @@ func (m *V1PostgresPartition) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1PostgresPartition) validateAllowedStorageClasses(formats strfmt.Registry) error {
+
+	if err := validate.Required("AllowedStorageClasses", "body", m.AllowedStorageClasses); err != nil {
+		return err
+	}
+
 	return nil
 }
 
