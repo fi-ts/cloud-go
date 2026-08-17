@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -77,6 +78,7 @@ type V1VolumeResponse struct {
 
 	// storage type
 	// Required: true
+	// Enum: ["lightbits","ontap"]
 	StorageType *string `json:"StorageType"`
 
 	// tenant ID
@@ -319,9 +321,43 @@ func (m *V1VolumeResponse) validateStatistics(formats strfmt.Registry) error {
 	return nil
 }
 
+var v1VolumeResponseTypeStorageTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["lightbits","ontap"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		v1VolumeResponseTypeStorageTypePropEnum = append(v1VolumeResponseTypeStorageTypePropEnum, v)
+	}
+}
+
+const (
+
+	// V1VolumeResponseStorageTypeLightbits captures enum value "lightbits"
+	V1VolumeResponseStorageTypeLightbits string = "lightbits"
+
+	// V1VolumeResponseStorageTypeOntap captures enum value "ontap"
+	V1VolumeResponseStorageTypeOntap string = "ontap"
+)
+
+// prop value enum
+func (m *V1VolumeResponse) validateStorageTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, v1VolumeResponseTypeStorageTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (m *V1VolumeResponse) validateStorageType(formats strfmt.Registry) error {
 
 	if err := validate.Required("StorageType", "body", m.StorageType); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateStorageTypeEnum("StorageType", "body", *m.StorageType); err != nil {
 		return err
 	}
 
