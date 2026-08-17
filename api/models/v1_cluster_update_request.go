@@ -84,6 +84,10 @@ type V1ClusterUpdateRequest struct {
 	// Required: true
 	Purpose *string `json:"Purpose"`
 
+	// q c a config
+	// Required: true
+	QCAConfig *V1QualysCloudAgent `json:"QCAConfig"`
+
 	// system components
 	// Required: true
 	SystemComponents *V1SystemComponents `json:"SystemComponents"`
@@ -166,6 +170,10 @@ func (m *V1ClusterUpdateRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePurpose(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQCAConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -419,6 +427,26 @@ func (m *V1ClusterUpdateRequest) validatePurpose(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *V1ClusterUpdateRequest) validateQCAConfig(formats strfmt.Registry) error {
+
+	if err := validate.Required("QCAConfig", "body", m.QCAConfig); err != nil {
+		return err
+	}
+
+	if m.QCAConfig != nil {
+		if err := m.QCAConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QCAConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QCAConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1ClusterUpdateRequest) validateSystemComponents(formats strfmt.Registry) error {
 
 	if err := validate.Required("SystemComponents", "body", m.SystemComponents); err != nil {
@@ -524,6 +552,10 @@ func (m *V1ClusterUpdateRequest) ContextValidate(ctx context.Context, formats st
 	}
 
 	if err := m.contextValidateMaintenance(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateQCAConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -664,6 +696,23 @@ func (m *V1ClusterUpdateRequest) contextValidateMaintenance(ctx context.Context,
 				return ve.ValidateName("Maintenance")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Maintenance")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1ClusterUpdateRequest) contextValidateQCAConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.QCAConfig != nil {
+
+		if err := m.QCAConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("QCAConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("QCAConfig")
 			}
 			return err
 		}

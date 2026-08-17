@@ -64,6 +64,9 @@ type ModelsV1MachineResponse struct {
 	// rackid
 	Rackid string `json:"rackid,omitempty"`
 
+	// roomid
+	Roomid string `json:"roomid,omitempty"`
+
 	// size
 	Size *ModelsV1SizeResponse `json:"size,omitempty"`
 

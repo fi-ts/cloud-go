@@ -880,6 +880,9 @@
         "rackid": {
           "type": "string"
         },
+        "roomid": {
+          "type": "string"
+        },
         "size": {
           "$ref": "#/definitions/models.V1SizeResponse"
         },
@@ -1520,6 +1523,9 @@
         "Purpose": {
           "type": "string"
         },
+        "QCAConfig": {
+          "$ref": "#/definitions/v1.QualysCloudAgent"
+        },
         "SystemComponents": {
           "$ref": "#/definitions/v1.SystemComponents"
         },
@@ -1572,6 +1578,7 @@
         "PartitionID",
         "ProjectID",
         "Purpose",
+        "QCAConfig",
         "SystemComponents",
         "Tenant",
         "Workers",
@@ -1887,6 +1894,9 @@
         "Purpose": {
           "type": "string"
         },
+        "QCAConfig": {
+          "$ref": "#/definitions/v1.QualysCloudAgent"
+        },
         "Status": {
           "$ref": "#/definitions/v1beta1.ShootStatus"
         },
@@ -1950,6 +1960,7 @@
         "PartitionID",
         "ProjectID",
         "Purpose",
+        "QCAConfig",
         "Status",
         "SystemComponents",
         "Tenant",
@@ -2080,6 +2091,9 @@
         "Purpose": {
           "type": "string"
         },
+        "QCAConfig": {
+          "$ref": "#/definitions/v1.QualysCloudAgent"
+        },
         "SystemComponents": {
           "$ref": "#/definitions/v1.SystemComponents"
         },
@@ -2114,6 +2128,7 @@
         "Labels",
         "Maintenance",
         "Purpose",
+        "QCAConfig",
         "SystemComponents",
         "Workers",
         "XDRConfig",
@@ -4103,6 +4118,43 @@
         }
       }
     },
+    "v1.PostgresLimits": {
+      "properties": {
+        "cpuMax": {
+          "type": "string"
+        },
+        "cpuMin": {
+          "type": "string"
+        },
+        "instancesMax": {
+          "format": "byte",
+          "type": "integer"
+        },
+        "memoryfactorMax": {
+          "format": "byte",
+          "type": "integer"
+        },
+        "memoryfactorMin": {
+          "format": "byte",
+          "type": "integer"
+        },
+        "storageSizeMax": {
+          "type": "string"
+        },
+        "storageSizeMin": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "cpuMax",
+        "cpuMin",
+        "instancesMax",
+        "memoryfactorMax",
+        "memoryfactorMin",
+        "storageSizeMax",
+        "storageSizeMin"
+      ]
+    },
     "v1.PostgresPartition": {
       "properties": {
         "AllowedStorageClasses": {
@@ -4116,11 +4168,15 @@
             "type": "boolean"
           },
           "type": "object"
+        },
+        "limits": {
+          "$ref": "#/definitions/v1.PostgresLimits"
         }
       },
       "required": [
         "AllowedStorageClasses",
-        "AllowedTenants"
+        "AllowedTenants",
+        "limits"
       ]
     },
     "v1.PostgresPartitionsResponse": {
@@ -4987,6 +5043,16 @@
         "Partition",
         "QoSPolicyID",
         "State"
+      ]
+    },
+    "v1.QualysCloudAgent": {
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "disabled"
       ]
     },
     "v1.Quota": {
@@ -6054,6 +6120,10 @@
           "$ref": "#/definitions/v1.VolumeStatistics"
         },
         "StorageType": {
+          "enum": [
+            "lightbits",
+            "ontap"
+          ],
           "type": "string"
         },
         "TenantID": {
@@ -6883,7 +6953,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.33.0"
+    "version": "v0.34.0"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
