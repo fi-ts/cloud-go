@@ -19,6 +19,10 @@ import (
 // swagger:model v1.PostgresResponse
 type V1PostgresResponse struct {
 
+	// internal resource name
+	// Required: true
+	InternalResourceName *string `json:"InternalResourceName"`
+
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
 
@@ -99,6 +103,10 @@ type V1PostgresResponse struct {
 func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateInternalResourceName(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAccessList(formats); err != nil {
 		res = append(res, err)
 	}
@@ -142,6 +150,15 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *V1PostgresResponse) validateInternalResourceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("InternalResourceName", "body", m.InternalResourceName); err != nil {
+		return err
+	}
+
 	return nil
 }
 

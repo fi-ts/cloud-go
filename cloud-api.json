@@ -4115,6 +4115,9 @@
         },
         "tenant": {
           "type": "string"
+        },
+        "version": {
+          "type": "string"
         }
       }
     },
@@ -4187,6 +4190,9 @@
     },
     "v1.PostgresResponse": {
       "properties": {
+        "InternalResourceName": {
+          "type": "string"
+        },
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
@@ -4270,6 +4276,7 @@
         }
       },
       "required": [
+        "InternalResourceName",
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
         "id",
@@ -5049,6 +5056,9 @@
       "properties": {
         "disabled": {
           "type": "boolean"
+        },
+        "proxy": {
+          "type": "string"
         }
       },
       "required": [
@@ -6800,6 +6810,9 @@
     },
     "v1beta1.ShootAdvertisedAddress": {
       "properties": {
+        "application": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -6877,12 +6890,6 @@
         "credentials": {
           "$ref": "#/definitions/v1beta1.ShootCredentials"
         },
-        "encryptedResources": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
         "gardener": {
           "$ref": "#/definitions/v1beta1.Gardener"
         },
@@ -6953,7 +6960,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.34.0"
+    "version": "v0.35.0"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {

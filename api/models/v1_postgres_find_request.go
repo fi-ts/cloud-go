@@ -34,6 +34,9 @@ type V1PostgresFindRequest struct {
 
 	// tenant
 	Tenant string `json:"tenant,omitempty"`
+
+	// version
+	Version string `json:"version,omitempty"`
 }
 
 // Validate validates this v1 postgres find request
