@@ -22,6 +22,9 @@ type V1QualysCloudAgent struct {
 	// disabled
 	// Required: true
 	Disabled *bool `json:"disabled"`
+
+	// proxy
+	Proxy string `json:"proxy,omitempty"`
 }
 
 // Validate validates this v1 qualys cloud agent

@@ -19,6 +19,9 @@ import (
 // swagger:model v1beta1.ShootAdvertisedAddress
 type V1beta1ShootAdvertisedAddress struct {
 
+	// application
+	Application string `json:"application,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
