@@ -6960,7 +6960,7 @@
       "url": "http://mit.org"
     },
     "title": "cloud-api",
-    "version": "v0.35.0"
+    "version": "v0.35.1"
   },
   "paths": {
     "/v1/accounting/cluster-usage": {
