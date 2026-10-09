@@ -1309,6 +1309,9 @@
         "tls": {
           "type": "boolean"
         },
+        "tlshost": {
+          "type": "string"
+        },
         "token": {
           "type": "string"
         }
@@ -3865,6 +3868,9 @@
         "s3Endpoint": {
           "type": "string"
         },
+        "s3Partition": {
+          "type": "string"
+        },
         "s3Region": {
           "type": "string"
         },
@@ -4190,9 +4196,6 @@
     },
     "v1.PostgresResponse": {
       "properties": {
-        "InternalResourceName": {
-          "type": "string"
-        },
         "accessList": {
           "$ref": "#/definitions/v1.AccessList"
         },
@@ -4200,6 +4203,9 @@
           "type": "boolean"
         },
         "backup": {
+          "type": "string"
+        },
+        "childResourceName": {
           "type": "string"
         },
         "connection": {
@@ -4276,7 +4282,7 @@
         }
       },
       "required": [
-        "InternalResourceName",
+        "childResourceName",
         "dedicatedloadbalancerip",
         "dedicatedloadbalancerport",
         "id",
