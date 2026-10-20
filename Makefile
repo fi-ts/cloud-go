@@ -34,7 +34,7 @@ mocks:
 		--user $$(id -u):$$(id -g) \
 		-w /work \
 		-v ${PWD}:/work \
-		vektra/mockery:v3.5.5
+		vektra/mockery:v3.8.1
 	go run ./test/client/generate/generate_mock_client.go
 
 .PHONY: gofmt
