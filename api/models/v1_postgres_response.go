@@ -19,10 +19,6 @@ import (
 // swagger:model v1.PostgresResponse
 type V1PostgresResponse struct {
 
-	// internal resource name
-	// Required: true
-	InternalResourceName *string `json:"InternalResourceName"`
-
 	// access list
 	AccessList *V1AccessList `json:"accessList,omitempty"`
 
@@ -31,6 +27,10 @@ type V1PostgresResponse struct {
 
 	// backup
 	Backup string `json:"backup,omitempty"`
+
+	// child resource name
+	// Required: true
+	ChildResourceName *string `json:"childResourceName"`
 
 	// connection
 	Connection *V1Connection `json:"connection,omitempty"`
@@ -103,11 +103,11 @@ type V1PostgresResponse struct {
 func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateInternalResourceName(formats); err != nil {
+	if err := m.validateAccessList(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateAccessList(formats); err != nil {
+	if err := m.validateChildResourceName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -153,15 +153,6 @@ func (m *V1PostgresResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *V1PostgresResponse) validateInternalResourceName(formats strfmt.Registry) error {
-
-	if err := validate.Required("InternalResourceName", "body", m.InternalResourceName); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *V1PostgresResponse) validateAccessList(formats strfmt.Registry) error {
 	if swag.IsZero(m.AccessList) { // not required
 		return nil
@@ -176,6 +167,15 @@ func (m *V1PostgresResponse) validateAccessList(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *V1PostgresResponse) validateChildResourceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("childResourceName", "body", m.ChildResourceName); err != nil {
+		return err
 	}
 
 	return nil

@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_AcceptPostgresRestore_Call struct {
 //   - params *database.AcceptPostgresRestoreParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) AcceptPostgresRestore(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_AcceptPostgresRestore_Call {
+func (_e *ClientService_Expecter) AcceptPostgresRestore(params any, authInfo any, opts ...any) *ClientService_AcceptPostgresRestore_Call {
 	return &ClientService_AcceptPostgresRestore_Call{Call: _e.mock.On("AcceptPostgresRestore",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_AcceptPostgresRestore_Call) Run(run func(params *database.AcceptPostgresRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_AcceptPostgresRestore_Call {
@@ -163,9 +172,9 @@ type ClientService_AcceptPostgresRestoreDeprecated_Call struct {
 //   - params *database.AcceptPostgresRestoreDeprecatedParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) AcceptPostgresRestoreDeprecated(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_AcceptPostgresRestoreDeprecated_Call {
+func (_e *ClientService_Expecter) AcceptPostgresRestoreDeprecated(params any, authInfo any, opts ...any) *ClientService_AcceptPostgresRestoreDeprecated_Call {
 	return &ClientService_AcceptPostgresRestoreDeprecated_Call{Call: _e.mock.On("AcceptPostgresRestoreDeprecated",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_AcceptPostgresRestoreDeprecated_Call) Run(run func(params *database.AcceptPostgresRestoreDeprecatedParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_AcceptPostgresRestoreDeprecated_Call {
@@ -246,9 +255,9 @@ type ClientService_CreatePostgres_Call struct {
 //   - params *database.CreatePostgresParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) CreatePostgres(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_CreatePostgres_Call {
+func (_e *ClientService_Expecter) CreatePostgres(params any, authInfo any, opts ...any) *ClientService_CreatePostgres_Call {
 	return &ClientService_CreatePostgres_Call{Call: _e.mock.On("CreatePostgres",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_CreatePostgres_Call) Run(run func(params *database.CreatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_CreatePostgres_Call {
@@ -329,9 +338,9 @@ type ClientService_CreatePostgresBackupConfig_Call struct {
 //   - params *database.CreatePostgresBackupConfigParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) CreatePostgresBackupConfig(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_CreatePostgresBackupConfig_Call {
+func (_e *ClientService_Expecter) CreatePostgresBackupConfig(params any, authInfo any, opts ...any) *ClientService_CreatePostgresBackupConfig_Call {
 	return &ClientService_CreatePostgresBackupConfig_Call{Call: _e.mock.On("CreatePostgresBackupConfig",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_CreatePostgresBackupConfig_Call) Run(run func(params *database.CreatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_CreatePostgresBackupConfig_Call {
@@ -412,9 +421,9 @@ type ClientService_CreatePostgresStandby_Call struct {
 //   - params *database.CreatePostgresStandbyParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) CreatePostgresStandby(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_CreatePostgresStandby_Call {
+func (_e *ClientService_Expecter) CreatePostgresStandby(params any, authInfo any, opts ...any) *ClientService_CreatePostgresStandby_Call {
 	return &ClientService_CreatePostgresStandby_Call{Call: _e.mock.On("CreatePostgresStandby",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_CreatePostgresStandby_Call) Run(run func(params *database.CreatePostgresStandbyParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_CreatePostgresStandby_Call {
@@ -495,9 +504,9 @@ type ClientService_DeletePostgres_Call struct {
 //   - params *database.DeletePostgresParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) DeletePostgres(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_DeletePostgres_Call {
+func (_e *ClientService_Expecter) DeletePostgres(params any, authInfo any, opts ...any) *ClientService_DeletePostgres_Call {
 	return &ClientService_DeletePostgres_Call{Call: _e.mock.On("DeletePostgres",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_DeletePostgres_Call) Run(run func(params *database.DeletePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_DeletePostgres_Call {
@@ -578,9 +587,9 @@ type ClientService_DeletePostgresBackupConfig_Call struct {
 //   - params *database.DeletePostgresBackupConfigParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) DeletePostgresBackupConfig(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_DeletePostgresBackupConfig_Call {
+func (_e *ClientService_Expecter) DeletePostgresBackupConfig(params any, authInfo any, opts ...any) *ClientService_DeletePostgresBackupConfig_Call {
 	return &ClientService_DeletePostgresBackupConfig_Call{Call: _e.mock.On("DeletePostgresBackupConfig",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_DeletePostgresBackupConfig_Call) Run(run func(params *database.DeletePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_DeletePostgresBackupConfig_Call {
@@ -661,9 +670,9 @@ type ClientService_FindPostgres_Call struct {
 //   - params *database.FindPostgresParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) FindPostgres(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindPostgres_Call {
+func (_e *ClientService_Expecter) FindPostgres(params any, authInfo any, opts ...any) *ClientService_FindPostgres_Call {
 	return &ClientService_FindPostgres_Call{Call: _e.mock.On("FindPostgres",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindPostgres_Call) Run(run func(params *database.FindPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_FindPostgres_Call {
@@ -744,9 +753,9 @@ type ClientService_GetBackupConfig_Call struct {
 //   - params *database.GetBackupConfigParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) GetBackupConfig(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetBackupConfig_Call {
+func (_e *ClientService_Expecter) GetBackupConfig(params any, authInfo any, opts ...any) *ClientService_GetBackupConfig_Call {
 	return &ClientService_GetBackupConfig_Call{Call: _e.mock.On("GetBackupConfig",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetBackupConfig_Call) Run(run func(params *database.GetBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_GetBackupConfig_Call {
@@ -827,9 +836,9 @@ type ClientService_GetPostgres_Call struct {
 //   - params *database.GetPostgresParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) GetPostgres(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetPostgres_Call {
+func (_e *ClientService_Expecter) GetPostgres(params any, authInfo any, opts ...any) *ClientService_GetPostgres_Call {
 	return &ClientService_GetPostgres_Call{Call: _e.mock.On("GetPostgres",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetPostgres_Call) Run(run func(params *database.GetPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_GetPostgres_Call {
@@ -910,9 +919,9 @@ type ClientService_GetPostgresBackups_Call struct {
 //   - params *database.GetPostgresBackupsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) GetPostgresBackups(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetPostgresBackups_Call {
+func (_e *ClientService_Expecter) GetPostgresBackups(params any, authInfo any, opts ...any) *ClientService_GetPostgresBackups_Call {
 	return &ClientService_GetPostgresBackups_Call{Call: _e.mock.On("GetPostgresBackups",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetPostgresBackups_Call) Run(run func(params *database.GetPostgresBackupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_GetPostgresBackups_Call {
@@ -993,9 +1002,9 @@ type ClientService_GetPostgresPartitions_Call struct {
 //   - params *database.GetPostgresPartitionsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) GetPostgresPartitions(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetPostgresPartitions_Call {
+func (_e *ClientService_Expecter) GetPostgresPartitions(params any, authInfo any, opts ...any) *ClientService_GetPostgresPartitions_Call {
 	return &ClientService_GetPostgresPartitions_Call{Call: _e.mock.On("GetPostgresPartitions",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetPostgresPartitions_Call) Run(run func(params *database.GetPostgresPartitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_GetPostgresPartitions_Call {
@@ -1076,9 +1085,9 @@ type ClientService_GetPostgresSecrets_Call struct {
 //   - params *database.GetPostgresSecretsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) GetPostgresSecrets(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetPostgresSecrets_Call {
+func (_e *ClientService_Expecter) GetPostgresSecrets(params any, authInfo any, opts ...any) *ClientService_GetPostgresSecrets_Call {
 	return &ClientService_GetPostgresSecrets_Call{Call: _e.mock.On("GetPostgresSecrets",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetPostgresSecrets_Call) Run(run func(params *database.GetPostgresSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_GetPostgresSecrets_Call {
@@ -1159,9 +1168,9 @@ type ClientService_GetPostgresVersions_Call struct {
 //   - params *database.GetPostgresVersionsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) GetPostgresVersions(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetPostgresVersions_Call {
+func (_e *ClientService_Expecter) GetPostgresVersions(params any, authInfo any, opts ...any) *ClientService_GetPostgresVersions_Call {
 	return &ClientService_GetPostgresVersions_Call{Call: _e.mock.On("GetPostgresVersions",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetPostgresVersions_Call) Run(run func(params *database.GetPostgresVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_GetPostgresVersions_Call {
@@ -1242,9 +1251,9 @@ type ClientService_ListPostgres_Call struct {
 //   - params *database.ListPostgresParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) ListPostgres(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListPostgres_Call {
+func (_e *ClientService_Expecter) ListPostgres(params any, authInfo any, opts ...any) *ClientService_ListPostgres_Call {
 	return &ClientService_ListPostgres_Call{Call: _e.mock.On("ListPostgres",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListPostgres_Call) Run(run func(params *database.ListPostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_ListPostgres_Call {
@@ -1325,9 +1334,9 @@ type ClientService_ListPostgresBackupConfigs_Call struct {
 //   - params *database.ListPostgresBackupConfigsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) ListPostgresBackupConfigs(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListPostgresBackupConfigs_Call {
+func (_e *ClientService_Expecter) ListPostgresBackupConfigs(params any, authInfo any, opts ...any) *ClientService_ListPostgresBackupConfigs_Call {
 	return &ClientService_ListPostgresBackupConfigs_Call{Call: _e.mock.On("ListPostgresBackupConfigs",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListPostgresBackupConfigs_Call) Run(run func(params *database.ListPostgresBackupConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_ListPostgresBackupConfigs_Call {
@@ -1408,9 +1417,9 @@ type ClientService_RestorePostgres_Call struct {
 //   - params *database.RestorePostgresParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) RestorePostgres(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_RestorePostgres_Call {
+func (_e *ClientService_Expecter) RestorePostgres(params any, authInfo any, opts ...any) *ClientService_RestorePostgres_Call {
 	return &ClientService_RestorePostgres_Call{Call: _e.mock.On("RestorePostgres",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_RestorePostgres_Call) Run(run func(params *database.RestorePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_RestorePostgres_Call {
@@ -1461,7 +1470,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 
@@ -1531,9 +1540,9 @@ type ClientService_UpdatePostgres_Call struct {
 //   - params *database.UpdatePostgresParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) UpdatePostgres(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_UpdatePostgres_Call {
+func (_e *ClientService_Expecter) UpdatePostgres(params any, authInfo any, opts ...any) *ClientService_UpdatePostgres_Call {
 	return &ClientService_UpdatePostgres_Call{Call: _e.mock.On("UpdatePostgres",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_UpdatePostgres_Call) Run(run func(params *database.UpdatePostgresParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_UpdatePostgres_Call {
@@ -1614,9 +1623,9 @@ type ClientService_UpdatePostgresBackupConfig_Call struct {
 //   - params *database.UpdatePostgresBackupConfigParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...database.ClientOption
-func (_e *ClientService_Expecter) UpdatePostgresBackupConfig(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_UpdatePostgresBackupConfig_Call {
+func (_e *ClientService_Expecter) UpdatePostgresBackupConfig(params any, authInfo any, opts ...any) *ClientService_UpdatePostgresBackupConfig_Call {
 	return &ClientService_UpdatePostgresBackupConfig_Call{Call: _e.mock.On("UpdatePostgresBackupConfig",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_UpdatePostgresBackupConfig_Call) Run(run func(params *database.UpdatePostgresBackupConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...database.ClientOption)) *ClientService_UpdatePostgresBackupConfig_Call {

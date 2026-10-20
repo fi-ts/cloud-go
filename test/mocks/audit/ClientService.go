@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_FindAuditTraces_Call struct {
 //   - params *audit.FindAuditTracesParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...audit.ClientOption
-func (_e *ClientService_Expecter) FindAuditTraces(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindAuditTraces_Call {
+func (_e *ClientService_Expecter) FindAuditTraces(params any, authInfo any, opts ...any) *ClientService_FindAuditTraces_Call {
 	return &ClientService_FindAuditTraces_Call{Call: _e.mock.On("FindAuditTraces",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindAuditTraces_Call) Run(run func(params *audit.FindAuditTracesParams, authInfo runtime.ClientAuthInfoWriter, opts ...audit.ClientOption)) *ClientService_FindAuditTraces_Call {
@@ -133,7 +142,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 

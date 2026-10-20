@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_FindTenants_Call struct {
 //   - params *tenant.FindTenantsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...tenant.ClientOption
-func (_e *ClientService_Expecter) FindTenants(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindTenants_Call {
+func (_e *ClientService_Expecter) FindTenants(params any, authInfo any, opts ...any) *ClientService_FindTenants_Call {
 	return &ClientService_FindTenants_Call{Call: _e.mock.On("FindTenants",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindTenants_Call) Run(run func(params *tenant.FindTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...tenant.ClientOption)) *ClientService_FindTenants_Call {
@@ -163,9 +172,9 @@ type ClientService_GetTenant_Call struct {
 //   - params *tenant.GetTenantParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...tenant.ClientOption
-func (_e *ClientService_Expecter) GetTenant(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetTenant_Call {
+func (_e *ClientService_Expecter) GetTenant(params any, authInfo any, opts ...any) *ClientService_GetTenant_Call {
 	return &ClientService_GetTenant_Call{Call: _e.mock.On("GetTenant",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetTenant_Call) Run(run func(params *tenant.GetTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...tenant.ClientOption)) *ClientService_GetTenant_Call {
@@ -246,9 +255,9 @@ type ClientService_ListTenants_Call struct {
 //   - params *tenant.ListTenantsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...tenant.ClientOption
-func (_e *ClientService_Expecter) ListTenants(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListTenants_Call {
+func (_e *ClientService_Expecter) ListTenants(params any, authInfo any, opts ...any) *ClientService_ListTenants_Call {
 	return &ClientService_ListTenants_Call{Call: _e.mock.On("ListTenants",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListTenants_Call) Run(run func(params *tenant.ListTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...tenant.ClientOption)) *ClientService_ListTenants_Call {
@@ -299,7 +308,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 
@@ -369,9 +378,9 @@ type ClientService_UpdateTenant_Call struct {
 //   - params *tenant.UpdateTenantParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...tenant.ClientOption
-func (_e *ClientService_Expecter) UpdateTenant(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_UpdateTenant_Call {
+func (_e *ClientService_Expecter) UpdateTenant(params any, authInfo any, opts ...any) *ClientService_UpdateTenant_Call {
 	return &ClientService_UpdateTenant_Call{Call: _e.mock.On("UpdateTenant",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_UpdateTenant_Call) Run(run func(params *tenant.UpdateTenantParams, authInfo runtime.ClientAuthInfoWriter, opts ...tenant.ClientOption)) *ClientService_UpdateTenant_Call {

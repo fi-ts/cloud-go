@@ -44,6 +44,9 @@ type V1PostgresBackupConfigCreateRequest struct {
 	// s3 endpoint
 	S3Endpoint string `json:"s3Endpoint,omitempty"`
 
+	// s3 partition
+	S3Partition string `json:"s3Partition,omitempty"`
+
 	// s3 region
 	S3Region string `json:"s3Region,omitempty"`
 

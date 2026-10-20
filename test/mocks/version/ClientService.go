@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_Info_Call struct {
 //   - params *version.InfoParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...version.ClientOption
-func (_e *ClientService_Expecter) Info(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_Info_Call {
+func (_e *ClientService_Expecter) Info(params any, authInfo any, opts ...any) *ClientService_Info_Call {
 	return &ClientService_Info_Call{Call: _e.mock.On("Info",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_Info_Call) Run(run func(params *version.InfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...version.ClientOption)) *ClientService_Info_Call {
@@ -133,7 +142,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 

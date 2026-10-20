@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_AllocateIP_Call struct {
 //   - params *ip.AllocateIPParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...ip.ClientOption
-func (_e *ClientService_Expecter) AllocateIP(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_AllocateIP_Call {
+func (_e *ClientService_Expecter) AllocateIP(params any, authInfo any, opts ...any) *ClientService_AllocateIP_Call {
 	return &ClientService_AllocateIP_Call{Call: _e.mock.On("AllocateIP",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_AllocateIP_Call) Run(run func(params *ip.AllocateIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ip.ClientOption)) *ClientService_AllocateIP_Call {
@@ -163,9 +172,9 @@ type ClientService_FindIPs_Call struct {
 //   - params *ip.FindIPsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...ip.ClientOption
-func (_e *ClientService_Expecter) FindIPs(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindIPs_Call {
+func (_e *ClientService_Expecter) FindIPs(params any, authInfo any, opts ...any) *ClientService_FindIPs_Call {
 	return &ClientService_FindIPs_Call{Call: _e.mock.On("FindIPs",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindIPs_Call) Run(run func(params *ip.FindIPsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ip.ClientOption)) *ClientService_FindIPs_Call {
@@ -246,9 +255,9 @@ type ClientService_FreeIP_Call struct {
 //   - params *ip.FreeIPParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...ip.ClientOption
-func (_e *ClientService_Expecter) FreeIP(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FreeIP_Call {
+func (_e *ClientService_Expecter) FreeIP(params any, authInfo any, opts ...any) *ClientService_FreeIP_Call {
 	return &ClientService_FreeIP_Call{Call: _e.mock.On("FreeIP",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FreeIP_Call) Run(run func(params *ip.FreeIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ip.ClientOption)) *ClientService_FreeIP_Call {
@@ -329,9 +338,9 @@ type ClientService_GetIP_Call struct {
 //   - params *ip.GetIPParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...ip.ClientOption
-func (_e *ClientService_Expecter) GetIP(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetIP_Call {
+func (_e *ClientService_Expecter) GetIP(params any, authInfo any, opts ...any) *ClientService_GetIP_Call {
 	return &ClientService_GetIP_Call{Call: _e.mock.On("GetIP",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetIP_Call) Run(run func(params *ip.GetIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ip.ClientOption)) *ClientService_GetIP_Call {
@@ -412,9 +421,9 @@ type ClientService_ListIPs_Call struct {
 //   - params *ip.ListIPsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...ip.ClientOption
-func (_e *ClientService_Expecter) ListIPs(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListIPs_Call {
+func (_e *ClientService_Expecter) ListIPs(params any, authInfo any, opts ...any) *ClientService_ListIPs_Call {
 	return &ClientService_ListIPs_Call{Call: _e.mock.On("ListIPs",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListIPs_Call) Run(run func(params *ip.ListIPsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ip.ClientOption)) *ClientService_ListIPs_Call {
@@ -465,7 +474,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 
@@ -535,9 +544,9 @@ type ClientService_UpdateIP_Call struct {
 //   - params *ip.UpdateIPParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...ip.ClientOption
-func (_e *ClientService_Expecter) UpdateIP(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_UpdateIP_Call {
+func (_e *ClientService_Expecter) UpdateIP(params any, authInfo any, opts ...any) *ClientService_UpdateIP_Call {
 	return &ClientService_UpdateIP_Call{Call: _e.mock.On("UpdateIP",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_UpdateIP_Call) Run(run func(params *ip.UpdateIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ip.ClientOption)) *ClientService_UpdateIP_Call {

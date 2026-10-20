@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_GetMasterdata_Call struct {
 //   - params *masterdata.GetMasterdataParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...masterdata.ClientOption
-func (_e *ClientService_Expecter) GetMasterdata(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetMasterdata_Call {
+func (_e *ClientService_Expecter) GetMasterdata(params any, authInfo any, opts ...any) *ClientService_GetMasterdata_Call {
 	return &ClientService_GetMasterdata_Call{Call: _e.mock.On("GetMasterdata",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetMasterdata_Call) Run(run func(params *masterdata.GetMasterdataParams, authInfo runtime.ClientAuthInfoWriter, opts ...masterdata.ClientOption)) *ClientService_GetMasterdata_Call {
@@ -133,7 +142,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 

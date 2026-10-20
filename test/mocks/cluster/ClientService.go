@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_CreateCluster_Call struct {
 //   - params *cluster.CreateClusterParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) CreateCluster(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_CreateCluster_Call {
+func (_e *ClientService_Expecter) CreateCluster(params any, authInfo any, opts ...any) *ClientService_CreateCluster_Call {
 	return &ClientService_CreateCluster_Call{Call: _e.mock.On("CreateCluster",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_CreateCluster_Call) Run(run func(params *cluster.CreateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_CreateCluster_Call {
@@ -163,9 +172,9 @@ type ClientService_CycleMachine_Call struct {
 //   - params *cluster.CycleMachineParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) CycleMachine(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_CycleMachine_Call {
+func (_e *ClientService_Expecter) CycleMachine(params any, authInfo any, opts ...any) *ClientService_CycleMachine_Call {
 	return &ClientService_CycleMachine_Call{Call: _e.mock.On("CycleMachine",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_CycleMachine_Call) Run(run func(params *cluster.CycleMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_CycleMachine_Call {
@@ -246,9 +255,9 @@ type ClientService_DeleteCluster_Call struct {
 //   - params *cluster.DeleteClusterParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) DeleteCluster(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_DeleteCluster_Call {
+func (_e *ClientService_Expecter) DeleteCluster(params any, authInfo any, opts ...any) *ClientService_DeleteCluster_Call {
 	return &ClientService_DeleteCluster_Call{Call: _e.mock.On("DeleteCluster",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_DeleteCluster_Call) Run(run func(params *cluster.DeleteClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_DeleteCluster_Call {
@@ -329,9 +338,9 @@ type ClientService_FindCluster_Call struct {
 //   - params *cluster.FindClusterParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) FindCluster(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindCluster_Call {
+func (_e *ClientService_Expecter) FindCluster(params any, authInfo any, opts ...any) *ClientService_FindCluster_Call {
 	return &ClientService_FindCluster_Call{Call: _e.mock.On("FindCluster",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindCluster_Call) Run(run func(params *cluster.FindClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_FindCluster_Call {
@@ -412,9 +421,9 @@ type ClientService_FindClusters_Call struct {
 //   - params *cluster.FindClustersParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) FindClusters(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindClusters_Call {
+func (_e *ClientService_Expecter) FindClusters(params any, authInfo any, opts ...any) *ClientService_FindClusters_Call {
 	return &ClientService_FindClusters_Call{Call: _e.mock.On("FindClusters",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindClusters_Call) Run(run func(params *cluster.FindClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_FindClusters_Call {
@@ -495,9 +504,9 @@ type ClientService_GetAuditPolicy_Call struct {
 //   - params *cluster.GetAuditPolicyParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) GetAuditPolicy(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetAuditPolicy_Call {
+func (_e *ClientService_Expecter) GetAuditPolicy(params any, authInfo any, opts ...any) *ClientService_GetAuditPolicy_Call {
 	return &ClientService_GetAuditPolicy_Call{Call: _e.mock.On("GetAuditPolicy",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetAuditPolicy_Call) Run(run func(params *cluster.GetAuditPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_GetAuditPolicy_Call {
@@ -578,9 +587,9 @@ type ClientService_GetClusterKubeconfigTpl_Call struct {
 //   - params *cluster.GetClusterKubeconfigTplParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) GetClusterKubeconfigTpl(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetClusterKubeconfigTpl_Call {
+func (_e *ClientService_Expecter) GetClusterKubeconfigTpl(params any, authInfo any, opts ...any) *ClientService_GetClusterKubeconfigTpl_Call {
 	return &ClientService_GetClusterKubeconfigTpl_Call{Call: _e.mock.On("GetClusterKubeconfigTpl",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetClusterKubeconfigTpl_Call) Run(run func(params *cluster.GetClusterKubeconfigTplParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_GetClusterKubeconfigTpl_Call {
@@ -661,9 +670,9 @@ type ClientService_GetMonitoringSecret_Call struct {
 //   - params *cluster.GetMonitoringSecretParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) GetMonitoringSecret(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetMonitoringSecret_Call {
+func (_e *ClientService_Expecter) GetMonitoringSecret(params any, authInfo any, opts ...any) *ClientService_GetMonitoringSecret_Call {
 	return &ClientService_GetMonitoringSecret_Call{Call: _e.mock.On("GetMonitoringSecret",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetMonitoringSecret_Call) Run(run func(params *cluster.GetMonitoringSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_GetMonitoringSecret_Call {
@@ -744,9 +753,9 @@ type ClientService_GetSSHKeyPair_Call struct {
 //   - params *cluster.GetSSHKeyPairParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) GetSSHKeyPair(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetSSHKeyPair_Call {
+func (_e *ClientService_Expecter) GetSSHKeyPair(params any, authInfo any, opts ...any) *ClientService_GetSSHKeyPair_Call {
 	return &ClientService_GetSSHKeyPair_Call{Call: _e.mock.On("GetSSHKeyPair",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetSSHKeyPair_Call) Run(run func(params *cluster.GetSSHKeyPairParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_GetSSHKeyPair_Call {
@@ -827,9 +836,9 @@ type ClientService_ListClusters_Call struct {
 //   - params *cluster.ListClustersParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) ListClusters(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListClusters_Call {
+func (_e *ClientService_Expecter) ListClusters(params any, authInfo any, opts ...any) *ClientService_ListClusters_Call {
 	return &ClientService_ListClusters_Call{Call: _e.mock.On("ListClusters",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListClusters_Call) Run(run func(params *cluster.ListClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_ListClusters_Call {
@@ -910,9 +919,9 @@ type ClientService_ListConstraints_Call struct {
 //   - params *cluster.ListConstraintsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) ListConstraints(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListConstraints_Call {
+func (_e *ClientService_Expecter) ListConstraints(params any, authInfo any, opts ...any) *ClientService_ListConstraints_Call {
 	return &ClientService_ListConstraints_Call{Call: _e.mock.On("ListConstraints",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListConstraints_Call) Run(run func(params *cluster.ListConstraintsParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_ListConstraints_Call {
@@ -993,9 +1002,9 @@ type ClientService_ReconcileCluster_Call struct {
 //   - params *cluster.ReconcileClusterParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) ReconcileCluster(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ReconcileCluster_Call {
+func (_e *ClientService_Expecter) ReconcileCluster(params any, authInfo any, opts ...any) *ClientService_ReconcileCluster_Call {
 	return &ClientService_ReconcileCluster_Call{Call: _e.mock.On("ReconcileCluster",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ReconcileCluster_Call) Run(run func(params *cluster.ReconcileClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_ReconcileCluster_Call {
@@ -1076,9 +1085,9 @@ type ClientService_ResetMachine_Call struct {
 //   - params *cluster.ResetMachineParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) ResetMachine(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ResetMachine_Call {
+func (_e *ClientService_Expecter) ResetMachine(params any, authInfo any, opts ...any) *ClientService_ResetMachine_Call {
 	return &ClientService_ResetMachine_Call{Call: _e.mock.On("ResetMachine",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ResetMachine_Call) Run(run func(params *cluster.ResetMachineParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_ResetMachine_Call {
@@ -1129,7 +1138,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 
@@ -1199,9 +1208,9 @@ type ClientService_UpdateCluster_Call struct {
 //   - params *cluster.UpdateClusterParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...cluster.ClientOption
-func (_e *ClientService_Expecter) UpdateCluster(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_UpdateCluster_Call {
+func (_e *ClientService_Expecter) UpdateCluster(params any, authInfo any, opts ...any) *ClientService_UpdateCluster_Call {
 	return &ClientService_UpdateCluster_Call{Call: _e.mock.On("UpdateCluster",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_UpdateCluster_Call) Run(run func(params *cluster.UpdateClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...cluster.ClientOption)) *ClientService_UpdateCluster_Call {
