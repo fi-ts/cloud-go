@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_ClusterInfo_Call struct {
 //   - params *volume.ClusterInfoParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) ClusterInfo(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ClusterInfo_Call {
+func (_e *ClientService_Expecter) ClusterInfo(params any, authInfo any, opts ...any) *ClientService_ClusterInfo_Call {
 	return &ClientService_ClusterInfo_Call{Call: _e.mock.On("ClusterInfo",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ClusterInfo_Call) Run(run func(params *volume.ClusterInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_ClusterInfo_Call {
@@ -163,9 +172,9 @@ type ClientService_DeleteSnapshot_Call struct {
 //   - params *volume.DeleteSnapshotParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) DeleteSnapshot(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_DeleteSnapshot_Call {
+func (_e *ClientService_Expecter) DeleteSnapshot(params any, authInfo any, opts ...any) *ClientService_DeleteSnapshot_Call {
 	return &ClientService_DeleteSnapshot_Call{Call: _e.mock.On("DeleteSnapshot",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_DeleteSnapshot_Call) Run(run func(params *volume.DeleteSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_DeleteSnapshot_Call {
@@ -246,9 +255,9 @@ type ClientService_DeleteVolume_Call struct {
 //   - params *volume.DeleteVolumeParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) DeleteVolume(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_DeleteVolume_Call {
+func (_e *ClientService_Expecter) DeleteVolume(params any, authInfo any, opts ...any) *ClientService_DeleteVolume_Call {
 	return &ClientService_DeleteVolume_Call{Call: _e.mock.On("DeleteVolume",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_DeleteVolume_Call) Run(run func(params *volume.DeleteVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_DeleteVolume_Call {
@@ -329,9 +338,9 @@ type ClientService_FindSnapshots_Call struct {
 //   - params *volume.FindSnapshotsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) FindSnapshots(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindSnapshots_Call {
+func (_e *ClientService_Expecter) FindSnapshots(params any, authInfo any, opts ...any) *ClientService_FindSnapshots_Call {
 	return &ClientService_FindSnapshots_Call{Call: _e.mock.On("FindSnapshots",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindSnapshots_Call) Run(run func(params *volume.FindSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_FindSnapshots_Call {
@@ -412,9 +421,9 @@ type ClientService_FindVolumes_Call struct {
 //   - params *volume.FindVolumesParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) FindVolumes(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindVolumes_Call {
+func (_e *ClientService_Expecter) FindVolumes(params any, authInfo any, opts ...any) *ClientService_FindVolumes_Call {
 	return &ClientService_FindVolumes_Call{Call: _e.mock.On("FindVolumes",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindVolumes_Call) Run(run func(params *volume.FindVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_FindVolumes_Call {
@@ -495,9 +504,9 @@ type ClientService_GetSnapshot_Call struct {
 //   - params *volume.GetSnapshotParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) GetSnapshot(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetSnapshot_Call {
+func (_e *ClientService_Expecter) GetSnapshot(params any, authInfo any, opts ...any) *ClientService_GetSnapshot_Call {
 	return &ClientService_GetSnapshot_Call{Call: _e.mock.On("GetSnapshot",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetSnapshot_Call) Run(run func(params *volume.GetSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_GetSnapshot_Call {
@@ -578,9 +587,9 @@ type ClientService_GetVolume_Call struct {
 //   - params *volume.GetVolumeParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) GetVolume(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetVolume_Call {
+func (_e *ClientService_Expecter) GetVolume(params any, authInfo any, opts ...any) *ClientService_GetVolume_Call {
 	return &ClientService_GetVolume_Call{Call: _e.mock.On("GetVolume",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetVolume_Call) Run(run func(params *volume.GetVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_GetVolume_Call {
@@ -661,9 +670,9 @@ type ClientService_ListPolicies_Call struct {
 //   - params *volume.ListPoliciesParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) ListPolicies(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListPolicies_Call {
+func (_e *ClientService_Expecter) ListPolicies(params any, authInfo any, opts ...any) *ClientService_ListPolicies_Call {
 	return &ClientService_ListPolicies_Call{Call: _e.mock.On("ListPolicies",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListPolicies_Call) Run(run func(params *volume.ListPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_ListPolicies_Call {
@@ -744,9 +753,9 @@ type ClientService_ListVolumes_Call struct {
 //   - params *volume.ListVolumesParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) ListVolumes(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListVolumes_Call {
+func (_e *ClientService_Expecter) ListVolumes(params any, authInfo any, opts ...any) *ClientService_ListVolumes_Call {
 	return &ClientService_ListVolumes_Call{Call: _e.mock.On("ListVolumes",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListVolumes_Call) Run(run func(params *volume.ListVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_ListVolumes_Call {
@@ -797,7 +806,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 
@@ -867,9 +876,9 @@ type ClientService_SetVolumeQoSPolicy_Call struct {
 //   - params *volume.SetVolumeQoSPolicyParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...volume.ClientOption
-func (_e *ClientService_Expecter) SetVolumeQoSPolicy(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_SetVolumeQoSPolicy_Call {
+func (_e *ClientService_Expecter) SetVolumeQoSPolicy(params any, authInfo any, opts ...any) *ClientService_SetVolumeQoSPolicy_Call {
 	return &ClientService_SetVolumeQoSPolicy_Call{Call: _e.mock.On("SetVolumeQoSPolicy",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_SetVolumeQoSPolicy_Call) Run(run func(params *volume.SetVolumeQoSPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...volume.ClientOption)) *ClientService_SetVolumeQoSPolicy_Call {

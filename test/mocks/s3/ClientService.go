@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_Creates3_Call struct {
 //   - params *s3.Creates3Params
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...s3.ClientOption
-func (_e *ClientService_Expecter) Creates3(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_Creates3_Call {
+func (_e *ClientService_Expecter) Creates3(params any, authInfo any, opts ...any) *ClientService_Creates3_Call {
 	return &ClientService_Creates3_Call{Call: _e.mock.On("Creates3",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_Creates3_Call) Run(run func(params *s3.Creates3Params, authInfo runtime.ClientAuthInfoWriter, opts ...s3.ClientOption)) *ClientService_Creates3_Call {
@@ -163,9 +172,9 @@ type ClientService_Deletes3_Call struct {
 //   - params *s3.Deletes3Params
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...s3.ClientOption
-func (_e *ClientService_Expecter) Deletes3(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_Deletes3_Call {
+func (_e *ClientService_Expecter) Deletes3(params any, authInfo any, opts ...any) *ClientService_Deletes3_Call {
 	return &ClientService_Deletes3_Call{Call: _e.mock.On("Deletes3",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_Deletes3_Call) Run(run func(params *s3.Deletes3Params, authInfo runtime.ClientAuthInfoWriter, opts ...s3.ClientOption)) *ClientService_Deletes3_Call {
@@ -246,9 +255,9 @@ type ClientService_Gets3_Call struct {
 //   - params *s3.Gets3Params
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...s3.ClientOption
-func (_e *ClientService_Expecter) Gets3(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_Gets3_Call {
+func (_e *ClientService_Expecter) Gets3(params any, authInfo any, opts ...any) *ClientService_Gets3_Call {
 	return &ClientService_Gets3_Call{Call: _e.mock.On("Gets3",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_Gets3_Call) Run(run func(params *s3.Gets3Params, authInfo runtime.ClientAuthInfoWriter, opts ...s3.ClientOption)) *ClientService_Gets3_Call {
@@ -329,9 +338,9 @@ type ClientService_Lists3_Call struct {
 //   - params *s3.Lists3Params
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...s3.ClientOption
-func (_e *ClientService_Expecter) Lists3(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_Lists3_Call {
+func (_e *ClientService_Expecter) Lists3(params any, authInfo any, opts ...any) *ClientService_Lists3_Call {
 	return &ClientService_Lists3_Call{Call: _e.mock.On("Lists3",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_Lists3_Call) Run(run func(params *s3.Lists3Params, authInfo runtime.ClientAuthInfoWriter, opts ...s3.ClientOption)) *ClientService_Lists3_Call {
@@ -412,9 +421,9 @@ type ClientService_Lists3partitions_Call struct {
 //   - params *s3.Lists3partitionsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...s3.ClientOption
-func (_e *ClientService_Expecter) Lists3partitions(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_Lists3partitions_Call {
+func (_e *ClientService_Expecter) Lists3partitions(params any, authInfo any, opts ...any) *ClientService_Lists3partitions_Call {
 	return &ClientService_Lists3partitions_Call{Call: _e.mock.On("Lists3partitions",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_Lists3partitions_Call) Run(run func(params *s3.Lists3partitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...s3.ClientOption)) *ClientService_Lists3partitions_Call {
@@ -465,7 +474,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 
@@ -535,9 +544,9 @@ type ClientService_Updates3_Call struct {
 //   - params *s3.Updates3Params
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...s3.ClientOption
-func (_e *ClientService_Expecter) Updates3(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_Updates3_Call {
+func (_e *ClientService_Expecter) Updates3(params any, authInfo any, opts ...any) *ClientService_Updates3_Call {
 	return &ClientService_Updates3_Call{Call: _e.mock.On("Updates3",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_Updates3_Call) Run(run func(params *s3.Updates3Params, authInfo runtime.ClientAuthInfoWriter, opts ...s3.ClientOption)) *ClientService_Updates3_Call {

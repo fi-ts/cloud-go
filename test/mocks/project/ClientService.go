@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_CreateMachineReservation_Call struct {
 //   - params *project.CreateMachineReservationParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) CreateMachineReservation(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_CreateMachineReservation_Call {
+func (_e *ClientService_Expecter) CreateMachineReservation(params any, authInfo any, opts ...any) *ClientService_CreateMachineReservation_Call {
 	return &ClientService_CreateMachineReservation_Call{Call: _e.mock.On("CreateMachineReservation",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_CreateMachineReservation_Call) Run(run func(params *project.CreateMachineReservationParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_CreateMachineReservation_Call {
@@ -163,9 +172,9 @@ type ClientService_CreateProject_Call struct {
 //   - params *project.CreateProjectParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) CreateProject(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_CreateProject_Call {
+func (_e *ClientService_Expecter) CreateProject(params any, authInfo any, opts ...any) *ClientService_CreateProject_Call {
 	return &ClientService_CreateProject_Call{Call: _e.mock.On("CreateProject",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_CreateProject_Call) Run(run func(params *project.CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_CreateProject_Call {
@@ -246,9 +255,9 @@ type ClientService_DeleteMachineReservation_Call struct {
 //   - params *project.DeleteMachineReservationParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) DeleteMachineReservation(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_DeleteMachineReservation_Call {
+func (_e *ClientService_Expecter) DeleteMachineReservation(params any, authInfo any, opts ...any) *ClientService_DeleteMachineReservation_Call {
 	return &ClientService_DeleteMachineReservation_Call{Call: _e.mock.On("DeleteMachineReservation",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_DeleteMachineReservation_Call) Run(run func(params *project.DeleteMachineReservationParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_DeleteMachineReservation_Call {
@@ -329,9 +338,9 @@ type ClientService_DeleteProject_Call struct {
 //   - params *project.DeleteProjectParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) DeleteProject(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_DeleteProject_Call {
+func (_e *ClientService_Expecter) DeleteProject(params any, authInfo any, opts ...any) *ClientService_DeleteProject_Call {
 	return &ClientService_DeleteProject_Call{Call: _e.mock.On("DeleteProject",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_DeleteProject_Call) Run(run func(params *project.DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_DeleteProject_Call {
@@ -412,9 +421,9 @@ type ClientService_FindProject_Call struct {
 //   - params *project.FindProjectParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) FindProject(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindProject_Call {
+func (_e *ClientService_Expecter) FindProject(params any, authInfo any, opts ...any) *ClientService_FindProject_Call {
 	return &ClientService_FindProject_Call{Call: _e.mock.On("FindProject",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindProject_Call) Run(run func(params *project.FindProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_FindProject_Call {
@@ -495,9 +504,9 @@ type ClientService_FindProjects_Call struct {
 //   - params *project.FindProjectsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) FindProjects(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_FindProjects_Call {
+func (_e *ClientService_Expecter) FindProjects(params any, authInfo any, opts ...any) *ClientService_FindProjects_Call {
 	return &ClientService_FindProjects_Call{Call: _e.mock.On("FindProjects",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_FindProjects_Call) Run(run func(params *project.FindProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_FindProjects_Call {
@@ -578,9 +587,9 @@ type ClientService_GetMachineReservation_Call struct {
 //   - params *project.GetMachineReservationParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) GetMachineReservation(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_GetMachineReservation_Call {
+func (_e *ClientService_Expecter) GetMachineReservation(params any, authInfo any, opts ...any) *ClientService_GetMachineReservation_Call {
 	return &ClientService_GetMachineReservation_Call{Call: _e.mock.On("GetMachineReservation",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_GetMachineReservation_Call) Run(run func(params *project.GetMachineReservationParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_GetMachineReservation_Call {
@@ -661,9 +670,9 @@ type ClientService_ListMachineReservations_Call struct {
 //   - params *project.ListMachineReservationsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) ListMachineReservations(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListMachineReservations_Call {
+func (_e *ClientService_Expecter) ListMachineReservations(params any, authInfo any, opts ...any) *ClientService_ListMachineReservations_Call {
 	return &ClientService_ListMachineReservations_Call{Call: _e.mock.On("ListMachineReservations",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListMachineReservations_Call) Run(run func(params *project.ListMachineReservationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_ListMachineReservations_Call {
@@ -744,9 +753,9 @@ type ClientService_ListProjects_Call struct {
 //   - params *project.ListProjectsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) ListProjects(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ListProjects_Call {
+func (_e *ClientService_Expecter) ListProjects(params any, authInfo any, opts ...any) *ClientService_ListProjects_Call {
 	return &ClientService_ListProjects_Call{Call: _e.mock.On("ListProjects",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ListProjects_Call) Run(run func(params *project.ListProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_ListProjects_Call {
@@ -827,9 +836,9 @@ type ClientService_MachineReservationsUsage_Call struct {
 //   - params *project.MachineReservationsUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) MachineReservationsUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_MachineReservationsUsage_Call {
+func (_e *ClientService_Expecter) MachineReservationsUsage(params any, authInfo any, opts ...any) *ClientService_MachineReservationsUsage_Call {
 	return &ClientService_MachineReservationsUsage_Call{Call: _e.mock.On("MachineReservationsUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_MachineReservationsUsage_Call) Run(run func(params *project.MachineReservationsUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_MachineReservationsUsage_Call {
@@ -880,7 +889,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 
@@ -950,9 +959,9 @@ type ClientService_UpdateMachineReservation_Call struct {
 //   - params *project.UpdateMachineReservationParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) UpdateMachineReservation(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_UpdateMachineReservation_Call {
+func (_e *ClientService_Expecter) UpdateMachineReservation(params any, authInfo any, opts ...any) *ClientService_UpdateMachineReservation_Call {
 	return &ClientService_UpdateMachineReservation_Call{Call: _e.mock.On("UpdateMachineReservation",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_UpdateMachineReservation_Call) Run(run func(params *project.UpdateMachineReservationParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_UpdateMachineReservation_Call {
@@ -1033,9 +1042,9 @@ type ClientService_UpdateProject_Call struct {
 //   - params *project.UpdateProjectParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...project.ClientOption
-func (_e *ClientService_Expecter) UpdateProject(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_UpdateProject_Call {
+func (_e *ClientService_Expecter) UpdateProject(params any, authInfo any, opts ...any) *ClientService_UpdateProject_Call {
 	return &ClientService_UpdateProject_Call{Call: _e.mock.On("UpdateProject",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_UpdateProject_Call) Run(run func(params *project.UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...project.ClientOption)) *ClientService_UpdateProject_Call {

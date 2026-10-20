@@ -20,7 +20,8 @@ import (
 type V1PostgresCreateRequest struct {
 
 	// access list
-	AccessList *V1AccessList `json:"accessList,omitempty"`
+	// Required: true
+	AccessList *V1AccessList `json:"accessList"`
 
 	// audit logs
 	AuditLogs bool `json:"auditLogs,omitempty"`
@@ -105,8 +106,9 @@ func (m *V1PostgresCreateRequest) Validate(formats strfmt.Registry) error {
 }
 
 func (m *V1PostgresCreateRequest) validateAccessList(formats strfmt.Registry) error {
-	if swag.IsZero(m.AccessList) { // not required
-		return nil
+
+	if err := validate.Required("accessList", "body", m.AccessList); err != nil {
+		return err
 	}
 
 	if m.AccessList != nil {
@@ -190,10 +192,6 @@ func (m *V1PostgresCreateRequest) ContextValidate(ctx context.Context, formats s
 func (m *V1PostgresCreateRequest) contextValidateAccessList(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AccessList != nil {
-
-		if swag.IsZero(m.AccessList) { // not required
-			return nil
-		}
 
 		if err := m.AccessList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

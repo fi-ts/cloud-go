@@ -16,10 +16,19 @@ func NewClientService(t interface {
 	mock.TestingT
 	Cleanup(func())
 }) *ClientService {
+	if helper, ok := t.(interface{ Helper() }); ok {
+		helper.Helper()
+	}
+
 	mock := &ClientService{}
 	mock.Mock.Test(t)
 
-	t.Cleanup(func() { mock.AssertExpectations(t) })
+	t.Cleanup(func() {
+		if helper, ok := t.(interface{ Helper() }); ok {
+			helper.Helper()
+		}
+		mock.AssertExpectations(t)
+	})
 
 	return mock
 }
@@ -80,9 +89,9 @@ type ClientService_ClusterUsage_Call struct {
 //   - params *accounting.ClusterUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) ClusterUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ClusterUsage_Call {
+func (_e *ClientService_Expecter) ClusterUsage(params any, authInfo any, opts ...any) *ClientService_ClusterUsage_Call {
 	return &ClientService_ClusterUsage_Call{Call: _e.mock.On("ClusterUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ClusterUsage_Call) Run(run func(params *accounting.ClusterUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_ClusterUsage_Call {
@@ -163,9 +172,9 @@ type ClientService_ClusterUsageCSV_Call struct {
 //   - params *accounting.ClusterUsageCSVParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) ClusterUsageCSV(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ClusterUsageCSV_Call {
+func (_e *ClientService_Expecter) ClusterUsageCSV(params any, authInfo any, opts ...any) *ClientService_ClusterUsageCSV_Call {
 	return &ClientService_ClusterUsageCSV_Call{Call: _e.mock.On("ClusterUsageCSV",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ClusterUsageCSV_Call) Run(run func(params *accounting.ClusterUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_ClusterUsageCSV_Call {
@@ -246,9 +255,9 @@ type ClientService_ContainerUsage_Call struct {
 //   - params *accounting.ContainerUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) ContainerUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ContainerUsage_Call {
+func (_e *ClientService_Expecter) ContainerUsage(params any, authInfo any, opts ...any) *ClientService_ContainerUsage_Call {
 	return &ClientService_ContainerUsage_Call{Call: _e.mock.On("ContainerUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ContainerUsage_Call) Run(run func(params *accounting.ContainerUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_ContainerUsage_Call {
@@ -329,9 +338,9 @@ type ClientService_ContainerUsageCSV_Call struct {
 //   - params *accounting.ContainerUsageCSVParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) ContainerUsageCSV(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ContainerUsageCSV_Call {
+func (_e *ClientService_Expecter) ContainerUsageCSV(params any, authInfo any, opts ...any) *ClientService_ContainerUsageCSV_Call {
 	return &ClientService_ContainerUsageCSV_Call{Call: _e.mock.On("ContainerUsageCSV",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ContainerUsageCSV_Call) Run(run func(params *accounting.ContainerUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_ContainerUsageCSV_Call {
@@ -412,9 +421,9 @@ type ClientService_IPUsage_Call struct {
 //   - params *accounting.IPUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) IPUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_IPUsage_Call {
+func (_e *ClientService_Expecter) IPUsage(params any, authInfo any, opts ...any) *ClientService_IPUsage_Call {
 	return &ClientService_IPUsage_Call{Call: _e.mock.On("IPUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_IPUsage_Call) Run(run func(params *accounting.IPUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_IPUsage_Call {
@@ -495,9 +504,9 @@ type ClientService_IPUsageCSV_Call struct {
 //   - params *accounting.IPUsageCSVParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) IPUsageCSV(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_IPUsageCSV_Call {
+func (_e *ClientService_Expecter) IPUsageCSV(params any, authInfo any, opts ...any) *ClientService_IPUsageCSV_Call {
 	return &ClientService_IPUsageCSV_Call{Call: _e.mock.On("IPUsageCSV",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_IPUsageCSV_Call) Run(run func(params *accounting.IPUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_IPUsageCSV_Call {
@@ -578,9 +587,9 @@ type ClientService_MachineReservationUsage_Call struct {
 //   - params *accounting.MachineReservationUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) MachineReservationUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_MachineReservationUsage_Call {
+func (_e *ClientService_Expecter) MachineReservationUsage(params any, authInfo any, opts ...any) *ClientService_MachineReservationUsage_Call {
 	return &ClientService_MachineReservationUsage_Call{Call: _e.mock.On("MachineReservationUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_MachineReservationUsage_Call) Run(run func(params *accounting.MachineReservationUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_MachineReservationUsage_Call {
@@ -661,9 +670,9 @@ type ClientService_MachineUsage_Call struct {
 //   - params *accounting.MachineUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) MachineUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_MachineUsage_Call {
+func (_e *ClientService_Expecter) MachineUsage(params any, authInfo any, opts ...any) *ClientService_MachineUsage_Call {
 	return &ClientService_MachineUsage_Call{Call: _e.mock.On("MachineUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_MachineUsage_Call) Run(run func(params *accounting.MachineUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_MachineUsage_Call {
@@ -744,9 +753,9 @@ type ClientService_NetworkUsage_Call struct {
 //   - params *accounting.NetworkUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) NetworkUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_NetworkUsage_Call {
+func (_e *ClientService_Expecter) NetworkUsage(params any, authInfo any, opts ...any) *ClientService_NetworkUsage_Call {
 	return &ClientService_NetworkUsage_Call{Call: _e.mock.On("NetworkUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_NetworkUsage_Call) Run(run func(params *accounting.NetworkUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_NetworkUsage_Call {
@@ -827,9 +836,9 @@ type ClientService_NetworkUsageCSV_Call struct {
 //   - params *accounting.NetworkUsageCSVParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) NetworkUsageCSV(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_NetworkUsageCSV_Call {
+func (_e *ClientService_Expecter) NetworkUsageCSV(params any, authInfo any, opts ...any) *ClientService_NetworkUsageCSV_Call {
 	return &ClientService_NetworkUsageCSV_Call{Call: _e.mock.On("NetworkUsageCSV",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_NetworkUsageCSV_Call) Run(run func(params *accounting.NetworkUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_NetworkUsageCSV_Call {
@@ -910,9 +919,9 @@ type ClientService_PostgresUsage_Call struct {
 //   - params *accounting.PostgresUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) PostgresUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_PostgresUsage_Call {
+func (_e *ClientService_Expecter) PostgresUsage(params any, authInfo any, opts ...any) *ClientService_PostgresUsage_Call {
 	return &ClientService_PostgresUsage_Call{Call: _e.mock.On("PostgresUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_PostgresUsage_Call) Run(run func(params *accounting.PostgresUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_PostgresUsage_Call {
@@ -993,9 +1002,9 @@ type ClientService_PostgresUsageCSV_Call struct {
 //   - params *accounting.PostgresUsageCSVParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) PostgresUsageCSV(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_PostgresUsageCSV_Call {
+func (_e *ClientService_Expecter) PostgresUsageCSV(params any, authInfo any, opts ...any) *ClientService_PostgresUsageCSV_Call {
 	return &ClientService_PostgresUsageCSV_Call{Call: _e.mock.On("PostgresUsageCSV",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_PostgresUsageCSV_Call) Run(run func(params *accounting.PostgresUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_PostgresUsageCSV_Call {
@@ -1076,9 +1085,9 @@ type ClientService_ProductOptionUsage_Call struct {
 //   - params *accounting.ProductOptionUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) ProductOptionUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_ProductOptionUsage_Call {
+func (_e *ClientService_Expecter) ProductOptionUsage(params any, authInfo any, opts ...any) *ClientService_ProductOptionUsage_Call {
 	return &ClientService_ProductOptionUsage_Call{Call: _e.mock.On("ProductOptionUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_ProductOptionUsage_Call) Run(run func(params *accounting.ProductOptionUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_ProductOptionUsage_Call {
@@ -1159,9 +1168,9 @@ type ClientService_Projects_Call struct {
 //   - params *accounting.ProjectsParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) Projects(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_Projects_Call {
+func (_e *ClientService_Expecter) Projects(params any, authInfo any, opts ...any) *ClientService_Projects_Call {
 	return &ClientService_Projects_Call{Call: _e.mock.On("Projects",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_Projects_Call) Run(run func(params *accounting.ProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_Projects_Call {
@@ -1242,9 +1251,9 @@ type ClientService_S3Usage_Call struct {
 //   - params *accounting.S3UsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) S3Usage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_S3Usage_Call {
+func (_e *ClientService_Expecter) S3Usage(params any, authInfo any, opts ...any) *ClientService_S3Usage_Call {
 	return &ClientService_S3Usage_Call{Call: _e.mock.On("S3Usage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_S3Usage_Call) Run(run func(params *accounting.S3UsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_S3Usage_Call {
@@ -1325,9 +1334,9 @@ type ClientService_S3UsageCSV_Call struct {
 //   - params *accounting.S3UsageCSVParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) S3UsageCSV(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_S3UsageCSV_Call {
+func (_e *ClientService_Expecter) S3UsageCSV(params any, authInfo any, opts ...any) *ClientService_S3UsageCSV_Call {
 	return &ClientService_S3UsageCSV_Call{Call: _e.mock.On("S3UsageCSV",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_S3UsageCSV_Call) Run(run func(params *accounting.S3UsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_S3UsageCSV_Call {
@@ -1378,7 +1387,7 @@ type ClientService_SetTransport_Call struct {
 
 // SetTransport is a helper method to define mock.On call
 //   - transport runtime.ClientTransport
-func (_e *ClientService_Expecter) SetTransport(transport interface{}) *ClientService_SetTransport_Call {
+func (_e *ClientService_Expecter) SetTransport(transport any) *ClientService_SetTransport_Call {
 	return &ClientService_SetTransport_Call{Call: _e.mock.On("SetTransport", transport)}
 }
 
@@ -1448,9 +1457,9 @@ type ClientService_VolumeUsage_Call struct {
 //   - params *accounting.VolumeUsageParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) VolumeUsage(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_VolumeUsage_Call {
+func (_e *ClientService_Expecter) VolumeUsage(params any, authInfo any, opts ...any) *ClientService_VolumeUsage_Call {
 	return &ClientService_VolumeUsage_Call{Call: _e.mock.On("VolumeUsage",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_VolumeUsage_Call) Run(run func(params *accounting.VolumeUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_VolumeUsage_Call {
@@ -1531,9 +1540,9 @@ type ClientService_VolumeUsageCSV_Call struct {
 //   - params *accounting.VolumeUsageCSVParams
 //   - authInfo runtime.ClientAuthInfoWriter
 //   - opts ...accounting.ClientOption
-func (_e *ClientService_Expecter) VolumeUsageCSV(params interface{}, authInfo interface{}, opts ...interface{}) *ClientService_VolumeUsageCSV_Call {
+func (_e *ClientService_Expecter) VolumeUsageCSV(params any, authInfo any, opts ...any) *ClientService_VolumeUsageCSV_Call {
 	return &ClientService_VolumeUsageCSV_Call{Call: _e.mock.On("VolumeUsageCSV",
-		append([]interface{}{params, authInfo}, opts...)...)}
+		append([]any{params, authInfo}, opts...)...)}
 }
 
 func (_c *ClientService_VolumeUsageCSV_Call) Run(run func(params *accounting.VolumeUsageCSVParams, authInfo runtime.ClientAuthInfoWriter, opts ...accounting.ClientOption)) *ClientService_VolumeUsageCSV_Call {
