@@ -1,12 +1,22 @@
 name: build
 
 on:
-  push
+  pull_request:
+    branches:
+      - master
+  release:
+    types:
+      - published
+  push:
+    branches:
+      - master
 
 jobs:
+  draft:
+    uses: metal-stack/actions-common/.github/workflows/release-drafter.yaml@v1
 
-  build:
-    name: Build
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - name: Check out code into the Go module directory
@@ -20,5 +30,5 @@ jobs:
     - name: Lint
       uses: golangci/golangci-lint-action@v9
 
-    - name: Build
+    - name: Test
       run: make test
