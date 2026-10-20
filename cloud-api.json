@@ -1309,6 +1309,9 @@
         "tls": {
           "type": "boolean"
         },
+        "tlshost": {
+          "type": "string"
+        },
         "token": {
           "type": "string"
         }
