@@ -58,6 +58,9 @@ type V1beta1ShootStatus struct {
 	// last operation
 	LastOperation *V1beta1LastOperation `json:"lastOperation,omitempty"`
 
+	// live migration
+	LiveMigration *V1beta1LiveMigration `json:"liveMigration,omitempty"`
+
 	// manual worker pool rollout
 	ManualWorkerPoolRollout *V1beta1ManualWorkerPoolRollout `json:"manualWorkerPoolRollout,omitempty"`
 
@@ -126,6 +129,10 @@ func (m *V1beta1ShootStatus) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastOperation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLiveMigration(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -360,6 +367,25 @@ func (m *V1beta1ShootStatus) validateLastOperation(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *V1beta1ShootStatus) validateLiveMigration(formats strfmt.Registry) error {
+	if swag.IsZero(m.LiveMigration) { // not required
+		return nil
+	}
+
+	if m.LiveMigration != nil {
+		if err := m.LiveMigration.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("liveMigration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("liveMigration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *V1beta1ShootStatus) validateManualWorkerPoolRollout(formats strfmt.Registry) error {
 	if swag.IsZero(m.ManualWorkerPoolRollout) { // not required
 		return nil
@@ -453,6 +479,10 @@ func (m *V1beta1ShootStatus) ContextValidate(ctx context.Context, formats strfmt
 	}
 
 	if err := m.contextValidateLastOperation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLiveMigration(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -663,6 +693,27 @@ func (m *V1beta1ShootStatus) contextValidateLastOperation(ctx context.Context, f
 				return ve.ValidateName("lastOperation")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("lastOperation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *V1beta1ShootStatus) contextValidateLiveMigration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LiveMigration != nil {
+
+		if swag.IsZero(m.LiveMigration) { // not required
+			return nil
+		}
+
+		if err := m.LiveMigration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("liveMigration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("liveMigration")
 			}
 			return err
 		}

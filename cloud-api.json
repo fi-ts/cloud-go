@@ -1624,6 +1624,9 @@
     },
     "v1.ClusterFeatures": {
       "properties": {
+        "CalicoBGPLoadBalancer": {
+          "type": "string"
+        },
         "CalicoEbpfDataplane": {
           "type": "string"
         },
@@ -1644,6 +1647,7 @@
         }
       },
       "required": [
+        "CalicoBGPLoadBalancer",
         "CalicoEbpfDataplane",
         "DisableCsiLvm",
         "DurosStorageEncryption",
@@ -6710,6 +6714,16 @@
         "type"
       ]
     },
+    "v1beta1.LiveMigration": {
+      "properties": {
+        "conditions": {
+          "items": {
+            "$ref": "#/definitions/v1beta1.Condition"
+          },
+          "type": "array"
+        }
+      }
+    },
     "v1beta1.ManualWorkerPoolRollout": {
       "properties": {
         "pendingWorkersRollouts": {
@@ -6920,6 +6934,9 @@
         },
         "lastOperation": {
           "$ref": "#/definitions/v1beta1.LastOperation"
+        },
+        "liveMigration": {
+          "$ref": "#/definitions/v1beta1.LiveMigration"
         },
         "manualWorkerPoolRollout": {
           "$ref": "#/definitions/v1beta1.ManualWorkerPoolRollout"
